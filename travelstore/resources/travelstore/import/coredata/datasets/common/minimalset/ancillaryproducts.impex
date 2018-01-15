@@ -1,0 +1,33 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$categories = supercategories(code, $catalogVersion)
+$approved = approvalstatus(code)[default = 'approved']
+$taxGroupLounge = Europe1PriceFactory_PTG(code)[default = LOUNGE]
+
+#Priority Products
+INSERT_UPDATE AncillaryProduct; code[unique = true]; name[lang = $lang]; $categories; productType(code)[default = 'ANCILLARY']; travelRestriction(code); $catalogVersion; $approved; ignoreRules[default = true]
+   					 ; PRICHECKIN1 		    ; "Priority Check In" ; PRIORITYCHECKIN  ; ; PRICHECKIN1_Restriction
+					 ; PRIBOARDING1         ; "Priority Boarding" ; PRIORITYBOARDING ; ; PRIBOARDING1_Restriction
+
+#Lounge Access Products
+INSERT_UPDATE AncillaryProduct; code[unique = true]; name[lang = $lang]; $categories; productType(code)[default = 'ANCILLARY']; travelRestriction(code); $catalogVersion; $approved; $taxGroupLounge; ignoreRules[default = true]
+					 ; LOUNGEACC1 			; "Lounge Access"   ; LOUNGEACCESS ; ; LOUNGEACC1_Restriction
+
+#Pre-Order Meals Products
+INSERT_UPDATE AncillaryProduct; code[unique = true]; name[lang = $lang]; $categories; productType(code)[default = 'ANCILLARY']; travelRestriction(code)   ; $catalogVersion; $approved; ignoreRules[default = true]
+                     ; STANDARDMEAL       ; "Standard Meal"   ; MEAL       ;                                         ; STANDARDMEAL_Restriction
+                     ; VEGETARIANMEAL     ; "Vegetarian Meal" ; MEAL       ;                                         ; VEGETARIANMEAL_Restriction
+                     ; CHILDMEAL          ; "Child Meal"      ; MEAL       ;                                         ; CHILDMEAL_Restriction
+
+#HoldItemsProducts
+INSERT_UPDATE AncillaryProduct; code[unique = true]; name[lang = $lang]; $categories; productType(code)[default = 'ANCILLARY']; travelRestriction(code)   ; $catalogVersion; $approved; ignoreRules[default = true]
+                     ; EXTRABAG20         ; "Extra Bag 20KG"  ; HOLDITEM   ;                                         ; EXTRABAG20_Restriction
+                     ; EXTRABAG32         ; "Extra Bag 32KG"  ; HOLDITEM   ;                                         ; EXTRABAG32_Restriction
+                     ; SKIS               ; "Skis"            ; HOLDITEM   ;                                         ; SKIS_Restriction
+                     ; SURFBOARD          ; "Surf Board"      ; HOLDITEM   ;                                         ; SURFBOARD_Restriction
+                     ; GOLFCLUBS          ; "Golf Clubs"      ; HOLDITEM   ;                                         ; GOLFCLUBS_Restriction
+
+#Special Products                     
+INSERT_UPDATE AncillaryProduct; code[unique = true]; name[lang = $lang]; $categories; productType(code)[default = 'ANCILLARY']; travelRestriction(code)                ; $catalogVersion; $approved; ignoreRules[default = true]
+                     ; CHAMPAGNE   ; "CHAMPAGNE"; SPECIAL    ;                           ; ALCOHOLIC_BEVERAGE_Restriction     ;                ;          ; false
+                     

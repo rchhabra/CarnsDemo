@@ -1,0 +1,23 @@
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
+    <extension name='mcc' />
+    <extension name='backoffice' />
+    <extension name='commercesearchbackoffice' />
+    <extension name='commerceservicesbackoffice' />
+    <extension name='solrfacetsearchbackoffice' />
+    <extension name='solrserver' />
+    <extension name='yacceleratorcockpits' />
+    <extension name='yacceleratorinitialdata' />
+    <extension name='yacceleratorstorefront' />
+    <extension name='yacceleratorfulfilmentprocess' />
+    <extension name='yaddon' />
+    <extension name='ycommercewebservices' />
+    <extension name='electronicsstore' />
+    <extension name='apparelstore' />
+    <extension name='liveeditaddon' />
+    <extension name='acceleratorwebservicesaddon' />
+
+    <extension name='travelacceleratorstorefront' />
+  </extensions>
+</hybrisconfig>

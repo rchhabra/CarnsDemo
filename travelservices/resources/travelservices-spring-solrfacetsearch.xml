@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <!-- Search related beans -->
+  <alias name="defaultTravelSearchQueryPageableConverter" alias="commerceSearchQueryPageableConverter"/>
+  <bean id="defaultTravelSearchQueryPageableConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchRequest"/>
+    <property name="populators">
+      <list>
+        <ref bean="travelSearchSolrQueryPopulator"/>
+        <ref bean="commerceSearchPagePopulator"/>
+        <ref bean="commerceSearchSortPopulator"/>
+        <ref bean="commerceSearchFiltersPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultSolrConfigurableDateRangeStrategy" alias="solrDateRangeStrategy"/>
+  <bean id="defaultSolrConfigurableDateRangeStrategy"
+        class="de.hybris.platform.travelservices.search.strategies.impl.SolrConfigurableDateRangeStrategy">
+    <property name="dateRange" value="0"/>
+  </bean>
+
+  <alias name="defaultTravelSearchSolrQueryPopulator" alias="travelSearchSolrQueryPopulator"/>
+  <bean id="defaultTravelSearchSolrQueryPopulator"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.TravelSearchSolrQueryPopulator">
+    <property name="commonI18NService" ref="commonI18NService"/>
+    <property name="facetSearchService" ref="solrTravelFacetSearchService"/>
+    <property name="facetSearchConfigService" ref="facetSearchConfigService"/>
+    <property name="solrFacetSearchConfigSelectionStrategy" ref="solrFacetSearchConfigSelectionStrategy"/>
+    <property name="solrDateRangeStrategy" ref="solrDateRangeStrategy"/>
+    <property name="solrIndexSortService" ref="solrIndexSortService"/>
+  </bean>
+
+  <alias name="defaultTravelSolrSearchResponseConverter" alias="travelcommerceSolrSearchResponseConverter"/>
+  <bean id="defaultTravelSolrSearchResponseConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelservices.search.facetdata.TransportOfferingSearchPageData"/>
+    <property name="populators">
+      <list>
+        <ref bean="commerceSearchResponseQueryPopulator"/>
+        <ref bean="commerceSearchResponsePaginationPopulator"/>
+        <ref bean="commerceSearchResponseResultsPopulator"/>
+        <ref bean="commerceSearchResponseSortsPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultTravelTransportOfferingSearchService" alias="travelTransportOfferingSearchService"/>
+  <alias name="defaultTravelSolrTransportOfferingSearchService" alias="defaultTravelTransportOfferingSearchService"/>
+  <bean id="defaultTravelSolrTransportOfferingSearchService"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.impl.DefaultSolrTransportOfferingSearchService">
+    <property name="searchQueryPageableConverter" ref="commerceSearchQueryPageableConverter"/>
+    <property name="searchRequestConverter" ref="travelCommerceSolrSearchRequestConverter"/>
+    <property name="searchResponseConverter" ref="travelcommerceSolrSearchResponseConverter"/>
+  </bean>
+
+  <bean id="facetSearchQueryFacetsPartialSearchPopulator"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.FacetSearchQueryFacetsPartialSearchPopulator"
+        parent="facetSearchQueryFacetsPopulator"/>
+  <bean parent="modifyPopulatorList">
+    <property name="list" ref="facetSearchQueryConverter"/>
+    <property name="remove" ref="facetSearchQueryFacetsPopulator"/>
+    <property name="add" ref="facetSearchQueryFacetsPartialSearchPopulator"/>
+  </bean>
+
+  <alias alias="flexibleSearchQuerySpecFactory" name="defaultTravelFlexibleSearchQuerySpecFactory"/>
+  <bean id="defaultTravelFlexibleSearchQuerySpecFactory"
+        class="de.hybris.platform.solrfacetsearch.config.factories.impl.DefaultTravelFlexibleSearchQuerySpecFactory"
+        parent="defaultFlexibleSearchQuerySpecFactory">
+  </bean>
+
+  <alias name="defaultTravelFlexibleSearchQueryPopulator" alias="indexedTypeFlexibleSearchQueryPopulator"/>
+  <bean id="defaultTravelFlexibleSearchQueryPopulator"
+        class="de.hybris.platform.solrfacetsearch.converters.populator.DefaultTravelFlexibleSearchQueryPopulator"
+        parent="defaultIndexedTypeFlexibleSearchQueryPopulator"/>
+
+  <bean id="transportOfferingStatusFacetSearchListener"
+        class="de.hybris.platform.solrfacetsearch.search.context.impl.TransportOfferingStatusFacetSearchListener">
+    <property name="notAllowedStatuses">
+      <util:list>
+        <util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED"/>
+        <util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED"/>
+        <util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED"/>
+      </util:list>
+    </property>
+  </bean>
+
+  <bean id="transportOfferingStatusFacetSearchListenerDefinition" parent="solrListenerDefinition">
+    <property name="listener" ref="transportOfferingStatusFacetSearchListener"/>
+  </bean>
+
+  <!-- Accommodation Offering specific bean configs -->
+
+  <alias name="defaultAccommodationOfferingSearchService" alias="accommodationOfferingSearchService"/>
+  <alias name="defaultSolrAccommodationOfferingSearchService" alias="defaultAccommodationOfferingSearchService"/>
+  <bean id="defaultSolrAccommodationOfferingSearchService"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.impl.DefaultSolrAccommodationOfferingSearchService">
+    <property name="accommodationSearchQueryPageableConverter" ref="accommodationSearchQueryPageableConverter"/>
+    <property name="searchRequestConverter" ref="travelCommerceSolrSearchRequestConverter"/>
+    <property name="searchResponseConverter" ref="accommodationSolrSearchResponseConverter"/>
+  </bean>
+
+  <alias name="defaultAccommodationSearchQueryPageableConverter" alias="accommodationSearchQueryPageableConverter"/>
+  <bean id="defaultAccommodationSearchQueryPageableConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchRequest"/>
+    <property name="populators">
+      <list>
+        <ref bean="accommodationSearchSolrQueryPopulator"/>
+        <ref bean="commerceSearchPagePopulator"/>
+        <ref bean="travelSearchSortPopulator"/>
+        <ref bean="accommodationSearchTextPopulator"/>
+        <ref bean="commerceSearchFiltersPopulator"/>
+        <ref bean="boostSearchQueryPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultAccommodationSearchSolrQueryPopulator" alias="accommodationSearchSolrQueryPopulator"/>
+  <bean id="defaultAccommodationSearchSolrQueryPopulator"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.AccommodationSearchSolrQueryPopulator">
+    <property name="catalogVersionService" ref="catalogVersionService"/>
+    <property name="baseSiteService" ref="baseSiteService"/>
+    <property name="commonI18NService" ref="commonI18NService"/>
+    <property name="accommodationFacetSearchService" ref="accommodationFacetSearchService"/>
+    <property name="facetSearchConfigService" ref="facetSearchConfigService"/>
+    <property name="solrFacetSearchConfigSelectionStrategy" ref="solrFacetSearchConfigSelectionStrategy"/>
+    <property name="solrIndexSortService" ref="solrIndexSortService" />
+  </bean>
+
+  <alias name="travelSearchSortPopulator" alias="travelSearchSortPopulator"/>
+  <bean id="travelSearchSortPopulator"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.TravelSearchSortPopulator"/>
+
+  <!-- This bean config is required to support the legacy mode, freeTextQueryBuilders are not used in the newer implementation as these are set within SolrIndexedPropertyModel -->
+  <alias name="defaultAccommodationSearchTextPopulator" alias="accommodationSearchTextPopulator"/>
+  <bean id="defaultAccommodationSearchTextPopulator"
+        class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SearchTextPopulator">
+    <property name="freeTextQueryBuilders">
+      <list>
+        <bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+          <property name="propertyName" value="locationNames"/>
+          <property name="boost" value="90"/>
+        </bean>
+        <bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+          <property name="propertyName" value="propertyName"/>
+          <property name="boost" value="100"/>
+        </bean>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultAccommodationSolrSearchResponseConverter" alias="accommodationSolrSearchResponseConverter"/>
+  <bean id="defaultAccommodationSolrSearchResponseConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelservices.search.facetdata.AccommodationOfferingSearchPageData"/>
+    <property name="populators">
+      <list>
+        <ref bean="commerceSearchResponseQueryPopulator"/>
+        <ref bean="commerceSearchResponsePaginationPopulator"/>
+        <ref bean="commerceSearchResponseResultsPopulator"/>
+        <ref bean="commerceSearchResponseFacetsPopulator"/>
+        <ref bean="commerceSearchResponseFacetFilterPopulator"/>
+        <ref bean="travelSearchResponseFilteredFacetsPopulator"/>
+        <ref bean="commerceSearchResponseFacetSortPopulator"/>
+        <ref bean="travelSearchResponseSortsPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="travelIndexer" alias="indexer"/>
+  <bean id="travelIndexer" parent="defaultIndexer" class="de.hybris.platform.solrfacetsearch.indexer.impl.TravelIndexer">
+    <property name="timeService" ref="timeService"/>
+    <property name="catalogVersionService" ref="catalogVersionService"/>
+    <property name="configurationService" ref="configurationService"/>
+    <property name="travelSolrDocumentFactory" ref="travelSolrDocumentFactory"/>
+  </bean>
+
+  <alias name="defaultTravelSolrDocumentFactory" alias="travelSolrDocumentFactory"/>
+  <bean id="defaultTravelSolrDocumentFactory" parent="defaultSolrDocumentFactory"
+        class="de.hybris.platform.solrfacetsearch.indexer.impl.DefaultTravelSolrDocumentFactory">
+  </bean>
+
+  <alias name="defaultAccommodationFacetSearchService" alias="accommodationFacetSearchService"/>
+  <bean id="defaultAccommodationFacetSearchService"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.impl.DefaultAccommodationFacetSearchService"
+        parent="defaultFacetSearchService">
+  </bean>
+
+  <alias name="defaultTravelSearchResponseFilteredFacetsPopulator" alias="travelSearchResponseFilteredFacetsPopulator"/>
+  <bean id="defaultTravelSearchResponseFilteredFacetsPopulator"
+        class=" de.hybris.platform.travelservices.search.solrfacetsearch.populators.TravelSearchResponseFilteredFacetsPopulator">
+    <property name="configurationService" ref="configurationService"/>
+  </bean>
+
+  <alias name="travelSearchResponseSortsPopulator" alias="travelSearchResponseSortsPopulator"/>
+  <bean id="travelSearchResponseSortsPopulator"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.TravelSearchResponseSortsPopulator">
+    <property name="configurationService" ref="configurationService"/>
+  </bean>
+
+  <alias alias="defaultFreeTextQueryBuilder" name="accommodationDisMaxFreeTextQueryBuilder"/>
+
+  <alias alias="accommodationDisMaxFreeTextQueryBuilder" name="defaultAccommodationDisMaxFreeTextQueryBuilder"/>
+  <bean id="defaultAccommodationDisMaxFreeTextQueryBuilder"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.impl.AccommodationDisMaxFreeTextQueryBuilder"
+        parent="disMaxFreeTextQueryBuilder">
+  </bean>
+
+  <alias name="defaultTravelCommerceSolrSearchRequestConverter" alias="travelCommerceSolrSearchRequestConverter"/>
+  <bean id="defaultTravelCommerceSolrSearchRequestConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchResponse"/>
+    <property name="populators">
+      <list>
+        <ref bean="solrTravelSearchRequestResponsePopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultTravelSolrSearchRequestResponsePopulator" alias="solrTravelSearchRequestResponsePopulator"/>
+  <bean id="defaultTravelSolrSearchRequestResponsePopulator"
+        class="de.hybris.platform.commerceservices.search.solrfacetsearch.populators.SolrSearchRequestResponsePopulator">
+    <property name="solrFacetSearchService" ref="solrTravelFacetSearchService"/>
+    <property name="solrKeywordRedirectService" ref="solrKeywordRedirectService"/>
+  </bean>
+
+  <alias name="defaultTravelFacetSearchService" alias="solrTravelFacetSearchService"/>
+  <bean id="defaultTravelFacetSearchService" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchService">
+    <property name="facetSearchStrategyFactory" ref="travelFacetSearchStrategyFactory"/>
+  </bean>
+
+  <alias name="defaultTravelFacetSearchStrategyFactory" alias="travelFacetSearchStrategyFactory"/>
+  <bean id="defaultTravelFacetSearchStrategyFactory"
+        class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchStrategyFactory">
+    <property name="defaultFacetSearchStrategy" ref="travelFacetSearchStrategy"/>
+    <property name="legacyFacetSearchStrategy" ref="legacyFacetSearchStrategy"/>
+  </bean>
+
+  <alias name="defaultTravelFacetSearchStrategy" alias="travelFacetSearchStrategy"/>
+  <bean id="defaultTravelFacetSearchStrategy" class="de.hybris.platform.solrfacetsearch.search.impl.DefaultFacetSearchStrategy"
+        parent="abstractFacetSearchStrategy">
+    <property name="solrSearchProviderFactory" ref="solrSearchProviderFactory" />
+    <property name="facetSearchQueryConverter" ref="travelFacetSearchQueryConverter"/>
+    <property name="facetSearchResultConverter" ref="facetSearchResultConverter"/>
+    <property name="facetSearchContextFactory" ref="facetSearchContextFactory"/>
+    <property name="solrIndexService" ref="solrIndexService" />
+  </bean>
+
+  <alias name="defaultTravelFacetSearchQueryConverter" alias="travelFacetSearchQueryConverter"/>
+  <bean id="defaultTravelFacetSearchQueryConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="org.apache.solr.client.solrj.SolrQuery"/>
+    <property name="populators">
+      <list>
+        <ref bean="facetSearchQueryBasicPopulator"/>
+        <ref bean="travelFacetSearchQueryFilterQueriesPopulator"/>
+        <ref bean="facetSearchQueryGroupingPopulator"/>
+        <ref bean="facetSearchQuerySortsPopulator"/>
+        <ref bean="facetSearchQueryPagingPopulator"/>
+        <ref bean="travelFacetSearchQueryFacetsPopulator"/>
+        <ref bean="facetSearchQueryFieldsPopulator"/>
+        <ref bean="facetSearchQuerySpellcheckPopulator"/>
+        <ref bean="facetSearchQueryParamsPopulator"/>
+        <ref bean="facetSearchQueryCatalogVersionsFilterPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias alias="travelFacetSearchQueryFacetsPopulator" name="defaultTravelFacetSearchQueryFacetsPopulator"/>
+  <bean id="defaultTravelFacetSearchQueryFacetsPopulator"
+        class="de.hybris.platform.travelservices.search.solrfacetsearch.impl.DefaultTravelFacetSearchQueryFacetsPopulator"
+        parent="abstractFacetSearchQueryPopulator">
+    <property name="defaultFacetSort" value="count"/>
+    <property name="defaultFacetValuesMinCount" value="${facet.limit.min}"/>
+    <property name="defaultFacetValuesMaxLimit" value="${facet.limit.max}"/>
+  </bean>
+
+  <alias alias="travelFacetSearchQueryFilterQueriesPopulator" name="defaultTravelFacetSearchQueryFilterQueriesPopulator"/>
+  <bean id="defaultTravelFacetSearchQueryFilterQueriesPopulator" class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.TravelFacetSearchQueryFilterQueriesPopulator"
+          parent="facetSearchQueryFilterQueriesPopulator" />
+
+  <alias name="defaultFilteredFacetSearchPagePopulator" alias="filteredFacetSearchPagePopulator" />
+  <bean id="defaultFilteredFacetSearchPagePopulator" class="de.hybris.platform.travelservices.search.solrfacetsearch.populators.FilteredFacetSearchPagePopulator">
+    <property name="searchQueryConverter" ref="solrSearchQueryEncoder" />
+    <property name="facetValueConverter" ref="facetValueConverter" />
+  </bean>
+
+  <alias name="travelUnallowedFacetTypes" alias="unallowedFacetTypes" />
+  <util:list id="travelUnallowedFacetTypes" value-type="java.lang.String">
+    <!--<value>text</value>-->
+    <!--<value>sortabletext</value>-->
+  </util:list>
+
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<widget-definition id="de.hybris.platform.travelbackoffice.widgets.mainpanel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd">
+
+    <name>Main Panel</name>
+    <description>Main panel widget for backoffice homepage</description>
+    <defaultTitle>Main Panel</defaultTitle>
+    <version>1.0</version>
+    <controller class="de.hybris.platform.travelbackoffice.controllers.MainPanelController"/>
+
+    <outputType>java.lang.Object</outputType>
+    <sockets>
+        <output id="contextMap" type="java.util.Map"/>
+        <output id="contextMapForModifyWizard" type="java.util.Map"/>
+        <output id="seatmapContext" type="java.util.Map"/>
+        <output id="treeNode" type="com.hybris.backoffice.navigation.TreeNodeSelector"/>
+    </sockets>
+<!---->
+</widget-definition>

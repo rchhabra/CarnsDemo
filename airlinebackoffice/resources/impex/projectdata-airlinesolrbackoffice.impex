@@ -1,0 +1,4 @@
+# This impex is to return to the Flexible search logic while accessing Products in backoffice
+
+REMOVE BackofficeIndexedTypeToSolrFacetSearchConfig; indexedType(code)[unique=true];
+; Product

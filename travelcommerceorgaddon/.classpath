@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="src" path="/addonsupport"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" path="acceleratoraddon/web/src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry kind="src" path="/acceleratorstorefrontcommons"/>
+	<classpathentry kind="src" path="/b2bcommercefacades"/>
+	<classpathentry kind="src" path="/b2bapprovalprocessfacades"/>
+	<classpathentry exported="true" kind="lib" path="/b2bcommercefacades/bin/b2bcommercefacadesserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/6.2.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/b2bapprovalprocessfacades/bin/b2bapprovalprocessfacadesserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/6.2.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="/b2bcommerce/bin/b2bcommerceserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://download.hybris.com/api/6.2.0"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="/travelb2bfacades"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

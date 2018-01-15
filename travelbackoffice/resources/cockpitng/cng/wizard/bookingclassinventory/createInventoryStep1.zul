@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:w="client">
+    <html>
+        <zscript><![CDATA[
+        	import de.hybris.platform.travelbackofficeservices.stocklevel.ManageStockLevelInfo;
+			import de.hybris.platform.travelservices.model.travel.ScheduleConfigurationModel;
+	   		ManageStockLevelInfo manageStockLevelInfo = widgetInstanceManager.getModel().getValue("manageStockLevelInfo",
+												ManageStockLevelInfo.class);
+			ScheduleConfigurationModel scheduleConfigurationModel = widgetInstanceManager.getModel().getValue("searchScheduleModel",
+												ScheduleConfigurationModel.class);
+			String selectedStockItemType = manageStockLevelInfo.getStockItemType();
+			String airlineNumberSearched = scheduleConfigurationModel.getNumber();
+   		]]>
+        </zscript>
+        <![CDATA[
+			<script type="text/javascript">
+                function showReference(className){
+                    jq(".y_reference-editor").slideUp();
+                    if(className){
+                        var classSelector = "." + className;
+                        jq(classSelector).slideDown();
+                    }
+                }
+			</script>
+		]]>
+    </html>
+
+    <radiogroup>
+        <vlayout>
+            <radio id="travelSector" checked="${(selectedStockItemType==null || selectedStockItemType=='' || selectedStockItemType=='TravelSector' )? 'true':''}" label="${c:l('assign.inventory.bookingclass.wizard.travelsector')}" w:onCheck="showReference('y_sectorReferenceDiv')"/>
+            <div zclass="y_sectorReferenceDiv y_reference-editor" style="${(selectedStockItemType==null || selectedStockItemType=='' || selectedStockItemType=='TravelSector')? '':'display: none;'} height: auto;">
+                <editor id="sectorReferenceEditor" type="MultiReference-COLLECTION(TravelSector)" property="manageStockLevelInfo.travelSectors">
+                     <custom-attributes pageSize="5" isNestedObjectCreationDisabled="false"/>
+                </editor>
+            </div>
+            <radio id="transportOffering" checked="${selectedStockItemType=='TransportOffering'?'true':''}" label="${c:l('assign.inventory.bookingclass.wizard.transportOffering')}" w:onCheck="showReference('y_flightReferenceDiv')"/>
+            <div zclass="y_flightReferenceDiv y_reference-editor" style="${selectedStockItemType=='TransportOffering'?'':'display: none;'} height: auto;">
+                <editor id="flightReferenceEditor" type="MultiReference-COLLECTION(TransportOffering)" property="manageStockLevelInfo.transportOfferings">
+                    <custom-attributes pageSize="5" isNestedObjectCreationDisabled="true"/>
+                </editor>
+            </div>
+            <radio id="travelSchedule" checked="${selectedStockItemType=='ScheduleConfiguration'?'true':''}" label="${c:l('assign.inventory.bookingclass.wizard.travelschedule')}" w:onCheck="showReference('y_schdeuleReferenceDiv')"/>
+            <div zclass="y_schdeuleReferenceDiv y_reference-editor" style="${selectedStockItemType=='ScheduleConfiguration'?'':'display: none;'} height: 150px;">
+                    <label value="${c:l('assign.inventory.bookingclass.wizard.airline')}"/>
+                <editor style="height: 60px;" id="travelProviderReferenceEditor" type="Reference(TravelProvider)" property="searchScheduleModel.travelProvider">
+                    <custom-attributes pageSize="5" isNestedObjectCreationDisabled="true"/>
+                </editor>
+                <label value="${c:l('assign.inventory.bookingclass.wizard.number')}"/>
+                <textbox id="airlineNumber" value="${airlineNumberSearched==null || airlineNumberSearched=='' ? '':airlineNumberSearched}"/>
+            </div>
+        </vlayout>
+    </radiogroup>
+
+</zk>

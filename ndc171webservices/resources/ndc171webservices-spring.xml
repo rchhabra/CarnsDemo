@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- Message converters -->
+
+    <alias name="ndcJaxbMessageConverters" alias="jaxbMessageConverters"/>
+    <util:list id="ndcJaxbMessageConverters">
+        <ref bean="defaultXmlHttpMessageConverter" />
+    </util:list>
+
+    <!-- Validators' Lists -->
+
+    <util:list id="airShoppingRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcAirShoppingCurrencyValidator"/>
+        <ref bean="ndcAirShoppingDataListsValidator"/>
+        <ref bean="ndcAirShoppingOriginDestinationValidator"/>
+        <ref bean="ndcAirShoppingPassengerTypeValidator"/>
+        <ref bean="ndcAirShoppingDateValidator"/>
+    </util:list>
+
+    <util:list id="airShoppingRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <util:list id="orderChangeRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcOrderChangeDataListsValidator"/>
+        <ref bean="ndcOrderChangeActionValidator"/>
+        <ref bean="ndcOrderChangeOfferValidator"/>
+        <ref bean="ndcOrderChangePassengerValidator"/>
+        <ref bean="ndcOrderChangeSegmentRefsValidator"/>
+        <ref bean="ndcOrderChangePaymentValidator"/>
+    </util:list>
+
+    <util:list id="orderCreateRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcOrderCreateDataListsValidator"/>
+        <ref bean="ndcOrderCreatePassengerTypeValidator"/>
+        <ref bean="ndcOrderCreateOfferValidator"/>
+        <ref bean="ndcOrderCreatePaymentValidator"/>
+        <ref bean="ndcMetadataCurrencyValidator"/>
+    </util:list>
+
+    <util:list id="flightPriceRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcFlightPricePassengerTypeValidator"/>
+        <ref bean="ndcFlightPriceOfferValidator"/>
+        <ref bean="ndcFlightPriceCurrencyValidator"/>
+    </util:list>
+
+    <util:list id="flightPriceRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <util:list id="orderViewRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <util:list id="baggageListRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcBaggageListCurrencyValidator"/>
+        <ref bean="ndcBaggageListDataListsValidator"/>
+        <ref bean="ndcBaggageListPassengerTypeValidator"/>
+        <ref bean="ndcBaggageListOriginDestinationValidator"/>
+        <ref bean="ndcBaggageListSegmentKeyValidator"/>
+    </util:list>
+
+    <util:list id="serviceListRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcServiceListCurrencyValidator"/>
+        <ref bean="ndcServiceListDataListsValidator"/>
+        <ref bean="ndcServiceListPassengerTypeValidator"/>
+        <ref bean="ndcServiceListOriginDestinationValidator"/>
+        <ref bean="ndcServiceListSegmentKeyValidator"/>
+    </util:list>
+
+    <util:list id="serviceListRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <util:list id="baggageListRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <util:list id="seatAvailabilityRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcSeatAvailabilityOriginDestinationValidator"/>
+        <ref bean="ndcSeatAvailabilityDataListValidator"/>
+    </util:list>
+
+    <util:list id="orderRetrieveRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcOrderRetrieveFiltersValidator"/>
+    </util:list>
+    
+    <util:list id="seatAvailabilityRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+    
+    <util:list id="servicePriceRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcServicePricePassengerTypeValidator"/>
+        <ref bean="ndcServicePriceCurrencyValidator"/>
+        <ref bean="ndcServicePriceOriginDestinationValidator"/>
+        <ref bean="ndcServicePriceSegmentKeyValidator"/>
+    </util:list>
+    
+    <util:list id="servicePriceRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <util:list id="baggageChargesRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcBaggageChargesCurrencyValidator"/>
+        <ref bean="ndcBaggageChargesDataListsValidator"/>
+        <ref bean="ndcBaggageChargesPassengerTypeValidator"/>
+        <ref bean="ndcBaggageChargesOriginDestinationValidator"/>
+        <ref bean="ndcBaggageChargesSegmentKeyValidator"/>
+    </util:list>
+    
+    <util:list id="baggageChargesRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+    
+    <util:list id="baggageAllowanceRQValidators">
+        <ref bean="ndcRQFormatValidator"/>
+        <ref bean="ndcBaggageAllowanceCurrencyValidator"/>
+        <ref bean="ndcBaggageAllowanceDataListsValidator"/>
+        <ref bean="ndcBaggageAllowancePassengerTypeValidator"/>
+        <ref bean="ndcBaggageAllowanceOriginDestinationValidator"/>
+        <ref bean="ndcBaggageAllowanceSegmentKeyValidator"/>
+    </util:list>
+    
+    <util:list id="baggageAllowanceRSValidators">
+        <ref bean="ndcRSFormatValidator"/>
+    </util:list>
+
+    <alias name="defaultNDCAirShoppingOriginDestinationValidator" alias="ndcAirShoppingOriginDestinationValidator"/>
+    <bean id="defaultNDCAirShoppingOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAirShoppingOriginDestinationValidator" parent="ndcAbstractOriginDestinationValidator">
+    </bean>
+
+    <alias name="defaultNDCOrderRetrieveFiltersValidator" alias="ndcOrderRetrieveFiltersValidator"/>
+    <bean id="defaultNDCOrderRetrieveFiltersValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderRetrieveFiltersValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCMetadataCurrencyValidator" alias="ndcMetadataCurrencyValidator"/>
+    <bean id="defaultNDCMetadataCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCMetadataCurrencyValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="defaultNDCAirShoppingDateValidator" alias="ndcAirShoppingDateValidator"/>
+    <bean id="defaultNDCAirShoppingDateValidator" class="de.hybris.platform.ndcwebservices.validators.impl.NDCAirShoppingDateValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCFlightPriceCurrencyValidator" alias="ndcFlightPriceCurrencyValidator"/>
+    <bean id="defaultNDCFlightPriceCurrencyValidator" class="de.hybris.platform.ndcwebservices.validators.impl.NDCFlightPriceCurrencyValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="ndcRSFormatValidator" alias="ndcRSFormatValidator"/>
+    <bean id="ndcRSFormatValidator" class="de.hybris.platform.ndcwebservices.validators.impl.NDCRSFormatValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcJAXBContext" ref="ndcJAXBContext"/>
+    </bean>
+
+    <alias name="ndcRQFormatValidator" alias="ndcRQFormatValidator"/>
+    <bean id="ndcRQFormatValidator" class="de.hybris.platform.ndcwebservices.validators.impl.NDCRQFormatValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcJAXBContext" ref="ndcJAXBContext"/>
+    </bean>
+
+    <alias name="ndcAbstractOriginDestinationValidator" alias="ndcAbstractOriginDestinationValidator"/>
+    <bean id="ndcAbstractOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAbstractOriginDestinationValidator" abstract="true">
+        <property name="transportFacilityService" ref="transportFacilityService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="travelRouteFacade" ref="travelRouteFacade"/>
+    </bean>
+
+    <alias name="ndcAbstractPaymentValidator" alias="ndcAbstractPaymentValidator"/>
+    <bean id="ndcAbstractPaymentValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAbstractPaymentValidator" abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="defaultNDCOrderCreatePaymentValidator" alias="ndcOrderCreatePaymentValidator"/>
+    <bean id="defaultNDCOrderCreatePaymentValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderCreatePaymentValidator" parent="ndcAbstractPaymentValidator">
+    </bean>
+
+    <alias name="defaultNDCOrderChangePaymentValidator" alias="ndcOrderChangePaymentValidator"/>
+    <bean id="defaultNDCOrderChangePaymentValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderChangePaymentValidator" parent="ndcAbstractPaymentValidator">
+    </bean>
+            
+   	<alias name="defaultNDCOrderCreateDataListsValidator" alias="ndcOrderCreateDataListsValidator"/>
+    <bean id="defaultNDCOrderCreateDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderCreateDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCOrderCreatePassengerTypeValidator" alias="ndcOrderCreatePassengerTypeValidator"/>
+    <bean id="defaultNDCOrderCreatePassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderCreatePassengerTypeValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="userService" ref="userService"/>
+        <property name="allowedGenders">
+            <util:list>
+                <util:constant static-field="de.hybris.platform.ndcfacades.ndc.GenderCodeContentType.MALE"/>
+                <util:constant static-field="de.hybris.platform.ndcfacades.ndc.GenderCodeContentType.FEMALE"/>
+            </util:list>
+        </property>
+    </bean>
+
+    <alias name="defaultOrderRetrieveRQValidator" alias="orderRetrieveRQValidator"/>
+    <bean id="defaultOrderRetrieveRQValidator" class="de.hybris.platform.ndcwebservices.validators.OrderRetrieveRQValidator">
+        <property name="requestValidators" ref="orderRetrieveRQValidators"/>
+    </bean>
+
+    <alias name="defaultNDCOrderCreateOfferValidator" alias="ndcOrderCreateOfferValidator"/>
+    <bean id="defaultNDCOrderCreateOfferValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderCreateOfferValidator" parent="ndcAbstractOriginDestinationValidator">
+            <property name="productService" ref="productService"/>
+            <property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping"/>
+    </bean>
+
+    <alias name="defaultNDCFlightPriceOfferValidator" alias="ndcFlightPriceOfferValidator"/>
+    <bean id="defaultNDCFlightPriceOfferValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCFlightPriceOfferValidator" parent="ndcAbstractOriginDestinationValidator">
+    </bean>
+
+    <alias name="ndcAbstractPassengerTypeValidator" alias="ndcAbstractPassengerTypeValidator"/>
+    <bean id="ndcAbstractPassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAbstractPassengerTypeValidator" abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+            
+   	<alias name="defaultNDCAirShoppingDataListsValidator" alias="ndcAirShoppingDataListsValidator"/>
+    <bean id="defaultNDCAirShoppingDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAirShoppingDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCAirShoppingPassengerTypeValidator" alias="ndcAirShoppingPassengerTypeValidator"/>
+    <bean id="defaultNDCAirShoppingPassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAirShoppingPassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultNDCFlightPricePassengerTypeValidator" alias="ndcFlightPricePassengerTypeValidator"/>
+    <bean id="defaultNDCFlightPricePassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCFlightPricePassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultNDCServiceListPassengerTypeValidator" alias="ndcServiceListPassengerTypeValidator"/>
+    <bean id="defaultNDCServiceListPassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServiceListPassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultNDCBaggageListCurrencyValidator" alias="ndcBaggageListCurrencyValidator"/>
+    <bean id="defaultNDCBaggageListCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageListCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+            
+   	<alias name="defaultNDCBaggageListDataListsValidator" alias="ndcBaggageListDataListsValidator"/>
+    <bean id="defaultNDCBaggageListDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageListDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>     
+
+    <alias name="defaultNDCServiceListCurrencyValidator" alias="ndcServiceListCurrencyValidator"/>
+    <bean id="defaultNDCServiceListCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServiceListCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+
+    <bean id="ndcAirShoppingCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCAirShoppingCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+
+    <alias name="ndcOffersCurrencyValidator" alias="ndcOffersCurrencyValidator"/>
+    <bean id="ndcOffersCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOffersCurrencyValidator" abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <alias name="ndcOriginDestinationValidator" alias="ndcOriginDestinationValidator"/>
+    <bean id="ndcOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOriginDestinationValidator" abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCServiceListOriginDestinationValidator" alias="ndcServiceListOriginDestinationValidator"/>
+    <bean id="defaultNDCServiceListOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServiceListOriginDestinationValidator" parent="ndcOriginDestinationValidator">
+    </bean>
+
+    <alias name="defaultNDCBaggageListOriginDestinationValidator" alias="ndcBaggageListOriginDestinationValidator"/>
+    <bean id="defaultNDCBaggageListOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageListOriginDestinationValidator" parent="ndcOriginDestinationValidator"/>
+
+    <alias name="ndcOffersSegmentKeyValidator" alias="ndcOffersSegmentKeyValidator"/>
+    <bean id="ndcOffersSegmentKeyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOffersSegmentKeyValidator" abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcTransportOfferingService" ref="ndcTransportOfferingService"/>
+    </bean>
+            
+   	<alias name="defaultNDCServiceListDataListsValidator" alias="ndcServiceListDataListsValidator"/>
+    <bean id="defaultNDCServiceListDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServiceListDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCServiceListSegmentKeyValidator" alias="ndcServiceListSegmentKeyValidator"/>
+    <bean id="defaultNDCServiceListSegmentKeyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServiceListSegmentKeyValidator" parent="ndcOffersSegmentKeyValidator"/>
+
+    <alias name="defaultNDCBaggageListSegmentKeyValidator" alias="ndcBaggageListSegmentKeyValidator"/>
+    <bean id="defaultNDCBaggageListSegmentKeyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageListSegmentKeyValidator" parent="ndcOffersSegmentKeyValidator"/>
+
+    <alias name="defaultNDCBaggageListPassengerTypeValidator" alias="ndcBaggageListPassengerTypeValidator"/>
+    <bean id="defaultNDCBaggageListPassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageListPassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultAirShoppingRQValidator" alias="airShoppingRQValidator"/>
+    <bean id="defaultAirShoppingRQValidator" class="de.hybris.platform.ndcwebservices.validators.AirShoppingRQValidator">
+        <property name="requestValidators" ref="airShoppingRQValidators"/>
+    </bean>
+
+    <alias name="defaultAirShoppingRSValidator" alias="airShoppingRSValidator"/>
+    <bean id="defaultAirShoppingRSValidator" class="de.hybris.platform.ndcwebservices.validators.AirShoppingRSValidator">
+        <property name="requestValidators" ref="airShoppingRSValidators"/>
+    </bean>
+
+    <alias name="defaultFlightPriceRSValidator" alias="flightPriceRSValidator"/>
+    <bean id="defaultFlightPriceRSValidator" class="de.hybris.platform.ndcwebservices.validators.FlightPriceRSValidator">
+        <property name="requestValidators" ref="flightPriceRSValidators"/>
+    </bean>
+
+    <alias name="defaultFlightPriceRQValidator" alias="flightPriceRQValidator"/>
+    <bean id="defaultFlightPriceRQValidator" class="de.hybris.platform.ndcwebservices.validators.FlightPriceRQValidator">
+        <property name="requestValidators" ref="flightPriceRQValidators"/>
+    </bean>
+
+    <alias name="defaultServiceListRSValidator" alias="serviceListRSValidator"/>
+    <bean id="defaultServiceListRSValidator" class="de.hybris.platform.ndcwebservices.validators.ServiceListRSValidator">
+        <property name="requestValidators" ref="serviceListRSValidators"/>
+    </bean>
+
+    <alias name="defaultBaggageListRSValidator" alias="baggageListRSValidator"/>
+    <bean id="defaultBaggageListRSValidator" class="de.hybris.platform.ndcwebservices.validators.BaggageListRSValidator">
+        <property name="requestValidators" ref="baggageListRSValidators"/>
+    </bean>
+
+    <alias name="defaultOrderCreateRQValidator" alias="orderCreateRQValidator"/>
+    <bean id="defaultOrderCreateRQValidator"
+            class="de.hybris.platform.ndcwebservices.validators.OrderCreateRQValidator">
+        <property name="requestValidators" ref="orderCreateRQValidators"/>
+    </bean>
+
+    <alias name="defaultOrderChangeRQValidator" alias="orderChangeRQValidator"/>
+    <bean id="defaultOrderChangeRQValidator"
+            class="de.hybris.platform.ndcwebservices.validators.OrderChangeRQValidator">
+        <property name="requestValidators" ref="orderChangeRQValidators"/>
+    </bean>
+
+    <alias name="defaultOrderViewRSValidator" alias="orderViewRSValidator"/>
+    <bean id="defaultOrderViewRSValidator"
+            class="de.hybris.platform.ndcwebservices.validators.OrderViewRSValidator">
+        <property name="requestValidators" ref="orderViewRSValidators"/>
+    </bean>
+
+    <alias name="defaultBaggageListRQValidator" alias="baggageListRQValidator"/>
+    <bean id="defaultBaggageListRQValidator" class="de.hybris.platform.ndcwebservices.validators.BaggageListRQValidator">
+        <property name="requestValidators" ref="baggageListRQValidators"/>
+    </bean>
+
+    <alias name="defaultServiceListRQValidator" alias="serviceListRQValidator"/>
+    <bean id="defaultServiceListRQValidator" class="de.hybris.platform.ndcwebservices.validators.ServiceListRQValidator">
+        <property name="requestValidators" ref="serviceListRQValidators"/>
+    </bean>
+
+    <alias name="defaultSeatAvailabilityRQValidator" alias="seatAvailabilityRQValidator"/>
+    <bean id="defaultSeatAvailabilityRQValidator"
+            class="de.hybris.platform.ndcwebservices.validators.SeatAvailabilityRQValidator">
+        <property name="requestValidators" ref="seatAvailabilityRQValidators"/>
+    </bean>
+
+    <alias name="defaulNDCOrderChangeActionValidator" alias="ndcOrderChangeActionValidator"/>
+    <bean id="defaulNDCOrderChangeActionValidator"
+          class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderChangeActionValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
+
+    <alias name="defaulNDCOrderChangeOfferValidator" alias="ndcOrderChangeOfferValidator"/>
+    <bean id="defaulNDCOrderChangeOfferValidator"
+          class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderChangeOfferValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="travelRouteFacade" ref="travelRouteFacade"/>
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
+
+    <alias name="defaulNDCOrderChangePassengerValidator" alias="ndcOrderChangePassengerValidator"/>
+    <bean id="defaulNDCOrderChangePassengerValidator"
+          class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderChangePassengerValidator" parent="ndcAbstractPassengerTypeValidator"/>
+            
+   	<alias name="defaultNDCOrderChangeDataListsValidator" alias="ndcOrderChangeDataListsValidator"/>
+    <bean id="defaultNDCOrderChangeDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderChangeDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+            
+   	<alias name="defaultNDCOrderChangeSegmentRefsValidator" alias="ndcOrderChangeSegmentRefsValidator"/>
+    <bean id="defaultNDCOrderChangeSegmentRefsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCOrderChangeSegmentRefsValidator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+    </bean>    
+
+    <alias name="defaultSeatAvailabilityRSValidator" alias="seatAvailabilityRSValidator"/>
+    <bean id="defaultSeatAvailabilityRSValidator" class="de.hybris.platform.ndcwebservices.validators.SeatAvailabilityRSValidator">
+        <property name="requestValidators" ref="seatAvailabilityRSValidators"/>
+    </bean>
+        
+    <alias name="defaultNDCSeatAvailabilityCurrencyValidator" alias="ndcSeatAvailabilityCurrencyValidator"/>
+    <bean id="defaultNDCSeatAvailabilityCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCSeatAvailabilityCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+    
+    <alias name="defaultNDCSeatAvailabilityOriginDestinationValidator" alias="ndcSeatAvailabilityOriginDestinationValidator"/>
+    <bean id="defaultNDCSeatAvailabilityOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCSeatAvailabilityOriginDestinationValidator" parent="ndcOriginDestinationValidator"/>
+
+    <alias name="defaultNDCSeatAvailabilityDataListValidator" alias="ndcSeatAvailabilityDataListValidator"/>
+    <bean id="defaultNDCSeatAvailabilityDataListValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCSeatAvailabilityDataListValidator" >
+            <property name="configurationService" ref="configurationService"/>
+    </bean>
+    
+    <alias name="defaultServicePriceRQValidator" alias="servicePriceRQValidator"/>
+    <bean id="defaultServicePriceRQValidator" class="de.hybris.platform.ndcwebservices.validators.ServicePriceRQValidator">
+        <property name="requestValidators" ref="servicePriceRQValidators"/>
+    </bean>
+
+    <alias name="defaultServicePriceRSValidator" alias="servicePriceRSValidator"/>
+    <bean id="defaultServicePriceRSValidator" class="de.hybris.platform.ndcwebservices.validators.ServicePriceRSValidator">
+        <property name="requestValidators" ref="servicePriceRSValidators"/>
+    </bean>
+
+    <alias name="defaultNDCServicePricePassengerTypeValidator" alias="ndcServicePricePassengerTypeValidator"/>
+    <bean id="defaultNDCServicePricePassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServicePricePassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultNDCServicePriceCurrencyValidator" alias="ndcServicePriceCurrencyValidator"/>
+    <bean id="defaultNDCServicePriceCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServicePriceCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+
+    <alias name="defaultNDCServicePriceOriginDestinationValidator" alias="ndcServicePriceOriginDestinationValidator"/>
+    <bean id="defaultNDCServicePriceOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServicePriceOriginDestinationValidator" parent="ndcOriginDestinationValidator"/>
+
+    <alias name="defaultNDCServicePriceSegmentKeyValidator" alias="ndcServicePriceSegmentKeyValidator"/>
+    <bean id="defaultNDCServicePriceSegmentKeyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCServicePriceSegmentKeyValidator" parent="ndcOffersSegmentKeyValidator"/>
+    <alias name="defaultBaggageChargesRQValidator" alias="baggageChargesRQValidator"/>
+    <bean id="defaultBaggageChargesRQValidator" class="de.hybris.platform.ndcwebservices.validators.BaggageChargesRQValidator">
+        <property name="requestValidators" ref="baggageChargesRQValidators"/>
+    </bean>
+
+    <alias name="defaultBaggageChargesRSValidator" alias="baggageChargesRSValidator"/>
+    <bean id="defaultBaggageChargesRSValidator" class="de.hybris.platform.ndcwebservices.validators.BaggageChargesRSValidator">
+        <property name="requestValidators" ref="baggageChargesRSValidators"/>
+    </bean>
+            
+    <alias name="defaultNDCBaggageChargesDataListsValidator" alias="ndcBaggageChargesDataListsValidator"/>
+    <bean id="defaultNDCBaggageChargesDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageChargesDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesPassengerTypeValidator" alias="ndcBaggageChargesPassengerTypeValidator"/>
+    <bean id="defaultNDCBaggageChargesPassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageChargesPassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultNDCBaggageChargesCurrencyValidator" alias="ndcBaggageChargesCurrencyValidator"/>
+    <bean id="defaultNDCBaggageChargesCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageChargesCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+
+    <alias name="defaultNDCBaggageChargesOriginDestinationValidator" alias="ndcBaggageChargesOriginDestinationValidator"/>
+    <bean id="defaultNDCBaggageChargesOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageChargesOriginDestinationValidator" parent="ndcOriginDestinationValidator"/>
+
+    <alias name="defaultNDCBaggageChargesSegmentKeyValidator" alias="ndcBaggageChargesSegmentKeyValidator"/>
+    <bean id="defaultNDCBaggageChargesSegmentKeyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageChargesSegmentKeyValidator" parent="ndcOffersSegmentKeyValidator"/>
+
+    <alias name="defaultNDCBaggageAllowancePassengerTypeValidator" alias="ndcBaggageAllowancePassengerTypeValidator"/>
+    <bean id="defaultNDCBaggageAllowancePassengerTypeValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageAllowancePassengerTypeValidator" parent="ndcAbstractPassengerTypeValidator"/>
+
+    <alias name="defaultNDCBaggageAllowanceCurrencyValidator" alias="ndcBaggageAllowanceCurrencyValidator"/>
+    <bean id="defaultNDCBaggageAllowanceCurrencyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageAllowanceCurrencyValidator" parent="ndcOffersCurrencyValidator"/>
+            
+    <alias name="defaultNDCBaggageAllowanceDataListsValidator" alias="ndcBaggageAllowanceDataListsValidator"/>
+    <bean id="defaultNDCBaggageAllowanceDataListsValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageAllowanceDataListsValidator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceOriginDestinationValidator" alias="ndcBaggageAllowanceOriginDestinationValidator"/>
+    <bean id="defaultNDCBaggageAllowanceOriginDestinationValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageAllowanceOriginDestinationValidator" parent="ndcOriginDestinationValidator"/>
+
+    <alias name="defaultNDCBaggageAllowanceSegmentKeyValidator" alias="ndcBaggageAllowanceSegmentKeyValidator"/>
+    <bean id="defaultNDCBaggageAllowanceSegmentKeyValidator"
+            class="de.hybris.platform.ndcwebservices.validators.impl.NDCBaggageAllowanceSegmentKeyValidator" parent="ndcOffersSegmentKeyValidator"/>
+
+    <alias name="defaultBaggageAllowanceRQValidator" alias="baggageAllowanceRQValidator"/>
+    <bean id="defaultBaggageAllowanceRQValidator" class="de.hybris.platform.ndcwebservices.validators.BaggageAllowanceRQValidator">
+        <property name="requestValidators" ref="baggageAllowanceRQValidators"/>
+    </bean>
+
+    <alias name="defaultBaggageAllowanceRSValidator" alias="baggageAllowanceRSValidator"/>
+    <bean id="defaultBaggageAllowanceRSValidator" class="de.hybris.platform.ndcwebservices.validators.BaggageAllowanceRSValidator">
+        <property name="requestValidators" ref="baggageAllowanceRSValidators"/>
+    </bean>
+</beans>

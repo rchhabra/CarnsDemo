@@ -1,0 +1,132 @@
+
+.planeOutline{
+	fill:#FFFFFF;
+	stroke:#000000;
+	stroke-miterlimit:10;
+}
+	.windowGlass{
+		fill:#F0F8FF;
+		stroke:#000000;
+		stroke-miterlimit:10;
+	}
+	.amenityBox{
+		fill:#EEEEEE;
+		stroke:#000000;
+		stroke-miterlimit:10;
+	}
+	.amenityLabel{
+		font-family: Helvetica; 
+		font-size:12px;
+	}
+
+	.columnLabel {
+		fill:#076480; 
+		font-size:26px; 
+		font-family: Helvetica;
+	}
+
+	.rowLabel {
+		fill:#076480; 
+		font-size:26px; 
+		font-family: Helvetica;
+	}
+
+.economy {
+	fill:#e9e2d8;
+	stroke:#000000;
+	
+}
+/*.seat .st1 {
+		fill:#fff;
+	stroke:#000;
+	}*/
+
+.economyPlus{
+	fill:#FFFF00;
+	stroke:#000000;
+}
+
+.business {
+	fill:#FFA500;
+	stroke:#000000;
+}
+
+.firstClass {
+	fill: #FFDF00;
+	stroke:#000000;	
+}
+
+
+.selected {
+	fill: #a7d49b;
+	fill-opacity: 0.45;
+}
+
+#tooltip {
+	fill: purple;
+	font-size: 18px;
+
+
+}
+#tooltip_outline{
+  fill: white;
+  stroke: black;
+  stroke-width: 1;
+  opacity: 0.85;
+}
+
+.unavailable {
+	fill: #9FA2A7;
+	stroke:#000000;
+	pointer-events: none;
+}
+
+.exitArrow {
+	fill:none;
+	stroke:#FBAE17;
+	stroke-width:3;
+	stroke-miterlimit:10;
+}
+
+.stairs-outline {
+	fill: #FFFFFF;
+    stroke: #076480;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+}
+
+.stairs {
+	fill: none;
+    stroke: #076480;
+    stroke-miterlimit: 10;
+}
+
+.stairs-arrow {
+	fill: #076480;
+    stroke: #076480;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+}
+
+#rearStairs {
+	font-size: 14px;
+}
+
+.stairs-text {
+	fill: #076480;
+	font-family: Helvetica;
+}
+
+.seatArea {
+	fill:#F3F0E4;
+	stroke:#000000;
+	stroke-miterlimit:10;
+}
+
+
+
+/* in the HTML*/
+
+
+
+

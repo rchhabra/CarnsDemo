@@ -1,0 +1,35 @@
+# ImpEx for Importing Travel Routes into travel accelerator
+
+$origin = origin(code)
+$destination = destination(code)
+$lang = en
+
+INSERT_UPDATE TravelRoute; code[unique = true]; name[lang = en]; $origin; $destination; travelSector(code)
+"#% beforeEach:
+	line.put(1,line.get(3) + ""_"" + line.get(4));
+	line.put(5,line.get(3) + ""_"" + line.get(4));
+"
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/travelroutes.csv""), ""utf-8"", new char[] {','}, 0, 0);"
+
+
+INSERT_UPDATE TravelRoute; code[unique = true]; name[lang = en]; $origin; $destination; travelSector(code)[collection-delimiter = #]
+; EDI_LGW_BCN ; ; EDI ; BCN ; EDI_LGW#LGW_BCN
+; BCN_LGW_EDI ; ; BCN ; EDI ; BCN_LGW#LGW_EDI
+; EDI_LGW_AMS ; ; EDI ; AMS ; EDI_LGW#LGW_AMS
+; AMS_LGW_EDI ; ; AMS ; EDI ; AMS_LGW#LGW_EDI
+; EDI_LGW_BUD ; ; EDI ; BUD ; EDI_LGW#LGW_BUD
+; BUD_LGW_EDI ; ; BUD ; EDI ; BUD_LGW#LGW_EDI
+; EDI_LGW_CPH ; ; EDI ; CPH ; EDI_LGW#LGW_CPH
+; CPH_LGW_EDI ; ; CPH ; EDI ; CPH_LGW#LGW_EDI
+; EDI_LGW_FAO ; ; EDI ; FAO ; EDI_LGW#LGW_FAO
+; FAO_LGW_EDI ; ; FAO ; EDI ; FAO_LGW#LGW_EDI
+; EDI_LGW_GVA ; ; EDI ; GVA ; EDI_LGW#LGW_GVA
+; GVA_LGW_EDI ; ; GVA ; EDI ; GVA_LGW#LGW_EDI
+; EDI_LGW_MAD ; ; EDI ; MAD ; EDI_LGW#LGW_MAD
+; MAD_LGW_EDI ; ; MAD ; EDI ; MAD_LGW#LGW_EDI
+; EDI_LGW_PMO ; ; EDI ; PMO ; EDI_LGW#LGW_PMO
+; PMO_LGW_EDI ; ; PMO ; EDI ; PMO_LGW#LGW_EDI
+; EDI_LGW_VCE ; ; EDI ; VCE ; EDI_LGW#LGW_VCE
+; VCE_LGW_EDI ; ; VCE ; EDI ; VCE_LGW#LGW_EDI
+; EDI_LGW_ZRH ; ; EDI ; ZRH ; EDI_LGW#LGW_ZRH
+; ZRH_LGW_EDI ; ; ZRH ; EDI ; ZRH_LGW#LGW_EDI

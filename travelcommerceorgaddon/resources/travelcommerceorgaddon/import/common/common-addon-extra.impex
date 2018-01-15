@@ -1,0 +1,86 @@
+#
+# Import Sample B2B Organizations
+#
+$catalog-id = travelProductCatalog
+$catalog-version = Staged
+$catalogVersion = catalogversion(catalog(id[default = $catalog-id]), version[default = $catalog-version])[unique = true, default = $catalog-id:$catalog-version]
+
+$defaultPassword = 12341234
+INSERT_UPDATE UserGroup; uid[unique = true]; groups(uid); locname[lang = en];
+; SuperAccountMangers ; ;
+
+INSERT_UPDATE Employee; uid[unique = true]; name; groups(uid)[mode = append]; password[default = $defaultPassword];
+; acctmgr ; Alistair Thompson ; employeegroup, acctmgrgroup, cockpitgroup, SuperAccountMangers, admingroup ;
+
+INSERT_UPDATE B2BCreditLimit; code[unique = true]; alertRateType(code, itemtype(code)); alertThreshold; amount; currency(isocode); dateRange(code, itemtype(code)); datePeriod[dateformat = dd.MM.yyyy hh:mm:ss];
+; Monthly30KAlert3K ; CURRENCY:B2BRateType ; 3000 ; 30000 ; GBP ; MONTH:B2BPeriodRange ; ;
+
+INSERT_UPDATE TravelAgency; description; uid[unique = true]; name; locName[lang = en]; groups(uid); reportingOrganization(uid); Addresses(&addId); &B2BUnitID; accountManager(uid); accountManagerGroups(uid); creditLimit(code); approvalProcessCode;
+; Hybris Travel Agency ; HybrisTravelAgency ; Hybris Travel Agency ; Hybris Travel Agency ; ; HybrisTravelAgency ; HybrisTravelAgencyAddrID1 ; HybrisTravelAgencyID1 ; acctmgr ; SuperAccountMangers ; Monthly30KAlert3K ; accApproval ;
+
+INSERT_UPDATE B2BUnit; description; uid[unique = true]; name; locName[lang = en]; groups(uid); reportingOrganization(uid); Addresses(&addId); &B2BUnitID; accountManager(uid); accountManagerGroups(uid); creditLimit(code); approvalProcessCode;
+; Unit A ; Pronto ; Pronto ; Pronto ; HybrisTravelAgency ; HybrisTravelAgency ; ProntoAddrID1 ; ProntoID1 ; ; ; ;
+; Unit B ; Rustic ; Rustic ; Rustic ; HybrisTravelAgency ; HybrisTravelAgency ; RusticAddrID1 ; RusticID1 ; ; ; ;
+
+INSERT_UPDATE Address; streetname[unique = true]; postalcode[unique = true]; town; country(isocode); billingAddress; contactAddress; shippingAddress; unloadingAddress; firstname; lastname; email; title(code); &addId; owner(&B2BUnitID)[unique = true];
+; 3000 Lombard Street        ; 94123 ; San Francisco ; US ; TRUE ; TRUE ; TRUE ; TRUE ; John  ; Smith ; admin@hybristravel.com ; mr ; HybrisTravelAgencyAddrID1 ; HybrisTravelAgencyID1 ;
+; 700 E 50th Street          ; 10022 ; New York      ; US ; TRUE ; TRUE ; TRUE ; TRUE ; James ; Bell  ; james.bell@pronto.com  ; mr ; ProntoAddrID1             ; ProntoID1             ;
+; 11000 Bagby Street Houston ; Texas ; Houston       ; US ; TRUE ; TRUE ; TRUE ; TRUE ; Jane  ; Smith ; jane.smith@rustic.com  ; mr ; RusticAddrID1             ; RusticID1             ;
+
+INSERT_UPDATE B2BUserGroup; uid[unique = true]; name; unit(uid); permissions(code, unit(uid));
+; limitedPermissions   ; Limited Permissions  ; HybrisTravelAgency ; Hybris 500 GBP ORDER:HybrisTravelAgency, Hybris 12K GBP MONTH:HybrisTravelAgency, Hybris 500 EUR ORDER:HybrisTravelAgency, Hybris 12K EUR MONTH:HybrisTravelAgency                                       ;
+; unlimitedPermissions ; Unimited Permissions ; HybrisTravelAgency ; Hybris 12K GBP ORDER:HybrisTravelAgency, Hybris Unlimited Threshold Timespan GBP:HybrisTravelAgency, Hybris 12K EUR ORDER:HybrisTravelAgency, Hybris Unlimited Threshold Timespan EUR:HybrisTravelAgency ;
+
+INSERT_UPDATE B2BCustomer; description; uid[unique = true]; email; name; title(code); groups(uid); permissionGroups(uid); defaultB2BUnit(uid); sessionCurrency(isocode)[default = 'GBP']; password[default = $defaultPassword]
+; Admin A         ; admin@hybristravel.com         ; admin@hybristravel.com         ; John Smith     ; mr ; HybrisTravelAgency, b2badmingroup                          ; ;HybrisTravelAgency
+; Travel Arranger ; arranger@hybristravel.com      ; arranger@hybristravel.com      ; Mark Jones     ; mr ; HybrisTravelAgency, b2bcustomergroup, unlimitedPermissions ; ;HybrisTravelAgency
+; Approver A      ; hanna.schmidt@hybristravel.com ; hanna.schmidt@hybristravel.com ; Hanna Schmidt  ; ms ; HybrisTravelAgency, b2bapprovergroup                       ; ;HybrisTravelAgency
+; Approver B      ; james.bell@pronto.com          ; james.bell@pronto.com          ; James Bell     ; mr ; Pronto, b2bapprovergroup                                   ; ;Pronto
+; Approver C      ; jane.smith@rustic.com          ; jane.smith@rustic.com          ; Jane Smith     ; ms ; Rustic, b2bapprovergroup                                   ; ;Rustic
+; Customer A      ; mark.rivers@pronto.com         ; mark.rivers@pronto.com         ; Mark Rivers    ; mr ; Pronto, b2bcustomergroup, limitedPermissions               ; ;Pronto
+; Customer B      ; mingmei.wang@pronto.com        ; mingmei.wang@pronto.com        ; Mingmei Wang   ; ms ; Pronto, b2bcustomergroup, limitedPermissions               ; ;Pronto
+; Customer C      ; william.hunter@rustic.com      ; william.hunter@rustic.com      ; William Hunter ; mr ; Rustic, b2bcustomergroup, limitedPermissions               ; ;Rustic
+; Customer D      ; gi.sun@rustic.com              ; gi.sun@rustic.com              ; Gi Sun         ; mr ; Rustic, b2bcustomergroup, limitedPermissions               ; ;Rustic
+; Manager A       ; akiro.nakamura@pronto.com      ; akiro.nakamura@pronto.com      ; Akiro Nakamura ; mr ; Pronto, b2bmanagergroup                                    ; ;Pronto
+; Manager B       ; anil.gupta@rustic.com          ; anil.gupta@rustic.com          ; Anil Gupta     ; mr ; Rustic, b2bmanagergroup                                    ; ;Rustic
+
+INSERT_UPDATE B2BBudget; code[unique = true]; Unit(uid); budget; currency(isocode)[allownull = true]; dateRange[dateformat = dd.MM.yyyy hh:mm:ss, allownull = true]; name[lang = en];
+; ProntoTravelBudget ; HybrisTravelAgency ; 30000 ; GBP ; 01.01.2010 00:00:00, 12.31.2021 12:59:59 ; Pronto Travel 30K GBP/MONTH ;
+; RusticTravelBudget ; HybrisTravelAgency ; 20000 ; GBP ; 01.01.2010 00:00:00, 12.31.2021 12:59:59 ; Rustic Travel 20K GBP/MONTH ;
+
+INSERT_UPDATE B2BCostCenter; code[unique = true]; Unit(uid); currency(isocode); budgets(code); name[lang = en];
+; Pronto ; Pronto ; GBP ; ProntoTravelBudget ; Pronto ;
+; Rustic  ; Rustic ; GBP ; RusticTravelBudget ; Rustic ;
+
+INSERT_UPDATE B2BOrderThresholdPermission; code[unique = true]; Unit(uid); threshold; currency(isocode);
+; Hybris 500 GBP ORDER ; HybrisTravelAgency ; 500   ; GBP ; -
+; Hybris 6K GBP ORDER  ; HybrisTravelAgency ; 6000  ; GBP ; -
+; Hybris 10K GBP ORDER ; HybrisTravelAgency ; 10000 ; GBP ; -
+; Hybris 12K GBP ORDER ; HybrisTravelAgency ; 12000 ; GBP ; -
+
+; Hybris 500 EUR ORDER ; HybrisTravelAgency ; 500   ; EUR ; -
+; Hybris 6K EUR ORDER  ; HybrisTravelAgency ; 6000  ; EUR ; -
+; Hybris 10K EUR ORDER ; HybrisTravelAgency ; 10000 ; EUR ; -
+; Hybris 12K EUR ORDER ; HybrisTravelAgency ; 12000 ; EUR ; -
+
+INSERT_UPDATE B2BOrderThresholdTimespanPermission; code[unique = true]; Unit(uid); threshold; currency(isocode); range(code, itemtype(code));
+; Hybris 15K GBP MONTH                    ; HybrisTravelAgency ; 15000     ; GBP ; MONTH:B2BPeriodRange ;
+; Hybris 12K GBP MONTH                    ; HybrisTravelAgency ; 12000     ; GBP ; MONTH:B2BPeriodRange ;
+; Hybris Unlimited Threshold Timespan GBP ; HybrisTravelAgency ; 999999999 ; GBP ; MONTH:B2BPeriodRange ;
+
+; Hybris 15K EUR MONTH                    ; HybrisTravelAgency ; 15000     ; EUR ; MONTH:B2BPeriodRange ;
+; Hybris 12K EUR MONTH                    ; HybrisTravelAgency ; 12000     ; EUR ; MONTH:B2BPeriodRange ;
+; Hybris Unlimited Threshold Timespan EUR ; HybrisTravelAgency ; 999999999 ; EUR ; MONTH:B2BPeriodRange ;
+
+UPDATE B2BUnit; uid[unique = true]; creditLimit(code); accountManager(uid); approvers(uid)
+; HybrisTravelAgency ; ; acctmgr ; hanna.schmidt@hybristravel.com ;
+; Pronto             ; ;         ; james.bell@pronto.com          ;
+; Rustic             ; ;         ; jane.smith@rustic.com          ;
+
+###############################
+# Assign userprice group to b2bUnits
+UPDATE B2BUnit; uid[unique = true, allownull = true]; userPriceGroup(code, itemtype(code))
+; HybrisTravelAgency ; B2B_DEFAULT_PRICE_GROUP:UserPriceGroup
+; Rustic             ; B2B_DEFAULT_PRICE_GROUP:UserPriceGroup
+; Pronto             ; B2B_DEFAULT_PRICE_GROUP:UserPriceGroup
+ 

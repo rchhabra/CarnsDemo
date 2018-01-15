@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+    // Asynchronously load the header template
+    $.get('templates/header.tmpl.htm', function(headerTemplate) {
+        var data = {
+            "CurrentPage": ""
+        };
+        $.tmpl(headerTemplate, data).appendTo('header');
+    });
+    // Asynchronously load the footer template
+    $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+        $.tmpl(footerTemplate).appendTo('footer');
+    });
+    </script>
+</head>
+
+<body class="flight-status">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="container">
+            <div class="col-xs-12 col-sm-9">
+                <div>
+                    <h2 class="h2">Flight Status</h2>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Flight Number</h2>
+                        </div>
+                        
+                        <div class="panel-body">
+                            <form id="y_transportOfferingStatusForm">
+                                <fieldset>
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                                        <label for="fs-flight-number">
+                                            Flight Number
+                                        </label>
+                                        <input id="y_transportOfferingStatusNumber" name="transportOfferingNumber" type="search" class="col-xs-12 form-control" value="">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-6">
+                                        <label for="fs-flight-departure-date">
+                                            Departure Date
+                                        </label>
+                                        <input id="y_transportOfferingStatusDepartureDate" name="departureDate" type="search" class="col-xs-12 datepicker form-control hasDatepicker" value="">
+                                    </div>
+                                    <div class="form-group col-xs-12 col-sm-12 col-md-offset-6 col-md-6 bottom-align-parent">
+                                        <button class="btn btn-primary btn-block bottom-align" type="submit" value="Submit">
+                                            Search
+                                        </button>
+                                    </div>
+                                </fieldset>
+                                <div>
+                                    <input type="hidden" name="CSRFToken" value="89a652e1-2550-4f68-8f0b-d84bcef5e142">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary flight-status-table">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">London Heathrow > Dubai</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div id="departing" class="col-md-6">
+                                <p>Departing: 01/01/2016</p>
+                            </div>
+                            <div id="updated" class="col-md-6">
+                                <p>Last Updated: 07:32 (GMT)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive" id="status">
+                        <table class="table" id="statusTable">
+                            <tbody><tr class="responsive-table-head hidden-xs">
+                                <th>Flight Number</th>
+                                <th>Scheduled Departure</th>
+                                <th>Updated Departure</th>
+                                <th>Flight Duration</th>
+                                <th>Terminal</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr class="responsive-table-item">
+                                    <td class="hidden-sm hidden-md hidden-lg">Flight Number</td>
+                                    <td class="responsive-table-cell">
+                                    	<span>RA123</span>    
+                                        </td>
+                                    <td class="hidden-sm hidden-md hidden-lg">Scheduled Departure</td>
+                                    <td class="responsive-table-cell">
+                                        <span>09:00 25/09/15</span>
+                                            </td>
+                                    <td class="hidden-sm hidden-md hidden-lg">Updated Departure</td>
+                                    <td class="responsive-table-cell">
+                                    	<span>09:00 25/09/15</span>
+                                        </td>
+                                    <td class="hidden-sm hidden-md hidden-lg">Flight Duration</td>
+                                    <td class="responsive-table-cell">
+										<span>1 Hour 30 Minutes</span>
+                                            </td>
+                                    <td class="hidden-sm hidden-md hidden-lg">Terminal</td>
+                                    <td class="responsive-table-cell">
+                                        <span>5</span>
+                                             </td>
+                                    <td class="hidden-sm hidden-md hidden-lg">Status</td>
+                                    <td class="responsive-table-cell">
+                                        <span>On Time</span>
+                                             </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <aside id="sidebar" class="y_itinerarySideBar">
+                    <div class="promotions side-to-top hidden-xs">
+                        <section>
+                            <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                            <div class="promotion-content">
+                                <h2 class="h4">Explore the gardens of Croatia</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </section>
+                        <section>
+                            <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                            <div class="promotion-content">
+                                <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </section>
+                        <section>
+                            <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                            <div class="promotion-content">
+                                <h2 class="h4">Set sail around the Mediterranean</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </section>
+                    </div>
+                </aside>
+            </div>
+        </div>
+        <footer class="footer-wrapper"></footer>
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

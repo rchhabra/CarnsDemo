@@ -1,0 +1,32 @@
+{
+    "locations": [
+        {
+            "value": "Andorra",
+            "data": "AD"
+        }, {
+            "value": "Andorra Test",
+            "data": "A2"
+        }, {
+            "value": "London, all airports",
+            "data": "LON"
+        }, {
+            "value": "London City Airport",
+            "data": "LCY"
+        }, {
+            "value": "London Heathrow",
+            "data": "LHR"
+        }, {
+            "value": "London-Stanstead",
+            "data": "STN"
+        }, {
+            "value": "London, Canada",
+            "data": "YXU"
+        }, {
+            "value": "Londrina",
+            "data": "LDB"
+        }, {
+            "value": "Long Beach",
+            "data": "LGB"
+        } 
+    ]
+}

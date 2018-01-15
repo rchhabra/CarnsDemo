@@ -1,0 +1,85 @@
+# ImpEx for Importing Identifiers(IATA,ICAO etc..) into travel accelerator
+
+INSERT_UPDATE Identifier; code[unique = true]; codeContext
+; EU  ; IATA
+
+; EUR ; IATA
+; NOA ; IATA
+; SAS ; IATA
+; EAS ; IATA
+
+; GB  ; IATA
+; FR  ; IATA
+; IT  ; IATA
+; DE  ; IATA
+; ES  ; IATA
+; US  ; IATA
+; MV  ; IATA
+; GR  ; IATA
+
+; TH ; IATA
+; IN ; IATA
+; MY ; IATA
+; CZ ; IATA
+; IS ; IATA
+; KR ; IATA
+
+
+; LON ; IATA
+; MAN ; IATA
+; EDI ; IATA
+; INV ; IATA
+; BFS ; IATA
+; NCE ; IATA
+; PAR ; IATA
+; MIL ; IATA
+; ROM ; IATA
+; BER ; IATA
+; BRE ; IATA
+; DUS ; IATA
+; FRA ; IATA
+; ALC ; IATA
+; ATH ; IATA
+; VCE ; IATA
+; MLE ; IATA
+; NYC ; IATA
+
+; LHR ; IATA
+; LGW ; IATA
+; LCY ; IATA
+; STN ; IATA
+; LTN ; IATA
+; SEN ; IATA
+; MAN ; IATA
+; CDG ; IATA
+; ORY ; IATA
+; LIN ; IATA
+; MXP ; IATA
+; CIA ; IATA
+; FCO ; IATA
+; SXF ; IATA
+; TXL ; IATA
+; DUS ; IATA
+; MGL ; IATA
+; NRN ; IATA
+; HHN ; IATA
+; QGV ; IATA
+; ALC ; IATA
+; ATH ; IATA
+; VCE ; IATA
+; MLE ; IATA
+; JFK ; IATA
+
+; HKT ; IATA
+; GOI ; IATA
+; MIA ; IATA
+; NAP ; IATA
+; FLR ; IATA
+; BKK ; IATA
+; KUL ; IATA
+; PRG ; IATA
+; KEF ; IATA
+; ICN ; IATA
+
+; REK ; IATA
+; SEL ; IATA

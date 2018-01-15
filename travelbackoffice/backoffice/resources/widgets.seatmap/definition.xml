@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<widget-definition id="de.hybris.platform.travelbackoffice.widget.seatmap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd">
+
+	<name>Seatmap</name>
+	<description>Seatmap widget.</description>
+	<defaultTitle>Seatmap</defaultTitle>
+	<controller class="de.hybris.platform.travelbackoffice.controllers.SeatMapController" />
+
+	<sockets>
+		<input type="java.util.Map" id="contextMap" />
+		<output type="java.lang.String" id="outgoingMsg" />
+	</sockets>
+
+</widget-definition>

@@ -1,0 +1,80 @@
+$contentCatalog = travelContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+#################    MY COMPANY START    #################
+
+#### add my-company related cms items for responsive ####
+
+# create cms link components for my-company pages
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; target(code)[default = 'sameWindow']
+; ; BudgetLink      ; Company Manage Budget Link       ; /my-company/organization-management/manage-budgets/     ; BudgetLink      ;
+; ; CostCenterLink  ; Company Manage Cost Centers Link ; /my-company/organization-management/manage-costcenters/ ; CostCenterLink  ;
+; ; UnitsLink       ; Company Manage Units Link        ; /my-company/organization-management/manage-units/       ; UnitsLink       ;
+; ; UsersLink       ; Company Manage Users Link        ; /my-company/organization-management/manage-users/       ; UsersLink       ;
+; ; UserGroupsLink  ; Company Manage User Groups Link  ; /my-company/organization-management/manage-usergroups/  ; UserGroupsLink  ;
+; ; PermissionsLink ; Company Manage User Groups Link  ; /my-company/organization-management/manage-permissions/ ; PermissionsLink ;
+; ; OrdersLink		; Company Order Report Link		   ; /my-company/organization-management/report-orders/		 ; OrdersLink	   ;
+
+
+# create navigation root node for my-company & child nodes for the root node
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
+; MyCompanyNavNode   ; ; My Company Nav Node  ; SiteRootNode     ; ; MyCompanyNavNode
+# children for my-company
+; BudgetNavNode      ; ; Budget Nav Node      ; MyCompanyNavNode ; ; BudgetNavNode
+; CostCenterNavNode  ; ; Cost Center Nav Node ; MyCompanyNavNode ; ; CostCenterNavNode
+; UnitsNavNode       ; ; Units Nav Node       ; MyCompanyNavNode ; ; UnitsNavNode
+; UsersNavNode       ; ; Users Nav Node       ; MyCompanyNavNode ; ; UsersNavNode
+; UserGroupsNavNode  ; ; User Groups Nav NOde ; MyCompanyNavNode ; ; UserGroupsNavNode
+; PermissionsNavNode ; ; Permissions Nav Node ; MyCompanyNavNode ; ; PermissionsNavNode
+; OrdersNavNode		 ; ; Orders Nav Node	  ; MyCompanyNavNode ; ; OrdersNavNode
+
+# create cms navigation entry for navigation child nodes
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
+; BudgetNavNodeEntry      ; ; Budget Nav Node Entry      ; BudgetNavNode      ; BudgetLink      ;
+; CostCenterNavNodeEntry  ; ; Cost Center Nav Node Entry ; CostCenterNavNode  ; CostCenterLink  ;
+; UnitsNavNodeEntry       ; ; Units Nav Node Entry       ; UnitsNavNode       ; UnitsLink       ;
+; UsersNavNodeEntry       ; ; Users Nav Node Entry       ; UsersNavNode       ; UsersLink       ;
+; UserGroupsNavNodeEntry  ; ; User Groups Nav Node Entry ; UserGroupsNavNode  ; UserGroupsLink  ;
+; PermissionsNavNodeEntry ; ; Permissions Nav Node Entry ; PermissionsNavNode ; PermissionsLink ;
+;OrdersNavNodeEntry;;Orders Nav Node Entry;OrdersNavNode;OrdersLink;
+
+# create navigation component for my-company
+INSERT_UPDATE NavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; styleClass; &componentRef; navigationNode(&nodeRef)
+; ; MyCompanyComponent ; My Company ; dropdown y_myCompanyComponent ; MyCompanyComponent ; MyCompanyNavNode
+
+#### add appropriate restrictions ####
+
+# CMS User Group Restrictions
+INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&componentRef)
+; ; MyCompanyLinkAdminGroupRestriction ; My Company Link Admin Group Restriction ; b2badmingroup ; true ; MyCompanyComponent
+
+#### add my-company stuff here ####
+
+# add my account navigation component to a content slot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)[mode=append]
+"#% afterEach: de.hybris.platform.core.Registry.getApplicationContext().getBean(""myCompanyComponentPositionStrategy"").sortComponents(impex.getLastImportedItem());"
+; ; HeaderLinksSlot ; MyCompanyComponent
+
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-company-login']; contentSlot(uid, $contentCV)[unique = true]
+; ; MyCompanyLogin-SideContent ; SideContent ; ; MyProfileSideSlot
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-company']; contentSlot(uid, $contentCV)[unique = true]
+; ; MyCompany-SideContent ; SideContent ; ; MyProfileSideSlot
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'organizationManagement']; contentSlot(uid, $contentCV)[unique = true]
+; ; OrganizationManagement-SideContent ; SideContent ; ; MyProfileSideSlot
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'manageUnits']; contentSlot(uid, $contentCV)[unique = true]
+; ; ManageUnits-SideContent ; SideContent ; ; MyProfileSideSlot
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'manageUsergroups']; contentSlot(uid, $contentCV)[unique = true]
+; ; ManageUsergroups-SideContent ; SideContent ; ; MyProfileSideSlot
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'manageUnitApprovers']; contentSlot(uid, $contentCV)[unique = true]
+; ; ManageUnitApprovers-SideContent ; SideContent ; ; MyProfileSideSlot
+
+
+UPDATE SyncAttributeDescriptorConfig[batchmode=true];includedInSync;attributeDescriptor(qualifier, enclosingType(code))[unique=true]
+;false;navigationNodeList:AbstractPage
+#################    MY COMPANY END    #################

@@ -1,0 +1,1397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultFareSearchPipelineManager" alias="fareSearchPipelineManager" />
+	<bean id="defaultFareSearchPipelineManager" class="de.hybris.platform.travelfacades.fare.search.manager.impl.DefaultFareSearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="isoCurrencyCodeHandler" />
+				<ref bean="basicResponseHandler" />
+				<ref bean="itineraryHandler" />
+				<ref bean="pricedItineraryBundleHandler" />
+				<ref bean="fareRulesHandler" />
+				<ref bean="fareAvailabilityHandler" />
+				<ref bean="fareInfoHandler" />
+				<ref bean="bundleSeatsAvailabilityHandler" />
+				<ref bean="taxHandler" />
+				<ref bean="fareTotalsHandler" />
+				<ref bean="selectedFareBundlesHandler" />
+				<ref bean="itineraryIdentifierHandler" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultUpgradeBundleFareSearchPipelineManager" alias="upgradeBundleFareSearchPipelineManager" />
+	<bean id="defaultUpgradeBundleFareSearchPipelineManager" class="de.hybris.platform.travelfacades.fare.search.manager.impl.DefaultFareSearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="isoCurrencyCodeHandler" />
+				<ref bean="upgradeBasicResponseHandler" />
+				<ref bean="upgradeItineraryHandler" />
+				<ref bean="pricedItineraryBundleHandler" />
+				<ref bean="fareRulesHandler" />
+				<ref bean="fareAvailabilityHandler" />
+				<ref bean="fareInfoHandler" />
+				<ref bean="bundleSeatsAvailabilityHandler" />
+				<ref bean="taxHandler" />
+				<ref bean="fareTotalsHandler" />
+				<ref bean="selectedFareBundlesHandler" />
+				<ref bean="bundleSelectionHandler" />
+				<ref bean="filterUpgradeBundleHandler" />
+				<ref bean="updateUpgradeBundlePricesHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultBasicResponseHandler" alias="basicResponseHandler" />
+	<bean id="defaultBasicResponseHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.BasicResponseHandler" />
+
+	<alias name="defaultItineraryHandler" alias="itineraryHandler" />
+	<bean id="defaultItineraryHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.ItineraryHandler" />
+	
+	<alias name="defaultUpgradeBasicResponseHandler" alias="upgradeBasicResponseHandler" />
+	<bean id="defaultUpgradeBasicResponseHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.UpgradeBasicResponseHandler" />
+
+	<alias name="defaultUpgradeItineraryHandler" alias="upgradeItineraryHandler" />
+	<bean id="defaultUpgradeItineraryHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.UpgradeItineraryHandler" />
+
+
+	<alias name="defaultPricedItineraryBundleHandler" alias="pricedItineraryBundleHandler" />
+	<bean id="defaultPricedItineraryBundleHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.PricedItineraryBundleHandler">
+		<property name="travelBundleTemplateService" ref="travelBundleTemplateService" />
+		<property name="travelRouteService" ref="travelRouteService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="travelBundleTemplateConverter" ref="travelBundleTemplateConverter" />
+		<property name="cabinClassService" ref="cabinClassService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="travelRulesService" ref="travelDroolsService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="defaultBundleSeatsAvailabilityHandler" alias="bundleSeatsAvailabilityHandler" />
+	<bean id="defaultBundleSeatsAvailabilityHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.BundleSeatsAvailabilityHandler">
+		<property name="accommodationMapService" ref="accommodationMapService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="configuredAccomNumberComparator" ref="configuredAccomNumberComparator" />
+		<property name="productReferenceService" ref="productReferenceService" />
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultFareAvailabilityHandler" alias="fareAvailabilityHandler" />
+	<bean id="defaultFareAvailabilityHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.FareAvailabilityHandler">
+		<property name="productService" ref="productService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="ancillaryAvailabilityStrategiesMap">
+			<util:map key-type="java.lang.String">
+				<entry key="PER_LEG" value-ref="ancillaryPerLegAvailabilityStrategy" />
+			</util:map>
+		</property>
+	</bean>
+
+	<alias name="defaultFareRulesHandler" alias="fareRulesHandler" />
+	<bean id="defaultFareRulesHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.FareRulesHandler">
+		<property name="travelRulesService" ref="travelDroolsService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultFareInfoHandler" alias="fareInfoHandler" />
+	<bean id="defaultFareInfoHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.FareInfoHandler">
+		<property name="productsSortStrategy" ref="productsSortStrategy" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+	</bean>
+
+	<alias name="defaultTaxHandler" alias="taxHandler" />
+	<bean id="defaultTaxHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.TaxHandler">
+		<property name="transportFacilityFacade" ref="transportFacilityFacade" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="productService" ref="productService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+	</bean>
+
+	<alias name="defaultIsoCurrencyCodeHandler" alias="isoCurrencyCodeHandler" />
+	<bean id="defaultIsoCurrencyCodeHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.IsoCurrencyCodeHandler">
+		<property name="storeSessionFacade" ref="storeSessionFacade" />
+	</bean>
+	
+	<alias name="defaultFareTotalsHandler" alias="fareTotalsHandler" />
+	<bean id="defaultFareTotalsHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.FareTotalsHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+	
+	<alias name="defaultSelectedFareBundlesHandler" alias="selectedFareBundlesHandler"/>
+	<bean id="defaultSelectedFareBundlesHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.SelectedFareBundlesHandler">
+		<property name="cartService" ref="cartService"/>
+		<property name="transportReservationSummaryPipelineManager" ref="transportReservationSummaryPipelineManager"/>
+	</bean>
+
+	<alias name="defaultItineraryIdentifierHandler" alias="itineraryIdentifierHandler"/>
+	<bean id="defaultItineraryIdentifierHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.ItineraryIdentifierHandler">
+		<property name="fareSearchHashResolver" ref="fareSearchHashResolver"/>
+	</bean>
+
+	<alias name="defaultDealItineraryIdentifierHandler" alias="dealItineraryIdentifierHandler"/>
+	<bean id="defaultDealItineraryIdentifierHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.DealItineraryIdentifierHandler" parent="defaultItineraryIdentifierHandler">
+		<property name="travelBundleTemplateFacade" ref="travelBundleTemplateFacade"/>
+	</bean>
+
+	<alias name="defaultReservationPipelineManager" alias="reservationPipelineManager" />
+	<bean id="defaultReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="reservationBasicHandler" />
+				<ref bean="reservationStatusHandler" />
+				<ref bean="reservationItemHandler" />
+				<ref bean="reservationPricingInfoHandler" />
+				<ref bean="reservationItineraryPricingInfoHandler" />
+				<ref bean="reservationOriginDestinationOfferPricingInfoHandler" />
+				<ref bean="reservationOfferPricingInfoHandler" />
+				<ref bean="reservationOfferBreakdownHandler" />
+				<ref bean="reservationPricingInfoOfferBreakdownHandler" />
+				<ref bean="reservationTotalFareHandler" />
+				<ref bean="reservationSelectedAccommodationHandler" />
+				<ref bean="reservationSalesApplicationHandler" />
+				<ref bean="reservationPaymentTransactionHandler" />
+				<ref bean="reservationAdditionalSecurityHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultFullAccommodationReservationPipelineManager" alias="fullAccommodationReservationPipelineManager" />
+	<bean id="defaultFullAccommodationReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultAccommodationReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationReservationBasicHandler" />
+				<ref bean="accommodationReservationPriceHandler" />
+				<ref bean="accommodationReservationStatusHandler" />
+				<ref bean="accommodationReservationPropertyHandler" />
+				<ref bean="accommodationReservationReservedRoomStayHandler" />
+				<ref bean="accommodationReservationRoomRateHandler" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultBasicAccommodationReservationPipelineManager" alias="basicAccommodationReservationPipelineManager" />
+	<bean id="defaultBasicAccommodationReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultAccommodationReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationReservationBasicHandler" />
+				<ref bean="accommodationReservationPriceHandler" />
+				<ref bean="accommodationReservationStatusHandler" />
+				<ref bean="accommodationReservationPropertyHandler" />
+				<ref bean="accommodationReservationReservedRoomStayHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultGuestDetailsAccommodationReservationPipelineManager" alias="guestDetailsAccommodationReservationPipelineManager" />
+	<bean id="defaultGuestDetailsAccommodationReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultAccommodationReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationReservationPropertyHandler" />
+				<ref bean="accommodationReservationReservedRoomStayBasicDetailsHandler" />
+				<ref bean="accommodationReservationReservedRoomStayServiceDetailsHandler" />
+				<ref bean="accommodationReservationReservedRoomStayHandler" />
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- My Account - My Bookings Pipeline Managers -->
+	<alias name="defaultTransportBookingListPipelineManager" alias="transportBookingListPipelineManager" />
+	<bean id="defaultTransportBookingListPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="reservationBasicHandler" />
+				<ref bean="reservationStatusHandler" />
+				<ref bean="basicReservationItemHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationBookingListPipelineManager" alias="accommodationBookingListPipelineManager" />
+	<bean id="defaultAccommodationBookingListPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultAccommodationReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationReservationBasicHandler" />
+				<ref bean="accommodationReservationStatusHandler" />
+				<ref bean="accommodationReservationPropertyHandler" />
+				<ref bean="accommodationReservationReservedRoomStayBasicDetailsHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelBookingListPipelineManager" alias="travelBookingListPipelineManager" />
+	<bean id="defaultTravelBookingListPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultGlobalTravelReservationPipelineManager">
+		<property name="reservationPipelineManager" ref="transportBookingListPipelineManager" />
+		<property name="accommodationReservationPipelineManager" ref="accommodationBookingListPipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="globalTravelReservationBasicHandler" />
+			</list>
+		</property>
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+	<!-- END of My Account - My Bookings Pipeline Managers -->
+
+	<!-- Summary Pipeline Managers -->
+
+	<alias name="defaultReservationSummaryPipelineManager" alias="reservationSummaryPipelineManager" />
+	<bean id="defaultReservationSummaryPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="reservationBasicHandler" />
+				<ref bean="reservationStatusHandler" />
+				<ref bean="reservationItemHandler" />
+				<ref bean="reservationPricingInfoBundleTypeHandler" />
+				<ref bean="reservationTotalFareHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportReservationSummaryPipelineManager" alias="transportReservationSummaryPipelineManager" />
+	<bean id="defaultTransportReservationSummaryPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="reservationItemHandler" />
+				<ref bean="reservationStatusHandler" />
+				<ref bean="reservationPricingInfoBundleTypeHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommmodationReservationSummaryPipelineManager" alias="accommmodationReservationSummaryPipelineManager" />
+	<bean id="defaultAccommmodationReservationSummaryPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultAccommodationReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationReservationPropertyHandler" />
+				<ref bean="accommodationReservationStatusHandler" />
+				<ref bean="accommodationReservationReservedRoomStayBasicDetailsHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageTransportReservationSummaryPipelineManager" alias="packageTransportReservationSummaryPipelineManager" />
+	<bean id="defaultPackageTransportReservationSummaryPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="reservationItemHandler" />
+				<ref bean="reservationPricingInfoHandler" />
+				<ref bean="reservationItineraryPricingInfoHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- End of Summary Pipeline Managers -->
+
+	<alias name="defaultGlobalTravelReservationPipelineManager" alias="globalTravelReservationPipelineManager" />
+	<bean id="defaultGlobalTravelReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultGlobalTravelReservationPipelineManager">
+		<property name="reservationPipelineManager" ref="reservationPipelineManager" />
+		<property name="accommodationReservationPipelineManager" ref="fullAccommodationReservationPipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="globalTravelReservationBasicHandler" />
+			</list>
+		</property>
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultCancelledGlobalTravelReservationPipelineManager" alias="cancelledGlobalTravelReservationPipelineManager" />
+	<bean id="defaultCancelledGlobalTravelReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultCancelledGlobalTravelReservationPipelineManager">
+		<property name="reservationPipelineManager" ref="reservationPipelineManager" />
+		<property name="accommodationReservationPipelineManager" ref="fullAccommodationReservationPipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="globalTravelReservationBasicHandler" />
+			</list>
+		</property>
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultBasicGlobalTravelReservationPipelineManager" alias="basicGlobalTravelReservationPipelineManager" />
+	<bean id="defaultBasicGlobalTravelReservationPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultGlobalTravelReservationPipelineManager">
+		<property name="reservationPipelineManager" ref="reservationPipelineManager" />
+		<property name="accommodationReservationPipelineManager" ref="basicAccommodationReservationPipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="globalTravelReservationBasicHandler" />
+			</list>
+		</property>
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultReservationItemPipelineManager" alias="reservationItemPipelineManager" />
+	<bean id="defaultReservationItemPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="reservationBasicHandler" />
+				<ref bean="reservationStatusHandler" />
+				<ref bean="reservationItemHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultReservationBasicHandler" alias="reservationBasicHandler" />
+	<bean id="defaultReservationBasicHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationBasicHandler">
+		<property name="paymentInfoToPaymentTypeMap" ref="paymentInfoToPaymentTypeMap" />
+	</bean>
+
+	<alias name="defaultReservationSalesApplicationHandler" alias="reservationSalesApplicationHandler" />
+	<bean id="defaultReservationSalesApplicationHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationSalesApplicationHandler">
+	</bean>
+
+	<alias name="defaultReservationPaymentTransactionHandler" alias="reservationPaymentTransactionHandler" />
+	<bean id="defaultReservationPaymentTransactionHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationPaymentTransactionHandler">
+		<property name="paymentTransactionConverter" ref="paymentTransactionConverter" />
+	</bean>
+
+	<alias name="defaultReservationStatusHandler" alias="reservationStatusHandler" />
+	<bean id="defaultReservationStatusHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationStatusHandler">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="i18NService" ref="i18NService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<alias name="defaultAbstractReservationItemHandler" alias="abstractReservationItemHandler" />
+	<bean id="defaultAbstractReservationItemHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AbstractReservationItemHandler">
+		<property name="travelRouteConverter" ref="travelRouteConverter" />
+		<property name="transportOfferingConverter" ref="transportOfferingConverter" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+	</bean>
+
+	<alias name="defaultBasicReservationItemHandler" alias="basicReservationItemHandler" />
+	<bean id="defaultBasicReservationItemHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.BasicReservationItemHandler"
+		parent="abstractReservationItemHandler">
+	</bean>
+
+	<alias name="defaultReservationItemHandler" alias="reservationItemHandler" />
+	<bean id="defaultReservationItemHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationItemHandler"
+		parent="abstractReservationItemHandler">
+		<property name="travellerDataConverter" ref="travellerDataConverter" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="travellerSortStrategy" ref="travellerSortStrategy" />
+	</bean>
+
+	<alias name="defaultReservationAdditionalSecurityHandler" alias="reservationAdditionalSecurityHandler" />
+	<bean id="defaultReservationAdditionalSecurityHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationAdditionalSecurityHandler">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultReservationPricingInfoBundleTypeHandler" alias="reservationPricingInfoBundleTypeHandler" />
+	<bean id="defaultReservationPricingInfoBundleTypeHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationPricingInfoBundleTypeHandler">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultReservationPricingInfoHandler" alias="reservationPricingInfoHandler" />
+	<bean id="defaultReservationPricingInfoHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationPricingInfoHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultReservationItineraryPricingInfoHandler" alias="reservationItineraryPricingInfoHandler" />
+	<bean id="defaultReservationItineraryPricingInfoHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationItineraryPricingInfoHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="fareProductConverter" ref="fareProductConverter" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultReservationSelectedAccommodationHandler" alias="reservationSelectedAccommodationHandler" />
+	<bean id="defaultReservationSelectedAccommodationHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationSelectedAccommodationHandler">
+		<property name="travellerDataConverter" ref="travellerDataConverter" />
+	</bean>
+
+	<bean name="abstractReservationOfferPricingInfoHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AbstractReservationOfferPricingInfoHandler"
+		abstract="true">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="productConverter" ref="ancillaryProductConverter" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="notAncillaryProductTypes">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.FARE_PRODUCT" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.FEE" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.ACCOMMODATION" />
+			</util:list>
+		</property>
+		<property name="productTypeInstanceMap" ref="productTypeInstanceMap" />
+	</bean>
+
+	<alias name="reservationOriginDestinationOfferPricingInfoHandler" alias="reservationOriginDestinationOfferPricingInfoHandler" />
+	<bean id="reservationOriginDestinationOfferPricingInfoHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationOriginDestinationOfferPricingInfoHandler"
+		parent="abstractReservationOfferPricingInfoHandler">
+		<property name="transportOfferingConverter" ref="transportOfferingConverter" />
+	</bean>
+
+	<alias name="reservationOfferPricingInfoHandler" alias="reservationOfferPricingInfoHandler" />
+	<bean id="reservationOfferPricingInfoHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationOfferPricingInfoHandler"
+		parent="abstractReservationOfferPricingInfoHandler">
+		<property name="travellerDataConverter" ref="travellerDataConverter" />
+	</bean>
+
+	<bean name="abstractOfferBreakdownHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AbstractOfferBreakdownHandler"
+		abstract="true">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="productConverter" ref="ancillaryProductConverter" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="reservationPricingInfoOfferBreakdownHandler" alias="reservationPricingInfoOfferBreakdownHandler" />
+	<bean id="reservationPricingInfoOfferBreakdownHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationPricingInfoOfferBreakdownHandler"
+		parent="abstractOfferBreakdownHandler">
+		<property name="notAncillaryProductTypes">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.FARE_PRODUCT" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.FEE" />
+			</util:list>
+		</property>
+		<property name="productTypeInstanceMap" ref="productTypeInstanceMap" />
+	</bean>
+
+	<alias name="reservationOfferBreakdownHandler" alias="reservationOfferBreakdownHandler" />
+	<bean id="reservationOfferBreakdownHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationOfferBreakdownHandler"
+		parent="abstractOfferBreakdownHandler">
+		<property name="notAncillaryProductTypes">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.FARE_PRODUCT" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.ProductType.FEE" />
+			</util:list>
+		</property>
+		<property name="productTypeInstanceMap" ref="productTypeInstanceMap" />
+	</bean>
+
+	<alias name="defaultReservationTotalFareHandler" alias="reservationTotalFareHandler" />
+	<bean id="defaultReservationTotalFareHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.ReservationTotalFareHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<!-- Ancillary Search beans -->
+	<alias name="defaultAncillarySearchPipelineManager" alias="ancillarySearchPipelineManager" />
+	<bean id="defaultAncillarySearchPipelineManager" class="de.hybris.platform.travelfacades.ancillary.search.manager.impl.DefaultAncillarySearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="basicOfferResponseHandler" />
+				<ref bean="travellerStatusInfoHandler" />
+				<ref bean="offerGroupHandler" />
+				<ref bean="offerGroupFilterHandler"/>
+				<ref bean="originDestinationHandler" />
+				<ref bean="offerPricingInfoHandler" />
+				<ref bean="offerRestrictionHandler" />
+				<ref bean="originDestinationBreakdownHandler" />
+				<ref bean="travellerBreakdownHandler" />
+				<ref bean="offerGroupOfferPricingInfoHandler" />
+				<ref bean="offerGroupOfferRestrictionHandler" />
+				<ref bean="bookingBreakdownHandler" />
+				<ref bean="travellerOfferGroupBreakdownHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Ancillary Search handlers -->
+	<bean id="basicOfferResponseHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.BasicOfferSearchResponseHandler" />
+
+	<bean id="travellerStatusInfoHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.TravellerStatusInfoHandler">
+		<property name="travelCartFacade" ref="cartFacade" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+	</bean>
+
+	<bean id="offerGroupHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferGroupHandler">
+		<property name="categoryOptionList">
+			<list>
+				<value>TRAVEL_RESTRICTION</value>
+			</list>
+		</property>
+		<property name="travelCategoryService" ref="travelCategoryService" />
+		<property name="categoryConverter" ref="travelCategoryConverter" />
+		<property name="offerSortStrategy" ref="offerSortStrategy" />
+		<property name="offerGroupDataConfiguredPopulator" ref="offerGroupDataConfiguredPopulator" />
+	</bean>
+	
+	<bean id="offerGroupFilterHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferGroupFilterHandler">
+		<property name="travelRulesService" ref="travelDroolsService" />
+	</bean>
+	
+	<bean id="offerGroupOfferPricingInfoHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferGroupOfferPricingInfoHandler">
+		<property name="travelPromotionsFacade" ref="travelPromotionsFacade" />
+		<property name="productService" ref="productService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="productConverter" ref="ancillaryProductConverter" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="travelCommerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<bean id="originDestinationHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OriginDestinationHandler">
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+	</bean>
+
+	<bean id="offerPricingInfoHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferPricingInfoHandler">
+		<property name="productService" ref="productService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="productConverter" ref="ancillaryProductConverter" />
+		<property name="travelPromotionsFacade" ref="travelPromotionsFacade" />
+		<property name="travelCartService" ref="travelCartService" />
+        <property name="travelRulesService" ref="travelDroolsService" />
+	</bean>
+
+	<bean id="abstractBreakdownHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.AbstractBreakdownHandler"
+		abstract="true">
+		<property name="productService" ref="productService" />
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<bean id="originDestinationBreakdownHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OriginDestinationBreakdownHandler"
+		parent="abstractBreakdownHandler">
+	</bean>
+
+	<bean id="bookingBreakdownHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.BookingBreakdownHandler"
+		parent="abstractBreakdownHandler">
+	</bean>
+
+	<bean id="travellerBreakdownHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.TravellerBreakdownHandler"
+		parent="abstractBreakdownHandler">
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+	</bean>
+
+	<bean id="travellerOfferGroupBreakdownHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.TravellerOfferGroupBreakdownHandler"
+		parent="abstractBreakdownHandler" />
+		
+	<bean id="abstractOfferRestrictionHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.AbstractOfferRestrictionHandler"
+		abstract="true">
+		<property name="productService" ref="productService" />
+		<property name="travelRestrictionConverter" ref="travelRestrictionConverter" />
+		<property name="travelRestrictionFacade" ref="travelRestrictionFacade" />
+	</bean>
+
+	<bean id="offerRestrictionHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferRestrictionHandler"
+		parent="abstractOfferRestrictionHandler" />
+
+	<bean id="offerGroupOfferRestrictionHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferGroupOfferRestrictionHandler"
+		parent="abstractOfferRestrictionHandler" />
+
+	<alias name="defaultAccommodationDetailsPipelineManager" alias="accommodationDetailsPipelineManager" />
+	<bean id="defaultAccommodationDetailsPipelineManager" class="de.hybris.platform.travelfacades.facades.accommodation.manager.impl.DefaultAccommodationDetailsPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationDetailsBasicHandler" />
+				<ref bean="roomStaysHandler" />
+				<ref bean="ratePlansHandler" />
+				<ref bean="roomRatesHandler" />
+				<ref bean="availabilityHandler" />
+				<ref bean="accommodationPriceHandler" />
+				<ref bean="reservedRoomStaysHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSelectedAccommodationDetailsPipelineManager" alias="selectedAccommodationDetailsPipelineManager" />
+	<bean id="defaultSelectedAccommodationDetailsPipelineManager" class="de.hybris.platform.travelfacades.facades.accommodation.manager.impl.DefaultAccommodationDetailsPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationDetailsBasicHandler" />
+				<ref bean="selectedRoomStaysHandler" />
+				<ref bean="selectedRatePlansHandler" />
+				<ref bean="roomRatesHandler" />
+				<ref bean="availabilityHandler" />
+				<ref bean="accommodationPriceHandler" />
+				<ref bean="selectedExtraServicePriceHandler" />
+				<ref bean="accommodationTotalPriceHandler" />
+				<ref bean="reservedRoomStaysHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDealAccommodationDetailsPipelineManager" alias="dealAccommodationDetailsPipelineManager" />
+	<bean id="defaultDealAccommodationDetailsPipelineManager" class="de.hybris.platform.travelfacades.facades.accommodation.manager.impl.DefaultAccommodationDetailsPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationDetailsBasicHandler" />
+				<ref bean="selectedRoomStaysHandler" />
+				<ref bean="dealRatePlansHandler" />
+				<ref bean="dealRoomRatesHandler" />
+				<ref bean="dealAvailabilityHandler" />
+				<ref bean="dealAccommodationPriceHandler" />
+				<ref bean="accommodationTotalPriceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationDetailsBasicHandler" alias="accommodationDetailsBasicHandler" />
+	<bean id="defaultAccommodationDetailsBasicHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AccommodationDetailsBasicHandler">
+		<property name="accommodationOfferingConverter" ref="accommodationOfferingConverter" />
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+	</bean>
+
+	<bean id="reservedRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.ReservedRoomStaysHandler" />
+
+
+	<alias name="defaultRoomStaysHandler" alias="roomStaysHandler" />
+	<bean id="defaultRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.RoomStaysHandler">
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="roomTypeConverter" ref="roomTypeConverter" />
+	</bean>
+
+	<alias name="defaultSelectedRoomStaysHandler" alias="selectedRoomStaysHandler" />
+	<bean id="defaultSelectedRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.SelectedRoomStaysHandler">
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="roomTypeConverter" ref="roomTypeConverter" />
+	</bean>
+
+	<alias name="defaultRoomRatesHandler" alias="roomRatesHandler" />
+	<bean id="defaultRoomRatesHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.RoomRatesHandler">
+		<property name="categoryService" ref="categoryService" />
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultDealRoomRatesHandler" alias="dealRoomRatesHandler" />
+	<bean id="defaultDealRoomRatesHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.DealRoomRatesHandler">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+	</bean>
+
+	<alias name="defaultAbstractRatePlansHandler" alias="abstractRatePlansHandler" />
+	<bean name="defaultAbstractRatePlansHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AbstractRatePlansHandler"
+		abstract="true" />
+
+	<alias name="defaultSelectedRatePlansHandler" alias="selectedRatePlansHandler" />
+	<bean id="defaultSelectedRatePlansHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.SelectedRatePlansHandler"
+		parent="abstractRatePlansHandler">
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="ratePlanConverter" ref="ratePlanConverter" />
+		<property name="guestOccupancyConverter" ref="guestOccupancyConverter" />
+		<property name="cancelPenaltiesDescriptionCreationStrategy" ref="cancelPenaltiesDescriptionCreationStrategy" />
+	</bean>
+
+	<alias name="defaultDealRatePlansHandler" alias="dealRatePlansHandler" />
+	<bean id="defaultDealRatePlansHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.DealRatePlansHandler"
+		parent="abstractRatePlansHandler">
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="ratePlanConverter" ref="ratePlanConverter" />
+		<property name="guestOccupancyConverter" ref="guestOccupancyConverter" />
+		<property name="cancelPenaltiesDescriptionCreationStrategy" ref="cancelPenaltiesDescriptionCreationStrategy" />
+		<property name="ratePlanService" ref="ratePlanService" />
+	</bean>
+
+	<alias name="defaultRatePlansHandler" alias="ratePlansHandler" />
+	<bean id="defaultRatePlansHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.RatePlansHandler"
+		parent="abstractRatePlansHandler">
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="ratePlanConverter" ref="ratePlanConverter" />
+		<property name="guestOccupancyConverter" ref="guestOccupancyConverter" />
+		<property name="cancelPenaltiesDescriptionCreationStrategy" ref="cancelPenaltiesDescriptionCreationStrategy" />
+	</bean>
+
+	<alias name="accommodationAvailabilityHandler" alias="availabilityHandler" />
+	<bean id="accommodationAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AccommodationAvailabilityHandler">
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+	</bean>
+
+	<alias name="dealAccommodationAvailabilityHandler" alias="dealAvailabilityHandler" />
+	<bean id="dealAccommodationAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.DealAccommodationAvailabilityHandler">
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+	</bean>
+
+	<alias name="defaultAbstractAccommodationPriceHandler" alias="abstractAccommodationPriceHandler" />
+    <bean name="defaultAbstractAccommodationPriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AbstractAccommodationPriceHandler"
+		abstract="true">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+		
+	<alias name="defaultAccommodationPriceHandler" alias="accommodationPriceHandler" />
+	<bean id="defaultAccommodationPriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AccommodationPriceHandler" parent="abstractAccommodationPriceHandler">
+		<property name="priceService" ref="priceService" />
+		<property name="productService" ref="productService" />
+		<property name="accommodationDiscountEvaluationStrategyMap" ref="accommodationDiscountEvaluationStrategyMap" />
+	</bean>
+
+	<alias name="dealAccommodationPriceHandler" alias="dealAccommodationPriceHandler" />
+	<bean id="dealAccommodationPriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.DealAccommodationPriceHandler" parent="abstractAccommodationPriceHandler">
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+		<property name="priceService" ref="priceService" />
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<alias name="defaultSelectedExtraServicePriceHandler" alias="selectedExtraServicePriceHandler" />
+	<bean id="defaultSelectedExtraServicePriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.SelectedExtraServicePriceHandler" parent="abstractExtraServicePriceHandler">
+	</bean>
+
+	<alias name="defaultAccommodationTotalPriceHandler" alias="accommodationTotalPriceHandler" />
+	<bean id="defaultAccommodationTotalPriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AccommodationTotalPriceHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+
+	<alias name="defaultAccommodationServicePipelineManager" alias="accommodationServicePipelineManager" />
+	<bean id="defaultAccommodationServicePipelineManager" class="de.hybris.platform.travelfacades.facades.accommodation.manager.impl.DefaultAccommodationServicePipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="extraServiceBasicHandler" />
+				<ref bean="extraServiceDetailsHandler" />
+				<ref bean="extraServiceRestrictionHandler" />
+				<ref bean="extraServicePriceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultExtraServiceBasicHandler" alias="extraServiceBasicHandler" />
+	<bean id="defaultExtraServiceBasicHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.ExtraServiceBasicHandler" />
+
+	<alias name="defaultExtraServiceDetailsHandler" alias="extraServiceDetailsHandler" />
+	<bean id="defaultExtraServiceDetailsHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.ExtraServiceDetailsHandler">
+		<property name="productConverter" ref="serviceProductConverter" />
+	</bean>
+
+	<alias name="defaultExtraServiceRestrictionHandler" alias="extraServiceRestrictionHandler" />
+	<bean id="defaultExtraServiceRestrictionHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.ExtraServiceRestrictionHandler">
+		<property name="extrasAvailabilityStrategyMap">
+			<util:map key-type="java.lang.String">
+				<entry key="AccommodationRestrictionModel" value-ref="addFreeQuantityExtrasStrategy" />
+				<entry key="AddExactlyNRestrictionModel" value-ref="addExactlyNQuantityExtrasStrategy" />
+				<entry key="default" value-ref="addFreeQuantityExtrasStrategy" />
+			</util:map>
+		</property>
+	</bean>
+
+	<alias name="defaultAbstractExtraServicePriceHandler" alias="abstractExtraServicePriceHandler" />
+	<bean name="defaultAbstractExtraServicePriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.AbstractExtraServicePriceHandler"
+		abstract="true">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+	
+	<alias name="defaultExtraServicePriceHandler" alias="extraServicePriceHandler" />
+	<bean id="defaultExtraServicePriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.handlers.impl.ExtraServicePriceHandler" parent="abstractExtraServicePriceHandler">
+	</bean>
+
+	<!-- Ancillary Search Request Pipeline Manager beans -->
+	<alias name="defaultAncillarySearchRequestPipelineManager" alias="ancillarySearchRequestPipelineManager" />
+	<bean id="defaultAncillarySearchRequestPipelineManager" class="de.hybris.platform.travelfacades.ancillary.search.manager.impl.DefaultAncillarySearchRequestPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="itineraryDataHandler" />
+				<ref bean="offersRequestHandler" />
+				<ref bean="offerGroupOfferPricingInfoRequestHandler" />
+				<ref bean="originDestinationOffersRequestHandler" />
+				<ref bean="pricingInfoOffersRequestHandler" />
+				<ref bean="accommodationMapRequestHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Ancillary Search Request handlers -->
+	<bean id="itineraryDataHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.ItineraryDataHandler" />
+
+	<bean id="offersRequestHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OffersRequestHandler">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<bean id="originDestinationOffersRequestHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OriginDestinationOffersRequestHandler">
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+		<property name="travelRestrictionFacade" ref="travelRestrictionFacade" />
+	</bean>
+
+	<bean id="offerGroupOfferPricingInfoRequestHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.OfferGroupOfferPricingInfoRequestHandler">
+		<property name="travelRestrictionFacade" ref="travelRestrictionFacade" />
+	</bean>
+
+	<bean id="pricingInfoOffersRequestHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.PricingInfoOffersRequestHandler">
+		<property name="travelRestrictionFacade" ref="travelRestrictionFacade" />
+	</bean>
+
+	<alias name="defaultAccommodationMapRequestHandler" alias="accommodationMapRequestHandler" />
+	<bean id="defaultAccommodationMapRequestHandler" class="de.hybris.platform.travelfacades.ancillary.search.handlers.impl.AccommodationMapRequestHandler" />
+
+
+	<alias name="defaultAccommodationSearchPipelineManager" alias="accommodationSearchPipelineManager" />
+	<bean id="defaultAccommodationSearchPipelineManager" class="de.hybris.platform.travelfacades.ancillary.search.manager.impl.DefaultAncillarySearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="travelAccommodationMapHandler" />
+				<ref bean="selectedAccommodationHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="travelAccommodationMapHandler" class="de.hybris.platform.travelfacades.ancillary.search.accommodation.handlers.TravelAccommodationMapHandler">
+		<property name="accommodationMapService" ref="accommodationMapService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="accommodationInfoDataComparator" ref="accommodationInfoDataComparator" />
+		<property name="configuredAccomNumberComparator" ref="configuredAccomNumberComparator" />
+		<property name="travellerDataConverter" ref="travellerDataConverter" />
+		<property name="productReferenceService" ref="productReferenceService" />
+		<property name="productService" ref="productService" />
+		<property name="seatPredicate" ref="enableSeatPredicate" />
+	</bean>
+
+	<bean id="accommodationMapHandler" class="de.hybris.platform.travelfacades.ancillary.search.accommodation.handlers.AccommodationMapHandler">
+		<property name="accommodationMapService" ref="accommodationMapService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="accommodationInfoDataComparator" ref="accommodationInfoDataComparator" />
+		<property name="configuredAccomNumberComparator" ref="configuredAccomNumberComparator" />
+		<property name="travellerDataConverter" ref="travellerDataConverter" />
+	</bean>
+
+	<bean id="selectedAccommodationHandler" class="de.hybris.platform.travelfacades.ancillary.search.accommodation.handlers.SelectedAccommodationHandler" />
+
+
+	<alias name="defaultAccommodationOfferingSearchPipelineManager" alias="accommodationOfferingSearchPipelineManager" />
+	<bean id="defaultAccommodationOfferingSearchPipelineManager"
+		class="de.hybris.platform.travelfacades.facades.accommodation.search.manager.impl.DefaultAccommodationOfferingSearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationBasicHandler" />
+				<ref bean="accommodationPropertyHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="accommodationBasicResponseHandler" alias="accommodationBasicHandler" />
+	<bean id="accommodationBasicResponseHandler" class="de.hybris.platform.travelfacades.facades.accommodation.search.handlers.impl.AccommodationBasicResponseHandler" />
+
+	<alias name="accommodationPropertyResponseHandler" alias="accommodationPropertyHandler" />
+	<bean id="accommodationPropertyResponseHandler" class="de.hybris.platform.travelfacades.facades.accommodation.search.handlers.impl.AccommodationPropertyResponseHandler">
+		<property name="propertyPipelineManager" ref="propertyPipelineManager" />
+	</bean>
+
+	<alias name="defaultPropertyPipelineManager" alias="propertyPipelineManager" />
+	<bean id="defaultPropertyPipelineManager" class="de.hybris.platform.travelfacades.facades.accommodation.search.manager.impl.DefaultPropertyPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="propertyRatePlanConfigsHandler" />
+				<ref bean="propertyBasicHandler" />
+				<ref bean="propertyPriceHandler" />
+				<ref bean="propertyAccommodationInfoHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="propertyDataBasicHandler" alias="propertyBasicHandler" />
+	<bean id="propertyDataBasicHandler" class="de.hybris.platform.travelfacades.facades.accommodation.search.handlers.impl.PropertyDataBasicHandler" />
+
+	<alias name="propertyDataAccommodationInfoHandler" alias="propertyAccommodationInfoHandler" />
+	<bean id="propertyDataAccommodationInfoHandler" class="de.hybris.platform.travelfacades.facades.accommodation.search.handlers.impl.PropertyDataAccommodationInfoHandler" />
+
+	<alias name="propertyDataRatePlanConfigsHandler" alias="propertyRatePlanConfigsHandler" />
+	<bean id="propertyDataRatePlanConfigsHandler" class="de.hybris.platform.travelfacades.facades.accommodation.search.handlers.impl.PropertyDataRatePlanConfigsHandler">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="propertyDataPriceHandler" alias="propertyPriceHandler" />
+	<bean id="propertyDataPriceHandler" class="de.hybris.platform.travelfacades.facades.accommodation.search.handlers.impl.PropertyDataPriceHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationBasicHandler" alias="accommodationReservationBasicHandler" />
+	<bean id="defaultAccommodationReservationBasicHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationBasicHandler">
+		<property name="paymentInfoToPaymentTypeMap" ref="paymentInfoToPaymentTypeMap" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationPriceHandler" alias="accommodationReservationPriceHandler" />
+	<bean id="defaultAccommodationReservationPriceHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationPriceHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="orderTotalPaidForOrderEntryTypeCalculationStrategy" ref="orderTotalPaidForOrderEntryTypeCalculationStrategy" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationStatusHandler" alias="accommodationReservationStatusHandler" />
+	<bean id="defaultAccommodationReservationStatusHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationStatusHandler">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="i18NService" ref="i18NService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationPropertyHandler" alias="accommodationReservationPropertyHandler" />
+	<bean id="defaultAccommodationReservationPropertyHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationPropertyHandler">
+		<property name="accommodationOfferingConverter" ref="accommodationOfferingConverter" />
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationReservedRoomStayHandler" alias="accommodationReservationReservedRoomStayHandler" />
+	<bean id="defaultAccommodationReservationReservedRoomStayHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationReservedRoomStayHandler">
+		<property name="ratePlanConverter" ref="ratePlanConverter" />
+		<property name="roomTypeConverter" ref="roomTypeConverter" />
+		<property name="passengerTypeConverter" ref="passengerTypeConverter" />
+		<property name="specialRequestDetailsConverter" ref="specialRequestDetailsConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="productConverter" ref="serviceProductConverter" />
+		<property name="cancelPenaltiesDescriptionCreationStrategy" ref="cancelPenaltiesDescriptionCreationStrategy" />
+		<property name="roomPreferenceConverter" ref="roomPreferenceConverter" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationReservedRoomStayBasicDetailsHandler" alias="accommodationReservationReservedRoomStayBasicDetailsHandler" />
+	<bean id="defaultAccommodationReservationReservedRoomStayBasicDetailsHandler"
+		class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationReservedRoomStayBasicDetailsHandler">
+		<property name="ratePlanConverter" ref="ratePlanConverter" />
+		<property name="roomTypeConverter" ref="roomTypeConverter" />
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationReservedRoomStayServiceDetailsHandler" alias="accommodationReservationReservedRoomStayServiceDetailsHandler" />
+	<bean id="defaultAccommodationReservationReservedRoomStayServiceDetailsHandler"
+		class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationReservedRoomStayServiceDetailsHandler">
+		<property name="bookingService" ref="bookingService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="productConverter" ref="serviceProductConverter" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationRoomRateHandler" alias="accommodationReservationRoomRateHandler" />
+	<bean id="defaultAccommodationReservationRoomRateHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.AccommodationReservationRoomRateHandler">
+		<property name="bookingService" ref="bookingService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultGlobalTravelReservationBasicHandler" alias="globalTravelReservationBasicHandler" />
+	<bean id="defaultGlobalTravelReservationBasicHandler" class="de.hybris.platform.travelfacades.reservation.handlers.impl.GlobalTravelReservationBasicHandler">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="i18NService" ref="i18NService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<!-- TRAVEL OFFERING STATUS SEARCH MANAGERS -->
+
+	<alias name="defaultTransportOfferingStatusSearchPipelineManager" alias="transportOfferingStatusSearchPipelineManager" />
+	<bean id="defaultTransportOfferingStatusSearchPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultReservationPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="basicReservationItemHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelOfferingStatusSearchPipelineManager" alias="travelOfferingStatusSearchPipelineManager" />
+	<bean id="defaultTravelOfferingStatusSearchPipelineManager" class="de.hybris.platform.travelfacades.reservation.manager.impl.DefaultGlobalTravelReservationPipelineManager">
+		<property name="reservationPipelineManager" ref="transportOfferingStatusSearchPipelineManager" />
+		<property name="accommodationReservationPipelineManager">
+			<null />
+		</property>
+		<property name="handlers">
+			<list>
+			</list>
+		</property>
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<!-- END TRAVEL OFFERING STATUS SEARCH MANAGERS -->
+
+	<!-- Deal pipeline manager -->
+
+	<alias name="defaultDealSearchFareSearchPipelineManager" alias="dealSearchFareSearchPipelineManager" />
+	<bean id="defaultDealSearchFareSearchPipelineManager" class="de.hybris.platform.travelfacades.fare.search.manager.impl.DefaultFareSearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="basicResponseHandler" />
+				<ref bean="itineraryHandler" />
+				<ref bean="dealPricedItineraryBundleHandler" />
+				<ref bean="fareAvailabilityHandler" />
+				<ref bean="dealFareInfoHandler" />
+				<ref bean="bundleSeatsAvailabilityHandler" />
+				<ref bean="dealFilterBundlesHandler" />
+				<ref bean="taxHandler" />
+				<ref bean="dealPTCWasRateHandler" />
+				<ref bean="dealFareTotalsHandler" />
+				<ref bean="dealItineraryIdentifierHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDealFareSearchPipelineManager" alias="dealFareSearchPipelineManager" />
+	<bean id="defaultDealFareSearchPipelineManager" class="de.hybris.platform.travelfacades.fare.search.manager.impl.DefaultFareSearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="basicResponseHandler" />
+				<ref bean="itineraryHandler" />
+				<ref bean="dealPricedItineraryBundleHandler" />
+				<ref bean="fareAvailabilityHandler" />
+				<ref bean="dealFareInfoHandler" />
+				<ref bean="bundleSeatsAvailabilityHandler" />
+				<ref bean="taxHandler" />
+				<ref bean="fareTotalsHandler" />
+				<ref bean="selectedFareBundlesHandler" />
+				<ref bean="itineraryIdentifierHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDealPricedItineraryBundleHandler" alias="dealPricedItineraryBundleHandler" />
+	<bean id="defaultDealPricedItineraryBundleHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.DealPricedItineraryBundleHandler">
+		<property name="travelBundleTemplateService" ref="travelBundleTemplateService" />
+		<property name="travelBundleTemplateConverter" ref="travelBundleTemplateConverter" />
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultDealFareInfoHandler" alias="dealFareInfoHandler" />
+	<bean id="defaultDealFareInfoHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.DealFareInfoHandler">
+		<property name="productsSortStrategy" ref="productsSortStrategy" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+	</bean>
+
+	<alias name="defaultDealFilterBundlesHandler" alias="dealFilterBundlesHandler"/>
+	<bean id="defaultDealFilterBundlesHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.DealFilterBundlesHandler"/>
+
+	<alias name="defaultDealPTCWasRateHandler" alias="dealPTCWasRateHandler" />
+	<bean id="defaultDealPTCWasRateHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.DealPTCWasRateHandler"
+			parent="taxHandler">
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<alias name="defaultDealFareTotalsHandler" alias="dealFareTotalsHandler" />
+	<bean id="defaultDealFareTotalsHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.DealFareTotalsHandler"
+			parent="fareTotalsHandler" />
+
+	<alias name="defaultDealSearchResponsePipelineManager" alias="dealSearchResponsePipelineManager" />
+	<bean id="defaultDealSearchResponsePipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultDealSearchResponsePipelineManager">
+		<property name="dealFareSearchFacade" ref="dealSearchFareSearchFacade" />
+		<property name="dealAccommodationDetailsPipelineManager" ref="dealAccommodationDetailsPipelineManager" />
+		<property name="standardPackagePipelineManager" ref="standardPackagePipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="dealPackageResponseBasicHandler" />
+				<ref bean="dealPackageResponseAvailabilityHandler" />
+				<ref bean="dealPackageResponsePriceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDealDetailsSearchResponsePipelineManager" alias="dealDetailsSearchResponsePipelineManager" />
+	<bean id="defaultDealDetailsSearchResponsePipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultDealSearchResponsePipelineManager">
+		<property name="dealFareSearchFacade" ref="dealFareSearchFacade" />
+		<property name="dealAccommodationDetailsPipelineManager" ref="dealAccommodationDetailsPipelineManager" />
+		<property name="standardPackagePipelineManager" ref="standardPackagePipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="dealPackageResponseBasicHandler" />
+				<ref bean="dealResponseAvailabilityHandler" />
+				<ref bean="packageFareBundlesPriceDifferenceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultDealPackageResponseBasicHandler" alias="dealPackageResponseBasicHandler" />
+	<bean id="defaultDealPackageResponseBasicHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.DealPackageResponseBasicHandler" />
+
+	<alias name="defaultDealPackageResponseAvailabilityHandler" alias="dealPackageResponseAvailabilityHandler" />
+	<bean id="defaultDealPackageResponseAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.DealPackageResponseAvailabilityHandler">
+		<property name="accommodationOfferingFacade" ref="accommodationOfferingFacade" />
+	</bean>
+
+	<alias name="defaultDealResponseAvailabilityHandler" alias="dealResponseAvailabilityHandler" />
+	<bean id="defaultDealResponseAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.DealResponseAvailabilityHandler" parent="dealPackageResponseAvailabilityHandler"/>
+
+	<alias name="defaultDealPackageResponsePriceHandler" alias="dealPackageResponsePriceHandler" />
+	<bean id="defaultDealPackageResponsePriceHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.DealPackageResponsePriceHandler">
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<!-- Dynamic Packages pipeline managers and handlers -->
+
+	<alias name="defaultPackageSearchResponsePipelineManager" alias="packageSearchResponsePipelineManager" />
+	<bean id="defaultPackageSearchResponsePipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultPackageSearchResponsePipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationBasicHandler" />
+				<ref bean="packageAccommodationPropertyHandler" />
+				<ref bean="packageFareSearchResponseHandler" />
+				<ref bean="packageSearchAvailabilityHandler" />
+				<ref bean="packagePriceHandler" />
+				<ref bean="packagePriceRangeFilterHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageSearchResponsePriceRangeFilterPipelineManager" alias="packageSearchResponsePriceRangeFilterPipelineManager" />
+	<bean id="defaultPackageSearchResponsePriceRangeFilterPipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultPackageSearchResponsePipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="packageSearchResponseSessionHandler" />
+				<ref bean="packagePriceRangeFilterHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageAccommodationPropertyHandler" alias="packageAccommodationPropertyHandler" />
+	<bean id="defaultPackageAccommodationPropertyHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageAccommodationPropertyHandler"
+		parent="accommodationPropertyHandler">
+		<property name="packagePipelineManager" ref="packagePipelineManager" />
+	</bean>
+
+	<alias name="defaultPackagePriceHandler" alias="packagePriceHandler" />
+	<bean id="defaultPackagePriceHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackagePriceHandler">
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultPackageSearchAvailabilityHandler" alias="packageSearchAvailabilityHandler" />
+	<bean id="defaultPackageSearchAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageSearchAvailabilityHandler"/>
+
+	<alias name="defaultPackageSearchResponseSessionHandler" alias="packageSearchResponseSessionHandler" />
+	<bean id="defaultPackageSearchResponseSessionHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageSearchResponseSessionHandler">		
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultPackagePriceRangeFilterHandler" alias="packagePriceRangeFilterHandler" />
+	<bean id="defaultPackagePriceRangeFilterHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackagePriceRangeFilterHandler" />
+
+	<alias name="defaultPackageAccommodationDetailsPipelineManager" alias="packageAccommodationDetailsPipelineManager" />
+	<bean id="defaultPackageAccommodationDetailsPipelineManager" class="de.hybris.platform.travelfacades.facades.accommodation.manager.impl.DefaultAccommodationDetailsPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="accommodationDetailsBasicHandler" />
+				<ref bean="packageRoomStaysHandler" />
+				<ref bean="ratePlansHandler" />
+				<ref bean="roomRatesHandler" />
+				<ref bean="availabilityHandler" />
+				<ref bean="accommodationPriceHandler" />
+				<ref bean="reservedRoomStaysHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageReservedRoomStaysPipelineManager" alias="packageReservedRoomStaysPipelineManager" />
+	<bean id="defaultPackageReservedRoomStaysPipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultPackageReservedRoomStaysPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="packageConfiguredReservedRoomStaysHandler" />
+				<ref bean="packageDefaultReservedRoomStaysHandler" />
+                <ref bean="filterOutOfStockRoomStaysHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageConfiguredReservedRoomStaysHandler" alias="packageConfiguredReservedRoomStaysHandler" />
+	<bean id="defaultPackageConfiguredReservedRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageConfiguredReservedRoomStaysHandler">
+		<property name="accommodationSearchFacade" ref="accommodationSearchFacade" />
+		<property name="accommodationOfferingFacade" ref="accommodationOfferingFacade" />
+		<property name="bookingFacade" ref="bookingFacade" />
+	</bean>
+
+	<alias name="defaultPackageDefaultReservedRoomStaysHandler" alias="packageDefaultReservedRoomStaysHandler" />
+	<bean id="defaultPackageDefaultReservedRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageDefaultReservedRoomStaysHandler" />
+   
+   <alias name="defaultFilterOutOfStockRoomStaysHandler" alias="filterOutOfStockRoomStaysHandler" />
+   <bean id="defaultFilterOutOfStockRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.FilterOutOfStockRoomStaysHandler" />
+
+	<alias name="defaultPackageDetailsPipelineManager" alias="packageDetailsPipelineManager" />
+	<bean id="defaultPackageDetailsPipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultPackageDetailsPipelineManager">
+		<property name="accommodationDetailsPipelineManager" ref="packageAccommodationDetailsPipelineManager" />
+		<property name="packageReservedRoomStaysPipelineManager" ref="packageReservedRoomStaysPipelineManager" />
+		<property name="fareSearchFacade" ref="fareSearchFacade" />
+		<property name="handlers">
+			<list>
+				<ref bean="packageAvailabilityHandler" />
+				<ref bean="packageSelectedRoomStaysHandler" />
+				<ref bean="packageRoomStaysPriceDifferenceHandler" />
+				<ref bean="packageSelectedFareBundlesHandler" />
+				<ref bean="packageFareBundlesPriceDifferenceHandler" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultAmendPackageDetailsPipelineManager" alias="amendPackageDetailsPipelineManager" />
+	<bean id="defaultAmendPackageDetailsPipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultAmendPackageDetailsPipelineManager">
+		<property name="accommodationDetailsPipelineManager" ref="packageAccommodationDetailsPipelineManager" />
+		<property name="packageReservedRoomStaysPipelineManager" ref="packageReservedRoomStaysPipelineManager" />
+		<property name="packageTransportReservationSummaryPipelineManager" ref="packageTransportReservationSummaryPipelineManager" />
+		 <property name="travelCartService" ref="travelCartService"/>
+		<property name="handlers">
+			<list>
+				<ref bean="amendPackageAvailabilityHandler" />
+				<ref bean="packageSelectedRoomStaysHandler" />
+				<ref bean="packageRoomStaysPriceDifferenceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageAvailabilityHandler" alias="packageAvailabilityHandler" />
+	<bean id="defaultPackageAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageAvailabilityHandler" />
+
+	<alias name="defaultAmendPackageAvailabilityHandler" alias="amendPackageAvailabilityHandler" />
+	<bean id="defaultAmendPackageAvailabilityHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.AmendPackageAvailabilityHandler" />
+
+
+	<alias name="defaultPackageSelectedRoomStaysHandler" alias="packageSelectedRoomStaysHandler" />
+	<bean id="defaultPackageSelectedRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageSelectedRoomStaysHandler" />
+
+	<alias name="defaultPackageRoomStaysPriceDifferenceHandler" alias="packageRoomStaysPriceDifferenceHandler" />
+	<bean id="defaultPackageRoomStaysPriceDifferenceHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageRoomStaysPriceDifferenceHandler">
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultPackageSelectedFareBundlesHandler" alias="packageSelectedFareBundlesHandler" />
+	<bean id="defaultPackageSelectedFareBundlesHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageSelectedFareBundlesHandler" />
+
+	<alias name="defaultPackageFareBundlesPriceDifferenceHandler" alias="packageFareBundlesPriceDifferenceHandler" />
+	<bean id="defaultPackageFareBundlesPriceDifferenceHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageFareBundlesPriceDifferenceHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<alias name="defaultPackageRoomStaysHandler" alias="packageRoomStaysHandler" />
+	<bean id="defaultPackageRoomStaysHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageRoomStaysHandler">
+		<property name="accommodationService" ref="accommodationService" />
+		<property name="roomTypeConverter" ref="roomTypeConverter" />
+	</bean>
+
+	<alias name="defaultStandardPackagePipelineManager" alias="standardPackagePipelineManager" />
+	<bean id="defaultStandardPackagePipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultStandardPackagePipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="packageProductBasicHandler" />
+				<ref bean="packageProductStockHandler" />
+				<ref bean="packageProductPriceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageProductBasicHandler" alias="packageProductBasicHandler" />
+	<bean id="defaultPackageProductBasicHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageProductBasicHandler">
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+	</bean>
+
+	<alias name="defaultPackageProductStockHandler" alias="packageProductStockHandler" />
+	<bean id="defaultPackageProductStockHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageProductStockHandler">
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="warehouseService" ref="warehouseService" />
+	</bean>
+
+	<alias name="defaultPackageProductPriceHandler" alias="packageProductPriceHandler" />
+	<bean id="defaultPackageProductPriceHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageProductPriceHandler">
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+		<property name="productService" ref="productService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="commercePriceService" ref="commercePriceService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultPackagePipelineManager" alias="packagePipelineManager" />
+	<bean id="defaultPackagePipelineManager" class="de.hybris.platform.travelfacades.facades.packages.manager.impl.DefaultPackagePipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="propertyRatePlanConfigsHandler" />
+				<ref bean="propertyBasicHandler" />
+				<ref bean="propertyPriceHandler" />
+				<ref bean="packageAccommodationInfoHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageAccommodationInfoHandler" alias="packageAccommodationInfoHandler" />
+	<bean id="defaultPackageAccommodationInfoHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageAccommodationInfoHandler"
+		parent="propertyAccommodationInfoHandler" />
+
+	<alias name="defaultPackageFareSearchResponseHandler" alias="packageFareSearchResponseHandler" />
+	<bean id="defaultPackageFareSearchResponseHandler" class="de.hybris.platform.travelfacades.facades.packages.handlers.impl.PackageFareSearchResponseHandler">
+		<property name="packageSearchFareSearchFacade" ref="packageSearchFareSearchFacade" />
+	</bean>
+
+	<alias name="defaultPackageSearchFareSearchPipelineManager" alias="packageSearchFareSearchPipelineManager" />
+	<bean id="defaultPackageSearchFareSearchPipelineManager" class="de.hybris.platform.travelfacades.fare.search.manager.impl.DefaultFareSearchPipelineManager">
+		<property name="handlers">
+			<list>
+				<ref bean="isoCurrencyCodeHandler" />
+				<ref bean="basicResponseHandler" />
+				<ref bean="itineraryHandler" />
+				<ref bean="pricedItineraryBundleHandler" />
+				<ref bean="fareRulesHandler" />
+				<ref bean="fareAvailabilityHandler" />
+				<ref bean="fareInfoHandler" />
+				<ref bean="bundleSeatsAvailabilityHandler" />
+				<ref bean="packageFilterBundlesHandler" />
+				<ref bean="taxHandler" />
+				<ref bean="fareTotalsHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPackageFilterBundlesHandler" alias="packageFilterBundlesHandler"/>
+	<bean id="defaultPackageFilterBundlesHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.PackageFilterBundlesHandler"/>
+	
+	<alias name="defaultBundleSelectionHandler" alias="bundleSelectionHandler" />
+	<bean id="defaultBundleSelectionHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.BundleSelectionHandler">
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="travelBundleTemplateFacade" ref="travelBundleTemplateFacade" />
+		<property name="travelBundleTemplateService" ref="travelBundleTemplateService" />
+	</bean>
+	
+	<alias name="defaultFilterUpgradeBundleHandler" alias="filterUpgradeBundleHandler" />
+	<bean id="defaultFilterUpgradeBundleHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.FilterUpgradeBundleHandler">
+		<property name="travelBundleTemplateFacade" ref="travelBundleTemplateFacade" />
+	</bean>
+	
+	<alias name="defaultUpdateUpgradeBundlePricesHandler" alias="updateUpgradeBundlePricesHandler" />
+	<bean id="defaultUpdateUpgradeBundlePricesHandler" class="de.hybris.platform.travelfacades.fare.search.handlers.impl.UpdateUpgradeBundlePricesHandler">
+		<property name="travelBundleTemplateFacade" ref="travelBundleTemplateFacade" />
+	</bean>
+
+</beans>

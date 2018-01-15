@@ -1,0 +1,71 @@
+package de.hybris.platform.travelrulesengine.rules
+
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import de.hybris.platform.ruleengineservices.rao.CartRAO;
+import de.hybris.platform.ruleengineservices.rao.OrderEntryRAO;
+import de.hybris.platform.ruleengineservices.rao.DiscountRAO;
+import de.hybris.platform.ruleengineservices.rao.UserGroupRAO;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
+import de.hybris.platform.ruleengineservices.rrd.RuleConfigurationRRD;
+import java.util.Map;
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO;
+import de.hybris.platform.travelrulesengine.utils.TravelRuleUtils;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleOrderEntryPercentageDiscountAction;
+
+rule "discounts"
+@ruleCode("discounts")
+@moduleName("promotions-module")
+dialect "mvel"
+
+	salience 10
+	when
+		$cart : CartRAO($cartUserGroups : user.groups, user.id != "anonymous", !user.id.contains("|"))
+		exists (UserGroupRAO(id == "customergroup") from $cartUserGroups)
+		$entries : ArrayList(size > 0) from collect
+		(
+			OrderEntryRAO(
+				quantity > 0,
+				product.getProductType() != null,
+				product.getProductType().getCode()=="FARE_PRODUCT",
+				$departureDate : getDepartureDate(transportOfferings),
+				eval($departureDate != null),
+        		eval(!TravelRuleUtils.isDateAWeekend($departureDate)),
+        		eval(TravelRuleUtils.isDateBetweenDates($departureDate, "26/04/2016", "03/10/2016"))
+			)
+		)
+		$result : RuleEngineResultRAO()
+		$config : RuleConfigurationRRD(ruleCode == "discounts")
+		not $discount:DiscountRAO( firedRuleCode == "discounts" )
+	then
+		Map variables = [
+		   "de.hybris.platform.ruleengineservices.rao.OrderEntryRAO": $entries,
+		   "de.hybris.platform.ruleengineservices.rao.CartRAO": $cart,
+		   "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO": $result
+		];
+		ruleOrderEntryPercentageDiscountAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), ["value":new BigDecimal(10)]);
+
+end
+
+function Date getDepartureDate(List transportOfferings)
+{
+	Date departureDate = null;
+	if(CollectionUtils.isEmpty(transportOfferings))
+	{
+		return departureDate;
+	}
+	for(Object transportOfferingObj : transportOfferings)
+	{
+		TransportOfferingRAO transportOffering = (TransportOfferingRAO)transportOfferingObj;
+		if(departureDate == null || departureDate.before(transportOffering.getDepartureTime()))
+		{
+			departureDate = transportOffering.getDepartureTime();
+		}
+	}
+	return departureDate;
+}

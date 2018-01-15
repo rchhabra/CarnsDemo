@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry kind="src" path="/commerceservices"/>
+	<classpathentry kind="src" path="/travelservices"/>
+	<classpathentry kind="src" path="/commercefacades"/>
+	<classpathentry kind="src" path="/travelfacades"/>
+	<classpathentry kind="src" path="/ndcservices"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/subscriptionbundleservices"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

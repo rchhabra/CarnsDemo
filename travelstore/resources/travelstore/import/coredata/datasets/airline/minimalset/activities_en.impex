@@ -1,0 +1,39 @@
+# Macros / Replacement Parameter definitions
+$lang = en
+
+#
+# ImpEx for Importing Activity into travel accelerator
+#
+INSERT_UPDATE Activity; code[unique = true]; name[lang = $lang]
+
+# Activities in London
+; britishMuseum            ; British Museum
+; vanda                    ; Victoria and Albert Museum
+; nationalGallery          ; National Gallery
+; towerOfLondon            ; Tower of London
+; bigBen                   ; Big Ben
+; city_break               ; city_break ;
+
+# Activities in Manchester
+; oldTrafford              ; Old Trafford
+; manchesterArtGallery     ; Manchester Art Gallery
+; etihadStadium            ; Etihad Stadium
+; manchesterCathedral      ; Manchester Cathedral
+; sports_trips             ; sports_trips
+
+# Activities in Edinburgh
+; arthursSeat              ; Arthur's Seat
+; edinburghOldTown         ; Edinburgh Old Town
+; nationalMuseumOfScotland ; National Museum of Scotland
+; culture_break            ; culture_break
+; family_friends           ; family_friends
+; winter_sun               ; winter_sun ;
+
+# Heathrow Airport specific activites
+; theMicroscopyCongress    ; The Microscopy Congress
+
+# Edinburgh Airport specific activites
+; liveAviationExcercise    ; Edinburgh Airport live Aviation excercise
+
+# Manchester Airport specific activites
+; aviationConference       ; Manchester Airport Aviation Conference

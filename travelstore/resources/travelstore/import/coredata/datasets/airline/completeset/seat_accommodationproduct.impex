@@ -1,0 +1,12 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$approved = approvalstatus(code)[default = 'approved']
+$categories = supercategories(code, $catalogVersion)
+$defaultProductType = ACCOMMODATION
+
+#Accommodation product data for seats.
+INSERT_UPDATE Accommodation; code[unique = true]; type(code); name[lang = $lang]; $catalogVersion; $approved; productType(code)[default = $defaultProductType]; $categories[default = 'ACCOMMODATION']
+; ACECONSEAT1 ; SEAT ; "Economy Seat"      ;
+; ACPECOSEAT1 ; SEAT ; "Economy Plus Seat" ;
+; ACBIZZSEAT1 ; SEAT ; "Business Seat"     ;
+

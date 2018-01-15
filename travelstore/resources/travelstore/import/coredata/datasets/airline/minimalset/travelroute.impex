@@ -1,0 +1,298 @@
+# ImpEx for Importing TravelRoutes into travel accelerator
+
+$origin = origin(code)
+$destination = destination(code)
+
+INSERT_UPDATE TravelRoute; code[unique = true]; $origin; $destination
+#LGW->CDG
+; LGW_CDG     ; LGW ; CDG
+#LTN->CDG
+; LTN_CDG     ; LTN ; CDG
+
+#CDG->LGW
+; CDG_LGW     ; CDG ; LGW
+#CDG->LTN
+; CDG_LTN     ; CDG ; LTN
+
+#CDG->JFK
+; CDG_JFK     ; CDG ; JFK
+
+#JFK->CDG
+; JFK_CDG     ; JFK ; CDG
+
+#LGW->EDI
+; LGW_EDI     ; LGW ; EDI
+#EDI->LGW
+; EDI_LGW     ; EDI ; LGW
+
+#EDI->LGW->CDG
+; EDI_LGW_CDG ; EDI ; CDG
+#CDG->LGW->EDI
+; CDG_LGW_EDI ; CDG ; EDI
+
+#EDI->CDG
+; EDI_CDG     ; EDI ; CDG
+#CDG->EDI
+; CDG_EDI     ; CDG ; EDI
+
+#LGW->ALC
+; LGW_ALC     ; LGW ; ALC
+#ALC->LGW
+; ALC_LGW     ; ALC ; LGW
+
+#LGW->NCE
+; LGW_NCE     ; LGW ; NCE
+#NCE->LGW
+; NCE_LGW     ; NCE ; LGW
+
+#LGW->VCE
+; LGW_VCE     ; LGW ; VCE
+#VCE->LGW
+; VCE_LGW     ; VCE ; LGW
+
+#LGW->ATH
+; LGW_ATH     ; LGW ; ATH
+#ATH->LGW
+; ATH_LGW     ; ATH ; LGW
+
+#LGW->JFK
+; LGW_JFK     ; LGW ; JFK
+#JFK->LGW
+; JFK_LGW     ; JFK ; LGW
+
+#LGW->MLE
+; LGW_MLE     ; LGW ; MLE
+#MLE->LGW
+; MLE_LGW     ; MLE ; LGW
+
+#LGW->CDG->JFK
+; LGW_CDG_JFK ; LGW ; JFK
+#JFK->CDG->LGW
+; JFK_CDG_LGW ; JFK ; LGW
+
+#HKT->CDG
+; HKT_CDG ; HKT ; CDG
+#CDG->HKT
+; CDG_HKT ; CDG ; HKT
+
+#HKT->LTN
+; HKT_LTN ; HKT ; LTN
+#LTN->HKT
+; LTN_HKT ; LTN ; HKT
+
+#GOI->CDG
+; GOI_CDG ; GOI ; CDG
+#CDG->GOI
+; CDG_GOI ; CDG ; GOI
+
+#GOI->LTN
+; GOI_LTN ; GOI ; LTN
+#LTN->GOI
+; LTN_GOI ; LTN ; GOI
+
+
+#MIA->CDG
+; MIA_CDG ; MIA ; CDG
+#CDG->MIA
+; CDG_MIA ; CDG ; MIA
+
+#MIA->LTN
+; MIA_LTN ; MIA ; LTN
+#LTN->MIA
+; LTN_MIA ; LTN ; MIA
+
+
+#NAP->CDG
+; NAP_CDG ; NAP ; CDG
+#CDG->NAP
+; CDG_NAP ; CDG ; NAP
+
+#NAP->LTN
+; NAP_LTN ; NAP ; LTN
+#LTN->NAP
+; LTN_NAP ; LTN ; NAP
+
+
+#FLR->CDG
+; FLR_CDG ; FLR ; CDG
+#CDG->FLR
+; CDG_FLR ; CDG ; FLR
+
+#FLR->LTN
+; FLR_LTN ; FLR ; LTN
+#LTN->FLR
+; LTN_FLR ; LTN ; FLR
+
+
+#FCO->CDG 
+; FCO_CDG ; FCO ; CDG 
+#CDG->FCO 
+; CDG_FCO ; CDG ; FCO 
+ 
+#FCO->LTN 
+; FCO_LTN ; FCO ; LTN 
+#LTN->FCO 
+; LTN_FCO ; LTN ; FCO 
+
+
+#BKK->CDG
+; BKK_CDG ; BKK ; CDG
+#CDG->BKK
+; CDG_BKK ; CDG ; BKK
+
+#BKK->LTN
+; BKK_LTN ; BKK ; LTN
+#LTN->BKK
+; LTN_BKK ; LTN ; BKK
+
+
+#KUL->CDG
+; KUL_CDG ; KUL ; CDG
+#CDG->KUL
+; CDG_KUL ; CDG ; KUL
+
+#KUL->LTN
+; KUL_LTN ; KUL ; LTN
+#LTN->KUL
+; LTN_KUL ; LTN ; KUL
+
+
+#PRG->CDG
+; PRG_CDG ; PRG ; CDG
+#CDG->PRG
+; CDG_PRG ; CDG ; PRG
+
+#PRG->LTN
+; PRG_LTN ; PRG ; LTN
+#LTN->PRG
+; LTN_PRG ; LTN ; PRG
+
+#KEF->CDG
+; KEF_CDG ; KEF ; CDG
+#CDG->KEF
+; CDG_KEF ; CDG ; KEF
+
+#KEF->LTN
+; KEF_LTN ; KEF ; LTN
+#LTN->KEF
+; LTN_KEF ; LTN ; KEF
+
+
+#ICN->CDG
+; ICN_CDG ; ICN ; CDG
+#CDG->ICN
+; CDG_ICN ; CDG ; ICN
+
+#ICN->LTN
+; ICN_LTN ; ICN ; LTN
+#LTN->ICN
+; LTN_ICN ; LTN ; ICN
+
+
+# ImpEx for Importing TravelRouteTravelSectorRelation into travel accelerator
+
+INSERT_UPDATE TravelRoute; code[unique = true]; travelSector(code)
+; LGW_CDG     ; LGW_CDG
+; LTN_CDG     ; LTN_CDG
+; CDG_LGW     ; CDG_LGW
+; CDG_LTN     ; CDG_LTN
+; LGW_EDI     ; LGW_EDI
+; EDI_LGW     ; EDI_LGW
+
+; EDI_LGW_CDG ; EDI_LGW, LGW_CDG
+; CDG_LGW_EDI ; CDG_LGW, LGW_EDI
+
+; EDI_CDG     ; EDI_CDG
+; CDG_EDI     ; CDG_EDI
+
+; CDG_JFK     ; CDG_JFK ;
+; JFK_CDG     ; JFK_CDG ;
+
+; LGW_ALC     ; LGW_ALC
+; ALC_LGW     ; ALC_LGW
+
+; LGW_NCE     ; LGW_NCE
+; NCE_LGW     ; NCE_LGW
+
+; LGW_VCE     ; LGW_VCE
+; VCE_LGW     ; VCE_LGW
+
+; LGW_ATH     ; LGW_ATH
+; ATH_LGW     ; ATH_LGW
+
+; LGW_JFK     ; LGW_JFK
+; JFK_LGW     ; JFK_LGW
+
+; LGW_MLE     ; LGW_MLE
+; MLE_LGW     ; MLE_LGW
+
+; LGW_CDG_JFK ; LGW_CDG, CDG_JFK
+; JFK_CDG_LGW ; JFK_CDG, CDG_LGW
+
+; CDG_HKT     ; CDG_HKT
+; HKT_CDG     ; HKT_CDG
+
+; LTN_HKT     ; LTN_HKT
+; HKT_LTN     ; HKT_LTN
+
+; CDG_GOI     ; CDG_GOI
+; GOI_CDG     ; GOI_CDG
+
+; LTN_GOI     ; LTN_GOI
+; GOI_LTN     ; GOI_LTN
+
+; CDG_MIA     ; CDG_MIA
+; MIA_CDG     ; MIA_CDG
+
+; LTN_MIA     ; LTN_MIA
+; MIA_LTN     ; MIA_LTN
+
+; CDG_NAP     ; CDG_NAP
+; NAP_CDG     ; NAP_CDG
+
+; LTN_NAP     ; LTN_NAP
+; NAP_LTN     ; NAP_LTN
+
+; CDG_FLR     ; CDG_FLR
+; FLR_CDG     ; FLR_CDG
+
+; LTN_FLR     ; LTN_FLR
+; FLR_LTN     ; FLR_LTN
+
+; CDG_FCO     ; CDG_FCO
+; FCO_CDG     ; FCO_CDG
+
+; LTN_FCO     ; LTN_FCO
+; FCO_LTN     ; FCO_LTN
+
+; CDG_BKK     ; CDG_BKK
+; BKK_CDG     ; BKK_CDG
+
+; LTN_BKK     ; LTN_BKK
+; BKK_LTN     ; BKK_LTN
+
+; CDG_KUL     ; CDG_KUL
+; KUL_CDG     ; KUL_CDG
+
+; LTN_KUL     ; LTN_KUL
+; KUL_LTN     ; KUL_LTN
+
+
+; CDG_PRG     ; CDG_PRG
+; PRG_CDG     ; PRG_CDG
+
+; LTN_PRG     ; LTN_PRG
+; PRG_LTN     ; PRG_LTN
+
+; CDG_KEF     ; CDG_KEF
+; KEF_CDG     ; KEF_CDG
+
+; LTN_KEF     ; LTN_KEF
+; KEF_LTN     ; KEF_LTN
+
+
+; CDG_ICN     ; CDG_ICN
+; ICN_CDG     ; ICN_CDG
+
+; LTN_ICN     ; LTN_ICN
+; ICN_LTN     ; ICN_LTN

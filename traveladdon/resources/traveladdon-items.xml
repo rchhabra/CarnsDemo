@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+  <itemtypes>
+    <itemtype code="FareFinderComponent" extends="AbstractFinderComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.FareFinderComponent">
+      <description>It provides a function to search for available fares.</description>
+    </itemtype>
+
+    <itemtype code="TransportOfferingStatusSearchComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.TransportOfferingStatusComponent">
+      <description>It provides a function to search for the status of a Transport Offering.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It is localized title of the component.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="TransportReservationComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.TransportReservationComponent">
+      <description>This component lists the entries selected by user during the checkout journey.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>This component lists the entries selected by user during the checkout journey.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="ReservationBreakdownComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.ReservationBreakdownComponent">
+      <description>This components shows the content of the transportation elements of the reservation.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="TransportBookingDetailsComponent" extends="AbstractBookingDetailsComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.TransportBookingDetailsComponent">
+      <description>This components shows booking details for a transportation booking</description>
+    </itemtype>
+
+    <itemtype code="TransportBookingListComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.TransportBookingListComponent">
+      <description>This components shows booking list for a transportation booking</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="TransportSummaryComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.traveladdon.jalo.components.TransportSummaryComponent">
+      <description>It provides a summary of transport selections.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It is localized title of the component.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+  </itemtypes>
+</items>

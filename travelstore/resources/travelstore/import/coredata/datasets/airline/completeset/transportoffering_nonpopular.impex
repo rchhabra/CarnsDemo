@@ -1,0 +1,53 @@
+# ImpEx for Importing TransportOfferings into travel accelerator
+
+$lang = en
+
+INSERT_UPDATE Terminal; code[unique = true]; name[lang = $lang]
+; T1 ; Terminal 1
+; T2 ; Terminal 2
+
+INSERT_UPDATE TravelProvider; code[unique = true]; name[lang = $lang]
+; HY ; Hybris Air
+
+# ImpEx for Importing TransportOfferings into travel accelerator
+#% import java.text.SimpleDateFormat;
+
+$vendorUid = airline
+$originTerminal = originTerminal(code[unique = true])[default = T1]
+$destinationTerminal = destinationTerminal(code[unique = true])[default = T2]
+$defaultStatus = SCHEDULED
+$defaultType = FLIGHT
+$travelDate="yyyy/MM/dd"
+
+INSERT_UPDATE TransportOffering; code[unique = true]; number; departureTime[dateformat = 'yyyy-MM-dd HH:mm']; arrivalTime[dateformat = 'yyyy-MM-dd HH:mm']; vendor(code)[default = $vendorUid]; $originTerminal; $destinationTerminal; type(code)[default = $defaultType]; status(code)[default = $defaultStatus]; travelSector(code); travelProvider(code); transportVehicle(code); active
+"#% beforeEach:
+	SimpleDateFormat feedDateFormat = new SimpleDateFormat(""yyyy/MM/dd HH:mm"");
+	SimpleDateFormat currentDateFormat1 = new SimpleDateFormat(""yyyy/MM/dd"");
+	SimpleDateFormat travelDateFormat = new SimpleDateFormat(""yyyy-MM-dd HH:mm"");
+	SimpleDateFormat codeDateFormat = new SimpleDateFormat(""ddMMyyyyHHmm"");
+	
+	Calendar departureCalInData = Calendar.getInstance();
+	departureCalInData.setTime(feedDateFormat.parse(line.get(3)));
+	Calendar departureCal = Calendar.getInstance();
+	departureCal.setTime(currentDateFormat1.parse($travelDate));
+	departureCal.set(Calendar.HOUR_OF_DAY, departureCalInData.get(Calendar.HOUR_OF_DAY));
+	departureCal.set(Calendar.MINUTE, departureCalInData.get(Calendar.MINUTE));
+	line.put(3, travelDateFormat.format(departureCal.getTime()));
+	line.put(1,line.get(1)+line.get(2) + codeDateFormat.format(departureCal.getTime()));
+    
+    Calendar arrivalCalInData = Calendar.getInstance();
+	arrivalCalInData.setTime(feedDateFormat.parse(line.get(4)));
+    Calendar arrivalCal = Calendar.getInstance();
+	arrivalCal.setTime(currentDateFormat1.parse($travelDate));
+	
+	if(arrivalCalInData.get(Calendar.DAY_OF_MONTH) > departureCalInData.get(Calendar.DAY_OF_MONTH))
+	{
+		int diff = arrivalCalInData.get(Calendar.DAY_OF_MONTH) - departureCalInData.get(Calendar.DAY_OF_MONTH);
+		arrivalCal.add(Calendar.DAY_OF_MONTH, diff);
+	}
+
+    arrivalCal.set(Calendar.HOUR_OF_DAY, arrivalCalInData.get(Calendar.HOUR_OF_DAY));
+	arrivalCal.set(Calendar.MINUTE, arrivalCalInData.get(Calendar.MINUTE));
+	line.put(4, travelDateFormat.format(arrivalCal.getTime()));
+	"
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/transportoffering_nonpopular.csv""), ""utf-8"", new char[] {','}, 0, 0);"

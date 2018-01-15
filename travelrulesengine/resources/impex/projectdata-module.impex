@@ -1,0 +1,50 @@
+INSERT_UPDATE DroolsKIEModule; name[unique = true]; mvnGroupId; mvnArtifactId; mvnVersion; ruleType(code); version; active[default = true]
+; travel-rules-module ; hybris-rules ; travelrulesengine ; 1.0.0 ; DEFAULT   ; 0 ;
+; promotions-module   ; hybris-rules ; promotions        ; 1.0.0 ; PROMOTION ; 0 ;
+
+INSERT_UPDATE DroolsKIEBase; name[unique = true]; kieModule(name)[unique = true]; equalityBehavior(code); eventProcessingMode(code)
+; travel-rules-base ; travel-rules-module ; EQUALITY ; STREAM
+; promotions-base   ; promotions-module   ; EQUALITY ; STREAM
+
+INSERT_UPDATE DroolsKIESession; name[unique = true]; kieBase(name)[unique = true]; sessionType(code)
+; travel-rules-session ; travel-rules-base ; STATELESS
+; promotions-session   ; promotions-base   ; STATELESS
+
+INSERT_UPDATE DroolsRuleEngineContext; name[unique = true]; kieSession(name); ruleFiringLimit
+; travel-rules-context ; travel-rules-session ; 200 ;
+; promotions-context   ; promotions-session   ; 200 ;
+
+UPDATE DroolsKIEModule; name[unique = true]; defaultKIEBase(name)
+"#% afterEach: de.hybris.platform.core.Registry.getApplicationContext().getBean(""ruleEngineSystemSetup"").initializeModule(impex.getLastImportedItem());"
+; travel-rules-module ; travel-rules-base
+; promotions-module   ; promotions-base
+
+UPDATE DroolsKIEBase; name[unique = true]; defaultKIESession(name)
+; travel-rules-base ; travel-rules-session
+; promotions-base   ; promotions-session
+
+INSERT_UPDATE DroolsRule; code[unique = true]; uuid; rulePackage; active[default = false]; maxAllowedRuns; globals; ruleType(code)[default = DEFAULT]; ruleGroupCode; version[default = 0]; kieBase(name)
+; adminFee                ; adminFee                ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleAddAdminFeeToCartAction->ruleAddAdminFeeToCartAction                       ;           ; feeRuleGroup                     ; ; travel-rules-base
+; refundFee               ; refundFee               ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleRetainAdminFeeAction->ruleRetainAdminFeeAction                             ;           ; cancellationRuleGroup            ; ; travel-rules-base
+; filterFareTripType      ; filterFareTripType      ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleFareFilterAction->ruleFareFilterAction                                     ;           ; fareFilterRuleGroup              ; ; travel-rules-base
+; filterFareCategory5     ; filterFareCategory5     ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleFareFilterAction->ruleFareFilterAction                                     ;           ; fareFilterRuleGroup              ; ; travel-rules-base
+; filterFareCategory6     ; filterFareCategory6     ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleFareFilterAction->ruleFareFilterAction                                     ;           ; fareFilterRuleGroup              ; ; travel-rules-base
+; filterFareCategory7     ; filterFareCategory7     ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleFareFilterAction->ruleFareFilterAction                                     ;           ; fareFilterRuleGroup              ; ; travel-rules-base
+; discounts               ; discounts               ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleOrderEntryPercentageDiscountAction->ruleOrderEntryPercentageDiscountAction ; PROMOTION ;                                  ; ; promotions-base
+; filterTransportOffering ; filterTransportOffering ; de.hybris.platform.travelrulesengine.rules ; true ; 50 ; ruleTransportOfferingFilterAction->ruleTransportOfferingFilterAction           ;           ; transportOfferingFilterRuleGroup ; ; travel-rules-base
+
+# load the drl content into the rules
+UPDATE DroolsRule; code[unique = true]; ruleContent[translator = de.hybris.platform.ruleengineservices.util.FileLoaderValueTranslator]
+; adminFee                ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/adminFee.drl"                ;
+; refundFee               ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/refundFee.drl"               ;
+; filterFareTripType      ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/filterFareTripType.drl"      ;
+; filterFareCategory5     ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/filterFareCategory5.drl"     ;
+; filterFareCategory6     ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/filterFareCategory6.drl"     ;
+; filterFareCategory7     ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/filterFareCategory7.drl"     ;
+; discounts               ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/discounts.drl"               ;
+; filterTransportOffering ; "jar:de.hybris.platform.travelrulesengine.constants.TravelrulesengineConstants&/travelrulesengine/rules/filterTransportOffering.drl" ;
+
+
+UPDATE DroolsKIEBase; name[unique = true]; kieModule(name)[unique = true]; defaultKIESession(name)
+; travel-rules-base ; travel-rules-module ; travel-rules-session
+; promotions-base   ; promotions-module   ; promotions-session

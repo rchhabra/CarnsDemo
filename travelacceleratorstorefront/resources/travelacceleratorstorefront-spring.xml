@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config />
+
+	<bean id="travelacceleratorstorefrontCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
+		<property name="supportedChannels">
+			<list value-type="de.hybris.platform.commerceservices.enums.SiteChannel">
+				<value>B2C</value>
+				<!-- <value>B2B</value> -->
+			</list>
+		</property>
+		<property name="addonExtensionMetadata">
+			<bean class="de.hybris.platform.addonsupport.data.AddonExtensionMetadata">
+				<property name="suffixChannel" value="false" />
+				<property name="baseExtensionName" value="travelacceleratorstorefront" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="travelacceleratorstorefrontSampleDataEventListener" parent="abstractGenericAddOnSampleDataEventListener">
+		<property name="extensionName" value="travelacceleratorstorefront" />
+	</bean>
+
+	<alias alias="emailContextFactory" name="extDefaultEmailContextFactory" />
+	<bean id="extDefaultEmailContextFactory" parent="defaultEmailContextFactory">
+		<property name="emailContextVariables">
+			<map merge="true">
+				<entry key="commonResourceUrl" value="{baseThemeUrl}/_ui/common" />
+				<entry key="themeResourceUrl" value="{baseThemeUrl}/_ui/addons/travelacceleratorstorefront/responsive/theme-{theme}" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Override of ASM Customer360Sections to remove storeLocationsSection -->
+	<alias name="defaultTravelCustomer360Sections" alias="travelCustomer360Sections"/>
+	<util:list id="defaultTravelCustomer360Sections" value-type="de.hybris.platform.assistedservicefacades.customer360.Section">
+		<ref bean="customerOverviewSection" />
+		<ref bean="customerProfileSection" />
+		<ref bean="activitySection" />
+	</util:list>
+
+	<alias name="defaultTravelAdditionalInformationFrameworkFacade" alias="additionalInformationFrameworkFacade"/>
+	<bean id="defaultTravelAdditionalInformationFrameworkFacade" class="de.hybris.platform.assistedservicefacades.customer360.impl.DefaultAdditionalInformationFrameworkFacade">
+		<property name="sections" ref="travelCustomer360Sections"/>
+		<property name="modelProvidersMap" ref="customer360ModelProvidersMap"/>
+		<property name="jspProvidersMap" ref="customer360JspProvidersMap"/>
+	</bean>
+
+</beans>

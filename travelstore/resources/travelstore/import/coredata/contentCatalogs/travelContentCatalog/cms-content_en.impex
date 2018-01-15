@@ -1,0 +1,63 @@
+#
+# Import CMS content for the Travel site
+#
+
+$contentCatalog = travelContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+# Language
+$lang = en
+
+# Content Pages
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; homepage                     ; "Home"
+; ; login                        ; "Login"
+; ; checkout-login               ; "Checkout Login"
+; ; bookingConfirmationPage      ; "Booking Confirmation"
+; ; profilePage                  ; "My Profile"
+; ; notFound                     ; "Page Not Found"
+; ; bookingDetailsPage           ; "Booking Details"
+; ; tripFinderPage               ; "Trip Finder"
+; ; orderFailedPage              ; "Order Failed"
+; ; tripFinderActivitiesPage     ; "Trip Finder - Activities"
+; ; travelInformationPage        ; "Travel Information"
+; ; contactUsPage                ; "Contact Us"
+; ; faqPage                      ; "Frequently Asked Questions"
+; ; privacyPolicyPage            ; "Privacy Policy"
+; ; termsConditionsPage          ; "Terms & Conditions"
+; ; accommodationSearchPage      ; "Accommodation Search"
+; ; accommodationDetailsPage     ; "Accommodation Details"
+; ; guestDetailsPage             ; "Guest Details"
+; ; paymentMethodPage            ; "Payment Method Page"
+; ; helpPage                     ; "Help"
+; ; updatePassword               ; "Update Forgotten Password"
+; ; multiStepCheckoutSummaryPage ; "Checkout"
+; ; payment-details              ; "Saved Payment Details"
+; ; my-saved-searches            ; "My Saved Searches"
+; ; disability-and-mobility      ; "Disability & Mobility"
+; ; preferences                  ; "Preferences"
+; ; checkInDetailsPage           ; "Check In Details"
+; ; checkInSuccessPage           ; "Check In Success"
+; ; checkInFailedPage            ; "Check In Failed"
+; ; transportOfferingStatusPage  ; "Transport Offering Status"
+; ; fareSelectionPage            ; "Fare Selection"
+; ; travellerDetailsPage         ; "Traveller Details"
+; ; saved-passengers             ; "My Saved Passengers"
+; ; advance-passenger            ; "Advance Passenger Details"
+; ; order-approval-dashboard     ; "Order Approval Dashboard"
+; ; order-approval-details       ; "Order Approval Details"
+; ; beachDestinationDealsPage    ; "Beach Destination Deals"
+; ; exploreEuropeDealsPage       ; "Explore Europe Deals"
+; ; greatSavingsDealsPage        ; "Great Savings Deals"
+; ; winterOlympicsDealsPage      ; "Winter Olympics Deals"
+; ; dealDetailsPage   			 ; "Deal Details"
+; ; packageDetailsPage  		 ; "Package Details"
+; ; packageListingPage			 ; "Package Listing"
+; ; personalDetailsPage			 ; "Personal Details"
+; ; consents            		 ; "My Consents"
+
+INSERT_UPDATE AncillaryPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; ancillaryPage          ; "Ancillary Checkout"
+; ; ancillaryAmendmentPage ; "Ancillary Amendment"
+; ; ancillaryCheckinPage   ; "Ancillary Checkin"
+; ; ancillaryExtrasPage    ; "Ancillary Extras"

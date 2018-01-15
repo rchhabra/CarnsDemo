@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config />
+
+	<!-- Listeners -->
+
+	<bean id="pickupConfirmationEventListener" class="de.hybris.platform.travelfulfilmentprocess.listeners.PickupConfirmationEventListener"
+		parent="abstractEventListener">
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+
+	<!-- Process Adapters -->
+
+	<alias name="mockProcess2WarehouseAdapter" alias="process2WarehouseAdapter" />
+	<bean id="mockProcess2WarehouseAdapter" class="de.hybris.platform.travelfulfilmentprocess.warehouse.MockProcess2WarehouseAdapter">
+		<property name="modelService" ref="modelService" />
+		<property name="warehouse2ProcessAdapter" ref="warehouse2ProcessAdapter" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultWarehouse2ProcessAdapter" alias="warehouse2ProcessAdapter" />
+	<bean id="defaultWarehouse2ProcessAdapter" class="de.hybris.platform.travelfulfilmentprocess.warehouse.DefaultWarehouse2ProcessAdapter">
+		<property name="modelService" ref="modelService" />
+		<property name="statusMap">
+			<map key-type="de.hybris.platform.warehouse.WarehouseConsignmentStatus" value-type="de.hybris.platform.commerceservices.enums.WarehouseConsignmentState">
+				<entry key="CANCEL" value="CANCEL" />
+				<entry key="COMPLETE" value="COMPLETE" />
+				<entry key="PARTIAL" value="PARTIAL" />
+			</map>
+		</property>
+		<property name="businessProcessService" ref="businessProcessService" />
+	</bean>
+
+	<!-- Process Definitions -->
+
+	<bean id="orderProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/order-process.xml" />
+	</bean>
+
+	<bean id="consignmentProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/consignment-process.xml" />
+	</bean>
+
+	<!-- Process Actions -->
+
+	<import resource="/travelfulfilmentprocess/process/order-process-spring.xml" />
+	<import resource="/travelfulfilmentprocess/process/consignment-process-spring.xml" />
+
+
+	<!-- Order Check Service -->
+	<!-- Performs some basic validation for the order as part of the first stage of the process. -->
+
+	<alias name="defaultTravelCheckOrderService" alias="travelCheckOrderService" />
+	<bean id="defaultTravelCheckOrderService" class="de.hybris.platform.travelfulfilmentprocess.impl.DefaultTravelCheckOrderService" />
+
+	<!-- Order Splitting -->
+	<alias name="travelfulfilmentprocessOrderSplittingService" alias="orderSplittingService" />
+	<bean id="travelfulfilmentprocessOrderSplittingService" parent="defaultOrderSplittingService">
+		<property name="strategiesList">
+			<list>
+				<ref bean="travelSplittingStrategy" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Split Strategies -->
+
+	<alias name="defaultTravelSplittingStrategy" alias="travelSplittingStrategy" />
+	<bean id="defaultTravelSplittingStrategy" class="de.hybris.platform.travelfulfilmentprocess.strategy.impl.DefaultTravelSplittingStrategy">
+		<property name="strategiesByTypeList">
+			<list>
+				<ref bean="transportSplittingStrategy" />
+				<ref bean="accommodationSplittingStrategy" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportSplittingStrategy" alias="transportSplittingStrategy" />
+	<bean id="defaultTransportSplittingStrategy" class="de.hybris.platform.travelfulfilmentprocess.strategy.impl.SplittingStrategyByTransportType">
+		<property name="strategiesList">
+			<list>
+				<ref bean="splitByTraveller" />
+				<ref bean="splitByTransportOffering" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationSplittingStrategy" alias="accommodationSplittingStrategy" />
+	<bean id="defaultAccommodationSplittingStrategy" class="de.hybris.platform.travelfulfilmentprocess.strategy.impl.SplittingStrategyByAccommodationType">
+		<property name="strategiesList">
+			<list>
+				<ref bean="splitByAccommodationEntryGroup" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSplitByTransportOffering" alias="splitByTransportOffering" />
+	<bean id="defaultSplitByTransportOffering" class="de.hybris.platform.travelfulfilmentprocess.strategy.impl.SplitByTransportOffering">
+		<property name="transportOfferingService" ref="transportOfferingService" />
+	</bean>
+
+	<alias name="defaultSplitByTraveller" alias="splitByTraveller" />
+	<bean id="defaultSplitByTraveller" class="de.hybris.platform.travelfulfilmentprocess.strategy.impl.SplitByTraveller">
+		<property name="travellerService" ref="travellerService" />
+	</bean>
+
+	<alias name="defaultSplitByAccommodationOrderEntryGroup" alias="splitByAccommodationEntryGroup" />
+	<bean id="defaultSplitByAccommodationOrderEntryGroup" class="de.hybris.platform.travelfulfilmentprocess.strategy.impl.SplitByAccommodationEntryGroup">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+
+
+	<!-- Jobs -->
+
+	<bean id="cleanUpFraudOrderJob" class="de.hybris.platform.travelfulfilmentprocess.jobs.CleanUpFraudOrderJob">
+		<property name="modelService" ref="modelService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<!-- Check In Process -->
+	<bean id="checkInProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/check-in-process.xml" />
+	</bean>
+
+	<bean id="performAutoSeatAllocationAction" class="de.hybris.platform.travelfulfilmentprocess.actions.checkin.PerformAutoSeatAllocationAction"
+		parent="abstractAction">
+		<property name="autoAccommodationAllocationStrategy" ref="travelProductBasedAutoAccommodationAllocationStrategy" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+
+	<bean id="updateConsignmentsAction" class="de.hybris.platform.travelfulfilmentprocess.actions.checkin.UpdateConsignmentsAction"
+		parent="abstractAction">
+		<property name="travellerService" ref="travellerService" />
+		<property name="travelConsignmentService" ref="consignmentService" />
+	</bean>
+
+	<bean id="sendOrderAmendmentEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/sendOrderAmendmentEmailProcess.xml" />
+	</bean>
+
+	<!-- B2B Order Process -->
+	<!-- APPROVAL PROCESS -->
+	<bean id="b2bAccApprovalProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/b2bAccOrderApproval.xml" />
+	</bean>
+
+	<bean id="orderApprovalRejectionEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/orderApprovalRejectionEmailProcess.xml" />
+	</bean>
+
+	<bean id="orderPendingApprovalEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource">
+		<property name="resource" value="classpath:/travelfulfilmentprocess/process/orderPendingApprovalEmailProcess.xml" />
+	</bean>
+
+
+	<bean id="generateB2BOrderPendingApprovalEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+		parent="abstractAction">
+		<property name="modelService" ref="modelService" />
+		<property name="cmsEmailPageService" ref="cmsEmailPageService" />
+		<property name="frontendTemplateName" value="OrderPendingApprovalEmailTemplate" />
+		<property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy" />
+		<property name="emailGenerationService" ref="emailGenerationService" />
+	</bean>
+
+	<!-- Process Actions -->
+
+	<import resource="/travelfulfilmentprocess/process/b2border-process-spring.xml" />
+
+	<import resource="/travelfulfilmentprocess/process/b2bapprovalprocess-spring.xml" />
+
+	<alias name="travelAmendmentB2BApprovalBusinessProcessStrategy" alias="amendmentB2BApprovalBusinessProcessStrategy" />
+	<bean id="travelAmendmentB2BApprovalBusinessProcessStrategy" class="de.hybris.platform.b2b.strategies.impl.DefaultB2BApprovalBusinessProcessStrategy">
+		<property name="processCode" value="accApproval" />
+		<property name="processName" value="ACTIVE" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="processCodeGenerator" ref="b2bProcessCodeGenerator" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<alias name="travelB2BCreateOrderFromCartStrategy" alias="defaultB2BCreateOrderFromCartStrategy" />
+	<bean id="travelB2BCreateOrderFromCartStrategy" class="de.hybris.platform.b2b.strategies.impl.DefaultB2BCreateOrderFromCartStrategy"
+		parent="createOrderFromCartStrategy">
+		<property name="businessProcessStrategies">
+			<list>
+				<ref bean="b2bApprovalBusinessProcessStrategy" />
+				<ref bean="b2bQuoteBusinessProcessStrategy" />
+				<ref bean="b2bQuoteApprovalBusinessProcessStrategy" />
+				<ref bean="amendmentB2BApprovalBusinessProcessStrategy" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="travelB2bPlaceOrderStrategy" alias="b2bPlaceOrderStrategy" />
+	<bean id="travelB2bPlaceOrderStrategy" class="de.hybris.platform.b2b.strategies.impl.DefaultB2BPlaceOrderStrategy">
+		<property name="i18nService" ref="defaultI18NService" />
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="businessProcessStrategies">
+			<list>
+				<ref bean="b2bApprovalBusinessProcessStrategy" />
+				<ref bean="b2bQuoteBusinessProcessStrategy" />
+				<ref bean="b2bQuoteApprovalBusinessProcessStrategy" />
+				<ref bean="amendmentB2BApprovalBusinessProcessStrategy" />
+			</list>
+		</property>
+		<property name="b2bCustomerService" ref="b2bCustomerService" />
+	</bean>
+
+</beans>

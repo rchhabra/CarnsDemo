@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-accommodation-logged-in.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="my-account-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="container">
+            <div class="col-xs-12 col-sm-9">
+                <h2 class="h2">My Profile</h2>
+                <!-- Personal Details -->
+                <div class="yCmsContentSlot accountPageTopContent">
+                    <div class="panel panel-primary panel-list">
+                        <a class="panel-heading panel-header-link" href="my-account-my-profile.html" data-toggle="collapse" data-target="#personal-details" aria-expanded="true" aria-controls="personal-details">
+                            <h3 class="title">My Personal Details</h3>
+                        </a>
+                    </div>
+                    <!-- / Personal Details -->
+                    <!-- Advance Passenger -->
+                    <div class="panel panel-primary panel-list">
+                        <a class="panel-heading panel-header-link" href="my-account-my-profile-advance-passenger.html" data-toggle="collapse" data-target="#advance-passenger" aria-expanded="true" aria-controls="advance-passenger">
+                            <h3 class="title">Advance Passenger Details</h3>
+                        </a>
+                    </div>
+                    <!-- / Advance Passenger -->
+                    <!-- Preferences -->
+                    <div class="panel panel-primary panel-list">
+                        <a class="panel-heading panel-header-link" href="my-account-my-profile-preferences.html" data-toggle="collapse" data-target="#preferences" aria-expanded="true" aria-controls="preferences">
+                            <h3 class="title">Preferences</h3>
+                        </a>
+                    </div>
+                    <!-- / Preferences -->
+                    <!-- Disability & Mobility -->
+                    <div class="panel panel-primary panel-list">
+                        <a class="panel-heading panel-header-link " href="my-account-my-profile-disability.html" data-toggle="collapse" data-target="#disability" aria-expanded="true" aria-controls="disability">
+                            <h3 class="title">Disability And Mobility</h3>
+                        </a>
+                    </div>
+                    <!-- / Disability & Mobility -->
+                </div>
+                <!-- My Bookings -->
+                <div class="yCmsContentSlot accountPageBodyContent">
+                    <div class="panel panel-primary panel-list">
+                        <a class="panel-heading panel-header-link collapsable" href="#" data-toggle="collapse" data-target="#my-bookings" aria-expanded="true" aria-controls="saved-payment">
+                            <h3 class="title">My Bookings</h3>
+                        </a>
+                        <div class="panel-body collapse in" id="my-bookings">
+                            <!-- Booking Status: ACTIVE -->
+                            <ul class="col-xs-12 accommodation-items my-bookings">
+                                <li class="col-xs-12 booking-list">
+                                    <div class="col-xs-5 col-sm-3 accommodation-image">
+                                        <div class="row">
+                                            <a href="#"><img src="http://r-ec.bstatic.com/images/hotel/max300/126/12607253.jpg" alt="Keio Plaza Hotel Tokyo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="accommodation-details col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="clearfix">
+                                                    <div class="col-xs-12">
+                                                        <div class="row">
+                                                            <dl>
+                                                                <dt>Luxury Inn Tokyo Hotel</dt>
+                                                                <dd>13 nights: Superior Twin Room</dd>
+                                                                <dd>02/11/2016 - 15/11/2016</dd>
+                                                                <dd>Booking Reference: DEF456</dd>
+                                                            </dl>
+                                                            <p><a href="#" class="y_removeBooking">Remove from this list</a></p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-offset-0 col-xs-12 col-md-offset-4 col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-xs-12 col-sm-6">
+                                                                        <a href="#" class="btn btn-primary btn-block">View Booking Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-12 col-sm-6 pull-right">
+                                                                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#bookAgainModal">Book Again</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-xs-12 booking-list">
+                                    <div class="col-xs-5 col-sm-3 accommodation-image">
+                                        <div class="row">
+                                            <a href="#"><img src="http://r-ec.bstatic.com/images/hotel/max300/126/12607253.jpg" alt="Keio Plaza Hotel Tokyo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="accommodation-details col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="clearfix">
+                                                    <div class="col-xs-12">
+                                                        <div class="row">
+                                                            <dl>
+                                                                <dt>Luxury Inn Tokyo Hotel</dt>
+                                                                <dd>13 nights: Superior Twin Room</dd>
+                                                                <dd>02/11/2016 - 15/11/2016</dd>
+                                                                <dd>Booking Reference: DEF456</dd>
+                                                            </dl>
+                                                            <p><a href="#" class="y_removeBooking">Remove from this list</a></p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-offset-0 col-xs-12 col-md-offset-4 col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-xs-12 col-sm-6">
+                                                                        <a href="#" class="btn btn-primary btn-block">View Booking Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-12 col-sm-6 pull-right">
+                                                                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#bookAgainModal">Book Again</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-xs-12 booking-list">
+                                    <div class="col-xs-5 col-sm-3 accommodation-image">
+                                        <div class="row">
+                                            <a href="#"><img src="http://r-ec.bstatic.com/images/hotel/max300/126/12607253.jpg" alt="Keio Plaza Hotel Tokyo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="accommodation-details col-xs-offset-5 col-xs-7 col-sm-offset-3 col-sm-9">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12">
+                                                <div class="clearfix">
+                                                    <div class="col-xs-12">
+                                                        <div class="row">
+                                                            <dl>
+                                                                <dt>Luxury Inn Tokyo Hotel</dt>
+                                                                <dd>13 nights: Superior Twin Room</dd>
+                                                                <dd>02/11/2016 - 15/11/2016</dd>
+                                                                <dd>Booking Reference: DEF456</dd>
+                                                            </dl>
+                                                            <p><a href="#" class="y_removeBooking">Remove from this list</a></p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-offset-0 col-xs-12 col-md-offset-4 col-md-8">
+                                                                <div class="row">
+                                                                    <div class="col-xs-12 col-sm-6">
+                                                                        <a href="#" class="btn btn-primary btn-block">View Booking Details</a>
+                                                                    </div>
+                                                                    <div class="col-xs-12 col-sm-6 pull-right">
+                                                                        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#bookAgainModal">Book Again</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- / Booking Status: ACTIVE -->
+                            <!-- Booking Status: PAST -->
+                            <div class="form-group col-xs-12 col-sm-6 col-sm-offset-6">
+                                <button type="submit" class="btn btn-primary btn-block btn-top-bottom-margin">Show More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / My Bookings -->
+                </div>
+                <!-- My Saved Payment -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile-saved-payments.html" data-toggle="collapse" data-target="#saved-payment" aria-expanded="true" aria-controls="saved-payment">
+                        <h3 class="title">My Saved Payment</h3>
+                    </a>
+                </div>
+                <!-- / My Saved Payment -->
+                <!-- My Saved Passengers -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile-saved-passengers.html" data-toggle="collapse" data-target="#saved-passengers" aria-expanded="true" aria-controls="saved-passengers">
+                        <h3 class="title">My Saved Passengers</h3>
+                    </a>
+                </div>
+                <!-- / My Saved Passengers -->
+                <div class="panel panel-primary panel-list">
+					<a class="panel-heading panel-header-link collapsable" href="my-account-my-profile-saved-searches.html" data-toggle="collapse" data-target="#saved-search" aria-expanded="true" aria-controls="saved-search">
+						<h3 class="title">My Saved Searches</h3>
+					</a>
+				</div>
+                <!-- My Saved Quotes -->
+				<div class="panel panel-primary panel-list">
+					<a class="panel-heading panel-header-link" href="my-account-my-profile-quotes.html" data-toggle="collapse" data-target="#quotes" aria-expanded="true" aria-controls="quotes">
+						<h3 class="title">My Quotes</h3>
+					</a>
+				</div>
+				<!-- My Saved order approvals -->
+				<div class="panel panel-primary panel-list">
+					<a class="panel-heading panel-header-link" href="my-account-my-profile-approval-dashboard.html" data-toggle="collapse" data-target="#orderApproval" aria-expanded="true" aria-controls="orderApproval">
+						<h3 class="title">Order Approval Dashboard</h3>
+					</a>
+				</div>
+            </div>
+            <div class="col-xs-12 col-sm-3 side-to-top hidden-xs">
+                <aside id="sidebar">
+                    <div class="promotions">
+                    <section>
+                        <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Explore the gardens of Croatia</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                </div>
+                </aside>
+            </div>
+        </div>
+        <!-- / .container -->
+        <!-- Modal (Update personal details) -->
+        <div class="modal fade no-padding" id="updatePersonalDetails" tabindex="-1" role="dialog" aria-labelledby="updatePersonalDetailsLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updatePersonalDetailsLabel">Update Personal Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="100%" height="324px" scrolling="no" src="iframe-update-personal-details.html" class="panel-external"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Update personal details) -->
+        <!-- Modal (Update email) -->
+        <div class="modal fade no-padding" id="updateEmail" tabindex="-1" role="dialog" aria-labelledby="updateEmailLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updateEmailLabel">Update Your Email</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="100%" height="292px" scrolling="no" src="iframe-update-email.html" class="panel-external"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Update email) -->
+        <!-- Modal (Change Password) -->
+        <div class="modal fade no-padding" id="updatePassword" tabindex="-1" role="dialog" aria-labelledby="updatePasswordLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updatePasswordLabel">Change Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="100%" height="246px" scrolling="no" src="iframe-update-password.html" class="panel-external"></iframe>
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Change Password) -->
+
+        <!-- Book Again overlay -->
+        <div class="modal transparent fade" id="bookAgainModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container travelforms book-again">
+                            <div class="form-wrapper col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-1">
+                                <form class="fe-validate form-background form-booking-trip y_accommodationFinderForm">
+                                    <fieldset>
+                                        <legend class="with-icon heading-accommodation primary-legend">Book Again</legend>
+                                        <button type="button" class="modal-only close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <div class="fieldset-inner-wrapper">
+                                            <!-- From / To input fields -->
+                                            <div class="row input-row">
+                                                <div class="input-required-wrap col-xs-12">
+                                                    <label for="destination">Where are you going?</label>
+                                                        <input
+                                                            type="search"
+                                                            class="input-grid col-xs-12 form-control"
+                                                            id="destination"
+                                                            name="destination"
+                                                            placeholder="Royal Palms Resort"
+                                                            disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- / From / To input fields -->
+                                        <!-- Departing / Returning dates input fields -->
+                                        <div class="row input-row">
+                                            <div class="col-xs-9 col-sm-8">
+                                                <div class="row">
+                                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                                        <label class="sr-only" for="accommodationDatePickerCheckIn">Check In</label>
+                                                        <input
+                                                            type="text"
+                                                            class="datePickerDeparting col-xs-12 datepicker input-grid form-control"
+                                                            id="accommodationDatePickerCheckIn"
+                                                            name="accommodationDatePickerCheckIn"
+                                                            placeholder="Check in"
+                                                            autocomplete="off">
+                                                    </div>
+                                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                                        <label class="sr-only" for="accommodationDatePickerCheckOut">Check Out</label>
+                                                        <input
+                                                            type="text"
+                                                            class="col-xs-12 datepicker input-grid form-control"
+                                                            id="accommodationDatePickerCheckOut"
+                                                            name="accommodationDatePickerCheckOut"
+                                                            placeholder="Check out"
+                                                            autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-xs-offset-1 col-xs-11 col-sm-offset-0 col-sm-8">
+                                                        <div class="night-number">
+                                                            <p>7<span>nights</span></p>
+                                                            <span class="moon"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Check in & check out dates input fields -->
+                                        <div class="row input-row less-margin">
+                                            <div class="col-xs-12 col-sm-8">
+                                                <label class="sr-only" for="accommodationRoomQuantity">Room Quantity</label>
+                                                <select class="form-control y_accommodationRoomQuantity" id="accommodationRoomQuantity" required>
+                                                    <option value="" disabled>Rooms</option>
+                                                    <option value="1" selected>1 Room</option>
+                                                    <option value="2">2 Rooms</option>
+                                                    <option value="3">3 Rooms</option>
+                                                </select>
+                                            </div>
+                                            <div id="room[1]" class="col-xs-12 guest-types">
+                                                <p>Room 1</p>
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfAdults[1]">Adult</label>
+                                                        <select class="form-control" id="accommodationNumberOfAdults[1]" required>
+                                                            <option value="" disabled>Adult</option>
+                                                            <option selected>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">16+ years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfChildren[1]">Children</label>
+                                                        <select class="form-control" id="accommodationNumberOfChildren[1]" required>
+                                                            <option value="" disabled>Children</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">2-15 years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfInfants[1]">Infants</label>
+                                                        <select class="form-control" id="accommodationNumberOfInfants[1]" required>
+                                                            <option value="" disabled>Infants</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">up to 2 years</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room[2]" class="col-xs-12 guest-types hidden">
+                                                <p>Room 2</p>
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfAdults[2]">Adult</label>
+                                                        <select class="form-control" id="accommodationNumberOfAdults[2]" required>
+                                                            <option value="" disabled>Adult</option>
+                                                            <option selected>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">16+ years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfChildren[2]">Children</label>
+                                                        <select class="form-control" id="accommodationNumberOfChildren[2]" required>
+                                                            <option value="" disabled>Children</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">2-15 years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfInfants[2]">Infants</label>
+                                                        <select class="form-control" id="accommodationNumberOfInfants[2]" required>
+                                                            <option value="" disabled>Infants</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">up to 2 years</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room[3]" class="col-xs-12 guest-types hidden">
+                                                <p>Room 3</p>
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfAdults[3]">Adult</label>
+                                                        <select class="form-control" id="accommodationNumberOfAdults[3]" required>
+                                                            <option value="" disabled>Adult</option>
+                                                            <option selected>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">16+ years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfChildren[3]">Children</label>
+                                                        <select class="form-control" id="accommodationNumberOfChildren[3]" required>
+                                                            <option value="" disabled>Children</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">2-15 years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfInfants[3]">Infants</label>
+                                                        <select class="form-control" id="accommodationNumberOfInfants[3]" required>
+                                                            <option value="" disabled>Infants</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">up to 2 years</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 age-info">
+                                                <a tabindex="0" class="link-trigger" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="Age refers to the age at the time of arrival date of the last leg of the journey: Adult[16+], Child[2-15], Infant[0-1]: Adult[16+], Child[2-15], Infant[0-1]">Age Information <i class="glyphicon glyphicon-info-sign"></i></a>
+                                            </div>
+                                        </div>
+                                        <!-- CTA (Search Dates) -->
+                                        <div class="row margin-cancel">
+                                            <div class="col-xs-12 btn-wrapper full-width">
+                                                <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-sm-offset-6">Search</button>
+                                            </div>
+                                        </div>
+                                        <!--  / CTA (Search Dates) -->
+                                        <!-- / .fieldset-inner-wrapper -->
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- / .form-wrapper -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+            </div>
+        </div>
+        <!-- / Book Again overlay -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

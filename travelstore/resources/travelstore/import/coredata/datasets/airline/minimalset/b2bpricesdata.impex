@@ -1,0 +1,1072 @@
+$catalog-id = travelProductCatalog
+$catalog-version = Staged
+$catalogVersion = catalogversion(catalog(id[default = $catalog-id]), version[default = $catalog-version])[unique = true, default = $catalog-id:$catalog-version]
+
+############## Airline #################
+# Create price rows and associate them to user price groups with GBP
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true, default = GBP]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Default Prices for Economy fare products in GBP
+; ORTC5   ; ; ; 18.99  ; ; ; ; ; ; ; ;
+; OOWC5   ; ; ; 23.74  ; ; ; ; ; ; ; ;
+; ORTC6C7 ; ; ; 16.14  ; ; ; ; ; ; ; ;
+; OOW     ; ; ; 28.5   ; ; ; ; ; ; ; ;
+; ORT     ; ; ; 26.59  ; ; ; ; ; ; ; ;
+
+; QRTC5   ; ; ; 23.74  ; ; ; ; ; ; ; ;
+; QOWC5   ; ; ; 28.49  ; ; ; ; ; ; ; ;
+; QRTC6C7 ; ; ; 20.89  ; ; ; ; ; ; ; ;
+; QOW     ; ; ; 33.25  ; ; ; ; ; ; ; ;
+; QRT     ; ; ; 31.34  ; ; ; ; ; ; ; ;
+
+; MRTC5   ; ; ; 28.49  ; ; ; ; ; ; ; ;
+; MOWC5   ; ; ; 33.24  ; ; ; ; ; ; ; ;
+; MRTC6C7 ; ; ; 25.64  ; ; ; ; ; ; ; ;
+; MOW     ; ; ; 38     ; ; ; ; ; ; ; ;
+; MRT     ; ; ; 36.09  ; ; ; ; ; ; ; ;
+
+; KRTC5   ; ; ; 33.24  ; ; ; ; ; ; ; ;
+; KOWC5   ; ; ; 37.99  ; ; ; ; ; ; ; ;
+; KRTC6C7 ; ; ; 30.39  ; ; ; ; ; ; ; ;
+; KOW     ; ; ; 42.75  ; ; ; ; ; ; ; ;
+; KRT     ; ; ; 40.84  ; ; ; ; ; ; ; ;
+
+# Default Prices for Economy plus fare products in GBP
+; ERTC5   ; ; ; 37.99  ; ; ; ; ; ; ; ;
+; EOWC5   ; ; ; 42.74  ; ; ; ; ; ; ; ;
+; ERTC6C7 ; ; ; 35.14  ; ; ; ; ; ; ; ;
+; EOW     ; ; ; 47.5   ; ; ; ; ; ; ; ;
+; ERT     ; ; ; 45.59  ; ; ; ; ; ; ; ;
+
+; TRTC5   ; ; ; 42.74  ; ; ; ; ; ; ; ;
+; TOWC5   ; ; ; 47.49  ; ; ; ; ; ; ; ;
+; TRTC6C7 ; ; ; 39.89  ; ; ; ; ; ; ; ;
+; TOW     ; ; ; 52.25  ; ; ; ; ; ; ; ;
+; TRT     ; ; ; 50.34  ; ; ; ; ; ; ; ;
+
+; WRTC5   ; ; ; 47.49  ; ; ; ; ; ; ; ;
+; WOWC5   ; ; ; 52.24  ; ; ; ; ; ; ; ;
+; WRTC6C7 ; ; ; 44.64  ; ; ; ; ; ; ; ;
+; WOW     ; ; ; 57     ; ; ; ; ; ; ; ;
+; WRT     ; ; ; 55.09  ; ; ; ; ; ; ; ;
+
+# Default Prices for business fare products in GBP
+; IRTC5   ; ; ; 71.24  ; ; ; ; ; ; ; ;
+; IOWC5   ; ; ; 75.99  ; ; ; ; ; ; ; ;
+; IRTC6C7 ; ; ; 68.39  ; ; ; ; ; ; ; ;
+; IOW     ; ; ; 80.75  ; ; ; ; ; ; ; ;
+; IRT     ; ; ; 78.84  ; ; ; ; ; ; ; ;
+
+; RRTC5   ; ; ; 80.74  ; ; ; ; ; ; ; ;
+; ROWC5   ; ; ; 85.49  ; ; ; ; ; ; ; ;
+; RRTC6C7 ; ; ; 77.89  ; ; ; ; ; ; ; ;
+; ROW     ; ; ; 90.25  ; ; ; ; ; ; ; ;
+; RRT     ; ; ; 88.34  ; ; ; ; ; ; ; ;
+
+; CRTC5   ; ; ; 90.24  ; ; ; ; ; ; ; ;
+; COWC5   ; ; ; 94.99  ; ; ; ; ; ; ; ;
+; CRTC6C7 ; ; ; 87.39  ; ; ; ; ; ; ; ;
+; COW     ; ; ; 99.75  ; ; ; ; ; ; ; ;
+; CRT     ; ; ; 97.84  ; ; ; ; ; ; ; ;
+
+; DRTC5   ; ; ; 99.74  ; ; ; ; ; ; ; ;
+; DOWC5   ; ; ; 104.49 ; ; ; ; ; ; ; ;
+; DRTC6C7 ; ; ; 96.89  ; ; ; ; ; ; ; ;
+; DOW     ; ; ; 109.25 ; ; ; ; ; ; ; ;
+; DRT     ; ; ; 107.34 ; ; ; ; ; ; ; ;
+
+# Create price rows and associate them to user price groups with EUR
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true, default = EUR]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Default Prices for Economy fare products in EUR
+; ORTC5   ; ; ; 24.69  ; ; ; ; ; ; ; ;
+; OOWC5   ; ; ; 30.87  ; ; ; ; ; ; ; ;
+; ORTC6C7 ; ; ; 20.99  ; ; ; ; ; ; ; ;
+; OOW     ; ; ; 37.05  ; ; ; ; ; ; ; ;
+; ORT     ; ; ; 34.57  ; ; ; ; ; ; ; ;
+
+; QRTC5   ; ; ; 30.87  ; ; ; ; ; ; ; ;
+; QOWC5   ; ; ; 37.04  ; ; ; ; ; ; ; ;
+; QRTC6C7 ; ; ; 27.16  ; ; ; ; ; ; ; ;
+; QOW     ; ; ; 43.23  ; ; ; ; ; ; ; ;
+; QRT     ; ; ; 40.75  ; ; ; ; ; ; ; ;
+
+; MRTC5   ; ; ; 37.04  ; ; ; ; ; ; ; ;
+; MOWC5   ; ; ; 43.22  ; ; ; ; ; ; ; ;
+; MRTC6C7 ; ; ; 33.34  ; ; ; ; ; ; ; ;
+; MOW     ; ; ; 49.4   ; ; ; ; ; ; ; ;
+; MRT     ; ; ; 46.92  ; ; ; ; ; ; ; ;
+
+; KRTC5   ; ; ; 43.22  ; ; ; ; ; ; ; ;
+; KOWC5   ; ; ; 49.39  ; ; ; ; ; ; ; ;
+; KRTC6C7 ; ; ; 39.51  ; ; ; ; ; ; ; ;
+; KOW     ; ; ; 55.58  ; ; ; ; ; ; ; ;
+; KRT     ; ; ; 53.1   ; ; ; ; ; ; ; ;
+
+# Default Prices for Economy plus fare products in EUR
+; ERTC5   ; ; ; 49.39  ; ; ; ; ; ; ; ;
+; EOWC5   ; ; ; 55.57  ; ; ; ; ; ; ; ;
+; ERTC6C7 ; ; ; 45.69  ; ; ; ; ; ; ; ;
+; EOW     ; ; ; 61.75  ; ; ; ; ; ; ; ;
+; ERT     ; ; ; 59.27  ; ; ; ; ; ; ; ;
+
+; TRTC5   ; ; ; 55.57  ; ; ; ; ; ; ; ;
+; TOWC5   ; ; ; 61.74  ; ; ; ; ; ; ; ;
+; TRTC6C7 ; ; ; 51.86  ; ; ; ; ; ; ; ;
+; TOW     ; ; ; 67.93  ; ; ; ; ; ; ; ;
+; TRT     ; ; ; 65.45  ; ; ; ; ; ; ; ;
+
+; WRTC5   ; ; ; 61.74  ; ; ; ; ; ; ; ;
+; WOWC5   ; ; ; 67.92  ; ; ; ; ; ; ; ;
+; WRTC6C7 ; ; ; 58.04  ; ; ; ; ; ; ; ;
+; WOW     ; ; ; 74.1   ; ; ; ; ; ; ; ;
+; WRT     ; ; ; 71.62  ; ; ; ; ; ; ; ;
+
+# Default Prices for business fare products in EUR
+; IRTC5   ; ; ; 92.62  ; ; ; ; ; ; ; ;
+; IOWC5   ; ; ; 98.79  ; ; ; ; ; ; ; ;
+; IRTC6C7 ; ; ; 88.91  ; ; ; ; ; ; ; ;
+; IOW     ; ; ; 104.98 ; ; ; ; ; ; ; ;
+; IRT     ; ; ; 102.5  ; ; ; ; ; ; ; ;
+
+; RRTC5   ; ; ; 104.97 ; ; ; ; ; ; ; ;
+; ROWC5   ; ; ; 111.14 ; ; ; ; ; ; ; ;
+; RRTC6C7 ; ; ; 101.26 ; ; ; ; ; ; ; ;
+; ROW     ; ; ; 117.33 ; ; ; ; ; ; ; ;
+; RRT     ; ; ; 114.85 ; ; ; ; ; ; ; ;
+
+; CRTC5   ; ; ; 117.32 ; ; ; ; ; ; ; ;
+; COWC5   ; ; ; 123.49 ; ; ; ; ; ; ; ;
+; CRTC6C7 ; ; ; 113.61 ; ; ; ; ; ; ; ;
+; COW     ; ; ; 129.68 ; ; ; ; ; ; ; ;
+; CRT     ; ; ; 127.2  ; ; ; ; ; ; ; ;
+
+; DRTC5   ; ; ; 129.67 ; ; ; ; ; ; ; ;
+; DOWC5   ; ; ; 135.84 ; ; ; ; ; ; ; ;
+; DRTC6C7 ; ; ; 125.96 ; ; ; ; ; ; ; ;
+; DOW     ; ; ; 142.03 ; ; ; ; ; ; ; ;
+; DRT     ; ; ; 139.55 ; ; ; ; ; ; ; ;
+
+#######################################################
+### # Create price rows and associate them to user price groups for multi sector Route
+#######################################################
+# EDI_LGW_CDG:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5   ; ; GBP ; 15.19  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ORTC5   ; ; GBP ; 15.19  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ORTC5   ; ; EUR ; 19.75  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ORTC5   ; ; EUR ; 19.75  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; OOWC5   ; ; GBP ; 18.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; OOWC5   ; ; GBP ; 18.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; OOWC5   ; ; EUR ; 24.69  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; OOWC5   ; ; EUR ; 24.69  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; ORTC6C7 ; ; GBP ; 12.91  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ORTC6C7 ; ; GBP ; 12.91  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ORTC6C7 ; ; EUR ; 16.79  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ORTC6C7 ; ; EUR ; 16.79  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; OOW     ; ; GBP ; 22.8   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; OOW     ; ; GBP ; 22.8   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; OOW     ; ; EUR ; 29.64  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; OOW     ; ; EUR ; 29.64  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; ORT     ; ; GBP ; 21.27  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ORT     ; ; GBP ; 21.27  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ORT     ; ; EUR ; 27.65  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ORT     ; ; EUR ; 27.65  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; QRTC5   ; ; GBP ; 18.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QRTC5   ; ; GBP ; 18.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; QRTC5   ; ; EUR ; 24.69  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QRTC5   ; ; EUR ; 24.69  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; QOWC5   ; ; GBP ; 22.79  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QOWC5   ; ; GBP ; 22.79  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; QOWC5   ; ; EUR ; 29.63  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QOWC5   ; ; EUR ; 29.63  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; QRTC6C7 ; ; GBP ; 16.71  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QRTC6C7 ; ; GBP ; 16.71  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; QRTC6C7 ; ; EUR ; 21.73  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QRTC6C7 ; ; EUR ; 21.73  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; QOW     ; ; GBP ; 26.6   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QOW     ; ; GBP ; 26.6   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; QOW     ; ; EUR ; 34.58  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QOW     ; ; EUR ; 34.58  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; QRT     ; ; GBP ; 25.07  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QRT     ; ; GBP ; 25.07  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; QRT     ; ; EUR ; 32.59  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; QRT     ; ; EUR ; 32.59  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; MRTC5   ; ; GBP ; 22.79  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MRTC5   ; ; GBP ; 22.79  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; MRTC5   ; ; EUR ; 29.63  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MRTC5   ; ; EUR ; 29.63  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; MOWC5   ; ; GBP ; 26.59  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MOWC5   ; ; GBP ; 26.59  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; MOWC5   ; ; EUR ; 34.57  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MOWC5   ; ; EUR ; 34.57  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; MRTC6C7 ; ; GBP ; 20.51  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MRTC6C7 ; ; GBP ; 20.51  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; MRTC6C7 ; ; EUR ; 26.67  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MRTC6C7 ; ; EUR ; 26.67  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; MOW     ; ; GBP ; 30.4   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MOW     ; ; GBP ; 30.4   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; MOW     ; ; EUR ; 39.52  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MOW     ; ; EUR ; 39.52  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; MRT     ; ; GBP ; 28.87  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MRT     ; ; GBP ; 28.87  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; MRT     ; ; EUR ; 37.53  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; MRT     ; ; EUR ; 37.53  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; KRTC5   ; ; GBP ; 26.59  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KRTC5   ; ; GBP ; 26.59  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; KRTC5   ; ; EUR ; 34.57  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KRTC5   ; ; EUR ; 34.57  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; KOWC5   ; ; GBP ; 30.39  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KOWC5   ; ; GBP ; 30.39  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; KOWC5   ; ; EUR ; 39.51  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KOWC5   ; ; EUR ; 39.51  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; KRTC6C7 ; ; GBP ; 24.31  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KRTC6C7 ; ; GBP ; 24.31  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; KRTC6C7 ; ; EUR ; 31.61  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KRTC6C7 ; ; EUR ; 31.61  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; KOW     ; ; GBP ; 34.2   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KOW     ; ; GBP ; 34.2   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; KOW     ; ; EUR ; 44.46  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KOW     ; ; EUR ; 44.46  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; KRT     ; ; GBP ; 32.67  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KRT     ; ; GBP ; 32.67  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; KRT     ; ; EUR ; 42.47  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; KRT     ; ; EUR ; 42.47  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+# EDI_LGW_CDG:Economy plus bundle
+; ERTC5   ; ; GBP ; 30.39  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ERTC5   ; ; GBP ; 30.39  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ERTC5   ; ; EUR ; 39.51  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ERTC5   ; ; EUR ; 39.51  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; EOWC5   ; ; GBP ; 34.19  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; EOWC5   ; ; GBP ; 34.19  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; EOWC5   ; ; EUR ; 44.45  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; EOWC5   ; ; EUR ; 44.45  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; ERTC6C7 ; ; GBP ; 28.11  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ERTC6C7 ; ; GBP ; 28.11  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ERTC6C7 ; ; EUR ; 36.55  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ERTC6C7 ; ; EUR ; 36.55  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; EOW     ; ; GBP ; 38     ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; EOW     ; ; GBP ; 38     ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; EOW     ; ; EUR ; 49.4   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; EOW     ; ; EUR ; 49.4   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; ERT     ; ; GBP ; 36.47  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ERT     ; ; GBP ; 36.47  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ERT     ; ; EUR ; 47.41  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ERT     ; ; EUR ; 47.41  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; TRTC5   ; ; GBP ; 34.19  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TRTC5   ; ; GBP ; 34.19  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; TRTC5   ; ; EUR ; 44.45  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TRTC5   ; ; EUR ; 44.45  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; TOWC5   ; ; GBP ; 37.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TOWC5   ; ; GBP ; 37.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; TOWC5   ; ; EUR ; 49.39  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TOWC5   ; ; EUR ; 49.39  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; TRTC6C7 ; ; GBP ; 31.91  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TRTC6C7 ; ; GBP ; 31.91  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; TRTC6C7 ; ; EUR ; 41.49  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TRTC6C7 ; ; EUR ; 41.49  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; TOW     ; ; GBP ; 41.8   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TOW     ; ; GBP ; 41.8   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; TOW     ; ; EUR ; 54.34  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TOW     ; ; EUR ; 54.34  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; TRT     ; ; GBP ; 40.27  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TRT     ; ; GBP ; 40.27  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; TRT     ; ; EUR ; 52.35  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; TRT     ; ; EUR ; 52.35  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; WRTC5   ; ; GBP ; 37.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WRTC5   ; ; GBP ; 37.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; WRTC5   ; ; EUR ; 49.39  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WRTC5   ; ; EUR ; 49.39  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; WOWC5   ; ; GBP ; 41.79  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WOWC5   ; ; GBP ; 41.79  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; WOWC5   ; ; EUR ; 54.33  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WOWC5   ; ; EUR ; 54.33  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; WRTC6C7 ; ; GBP ; 35.71  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WRTC6C7 ; ; GBP ; 35.71  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; WRTC6C7 ; ; EUR ; 46.43  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WRTC6C7 ; ; EUR ; 46.43  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; WOW     ; ; GBP ; 45.6   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WOW     ; ; GBP ; 45.6   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; WOW     ; ; EUR ; 59.28  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WOW     ; ; EUR ; 59.28  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; WRT     ; ; GBP ; 44.07  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WRT     ; ; GBP ; 44.07  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; WRT     ; ; EUR ; 57.29  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; WRT     ; ; EUR ; 57.29  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+# EDI_LGW_CDG:business bundle
+; IRTC5   ; ; GBP ; 56.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IRTC5   ; ; GBP ; 56.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; IRTC5   ; ; EUR ; 74.09  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IRTC5   ; ; EUR ; 74.09  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; IOWC5   ; ; GBP ; 60.79  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IOWC5   ; ; GBP ; 60.79  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; IOWC5   ; ; EUR ; 79.03  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IOWC5   ; ; EUR ; 79.03  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; IRTC6C7 ; ; GBP ; 54.71  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IRTC6C7 ; ; GBP ; 54.71  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; IRTC6C7 ; ; EUR ; 71.13  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IRTC6C7 ; ; EUR ; 71.13  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; IOW     ; ; GBP ; 64.6   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IOW     ; ; GBP ; 64.6   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; IOW     ; ; EUR ; 83.98  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IOW     ; ; EUR ; 83.98  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; IRT     ; ; GBP ; 63.07  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IRT     ; ; GBP ; 63.07  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; IRT     ; ; EUR ; 81.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; IRT     ; ; EUR ; 81.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; RRTC5   ; ; GBP ; 64.59  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; RRTC5   ; ; GBP ; 64.59  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; RRTC5   ; ; EUR ; 83.97  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; RRTC5   ; ; EUR ; 83.97  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; ROWC5   ; ; GBP ; 68.39  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ROWC5   ; ; GBP ; 68.39  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ROWC5   ; ; EUR ; 88.91  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ROWC5   ; ; EUR ; 88.91  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; RRTC6C7 ; ; GBP ; 62.31  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; RRTC6C7 ; ; GBP ; 62.31  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; RRTC6C7 ; ; EUR ; 81.01  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; RRTC6C7 ; ; EUR ; 81.01  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; ROW     ; ; GBP ; 72.2   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ROW     ; ; GBP ; 72.2   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ROW     ; ; EUR ; 93.86  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ROW     ; ; EUR ; 93.86  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; RRT     ; ; GBP ; 70.67  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; RRT     ; ; GBP ; 70.67  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; RRT     ; ; EUR ; 91.87  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; RRT     ; ; EUR ; 91.87  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; CRTC5   ; ; GBP ; 72.19  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; CRTC5   ; ; GBP ; 72.19  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; CRTC5   ; ; EUR ; 93.85  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; CRTC5   ; ; EUR ; 93.85  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; COWC5   ; ; GBP ; 75.99  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; COWC5   ; ; GBP ; 75.99  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; COWC5   ; ; EUR ; 98.79  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; COWC5   ; ; EUR ; 98.79  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; CRTC6C7 ; ; GBP ; 69.91  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; CRTC6C7 ; ; GBP ; 69.91  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; CRTC6C7 ; ; EUR ; 90.89  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; CRTC6C7 ; ; EUR ; 90.89  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; COW     ; ; GBP ; 79.8   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; COW     ; ; GBP ; 79.8   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; COW     ; ; EUR ; 103.74 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; COW     ; ; EUR ; 103.74 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; CRT     ; ; GBP ; 78.27  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; CRT     ; ; GBP ; 78.27  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; CRT     ; ; EUR ; 101.75 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; CRT     ; ; EUR ; 101.75 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; DRTC5   ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DRTC5   ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; DRTC5   ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DRTC5   ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; DOWC5   ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DOWC5   ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; DOWC5   ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DOWC5   ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; DRTC6C7 ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DRTC6C7 ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; DRTC6C7 ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DRTC6C7 ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; DOW     ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DOW     ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; DOW     ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DOW     ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+; DRT     ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DRT     ; ; GBP ; 321.1  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; DRT     ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; DRT     ; ; EUR ; 415.15 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+#######################################################
+### # Create price rows and associate them to user price groups for single sector route (outside Europe)
+#######################################################
+# LGW_JFK:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5   ; ; GBP ; 94.95  ; ; ; ; ; ; ; LGW_JFK ;
+; ORTC5   ; ; GBP ; 94.95  ; ; ; ; ; ; ; JFK_LGW ;
+; ORTC5   ; ; EUR ; 123.44 ; ; ; ; ; ; ; LGW_JFK ;
+; ORTC5   ; ; EUR ; 123.44 ; ; ; ; ; ; ; JFK_LGW ;
+
+; OOWC5   ; ; GBP ; 118.7  ; ; ; ; ; ; ; LGW_JFK ;
+; OOWC5   ; ; GBP ; 118.7  ; ; ; ; ; ; ; JFK_LGW ;
+; OOWC5   ; ; EUR ; 154.32 ; ; ; ; ; ; ; LGW_JFK ;
+; OOWC5   ; ; EUR ; 154.32 ; ; ; ; ; ; ; JFK_LGW ;
+
+; ORTC6C7 ; ; GBP ; 80.7   ; ; ; ; ; ; ; LGW_JFK ;
+; ORTC6C7 ; ; GBP ; 80.7   ; ; ; ; ; ; ; JFK_LGW ;
+; ORTC6C7 ; ; EUR ; 104.92 ; ; ; ; ; ; ; LGW_JFK ;
+; ORTC6C7 ; ; EUR ; 104.92 ; ; ; ; ; ; ; JFK_LGW ;
+
+; OOW     ; ; GBP ; 142.5  ; ; ; ; ; ; ; LGW_JFK ;
+; OOW     ; ; GBP ; 142.5  ; ; ; ; ; ; ; JFK_LGW ;
+; OOW     ; ; EUR ; 185.25 ; ; ; ; ; ; ; LGW_JFK ;
+; OOW     ; ; EUR ; 185.25 ; ; ; ; ; ; ; JFK_LGW ;
+
+; ORT     ; ; GBP ; 132.95 ; ; ; ; ; ; ; LGW_JFK ;
+; ORT     ; ; GBP ; 132.95 ; ; ; ; ; ; ; JFK_LGW ;
+; ORT     ; ; EUR ; 172.84 ; ; ; ; ; ; ; LGW_JFK ;
+; ORT     ; ; EUR ; 172.84 ; ; ; ; ; ; ; JFK_LGW ;
+
+; QRTC5   ; ; GBP ; 118.7  ; ; ; ; ; ; ; LGW_JFK ;
+; QRTC5   ; ; GBP ; 118.7  ; ; ; ; ; ; ; JFK_LGW ;
+; QRTC5   ; ; EUR ; 154.32 ; ; ; ; ; ; ; LGW_JFK ;
+; QRTC5   ; ; EUR ; 154.32 ; ; ; ; ; ; ; JFK_LGW ;
+
+; QOWC5   ; ; GBP ; 142.45 ; ; ; ; ; ; ; LGW_JFK ;
+; QOWC5   ; ; GBP ; 142.45 ; ; ; ; ; ; ; JFK_LGW ;
+; QOWC5   ; ; EUR ; 185.19 ; ; ; ; ; ; ; LGW_JFK ;
+; QOWC5   ; ; EUR ; 185.19 ; ; ; ; ; ; ; JFK_LGW ;
+
+; QRTC6C7 ; ; GBP ; 104.45 ; ; ; ; ; ; ; LGW_JFK ;
+; QRTC6C7 ; ; GBP ; 104.45 ; ; ; ; ; ; ; JFK_LGW ;
+; QRTC6C7 ; ; EUR ; 135.79 ; ; ; ; ; ; ; LGW_JFK ;
+; QRTC6C7 ; ; EUR ; 135.79 ; ; ; ; ; ; ; JFK_LGW ;
+
+; QOW     ; ; GBP ; 166.25 ; ; ; ; ; ; ; LGW_JFK ;
+; QOW     ; ; GBP ; 166.25 ; ; ; ; ; ; ; JFK_LGW ;
+; QOW     ; ; EUR ; 216.13 ; ; ; ; ; ; ; LGW_JFK ;
+; QOW     ; ; EUR ; 216.13 ; ; ; ; ; ; ; JFK_LGW ;
+
+; QRT     ; ; GBP ; 156.7  ; ; ; ; ; ; ; LGW_JFK ;
+; QRT     ; ; GBP ; 156.7  ; ; ; ; ; ; ; JFK_LGW ;
+; QRT     ; ; EUR ; 203.72 ; ; ; ; ; ; ; LGW_JFK ;
+; QRT     ; ; EUR ; 203.72 ; ; ; ; ; ; ; JFK_LGW ;
+
+; MRTC5   ; ; GBP ; 142.45 ; ; ; ; ; ; ; LGW_JFK ;
+; MRTC5   ; ; GBP ; 142.45 ; ; ; ; ; ; ; JFK_LGW ;
+; MRTC5   ; ; EUR ; 185.19 ; ; ; ; ; ; ; LGW_JFK ;
+; MRTC5   ; ; EUR ; 185.19 ; ; ; ; ; ; ; JFK_LGW ;
+
+; MOWC5   ; ; GBP ; 166.2  ; ; ; ; ; ; ; LGW_JFK ;
+; MOWC5   ; ; GBP ; 166.2  ; ; ; ; ; ; ; JFK_LGW ;
+; MOWC5   ; ; EUR ; 216.07 ; ; ; ; ; ; ; LGW_JFK ;
+; MOWC5   ; ; EUR ; 216.07 ; ; ; ; ; ; ; JFK_LGW ;
+
+; MRTC6C7 ; ; GBP ; 128.2  ; ; ; ; ; ; ; LGW_JFK ;
+; MRTC6C7 ; ; GBP ; 128.2  ; ; ; ; ; ; ; JFK_LGW ;
+; MRTC6C7 ; ; EUR ; 166.67 ; ; ; ; ; ; ; LGW_JFK ;
+; MRTC6C7 ; ; EUR ; 166.67 ; ; ; ; ; ; ; JFK_LGW ;
+
+; MOW     ; ; GBP ; 190    ; ; ; ; ; ; ; LGW_JFK ;
+; MOW     ; ; GBP ; 190    ; ; ; ; ; ; ; JFK_LGW ;
+; MOW     ; ; EUR ; 247    ; ; ; ; ; ; ; LGW_JFK ;
+; MOW     ; ; EUR ; 247    ; ; ; ; ; ; ; JFK_LGW ;
+
+; MRT     ; ; GBP ; 180.45 ; ; ; ; ; ; ; LGW_JFK ;
+; MRT     ; ; GBP ; 180.45 ; ; ; ; ; ; ; JFK_LGW ;
+; MRT     ; ; EUR ; 234.59 ; ; ; ; ; ; ; LGW_JFK ;
+; MRT     ; ; EUR ; 234.59 ; ; ; ; ; ; ; JFK_LGW ;
+
+; KRTC5   ; ; GBP ; 166.2  ; ; ; ; ; ; ; LGW_JFK ;
+; KRTC5   ; ; GBP ; 166.2  ; ; ; ; ; ; ; JFK_LGW ;
+; KRTC5   ; ; EUR ; 216.07 ; ; ; ; ; ; ; LGW_JFK ;
+; KRTC5   ; ; EUR ; 216.07 ; ; ; ; ; ; ; JFK_LGW ;
+
+; KOWC5   ; ; GBP ; 189.95 ; ; ; ; ; ; ; LGW_JFK ;
+; KOWC5   ; ; GBP ; 189.95 ; ; ; ; ; ; ; JFK_LGW ;
+; KOWC5   ; ; EUR ; 246.94 ; ; ; ; ; ; ; LGW_JFK ;
+; KOWC5   ; ; EUR ; 246.94 ; ; ; ; ; ; ; JFK_LGW ;
+
+; KRTC6C7 ; ; GBP ; 151.95 ; ; ; ; ; ; ; LGW_JFK ;
+; KRTC6C7 ; ; GBP ; 151.95 ; ; ; ; ; ; ; JFK_LGW ;
+; KRTC6C7 ; ; EUR ; 197.54 ; ; ; ; ; ; ; LGW_JFK ;
+; KRTC6C7 ; ; EUR ; 197.54 ; ; ; ; ; ; ; JFK_LGW ;
+
+; KOW     ; ; GBP ; 213.75 ; ; ; ; ; ; ; LGW_JFK ;
+; KOW     ; ; GBP ; 213.75 ; ; ; ; ; ; ; JFK_LGW ;
+; KOW     ; ; EUR ; 277.88 ; ; ; ; ; ; ; LGW_JFK ;
+; KOW     ; ; EUR ; 277.88 ; ; ; ; ; ; ; JFK_LGW ;
+
+; KRT     ; ; GBP ; 204.2  ; ; ; ; ; ; ; LGW_JFK ;
+; KRT     ; ; GBP ; 204.2  ; ; ; ; ; ; ; JFK_LGW ;
+; KRT     ; ; EUR ; 265.47 ; ; ; ; ; ; ; LGW_JFK ;
+; KRT     ; ; EUR ; 265.47 ; ; ; ; ; ; ; JFK_LGW ;
+
+# LGW_JFK:Economy plus bundle
+; ERTC5   ; ; GBP ; 189.95 ; ; ; ; ; ; ; LGW_JFK ;
+; ERTC5   ; ; GBP ; 189.95 ; ; ; ; ; ; ; JFK_LGW ;
+; ERTC5   ; ; EUR ; 246.94 ; ; ; ; ; ; ; LGW_JFK ;
+; ERTC5   ; ; EUR ; 246.94 ; ; ; ; ; ; ; JFK_LGW ;
+
+; EOWC5   ; ; GBP ; 213.7  ; ; ; ; ; ; ; LGW_JFK ;
+; EOWC5   ; ; GBP ; 213.7  ; ; ; ; ; ; ; JFK_LGW ;
+; EOWC5   ; ; EUR ; 277.82 ; ; ; ; ; ; ; LGW_JFK ;
+; EOWC5   ; ; EUR ; 277.82 ; ; ; ; ; ; ; JFK_LGW ;
+
+; ERTC6C7 ; ; GBP ; 175.7  ; ; ; ; ; ; ; LGW_JFK ;
+; ERTC6C7 ; ; GBP ; 175.7  ; ; ; ; ; ; ; JFK_LGW ;
+; ERTC6C7 ; ; EUR ; 228.42 ; ; ; ; ; ; ; LGW_JFK ;
+; ERTC6C7 ; ; EUR ; 228.42 ; ; ; ; ; ; ; JFK_LGW ;
+
+; EOW     ; ; GBP ; 237.5  ; ; ; ; ; ; ; LGW_JFK ;
+; EOW     ; ; GBP ; 237.5  ; ; ; ; ; ; ; JFK_LGW ;
+; EOW     ; ; EUR ; 308.75 ; ; ; ; ; ; ; LGW_JFK ;
+; EOW     ; ; EUR ; 308.75 ; ; ; ; ; ; ; JFK_LGW ;
+
+; ERT     ; ; GBP ; 227.95 ; ; ; ; ; ; ; LGW_JFK ;
+; ERT     ; ; GBP ; 227.95 ; ; ; ; ; ; ; JFK_LGW ;
+; ERT     ; ; EUR ; 296.34 ; ; ; ; ; ; ; LGW_JFK ;
+; ERT     ; ; EUR ; 296.34 ; ; ; ; ; ; ; JFK_LGW ;
+
+; TRTC5   ; ; GBP ; 213.7  ; ; ; ; ; ; ; LGW_JFK ;
+; TRTC5   ; ; GBP ; 213.7  ; ; ; ; ; ; ; JFK_LGW ;
+; TRTC5   ; ; EUR ; 277.82 ; ; ; ; ; ; ; LGW_JFK ;
+; TRTC5   ; ; EUR ; 277.82 ; ; ; ; ; ; ; JFK_LGW ;
+
+; TOWC5   ; ; GBP ; 237.45 ; ; ; ; ; ; ; LGW_JFK ;
+; TOWC5   ; ; GBP ; 237.45 ; ; ; ; ; ; ; JFK_LGW ;
+; TOWC5   ; ; EUR ; 308.69 ; ; ; ; ; ; ; LGW_JFK ;
+; TOWC5   ; ; EUR ; 308.69 ; ; ; ; ; ; ; JFK_LGW ;
+
+; TRTC6C7 ; ; GBP ; 199.45 ; ; ; ; ; ; ; LGW_JFK ;
+; TRTC6C7 ; ; GBP ; 199.45 ; ; ; ; ; ; ; JFK_LGW ;
+; TRTC6C7 ; ; EUR ; 259.29 ; ; ; ; ; ; ; LGW_JFK ;
+; TRTC6C7 ; ; EUR ; 259.29 ; ; ; ; ; ; ; JFK_LGW ;
+
+; TOW     ; ; GBP ; 261.25 ; ; ; ; ; ; ; LGW_JFK ;
+; TOW     ; ; GBP ; 261.25 ; ; ; ; ; ; ; JFK_LGW ;
+; TOW     ; ; EUR ; 339.63 ; ; ; ; ; ; ; LGW_JFK ;
+; TOW     ; ; EUR ; 339.63 ; ; ; ; ; ; ; JFK_LGW ;
+
+; TRT     ; ; GBP ; 251.7  ; ; ; ; ; ; ; LGW_JFK ;
+; TRT     ; ; GBP ; 251.7  ; ; ; ; ; ; ; JFK_LGW ;
+; TRT     ; ; EUR ; 327.22 ; ; ; ; ; ; ; LGW_JFK ;
+; TRT     ; ; EUR ; 327.22 ; ; ; ; ; ; ; JFK_LGW ;
+
+; WRTC5   ; ; GBP ; 237.45 ; ; ; ; ; ; ; LGW_JFK ;
+; WRTC5   ; ; GBP ; 237.45 ; ; ; ; ; ; ; JFK_LGW ;
+; WRTC5   ; ; EUR ; 308.69 ; ; ; ; ; ; ; LGW_JFK ;
+; WRTC5   ; ; EUR ; 308.69 ; ; ; ; ; ; ; JFK_LGW ;
+
+; WOWC5   ; ; GBP ; 261.2  ; ; ; ; ; ; ; LGW_JFK ;
+; WOWC5   ; ; GBP ; 261.2  ; ; ; ; ; ; ; JFK_LGW ;
+; WOWC5   ; ; EUR ; 339.57 ; ; ; ; ; ; ; LGW_JFK ;
+; WOWC5   ; ; EUR ; 339.57 ; ; ; ; ; ; ; JFK_LGW ;
+
+; WRTC6C7 ; ; GBP ; 223.2  ; ; ; ; ; ; ; LGW_JFK ;
+; WRTC6C7 ; ; GBP ; 223.2  ; ; ; ; ; ; ; JFK_LGW ;
+; WRTC6C7 ; ; EUR ; 290.17 ; ; ; ; ; ; ; LGW_JFK ;
+; WRTC6C7 ; ; EUR ; 290.17 ; ; ; ; ; ; ; JFK_LGW ;
+
+; WOW     ; ; GBP ; 285    ; ; ; ; ; ; ; LGW_JFK ;
+; WOW     ; ; GBP ; 285    ; ; ; ; ; ; ; JFK_LGW ;
+; WOW     ; ; EUR ; 370.5  ; ; ; ; ; ; ; LGW_JFK ;
+; WOW     ; ; EUR ; 370.5  ; ; ; ; ; ; ; JFK_LGW ;
+
+; WRT     ; ; GBP ; 275.45 ; ; ; ; ; ; ; LGW_JFK ;
+; WRT     ; ; GBP ; 275.45 ; ; ; ; ; ; ; JFK_LGW ;
+; WRT     ; ; EUR ; 358.09 ; ; ; ; ; ; ; LGW_JFK ;
+; WRT     ; ; EUR ; 358.09 ; ; ; ; ; ; ; JFK_LGW ;
+
+# LGW_JFK:business bundle
+; IRTC5   ; ; GBP ; 356.2  ; ; ; ; ; ; ; LGW_JFK ;
+; IRTC5   ; ; GBP ; 356.2  ; ; ; ; ; ; ; JFK_LGW ;
+; IRTC5   ; ; EUR ; 463.07 ; ; ; ; ; ; ; LGW_JFK ;
+; IRTC5   ; ; EUR ; 463.07 ; ; ; ; ; ; ; JFK_LGW ;
+
+; IOWC5   ; ; GBP ; 379.95 ; ; ; ; ; ; ; LGW_JFK ;
+; IOWC5   ; ; GBP ; 379.95 ; ; ; ; ; ; ; JFK_LGW ;
+; IOWC5   ; ; EUR ; 493.94 ; ; ; ; ; ; ; LGW_JFK ;
+; IOWC5   ; ; EUR ; 493.94 ; ; ; ; ; ; ; JFK_LGW ;
+
+; IRTC6C7 ; ; GBP ; 341.95 ; ; ; ; ; ; ; LGW_JFK ;
+; IRTC6C7 ; ; GBP ; 341.95 ; ; ; ; ; ; ; JFK_LGW ;
+; IRTC6C7 ; ; EUR ; 444.54 ; ; ; ; ; ; ; LGW_JFK ;
+; IRTC6C7 ; ; EUR ; 444.54 ; ; ; ; ; ; ; JFK_LGW ;
+
+; IOW     ; ; GBP ; 403.75 ; ; ; ; ; ; ; LGW_JFK ;
+; IOW     ; ; GBP ; 403.75 ; ; ; ; ; ; ; JFK_LGW ;
+; IOW     ; ; EUR ; 524.88 ; ; ; ; ; ; ; LGW_JFK ;
+; IOW     ; ; EUR ; 524.88 ; ; ; ; ; ; ; JFK_LGW ;
+
+; IRT     ; ; GBP ; 394.2  ; ; ; ; ; ; ; LGW_JFK ;
+; IRT     ; ; GBP ; 394.2  ; ; ; ; ; ; ; JFK_LGW ;
+; IRT     ; ; EUR ; 512.47 ; ; ; ; ; ; ; LGW_JFK ;
+; IRT     ; ; EUR ; 512.47 ; ; ; ; ; ; ; JFK_LGW ;
+
+; RRTC5   ; ; GBP ; 403.7  ; ; ; ; ; ; ; LGW_JFK ;
+; RRTC5   ; ; GBP ; 403.7  ; ; ; ; ; ; ; JFK_LGW ;
+; RRTC5   ; ; EUR ; 524.82 ; ; ; ; ; ; ; LGW_JFK ;
+; RRTC5   ; ; EUR ; 524.82 ; ; ; ; ; ; ; JFK_LGW ;
+
+; ROWC5   ; ; GBP ; 427.45 ; ; ; ; ; ; ; LGW_JFK ;
+; ROWC5   ; ; GBP ; 427.45 ; ; ; ; ; ; ; JFK_LGW ;
+; ROWC5   ; ; EUR ; 555.69 ; ; ; ; ; ; ; LGW_JFK ;
+; ROWC5   ; ; EUR ; 555.69 ; ; ; ; ; ; ; JFK_LGW ;
+
+; RRTC6C7 ; ; GBP ; 389.45 ; ; ; ; ; ; ; LGW_JFK ;
+; RRTC6C7 ; ; GBP ; 389.45 ; ; ; ; ; ; ; JFK_LGW ;
+; RRTC6C7 ; ; EUR ; 506.29 ; ; ; ; ; ; ; LGW_JFK ;
+; RRTC6C7 ; ; EUR ; 506.29 ; ; ; ; ; ; ; JFK_LGW ;
+
+; ROW     ; ; GBP ; 451.25 ; ; ; ; ; ; ; LGW_JFK ;
+; ROW     ; ; GBP ; 451.25 ; ; ; ; ; ; ; JFK_LGW ;
+; ROW     ; ; EUR ; 586.63 ; ; ; ; ; ; ; LGW_JFK ;
+; ROW     ; ; EUR ; 586.63 ; ; ; ; ; ; ; JFK_LGW ;
+
+; RRT     ; ; GBP ; 441.7  ; ; ; ; ; ; ; LGW_JFK ;
+; RRT     ; ; GBP ; 441.7  ; ; ; ; ; ; ; JFK_LGW ;
+; RRT     ; ; EUR ; 574.22 ; ; ; ; ; ; ; LGW_JFK ;
+; RRT     ; ; EUR ; 574.22 ; ; ; ; ; ; ; JFK_LGW ;
+
+; CRTC5   ; ; GBP ; 451.2  ; ; ; ; ; ; ; LGW_JFK ;
+; CRTC5   ; ; GBP ; 451.2  ; ; ; ; ; ; ; JFK_LGW ;
+; CRTC5   ; ; EUR ; 586.57 ; ; ; ; ; ; ; LGW_JFK ;
+; CRTC5   ; ; EUR ; 586.57 ; ; ; ; ; ; ; JFK_LGW ;
+
+; COWC5   ; ; GBP ; 474.95 ; ; ; ; ; ; ; LGW_JFK ;
+; COWC5   ; ; GBP ; 474.95 ; ; ; ; ; ; ; JFK_LGW ;
+; COWC5   ; ; EUR ; 617.44 ; ; ; ; ; ; ; LGW_JFK ;
+; COWC5   ; ; EUR ; 617.44 ; ; ; ; ; ; ; JFK_LGW ;
+
+; CRTC6C7 ; ; GBP ; 436.95 ; ; ; ; ; ; ; LGW_JFK ;
+; CRTC6C7 ; ; GBP ; 436.95 ; ; ; ; ; ; ; JFK_LGW ;
+; CRTC6C7 ; ; EUR ; 568.04 ; ; ; ; ; ; ; LGW_JFK ;
+; CRTC6C7 ; ; EUR ; 568.04 ; ; ; ; ; ; ; JFK_LGW ;
+
+; COW     ; ; GBP ; 498.75 ; ; ; ; ; ; ; LGW_JFK ;
+; COW     ; ; GBP ; 498.75 ; ; ; ; ; ; ; JFK_LGW ;
+; COW     ; ; EUR ; 648.38 ; ; ; ; ; ; ; LGW_JFK ;
+; COW     ; ; EUR ; 648.38 ; ; ; ; ; ; ; JFK_LGW ;
+
+; CRT     ; ; GBP ; 489.2  ; ; ; ; ; ; ; LGW_JFK ;
+; CRT     ; ; GBP ; 489.2  ; ; ; ; ; ; ; JFK_LGW ;
+; CRT     ; ; EUR ; 635.97 ; ; ; ; ; ; ; LGW_JFK ;
+; CRT     ; ; EUR ; 635.97 ; ; ; ; ; ; ; JFK_LGW ;
+
+; DRTC5   ; ; GBP ; 498.7  ; ; ; ; ; ; ; LGW_JFK ;
+; DRTC5   ; ; GBP ; 498.7  ; ; ; ; ; ; ; JFK_LGW ;
+; DRTC5   ; ; EUR ; 648.32 ; ; ; ; ; ; ; LGW_JFK ;
+; DRTC5   ; ; EUR ; 648.32 ; ; ; ; ; ; ; JFK_LGW ;
+
+; DOWC5   ; ; GBP ; 522.45 ; ; ; ; ; ; ; LGW_JFK ;
+; DOWC5   ; ; GBP ; 522.45 ; ; ; ; ; ; ; JFK_LGW ;
+; DOWC5   ; ; EUR ; 679.19 ; ; ; ; ; ; ; LGW_JFK ;
+; DOWC5   ; ; EUR ; 679.19 ; ; ; ; ; ; ; JFK_LGW ;
+
+; DRTC6C7 ; ; GBP ; 484.45 ; ; ; ; ; ; ; LGW_JFK ;
+; DRTC6C7 ; ; GBP ; 484.45 ; ; ; ; ; ; ; JFK_LGW ;
+; DRTC6C7 ; ; EUR ; 629.79 ; ; ; ; ; ; ; LGW_JFK ;
+; DRTC6C7 ; ; EUR ; 629.79 ; ; ; ; ; ; ; JFK_LGW ;
+
+; DOW     ; ; GBP ; 546.25 ; ; ; ; ; ; ; LGW_JFK ;
+; DOW     ; ; GBP ; 546.25 ; ; ; ; ; ; ; JFK_LGW ;
+; DOW     ; ; EUR ; 710.13 ; ; ; ; ; ; ; LGW_JFK ;
+; DOW     ; ; EUR ; 710.13 ; ; ; ; ; ; ; JFK_LGW ;
+
+; DRT     ; ; GBP ; 536.7  ; ; ; ; ; ; ; LGW_JFK ;
+; DRT     ; ; GBP ; 536.7  ; ; ; ; ; ; ; JFK_LGW ;
+; DRT     ; ; EUR ; 697.72 ; ; ; ; ; ; ; LGW_JFK ;
+; DRT     ; ; EUR ; 697.72 ; ; ; ; ; ; ; JFK_LGW ;
+
+#######################################################
+#### Create price rows and associate them to user price groups for multi sector route (outside Europe)
+#######################################################
+# LGW_CDG_JFK:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5   ; ; GBP ; 75.96  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ORTC5   ; ; GBP ; 75.96  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ORTC5   ; ; EUR ; 98.75  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ORTC5   ; ; EUR ; 98.75  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; OOWC5   ; ; GBP ; 94.96  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; OOWC5   ; ; GBP ; 94.96  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; OOWC5   ; ; EUR ; 123.45 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; OOWC5   ; ; EUR ; 123.45 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; ORTC6C7 ; ; GBP ; 64.56  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ORTC6C7 ; ; GBP ; 64.56  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ORTC6C7 ; ; EUR ; 83.93  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ORTC6C7 ; ; EUR ; 83.93  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; OOW     ; ; GBP ; 114    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; OOW     ; ; GBP ; 114    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; OOW     ; ; EUR ; 148.2  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; OOW     ; ; EUR ; 148.2  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; ORT     ; ; GBP ; 106.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ORT     ; ; GBP ; 106.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ORT     ; ; EUR ; 138.27 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ORT     ; ; EUR ; 138.27 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; QRTC5   ; ; GBP ; 94.96  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QRTC5   ; ; GBP ; 94.96  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; QRTC5   ; ; EUR ; 123.45 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QRTC5   ; ; EUR ; 123.45 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; QOWC5   ; ; GBP ; 113.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QOWC5   ; ; GBP ; 113.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; QOWC5   ; ; EUR ; 148.15 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QOWC5   ; ; EUR ; 148.15 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; QRTC6C7 ; ; GBP ; 83.56  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QRTC6C7 ; ; GBP ; 83.56  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; QRTC6C7 ; ; EUR ; 108.63 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QRTC6C7 ; ; EUR ; 108.63 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; QOW     ; ; GBP ; 133    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QOW     ; ; GBP ; 133    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; QOW     ; ; EUR ; 172.9  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QOW     ; ; EUR ; 172.9  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; QRT     ; ; GBP ; 125.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QRT     ; ; GBP ; 125.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; QRT     ; ; EUR ; 162.97 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; QRT     ; ; EUR ; 162.97 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; MRTC5   ; ; GBP ; 113.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MRTC5   ; ; GBP ; 113.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; MRTC5   ; ; EUR ; 148.15 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MRTC5   ; ; EUR ; 148.15 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; MOWC5   ; ; GBP ; 132.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MOWC5   ; ; GBP ; 132.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; MOWC5   ; ; EUR ; 172.85 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MOWC5   ; ; EUR ; 172.85 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; MRTC6C7 ; ; GBP ; 102.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MRTC6C7 ; ; GBP ; 102.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; MRTC6C7 ; ; EUR ; 133.33 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MRTC6C7 ; ; EUR ; 133.33 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; MOW     ; ; GBP ; 152    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MOW     ; ; GBP ; 152    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; MOW     ; ; EUR ; 197.6  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MOW     ; ; EUR ; 197.6  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; MRT     ; ; GBP ; 144.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MRT     ; ; GBP ; 144.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; MRT     ; ; EUR ; 187.67 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; MRT     ; ; EUR ; 187.67 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; KRTC5   ; ; GBP ; 132.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KRTC5   ; ; GBP ; 132.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; KRTC5   ; ; EUR ; 172.85 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KRTC5   ; ; EUR ; 172.85 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; KOWC5   ; ; GBP ; 151.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KOWC5   ; ; GBP ; 151.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; KOWC5   ; ; EUR ; 197.55 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KOWC5   ; ; EUR ; 197.55 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; KRTC6C7 ; ; GBP ; 121.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KRTC6C7 ; ; GBP ; 121.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; KRTC6C7 ; ; EUR ; 158.03 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KRTC6C7 ; ; EUR ; 158.03 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; KOW     ; ; GBP ; 171    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KOW     ; ; GBP ; 171    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; KOW     ; ; EUR ; 222.3  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KOW     ; ; EUR ; 222.3  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; KRT     ; ; GBP ; 163.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KRT     ; ; GBP ; 163.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; KRT     ; ; EUR ; 212.37 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; KRT     ; ; EUR ; 212.37 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+# LGW_CDG_JFK:Economy plus bundle
+; ERTC5   ; ; GBP ; 151.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ERTC5   ; ; GBP ; 151.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ERTC5   ; ; EUR ; 197.55 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ERTC5   ; ; EUR ; 197.55 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; EOWC5   ; ; GBP ; 170.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; EOWC5   ; ; GBP ; 170.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; EOWC5   ; ; EUR ; 222.25 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; EOWC5   ; ; EUR ; 222.25 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; ERTC6C7 ; ; GBP ; 140.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ERTC6C7 ; ; GBP ; 140.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ERTC6C7 ; ; EUR ; 182.73 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ERTC6C7 ; ; EUR ; 182.73 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; EOW     ; ; GBP ; 190    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; EOW     ; ; GBP ; 190    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; EOW     ; ; EUR ; 247    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; EOW     ; ; EUR ; 247    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; ERT     ; ; GBP ; 182.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ERT     ; ; GBP ; 182.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ERT     ; ; EUR ; 237.07 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ERT     ; ; EUR ; 237.07 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; TRTC5   ; ; GBP ; 170.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TRTC5   ; ; GBP ; 170.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; TRTC5   ; ; EUR ; 222.25 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TRTC5   ; ; EUR ; 222.25 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; TOWC5   ; ; GBP ; 189.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TOWC5   ; ; GBP ; 189.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; TOWC5   ; ; EUR ; 246.95 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TOWC5   ; ; EUR ; 246.95 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; TRTC6C7 ; ; GBP ; 159.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TRTC6C7 ; ; GBP ; 159.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; TRTC6C7 ; ; EUR ; 207.43 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TRTC6C7 ; ; EUR ; 207.43 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; TOW     ; ; GBP ; 209    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TOW     ; ; GBP ; 209    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; TOW     ; ; EUR ; 271.7  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TOW     ; ; EUR ; 271.7  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; TRT     ; ; GBP ; 201.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TRT     ; ; GBP ; 201.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; TRT     ; ; EUR ; 261.77 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; TRT     ; ; EUR ; 261.77 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; WRTC5   ; ; GBP ; 189.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WRTC5   ; ; GBP ; 189.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; WRTC5   ; ; EUR ; 246.95 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WRTC5   ; ; EUR ; 246.95 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; WOWC5   ; ; GBP ; 208.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WOWC5   ; ; GBP ; 208.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; WOWC5   ; ; EUR ; 271.65 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WOWC5   ; ; EUR ; 271.65 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; WRTC6C7 ; ; GBP ; 178.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WRTC6C7 ; ; GBP ; 178.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; WRTC6C7 ; ; EUR ; 232.13 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WRTC6C7 ; ; EUR ; 232.13 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; WOW     ; ; GBP ; 228    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WOW     ; ; GBP ; 228    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; WOW     ; ; EUR ; 296.4  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WOW     ; ; EUR ; 296.4  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; WRT     ; ; GBP ; 220.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WRT     ; ; GBP ; 220.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; WRT     ; ; EUR ; 286.47 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; WRT     ; ; EUR ; 286.47 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+# LGW_CDG_JFK:business bundle
+; IRTC5   ; ; GBP ; 284.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IRTC5   ; ; GBP ; 284.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; IRTC5   ; ; EUR ; 370.45 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IRTC5   ; ; EUR ; 370.45 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; IOWC5   ; ; GBP ; 303.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IOWC5   ; ; GBP ; 303.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; IOWC5   ; ; EUR ; 395.15 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IOWC5   ; ; EUR ; 395.15 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; IRTC6C7 ; ; GBP ; 273.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IRTC6C7 ; ; GBP ; 273.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; IRTC6C7 ; ; EUR ; 355.63 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IRTC6C7 ; ; EUR ; 355.63 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; IOW     ; ; GBP ; 323    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IOW     ; ; GBP ; 323    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; IOW     ; ; EUR ; 419.9  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IOW     ; ; EUR ; 419.9  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; IRT     ; ; GBP ; 315.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IRT     ; ; GBP ; 315.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; IRT     ; ; EUR ; 409.97 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; IRT     ; ; EUR ; 409.97 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; RRTC5   ; ; GBP ; 322.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; RRTC5   ; ; GBP ; 322.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; RRTC5   ; ; EUR ; 419.85 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; RRTC5   ; ; EUR ; 419.85 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; ROWC5   ; ; GBP ; 341.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ROWC5   ; ; GBP ; 341.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ROWC5   ; ; EUR ; 444.55 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ROWC5   ; ; EUR ; 444.55 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; RRTC6C7 ; ; GBP ; 311.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; RRTC6C7 ; ; GBP ; 311.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; RRTC6C7 ; ; EUR ; 405.03 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; RRTC6C7 ; ; EUR ; 405.03 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; ROW     ; ; GBP ; 361    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ROW     ; ; GBP ; 361    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; ROW     ; ; EUR ; 469.3  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; ROW     ; ; EUR ; 469.3  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; RRT     ; ; GBP ; 353.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; RRT     ; ; GBP ; 353.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; RRT     ; ; EUR ; 459.37 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; RRT     ; ; EUR ; 459.37 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; CRTC5   ; ; GBP ; 360.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; CRTC5   ; ; GBP ; 360.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; CRTC5   ; ; EUR ; 469.25 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; CRTC5   ; ; EUR ; 469.25 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; COWC5   ; ; GBP ; 379.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; COWC5   ; ; GBP ; 379.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; COWC5   ; ; EUR ; 493.95 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; COWC5   ; ; EUR ; 493.95 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; CRTC6C7 ; ; GBP ; 349.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; CRTC6C7 ; ; GBP ; 349.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; CRTC6C7 ; ; EUR ; 454.43 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; CRTC6C7 ; ; EUR ; 454.43 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; COW     ; ; GBP ; 399    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; COW     ; ; GBP ; 399    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; COW     ; ; EUR ; 518.7  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; COW     ; ; EUR ; 518.7  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; CRT     ; ; GBP ; 391.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; CRT     ; ; GBP ; 391.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; CRT     ; ; EUR ; 508.77 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; CRT     ; ; EUR ; 508.77 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; DRTC5   ; ; GBP ; 398.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DRTC5   ; ; GBP ; 398.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; DRTC5   ; ; EUR ; 518.65 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DRTC5   ; ; EUR ; 518.65 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; DOWC5   ; ; GBP ; 417.96 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DOWC5   ; ; GBP ; 417.96 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; DOWC5   ; ; EUR ; 543.35 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DOWC5   ; ; EUR ; 543.35 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; DRTC6C7 ; ; GBP ; 387.56 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DRTC6C7 ; ; GBP ; 387.56 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; DRTC6C7 ; ; EUR ; 503.83 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DRTC6C7 ; ; EUR ; 503.83 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; DOW     ; ; GBP ; 437    ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DOW     ; ; GBP ; 437    ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; DOW     ; ; EUR ; 568.1  ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DOW     ; ; EUR ; 568.1  ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+; DRT     ; ; GBP ; 429.36 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DRT     ; ; GBP ; 429.36 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+; DRT     ; ; EUR ; 558.17 ; ; ; ; ; ; ; ; LGW_CDG_JFK
+; DRT     ; ; EUR ; 558.17 ; ; ; ; ; ; ; ; JFK_CDG_LGW
+
+#######################################################
+# Create price rows and associate them to user price groups for Ancillary Prices
+#######################################################
+
+# Accommodation Prices for multi-sector Routes
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ACECONSEAT1 ; ; GBP ; 4.75  ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ACECONSEAT1 ; ; GBP ; 4.75  ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ACPECOSEAT1 ; ; GBP ; 9.5   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ACPECOSEAT1 ; ; GBP ; 9.5   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ACBIZZSEAT1 ; ; GBP ; 14.25 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ACBIZZSEAT1 ; ; GBP ; 14.25 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ACECONSEAT1 ; ; EUR ; 5.7   ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ACECONSEAT1 ; ; EUR ; 5.7   ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ACPECOSEAT1 ; ; EUR ; 12.35 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ACPECOSEAT1 ; ; EUR ; 12.35 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+; ACBIZZSEAT1 ; ; EUR ; 18.05 ; ; ; ; ; ; ; ; EDI_LGW_CDG
+; ACBIZZSEAT1 ; ; EUR ; 18.05 ; ; ; ; ; ; ; ; CDG_LGW_EDI
+
+# Default Accommodation prices
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; ACECONSEAT1 ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+; ACPECOSEAT1 ; ; GBP ; 19    ; ; ; ; ; ; ; ;
+; ACBIZZSEAT1 ; ; GBP ; 28.5  ; ; ; ; ; ; ; ;
+
+# Prices in EUR
+; ACECONSEAT1 ; ; EUR ; 12.35 ; ; ; ; ; ; ; ;
+; ACPECOSEAT1 ; ; EUR ; 24.7  ; ; ; ; ; ; ; ;
+; ACBIZZSEAT1 ; ; EUR ; 37.05 ; ; ; ; ; ; ; ;
+
+# Priority Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; PRICHECKIN1  ; ; GBP ; 4.75  ; ; ; ; ; ; ; ;
+; PRIBOARDING1 ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+
+# Prices in EUR
+; PRICHECKIN1  ; ; EUR ; 5.7   ; ; ; ; ; ; ; ;
+; PRIBOARDING1 ; ; EUR ; 12.35 ; ; ; ; ; ; ; ;
+
+# Lounge Access Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; LOUNGEACC1 ; ; GBP ; 14.25 ; ; ; ; ; ; ; ;
+
+# Prices in EUR
+; LOUNGEACC1 ; ; EUR ; 18.05 ; ; ; ; ; ; ; ;
+
+
+# Meal Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; STANDARDMEAL   ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+; VEGETARIANMEAL ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+; CHILDMEAL      ; ; GBP ; 4.75  ; ; ; ; ; ; ; ;
+; CHAMPAGNE      ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+
+# Prices in EUR
+; STANDARDMEAL   ; ; EUR ; 12.35 ; ; ; ; ; ; ; ;
+; VEGETARIANMEAL ; ; EUR ; 12.35 ; ; ; ; ; ; ; ;
+; CHILDMEAL      ; ; EUR ; 5.7   ; ; ; ; ; ; ; ;
+; CHAMPAGNE      ; ; GBP ; 12.35 ; ; ; ; ; ; ; ;
+
+# Hold Item Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true, default = B2B_DEFAULT_PRICE_GROUP]; currency(isocode)[unique = true]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; EXTRABAG20 ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+; EXTRABAG32 ; ; GBP ; 19    ; ; ; ; ; ; ; ;
+; SKIS       ; ; GBP ; 19    ; ; ; ; ; ; ; ;
+; SURFBOARD  ; ; GBP ; 28.5  ; ; ; ; ; ; ; ;
+; GOLFCLUBS  ; ; GBP ; 9.5   ; ; ; ; ; ; ; ;
+
+# Prices in EUR
+; EXTRABAG20 ; ; EUR ; 12.35 ; ; ; ; ; ; ; ;
+; EXTRABAG32 ; ; EUR ; 24.7  ; ; ; ; ; ; ; ;
+; SKIS       ; ; EUR ; 24.7  ; ; ; ; ; ; ; ;
+; SURFBOARD  ; ; EUR ; 37.05 ; ; ; ; ; ; ; ;
+; GOLFCLUBS  ; ; EUR ; 12.35 ; ; ; ; ; ; ; ;

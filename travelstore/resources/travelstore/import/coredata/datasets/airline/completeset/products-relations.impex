@@ -1,0 +1,25 @@
+$catalogVersion=catalogVersion(catalog(id[default='travelProductCatalog']),version[default='Staged'])[unique=true,default='airlineProductCatalog:Staged']
+$economyAccommodation=target(code,$catalogVersion)
+$economyPlusAccommodation=target(code,$catalogVersion)
+$businessAccommodation=target(code,$catalogVersion)
+
+# Insert Product References for Business Accommodation
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];$businessAccommodation[default='ACBIZZSEAT1'][unique=true];referenceType(code)[default='FARE_ACCOMMODATION'];active[default=true];preselected[default=true]
+;IOWC5;;;;
+;ROWC5;;;;
+;COWC5;;;;
+;DOWC5;;;;
+ 
+# Insert Product References for Economy Plus Accommodation
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];$economyPlusAccommodation[default='ACPECOSEAT1'][unique=true];referenceType(code)[default='FARE_ACCOMMODATION'];active[default=true];preselected[default=true]
+;EOWC5;;;;
+;TOWC5;;;;
+;WOWC5;;;;
+;WRTC6;;;;
+ 
+# Insert Product References for Economy Accommodation
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];$economyAccommodation[default='ACECONSEAT1'][unique=true];referenceType(code)[default='FARE_ACCOMMODATION'];active[default=true];preselected[default=true]
+;ORTC5;;;;
+;QOWC5;;;;
+;MOWC5;;;;
+;KOWC5;;;;

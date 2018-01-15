@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<itemtypes>
+		<itemtype code="AccommodationSummaryComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationSummaryComponent">
+			<description>It provides a summary of accommodation selections.</description>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>It is localized title of the component.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="AccommodationFinderComponent" extends="AbstractFinderComponent" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationFinderComponent">
+			<description>It provides a function to search for available accommodation offers.</description>
+		</itemtype>
+
+		<itemtype code="AccommodationRefinementComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationRefinementComponent">
+			<description>It provides a faceting functionality on accommodation search page</description>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>It is localized title of the component.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="AccommodationBreakdownComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationBreakdownComponent">
+			<description>It provides breakdown for all the room reserved in the booking</description>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>It is localized title of the component.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		<itemtype code="AccommodationBookingDetailsComponent" extends="AbstractBookingDetailsComponent" autocreate="true"
+			generate="true" jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationBookingDetailsComponent">
+			<description>It provides booking details for all the room reserved in the booking</description>
+		</itemtype>
+		<itemtype code="AccommodationBookingListComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationBookingListComponent">
+			<description>It provides list of bookings made by customer.</description>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>It is localized title of the component.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="AccommodationReservationComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.accommodationaddon.jalo.components.AccommodationReservationComponent">
+			<description>It provides a full view of selected accommodations.</description>
+			<attributes>
+				<attribute qualifier="title" type="localized:java.lang.String">
+					<persistence type="property" />
+					<description>This component lists the entries selected by user during the accommodation booking journey.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

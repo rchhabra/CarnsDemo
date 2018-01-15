@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:h="http://www.w3.org/1999/xhtml" xmlns:zk="http://www.zkoss.org/2005/zk"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+
+	<zscript><![CDATA[
+	                 
+	import de.hybris.platform.ordersplitting.model.StockLevelModel;
+	import org.apache.commons.lang3.StringUtils;
+	import de.hybris.platform.basecommerce.enums.InStockStatus;
+	import de.hybris.platform.travelbackoffice.constants.TravelbackofficeConstants;
+	import de.hybris.platform.travelbackoffice.utils.TravelbackofficeUtils;
+	
+	public class ModifyInventoryPreviewDynamicValue extends Window
+	{
+		public String getCode(String stockLevelCode)
+		{
+			stockLevelCode = validateStockLevelCode(stockLevelCode);
+			
+			widgetInstanceManager.getModel().put("fromPreviewStep", Boolean.TRUE);
+			final StockLevelModel stockLevel = widgetInstanceManager.getModel().getValue(stockLevelCode , StockLevelModel.class);
+			if(Objects.nonNull(stockLevel) && stockLevel.getSelected())
+			{
+				return stockLevel.getProductCode();				
+			}
+			return StringUtils.EMPTY;
+		}
+		
+		public String validateStockLevelCode(String stockLevelCode)
+		{
+			if(StringUtils.equalsIgnoreCase(stockLevelCode, TravelbackofficeConstants.TYPE_REFERENCE))
+			{
+				return TravelbackofficeUtils.replaceTypeReference(stockLevelCode);
+			}
+			return stockLevelCode;
+		}
+		
+		public String getAvailableQty(String stockLevelCode)
+		{
+			stockLevelCode = validateStockLevelCode(stockLevelCode);
+			
+			final StockLevelModel stockLevel = widgetInstanceManager.getModel().getValue(stockLevelCode , StockLevelModel.class);
+			if(Objects.nonNull(stockLevel) && stockLevel.getSelected())
+			{
+				return String.valueOf(stockLevel.getAvailable());				
+			}
+			return StringUtils.EMPTY;
+		}
+		
+		public String getReservedQty(String stockLevelCode)
+		{
+			stockLevelCode = validateStockLevelCode(stockLevelCode);
+			
+			final StockLevelModel stockLevel = widgetInstanceManager.getModel().getValue(stockLevelCode , StockLevelModel.class);
+			if(Objects.nonNull(stockLevel) && stockLevel.getSelected())
+			{
+				return String.valueOf(stockLevel.getReserved());				
+			}
+			return StringUtils.EMPTY;
+		}
+		
+		public String getOversellingQty(String stockLevelCode)
+		{
+			stockLevelCode = validateStockLevelCode(stockLevelCode);
+			
+			final StockLevelModel stockLevel = widgetInstanceManager.getModel().getValue(stockLevelCode , StockLevelModel.class);
+			if(Objects.nonNull(stockLevel) && stockLevel.getSelected())
+			{
+				return String.valueOf(stockLevel.getOverSelling());				
+			}
+			return StringUtils.EMPTY;
+		}
+		
+		public String getInStockStatus(String stockLevelCode)
+		{
+			stockLevelCode = validateStockLevelCode(stockLevelCode);
+			
+			final StockLevelModel stockLevel = widgetInstanceManager.getModel().getValue(stockLevelCode , StockLevelModel.class);
+			if(Objects.nonNull(stockLevel) && stockLevel.getSelected() && Objects.nonNull(stockLevel.getInStockStatus()) && Objects.nonNull(stockLevel.getInStockStatus().getCode()))
+			{
+				return widgetInstanceManager.getModel().getValue(stockLevel.getInStockStatus().getCode(), String.class);				
+			}
+			return StringUtils.EMPTY;
+		}
+		
+		public boolean checkIsSelected(String stockLevelCode)
+		{
+			stockLevelCode = validateStockLevelCode(stockLevelCode);
+			
+			final StockLevelModel stockLevel = widgetInstanceManager.getModel().getValue(stockLevelCode , StockLevelModel.class);
+			if(Objects.nonNull(stockLevel))
+			{
+				return stockLevel.getSelected();				
+			}
+			return Boolean.FALSE;
+		}
+	}
+	
+	]]>
+   </zscript>
+	<window use="ModifyInventoryPreviewDynamicValue" id="window">
+		<div id="container">
+			<div forEach="${widgetModel.manageStockLevelInfo.transportOfferings}" style="font-weight: bold;">
+				<label value="${each.travelProvider.code}"/> <label value="${each.number}"/> <label value="${c:formatDate(each.departureTime, 'MMM dd, yyyy hh:mm a')}"/>
+			</div>
+		</div>
+		<grid style="padding-top:30px; padding-bottom:20px; border-right: 0px #CCC;" class="modify-inventory-grid">
+			<columns style="background-color: #F0F0F0;">
+				<column label="${c:l('create.inventory.bookingclass.preview.wizard.bookingclass')}" />
+				<column label="${c:l('create.inventory.bookingclass.preview.wizard.availablequantity')}" />
+				<column label="${c:l('modify.inventory.transportoffering.reservedquantity')}"
+					if="${widgetModel.manageStockLevelInfo.transportOfferings.size() == 1}" />
+				<column label="${c:l('create.inventory.bookingclass.preview.wizard.oversellingquantity')}" />
+				<column label="${c:l('create.inventory.bookingclass.preview.wizard.instockstatus')}" />
+			</columns>
+			<rows>
+				<row forEach="${widgetModel.stockLevels}" if="${window.checkIsSelected(each)}">
+					<label value="${window.getCode(each)}" />
+					<label value="${window.getAvailableQty(each)}" />
+					<label value="${window.getReservedQty(each)}" if="${widgetModel.manageStockLevelInfo.transportOfferings.size() == 1}"/>
+					<label value="${window.getOversellingQty(each)}" />
+					<label value="${window.getInStockStatus(each)}" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

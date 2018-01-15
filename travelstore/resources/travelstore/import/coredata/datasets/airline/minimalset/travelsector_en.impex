@@ -1,0 +1,158 @@
+# ImpEx for Importing Localised name for TravelSector into travel accelerator
+
+
+$lang = en
+
+INSERT_UPDATE TravelSector; code[unique = true]; name[lang = $lang]
+
+; LGW_CDG ; London Gatwick to Charles De Gaulle
+; LTN_CDG ; Luton Airport to Charles De Gaulle
+
+; CDG_LGW ; Charles De Gaulle to London Gatwick
+; CDG_LTN ; Charles De Gaulle to Luton Airport
+
+; LGW_EDI ; London Gatwick to Edinburgh Airport
+; EDI_LGW ; Edinburgh Airport to London Gatwick
+
+; EDI_CDG ; Edinburgh Airport to Charles De Gaulle
+; CDG_EDI ; Charles De Gaulle to Edinburgh Airport
+
+; LGW_ALC ; London Gatwick to Alicante
+; ALC_LGW ; Alicante to London Gatwick
+
+; LGW_NCE ; London Gatwick to Nice Intl Airport
+; NCE_LGW ; Nice Intl Airport to London Gatwick
+
+; LGW_VCE ; London Gatwick to Venice Marco Polo
+; VCE_LGW ; Venice Marco Polo to London Gatwick
+
+; LGW_ATH ; London Gatwick to Athens International
+; ATH_LGW ; Athens International to London Gatwick
+
+; LGW_JFK ; London Gatwick to New York John F Kennedy
+; JFK_LGW ; New York John F Kennedy to London Gatwick
+
+; LGW_MLE ; London Gatwick to Male Airport
+; MLE_LGW ; Male Airport to London Gatwick
+
+; CDG_JFK ; Charles de Gaulle to New York John F Kennedy
+; JFK_CDG ; New York John F Kennedy to Charles de Gaulle
+
+
+#HKT->CDG
+; HKT_CDG ; Phuket to Charles De Gaulle
+#CDG->HKT
+; CDG_HKT ; Charles De Gaulle to Phuket
+
+#HKT->LTN
+; HKT_LTN ; Phuket to Luton Airport
+#LTN->HKT
+; LTN_HKT ; Luton Airport to Phuket
+
+#GOI->CDG
+; GOI_CDG ; Goa to Charles De Gaulle
+#CDG->GOI
+; CDG_GOI ; Charles De Gaulle to Goa
+
+#GOI->LTN
+; GOI_LTN ; Goa to Luton Airport
+#LTN->GOI
+; LTN_GOI ; Luton Airport to Goa
+
+
+#MIA->CDG
+; MIA_CDG ; Miami to Charles De Gaulle
+#CDG->MIA
+; CDG_MIA ; Charles De Gaulle to Miami
+
+#MIA->LTN
+; MIA_LTN ; Miami to Luton Airport
+#LTN->MIA
+; LTN_MIA ; Luton Airport to Miami
+
+
+#NAP->CDG
+; NAP_CDG ; Naples to Charles De Gaulle
+#CDG->NAP
+; CDG_NAP ; Charles De Gaulle to Naples
+
+#NAP->LTN
+; NAP_LTN ; Naples to Luton Airport
+#LTN->NAP
+; LTN_NAP ; Luton Airport to Naples
+
+
+#FLR->CDG
+; FLR_CDG ; Florence to Charles De Gaulle
+#CDG->FLR
+; CDG_FLR ; Charles De Gaulle to Florence
+
+#FLR->LTN
+; FLR_LTN ; Florence to Luton Airport
+#LTN->FLR
+; LTN_FLR ; Luton Airport to Florence 
+
+#FCO->CDG
+; FCO_CDG ; Leonardo da Vinci–Fiumicino Airport to Charles De Gaulle
+#CDG->FCO
+; CDG_FCO ; Charles De Gaulle to Leonardo da Vinci–Fiumicino Airport
+
+#FCO->LTN
+; FCO_LTN ; Leonardo da Vinci–Fiumicino Airport to Luton Airport
+#LTN->FCO
+; LTN_FCO ; Luton Airport to Leonardo da Vinci–Fiumicino Airport
+
+
+#BKK->CDG
+; BKK_CDG ; Bangkok to Charles De Gaulle
+#CDG->BKK
+; CDG_BKK ; Charles De Gaulle to Bangkok
+
+#BKK->LTN
+; BKK_LTN ; Bangkok to Luton Airport
+#LTN->BKK
+; LTN_BKK ; Luton Airport to Bangkok
+
+
+#KUL->CDG
+; KUL_CDG ; Kuala Lumpur to Charles De Gaulle
+#CDG->KUL
+; CDG_KUL ; Charles De Gaulle to Kuala Lumpur
+
+#KUL->LTN
+; KUL_LTN ; Kuala Lumpur to Luton Airport
+#LTN->KUL
+; LTN_KUL ; Luton Airport to Kuala Lumpur
+
+
+#PRG->CDG
+; PRG_CDG ; Prague to Charles De Gaulle
+#CDG->PRG
+; CDG_PRG ; Charles De Gaulle to Prague
+
+#PRG->LTN
+; PRG_LTN ; Prague to Luton Airport
+#LTN->PRG
+; LTN_PRG ; Luton Airport to Prague
+
+
+#KEF->CDG
+; KEF_CDG ; Reykjavik Airport to Charles De Gaulle
+#CDG->KEF
+; CDG_KEF ; Charles De Gaulle to Reykjavik Airport
+
+#KEF->LTN
+; KEF_LTN ; Reykjavik Airport to Luton Airport
+#LTN->KEF
+; LTN_KEF ; Luton Airport to Reykjavik Airport
+
+
+#ICN->CDG
+; ICN_CDG ; Incheon International Airport to Charles De Gaulle
+#CDG->ICN
+; CDG_ICN ; Charles De Gaulle to Incheon International Airport
+
+#ICN->LTN
+; ICN_LTN ; Incheon International Airport to Luton Airport
+#LTN->ICN
+; LTN_ICN ; Luton Airport to Incheon International Airport

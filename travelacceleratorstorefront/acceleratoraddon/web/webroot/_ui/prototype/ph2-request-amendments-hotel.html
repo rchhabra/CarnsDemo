@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC - Accomodation search results page</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/css/bootstrap-slider.min.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+    // Asynchronously load the header template
+    $.get('templates/header-accommodation.tmpl.htm', function(headerTemplate) {
+        var data = {
+            "CurrentPage": "home"
+        };
+        $.tmpl(headerTemplate, data).appendTo('header');
+    });
+    // Asynchronously load the footer template
+    $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+        $.tmpl(footerTemplate).appendTo('footer');
+    });
+    </script>
+</head>
+
+<body class="my-account-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-9">
+                    <div class="row heading-with-button">
+                        <div class="col-xs-7 col-sm-8">
+                            <h2 class="h2">Booking details</h2>
+                        </div>
+                        <div class="col-xs-5 col-sm-4 button-inline">
+                            <a class="btn btn-primary btn-block">Back to My Profile</a>
+                        </div>
+                    </div>
+                    <!-- Room Details -->
+                    <div class="panel panel-primary panel-list booking room-details clearfix">
+                        <div class="panel-heading">
+                            <h3 class="title">Booking Reference ABC123</h3>
+                        </div>
+                        <div class="row">
+                            <div class="panel button-wrap">
+                                <div class="col-xs-12 col-sm-6 col-lg-8">
+                                    <dl class="booking status">
+                                        <dt>Booking Status:</dt>
+                                        <dd>Active</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-lg-4">
+                                    <button class="btn btn-primary btn-block">Cancel Booking</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default my-account-secondary-panel clearfix">
+                            <div class="room panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Stay at Holiday Inn Tokyo</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-xs-12">
+                                        <div class="row room-wrap">
+                                            <div class="col-xs-4 col-sm-2">
+                                                <img src="https://media-cdn.tripadvisor.com/media/photo-o/01/d9/b8/7d/new-world-hotel.jpg" class="img-responsive" alt="Imperial Hotel">
+                                            </div>
+                                            <div class="col-xs-8 col-sm-10">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <h3>Room 1 Name</h3>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p>Double Room</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-xs-6 item-wrapper">
+                                                        <dl>
+                                                            <dt>Guests</dt>
+                                                            <dd>2 x Adults</dd>
+                                                            <dd>1 x Infants</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-6 item-wrapper">
+                                                        <dl>
+                                                            <dt>Dates</dt>
+                                                            <dd>Check In 1/01/2017</dd>
+                                                            <dd>Check Out 8/01/2017</dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="row booking-features">
+                                                <ul class="small clearfix">
+                                                    <li class="col-xs-6">Free cancellation before 10/12/2016</li>
+                                                    <li class="col-xs-6">Full Payment at the time of booking</li>
+                                                    <li class="col-xs-6">Welcome drinks (one drink per person)</li>
+                                                    <li class="col-xs-6">All inclusive</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="responsive-table booking-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="account-orderhistory-table-head responsive-table-head hidden-xs">
+                                                                <th class="sr-only">Extra</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Base Price</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Taxes</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Fees</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Discounts</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Total</th>
+                                                                <th class="hidden"></th>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                <td class="responsive-table-cell"></td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">500</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">20</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">10</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="status">540</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                <td class="responsive-table-cell">Extra: 1 x Wi-Fi</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">10</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="status">10</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <span class="cart-total pull-right">Total per room: &pound;550</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="breakdown">
+                                            <div id="accommodation-breakdown_1">
+                                                <a role="button" data-toggle="collapse" href="#collapse-breakdown_1" aria-expanded="true" aria-controls="collapse-breakdown_1">
+                                                    <i class="glyphicon glyphicon-info-sign"></i>Full breakdown</a>
+                                            </div>
+                                            <div id="collapse-breakdown_1" class="panel-collapse collapse">
+                                                <div class="responsive-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="account-orderhistory-table-head responsive-table-head hidden-xs inner-table-head">
+                                                                <th class="hidden"></th>
+                                                                <th>Date</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Base Price</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Taxes</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Fees</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Discounts</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">01/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">02/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">03/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">04/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">05/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">06/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">07/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <section>
+                                            <div class="row facilities-options">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading divided">
+                                                        <h3 class="panel-title">Your Preferences</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <ul class="selected-facilities clearfix">
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Air Conditioning</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Flat-screen HD TV</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Blackout curtains</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Work desk</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Bathtub HD TV</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Iron and ironing board</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Tea Kettle</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Designer Towels</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Travel Charger</li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- / .panel-body -->
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Request</h3>
+                                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#rm1_request" aria-expanded="true" aria-controls="rm1_request">Collapse / Expand</button>
+                                                </div>
+                                                <div id="rm1_request" class="request-amendments panel-body collapse in">
+                                                    <form>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> Request for baby court and a push chair
+                                                        </div>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> Could you kindly reserve 5 seats for plush Indian Restaurant with directions ? Will also want to go to the Cinema for a nice relaxing movie
+                                                        </div>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#"type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> Would like to book a Caravan for an Adventure Tour
+                                                        </div>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> A flower on arrival and exotic Spa massage
+                                                        </div>
+
+                                                        <fieldset class="fieldset">
+                                                            <legend class="sr-only">Request</legend>
+                                                            <div class="form-group col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="rm1_request-message">Let us know what you need</label>
+                                                                    <textarea class="col-xs-12 form-control" id="rm1_request-message" name="request-message"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>                                                      
+                                                        <div class="form-group col-xs-12 col-sm-4 col-xs-offset-0 col-sm-offset-8">
+                                                            <button class="btn btn-primary btn-block">Request</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="room panel-default">
+                                <div class="panel-body">
+                                    <div class="col-xs-12">
+                                        <div class="row room-wrap">
+                                            <div class="col-xs-4 col-sm-2">
+                                                <img src="https://media-cdn.tripadvisor.com/media/photo-o/01/d9/b8/7d/new-world-hotel.jpg" class="img-responsive" alt="Imperial Hotel">
+                                            </div>
+                                            <div class="col-xs-8 col-sm-10">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <h3>Room 2 Name</h3>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p>Double Room</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-6 item-wrapper">
+                                                        <dl>
+                                                            <dt>Guests</dt>
+                                                            <dd>2 x Adults</dd>
+                                                            <dd>1 x Infants</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-6 item-wrapper">
+                                                        <dl>
+                                                            <dt>Dates</dt>
+                                                            <dd>Check In 1/01/2017</dd>
+                                                            <dd>Check Out 8/01/2017</dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="row booking-features">
+                                                <ul class="small clearfix">
+                                                    <li class="col-xs-6">Free cancellation before 10/12/2016</li>
+                                                    <li class="col-xs-6">Full Payment at the time of booking</li>
+                                                    <li class="col-xs-6">Welcome drinks (one drink per person)</li>
+                                                    <li class="col-xs-6">All inclusive</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="responsive-table booking-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="account-orderhistory-table-head responsive-table-head hidden-xs">
+                                                                <th class="sr-only">Extra</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Base Price</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Taxes</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Fees</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Discounts</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Total</th>
+                                                                <th class="hidden"></th>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                <td class="responsive-table-cell"></td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">500</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">20</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">10</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="status">540</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                <td class="responsive-table-cell">Extra: 1 x Wi-Fi</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">10</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="status">10</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <span class="cart-total pull-right">Total per room: &pound;550</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="breakdown">
+                                            <div id="accommodation-breakdown_2">
+                                                <a role="button" data-toggle="collapse" href="#collapse-breakdown_2" aria-expanded="true" aria-controls="collapse-breakdown_2">
+                                                    <i class="glyphicon glyphicon-info-sign"></i>Full breakdown</a>
+                                            </div>
+                                            <div id="collapse-breakdown_2" class="panel-collapse collapse">
+                                                <div class="responsive-table">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr class="account-orderhistory-table-head responsive-table-head hidden-xs inner-table-head">
+                                                                <th class="hidden"></th>
+                                                                <th>Date</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Base Price</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Taxes</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Fees</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Discounts</th>
+                                                                <th class="hidden"></th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">01/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">02/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">03/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">04/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">05/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">06/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                            <tr class="responsive-table-item">
+                                                                <td class="hidden-sm hidden-md hidden-lg">Date</td>
+                                                                <td class="responsive-table-cell">07/01/2017</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                <td class="responsive-table-cell">71.42</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                <td class="responsive-table-cell">2.86</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                <td class="responsive-table-cell">0</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                <td class="responsive-table-cell">1.43</td>
+                                                                <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                <td class="responsive-table-cell">72.85</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <section>
+                                            <div class="row facilities-options">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading divided">
+                                                        <h3 class="panel-title">Your Preferences</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <ul class="selected-facilities clearfix">
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Air Conditioning</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Flat-screen HD TV</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Blackout curtains</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Work desk</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Bathtub HD TV</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Iron and ironing board</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Tea Kettle</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Designer Towels</li>
+                                                            <li class="col-xs-6 col-sm-4"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Travel Charger</li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- / .panel-body -->
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Request</h3>
+                                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#rm1_request" aria-expanded="true" aria-controls="rm1_request">Collapse / Expand</button>
+                                                </div>
+                                                <div id="rm1_request" class="request-amendments panel-body collapse in">
+                                                    <form>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> Request for baby court and a push chair
+                                                        </div>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> Could you kindly reserve 5 seats for plush Indian Restaurant with directions ? Will also want to go to the Cinema for a nice relaxing movie
+                                                        </div>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#"type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> Would like to book a Caravan for an Adventure Tour
+                                                        </div>
+                                                        <div class="alert request-list alert-dismissible" role="alert">
+                                                          <a href="#" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span></a>
+                                                          <strong></strong> A flower on arrival and exotic Spa massage
+                                                        </div>
+
+                                                        <fieldset class="fieldset">
+                                                            <legend class="sr-only">Request</legend>
+                                                            <div class="form-group col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="rm1_request-message">Let us know what you need</label>
+                                                                    <textarea class="col-xs-12 form-control" id="rm1_request-message" name="request-message"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>                                                      
+                                                        <div class="form-group col-xs-12 col-sm-4 col-xs-offset-0 col-sm-offset-8">
+                                                            <button class="btn btn-primary btn-block">Request</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-default extras">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Other Extras</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-xs-12">
+                                        <div class="responsive-table">
+                                            <table class="table">
+                                                <tbody>
+                                                    <tr class="account-orderhistory-table-head responsive-table-head hidden-xs inner-table-head">
+                                                        <th class="hidden"></th>
+                                                        <th>Extra</th>
+                                                        <th class="hidden"></th>
+                                                        <th>Base Price</th>
+                                                        <th class="hidden"></th>
+                                                        <th>Taxes</th>
+                                                        <th class="hidden"></th>
+                                                        <th>Fees</th>
+                                                        <th class="hidden"></th>
+                                                        <th>Discounts</th>
+                                                        <th class="hidden"></th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                    <tr class="responsive-table-item">
+                                                        <td class="hidden-sm hidden-md hidden-lg">Extra</td>
+                                                        <td class="responsive-table-cell">3 x shuttle</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                        <td class="responsive-table-cell">30</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                        <td class="responsive-table-cell">90</td>
+                                                    </tr>
+                                                    <tr class="responsive-table-item">
+                                                        <td class="hidden-sm hidden-md hidden-lg">Extra</td>
+                                                        <td class="responsive-table-cell">Voucher</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                        <td class="responsive-table-cell">0</td>
+                                                        <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                        <td class="responsive-table-cell">10</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-default total">
+                                <div class="panel-body">
+                                    <div class="col-xs-12">
+                                        <dl class="text-right">
+                                            <dt>Grand Total To Pay</dt>
+                                            <dd>&pound;9999.99</dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="panel-default">
+                                    <div class="panel-body">
+                                        <!-- Departing / Returning dates input fields -->
+                                        <form class="fe-validate y_fareFinderForm">
+                                            <fieldset class="fieldset">
+                                                <legend class="sr-only">Change Dates</legend>
+                                                <div class="row">
+                                                    <div class="form-group col-xs-12 col-sm-4">
+                                                        <p>Would you like to change the dates of your holiday?</p>
+                                                    </div>
+                                                    <div class="input-required-wrap col-xs-12 col-sm-4">
+                                                        <label class="sr-only" for="datePickerDeparting">Departing</label>
+                                                        <input
+                                                            type="text"
+                                                            class="col-xs-12 datepicker input-grid form-control"
+                                                            id="datePickerDeparting"
+                                                            name="datePickerDeparting"
+                                                            placeholder="Departing"
+                                                            autocomplete="off">
+                                                    </div>
+                                                    <div class="y_fareFinderReturnField">
+                                                        <div class="input-required-wrap col-xs-12 col-sm-4">
+                                                            <label class="sr-only" for="datePickerReturning">Returning</label>
+                                                            <input
+                                                                type="text"
+                                                                class="col-xs-12 datepicker input-grid form-control"
+                                                                id="datePickerReturning"
+                                                                name="datePickerReturning"
+                                                                placeholder="Returning"
+                                                                autocomplete="off">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-group col-xs-12 col-sm-4 col-xs-offset-0 col-sm-offset-8">
+                                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#changeDatesModal">Change dates</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row option-buttons">
+                                    <div class="fieldset">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-4">
+                                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addRoomModal">Add a Room</button>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4">
+                                                <button type="button" class="btn btn-primary btn-block">Modify Services</button>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-4">
+                                                <button class="btn btn-primary btn-block">Cancel Hotel Booking</button>
+                                            </div>
+                                            <div class="col-xs-offset-0 col-xs-12 col-sm-offset-8 col-sm-4">
+                                                <button class="btn btn-primary btn-block">Pay Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 pull-right form-group">
+                            <button class="btn btn-primary btn-block">Back to My Profile</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- / .panel (outer) -->
+                <div class="col-xs-12 col-sm-3">
+                    <aside id="sidebar" class="reservation y_reservationSideBar">
+                        <div class="promotions hidden-xs">
+                            <section>
+                                <img src="http://i0.wp.com/easyonigiri.com/wp-content/uploads/2015/03/Mochi1.jpg" class="img-responsive" alt="dessert">
+                                <div class="promotion-content">
+                                    <h2 class="h4">Taste of Tokyo 2016</h2>
+                                    <p>Taste of Dubai has created one of the finest corporate hospitality experiences in Middle East for you to offer to your valued clients.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        <!-- / .container -->
+
+        <!-- Change dates overlay -->
+        <div class="modal fade" id="changeDatesModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">Change Dates</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h2 class="h4">New Accomodation Details</h2>
+                        <div class="panel panel-primary panel-list booking room-details clearfix">
+                            <div class="panel panel-default my-account-secondary-panel clearfix">
+                                <div class="room panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Stay at Holiday Inn Tokyo</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-xs-12">
+                                            <div class="row room-wrap">
+                                                <div class="col-xs-4 col-sm-2">
+                                                    <img src="https://media-cdn.tripadvisor.com/media/photo-o/01/d9/b8/7d/new-world-hotel.jpg" class="img-responsive" alt="Imperial Hotel">
+                                                </div>
+                                                <div class="col-xs-8 col-sm-10">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <h3>Room 1 Name</h3>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <p>Double Room</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-6 item-wrapper">
+                                                            <dl>
+                                                                <dt>Guests</dt>
+                                                                <dd>2 x Adults</dd>
+                                                                <dd>1 x Infants</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-6 item-wrapper">
+                                                            <dl>
+                                                                <dt>Dates</dt>
+                                                                <dd>Check In 1/01/2017</dd>
+                                                                <dd>Check Out 8/01/2017</dd>
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="row booking-features">
+                                                    <ul class="small clearfix">
+                                                        <li class="col-xs-6">Free cancellation before 10/12/2016</li>
+                                                        <li class="col-xs-6">Full Payment at the time of booking</li>
+                                                        <li class="col-xs-6">Welcome drinks (one drink per person)</li>
+                                                        <li class="col-xs-6">All inclusive</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="responsive-table booking-table">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr class="account-orderhistory-table-head responsive-table-head hidden-xs">
+                                                                    <th class="sr-only">Extra</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Base Price</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Taxes</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Fees</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Discounts</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Total</th>
+                                                                    <th class="hidden"></th>
+                                                                </tr>
+                                                                <tr class="responsive-table-item">
+                                                                    <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                    <td class="responsive-table-cell"></td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                    <td class="responsive-table-cell">500</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                    <td class="responsive-table-cell">20</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                    <td class="responsive-table-cell">10</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                    <td class="status">510</td>
+                                                                </tr>
+                                                                <tr class="responsive-table-item">
+                                                                    <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                    <td class="responsive-table-cell">Extra: 1 x Wi-Fi</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                    <td class="responsive-table-cell">10</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                    <td class="status">520</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <span class="cart-total pull-right">New total per room: £520</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="room panel-default">
+                                    <div class="panel-body">
+                                        <div class="col-xs-12">
+                                            <div class="row room-wrap">
+                                                <div class="col-xs-4 col-sm-2">
+                                                    <img src="https://media-cdn.tripadvisor.com/media/photo-o/01/d9/b8/7d/new-world-hotel.jpg" class="img-responsive" alt="Imperial Hotel">
+                                                </div>
+                                                <div class="col-xs-8 col-sm-10">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <h3>Room 2 Name</h3>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <p>Single Room</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-6 item-wrapper">
+                                                            <dl>
+                                                                <dt>Guests</dt>
+                                                                <dd>1 x Adult</dd>
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-xs-6 item-wrapper">
+                                                            <dl>
+                                                                <dt>Dates</dt>
+                                                                <dd>Check In 1/01/2017</dd>
+                                                                <dd>Check Out 8/01/2017</dd>
+                                                            </dl>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="row booking-features">
+                                                    <ul class="small clearfix">
+                                                        <li class="col-xs-6">Free cancellation before 10/12/2016</li>
+                                                        <li class="col-xs-6">Full Payment at the time of booking</li>
+                                                        <li class="col-xs-6">Welcome drinks (one drink per person)</li>
+                                                        <li class="col-xs-6">All inclusive</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="responsive-table booking-table">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr class="account-orderhistory-table-head responsive-table-head hidden-xs">
+                                                                    <th class="sr-only">Extra</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Base Price</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Taxes</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Fees</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Discounts</th>
+                                                                    <th class="hidden"></th>
+                                                                    <th>Total</th>
+                                                                    <th class="hidden"></th>
+                                                                </tr>
+                                                                <tr class="responsive-table-item">
+                                                                    <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                    <td class="responsive-table-cell"></td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                    <td class="responsive-table-cell">250</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                    <td class="responsive-table-cell">10</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                    <td class="responsive-table-cell">5</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                    <td class="status">255</td>
+                                                                </tr>
+                                                                <tr class="responsive-table-item">
+                                                                    <td class="hidden-sm hidden-md hidden-lg"></td>
+                                                                    <td class="responsive-table-cell">Extra: 1 x Wi-Fi</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Base Price</td>
+                                                                    <td class="responsive-table-cell">10</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Taxes</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Fees</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Discounts</td>
+                                                                    <td class="responsive-table-cell">0</td>
+                                                                    <td class="hidden-sm hidden-md hidden-lg">Total</td>
+                                                                    <td class="status">265</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <span class="cart-total pull-right">New total per room: £265</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-default total">
+                                    <div class="panel-body">
+                                        <div class="col-xs-12">
+                                            <dl class="text-right">
+                                                <dt>Total to refund</dt>
+                                                <dd>£50.00</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-default total">
+                                    <div class="panel-body">
+                                        <div class="col-xs-12">
+                                            <dl class="text-right">
+                                                <dt>New grand total to pay</dt>
+                                                <dd>£785.00</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="fieldset form-group col-xs-12 col-sm-offset-6 col-sm-6">
+                                        <button class="btn btn-primary btn-block">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Change dates overlay -->
+
+        <!-- Add Room overlay -->
+        <div class="modal transparent fade" id="addRoomModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container travelforms add-room">
+                            <div class="form-wrapper col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-1">
+                                <form class="fe-validate form-background form-booking-trip y_accommodationFinderForm">
+                                    <fieldset>
+                                        <legend class="with-icon heading-accommodation primary-legend">Add Room</legend>
+                                        <button type="button" class="modal-only close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <div class="fieldset-inner-wrapper">
+                                            <!-- From / To input fields -->
+                                            <div class="row input-row">
+                                                <div class="input-required-wrap col-xs-12">
+                                                    <label for="destination">Where are you going?</label>
+                                                        <input
+                                                            type="search"
+                                                            class="input-grid col-xs-12 form-control"
+                                                            id="destination"
+                                                            name="destination"
+                                                            placeholder="Holiday Inn Tokyo"
+                                                            disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- / From / To input fields -->
+                                        <!-- Departing / Returning dates input fields -->
+                                        <div class="row input-row">
+                                            <div class="col-xs-9 col-sm-8">
+                                                <div class="row">
+                                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                                        <label class="sr-only" for="accommodationDatePickerCheckIn">Check In</label>
+                                                        <input
+                                                            type="text"
+                                                            class="datePickerDeparting col-xs-12 datepicker input-grid form-control"
+                                                            id="accommodationDatePickerCheckIn"
+                                                            name="accommodationDatePickerCheckIn"
+                                                            placeholder="01/01/2017"
+                                                            autocomplete="off"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                                        <label class="sr-only" for="accommodationDatePickerCheckOut">Check Out</label>
+                                                        <input
+                                                            type="text"
+                                                            class="col-xs-12 datepicker input-grid form-control"
+                                                            id="accommodationDatePickerCheckOut"
+                                                            name="accommodationDatePickerCheckOut"
+                                                            placeholder="08/01/2017"
+                                                            autocomplete="off"
+                                                            disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-3 col-sm-4">
+                                                <div class="row">
+                                                    <div class="col-xs-offset-1 col-xs-11 col-sm-offset-0 col-sm-8">
+                                                        <div class="night-number">
+                                                            <p>7<span>nights</span></p>
+                                                            <span class="moon"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Check in & check out dates input fields -->
+                                        <div class="row input-row less-margin">
+                                            <div class="col-xs-12 col-sm-8">
+                                                <label class="sr-only" for="accommodationRoomQuantity">Room Quantity</label>
+                                                <select class="form-control y_accommodationRoomQuantity" id="accommodationRoomQuantity" required>
+                                                    <option value="" disabled>Rooms</option>
+                                                    <option value="1" selected>1 Room</option>
+                                                    <option value="2">2 Rooms</option>
+                                                    <option value="3">3 Rooms</option>
+                                                </select>
+                                            </div>
+                                            <div id="room[1]" class="col-xs-12 guest-types">
+                                                <p>Room 1</p>
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfAdults[1]">Adult</label>
+                                                        <select class="form-control" id="accommodationNumberOfAdults[1]" required>
+                                                            <option value="" disabled>Adult</option>
+                                                            <option selected>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">16+ years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfChildren[1]">Children</label>
+                                                        <select class="form-control" id="accommodationNumberOfChildren[1]" required>
+                                                            <option value="" disabled>Children</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">2-15 years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfInfants[1]">Infants</label>
+                                                        <select class="form-control" id="accommodationNumberOfInfants[1]" required>
+                                                            <option value="" disabled>Infants</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">up to 2 years</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room[2]" class="col-xs-12 guest-types hidden">
+                                                <p>Room 2</p>
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfAdults[2]">Adult</label>
+                                                        <select class="form-control" id="accommodationNumberOfAdults[2]" required>
+                                                            <option value="" disabled>Adult</option>
+                                                            <option selected>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">16+ years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfChildren[2]">Children</label>
+                                                        <select class="form-control" id="accommodationNumberOfChildren[2]" required>
+                                                            <option value="" disabled>Children</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">2-15 years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfInfants[2]">Infants</label>
+                                                        <select class="form-control" id="accommodationNumberOfInfants[2]" required>
+                                                            <option value="" disabled>Infants</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">up to 2 years</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="room[3]" class="col-xs-12 guest-types hidden">
+                                                <p>Room 3</p>
+                                                <div class="row">
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfAdults[3]">Adult</label>
+                                                        <select class="form-control" id="accommodationNumberOfAdults[3]" required>
+                                                            <option value="" disabled>Adult</option>
+                                                            <option selected>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">16+ years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfChildren[3]">Children</label>
+                                                        <select class="form-control" id="accommodationNumberOfChildren[3]" required>
+                                                            <option value="" disabled>Children</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">2-15 years</span>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <label for="accommodationNumberOfInfants[3]">Infants</label>
+                                                        <select class="form-control" id="accommodationNumberOfInfants[3]" required>
+                                                            <option value="" disabled>Infants</option>
+                                                            <option selected>0</option>
+                                                            <option>1</option>
+                                                            <option>2</option>
+                                                            <option>3</option>
+                                                        </select>
+                                                        <span class="age-range">up to 2 years</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 age-info">
+                                                <a tabindex="0" class="link-trigger" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="Age refers to the age at the time of arrival date of the last leg of the journey: Adult[16+], Child[2-15], Infant[0-1]: Adult[16+], Child[2-15], Infant[0-1]">Age Information <i class="glyphicon glyphicon-info-sign"></i></a>
+                                            </div>
+                                        </div>
+                                        <!-- CTA (Search Dates) -->
+                                        <div class="row margin-cancel">
+                                            <div class="col-xs-12 btn-wrapper full-width">
+                                                <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-sm-offset-6">Search</button>
+                                            </div>
+                                        </div>
+                                        <!--  / CTA (Search Dates) -->
+                                        <!-- / .fieldset-inner-wrapper -->
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- / .form-wrapper -->
+                    </div>
+                    <!-- .modal-body -->
+                </div>
+            </div>
+        </div>
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    
+    <!-- Live Reload Script -->
+    <script src="//localhost:54321/livereload.js"></script>
+
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+        
+</body>
+
+</html>

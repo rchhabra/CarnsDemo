@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:annotation-config/>
+
+  <!-- Order Process Actions -->
+
+  <bean id="abstractOrderAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.AbstractOrderAction"
+        abstract="true" parent="abstractAction">
+    <property name="timeService" ref="timeService"/>
+  </bean>
+
+  <bean id="cancelWholeOrderAuthorizationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.CancelWholeOrderAuthorizationAction"
+        parent="abstractAction">
+    <property name="paymentService" ref="paymentService"/>
+  </bean>
+
+  <bean id="sendOrderPlacedNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.SendOrderPlacedNotificationAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="takePaymentAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.TakePaymentAction"
+        parent="abstractAction">
+    <property name="paymentService" ref="paymentService"/>
+  </bean>
+
+  <bean id="sendPaymentFailedNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.SendPaymentFailedNotificationAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="checkTransactionReviewStatusAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.CheckTransactionReviewStatusAction"
+        parent="abstractAction">
+    <property name="ticketBusinessService" ref="ticketBusinessService"/>
+  </bean>
+
+  <bean id="fraudCheckOrderAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.FraudCheckOrderAction"
+        parent="abstractOrderAction">
+    <property name="fraudService" ref="fraudService"/>
+    <property name="providerName" value="Mockup_3rdPartyProvider"/>
+  </bean>
+
+  <bean id="prepareOrderForManualCheckAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.PrepareOrderForManualCheckAction" parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="sendFraudErrorNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.SendFraudErrorNotificationAction" parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="checkAuthorizeOrderPaymentAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.CheckAuthorizeOrderPaymentAction"
+        parent="abstractAction"/>
+
+  <bean id="sendAuthorizationFailedNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.SendAuthorizationFailedNotificationAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="reserveOrderAmountAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.ReserveOrderAmountAction"
+        parent="abstractAction"/>
+
+  <bean id="fraudCheckOrderInternalAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.FraudCheckOrderInternalAction"
+        parent="abstractOrderAction">
+    <property name="fraudService" ref="fraudService"/>
+    <property name="providerName" value="hybris"/>
+  </bean>
+
+  <bean id="orderManualCheckedAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.OrderManualCheckedAction"
+        parent="abstractOrderAction"/>
+
+  <bean id="splitOrderAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.SplitOrderAction"
+        parent="abstractAction">
+    <property name="orderSplittingService" ref="orderSplittingService"/>
+    <property name="businessProcessService" ref="businessProcessService"/>
+  </bean>
+
+  <bean id="subprocessesCompletedAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.SubprocessesCompletedAction" parent="abstractAction"/>
+
+  <bean id="sendOrderCompletedNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.SendOrderCompletedNotificationAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="scheduleForCleanUpAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.ScheduleForCleanUpAction"
+        parent="abstractAction">
+    <property name="timeService" ref="timeService"/>
+  </bean>
+
+  <bean id="notifyCustomerAboutFraudAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.NotifyCustomerAboutFraudAction" parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="travelCheckOrderAction" parent="abstractAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.TravelCheckOrderAction">
+    <property name="travelCheckOrderService" ref="travelCheckOrderService"/>
+  </bean>
+
+  <bean id="travelSendOrderPlacedNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.TravelSendOrderPlacedNotificationAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="travelSendOrderPlacedNotificationProceduralAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.order.TravelSendOrderPlacedNotificationProceduralAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="moveOrderToActiveAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.MoveOrderToActiveAction"
+        parent="abstractAction"/>
+
+  <bean id="startCheckInProcessAction" class="de.hybris.platform.travelfulfilmentprocess.actions.order.StartCheckInProcessAction"
+        parent="abstractAction">
+    <property name="businessProcessService" ref="businessProcessService"/>
+  </bean>
+
+</beans>

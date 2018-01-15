@@ -1,0 +1,364 @@
+$productCatalog = travelProductCatalog
+$catalogVersion = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$ruleType = ruleType(code)[default = 'ANY']
+
+###########
+### GBP ###
+###########
+
+### FARE PRODUCTS
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = GBP, unique = true]; billingEvent(code); $catalogVersion
+#Beach Destination
+; PhuketOutboundFareProductGBPrule1           ; PhuketOutboundFareProductBundle           ; ; ORT ; ; 20   ; GBP ; ;
+; PhuketInboundFareProductGBPrule1            ; PhuketInboundFareProductBundle            ; ; ORT ; ; 20   ; GBP ; ;
+; GoaOutboundFareProductGBPrule1              ; GoaOutboundFareProductBundle              ; ; ORT ; ; 20   ; GBP ; ;
+; GoaInboundFareProductGBPrule1               ; GoaInboundFareProductBundle               ; ; ORT ; ; 20   ; GBP ; ;
+; MiamiOutboundFareProductGBPrule1            ; MiamiOutboundFareProductBundle            ; ; IRT ; ; 58   ; GBP ; ;
+; MiamiInboundFareProductGBPrule1             ; MiamiInboundFareProductBundle             ; ; IRT ; ; 58   ; GBP ; ;
+; AmalfiOutboundFareProductGBPrule1           ; AmalfiOutboundFareProductBundle           ; ; ERT ; ; 33.6 ; GBP ; ;
+; AmalfiInboundFareProductGBPrule1            ; AmalfiInboundFareProductBundle            ; ; ERT ; ; 33.6 ; GBP ; ;
+
+#Explore Europe
+; LondonOutboundFareProductGBPrule1           ; LondonOutboundFareProductBundle           ; ; ORT ; ; 20   ; GBP ; ;
+; LondonInboundFareProductGBPrule1            ; LondonInboundFareProductBundle            ; ; ORT ; ; 20   ; GBP ; ;
+; ParisOutboundFareProductGBPrule1            ; ParisOutboundFareProductBundle            ; ; ORT ; ; 20   ; GBP ; ;
+; ParisInboundFareProductGBPrule1             ; ParisInboundFareProductBundle             ; ; ORT ; ; 20   ; GBP ; ;
+; FlorenceOutboundFareProductGBPrule1         ; FlorenceOutboundFareProductBundle         ; ; ERT ; ; 33.6 ; GBP ; ;
+; FlorenceInboundFareProductGBPrule1          ; FlorenceInboundFareProductBundle          ; ; ERT ; ; 33.6 ; GBP ; ;
+; RomeOutboundFareProductGBPrule1             ; RomeOutboundFareProductBundle             ; ; IRT ; ; 58   ; GBP ; ;
+; RomeInboundFareProductGBPrule1              ; RomeInboundFareProductBundle              ; ; IRT ; ; 58   ; GBP ; ;
+
+#Great Savings
+; BangkokOutboundFareProductGBPrule1          ; BangkokOutboundFareProductBundle          ; ; ERT ; ; 33.6 ; GBP ; ;
+; BangkokInboundFareProductGBPrule1           ; BangkokInboundFareProductBundle           ; ; ERT ; ; 33.6 ; GBP ; ;
+; MalaysiaOutboundFareProductGBPrule1         ; MalaysiaOutboundFareProductBundle         ; ; IRT ; ; 58   ; GBP ; ;
+; MalaysiaInboundFareProductGBPrule1          ; MalaysiaInboundFareProductBundle          ; ; IRT ; ; 58   ; GBP ; ;
+; PragueOutboundFareProductGBPrule1           ; PragueOutboundFareProductBundle           ; ; ORT ; ; 20   ; GBP ; ;
+; PragueInboundFareProductGBPrule1            ; PragueInboundFareProductBundle            ; ; ORT ; ; 20   ; GBP ; ;
+; IcelandOutboundFareProductGBPrule1          ; IcelandOutboundFareProductBundle          ; ; ORT ; ; 20   ; GBP ; ;
+; IcelandInboundFareProductGBPrule1           ; IcelandInboundFareProductBundle           ; ; ORT ; ; 20   ; GBP ; ;
+
+#Winter Olympics
+; WinterOlympics1OutboundFareProductGBPrule1  ; WinterOlympics1OutboundFareProductBundle  ; ; ORT ; ; 20   ; GBP ; ;
+; WinterOlympics1InboundFareProductGBPrule1   ; WinterOlympics1InboundFareProductBundle   ; ; ORT ; ; 20   ; GBP ; ;
+; WinterOlympics2OutboundFareProductGBPrule1  ; WinterOlympics2OutboundFareProductBundle  ; ; ORT ; ; 20   ; GBP ; ;
+; WinterOlympics2InboundFareProductGBPrule1   ; WinterOlympics2InboundFareProductBundle   ; ; ORT ; ; 20   ; GBP ; ;
+; WinterOlympics3OutboundFareProductGBPrule1  ; WinterOlympics3OutboundFareProductBundle  ; ; ERT ; ; 33.6 ; GBP ; ;
+; WinterOlympics3InboundFareProductGBPrule1   ; WinterOlympics3InboundFareProductBundle   ; ; ERT ; ; 33.6 ; GBP ; ;
+; SnowboardSpecialOutboundFareProductGBPrule1 ; SnowboardSpecialOutboundFareProductBundle ; ; IRT ; ; 58   ; GBP ; ;
+; SnowboardSpecialInboundFareProductGBPrule1  ; SnowboardSpecialInboundFareProductBundle  ; ; IRT ; ; 58   ; GBP ; ;
+
+
+
+### ANCILLARY PRODUCTS
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = GBP, unique = true]; billingEvent(code); $catalogVersion
+#Beach Destination
+; MiamiOutboundAncillaryProductGBPrule1            ; MiamiOutboundAncillaryProductBundle            ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; MiamiOutboundAncillaryProductGBPrule2            ; MiamiOutboundAncillaryProductBundle            ; ; LOUNGEACC1   ; ; 0 ; GBP ; ;
+; MiamiOutboundAncillaryProductGBPrule3            ; MiamiOutboundAncillaryProductBundle            ; ; STANDARDMEAL ; ; 0 ; GBP ; ;
+; MiamiInboundAncillaryProductGBPrule1             ; MiamiInboundAncillaryProductBundle             ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; MiamiInboundAncillaryProductGBPrule2             ; MiamiInboundAncillaryProductBundle             ; ; LOUNGEACC1   ; ; 0 ; GBP ; ;
+; MiamiInboundAncillaryProductGBPrule3             ; MiamiInboundAncillaryProductBundle             ; ; STANDARDMEAL ; ; 0 ; GBP ; ;
+; AmalfiOutboundAncillaryProductGBPrule1           ; AmalfiOutboundAncillaryProductBundle           ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; AmalfiInboundAncillaryProductGBPrule1            ; AmalfiInboundAncillaryProductBundle            ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+
+#Explore Europe
+; FlorenceOutboundAncillaryProductGBPrule1         ; FlorenceOutboundAncillaryProductBundle         ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; FlorenceInboundAncillaryProductGBPrule1          ; FlorenceInboundAncillaryProductBundle          ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+
+#Great Savings
+; BangkokOutboundAncillaryProductGBPrule1          ; BangkokOutboundAncillaryProductBundle          ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; BangkokInboundAncillaryProductGBPrule1           ; BangkokInboundAncillaryProductBundle           ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; MalaysiaOutboundAncillaryProductGBPrule1         ; MalaysiaOutboundAncillaryProductBundle         ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; MalaysiaOutboundAncillaryProductGBPrule2         ; MalaysiaOutboundAncillaryProductBundle         ; ; LOUNGEACC1   ; ; 0 ; GBP ; ;
+; MalaysiaOutboundAncillaryProductGBPrule3         ; MalaysiaOutboundAncillaryProductBundle         ; ; STANDARDMEAL ; ; 0 ; GBP ; ;
+; MalaysiaInboundAncillaryProductGBPrule1          ; MalaysiaInboundAncillaryProductBundle          ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; MalaysiaInboundAncillaryProductGBPrule2          ; MalaysiaInboundAncillaryProductBundle          ; ; LOUNGEACC1   ; ; 0 ; GBP ; ;
+; MalaysiaInboundAncillaryProductGBPrule3          ; MalaysiaInboundAncillaryProductBundle          ; ; STANDARDMEAL ; ; 0 ; GBP ; ;
+
+#Winter Olympics
+; WinterOlympics3OutboundAncillaryProductGBPrule1  ; WinterOlympics3OutboundAncillaryProductBundle  ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; WinterOlympics3InboundAncillaryProductGBPrule1   ; WinterOlympics3InboundAncillaryProductBundle   ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; SnowboardSpecialOutboundAncillaryProductGBPrule1 ; SnowboardSpecialOutboundAncillaryProductBundle ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; SnowboardSpecialOutboundAncillaryProductGBPrule2 ; SnowboardSpecialOutboundAncillaryProductBundle ; ; LOUNGEACC1   ; ; 0 ; GBP ; ;
+; SnowboardSpecialOutboundAncillaryProductGBPrule3 ; SnowboardSpecialOutboundAncillaryProductBundle ; ; STANDARDMEAL ; ; 0 ; GBP ; ;
+; SnowboardSpecialInboundAncillaryProductGBPrule1  ; SnowboardSpecialInboundAncillaryProductBundle  ; ; PRIBOARDING1 ; ; 0 ; GBP ; ;
+; SnowboardSpecialInboundAncillaryProductGBPrule2  ; SnowboardSpecialInboundAncillaryProductBundle  ; ; LOUNGEACC1   ; ; 0 ; GBP ; ;
+; SnowboardSpecialInboundAncillaryProductGBPrule3  ; SnowboardSpecialInboundAncillaryProductBundle  ; ; STANDARDMEAL ; ; 0 ; GBP ; ;
+
+
+
+### ROOM RATE PRODUCTS
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = GBP, unique = true]; billingEvent(code); $catalogVersion
+#Beach destination
+; PhuketAccommodationGBPrule1           ; PhuketAccommodationDealBundle           ; ; 4S_2P_LSWDNR_TH ; ; 84    ; GBP ; ; ;
+; PhuketAccommodationGBPrule2           ; PhuketAccommodationDealBundle           ; ; 4S_2P_LSWENR_TH ; ; 92.4  ; GBP ; ; ;
+; PhuketAccommodationGBPrule3           ; PhuketAccommodationDealBundle           ; ; 4S_2P_HSWDNR_TH ; ; 126   ; GBP ; ; ;
+; PhuketAccommodationGBPrule4           ; PhuketAccommodationDealBundle           ; ; 4S_2P_HSWENR_TH ; ; 134.4 ; GBP ; ; ;
+
+; GoaAccommodationGBPrule1              ; GoaAccommodationDealBundle              ; ; 4S_2P_LSWDNR_IN ; ; 84    ; GBP ; ; ;
+; GoaAccommodationGBPrule2              ; GoaAccommodationDealBundle              ; ; 4S_2P_LSWENR_IN ; ; 92.4  ; GBP ; ; ;
+; GoaAccommodationGBPrule3              ; GoaAccommodationDealBundle              ; ; 4S_2P_HSWDNR_IN ; ; 126   ; GBP ; ; ;
+; GoaAccommodationGBPrule4              ; GoaAccommodationDealBundle              ; ; 4S_2P_HSWENR_IN ; ; 134.4 ; GBP ; ; ;
+
+; MiamiAccommodationGBPrule1            ; MiamiAccommodationDealBundle            ; ; 4S_2P_LSWDFC_US ; ; 77    ; GBP ; ; ;
+; MiamiAccommodationGBPrule2            ; MiamiAccommodationDealBundle            ; ; 4S_2P_LSWEFC_US ; ; 85.4  ; GBP ; ; ;
+; MiamiAccommodationGBPrule3            ; MiamiAccommodationDealBundle            ; ; 4S_2P_HSWDFC_US ; ; 112   ; GBP ; ; ;
+; MiamiAccommodationGBPrule4            ; MiamiAccommodationDealBundle            ; ; 4S_2P_HSWEFC_US ; ; 123.2 ; GBP ; ; ;
+
+; AmalfiAccommodationGBPrule1           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_LSWDFC_IT ; ; 84    ; GBP ; ; ;
+; AmalfiAccommodationGBPrule2           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_LSWEFC_IT ; ; 92.4  ; GBP ; ; ;
+; AmalfiAccommodationGBPrule3           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_HSWDFC_IT ; ; 122.5 ; GBP ; ; ;
+; AmalfiAccommodationGBPrule4           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_HSWEFC_IT ; ; 133.7 ; GBP ; ; ;
+
+
+#Explore Europe
+; LondonAccommodationGBPrule1           ; LondonAccommodationDealBundle           ; ; 4S_2P_LSWDFC_UK ; ; 77    ; GBP ; ; ;
+; LondonAccommodationGBPrule2           ; LondonAccommodationDealBundle           ; ; 4S_2P_LSWEFC_UK ; ; 85.4  ; GBP ; ; ;
+; LondonAccommodationGBPrule3           ; LondonAccommodationDealBundle           ; ; 4S_2P_HSWDFC_UK ; ; 112   ; GBP ; ; ;
+; LondonAccommodationGBPrule4           ; LondonAccommodationDealBundle           ; ; 4S_2P_HSWEFC_UK ; ; 123.2 ; GBP ; ; ;
+
+; ParisAccommodationGBPrule1            ; ParisAccommodationDealBundle            ; ; 5S_2P_LSWDNR_FR ; ; 84    ; GBP ; ; ;
+; ParisAccommodationGBPrule2            ; ParisAccommodationDealBundle            ; ; 5S_2P_LSWENR_FR ; ; 94.5  ; GBP ; ; ;
+; ParisAccommodationGBPrule3            ; ParisAccommodationDealBundle            ; ; 5S_2P_HSWDNR_FR ; ; 126   ; GBP ; ; ;
+; ParisAccommodationGBPrule4            ; ParisAccommodationDealBundle            ; ; 5S_2P_HSWENR_FR ; ; 140   ; GBP ; ; ;
+
+; FlorenceAccommodationGBPrule1         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_LSWDFC_IT ; ; 77    ; GBP ; ; ;
+; FlorenceAccommodationGBPrule2         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_LSWEFC_IT ; ; 85.4  ; GBP ; ; ;
+; FlorenceAccommodationGBPrule3         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_HSWDFC_IT ; ; 112   ; GBP ; ; ;
+; FlorenceAccommodationGBPrule4         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_HSWEFC_IT ; ; 123.2 ; GBP ; ; ;
+
+; RomeAccommodationGBPrule1             ; RomeAccommodationDealBundle             ; ; 4S_2P_LSWDNR_IT ; ; 70    ; GBP ; ; ;
+; RomeAccommodationGBPrule2             ; RomeAccommodationDealBundle             ; ; 4S_2P_LSWENR_IT ; ; 78.4  ; GBP ; ; ;
+; RomeAccommodationGBPrule3             ; RomeAccommodationDealBundle             ; ; 4S_2P_HSWDNR_IT ; ; 105   ; GBP ; ; ;
+; RomeAccommodationGBPrule4             ; RomeAccommodationDealBundle             ; ; 4S_2P_HSWENR_IT ; ; 116.2 ; GBP ; ; ;
+
+
+#Great Savings
+; BangkokAccommodationGBPrule1          ; BangkokAccommodationDealBundle          ; ; 4S_2P_LSWDNR_TH ; ; 84    ; GBP ; ; ;
+; BangkokAccommodationGBPrule2          ; BangkokAccommodationDealBundle          ; ; 4S_2P_LSWENR_TH ; ; 92.4  ; GBP ; ; ;
+; BangkokAccommodationGBPrule3          ; BangkokAccommodationDealBundle          ; ; 4S_2P_HSWDNR_TH ; ; 126   ; GBP ; ; ;
+; BangkokAccommodationGBPrule4          ; BangkokAccommodationDealBundle          ; ; 4S_2P_HSWENR_TH ; ; 134.4 ; GBP ; ; ;
+
+; MalaysiaAccommodationGBPrule1         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_LSWDFC_MY ; ; 84    ; GBP ; ; ;
+; MalaysiaAccommodationGBPrule2         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_LSWEFC_MY ; ; 92.4  ; GBP ; ; ;
+; MalaysiaAccommodationGBPrule3         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_HSWDFC_MY ; ; 126   ; GBP ; ; ;
+; MalaysiaAccommodationGBPrule4         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_HSWEFC_MY ; ; 134.4 ; GBP ; ; ;
+
+; PragueAccommodationGBPrule1           ; PragueAccommodationDealBundle           ; ; 5S_4P_LSWDNR_CZ ; ; 105   ; GBP ; ; ;
+; PragueAccommodationGBPrule2           ; PragueAccommodationDealBundle           ; ; 5S_4P_LSWENR_CZ ; ; 115.5 ; GBP ; ; ;
+; PragueAccommodationGBPrule3           ; PragueAccommodationDealBundle           ; ; 5S_4P_HSWDNR_CZ ; ; 157.5 ; GBP ; ; ;
+; PragueAccommodationGBPrule4           ; PragueAccommodationDealBundle           ; ; 5S_4P_HSWENR_CZ ; ; 168   ; GBP ; ; ;
+
+; IcelandAccommodationGBPrule1          ; IcelandAccommodationDealBundle          ; ; 3S_2P_LSWDNR_IS ; ; 63    ; GBP ; ; ;
+; IcelandAccommodationGBPrule2          ; IcelandAccommodationDealBundle          ; ; 3S_2P_LSWENR_IS ; ; 69.3  ; GBP ; ; ;
+; IcelandAccommodationGBPrule3          ; IcelandAccommodationDealBundle          ; ; 3S_2P_HSWDNR_IS ; ; 94.5  ; GBP ; ; ;
+; IcelandAccommodationGBPrule4          ; IcelandAccommodationDealBundle          ; ; 3S_2P_HSWENR_IS ; ; 100.8 ; GBP ; ; ;
+
+
+#Winter Olympics
+; WinterOlympics1AccommodationGBPrule1  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_LSWDNR_KR ; ; 60    ; GBP ; ; ;
+; WinterOlympics1AccommodationGBPrule2  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_LSWENR_KR ; ; 69.3  ; GBP ; ; ;
+; WinterOlympics1AccommodationGBPrule3  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_HSWDNR_KR ; ; 94.5  ; GBP ; ; ;
+; WinterOlympics1AccommodationGBPrule4  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_HSWENR_KR ; ; 100.8 ; GBP ; ; ;
+
+; WinterOlympics2AccommodationGBPrule1  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_LSWDFC_KR ; ; 140   ; GBP ; ; ;
+; WinterOlympics2AccommodationGBPrule2  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_LSWEFC_KR ; ; 154   ; GBP ; ; ;
+; WinterOlympics2AccommodationGBPrule3  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_HSWDFC_KR ; ; 210   ; GBP ; ; ;
+; WinterOlympics2AccommodationGBPrule4  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_HSWEFC_KR ; ; 224   ; GBP ; ; ;
+
+; WinterOlympics3AccommodationGBPrule1  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_LSWDFC_KR ; ; 84    ; GBP ; ; ;
+; WinterOlympics3AccommodationGBPrule2  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_LSWEFC_KR ; ; 92.4  ; GBP ; ; ;
+; WinterOlympics3AccommodationGBPrule3  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_HSWDFC_KR ; ; 126   ; GBP ; ; ;
+; WinterOlympics3AccommodationGBPrule4  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_HSWEFC_KR ; ; 134.4 ; GBP ; ; ;
+
+; SnowboardSpecialAccommodationGBPrule1 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_LSWDNR_KR ; ; 63    ; GBP ; ; ;
+; SnowboardSpecialAccommodationGBPrule2 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_LSWENR_KR ; ; 69.3  ; GBP ; ; ;
+; SnowboardSpecialAccommodationGBPrule3 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_HSWDNR_KR ; ; 94.5  ; GBP ; ; ;
+; SnowboardSpecialAccommodationGBPrule4 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_HSWENR_KR ; ; 100.8 ; GBP ; ; ;
+
+
+
+### STANDARD BUNDLE
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = GBP, unique = true]; billingEvent(code); $catalogVersion
+#
+
+
+###########
+### EUR ###
+###########
+
+### FARE PRODUCTS
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = EUR, unique = true]; billingEvent(code); $catalogVersion
+#Beach Destination
+; PhuketOutboundFareProductEURrule1           ; PhuketOutboundFareProductBundle           ; ; ORT ; ; 25.47 ; EUR ; ;
+; PhuketInboundFareProductEURrule1            ; PhuketInboundFareProductBundle            ; ; ORT ; ; 25.47 ; EUR ; ;
+; GoaOutboundFareProductEURrule1              ; GoaOutboundFareProductBundle              ; ; ORT ; ; 25.47 ; EUR ; ;
+; GoaInboundFareProductEURrule1               ; GoaInboundFareProductBundle               ; ; ORT ; ; 25.47 ; EUR ; ;
+; MiamiOutboundFareProductEURrule1            ; MiamiOutboundFareProductBundle            ; ; IRT ; ; 75.52 ; EUR ; ;
+; MiamiInboundFareProductEURrule1             ; MiamiInboundFareProductBundle             ; ; IRT ; ; 75.52 ; EUR ; ;
+; AmalfiOutboundFareProductEURrule1           ; AmalfiOutboundFareProductBundle           ; ; ERT ; ; 43.67 ; EUR ; ;
+; AmalfiInboundFareProductEURrule1            ; AmalfiInboundFareProductBundle            ; ; ERT ; ; 43.67 ; EUR ; ;
+
+#Explore Europe
+; LondonOutboundFareProductEURrule1           ; LondonOutboundFareProductBundle           ; ; ORT ; ; 25.47 ; EUR ; ;
+; LondonInboundFareProductEURrule1            ; LondonInboundFareProductBundle            ; ; ORT ; ; 25.47 ; EUR ; ;
+; ParisOutboundFareProductEURrule1            ; ParisOutboundFareProductBundle            ; ; ORT ; ; 25.47 ; EUR ; ;
+; ParisInboundFareProductEURrule1             ; ParisInboundFareProductBundle             ; ; ORT ; ; 25.47 ; EUR ; ;
+; FlorenceOutboundFareProductEURrule1         ; FlorenceOutboundFareProductBundle         ; ; ERT ; ; 43.67 ; EUR ; ;
+; FlorenceInboundFareProductEURrule1          ; FlorenceInboundFareProductBundle          ; ; ERT ; ; 43.67 ; EUR ; ;
+; RomeOutboundFareProductEURrule1             ; RomeOutboundFareProductBundle             ; ; IRT ; ; 75.52 ; EUR ; ;
+; RomeInboundFareProductEURrule1              ; RomeInboundFareProductBundle              ; ; IRT ; ; 75.52 ; EUR ; ;
+
+#Great Savings
+; BangkokOutboundFareProductEURrule1          ; BangkokOutboundFareProductBundle          ; ; ERT ; ; 43.67 ; EUR ; ;
+; BangkokInboundFareProductEURrule1           ; BangkokInboundFareProductBundle           ; ; ERT ; ; 43.67 ; EUR ; ;
+; MalaysiaOutboundFareProductEURrule1         ; MalaysiaOutboundFareProductBundle         ; ; IRT ; ; 75.52 ; EUR ; ;
+; MalaysiaInboundFareProductEURrule1          ; MalaysiaInboundFareProductBundle          ; ; IRT ; ; 75.52 ; EUR ; ;
+; PragueOutboundFareProductEURrule1           ; PragueOutboundFareProductBundle           ; ; ORT ; ; 25.47 ; EUR ; ;
+; PragueInboundFareProductEURrule1            ; PragueInboundFareProductBundle            ; ; ORT ; ; 25.47 ; EUR ; ;
+; IcelandOutboundFareProductEURrule1          ; IcelandOutboundFareProductBundle          ; ; ORT ; ; 25.47 ; EUR ; ;
+; IcelandInboundFareProductEURrule1           ; IcelandInboundFareProductBundle           ; ; ORT ; ; 25.47 ; EUR ; ;
+
+#Winter Olympics
+; WinterOlympics1OutboundFareProductEURrule1  ; WinterOlympics1OutboundFareProductBundle  ; ; ORT ; ; 25.47 ; EUR ; ;
+; WinterOlympics1InboundFareProductEURrule1   ; WinterOlympics1InboundFareProductBundle   ; ; ORT ; ; 25.47 ; EUR ; ;
+; WinterOlympics2OutboundFareProductEURrule1  ; WinterOlympics2OutboundFareProductBundle  ; ; ORT ; ; 25.47 ; EUR ; ;
+; WinterOlympics2InboundFareProductEURrule1   ; WinterOlympics2InboundFareProductBundle   ; ; ORT ; ; 25.47 ; EUR ; ;
+; WinterOlympics3OutboundFareProductEURrule1  ; WinterOlympics3OutboundFareProductBundle  ; ; ERT ; ; 43.67 ; EUR ; ;
+; WinterOlympics3InboundFareProductEURrule1   ; WinterOlympics3InboundFareProductBundle   ; ; ERT ; ; 43.67 ; EUR ; ;
+; SnowboardSpecialOutboundFareProductEURrule1 ; SnowboardSpecialOutboundFareProductBundle ; ; IRT ; ; 75.52 ; EUR ; ;
+; SnowboardSpecialInboundFareProductEURrule1  ; SnowboardSpecialInboundFareProductBundle  ; ; IRT ; ; 75.52 ; EUR ; ;
+
+
+
+### ANCILLARY PRODUCTS
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = EUR, unique = true]; billingEvent(code); $catalogVersion
+#Beach Destination
+; MiamiOutboundAncillaryProductEURrule1            ; MiamiOutboundAncillaryProductBundle            ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; MiamiOutboundAncillaryProductEURrule2            ; MiamiOutboundAncillaryProductBundle            ; ; LOUNGEACC1   ; ; 0 ; EUR ; ;
+; MiamiOutboundAncillaryProductEURrule3            ; MiamiOutboundAncillaryProductBundle            ; ; STANDARDMEAL ; ; 0 ; EUR ; ;
+; MiamiInboundAncillaryProductEURrule1             ; MiamiInboundAncillaryProductBundle             ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; MiamiInboundAncillaryProductEURrule2             ; MiamiInboundAncillaryProductBundle             ; ; LOUNGEACC1   ; ; 0 ; EUR ; ;
+; MiamiInboundAncillaryProductEURrule3             ; MiamiInboundAncillaryProductBundle             ; ; STANDARDMEAL ; ; 0 ; EUR ; ;
+; AmalfiOutboundAncillaryProductEURrule1           ; AmalfiOutboundAncillaryProductBundle           ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; AmalfiInboundAncillaryProductEURrule1            ; AmalfiInboundAncillaryProductBundle            ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+
+#Explore Europe
+; FlorenceOutboundAncillaryProductEURrule1         ; FlorenceOutboundAncillaryProductBundle         ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; FlorenceInboundAncillaryProductEURrule1          ; FlorenceInboundAncillaryProductBundle          ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+
+#Great Savings
+; BangkokOutboundAncillaryProductEURrule1          ; BangkokOutboundAncillaryProductBundle          ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; BangkokInboundAncillaryProductEURrule1           ; BangkokInboundAncillaryProductBundle           ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; MalaysiaOutboundAncillaryProductEURrule1         ; MalaysiaOutboundAncillaryProductBundle         ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; MalaysiaOutboundAncillaryProductEURrule2         ; MalaysiaOutboundAncillaryProductBundle         ; ; LOUNGEACC1   ; ; 0 ; EUR ; ;
+; MalaysiaOutboundAncillaryProductEURrule3         ; MalaysiaOutboundAncillaryProductBundle         ; ; STANDARDMEAL ; ; 0 ; EUR ; ;
+; MalaysiaInboundAncillaryProductEURrule1          ; MalaysiaInboundAncillaryProductBundle          ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; MalaysiaInboundAncillaryProductEURrule2          ; MalaysiaInboundAncillaryProductBundle          ; ; LOUNGEACC1   ; ; 0 ; EUR ; ;
+; MalaysiaInboundAncillaryProductEURrule3          ; MalaysiaInboundAncillaryProductBundle          ; ; STANDARDMEAL ; ; 0 ; EUR ; ;
+
+#Winter Olympics
+; WinterOlympics3OutboundAncillaryProductEURrule1  ; WinterOlympics3OutboundAncillaryProductBundle  ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; WinterOlympics3InboundAncillaryProductEURrule1   ; WinterOlympics3InboundAncillaryProductBundle   ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; SnowboardSpecialOutboundAncillaryProductEURrule1 ; SnowboardSpecialOutboundAncillaryProductBundle ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; SnowboardSpecialOutboundAncillaryProductEURrule2 ; SnowboardSpecialOutboundAncillaryProductBundle ; ; LOUNGEACC1   ; ; 0 ; EUR ; ;
+; SnowboardSpecialOutboundAncillaryProductEURrule3 ; SnowboardSpecialOutboundAncillaryProductBundle ; ; STANDARDMEAL ; ; 0 ; EUR ; ;
+; SnowboardSpecialInboundAncillaryProductEURrule1  ; SnowboardSpecialInboundAncillaryProductBundle  ; ; PRIBOARDING1 ; ; 0 ; EUR ; ;
+; SnowboardSpecialInboundAncillaryProductEURrule2  ; SnowboardSpecialInboundAncillaryProductBundle  ; ; LOUNGEACC1   ; ; 0 ; EUR ; ;
+; SnowboardSpecialInboundAncillaryProductEURrule3  ; SnowboardSpecialInboundAncillaryProductBundle  ; ; STANDARDMEAL ; ; 0 ; EUR ; ;
+
+
+
+### ROOM RATE PRODUCTS
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = EUR, unique = true]; billingEvent(code); $catalogVersion
+#Beach destination
+; PhuketAccommodationEURrule1           ; PhuketAccommodationDealBundle           ; ; 4S_2P_LSWDNR_TH ; ; 98    ; EUR ; ; ;
+; PhuketAccommodationEURrule2           ; PhuketAccommodationDealBundle           ; ; 4S_2P_LSWENR_TH ; ; 106.4 ; EUR ; ; ;
+; PhuketAccommodationEURrule3           ; PhuketAccommodationDealBundle           ; ; 4S_2P_HSWDNR_TH ; ; 140   ; EUR ; ; ;
+; PhuketAccommodationEURrule4           ; PhuketAccommodationDealBundle           ; ; 4S_2P_HSWENR_TH ; ; 148.4 ; EUR ; ; ;
+
+; GoaAccommodationEURrule1              ; GoaAccommodationDealBundle              ; ; 4S_2P_LSWDNR_IN ; ; 98    ; EUR ; ; ;
+; GoaAccommodationEURrule2              ; GoaAccommodationDealBundle              ; ; 4S_2P_LSWENR_IN ; ; 106.4 ; EUR ; ; ;
+; GoaAccommodationEURrule3              ; GoaAccommodationDealBundle              ; ; 4S_2P_HSWDNR_IN ; ; 140   ; EUR ; ; ;
+; GoaAccommodationEURrule4              ; GoaAccommodationDealBundle              ; ; 4S_2P_HSWENR_IN ; ; 148.4 ; EUR ; ; ;
+
+; MiamiAccommodationEURrule1            ; MiamiAccommodationDealBundle            ; ; 4S_2P_LSWDFC_US ; ; 77    ; EUR ; ; ;
+; MiamiAccommodationEURrule2            ; MiamiAccommodationDealBundle            ; ; 4S_2P_LSWEFC_US ; ; 85.4  ; EUR ; ; ;
+; MiamiAccommodationEURrule3            ; MiamiAccommodationDealBundle            ; ; 4S_2P_HSWDFC_US ; ; 112   ; EUR ; ; ;
+; MiamiAccommodationEURrule4            ; MiamiAccommodationDealBundle            ; ; 4S_2P_HSWEFC_US ; ; 123.2 ; EUR ; ; ;
+
+; AmalfiAccommodationEURrule1           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_LSWDFC_IT ; ; 84    ; EUR ; ; ;
+; AmalfiAccommodationEURrule2           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_LSWEFC_IT ; ; 92.4  ; EUR ; ; ;
+; AmalfiAccommodationEURrule3           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_HSWDFC_IT ; ; 122.5 ; EUR ; ; ;
+; AmalfiAccommodationEURrule4           ; AmalfiAccommodationDealBundle           ; ; 4S_3P_HSWEFC_IT ; ; 133.7 ; EUR ; ; ;
+
+#Explore Europe
+; LondonAccommodationEURrule1           ; LondonAccommodationDealBundle           ; ; 4S_2P_LSWDFC_UK ; ; 77    ; EUR ; ; ;
+; LondonAccommodationEURrule2           ; LondonAccommodationDealBundle           ; ; 4S_2P_LSWEFC_UK ; ; 85.4  ; EUR ; ; ;
+; LondonAccommodationEURrule3           ; LondonAccommodationDealBundle           ; ; 4S_2P_HSWDFC_UK ; ; 112   ; EUR ; ; ;
+; LondonAccommodationEURrule4           ; LondonAccommodationDealBundle           ; ; 4S_2P_HSWEFC_UK ; ; 123.2 ; EUR ; ; ;
+
+; ParisAccommodationEURrule1            ; ParisAccommodationDealBundle            ; ; 5S_2P_LSWDNR_FR ; ; 84    ; EUR ; ; ;
+; ParisAccommodationEURrule2            ; ParisAccommodationDealBundle            ; ; 5S_2P_LSWENR_FR ; ; 94.5  ; EUR ; ; ;
+; ParisAccommodationEURrule3            ; ParisAccommodationDealBundle            ; ; 5S_2P_HSWDNR_FR ; ; 126   ; EUR ; ; ;
+; ParisAccommodationEURrule4            ; ParisAccommodationDealBundle            ; ; 5S_2P_HSWENR_FR ; ; 140   ; EUR ; ; ;
+
+; FlorenceAccommodationEURrule1         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_LSWDFC_IT ; ; 77    ; EUR ; ; ;
+; FlorenceAccommodationEURrule2         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_LSWEFC_IT ; ; 85.4  ; EUR ; ; ;
+; FlorenceAccommodationEURrule3         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_HSWDFC_IT ; ; 112   ; EUR ; ; ;
+; FlorenceAccommodationEURrule4         ; FlorenceAccommodationDealBundle         ; ; 4S_2P_HSWEFC_IT ; ; 123.2 ; EUR ; ; ;
+
+; RomeAccommodationEURrule1             ; RomeAccommodationDealBundle             ; ; 4S_2P_LSWDNR_IT ; ; 70    ; EUR ; ; ;
+; RomeAccommodationEURrule2             ; RomeAccommodationDealBundle             ; ; 4S_2P_LSWENR_IT ; ; 78.4  ; EUR ; ; ;
+; RomeAccommodationEURrule3             ; RomeAccommodationDealBundle             ; ; 4S_2P_HSWDNR_IT ; ; 105   ; EUR ; ; ;
+; RomeAccommodationEURrule4             ; RomeAccommodationDealBundle             ; ; 4S_2P_HSWENR_IT ; ; 116.2 ; EUR ; ; ;
+
+#Great Savings
+; BangkokAccommodationEURrule1          ; BangkokAccommodationDealBundle          ; ; 4S_2P_LSWDNR_TH ; ; 98    ; EUR ; ; ;
+; BangkokAccommodationEURrule2          ; BangkokAccommodationDealBundle          ; ; 4S_2P_LSWENR_TH ; ; 106.4 ; EUR ; ; ;
+; BangkokAccommodationEURrule3          ; BangkokAccommodationDealBundle          ; ; 4S_2P_HSWDNR_TH ; ; 140   ; EUR ; ; ;
+; BangkokAccommodationEURrule4          ; BangkokAccommodationDealBundle          ; ; 4S_2P_HSWENR_TH ; ; 148.4 ; EUR ; ; ;
+
+; MalaysiaAccommodationEURrule1         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_LSWDFC_MY ; ; 98    ; EUR ; ; ;
+; MalaysiaAccommodationEURrule2         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_LSWEFC_MY ; ; 106.4 ; EUR ; ; ;
+; MalaysiaAccommodationEURrule3         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_HSWDFC_MY ; ; 140   ; EUR ; ; ;
+; MalaysiaAccommodationEURrule4         ; MalaysiaAccommodationDealBundle         ; ; 3S_2P_HSWEFC_MY ; ; 148.4 ; EUR ; ; ;
+
+; PragueAccommodationEURrule1           ; PragueAccommodationDealBundle           ; ; 5S_4P_LSWDNR_CZ ; ; 133   ; EUR ; ; ;
+; PragueAccommodationEURrule2           ; PragueAccommodationDealBundle           ; ; 5S_4P_LSWENR_CZ ; ; 143.5 ; EUR ; ; ;
+; PragueAccommodationEURrule3           ; PragueAccommodationDealBundle           ; ; 5S_4P_HSWDNR_CZ ; ; 185.5 ; EUR ; ; ;
+; PragueAccommodationEURrule4           ; PragueAccommodationDealBundle           ; ; 5S_4P_HSWENR_CZ ; ; 196   ; EUR ; ; ;
+
+; IcelandAccommodationEURrule1          ; IcelandAccommodationDealBundle          ; ; 3S_2P_LSWDNR_IS ; ; 77    ; EUR ; ; ;
+; IcelandAccommodationEURrule2          ; IcelandAccommodationDealBundle          ; ; 3S_2P_LSWENR_IS ; ; 83.3  ; EUR ; ; ;
+; IcelandAccommodationEURrule3          ; IcelandAccommodationDealBundle          ; ; 3S_2P_HSWDNR_IS ; ; 108.5 ; EUR ; ; ;
+; IcelandAccommodationEURrule4          ; IcelandAccommodationDealBundle          ; ; 3S_2P_HSWENR_IS ; ; 114.8 ; EUR ; ; ;
+
+
+#Winter Olympics
+; WinterOlympics1AccommodationEURrule1  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_LSWDNR_KR ; ; 77    ; EUR ; ; ;
+; WinterOlympics1AccommodationEURrule2  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_LSWENR_KR ; ; 83.3  ; EUR ; ; ;
+; WinterOlympics1AccommodationEURrule3  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_HSWDNR_KR ; ; 108.5 ; EUR ; ; ;
+; WinterOlympics1AccommodationEURrule4  ; WinterOlympics1AccommodationDealBundle  ; ; 3S_2P_HSWENR_KR ; ; 114.8 ; EUR ; ; ;
+
+; WinterOlympics2AccommodationEURrule1  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_LSWDFC_KR ; ; 161   ; EUR ; ; ;
+; WinterOlympics2AccommodationEURrule2  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_LSWEFC_KR ; ; 175   ; EUR ; ; ;
+; WinterOlympics2AccommodationEURrule3  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_HSWDFC_KR ; ; 231   ; EUR ; ; ;
+; WinterOlympics2AccommodationEURrule4  ; WinterOlympics2AccommodationDealBundle  ; ; 5S_3P_HSWEFC_KR ; ; 245   ; EUR ; ; ;
+
+; WinterOlympics3AccommodationEURrule1  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_LSWDFC_KR ; ; 112   ; EUR ; ; ;
+; WinterOlympics3AccommodationEURrule2  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_LSWEFC_KR ; ; 120.4 ; EUR ; ; ;
+; WinterOlympics3AccommodationEURrule3  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_HSWDFC_KR ; ; 154   ; EUR ; ; ;
+; WinterOlympics3AccommodationEURrule4  ; WinterOlympics3AccommodationDealBundle  ; ; 3S_4P_HSWEFC_KR ; ; 162.4 ; EUR ; ; ;
+
+; SnowboardSpecialAccommodationEURrule1 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_LSWDNR_KR ; ; 91    ; EUR ; ; ;
+; SnowboardSpecialAccommodationEURrule2 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_LSWENR_KR ; ; 97.3  ; EUR ; ; ;
+; SnowboardSpecialAccommodationEURrule3 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_HSWDNR_KR ; ; 122.5 ; EUR ; ; ;
+; SnowboardSpecialAccommodationEURrule4 ; SnowboardSpecialAccommodationDealBundle ; ; 3S_4P_HSWENR_KR ; ; 128.8 ; EUR ; ; ;
+
+
+
+### STANDARD BUNDLE
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = EUR, unique = true]; billingEvent(code); $catalogVersion
+#

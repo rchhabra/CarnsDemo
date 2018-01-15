@@ -1,0 +1,39 @@
+package de.hybris.platform.travelrulesengine.rules
+
+import de.hybris.platform.travelrulesengine.rao.FareProductRAO;
+import de.hybris.platform.travelrulesengine.rao.FareSearchRequestRAO;
+import de.hybris.platform.ruleengineservices.rao.CategoryRAO;
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import de.hybris.platform.commercefacades.travel.enums.TripType;
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import java.util.Map;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleFareFilterAction;
+
+rule "filterFareTripType"
+@ruleCode("filterFareTripType")
+@moduleName("travel-rules-module")
+dialect "mvel"
+    when
+        $result : RuleEngineResultRAO()
+        $fareProduct : FareProductRAO($fareproduct_categories : categories)
+        (
+            (
+                $fareSearchRequest : FareSearchRequestRAO(tripType == TripType.RETURN)
+                and
+                exists (CategoryRAO(code == "CATEGORY_OW") from $fareproduct_categories)
+            )
+            or
+            (
+                $fareSearchRequest : FareSearchRequestRAO(tripType == TripType.SINGLE)
+                and
+                exists (CategoryRAO(code == "CATEGORY_RT") from $fareproduct_categories)
+            )
+        )
+    then
+    	Map variables = [
+		   "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO": $result,
+		   "de.hybris.platform.travelrulesengine.rao.FareProductRAO": $fareProduct
+		];
+    	ruleFareFilterAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), null);
+end

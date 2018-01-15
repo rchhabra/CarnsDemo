@@ -1,0 +1,140 @@
+# ImpEx for Importing TransportFacilities into travel accelerator
+
+
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE TransportFacility; code[unique = true]; type(code)
+
+; LHR ; AIRPORT
+; LCY ; AIRPORT
+; LGW ; AIRPORT
+; LTN ; AIRPORT
+; SEN ; AIRPORT
+; STN ; AIRPORT
+; MAN ; AIRPORT
+; EDI ; AIRPORT
+; INV ; AIRPORT
+; BFS ; AIRPORT
+; CDG ; AIRPORT
+; ORY ; AIRPORT
+; NCE ; AIRPORT
+
+; LIN ; AIRPORT
+; MXP ; AIRPORT
+; CIA ; AIRPORT
+; FCO ; AIRPORT
+; VCE ; AIRPORT
+
+; BER ; AIRPORT
+; SXF ; AIRPORT
+; TXL ; AIRPORT
+; BRE ; AIRPORT
+; DUS ; AIRPORT
+; MGL ; AIRPORT
+; NRN ; AIRPORT
+; FRA ; AIRPORT
+; HHN ; AIRPORT
+; QGV ; AIRPORT
+; ALC ; AIRPORT
+
+; ATH ; AIRPORT
+; JFK ; AIRPORT
+; MLE ; AIRPORT
+
+; HKT ; AIRPORT
+; GOI ; AIRPORT
+; MIA ; AIRPORT
+; NAP ; AIRPORT
+; FLR ; AIRPORT
+; BKK ; AIRPORT
+; KUL ; AIRPORT
+; PRG ; AIRPORT
+; KEF ; AIRPORT
+; ICN ; AIRPORT
+
+# ImpEx for Importing TransportFacilityLocationRelation into travel accelerator
+
+
+UPDATE Location; code[unique = true]; transportFacility(code);
+
+; LON ; LHR, LGW, LCY, LTN, STN, SEN
+; MAN ; MAN
+; EDI ; EDI
+; INV ; INV
+; BFS ; BFS
+
+; PAR ; CDG, ORY
+; NCE ; NCE
+
+; MIL ; LIN, MXP
+; ROM ; CIA, FCO
+; VCE ; VCE
+
+; BER ; BER, SXF, TXL
+; BRE ; BRE
+; DUS ; DUS, MGL, NRN
+; FRA ; FRA, HHN, QGV
+
+; ALC ; ALC
+
+; ATH ; ATH
+; NYC ; JFK
+; MLE ; MLE
+
+; HKT ; HKT
+; GOI ; GOI
+; MIA ; MIA
+; NAP ; NAP
+; FLR ; FLR
+; BKK ; BKK
+; KUL ; KUL
+; PRG ; PRG
+; REK ; KEF
+; SEL ; ICN
+
+# ImpEx for Importing TransportFacilityIdentifierRelation into travel accelerator
+
+INSERT_UPDATE TransportFacility; code[unique = true]; identifier(code)
+
+; LHR ; LHR
+; LGW ; LGW
+; LCY ; LCY
+; STN ; STN
+; LTN ; LTN
+; SEN ; SEN
+; MAN ; MAN
+; EDI ; EDI
+; INV ; INV
+; BFS ; BFS
+; CDG ; CDG
+; ORY ; ORY
+; NCE ; NCE
+; LIN ; LIN
+; MXP ; MXP
+; CIA ; CIA
+; FCO ; FCO
+; BER ; BER
+; SXF ; SXF
+; TXL ; TXL
+; BRE ; BRE
+; DUS ; DUS
+; MGL ; MGL
+; NRN ; NRN
+; FRA ; FRA
+; HHN ; HHN
+; QGV ; QGV
+; ALC ; ALC
+; VCE ; VCE
+; ATH ; ATH
+; JFK ; JFK
+; MLE ; MLE
+
+; GOI ; GOI
+; MIA ; MIA
+; NAP ; NAP
+; FLR ; FLR
+; BKK ; BKK
+; KUL ; KUL
+; PRG ; PRG
+; KEF ; KEF
+; ICN ; ICN

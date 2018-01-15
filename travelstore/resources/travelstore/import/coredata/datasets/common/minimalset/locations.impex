@@ -1,0 +1,125 @@
+# ImpEx for Importing Locations into Travelaccelerator
+
+# Create Categories
+INSERT_UPDATE Location; code[unique = true]; locationType(code); superlocations(code)
+
+
+#Regions
+; EUR ; REGION  ;
+; NOA ; REGION  ;
+; SAS ; REGION  ;
+; EAS ; REGION  ;
+
+#Countries
+; GB  ; COUNTRY ; EUR
+; FR  ; COUNTRY ; EUR
+; IT  ; COUNTRY ; EUR
+; DE  ; COUNTRY ; EUR
+; ES  ; COUNTRY ; EUR
+; GR  ; COUNTRY ; EUR
+; US  ; COUNTRY ; NOA
+; MV  ; COUNTRY ; SAS
+; TH ; COUNTRY ; SAS
+; IN ; COUNTRY ; SAS
+; MY ; COUNTRY ; SAS
+; CZ ; COUNTRY ; EUR
+; IS ; COUNTRY ; EUR
+; KR ; COUNTRY ; EAS
+
+#Cities
+; LON ; CITY    ; GB
+; MAN ; CITY    ; GB
+; EDI ; CITY    ; GB
+; INV ; CITY    ; GB
+; BFS ; CITY    ; GB
+
+
+; NCE ; CITY    ; FR
+; PAR ; CITY    ; FR
+
+; MIL ; CITY    ; IT
+; ROM ; CITY    ; IT
+; VCE ; CITY    ; IT
+
+; BER ; CITY    ; DE
+; BRE ; CITY    ; DE
+; DUS ; CITY    ; DE
+; FRA ; CITY    ; DE
+; MUN ; CITY	; DE
+
+; ALC ; CITY    ; ES
+; MAD ; CITY    ; ES
+
+; ATH ; CITY    ; GR
+
+; NYC ; CITY    ; US
+
+; MLE ; CITY    ; MV
+
+; HKT ; CITY	; TH
+
+; GOI ; CITY	; IN
+; MIA ; CITY	; US
+; NAP ; CITY	; IT
+; FLR ; CITY	; IT
+; BKK ; CITY	; TH
+; KUL ; CITY	; MY
+; PRG ; CITY	; CZ
+; REK ; CITY	; IS	
+; SEL ; CITY	; KR
+
+# ImpEx for Importing LocationIdentifiersRelation into travel accelerator
+
+INSERT_UPDATE Location; code[unique = true]; identifier(code)
+
+#;EU;EU
+
+; EUR ; EUR
+; NOA ; NOA
+; SAS ; SAS
+; EAS ; EAS
+
+; GB  ; GB
+; FR  ; FR
+; IT  ; IT
+; DE  ; DE
+; ES  ; ES
+; GR  ; GR
+; US  ; US
+; MV  ; MV
+; TH ; TH
+; IN ; IN
+; MY ; MY
+; CZ ; CZ
+; IS ; IS
+; KR ; KR
+
+; LON ; LON
+; MAN ; MAN
+; EDI ; EDI
+; INV ; INV
+; BFS ; BFS
+; NCE ; NCE
+; PAR ; PAR
+; MIL ; MIL
+; ROM ; ROM
+; BER ; BER
+; BRE ; BRE
+; DUS ; DUS
+; FRA ; FRA
+; ALC ; ALC
+; VCE ; VCE
+; ATH ; ATH
+; NYC ; NYC
+; MLE ; MLE
+
+; HKT ; HKT
+; GOI ; GOI
+; MIA ; MIA
+; NAP ; NAP
+; FLR ; FLR
+; BKK ; BKK
+; KUL ; KUL
+; PRG ; PRG
+; REK ; REK
+; SEL ; SEL

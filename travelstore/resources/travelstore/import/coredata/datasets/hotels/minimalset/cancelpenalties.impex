@@ -1,0 +1,7 @@
+#
+# ImpEx for Importing CancelPenalty into travel accelerator
+#
+
+INSERT_UPDATE CancelPenalty; code[unique = true]; percentageAmount; fixedAmount; absoluteDeadline; relativeDeadline
+# Cancel penalty of 100% if cancellation happens less than 7 days before
+; nonRefundable ; 100 ; ; ; 604800000 ;

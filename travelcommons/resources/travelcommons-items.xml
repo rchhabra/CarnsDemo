@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+  
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="items.xsd">
+
+  <itemtypes>
+
+    <itemtype code="TabbedFinderComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.TabbedFinderComponent">
+      <description>It provides a function to search for available transport and accommodation offers.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It is localized title of the component.</description>
+        </attribute>
+        <attribute qualifier="fareFinder" type="FareFinderComponent">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="accommodationFinder" type="AccommodationFinderComponent">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="travelFinder" type="TravelFinderComponent">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="packageFinder" type="PackageFinderComponent">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="TravelFinderComponent" extends="AbstractFinderComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.TravelFinderComponent">
+      <description>It provides a function to search for available transport and accommodation offers.</description>
+    </itemtype>
+
+    <itemtype code="PackageFinderComponent" extends="AbstractFinderComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.PackageFinderComponent">
+      <description>It provides a function to search for available transport and accommodation package offers.</description>
+    </itemtype>
+
+    <itemtype code="TravelBookingDetailsComponent" extends="AbstractBookingDetailsComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.TravelBookingDetailsComponent">
+      <description>It provides booking details for both accommodation and transport booking</description>
+    </itemtype>
+    
+    <itemtype code="TravelBookingPaymentDetailsComponent" extends="AbstractBookingDetailsComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.TravelBookingPaymentDetailsComponent">
+      <description>It provides details of payment booking.</description>
+    </itemtype>
+
+    <itemtype code="TravelBookingListComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.TravelBookingListComponent">
+      <description>It provides list of bookings made by customer.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It is localized title of the component.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="DealComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelcommons.jalo.components.DealComponent">
+      <description>It provides the functionality to display the deal for the specified dealBundleTemplateId.</description>
+      <attributes>
+        <attribute qualifier="dealBundleTemplateId" type="java.lang.String">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>    
+
+	<itemtype code="PackageRefinementComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+		jaloclass="de.hybris.platform.travelcommons.jalo.components.PackageRefinementComponent">
+		<description>It provides a facet filtering functionality on package listing page</description>
+		<attributes>
+			<attribute qualifier="title" type="localized:java.lang.String">
+				<persistence type="property" />
+				<description>It is localized title of the component.</description>
+			</attribute>
+		</attributes>
+	</itemtype>
+    
+  </itemtypes>
+
+</items>

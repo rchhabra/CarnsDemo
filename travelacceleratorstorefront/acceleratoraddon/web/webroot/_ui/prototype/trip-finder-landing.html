@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="trip-finder-page">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="container">
+            <h2 class="h2">Find your perfect destination&hellip;</h2>
+            <div class="trip-tile col-xs-12 col-sm-6 col-md-4">
+                <a href="#">
+                    <img src="assets/images/photos/beach.jpg" alt="Beach">
+                    <h3 class="trip-tile-heading">Beach Holiday</h3>
+                </a>
+            </div>
+            <div class="trip-tile col-xs-12 col-sm-6 col-md-4">
+                <a href="#">
+                    <img src="assets/images/photos/city.jpg" alt="City">
+                    <h3 class="trip-tile-heading">City Break</h3>
+                </a>
+            </div>
+            <div class="trip-tile col-xs-12 col-sm-6 col-md-4">
+                <a href="#">
+                    <img src="assets/images/photos/winter2.jpg" alt="Winter">
+                    <h3 class="trip-tile-heading">Winter Escape</h3>
+                </a>
+            </div>
+            <div class="trip-tile col-xs-12 col-sm-6 col-md-4">
+                <a href="#">
+                    <img src="assets/images/photos/family.jpg" alt="Family">
+                    <h3 class="trip-tile-heading">Family Friendly</h3>
+                </a>
+            </div>
+            <div class="trip-tile col-xs-12 col-sm-6 col-md-4">
+                <a href="#">
+                    <img src="assets/images/photos/TM.jpg" alt="Culture">
+                    <h3 class="trip-tile-heading">Culture Break</h3>
+                </a>
+            </div>
+            <div class="trip-tile col-xs-12 col-sm-6 col-md-4">
+                <a href="#">
+                    <img src="assets/images/photos/bike.jpg" alt="Sport">
+                    <h3 class="trip-tile-heading">Sport Trips</h3>
+                </a>
+            </div>
+        </div>
+        <!-- / .container -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

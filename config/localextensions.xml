@@ -1,0 +1,124 @@
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+              xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false'/>
+
+    <!-- ext-platform -->
+    <extension name="admincockpit"/>
+    <extension name="backoffice"/>
+    <extension name="cockpit"/>
+    <extension name="hmc"/>
+    <extension name="mcc"/>
+    <extension name="platformhmc"/>
+    <extension name="b2badmincockpit"/>
+
+    <!-- ext-commerce -->
+    <extension name="commercesearch"/>
+    <extension name="commercesearchhmc"/>
+    <extension name="commerceservices"/>
+    <extension name="basecommerce"/>
+    <extension name="payment"/>
+    <extension name="promotions"/>
+    <extension name="voucher"/>
+    <extension name="solrfacetsearch"/>
+    <extension name="solrfacetsearchbackoffice"/>
+    <extension name="solrfacetsearchhmc"/>
+    <extension name="solrserver"/>
+    <extension name="subscriptionservices"/>
+    <extension name="subscriptionfacades"/>
+    <extension name="commercefacades"/>
+    <extension name="platformbackoffice"/>
+    <extension name="ondemandcommon"/>
+    <extension name="xyformsbackoffice"/>
+    <extension name="b2bcommercefacades"/>
+    <extension name="b2bcommerce"/>
+    <extension name="b2bcommercebackoffice"/>
+
+    <!-- Drools -->
+    <extension name="droolsruleengineservices"/>
+    <extension name="rulebuilderbackoffice"/>
+    <extension name="promotionengineservices"/>
+    <extension name="couponservices"/>
+    <extension name="promotionenginebackoffice"/>
+
+    <!-- ext-content -->
+    <extension name="productcockpit"/>
+    <extension name="cms2"/>
+    <extension name="cms2lib"/>
+    <extension name="cmscockpit"/>
+
+    <!-- ext-travel addons -->
+    <extension name="travelacceleratorstorefront"/>
+    <extension name="travelcheckout"/>
+    <extension name="traveladdon"/>
+    <extension name="travelcommons"/>
+    <extension name="accommodationaddon"/>
+    <extension name="travelcommerceorgaddon"/>
+
+    <!-- ext-travel extensions -->
+    <extension name="travelstore"/>
+    <extension name="travelfacades"/>
+    <extension name="travelservices"/>
+    <extension name="travelrulesengine"/>
+    <extension name="travelfulfilmentprocess"/>
+    <extension name="travelb2bservices"/>
+    <extension name="travelb2bfacades"/>
+    <extension name="travelseatmapservices"/>
+
+    <!-- ext-travel backoffice extensions -->
+    <extension name="travelbackoffice"/>
+    <extension name="travelbackofficeservices"/>
+    <extension name="airlinebackoffice"/>
+
+    <!-- ext-template -->
+    <extension name="ycommercewebservices"/>
+    <extension name="ycommercewebserviceshmc"/>
+    <extension name="yaddon"/>
+    <extension name="yacceleratorcockpits"/>
+    <extension name="yacceleratorstorefront"/>
+    <extension name="yacceleratorcore"/>
+    <extension name="yacceleratorinitialdata"/>
+
+    <!-- ext-accelerator -->
+    <extension name="acceleratorservices"/>
+    <extension name="acceleratorfacades"/>
+    <extension name="acceleratorcms"/>
+    <extension name="acceleratorstorefrontcommons"/>
+    <extension name="b2bacceleratorservices"/>
+    <extension name="b2bacceleratorfacades"/>
+    <extension name="b2bapprovalprocessfacades"/>
+    <extension name="b2bapprovalprocess"/>
+
+    <!-- ext-addons -->
+    <extension name="addonsupport"/>
+    <extension name="assistedservicefacades"/>
+    <extension name="assistedservicestorefront"/>
+    <extension name="liveeditaddon"/>
+
+    <!-- Smart Edit -->
+    <extension name="cmswebservices"/>
+    <extension name="smarteditwebservices"/>
+    <extension name="permissionswebservices"/>
+    <extension name="smarteditaddon"/>
+    <extension name="cmssmartedit"/>
+    <extension name="previewwebservices"/>
+    <extension name="cmssmarteditwebservices"/>
+
+    <!-- ext-travel ndc extensions -->
+    <!-- <extension name="ndcwebservices"/>
+    <extension name="ndcfacades"/> -->
+    <extension name="ndc171webservices"/>
+    <extension name="ndc171facades"/>
+    <extension name="ndcservices"/>
+    <extension name="ndcfulfilmentprocess"/>
+
+    <!-- oauth2 -->
+    <extension name="oauth2" />
+
+	<!-- Subscription Bundle -->
+    <extension name="subscriptionbundlefacades"/>
+    <extension name="subscriptionbundleservices"/>
+    <extension name="configurablebundlecockpits"/>
+    
+  </extensions>
+</hybrisconfig>

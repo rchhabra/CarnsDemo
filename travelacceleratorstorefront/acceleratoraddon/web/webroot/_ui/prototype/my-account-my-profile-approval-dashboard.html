@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-logged-in.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="my-account-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="container">
+            <div class="col-xs-12 col-sm-3 side-to-top hidden-xs">
+                <aside id="sidebar">
+                    <!-- <div class="main-wrap">
+                  <div class="inner-wrap">
+                      <section>
+                          <h2 class="h4 text-center">My Account</h2>
+                          <div class="sidebar-content-section">
+                              <ul>
+                                  <li><a href="#" class="active">My Profile</a></li>
+                                  <li><a href="#">My Upcoming Bookings</a></li>
+                                  <li><a href="#">My Past Bookings</a></li>
+                              </ul>
+                          </div>
+                      </section>
+                  </div>
+              </div> -->
+                    <div class="promotions">
+                    <section>
+                        <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Explore the gardens of Croatia</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                </div>
+                </aside>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <h2 class="h2">My Profile</h2>
+                <div class="yCmsContentSlot accountPageTopContent">
+                <!-- Personal Details -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile.html" data-toggle="collapse" data-target="#personal-details" aria-expanded="true" aria-controls="personal-details">
+                        <h3 class="title">My Personal Details</h3>
+                    </a>
+                </div>
+                <!-- / Personal Details -->
+                <!-- Advance Passenger -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile-advance-passenger.html" data-toggle="collapse" data-target="#advance-passenger" aria-expanded="true" aria-controls="advance-passenger">
+                        <h3 class="title">Advance Passenger Details</h3>
+                    </a>
+                </div>
+                <!-- / Advance Passenger -->
+                <!-- Preferences -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile-preferences.html" data-toggle="collapse" data-target="#preferences" aria-expanded="true" aria-controls="preferences">
+                        <h3 class="title">Preferences</h3>
+                    </a>
+                </div>
+                <!-- / Preferences -->
+                <!-- Disability & Mobility -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link " href="my-account-my-profile-disability.html" data-toggle="collapse" data-target="#disability" aria-expanded="true" aria-controls="disability">
+                        <h3 class="title">Disability And Mobility</h3>
+                    </a>
+                </div>
+                <!-- / Disability & Mobility -->
+                <!-- My Bookings -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link " href="my-account-my-profile-bookings.html" data-toggle="collapse" data-target="#my-bookings" aria-expanded="true" aria-controls="saved-card">
+                        <h3 class="title">My Bookings</h3>
+                    </a>
+                    
+                </div>
+                <!-- / My Bookings -->
+                </div>
+                <div class="yCmsContentSlot accountPageBodyContent">
+                <!-- My Saved Payment -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile-saved-payments.html" data-toggle="collapse" data-target="#saved-card" aria-expanded="true" aria-controls="saved-card">
+                        <h3 class="title">My Saved Payment</h3>
+                    </a>    
+                </div>
+                <!-- / My Saved Payment -->
+                </div>
+                <div class="yCmsContentSlot accountPageBottomContent">
+                <!-- My Saved Passengers -->
+                <div class="panel panel-primary panel-list">
+                    <a class="panel-heading panel-header-link" href="my-account-my-profile-saved-passengers.html" data-toggle="collapse" data-target="#saved-passengers" aria-expanded="true" aria-controls="saved-passengers">
+                        <h3 class="title">My Saved Passengers</h3>
+                    </a>
+                </div>
+                <!-- / My Saved Passengers -->
+                </div>
+			<div class="yCmsContentSlot accountPageBottomContent">
+				<!-- My Saved Passengers -->
+				<div class="panel panel-primary panel-list">
+					<a class="panel-heading panel-header-link" href="my-account-my-profile-quotes.html" data-toggle="collapse" data-target="#quotes" aria-expanded="true" aria-controls="quotes">
+						<h3 class="title">My Quotes</h3>
+					</a>
+				</div>
+			</div>
+			<div class="yCmsContentSlot accountPageBottomContent">
+				<!-- My Saved Passengers -->
+				<div class="panel panel-primary panel-list">
+					<a class="panel-heading panel-header-link" href="#" data-toggle="collapse" data-target="#orderApproval" aria-expanded="true" aria-controls="orderApproval">
+						<h3 class="title">Order Approval Dashboard</h3>
+					</a>
+					<div class="panel-body collapse in" id="orderApproval">							
+							<div class="panel-body">
+								<div class="clearfix sort-By">
+									<div class="form-inline clearfix">
+										<label for="sortBy">Sort by:</label>
+										<select class="form-control" id="sortBy">
+											<option value="Name" selected="">Name</option>
+											<option value="ID">ID</option>
+											<option value="something-else">Something else…</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="pagination-bar-results">5 Orders found</div>
+									</div>
+								</div>
+								<div class="account-overview-table">
+									<div class="responsive-table">
+										<table class="table">
+											<tbody>
+												<tr class="account-orderhistory-table-head responsive-table-head hidden-xs inner-table-head">
+													<th>Order Number</th>
+													<th>P.O number</th>
+													<th>Order Status</th>
+													<th>Account Manager</th>
+													<th>Date Placed</th>
+													<th>Total</th>
+												</tr>
+												<tr class="responsive-table-item">
+													<td class="hidden-sm hidden-md hidden-lg">Order Number</td>
+													<td class="responsive-table-cell"><a href="">00000011</a></td>
+													<td class="hidden-sm hidden-md hidden-lg">P.O. Number</td>
+													<td class="responsive-table-cell">12345</td>
+													<td class="hidden-sm hidden-md hidden-lg">Order Status</td>
+													<td class="responsive-table-cell">Order Pending</td>
+													<td class="hidden-sm hidden-md hidden-lg">Account Manager</td>
+													<td class="responsive-table-cell">Alistair Thompson</td>
+													<td class="hidden-sm hidden-md hidden-lg">Date Placed</td>
+													<td class="responsive-table-cell">Jun 17, 2016 6:14 PM</td>
+													<td class="hidden-sm hidden-md hidden-lg">Total</td>
+													<td class="status">$10,000</td>
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				<!-- / My Saved Passengers -->
+			</div>
+		</div>
+        </div>
+        <!-- / .container -->
+        <!-- Modal (Update personal details) -->
+        <div class="modal fade no-padding" id="updatePersonalDetails" tabindex="-1" role="dialog" aria-labelledby="updatePersonalDetailsLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updatePersonalDetailsLabel">Update Personal Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="100%" height="324px" scrolling="no" src="iframe-update-personal-details.html" class="panel-external"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Update personal details) -->
+        <!-- Modal (Update email) -->
+        <div class="modal fade no-padding" id="updateEmail" tabindex="-1" role="dialog" aria-labelledby="updateEmailLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updateEmailLabel">Update Your Email</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="100%" height="292px" scrolling="no" src="iframe-update-email.html" class="panel-external"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Update email) -->
+        <!-- Modal (Change Password) -->
+        <div class="modal fade no-padding" id="updatePassword" tabindex="-1" role="dialog" aria-labelledby="updatePasswordLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="updatePasswordLabel">Change Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <iframe width="100%" height="246px" scrolling="no" src="iframe-update-password.html" class="panel-external"></iframe>
+                    </div>
+                    <!-- <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Change Password) -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

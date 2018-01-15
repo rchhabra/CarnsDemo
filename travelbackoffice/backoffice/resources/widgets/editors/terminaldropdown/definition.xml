@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<editor-definition id="de.hybris.platform.travelbackoffice.editor.terminaldropdown"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/editor-definition.xsd">
+
+	<name>Terminal drop down editor</name>
+	<description>Custom drop down editor for airport Terminals</description>
+	<type>de.hybris.platform.travelservices.model.travel.TerminalModel</type>
+	<editorClassName>de.hybris.platform.travelbackoffice.editor.DefaultAirportTerminalDropDownEditor</editorClassName>
+
+</editor-definition>

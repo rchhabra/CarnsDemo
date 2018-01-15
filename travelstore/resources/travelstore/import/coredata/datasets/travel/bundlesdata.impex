@@ -1,0 +1,312 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+
+
+#################
+## DEAL BUNDLE ##
+#################
+
+INSERT_UPDATE GuestCount; passengerType(code)[unique=true]; quantity[unique=true]; &guestCountRef
+; adult; 2 ; ADULT_2
+; child; 1 ; CHILD_1
+; child; 2 ; CHILD_2
+
+INSERT_UPDATE DealBundleTemplate; id[unique = true]; name[lang = $lang]; startingDatePattern; length; guestCounts(&guestCountRef); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#Beach destination
+; PhuketDealBundle           ; Phuket Deal Bundle            ; 0 0 0 ? * MON-WED          ; 7  ; ADULT_2          ; ; ;
+; GoaDealBundle              ; Goa Deal Bundle               ; 0 0 0 ? * SAT              ; 7  ; ADULT_2, CHILD_1 ; ; ;
+; MiamiDealBundle            ; Miami Deal Bundle             ; 0 0 0 1/10 * ?             ; 5  ; ADULT_2          ; ; ;
+; AmalfiDealBundle           ; Amalfi Deal Bundle            ; 0 0 0 ? 1-4,9-12 SAT,WED   ; 14 ; ADULT_2, CHILD_1 ; ; ;
+
+#Explore Europe
+; LondonDealBundle           ; London Deal Bundle            ; 0 0 0 ? * MON,WED,SAT      ; 4  ; ADULT_2, CHILD_2 ; ; ;
+; ParisDealBundle            ; Paris Deal Bundle             ; 0 0 0 ? * MON,WED,SAT      ; 3  ; ADULT_2, CHILD_2 ; ; ;
+; FlorenceDealBundle         ; Florence Deal Bundle          ; 0 0 0 ? * SAT              ; 3  ; ADULT_2          ; ; ;
+; RomeDealBundle             ; Rome Deal Bundle              ; 0 0 0 ? * SAT              ; 4  ; ADULT_2          ; ; ;
+
+#Great Savings
+; BangkokDealBundle          ; Bangkok Deal Bundle           ; 0 0 0 ? * SAT              ; 7  ; ADULT_2          ; ; ;
+; MalaysiaDealBundle         ; Malaysia Deal Bundle          ; 0 0 0 ? * MON-WED          ; 14 ; ADULT_2          ; ; ;
+; PragueDealBundle           ; Prague Deal Bundle            ; 0 0 0 1/10 * ?             ; 5  ; ADULT_2, CHILD_1 ; ; ;
+; IcelandDealBundle          ; Iceland Deal Bundle           ; 0 0 0 ? * MON-WED          ; 7  ; ADULT_2          ; ; ;
+
+#Winter Olympics
+; WinterOlympics1DealBundle  ; Winter Olympics 1 Deal Bundle ; 0 0 0 9-25 * WED,SAT       ; 7  ; ADULT_2          ; ; ;
+; WinterOlympics2DealBundle  ; Winter Olympics 2 Deal Bundle ; 0 0 0 9-25 * WED,SAT       ; 14 ; ADULT_2, CHILD_1 ; ; ;
+; WinterOlympics3DealBundle  ; Winter Olympics 3 Deal Bundle ; 0 0 0 9-25 * WED,SAT       ; 21 ; ADULT_2, CHILD_2 ; ; ;
+; SnowboardSpecialDealBundle ; Snowboard Special Deal Bundle ; 0 0 0 9-25 * SAT           ; 7  ; ADULT_2, CHILD_2 ; ; ;
+
+#At 00:00 AM, only on Monday, Wednesday, and Saturday = 0 0 0 ? * MON,WED,SAT
+#At 00:00 AM, only on Saturday and Wednesday, only in January through April and September through December = 0 0 0 ? 1-4,9-12 SAT,WED
+#At 00:00 AM, Monday through Wednesday = 0 0 0 ? * MON-WED
+#At 00:00 AM, only on Saturday = 0 0 0 ? * SAT
+#At 00:00 AM, every 10 days = 0 0 0 1/10 * ?
+#At 00:00 AM, between day 9 and 25 of the month, only on Wednesday and Saturday = 0 0 0 9-25 * WED,SAT
+#At 00:00 AM, between day 9 and 25 of the month, only on Saturday = 0 0 0 9-25 * SAT
+
+
+
+######################
+## TRANSPORT BUNDLE ##
+######################
+
+### Transport Bundles
+INSERT_UPDATE TransportBundleTemplate; id[unique = true]; name[lang = $lang]; parentTemplate(id, $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#Beach destination
+; PhuketTransportDealBundle           ; Phuket Transport Deal Bundle            ; PhuketDealBundle           ; ; ;
+; GoaTransportDealBundle              ; Goa Transport Deal Bundle               ; GoaDealBundle              ; ; ;
+; MiamiTransportDealBundle            ; Miami Transport Deal Bundle             ; MiamiDealBundle            ; ; ;
+; AmalfiTransportDealBundle           ; Amalfi Transport Deal Bundle            ; AmalfiDealBundle           ; ; ;
+
+#Explore Europe
+; LondonTransportDealBundle           ; London Transport Deal Bundle            ; LondonDealBundle           ; ; ;
+; ParisTransportDealBundle            ; Paris Transport Deal Bundle             ; ParisDealBundle            ; ; ;
+; FlorenceTransportDealBundle         ; Florence Transport Deal Bundle          ; FlorenceDealBundle         ; ; ;
+; RomeTransportDealBundle             ; Rome Transport Deal Bundle              ; RomeDealBundle             ; ; ;
+
+#Great Savings
+; BangkokTransportDealBundle          ; Bangkok Transport Deal Bundle           ; BangkokDealBundle          ; ; ;
+; MalaysiaTransportDealBundle         ; Malaysia Transport Deal Bundle          ; MalaysiaDealBundle         ; ; ;
+; PragueTransportDealBundle           ; Prague Transport Deal Bundle            ; PragueDealBundle           ; ; ;
+; IcelandTransportDealBundle          ; Iceland Transport Deal Bundle           ; IcelandDealBundle          ; ; ;
+
+#Winter Olympics
+; WinterOlympics1TransportDealBundle  ; Winter Olympics 1 Transport Deal Bundle ; WinterOlympics1DealBundle  ; ; ;
+; WinterOlympics2TransportDealBundle  ; Winter Olympics 2 Transport Deal Bundle ; WinterOlympics2DealBundle  ; ; ;
+; WinterOlympics3TransportDealBundle  ; Winter Olympics 3 Transport Deal Bundle ; WinterOlympics3DealBundle  ; ; ;
+; SnowboardSpecialTransportDealBundle ; Snowboard Special Transport Deal Bundle ; SnowboardSpecialDealBundle ; ; ;
+
+
+
+### Route Bundles
+INSERT_UPDATE RouteBundleTemplate; id[unique = true]; name[lang = $lang]; travelRoute(code); originDestinationRefNumber; cabinClass(code); type(code); parentTemplate(id, $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#Beach destination
+; PhuketOutboundRouteBundle           ; Phuket Outbound Route Bundle            ; LTN_HKT     ; 0 ; M ; ECONOMY      ; PhuketTransportDealBundle           ; ;
+; PhuketInboundRouteBundle            ; Phuket Inbound Route Bundle             ; HKT_LTN     ; 1 ; M ; ECONOMY      ; PhuketTransportDealBundle           ; ;
+
+; GoaOutboundRouteBundle              ; Goa Outbound Route Bundle               ; CDG_GOI     ; 0 ; M ; ECONOMY      ; GoaTransportDealBundle              ; ;
+; GoaInboundRouteBundle               ; Goa Inbound Route Bundle                ; GOI_CDG     ; 1 ; M ; ECONOMY      ; GoaTransportDealBundle              ; ;
+
+; MiamiOutboundRouteBundle            ; Miami Outbound Route Bundle             ; CDG_MIA     ; 0 ; J ; BUSINESS     ; MiamiTransportDealBundle            ; ;
+; MiamiInboundRouteBundle             ; Miami Inbound Route Bundle              ; MIA_CDG     ; 1 ; J ; BUSINESS     ; MiamiTransportDealBundle            ; ;
+
+; AmalfiOutboundRouteBundle           ; Amalfi Outbound Route Bundle            ; LTN_NAP     ; 0 ; M ; ECONOMY_PLUS ; AmalfiTransportDealBundle           ; ;
+; AmalfiInboundRouteBundle            ; Amalfi Inbound Route Bundle             ; NAP_LTN     ; 1 ; M ; ECONOMY_PLUS ; AmalfiTransportDealBundle           ; ;
+
+#Explore Europe
+; LondonOutboundRouteBundle           ; London Outbound Route Bundle            ; CDG_LTN     ; 0 ; M ; ECONOMY      ; LondonTransportDealBundle           ; ;
+; LondonInboundRouteBundle            ; London Inbound Route Bundle             ; LTN_CDG     ; 1 ; M ; ECONOMY      ; LondonTransportDealBundle           ; ;
+
+; ParisOutboundRouteBundle            ; Paris Outbound Route Bundle             ; EDI_LGW_CDG ; 0 ; M ; ECONOMY      ; ParisTransportDealBundle            ; ;
+; ParisInboundRouteBundle             ; Paris Inbound Route Bundle              ; CDG_LGW_EDI ; 1 ; M ; ECONOMY      ; ParisTransportDealBundle            ; ;
+
+; FlorenceOutboundRouteBundle         ; Florence Outbound Route Bundle          ; LTN_FLR     ; 0 ; M ; ECONOMY_PLUS ; FlorenceTransportDealBundle         ; ;
+; FlorenceInboundRouteBundle          ; Florence Inbound Route Bundle           ; FLR_LTN     ; 1 ; M ; ECONOMY_PLUS ; FlorenceTransportDealBundle         ; ;
+
+; RomeOutboundRouteBundle             ; Rome Outbound Route Bundle              ; LTN_FCO     ; 0 ; J ; BUSINESS     ; RomeTransportDealBundle             ; ;
+; RomeInboundRouteBundle              ; Rome Inbound Route Bundle               ; FCO_LTN     ; 1 ; J ; BUSINESS     ; RomeTransportDealBundle             ; ;
+
+#Great Savings
+; BangkokOutboundRouteBundle          ; Bangkok Outbound Route Bundle           ; LTN_BKK     ; 0 ; M ; ECONOMY_PLUS ; BangkokTransportDealBundle          ; ;
+; BangkokInboundRouteBundle           ; Bangkok Inbound Route Bundle            ; BKK_LTN     ; 1 ; M ; ECONOMY_PLUS ; BangkokTransportDealBundle          ; ;
+
+; MalaysiaOutboundRouteBundle         ; Malaysia Outbound Route Bundle          ; LTN_KUL     ; 0 ; J ; BUSINESS     ; MalaysiaTransportDealBundle         ; ;
+; MalaysiaInboundRouteBundle          ; Malaysia Inbound Route Bundle           ; KUL_LTN     ; 1 ; J ; BUSINESS     ; MalaysiaTransportDealBundle         ; ;
+
+; PragueOutboundRouteBundle           ; Prague Outbound Route Bundle            ; LTN_PRG     ; 0 ; M ; ECONOMY      ; PragueTransportDealBundle           ; ;
+; PragueInboundRouteBundle            ; Prague Inbound Route Bundle             ; PRG_LTN     ; 1 ; M ; ECONOMY      ; PragueTransportDealBundle           ; ;
+
+; IcelandOutboundRouteBundle          ; Iceland Outbound Route Bundle           ; LTN_KEF     ; 0 ; M ; ECONOMY      ; IcelandTransportDealBundle          ; ;
+; IcelandInboundRouteBundle           ; Iceland Inbound Route Bundle            ; KEF_LTN     ; 1 ; M ; ECONOMY      ; IcelandTransportDealBundle          ; ;
+
+#Winter Olympics
+; WinterOlympics1OutboundRouteBundle  ; Winter Olympics 1 Outbound Route Bundle ; LTN_ICN     ; 0 ; M ; ECONOMY      ; WinterOlympics1TransportDealBundle  ; ;
+; WinterOlympics1InboundRouteBundle   ; Winter Olympics 1 Inbound Route Bundle  ; ICN_LTN     ; 1 ; M ; ECONOMY      ; WinterOlympics1TransportDealBundle  ; ;
+
+; WinterOlympics2OutboundRouteBundle  ; Winter Olympics 2 Outbound Route Bundle ; LTN_ICN     ; 0 ; M ; ECONOMY      ; WinterOlympics2TransportDealBundle  ; ;
+; WinterOlympics2InboundRouteBundle   ; Winter Olympics 2 Inbound Route Bundle  ; ICN_LTN     ; 1 ; M ; ECONOMY      ; WinterOlympics2TransportDealBundle  ; ;
+
+; WinterOlympics3OutboundRouteBundle  ; Winter Olympics 3 Outbound Route Bundle ; LTN_ICN     ; 0 ; M ; ECONOMY_PLUS ; WinterOlympics3TransportDealBundle  ; ;
+; WinterOlympics3InboundRouteBundle   ; Winter Olympics 3 Inbound Route Bundle  ; ICN_LTN     ; 1 ; M ; ECONOMY_PLUS ; WinterOlympics3TransportDealBundle  ; ;
+
+; SnowboardSpecialOutboundRouteBundle ; Snowboard Special Outbound Route Bundle ; LTN_ICN     ; 0 ; J ; BUSINESS     ; SnowboardSpecialTransportDealBundle ; ;
+; SnowboardSpecialInboundRouteBundle  ; Snowboard Special Inbound Route Bundle  ; ICN_LTN     ; 1 ; J ; BUSINESS     ; SnowboardSpecialTransportDealBundle ; ;
+
+
+
+### Fare Products Bundles
+INSERT_UPDATE BundleTemplate; id[unique = true]; name[lang = $lang]; products(code, $catalogVersion)[mode = replace]; parentTemplate(id, $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#Beach destinations
+; PhuketOutboundFareProductBundle           ; Phuket Outbound Fare Products Bundle            ; ORT ; PhuketOutboundRouteBundle           ; ; ;
+; PhuketInboundFareProductBundle            ; Phuket Inbound Fare Products Bundle             ; ORT ; PhuketInboundRouteBundle            ; ; ;
+
+; GoaOutboundFareProductBundle              ; Goa Outbound Fare Products Bundle               ; ORT ; GoaOutboundRouteBundle              ; ; ;
+; GoaInboundFareProductBundle               ; Goa Inbound Fare Products Bundle                ; ORT ; GoaInboundRouteBundle               ; ; ;
+
+; MiamiOutboundFareProductBundle            ; Miami Outbound Fare Products Bundle             ; IRT  ; MiamiOutboundRouteBundle            ; ; ;
+; MiamiInboundFareProductBundle             ; Miami Inbound Fare Products Bundle              ; IRT ; MiamiInboundRouteBundle             ; ; ;
+
+; AmalfiOutboundFareProductBundle           ; Amalfi Outbound Fare Products Bundle            ; ERT ; AmalfiOutboundRouteBundle           ; ; ;
+; AmalfiInboundFareProductBundle            ; Amalfi Inbound Fare Products Bundle             ; ERT ; AmalfiInboundRouteBundle            ; ; ;
+
+#Explore Europe
+; LondonOutboundFareProductBundle           ; London Outbound Fare Products Bundle            ; ORT ; LondonOutboundRouteBundle           ; ; ;
+; LondonInboundFareProductBundle            ; London Inbound Fare Products Bundle             ; ORT ; LondonInboundRouteBundle            ; ; ;
+
+; ParisOutboundFareProductBundle            ; Paris Outbound Fare Products Bundle             ; ORT ; ParisOutboundRouteBundle            ; ; ;
+; ParisInboundFareProductBundle             ; Paris Inbound Fare Products Bundle              ; ORT ; ParisInboundRouteBundle             ; ; ;
+
+; FlorenceOutboundFareProductBundle         ; Florence Outbound Fare Products Bundle          ; ERT ; FlorenceOutboundRouteBundle         ; ; ;
+; FlorenceInboundFareProductBundle          ; Florence Inbound Fare Products Bundle           ; ERT ; FlorenceInboundRouteBundle          ; ; ;
+
+; RomeOutboundFareProductBundle             ; Rome Outbound Fare Products Bundle              ; IRT ; RomeOutboundRouteBundle             ; ; ;
+; RomeInboundFareProductBundle              ; Rome Inbound Fare Products Bundle               ; IRT ; RomeInboundRouteBundle              ; ; ;
+
+#Great Savings
+; BangkokOutboundFareProductBundle          ; Bangkok Outbound Fare Products Bundle           ; ERT ; BangkokOutboundRouteBundle          ; ; ;
+; BangkokInboundFareProductBundle           ; Bangkok Inbound Fare Products Bundle            ; ERT ; BangkokInboundRouteBundle           ; ; ;
+
+; MalaysiaOutboundFareProductBundle         ; Malaysia Outbound Fare Products Bundle          ; IRT ; MalaysiaOutboundRouteBundle         ; ; ;
+; MalaysiaInboundFareProductBundle          ; Malaysia Inbound Fare Products Bundle           ; IRT ; MalaysiaInboundRouteBundle          ; ; ;
+
+; PragueOutboundFareProductBundle           ; Prague Outbound Fare Products Bundle            ; ORT ; PragueOutboundRouteBundle           ; ; ;
+; PragueInboundFareProductBundle            ; Prague Inbound Fare Products Bundle             ; ORT ; PragueInboundRouteBundle            ; ; ;
+
+; IcelandOutboundFareProductBundle          ; Iceland Outbound Fare Products Bundle           ; ORT ; IcelandOutboundRouteBundle          ; ; ;
+; IcelandInboundFareProductBundle           ; Iceland Inbound Fare Products Bundle            ; ORT ; IcelandInboundRouteBundle           ; ; ;
+
+#Winter Olympics
+; WinterOlympics1OutboundFareProductBundle  ; Winter Olympics 1 Outbound Fare Products Bundle ; ORT ; WinterOlympics1OutboundRouteBundle  ; ; ;
+; WinterOlympics1InboundFareProductBundle   ; Winter Olympics 1 Inbound Fare Products Bundle  ; ORT ; WinterOlympics1InboundRouteBundle   ; ; ;
+
+; WinterOlympics2OutboundFareProductBundle  ; Winter Olympics 2 Outbound Fare Products Bundle ; ORT ; WinterOlympics2OutboundRouteBundle  ; ; ;
+; WinterOlympics2InboundFareProductBundle   ; Winter Olympics 2 Inbound Fare Products Bundle  ; ORT ; WinterOlympics2InboundRouteBundle   ; ; ;
+
+; WinterOlympics3OutboundFareProductBundle  ; Winter Olympics 3 Outbound Fare Products Bundle ; ERT ; WinterOlympics3OutboundRouteBundle  ; ; ;
+; WinterOlympics3InboundFareProductBundle   ; Winter Olympics 3 Inbound Fare Products Bundle  ; ERT ; WinterOlympics3InboundRouteBundle   ; ; ;
+
+; SnowboardSpecialOutboundFareProductBundle ; Snowboard Special Outbound Fare Products Bundle ; IRT ; SnowboardSpecialOutboundRouteBundle ; ; ;
+; SnowboardSpecialInboundFareProductBundle  ; Snowboard Special Inbound Fare Products Bundle  ; IRT ; SnowboardSpecialInboundRouteBundle  ; ; ;
+
+
+
+### Ancillary Products Bundles
+INSERT_UPDATE BundleTemplate; id[unique = true]; name[lang = $lang]; products(code, $catalogVersion)[mode = replace]; parentTemplate(id, $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#Beach destinations
+; PhuketOutboundAncillaryProductBundle           ; Phuket Outbound Ancillary Products Bundle            ;                                        ; PhuketOutboundRouteBundle           ; ; ;
+; PhuketInboundAncillaryProductBundle            ; Phuket Inbound Ancillary Products Bundle             ;                                        ; PhuketInboundRouteBundle            ; ; ;
+
+; GoaOutboundAncillaryProductBundle              ; Goa Outbound Ancillary Products Bundle               ;                                        ; GoaOutboundRouteBundle              ; ; ;
+; GoaInboundAncillaryProductBundle               ; Goa Inbound Ancillary Products Bundle                ;                                        ; GoaInboundRouteBundle               ; ; ;
+
+; MiamiOutboundAncillaryProductBundle            ; Miami Outbound Ancillary Products Bundle             ; PRIBOARDING1, LOUNGEACC1, STANDARDMEAL ; MiamiOutboundRouteBundle            ; ; ;
+; MiamiInboundAncillaryProductBundle             ; Miami Inbound Ancillary Products Bundle              ; PRIBOARDING1, LOUNGEACC1, STANDARDMEAL ; MiamiInboundRouteBundle             ; ; ;
+
+; AmalfiOutboundAncillaryProductBundle           ; Amalfi Outbound Ancillary Products Bundle            ; PRIBOARDING1                           ; AmalfiOutboundRouteBundle           ; ; ;
+; AmalfiInboundAncillaryProductBundle            ; Amalfi Inbound Ancillary Products Bundle             ; PRIBOARDING1                           ; AmalfiInboundRouteBundle            ; ; ;
+
+#Explore Europe
+; LondonOutboundAncillaryProductBundle           ; London Outbound Ancillary Products Bundle            ;                                        ; LondonOutboundRouteBundle           ; ; ;
+; LondonInboundAncillaryProductBundle            ; London Inbound Ancillary Products Bundle             ;                                        ; LondonInboundRouteBundle            ; ; ;
+
+; ParisOutboundAncillaryProductBundle            ; Paris Outbound Ancillary Products Bundle             ;                                        ; ParisOutboundRouteBundle            ; ; ;
+; ParisInboundAncillaryProductBundle             ; Paris Inbound Ancillary Products Bundle              ;                                        ; ParisInboundRouteBundle             ; ; ;
+
+; FlorenceOutboundAncillaryProductBundle         ; Florence Outbound Ancillary Products Bundle          ; PRIBOARDING1                           ; FlorenceOutboundRouteBundle         ; ; ;
+; FlorenceInboundAncillaryProductBundle          ; Florence Inbound Ancillary Products Bundle           ; PRIBOARDING1                           ; FlorenceInboundRouteBundle          ; ; ;
+
+; RomeOutboundAncillaryProductBundle             ; Rome Outbound Ancillary Products Bundle              ;                                        ; RomeOutboundRouteBundle             ; ; ;
+; RomeInboundAncillaryProductBundle              ; Rome Inbound Ancillary Products Bundle               ;                                        ; RomeInboundRouteBundle              ; ; ;
+
+#Great Savings
+; BangkokOutboundAncillaryProductBundle          ; Bangkok Outbound Ancillary Products Bundle           ; PRIBOARDING1                           ; BangkokOutboundRouteBundle          ; ; ;
+; BangkokInboundAncillaryProductBundle           ; Bangkok Inbound Ancillary Products Bundle            ; PRIBOARDING1                           ; BangkokInboundRouteBundle           ; ; ;
+
+; MalaysiaOutboundAncillaryProductBundle         ; Malaysia Outbound Ancillary Products Bundle          ; PRIBOARDING1, LOUNGEACC1, STANDARDMEAL ; MalaysiaOutboundRouteBundle         ; ; ;
+; MalaysiaInboundAncillaryProductBundle          ; Malaysia Inbound Ancillary Products Bundle           ; PRIBOARDING1, LOUNGEACC1, STANDARDMEAL ; MalaysiaInboundRouteBundle          ; ; ;
+
+; PragueOutboundAncillaryProductBundle           ; Prague Outbound Ancillary Products Bundle            ;                                        ; PragueOutboundRouteBundle           ; ; ;
+; PragueInboundAncillaryProductBundle            ; Prague Inbound Ancillary Products Bundle             ;                                        ; PragueInboundRouteBundle            ; ; ;
+
+; IcelandOutboundAncillaryProductBundle          ; Iceland Outbound Ancillary Products Bundle           ;                                        ; IcelandOutboundRouteBundle          ; ; ;
+; IcelandInboundAncillaryProductBundle           ; Iceland Inbound Ancillary Products Bundle            ;                                        ; IcelandInboundRouteBundle           ; ; ;
+
+#Winter Olympics
+; WinterOlympics1OutboundAncillaryProductBundle  ; Winter Olympics 1 Outbound Ancillary Products Bundle ;                                        ; WinterOlympics1OutboundRouteBundle  ; ; ;
+; WinterOlympics1InboundAncillaryProductBundle   ; Winter Olympics 1 Inbound Ancillary Products Bundle  ;                                        ; WinterOlympics1InboundRouteBundle   ; ; ;
+
+; WinterOlympics2OutboundAncillaryProductBundle  ; Winter Olympics 2 Outbound Ancillary Products Bundle ;                                        ; WinterOlympics2OutboundRouteBundle  ; ; ;
+; WinterOlympics2InboundAncillaryProductBundle   ; Winter Olympics 2 Inbound Ancillary Products Bundle  ;                                        ; WinterOlympics2InboundRouteBundle   ; ; ;
+
+; WinterOlympics3OutboundAncillaryProductBundle  ; Winter Olympics 3 Outbound Ancillary Products Bundle ; PRIBOARDING1                           ; WinterOlympics3OutboundRouteBundle  ; ; ;
+; WinterOlympics3InboundAncillaryProductBundle   ; Winter Olympics 3 Inbound Ancillary Products Bundle  ; PRIBOARDING1                           ; WinterOlympics3InboundRouteBundle   ; ; ;
+
+; SnowboardSpecialOutboundAncillaryProductBundle ; Snowboard Special Outbound Ancillary Products Bundle ; PRIBOARDING1, LOUNGEACC1, STANDARDMEAL ; SnowboardSpecialOutboundRouteBundle ; ; ;
+; SnowboardSpecialInboundAncillaryProductBundle  ; Snowboard Special Inbound Ancillary Products Bundle  ; PRIBOARDING1, LOUNGEACC1, STANDARDMEAL ; SnowboardSpecialInboundRouteBundle  ; ; ;
+
+
+
+##########################
+## ACCOMMODATION BUNDLE ##
+##########################
+
+INSERT_UPDATE AccommodationBundleTemplate; id[unique = true]; name[lang = $lang]; accommodationOffering(code); accommodation(code, $catalogVersion); ratePlan(code, $catalogVersion); parentTemplate(id, $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#Beach destination
+; PhuketAccommodationDealBundle           ; Phuket Accommodation Deal Bundle            ; THE_LANTERN_RESORTS_PATONG           ; THE_LANTERN_RESORTS_PATONGVIEW_PENT_DOUBLE_OR_TWIN_ROOM ; 4S_2P_NR_Plan_TH ; PhuketDealBundle           ; ; ;
+; GoaAccommodationDealBundle              ; Goa Accommodation Deal Bundle               ; SANDALWOOD_HOTEL_RETREAT             ; SANDALWOOD_HOTEL_RETREATPREMIER_DOUBLE_OR_TWIN_ROOM     ; 4S_2P_NR_Plan_IN ; GoaDealBundle              ; ; ;
+; MiamiAccommodationDealBundle            ; Miami Accommodation Deal Bundle             ; HILTON_MIAMI_DOWNTOWN                ; HILTON_MIAMI_DOWNTOWNKING_ROOM                          ; 4S_2P_FC_Plan_US ; MiamiDealBundle            ; ; ;
+; AmalfiAccommodationDealBundle           ; Amalfi Accommodation Deal Bundle            ; HOTEL_MIRAMALFI                      ; HOTEL_MIRAMALFITRIPLE_ROOM_WITH_SEA_VIEW                ; 4S_3P_FC_Plan_IT ; AmalfiDealBundle           ; ; ;
+
+#Explore Europe
+; LondonAccommodationDealBundle           ; London Accommodation Deal Bundle            ; HILTON_LONDON_WEMBLEY                ; HILTON_LONDON_WEMBLEYKING_GUEST_ROOM                    ; 4S_2P_FC_Plan_UK ; LondonDealBundle           ; ; ;
+; ParisAccommodationDealBundle            ; Paris Accommodation Deal Bundle             ; H_TEL_SAN_R_GIS                      ; H_TEL_SAN_R_GISDELUXE_ROOM                              ; 5S_2P_NR_Plan_FR ; ParisDealBundle            ; ; ;
+; FlorenceAccommodationDealBundle         ; Florence Accommodation Deal Bundle          ; HOTEL_RIVOLI                         ; HOTEL_RIVOLISUPERIOR_DOUBLE_ROOM                        ; 4S_2P_FC_Plan_IT ; FlorenceDealBundle         ; ; ;
+; RomeAccommodationDealBundle             ; Rome Accommodation Deal Bundle              ; SPAGNA_ROYAL_SUITE                   ; SPAGNA_ROYAL_SUITEEXECUTIVE_DOUBLE_ROOM                 ; 4S_2P_NR_Plan_IT ; RomeDealBundle             ; ; ;
+
+#Great Savings
+; BangkokAccommodationDealBundle          ; Bangkok Accommodation Deal Bundle           ; PARADISE_SUKHUMVIT                   ; PARADISE_SUKHUMVITDELUXE_DOUBLE_ROOM                    ; 4S_2P_NR_Plan_TH ; BangkokDealBundle          ; ; ;
+; MalaysiaAccommodationDealBundle         ; Malaysia Accommodation Deal Bundle          ; THE_MAPLE_SUITE                      ; THE_MAPLE_SUITEDELUXE_ONE_BEDROOM_APARTMENT             ; 3S_2P_FC_Plan_MY ; MalaysiaDealBundle         ; ; ;
+; PragueAccommodationDealBundle           ; Prague Accommodation Deal Bundle            ; HILTON_PRAGUE_HOTEL                  ; HILTON_PRAGUE_HOTELTWO_QUEEN_BED_SPACIOUS_ROOM          ; 5S_4P_NR_Plan_CZ ; PragueDealBundle           ; ; ;
+; IcelandAccommodationDealBundle          ; Iceland Accommodation Deal Bundle           ; FOSSHOTEL_FOSSHOTEL_HUSAVIK          ; FOSSHOTEL_FOSSHOTEL_HUSAVIKDELUXE_DOUBLE_OR_TWIN_ROOM   ; 3S_2P_FC_Plan_IS ; IcelandDealBundle          ; ; ;
+
+#Winter Olympics
+; WinterOlympics1AccommodationDealBundle  ; Winter Olympics 1 Accommodation Deal Bundle ; GOODSTAY_ELF_SPA_RESORT              ; GOODSTAY_ELF_SPA_RESORTSUITE                            ; 3S_2P_NR_Plan_KR ; WinterOlympics1DealBundle  ; ; ;
+; WinterOlympics2AccommodationDealBundle  ; Winter Olympics 2 Accommodation Deal Bundle ; YONGPYONG_RESORT_DRAGON_VALLEY_HOTEL ; YONGPYONG_RESORT_DRAGON_VALLEY_HOTELTRIPLE_ROOM         ; 5S_3P_FC_Plan_KR ; WinterOlympics2DealBundle  ; ; ;
+; WinterOlympics3AccommodationDealBundle  ; Winter Olympics 3 Accommodation Deal Bundle ; WHITE_CABIN                          ; WHITE_CABINKOREAN_STYLE_QUADRUPLE_ROOM                  ; 3S_4P_FC_Plan_KR ; WinterOlympics3DealBundle  ; ; ;
+; SnowboardSpecialAccommodationDealBundle ; Snowboard Special Accommodation Deal Bundle ; ECOPIA_PENSION                       ; ECOPIA_PENSIONDOUBLE_ROOM_WITH_PARK_VIEW                ; 3S_4P_NR_Plan_KR ; SnowboardSpecialDealBundle ; ; ;
+
+
+UPDATE AccommodationBundleTemplate; id[unique = true]; products(code, $catalogVersion)[mode = replace]; $catalogVersion
+#Beach destination
+; PhuketAccommodationDealBundle           ; 4S_2P_LSWDNR_TH, 4S_2P_LSWENR_TH, 4S_2P_HSWDNR_TH, 4S_2P_HSWENR_TH ;
+; GoaAccommodationDealBundle              ; 4S_2P_LSWDNR_IN, 4S_2P_LSWENR_IN, 4S_2P_HSWDNR_IN, 4S_2P_HSWENR_IN ;
+; MiamiAccommodationDealBundle            ; 4S_2P_LSWDFC_US, 4S_2P_LSWEFC_US, 4S_2P_HSWDFC_US, 4S_2P_HSWEFC_US ;
+; AmalfiAccommodationDealBundle           ; 4S_3P_LSWDFC_IT, 4S_3P_LSWEFC_IT, 4S_3P_HSWDFC_IT, 4S_3P_HSWEFC_IT ;
+
+#Explore Europe
+; LondonAccommodationDealBundle           ; 4S_2P_LSWDFC_UK, 4S_2P_LSWEFC_UK, 4S_2P_HSWDFC_UK, 4S_2P_HSWEFC_UK ;
+; ParisAccommodationDealBundle            ; 5S_2P_LSWDNR_FR, 5S_2P_LSWENR_FR, 5S_2P_HSWDNR_FR, 5S_2P_HSWENR_FR ;
+; FlorenceAccommodationDealBundle         ; 4S_2P_LSWDFC_IT, 4S_2P_LSWEFC_IT, 4S_2P_HSWDFC_IT, 4S_2P_HSWEFC_IT ;
+; RomeAccommodationDealBundle             ; 4S_2P_LSWDNR_IT, 4S_2P_LSWENR_IT, 4S_2P_HSWDNR_IT, 4S_2P_HSWENR_IT ;
+
+#Great Savings
+; BangkokAccommodationDealBundle          ; 4S_2P_LSWDNR_TH, 4S_2P_LSWENR_TH, 4S_2P_HSWDNR_TH, 4S_2P_HSWENR_TH ;
+; MalaysiaAccommodationDealBundle         ; 3S_2P_LSWDFC_MY, 3S_2P_LSWEFC_MY, 3S_2P_HSWDFC_MY, 3S_2P_HSWEFC_MY ;
+; PragueAccommodationDealBundle           ; 5S_4P_LSWDNR_CZ, 5S_4P_LSWENR_CZ, 5S_4P_HSWDNR_CZ, 5S_4P_HSWENR_CZ ;
+; IcelandAccommodationDealBundle          ; 3S_2P_LSWDNR_IS, 3S_2P_LSWENR_IS, 3S_2P_HSWDNR_IS, 3S_2P_HSWENR_IS ;
+
+#Winter Olympics
+; WinterOlympics1AccommodationDealBundle  ; 3S_2P_LSWDNR_KR, 3S_2P_LSWENR_KR, 3S_2P_HSWDNR_KR, 3S_2P_HSWENR_KR ;
+; WinterOlympics2AccommodationDealBundle  ; 5S_3P_LSWDFC_KR, 5S_3P_LSWEFC_KR, 5S_3P_HSWDFC_KR, 5S_3P_HSWEFC_KR ;
+; WinterOlympics3AccommodationDealBundle  ; 3S_4P_LSWDFC_KR, 3S_4P_LSWEFC_KR, 3S_4P_HSWDFC_KR, 3S_4P_HSWEFC_KR ;
+; SnowboardSpecialAccommodationDealBundle ; 3S_4P_LSWDNR_KR, 3S_4P_LSWENR_KR, 3S_4P_HSWDNR_KR, 3S_4P_HSWENR_KR ;
+
+
+
+#####################
+## STANDARD BUNDLE ##
+#####################
+
+INSERT_UPDATE BundleTemplate; id[unique = true]; name[lang = $lang]; products(code, $catalogVersion); parentTemplate(id, $catalogVersion); version[default = 1.0][unique = true]; status(id, $catalogVersion)[default = 'Approved_Status']; $catalogVersion
+#

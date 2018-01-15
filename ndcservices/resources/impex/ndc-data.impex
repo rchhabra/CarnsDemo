@@ -1,0 +1,54 @@
+############################
+###	Update PassengerType with the IATA code required for ndc
+############################
+INSERT_UPDATE PassengerType; code[unique = true]; ndcCode
+; adult  ; ADT
+; child  ; CHD
+; infant ; INF
+
+
+############################
+###	Update TransportVehicle with the IATA code required for ndc
+############################
+
+INSERT_UPDATE AircraftInfo; code[unique = true]; ndcCode
+; A380-800 ; 380
+
+
+############################
+###	Update TransportVehicle with the IATA code required for ndc
+############################
+
+INSERT_UPDATE NDCCreditCardTypeMapping; code[unique = true]; creditCardType
+; AX ; amex
+; DC ; diners
+; TO ; maestro
+; CA ; master
+; CE ; mastercard_eurocard
+; SW ; switch
+; VI ; visa
+
+############################
+###	Insert UserGroup that enables
+############################
+
+INSERT_UPDATE UserGroup; UID[unique = true]; description
+; travelagencygroup ; Groups that collects all the travel agency users
+
+############################
+###	Insert OAuthClientDetails required for ndc
+############################
+
+INSERT_UPDATE OAuthClientDetails; clientId[unique = true]; scope; authorizedGrantTypes; authorities; clientSecret; accesstokenvalidityseconds; refreshtokenvalidityseconds
+; travel-agency ; basic ; password, refresh_token ; ROLE_TRAVELAGENCYGROUP ; 12341234 ; 2628000 ; 3000
+
+######################################
+##### Test User
+######################################
+$lang = en
+$defaultPassword = 12341234
+$passwordEncoding = md5
+$setPassword = @password[translator = de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default = '$passwordEncoding:$defaultPassword']
+
+INSERT_UPDATE Customer; originalUid[unique = true]; uid[unique = true]; title(code); name; sessionLanguage(isocode); sessionCurrency(isocode); groups(uid); $setPassword
+; john.smith@mailinator.com ; john.smith@mailinator.com ; mr ; John Smith ; $lang ; GBP ; travelagencygroup, customergroup ;

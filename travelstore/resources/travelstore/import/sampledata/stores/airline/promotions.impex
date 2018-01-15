@@ -1,0 +1,17 @@
+$productCatalog = travelProductCatalog
+$defaultPromoGroup = default
+$usergroup = familygroup
+
+INSERT_UPDATE UserGroup; UID[unique = true]; groups(uid)[mode = append]; locname[lang = en]; description
+; $usergroup ; ; Family Group ; Family group for promotions
+
+INSERT_UPDATE ProductPercentageDiscountPromotion; PromotionGroup(Identifier[default = $defaultPromoGroup]); enabled[default = true][unique = true]; code[unique = true]; title; description; percentageDiscount; priority
+; ; ; mealDiscount ; 10% discount on meals ; 10% discount on meals ; 10 ; 500
+
+INSERT_UPDATE PromotionUserRestriction; positive; promotion(code)[unique = true]; users(uid)
+; TRUE ; mealDiscount ; $usergroup
+
+$version = Online
+$catalogVersion = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $productCatalog]), CatalogVersion.version[default = $version])[default = $productCatalog:$version]
+UPDATE ProductPercentageDiscountPromotion; code[unique = true]; products(code, $catalogVersion)[mode = append]
+; mealDiscount ; STANDARDMEAL

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <bean class="de.hybris.platform.travelbackofficeservices.stocklevel.ManageStockLevelInfo">
+        <description>POJO containing info about the models and stock for which the create/update stock is to be performed.</description>
+        <property name="stockItemType" type="java.lang.String"/>
+        <property name="scheduleConfigurations" type="java.util.List&lt;de.hybris.platform.travelservices.model.travel.ScheduleConfigurationModel>"/>
+        <property name="travelSectors" type="java.util.List&lt;de.hybris.platform.travelservices.model.travel.TravelSectorModel>"/>
+        <property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.travelservices.model.warehouse.TransportOfferingModel>"/>
+        <property name="stockLevelAttributes" type="java.util.List&lt;de.hybris.platform.travelservices.stocklevel.StockLevelAttributes>"/>
+        <property name="modified" type="java.lang.Boolean" />
+    </bean>
+
+</beans>

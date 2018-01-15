@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Sep 09 11:31:02 CEST 2016
+builddate=20160909 1130
+description=ndcwebservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=ndcwebservices
+releasedate=20160906 1533
+vendor=hybris
+version=6.2.0.0-SNAPSHOT
+version.api=6.2.0

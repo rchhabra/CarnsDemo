@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultTravelRouteDao" alias="travelRouteDao" />
+	<bean id="defaultTravelRouteDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelRouteDao">
+		<constructor-arg value="TravelRoute" />
+	</bean>
+
+	<alias name="defaultTransportFacilityDao" alias="transportFacilityDao" />
+	<bean id="defaultTransportFacilityDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTransportFacilityDao">
+		<constructor-arg value="TransportFacility" />
+	</bean>
+
+	<alias name="defaultTransportOfferingDao" alias="transportOfferingDao" />
+	<bean id="defaultTransportOfferingDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTransportOfferingDao">
+		<constructor-arg value="TransportOffering" />
+	</bean>
+
+	<alias name="defaultCabinClassDao" alias="cabinClassDao" />
+	<bean id="defaultCabinClassDao" class="de.hybris.platform.travelservices.dao.impl.DefaultCabinClassDao">
+		<constructor-arg value="CabinClass" />
+	</bean>
+
+	<alias name="defaultPassengerTypeDao" alias="passengerTypeDao" />
+	<bean id="defaultPassengerTypeDao" class="de.hybris.platform.travelservices.dao.impl.DefaultPassengerTypeDao">
+		<constructor-arg value="PassengerType" />
+	</bean>
+
+	<alias name="defaultTravellerDao" alias="travellerDao" />
+	<bean id="defaultTravellerDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravellerDao">
+		<constructor-arg value="Traveller" />
+	</bean>
+
+	<alias name="defaultTravelBundleTemplateDao" alias="travelBundleTemplateDao" />
+	<bean id="defaultTravelBundleTemplateDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelBundleTemplateDao"
+		parent="abstractItemDao" />
+
+	<alias name="defaultTravelCategoryDao" alias="travelCategoryDao" />
+	<bean id="defaultTravelCategoryDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelCategoryDao" parent="categoryDao">
+	</bean>
+
+	<alias name="defaultTransportVehicleConfigurationMappingDao" alias="transportVehicleConfigurationMappingDao" />
+	<bean id="defaultTransportVehicleConfigurationMappingDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTransportVehicleConfigurationMappingDao">
+		<constructor-arg value="TransportVehicleConfigurationMapping" />
+	</bean>
+
+	<alias name="defaultTransportVehicleInfoDao" alias="transportVehicleInfoDao" />
+	<bean id="defaultTransportVehicleInfoDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTransportVehicleInfoDao">
+		<constructor-arg value="TransportVehicleInfo" />
+	</bean>
+
+	<alias name="defaultTravelSectorDao" alias="travelSectorDao" />
+	<bean id="defaultTravelSectorDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelSectorDao">
+		<constructor-arg value="TravelSector" />
+	</bean>
+
+	<alias name="defaultConfiguredAccommodationDao" alias="configuredAccommodationDao" />
+	<bean id="defaultConfiguredAccommodationDao" class="de.hybris.platform.travelservices.dao.impl.DefaultConfiguredAccommodationDao">
+		<constructor-arg value="ConfiguredAccommodation" />
+	</bean>
+
+	<alias name="defaultTravelCartDao" alias="travelCartDao" />
+	<bean id="defaultTravelCartDao" class="de.hybris.platform.travelservices.order.daos.impl.DefaultTravelCartDao">
+		<constructor-arg value="Cart" />
+	</bean>
+
+	<alias name="defaultSpecialServiceRequestDao" alias="specialServiceRequestDao" />
+	<bean id="defaultSpecialServiceRequestDao" class="de.hybris.platform.travelservices.dao.impl.DefaultSpecialServiceRequestDao">
+		<constructor-arg value="SpecialServiceRequest" />
+	</bean>
+
+	<alias name="defaultTravelConsignmentDao" alias="consignmentDao" />
+	<bean id="defaultTravelConsignmentDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelConsignmentDao">
+		<constructor-arg value="Consignment" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingDao" alias="accommodationOfferingDao" />
+	<bean id="defaultAccommodationOfferingDao" class="de.hybris.platform.travelservices.dao.impl.DefaultAccommodationOfferingDao">
+		<constructor-arg value="AccommodationOffering" />
+	</bean>
+
+	<alias name="defaultPropertyFacilityDao" alias="propertyFacilityDao" />
+	<bean id="defaultPropertyFacilityDao" class="de.hybris.platform.travelservices.dao.impl.DefaultPropertyFacilityDao">
+		<constructor-arg value="PropertyFacility" />
+	</bean>
+
+	<alias name="defaultAccommodationDao" alias="accommodationDao" />
+	<bean id="defaultAccommodationDao" class="de.hybris.platform.travelservices.dao.impl.DefaultAccommodationDao">
+		<constructor-arg value="Accommodation" />
+	</bean>
+
+	<alias name="defaultRatePlanConfigDao" alias="ratePlanConfigDao" />
+	<bean id="defaultRatePlanConfigDao" class="de.hybris.platform.travelservices.dao.impl.DefaultRatePlanConfigDao">
+		<constructor-arg value="RatePlanConfig" />
+	</bean>
+
+	<alias name="defaultMarketingRatePlanInfoDao" alias="marketingRatePlanInfoDao" />
+	<bean id="defaultMarketingRatePlanInfoDao" class="de.hybris.platform.travelservices.dao.impl.DefaultMarketingRatePlanInfoDao">
+		<constructor-arg value="MarketingRatePlanInfo" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingGalleryDao" alias="accommodationOfferingGalleryDao" />
+	<bean id="defaultAccommodationOfferingGalleryDao" class="de.hybris.platform.travelservices.dao.impl.DefaultAccommodationOfferingGalleryDao">
+		<constructor-arg value="AccommodationOfferingGallery" />
+	</bean>
+
+	<alias name="defaultPagedAccommodationOfferingCustomerReviewDao" alias="pagedAccommodationOfferingCustomerReviewDao" />
+	<bean id="defaultPagedAccommodationOfferingCustomerReviewDao" class="de.hybris.platform.travelservices.dao.impl.DefaultPagedAccommodationOfferingCustomerReviewDao">
+		<constructor-arg value="CustomerReview" />
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+	</bean>
+
+	<alias name="defaultTravelLocationDao" alias="travelLocationDao" />
+	<bean id="defaultTravelLocationDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelLocationDao">
+		<constructor-arg value="Location" />
+	</bean>
+
+	<alias name="defaultAccommodationExtrasDao" alias="accommodationExtrasDao" />
+	<bean id="defaultAccommodationExtrasDao" class="de.hybris.platform.travelservices.dao.impl.DefaultAccommodationExtrasDao">
+		<constructor-arg value="Product" />
+	</bean>
+
+	<alias name="defaultSolrIndexSortDao" alias="solrIndexSortDao" />
+	<bean id="defaultSolrIndexSortDao" class="de.hybris.platform.travelservices.dao.impl.DefaultSolrIndexSortDao">
+		<constructor-arg value="SolrIndexedTypeDefaultSortOrderMapping" />
+	</bean>
+
+	<alias name="defaultAccommodationCustomerReviewDao" alias="accommodationCustomerReviewDao" />
+	<bean id="defaultAccommodationCustomerReviewDao" class="de.hybris.platform.travelservices.dao.impl.DefaultAccommodationCustomerReviewDao">
+		<constructor-arg value="CustomerReview" />
+	</bean>
+
+	<alias name="defaultAbstractOrderEntryGroupDao" alias="abstractOrderEntryGroupDao" />
+	<bean id="defaultAbstractOrderEntryGroupDao" class="de.hybris.platform.travelservices.dao.impl.DefaultAbstractOrderEntryGroupDao">
+		<constructor-arg value="AbstractOrderEntryGroup" />
+	</bean>
+
+	<alias name="defaultOrderUserAccountMappingDao" alias="orderUserAccountMapping" />
+	<bean id="defaultOrderUserAccountMappingDao" class="de.hybris.platform.travelservices.dao.impl.DefaultOrderUserAccountMappingDao">
+		<constructor-arg value="OrderUserAccountMapping" />
+	</bean>
+
+	<alias name="defaultTravelOrderDao" alias="travelOrderDao" />
+	<bean id="defaultTravelOrderDao" class="de.hybris.platform.travelservices.order.daos.impl.DefaultTravelOrderDao">
+		<constructor-arg value="Order" />
+	</bean>
+
+	<alias name="defaultTravelStockLevelDao" alias="travelStockLevelDao" />
+	<bean id="defaultTravelStockLevelDao" parent="defaultStockLevelDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelStockLevelDao">
+	</bean>
+
+	<alias name="defaultSelectedAccommodationDao" alias="selectedAccommodationDao" />
+	<bean id="defaultSelectedAccommodationDao" class="de.hybris.platform.travelservices.dao.impl.DefaultSelectedAccommodationDao" >
+        <constructor-arg value="SelectedAccommodation" />
+    </bean>
+
+	<alias alias="pointOfServiceDao" name="defaultTravelPointOfServiceDao" />
+	<bean id="defaultTravelPointOfServiceDao" class="de.hybris.platform.travelservices.dao.impl.DefaultTravelPointOfServiceDao"
+		parent="defaultPointOfServiceDao" />
+
+	<alias name="defaultTravelCustomerAccountDao" alias="customerAccountDao" />
+	<bean id="defaultTravelCustomerAccountDao" class="de.hybris.platform.travelservices.customer.dao.impl.DefaultTravelCustomerAccountDao"
+		parent="defaultCustomerAccountDao" />
+
+	<alias name="defaultRoomPreferenceDAO" alias="roomPreferenceDAO" />
+	<bean id="defaultRoomPreferenceDAO" class="de.hybris.platform.travelservices.dao.impl.DefaultRoomPreferenceDAO">
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultRatePlanDao" alias="ratePlanDao" />
+	<bean id="defaultRatePlanDao" class="de.hybris.platform.travelservices.dao.impl.DefaultRatePlanDao">
+		<constructor-arg value="RatePlan" />
+	</bean>
+
+	<alias name="defaultGuestCountDao" alias="guestCountDao" />
+	<bean id="defaultGuestCountDao" class="de.hybris.platform.travelservices.dao.impl.DefaultGuestCountDao">
+		<constructor-arg value="GuestCount" />
+	</bean>
+
+	<alias name="defaultTravelVendorDao" alias="travelVendorDao" />
+	<bean id="defaultTravelVendorDao" class="de.hybris.platform.travelservices.vendor.dao.impl.DefaultTravelVendorDao">
+		<constructor-arg value="Vendor" />
+	</bean>
+
+</beans>

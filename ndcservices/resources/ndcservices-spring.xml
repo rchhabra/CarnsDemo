@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="defaultNDCTransportVehicleInfoService" alias="ndcTransportVehicleInfoService" />
+    <bean id="defaultNDCTransportVehicleInfoService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCTransportVehicleInfoService">
+        <property name="transportVehicleInfoDao" ref="transportVehicleInfoDao"/>
+    </bean>
+
+    <alias name="defaultNDCPassengerTypeService" alias="ndcPassengerTypeService" />
+    <bean id="defaultNDCPassengerTypeService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCPassengerTypeService">
+        <property name="ndcPassengerTypeDAO" ref="ndcPassengerTypeDAO" />
+    </bean>
+
+    <alias name="defaultNDCPassengerTypeDAO" alias="ndcPassengerTypeDAO" />
+    <bean id="defaultNDCPassengerTypeDAO" class="de.hybris.platform.ndcservices.dao.impl.DefaultNDCPassengerTypeDAO">
+        <constructor-arg value="PassengerType" />
+    </bean>
+
+    <alias name="defaultNDCOfferMappingService" alias="ndcOfferMappingService" />
+    <bean id="defaultNDCOfferMappingService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCOfferMappingService">
+        <property name="ndcOfferMappingDao" ref="ndcOfferMappingDao" />
+    </bean>
+
+    <alias name="defaultNDCOfferMappingDao" alias="ndcOfferMappingDao" />
+    <bean id="defaultNDCOfferMappingDao" class="de.hybris.platform.ndcservices.dao.impl.DefaultNDCOfferMappingDao">
+        <constructor-arg value="NDCOfferMapping" />
+    </bean>
+
+    <alias name="defaultNDCCreditCardTypeMappingService" alias="ndcCreditCardTypeMappingService" />
+    <bean id="defaultNDCCreditCardTypeMappingService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCCreditCardTypeMappingService">
+        <property name="ndcCreditCardTypeMappingDao" ref="ndcCreditCardTypeMappingDao" />
+    </bean>
+
+    <alias name="defaultNDCCreditCardTypeMappingDao" alias="ndcCreditCardTypeMappingDao" />
+    <bean id="defaultNDCCreditCardTypeMappingDao" class="de.hybris.platform.ndcservices.dao.impl.DefaultNDCCreditCardTypeMappingDao">
+        <constructor-arg value="NDCCreditCardTypeMapping" />
+    </bean>
+
+    <alias name="defaultNDCOrderService" alias="ndcOrderService" />
+    <bean id="defaultNDCOrderService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCOrderService">
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="unitService" ref="unitService"/>
+        <property name="travelRouteService" ref="travelRouteService"/>
+        <property name="travelCommercePriceService" ref="travelCommercePriceService"/>
+        <property name="travelOrderCodeGenerationStrategy" ref="travelOrderCodeGenerationStrategy"/>
+    </bean>
+
+    <alias name="defaultNDCTransportOfferingService" alias="ndcTransportOfferingService" />
+    <bean id="defaultNDCTransportOfferingService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCTransportOfferingService">
+        <property name="timeService" ref="timeService"/>
+        <property name="transportOfferingService" ref="transportOfferingService"/>
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <bean id="ndcServicesSystemSetup" class="de.hybris.platform.ndcservices.setup.NDCServicesSystemSetup"
+          parent="abstractCoreSystemSetup">
+    </bean>
+    
+    <alias name="defaultNDCAccommodationService" alias="ndcAccommodationService" />
+    <bean id="defaultNDCAccommodationService" class="de.hybris.platform.ndcservices.services.impl.DefaultNDCAccommodationService">
+        <property name="accommodationMapService" ref="accommodationMapService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="productService" ref="productService"/>
+        <property name="productReferenceService" ref="productReferenceService"/>
+        <property name="selectedAccommodationDao" ref="selectedAccommodationDao"/>
+    </bean>
+			
+</beans>

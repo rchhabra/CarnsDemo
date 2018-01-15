@@ -1,0 +1,32 @@
+$productCatalog = travelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+# Selection criteria
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria; id[unique = true]; n; $catalogVersion
+; FareProductEconomyBundle_PickExactlyOne       ; 1 ;
+; FareProductEconomyPlusBundle_PickExactlyOne   ; 1 ;
+; FareProductBusinessBundle_PickExactlyOne      ; 1 ;
+; FareProductFamilyBundle_PickExactlyOne        ; 1 ;
+; FareProductSpecialBundle_PickExactlyOne       ; 1 ;
+
+# Auto pick Selection criteria
+INSERT_UPDATE AutoPickBundleSelectionCriteria; id[unique = true]; $catalogVersion
+; AncillaryProductEconomyBundle_AutoPickBundleSelection         ;
+; AncillaryProductEconomyPlusBundle_AutoPickBundleSelection     ;
+; AncillaryProductBusinessBundle_AutoPickBundleSelection        ;
+; AncillaryProductFamilyBundle_AutoPickBundleSelection          ;
+; AncillaryProductSpecialBundle_AutoPickBundleSelection         ;
+
+
+#Update the BundleTemplate with Selectioncriteria
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; bundleSelectionCriteria(id, $catalogVersion); $catalogVersion
+; FareProductEconomyBundle          ; ; FareProductEconomyBundle_PickExactlyOne                     ;
+; FareProductEconomyPlusBundle      ; ; FareProductEconomyPlusBundle_PickExactlyOne                 ;
+; FareProductBusinessBundle         ; ; FareProductBusinessBundle_PickExactlyOne                    ;
+; FareProductFamilyBundle           ; ; FareProductFamilyBundle_PickExactlyOne                      ;
+; FareProductSpecialBundle          ; ; FareProductSpecialBundle_PickExactlyOne                     ;
+; AncillaryProductEconomyBundle     ; ; AncillaryProductEconomyBundle_AutoPickBundleSelection       ;
+; AncillaryProductEconomyPlusBundle ; ; AncillaryProductEconomyPlusBundle_AutoPickBundleSelection   ;
+; AncillaryProductBusinessBundle    ; ; AncillaryProductBusinessBundle_AutoPickBundleSelection      ;
+; AncillaryProductFamilyBundle      ; ; AncillaryProductFamilyBundle_AutoPickBundleSelection        ;
+; AncillaryProductSpecialBundle     ; ; AncillaryProductSpecialBundle_AutoPickBundleSelection       ;

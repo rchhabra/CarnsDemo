@@ -1,0 +1,7 @@
+#
+# ImpEx for Importing RoomPreference into travel accelerator
+#
+INSERT_UPDATE RoomPreference;		value[unique=true,lang=en]		;		preferenceType(code)[unique=true]			
+							;		Twin Beds						;		BED_PREFERENCE			;				
+							;		Double Queen Size				;		BED_PREFERENCE			;			
+							;		Double Bed						;		BED_PREFERENCE			;				

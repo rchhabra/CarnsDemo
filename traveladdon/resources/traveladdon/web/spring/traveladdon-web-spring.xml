@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+  <context:annotation-config/>
+
+  <!-- support for JSR303 annotation used for Form object validation -->
+  <mvc:annotation-driven/>
+
+  <bean name="transportOfferingStatusPageController"
+        class="de.hybris.platform.traveladdon.controllers.pages.TransportOfferingStatusPageController"/>
+  <bean name="tripFinderPageController" class="de.hybris.platform.traveladdon.controllers.pages.TripFinderPageController"/>
+  <bean name="fareSelectionPageController" class="de.hybris.platform.traveladdon.controllers.pages.FareSelectionPageController"/>
+  <bean name="ancillaryPageController" class="de.hybris.platform.traveladdon.controllers.pages.AncillaryPageController"/>
+  <bean name="addToCartController" class="de.hybris.platform.traveladdon.controllers.misc.AddToCartController"/>
+  <bean name="transportAccountPageController" class="de.hybris.platform.traveladdon.controllers.pages.TransportAccountPageController">
+    <property name="adultTitles" value="${travellerdetails.form.property.adultTitles}"/>
+  </bean>
+
+  <bean name="travellerDetailsPageController" class="de.hybris.platform.traveladdon.controllers.pages.TravellerDetailsPageController">
+    <property name="adultAgesRange" value="${travellerdetails.form.property.adultAgesRange}" />
+    <property name="childrenAgeRange" value="${travellerdetails.form.property.childrenAgeRange}" />
+    <property name="infantAgeRange" value="${travellerdetails.form.property.infantAgeRange}" />
+    <property name="adultTitles" value="${travellerdetails.form.property.adultTitles}" />
+    <property name="childrenTitles" value="${travellerdetails.form.property.childrenTitles}" />
+  </bean>
+
+  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="/transport-offering-status">transportOfferingStatusPageController</prop>
+        <prop key="/trip-finder">tripFinderPageController</prop>
+        <prop key="/fare-selection">fareSelectionPageController</prop>
+        <prop key="/ancillary">ancillaryPageController</prop>
+        <prop key="/cart/**">addToCartController</prop>
+        <prop key="/traveller-details">travellerDetailsPageController</prop>
+      </props>
+    </property>
+  </bean>
+
+  <context:component-scan base-package="de.hybris.platform.traveladdon"/>
+
+  <!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+  <bean id="defaultTraveladdonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+    <property name="addOnName" value="traveladdon"/>
+  </bean>
+
+  <bean id="defaultTraveladdonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee"
+        class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+    <property name="messageSource" ref="defaultTraveladdonJavaScriptMessageResourceAccessor"/>
+  </bean>
+
+  <bean id="getTraveladdonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+    <property name="adaptee">
+      <ref bean="defaultTraveladdonBeforeViewJsPropsHandlerAdaptee"/>
+    </property>
+  </bean>
+  <bean id="TraveladdonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+    <property name="add" ref="getTraveladdonBeforeViewHandler"/>
+  </bean>
+
+  <alias name="abstractCheckinStep" alias="checkinStep"/>
+  <bean id="abstractCheckinStep" class="de.hybris.platform.traveladdon.checkin.steps.CheckinStep" abstract="true"/>
+
+  <util:map id="checkinFlowGroupMap">
+    <entry key="travelCheckinGroup" value-ref="travelCheckinGroup"/>
+  </util:map>
+
+  <alias name="defaultTravelCheckinGroup" alias="travelCheckinGroup"/>
+  <bean id="defaultTravelCheckinGroup" class="de.hybris.platform.traveladdon.checkin.steps.CheckinGroup">
+    <property name="groupId" value="defaultCheckinGroup"/>
+    <property name="checkinStepMap">
+      <map merge="true">
+        <entry key="check-in" value-ref="reservationCheckinStep"/>
+        <entry key="ancillary" value-ref="ancillaryCheckinStep"/>
+      </map>
+    </property>
+    <property name="checkinProgressBar">
+      <map merge="true">
+        <entry key="1" value-ref="reservationCheckinStep"/>
+        <entry key="2" value-ref="ancillaryCheckinStep"/>
+      </map>
+    </property>
+  </bean>
+
+  <alias name="defaultReservationCheckinStep" alias="reservationCheckinStep"/>
+  <bean id="defaultReservationCheckinStep" parent="checkinStep">
+    <property name="checkinGroup" ref="travelCheckinGroup"/>
+    <property name="transitions">
+      <map merge="true">
+        <entry key="current" value-ref="REDIRECT_TO_CHECK_IN"/>
+        <entry key="next" value-ref="REDIRECT_TO_CHECKIN_SUCCESS"/>
+      </map>
+    </property>
+    <property name="progressBarId" value="checkin"/>
+  </bean>
+
+  <alias name="defaultAncillaryCheckinStep" alias="ancillaryCheckinStep"/>
+  <bean id="defaultAncillaryCheckinStep" parent="checkinStep">
+    <property name="checkinGroup" ref="travelCheckinGroup"/>
+    <property name="transitions">
+      <map merge="true">
+        <entry key="previous" value-ref="REDIRECT_TO_CHECK_IN"/>
+        <entry key="current" value-ref="REDIRECT_TO_ANCILLARY"/>
+        <entry key="next" value="redirect:/checkout/multi/payment-method/select-flow?pci="/>
+      </map>
+    </property>
+    <property name="progressBarId" value="ancillary"/>
+  </bean>
+
+  <bean id="REDIRECT_TO_CHECK_IN" class="java.lang.String">
+    <constructor-arg value="redirect:/manage-booking/check-in/%s/%s"/>
+  </bean>
+
+  <bean id="REDIRECT_TO_ANCILLARY" class="java.lang.String">
+    <constructor-arg value="redirect:/manage-booking/ancillary/checkin"/>
+  </bean>
+
+  <bean id="REDIRECT_TO_CHECKIN_SUCCESS" class="java.lang.String">
+    <constructor-arg value="redirect:/manage-booking/check-in/success"/>
+  </bean>
+
+</beans>

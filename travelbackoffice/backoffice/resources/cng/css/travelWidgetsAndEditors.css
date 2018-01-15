@@ -1,0 +1,53 @@
+.yw-modal-configurableFlow, .yw-modal-modifyWizard {
+	width: 1270px !important;
+	max-width: 1350px;
+}
+
+.transportoffering-effected-label {
+	padding-bottom: 10px;
+	font-weight: bold;
+}
+
+.gridWithNoBorder td.z-row-inner {
+	border: none !important;
+}
+
+.searchFieldAlignRight {
+	float:right;
+}
+
+.z-datebox-popup {
+	width: 400px !important;
+	right: 400px !important;
+	left: unset !important;
+}
+
+.schedule-config-day table .modify-inventory-grid table{
+	width: 100% !important;
+	text-align: center;
+}
+
+.manage-inventory-grid table {
+	table-layout: initial !important;
+}
+
+.manage-inventory-grid table button {
+	position: relative !important;
+	right: auto !important;
+	margin-top: 0 !important;
+}
+
+.modify-inventory-grid.z-grid {
+	border-right: 0px #CCC;
+	text-align: center;
+	height:600px;
+	overflow-y:scroll; 
+}
+
+.z-row-content .z-div button {
+	width: auto !important;
+}
+
+.z-row-content .z-div button img {
+	width: 100px !important;
+}

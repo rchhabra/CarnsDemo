@@ -1,0 +1,9 @@
+<editor-definition id="de.hybris.platform.travelbackoffice.editor.transportofferingdurationspinner"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/editor-definition.xsd">
+
+	<name>Duration spinner editor</name>
+	<description>Custom spinner editor for flight duration</description>
+	<type>java.lang.Integer</type>
+	<editorClassName>de.hybris.platform.travelbackoffice.editor.DefaultTransportOfferingDurationSpinnerEditor</editorClassName>
+</editor-definition>

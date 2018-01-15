@@ -1,0 +1,29 @@
+package de.hybris.platform.travelrulesengine.rules
+
+import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.travelrulesengine.rao.BookingRAO;
+import de.hybris.platform.travelrulesengine.rao.FeeRAO;
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import java.math.BigDecimal;
+import java.util.Date;
+import org.apache.commons.lang.time.DateUtils;
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import java.util.Map;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleRetainAdminFeeAction;
+
+rule "refundFee"
+@ruleCode("refundFee")
+@moduleName("travel-rules-module")
+dialect "mvel"
+    when
+    	// Check if the cancellation time is within 24hrs before departure time, we do not refund admin fee. 
+    	$booking:BookingRAO(!OrderStatus.ACTIVE_DISRUPTED_PENDING.equals(bookingStatus), reservationItems.size() > 0, new Date().after(DateUtils.addDays(reservationItems.get(0).getItinerary().getTransportOfferings().get(0).getDepartureTime(), -1)))
+		$result : RuleEngineResultRAO()
+    then
+    	Map variables = [
+		   "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO": $result,
+		   "de.hybris.platform.travelrulesengine.rao.BookingRAO": $booking
+		];
+    	ruleRetainAdminFeeAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), null);
+end

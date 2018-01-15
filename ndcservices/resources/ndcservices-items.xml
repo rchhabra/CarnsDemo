@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+		<enumtype code="PaymentTransactionType" autocreate="false" generate="false">
+			<value code="PAY_LATER"/>
+		</enumtype>
+
+		<enumtype code="NDCCardType">
+			<value code="AX"/>
+			<value code="DC"/>
+			<value code="TO"/>
+			<value code="CA"/>
+			<value code="CE"/>
+			<value code="SW"/>
+		</enumtype>
+
+		<enumtype code="NDCActionType">
+			<value code="REMOVE_PASSENGER"/>
+			<value code="REMOVE_ANCILLARIES"/>
+			<value code="ADD_ANCILLARIES"/>
+            <value code="ADD_ACCOMMODATION"/>
+            <value code="REMOVE_ACCOMMODATION"/>
+		</enumtype>
+
+		<enumtype code="SalesApplication" autocreate="false" dynamic="true">
+			<value code="NDC" />
+		</enumtype>
+	</enumtypes>
+
+	<itemtypes>
+		<itemtype code="NDCCreditCardTypeMapping">
+			<description>This type map an NDCCardType to CreditCardType.</description>
+			<deployment table="NDCCreditCardTypeMapping" typecode="6901"/>
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<modifiers optional="false" unique="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="creditCardType" type="java.lang.String">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="NDCOfferMapping">
+			<description>This type map an NDCOfferItemID to its shorted code.</description>
+			<deployment table="NDCOfferMapping" typecode="6902"/>
+			<attributes>
+				<attribute qualifier="code" type="java.lang.String">
+					<modifiers optional="false" unique="true"/>
+					<persistence type="property"/>
+				</attribute>
+				<attribute qualifier="NDCOfferItemID" type="java.lang.String">
+					<modifiers optional="false" unique="true"/>
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="PassengerType" autocreate="false" generate="false">
+			<description>This type represents a passenger type.</description>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="ndcCode">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="TransportVehicleInfo" autocreate="false" generate="false">
+			<description>This type holds the information of a transport vehicle.</description>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="ndcCode">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+			<description>Extending OrderEntry type to include ndc OfferItemID.</description>
+			<attributes>
+				<attribute type="java.lang.String" qualifier="ndcOfferItemID">
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias name="defaultTravelCustomerPopulator" alias="customerPopulator"/>
+	<bean id="defaultTravelCustomerPopulator"
+			class="de.hybris.platform.travelfacades.populators.TravelCustomerPopulator" parent="defaultCustomerPopulator">
+	</bean>
+
+	<alias name="defaultProductTypePopulator" alias="productTypePopulator" />
+	<bean id="defaultProductTypePopulator" class="de.hybris.platform.travelfacades.populators.ProductTypePopulator">
+		<property name="productTypeInstanceMap" ref="productTypeInstanceMap" />
+	</bean>
+
+	<alias name="defaultSpecialRequestDetailsConverter" alias="specialRequestDetailsConverter" />
+	<bean id="defaultSpecialRequestDetailsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.SpecialRequestDetailData" />
+		<property name="populators">
+			<list>
+				<ref bean="specialRequestDetailsPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="specialRequestDetailsPopulator" class="de.hybris.platform.travelfacades.populators.SpecialRequestDetailsPopulator">
+		<property name="specialServiceRequestConverter" ref="specialServiceRequestConverter" />
+		<property name="remarkConverter" ref="remarkConverter" />
+	</bean>
+
+	<alias name="defaultSpecialServiceRequestConverter" alias="specialServiceRequestConverter" />
+	<bean id="defaultSpecialServiceRequestConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.SpecialServiceRequestData" />
+		<property name="populators">
+			<list>
+				<ref bean="specialServiceRequestPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="specialServiceRequestPopulator" class="de.hybris.platform.travelfacades.populators.SpecialServiceRequestPopulator" />
+
+	<alias name="defaultRemarkConverter" alias="remarkConverter" />
+	<bean id="defaultRemarkConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.RemarkData" />
+		<property name="populators">
+			<list>
+				<ref bean="remarkPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="remarkPopulator" class="de.hybris.platform.travelfacades.populators.RemarkPopulator" />
+
+	<alias name="defaultTravellerPreferenceConverter" alias="travellerPreferenceConverter" />
+	<bean id="defaultTravellerPreferenceConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravellerPreferenceData" />
+		<property name="populators">
+			<list>
+				<ref bean="travellerPreferencePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravellerPreferencePopulator" alias="travellerPreferencePopulator" />
+	<bean id="defaultTravellerPreferencePopulator" class="de.hybris.platform.travelfacades.populators.TravellerPreferencePopulator" />
+
+	<alias name="defaultTravellerPreferenceReverseConverter" alias="travellerPreferenceReverseConverter" />
+	<bean id="defaultTravellerPreferenceReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.model.user.TravellerPreferenceModel" />
+		<property name="populators">
+			<list>
+				<ref bean="travellerPreferenceReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravellerPreferenceReversePopulator" alias="travellerPreferenceReversePopulator" />
+	<bean id="defaultTravellerPreferenceReversePopulator" class="de.hybris.platform.travelfacades.populators.TravellerPreferenceReversePopulator" />
+
+	<alias name="defaultPassengerInformationReverseConverter" alias="passengerInformationReverseConverter" />
+	<bean id="defaultPassengerInformationReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.model.user.PassengerInformationModel" />
+		<property name="populators">
+			<list>
+				<ref bean="passengerBasicDetailsReversePopulator" />
+				<ref bean="passengerAdvancedDetailsReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultPassengerDetailsReverseConverter" alias="passengerDetailsReverseConverter" />
+	<bean id="defaultPassengerDetailsReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.model.user.PassengerInformationModel" />
+		<property name="populators">
+			<list>
+				<ref bean="passengerBasicDetailsReversePopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultPassengerAdvancedDetailsReversePopulator" alias="passengerAdvancedDetailsReversePopulator" />
+	<bean id="defaultPassengerAdvancedDetailsReversePopulator" class="de.hybris.platform.travelfacades.populators.PassengerAdvancedDetailsReversePopulator">
+		<property name="passengerTypeService" ref="passengerTypeService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultPassengerBasicDetailsReversePopulator" alias="passengerBasicDetailsReversePopulator" />
+	<bean id="defaultPassengerBasicDetailsReversePopulator" class="de.hybris.platform.travelfacades.populators.PassengerBasicDetailsReversePopulator">
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<alias name="defaultAccommodationCustomerReviewReverseConverter" alias="accommodationCustomerReviewReverseConverter" />
+	<bean id="defaultAccommodationCustomerReviewReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.customerreview.model.CustomerReviewModel" />
+		<property name="populators">
+			<list>
+				<ref bean="accommodationCustomerReviewReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationCustomerReviewReversePopulator" alias="accommodationCustomerReviewReversePopulator" />
+	<bean id="defaultAccommodationCustomerReviewReversePopulator" class="de.hybris.platform.travelfacades.populators.AccommodationCustomerReviewReversePopulator">
+		<property name="productService" ref="productService" />
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+
+	<!-- TransportOffering Converter and Populators -->
+	<alias name="defaultTransportOfferingConverter" alias="transportOfferingConverter" />
+	<bean id="defaultTransportOfferingConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TransportOfferingData" />
+		<property name="populators">
+			<list>
+				<ref bean="transportOfferingPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportOfferingConfiguredPopulator" alias="transportOfferingConfiguredPopulator" />
+	<bean id="defaultTransportOfferingConfiguredPopulator" class="de.hybris.platform.commercefacades.converter.impl.DefaultConfigurablePopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.travel.enums.TransportOfferingOption">
+				<entry key="BASIC" value-ref="transportOfferingPopulator" />
+				<entry key="STATUS" value-ref="transportOfferingStatusPopulator" />
+				<entry key="TERMINAL" value-ref="transportOfferingTerminalPopulator" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportOfferingPopulator" alias="transportOfferingPopulator" />
+	<bean id="defaultTransportOfferingPopulator" class="de.hybris.platform.travelfacades.populators.TransportOfferingPopulator">
+		<property name="travelSectorConverter" ref="travelSectorConverter" />
+		<property name="transportVehicleConverter" ref="transportVehicleConverter" />
+		<property name="travelProviderConverter" ref="travelProviderConverter" />
+	</bean>
+
+	<alias name="defaultTransportOfferingStatusPopulator" alias="transportOfferingStatusPopulator" />
+	<bean id="defaultTransportOfferingStatusPopulator" class="de.hybris.platform.travelfacades.populators.TransportOfferingStatusPopulator">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultTransportOfferingTerminalPopulator" alias="transportOfferingTerminalPopulator" />
+	<bean id="defaultTransportOfferingTerminalPopulator" class="de.hybris.platform.travelfacades.populators.TransportOfferingTerminalPopulator">
+		<property name="terminalConverter" ref="terminalConverter" />
+	</bean>
+
+
+	<!-- Terminal Converter and Populator -->
+
+	<alias name="defaultTerminalConverter" alias="terminalConverter" />
+	<bean id="defaultTerminalConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TerminalData" />
+		<property name="populators">
+			<list>
+				<ref bean="terminalPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTerminalPopulator" alias="terminalPopulator" />
+	<bean id="defaultTerminalPopulator" class="de.hybris.platform.travelfacades.populators.TerminalPopulator" />
+
+	<!-- Payment transaction and Payment transaction entry Converter and Populators -->
+
+	<alias name="defaultPaymentTransactionConverter" alias="paymentTransactionConverter" />
+	<bean id="defaultPaymentTransactionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.order.PaymentTransactionData" />
+		<property name="populators">
+			<list>
+				<ref bean="paymentTransactionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPaymentTransactionPopulator" alias="paymentTransactionPopulator" />
+	<bean id="defaultPaymentTransactionPopulator" class="de.hybris.platform.travelfacades.populators.PaymentTransactionPopulator">
+		<property name="paymentTransactionEntryConverter" ref="paymentTransactionEntryConverter" />
+	</bean>
+
+	<alias name="defaultPaymentTransactionEntryConverter" alias="paymentTransactionEntryConverter" />
+	<bean id="defaultPaymentTransactionEntryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.order.PaymentTransactionEntryData" />
+		<property name="populators">
+			<list>
+				<ref bean="paymentTransactionEntryPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPaymentTransactionEntryPopulator" alias="paymentTransactionEntryPopulator" />
+	<bean id="defaultPaymentTransactionEntryPopulator" class="de.hybris.platform.travelfacades.populators.PaymentTransactionEntryPopulator" />
+
+	<!-- TravelSector Converter and Populators -->
+	<alias name="defaultTravelSectorConverter" alias="travelSectorConverter" />
+	<bean id="defaultTravelSectorConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravelSectorData" />
+		<property name="populators">
+			<list>
+				<ref bean="travelSectorPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelSectorConfiguredPopulator" alias="travelSectorConfiguredPopulator" />
+	<bean id="defaultTravelSectorConfiguredPopulator" class="de.hybris.platform.commercefacades.converter.impl.DefaultConfigurablePopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.travel.enums.TravelSectorOption">
+				<entry key="BASIC" value-ref="travelSectorPopulator" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelSectorPopulator" alias="travelSectorPopulator" />
+	<bean id="defaultTravelSectorPopulator" class="de.hybris.platform.travelfacades.populators.TravelSectorPopulator">
+		<property name="transportFacilityConverter" ref="transportFacilityConverter" />
+	</bean>
+
+	<!-- TransportFacility Converter and Populator -->
+	<alias name="defaultTransportFacilityConverter" alias="transportFacilityConverter" />
+	<bean id="defaultTransportFacilityConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="populators">
+			<list>
+				<ref bean="transportFacilityPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportFacilityPopulator" alias="transportFacilityPopulator" />
+	<bean id="defaultTransportFacilityPopulator" class="de.hybris.platform.travelfacades.populators.TransportFacilityPopulator">
+		<property name="locationConverter" ref="locationConverter"/>
+	</bean>
+
+	<!-- TravelBundleTemplate Converter and Populator -->
+	<alias name="travelBundleTemplateConverter" alias="travelBundleTemplateConverter" />
+	<bean id="travelBundleTemplateConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravelBundleTemplateData" />
+		<property name="populators">
+			<list>
+				<ref bean="travelBundleTemplatePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="travelBundleTemplatePopulator" alias="travelBundleTemplatePopulator" />
+	<bean id="travelBundleTemplatePopulator" class="de.hybris.platform.travelfacades.fare.search.converters.populator.TravelBundleTemplatePopulator">
+		<property name="fareProductConverter" ref="fareProductConverter" />
+		<property name="productConverter" ref="ancillaryProductConverter" />
+	</bean>
+
+	<alias name="dealBundleTemplateConverter" alias="dealBundleTemplateConverter" />
+	<bean id="dealBundleTemplateConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.configurablebundlefacades.data.BundleTemplateData" />
+		<property name="populators">
+			<list>
+				<ref bean="bundleTemplatePopulator" />
+				<ref bean="bundleTemplateProductPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="bundleTemplateProductPopulator" alias="bundleTemplateProductPopulator" />
+	<bean id="bundleTemplateProductPopulator" class="de.hybris.platform.travelfacades.populators.BundleTemplateProductPopulator">
+		<property name="productConverter" ref="productConverter" />
+	</bean>
+
+	<!-- Location Converter and Populator -->
+	<alias name="defaultLocationConverter" alias="locationConverter" />
+	<bean id="defaultLocationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.LocationData" />
+		<property name="populators">
+			<list>
+				<ref bean="locationPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultLocationPopulator" alias="locationPopulator" />
+	<bean id="defaultLocationPopulator" class="de.hybris.platform.travelfacades.populators.LocationPopulator">
+		<property name="imageConverter" ref="imageConverter" />
+	</bean>
+
+
+	<!-- TravelRoute Converter and Populator -->
+	<alias name="defaultTravelRouteConverter" alias="travelRouteConverter" />
+	<bean id="defaultTravelRouteConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravelRouteData" />
+		<property name="populators">
+			<list>
+				<ref bean="travelRoutePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelRoutePopulator" alias="travelRoutePopulator" />
+	<bean id="defaultTravelRoutePopulator" class="de.hybris.platform.travelfacades.populators.TravelRoutePopulator">
+		<property name="travelSectorConverter" ref="travelSectorConverter" />
+		<property name="transportFacilityConverter" ref="transportFacilityConverter" />
+	</bean>
+
+	<!-- Cabin Class Converter/Populator -->
+
+	<bean id="cabinClassPopulator" class="de.hybris.platform.travelfacades.populators.CabinClassPopulator" />
+
+	<alias name="defaultCabinClassConverter" alias="cabinClassConverter" />
+	<bean id="defaultCabinClassConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.CabinClassData" />
+		<property name="populators">
+			<list>
+				<ref bean="cabinClassPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Passenger Type Converter/Populator -->
+
+	<alias name="defaultPassengerTypeConverter" alias="passengerTypeConverter" />
+	<bean id="defaultPassengerTypeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.PassengerTypeData" />
+		<property name="populators">
+			<list>
+				<ref bean="passengerTypePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravellerDataConverter" alias="travellerDataConverter" />
+	<bean id="defaultTravellerDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravellerData" />
+		<property name="populators">
+			<list>
+				<ref bean="travellerDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPassengerInformationDataConverter" alias="passengerInformationDataConverter" />
+	<bean id="defaultPassengerInformationDataConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.PassengerInformationData" />
+		<property name="populators">
+			<list>
+				<ref bean="passengerInformationDataPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationOfferingConverter" alias="accommodationOfferingConverter" />
+	<bean id="defaultAccommodationOfferingConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.PropertyData" />
+		<property name="populators">
+			<list>
+				<ref bean="accommodationOfferingBasicPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Vehicle converter/populator -->
+
+	<alias name="defaultTravelProviderConverter" alias="travelProviderConverter" />
+	<bean id="defaultTravelProviderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravelProviderData" />
+		<property name="populators">
+			<list>
+				<ref bean="travelProviderPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelProviderPopulator" alias="travelProviderPopulator" />
+	<bean id="defaultTravelProviderPopulator" class="de.hybris.platform.travelfacades.populators.TravelProviderPopulator">
+	</bean>
+
+	<alias name="defaultTransportVehicleConverter" alias="transportVehicleConverter" />
+	<bean id="defaultTransportVehicleConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TransportVehicleData" />
+		<property name="populators">
+			<list>
+				<ref bean="transportVehiclePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportVehiclePopulator" alias="transportVehiclePopulator" />
+	<bean id="defaultTransportVehiclePopulator" class="de.hybris.platform.travelfacades.populators.TransportVehiclePopulator">
+		<property name="transportVehicleInfoConverter" ref="transportVehicleInfoConverter" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingBasicPopulator" alias="accommodationOfferingBasicPopulator" />
+	<bean name="defaultAccommodationOfferingBasicPopulator" class="de.hybris.platform.travelfacades.populators.AccommodationOfferingBasicPopulator">
+		<property name="propertyFacilityConverter" ref="propertyFacilityConverter" />
+		<property name="configuredFacilityDataComparator" ref="configuredFacilityDataComparator" />
+		<property name="accommodationOfferingGalleryService" ref="accommodationOfferingGalleryService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="imageFormats">
+			<list>
+				<value>hotelGallery</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+		<property name="imageConverter" ref="imageConverter" />
+		<property name="imageFormatMapping" ref="imageFormatMapping" />
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="addressConverter" ref="addressConverter" />
+	</bean>
+
+
+	<alias name="defaultTransportVehicleInfoConverter" alias="transportVehicleInfoConverter" />
+	<bean id="defaultTransportVehicleInfoConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TransportVehicleInfoData" />
+		<property name="populators">
+			<list>
+				<ref bean="transportVehicleInfoPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportVehicleInfoPopulator" alias="transportVehicleInfoPopulator" />
+	<bean id="defaultTransportVehicleInfoPopulator" class="de.hybris.platform.travelfacades.populators.TransportVehicleInfoPopulator" />
+
+	<!-- Accommodation converter/populator -->
+
+	<alias name="defaultConfiguredAccommodationConverter" alias="configuredAccommodationConverter" />
+	<bean id="defaultConfiguredAccommodationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.accommodation.data.ConfiguredAccommodationData" />
+		<property name="populators">
+			<list>
+				<ref bean="configuredAccommodationPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultConfiguredAccommodationPopulator" alias="configuredAccommodationPopulator" />
+	<bean id="defaultConfiguredAccommodationPopulator" class="de.hybris.platform.travelfacades.populators.ConfiguredAccommodationPopulator">
+		<property name="productConverter" ref="ancillaryProductConverter" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingCustomerReviewConverter" alias="accommodationOfferingCustomerReviewConverter" />
+	<bean id="defaultAccommodationOfferingCustomerReviewConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ReviewData" />
+		<property name="populators">
+			<list>
+				<ref bean="customerReviewPopulator" />
+				<ref bean="travelCustomerReviewPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultFareProductConverter" alias="fareProductConverter" />
+	<bean id="defaultFareProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.FareProductData" />
+		<property name="populators">
+			<list>
+				<ref bean="fareProductPopulator" />
+				<ref bean="productTypePopulator" />
+				<ref bean="productCategoriesPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAncillaryProductConverter" alias="ancillaryProductConverter" />
+	<bean id="defaultAncillaryProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="populators">
+			<list>
+				<ref bean="ancillaryProductPopulator" />
+				<ref bean="productTypePopulator" />
+				<ref bean="productCategoriesPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAncillaryProductPopulator" alias="ancillaryProductPopulator" />
+	<bean id="defaultAncillaryProductPopulator" class="de.hybris.platform.travelfacades.ancillary.search.converters.populator.AncillaryProductPopulator" />
+
+	<alias name="defaultFareProductPopulator" alias="fareProductPopulator" />
+	<bean id="defaultFareProductPopulator" class="de.hybris.platform.travelfacades.fare.search.converters.populator.FareProductPopulator" />
+
+	<bean id="travellerDataPopulator" class="de.hybris.platform.travelfacades.populators.TravellerDataPopulator">
+		<property name="passengerInformationDataConverter" ref="passengerInformationDataConverter" />
+		<property name="specialRequestDetailsConverter" ref="specialRequestDetailsConverter" />
+	</bean>
+
+	<bean id="passengerTypePopulator" class="de.hybris.platform.travelfacades.populators.PassengerTypePopulator" />
+
+	<bean id="passengerInformationDataPopulator" class="de.hybris.platform.travelfacades.populators.PassengerInformationDataPopulator">
+		<property name="passengerTypeConverter" ref="passengerTypeConverter" />
+		<property name="titleConverter" ref="titleConverter" />
+		<property name="countryConverter" ref="countryConverter" />
+	</bean>
+
+	<alias name="defaultServiceProductConverter" alias="serviceProductConverter" />
+	<bean id="defaultServiceProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="populators">
+			<list>
+				<ref bean="productUrlPopulator" />
+				<ref bean="productDescriptionPopulator" />
+				<ref bean="productPricePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPropertyFacilityConverter" alias="propertyFacilityConverter" />
+	<bean id="defaultPropertyFacilityConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.property.FacilityData" />
+		<property name="populators">
+			<list>
+				<ref bean="propertyFacilityPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultRoomTypeConverter" alias="roomTypeConverter" />
+	<bean id="defaultRoomTypeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.RoomTypeData" />
+		<property name="populators">
+			<list>
+				<ref bean="accommodationBasicPopulator" />
+				<ref bean="accommodationOccupanciesPopulator" />
+				<ref bean="accommodationFacilitiesPopulator" />
+				<ref bean="accommodationPrimaryImagePopulator" />
+				<ref bean="accommodationProductGalleryImagesPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultRatePlanConverter" alias="ratePlanConverter" />
+	<bean id="defaultRatePlanConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.RatePlanData" />
+		<property name="populators">
+			<list>
+				<ref bean="ratePlanBasicPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationBasicPopulator" alias="accommodationBasicPopulator" />
+	<bean id="defaultAccommodationBasicPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.AccommodationBasicPopulator" />
+
+	<alias name="defaultAccommodationOccupanciesPopulator" alias="accommodationOccupanciesPopulator" />
+	<bean id="defaultAccommodationOccupanciesPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.AccommodationOccupanciesPopulator">
+		<property name="guestOccupancyConverter" ref="guestOccupancyConverter" />
+	</bean>
+
+	<alias name="defaultAccommodationFacilitiesPopulator" alias="accommodationFacilitiesPopulator" />
+	<bean id="defaultAccommodationFacilitiesPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.AccommodationFacilitiesPopulator">
+		<property name="accommodationFacilityConverter" ref="accommodationFacilityConverter" />
+	</bean>
+
+	<bean id="propertyFacilityPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.PropertyFacilityPopulator">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultAccommodationProductGalleryImagesPopulator" alias="accommodationProductGalleryImagesPopulator" />
+	<bean id="defaultAccommodationProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>accommodationDetail</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+		<property name="imageFormatMapping" ref="accommodationImageFormatMapping" />
+	</bean>
+
+	<alias name="defaultAccommodationProductPrimaryImagePopulator" alias="accommodationPrimaryImagePopulator" />
+	<bean id="defaultAccommodationProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>list</value>
+			</list>
+		</property>
+		<property name="imageFormatMapping" ref="accommodationImageFormatMapping" />
+	</bean>
+
+	<alias name="defaultAccommodationFacilityConverter" alias="accommodationFacilityConverter" />
+	<bean id="defaultAccommodationFacilityConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.AccommodationFacilityData" />
+		<property name="populators">
+			<list>
+				<ref bean="accommodationFacilityPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="accommodationFacilityPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.AccommodationFacilityPopulator" />
+
+	<alias name="defaultGuestOccupancyConverter" alias="guestOccupancyConverter" />
+	<bean id="defaultGuestOccupancyConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.GuestOccupancyData" />
+		<property name="populators">
+			<list>
+				<ref bean="guestOccupancyPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="guestOccupancyPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.GuestOccupancyPopulator">
+		<property name="passengerTypeConverter" ref="passengerTypeConverter" />
+	</bean>
+
+	<alias name="defaultGuaranteeConverter" alias="guaranteeConverter" />
+	<bean id="defaultGuaranteeConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.GuaranteeData" />
+		<property name="populators">
+			<list>
+				<ref bean="guaranteePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="guaranteePopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.GuaranteePopulator" />
+
+	<alias name="defaultCancelPenaltyConverter" alias="cancelPenaltyConverter" />
+	<bean id="defaultCancelPenaltyConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.CancelPenaltyData" />
+		<property name="populators">
+			<list>
+				<ref bean="cancelPenaltyPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="cancelPenaltyPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.CancelPenaltyPopulator" />
+
+	<alias name="defaultRatePlanInclusionConverter" alias="ratePlanInclusionConverter" />
+	<bean id="defaultRatePlanInclusionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.RatePlanInclusionData" />
+		<property name="populators">
+			<list>
+				<ref bean="ratePlanInclusionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean name="ratePlanInclusionPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.RatePlanInclusionPopulator" />
+
+	<bean id="ratePlanBasicPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.RatePlanBasicPopulator">
+		<property name="cancelPenaltyConverter" ref="cancelPenaltyConverter" />
+		<property name="guaranteeConverter" ref="guaranteeConverter" />
+		<property name="guestOccupancyConverter" ref="guestOccupancyConverter" />
+		<property name="ratePlanInclusionConverter" ref="ratePlanInclusionConverter" />
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultTravelCustomerReviewPopulator" alias="travelCustomerReviewPopulator" />
+	<bean id="defaultTravelCustomerReviewPopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.TravelCustomerReviewPopulator">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultTravelRestrictionConverter" alias="travelRestrictionConverter" />
+	<bean id="defaultTravelRestrictionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.TravelRestrictionData" />
+		<property name="populators">
+			<list>
+				<ref bean="travelRestrictionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelRestrictionPopulator" alias="travelRestrictionPopulator" />
+	<bean id="defaultTravelRestrictionPopulator" class="de.hybris.platform.travelfacades.populators.TravelRestrictionPopulator" />
+
+	<alias name="defaultOfferGroupDataConfiguredPopulator" alias="offerGroupDataConfiguredPopulator" />
+	<bean id="defaultOfferGroupDataConfiguredPopulator" class="de.hybris.platform.commercefacades.converter.impl.DefaultConfigurablePopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.travel.enums.CategoryOption">
+				<entry key="TRAVEL_RESTRICTION" value-ref="categoryTravelRestrictionPopulator" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="categoryTravelRestrictionPopulator" alias="categoryTravelRestrictionPopulator" />
+	<bean id="categoryTravelRestrictionPopulator" class="de.hybris.platform.travelfacades.ancillary.search.converters.populator.CategoryTravelRestrictionPopulator">
+		<property name="travelRestrictionConverter" ref="travelRestrictionConverter" />
+	</bean>
+
+	<!-- SOLR beans -->
+	<alias name="defaultTransportOfferingSearchPageConverter" alias="transportOfferingSearchPageConverter" />
+	<bean id="defaultTransportOfferingSearchPageConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.search.facetdata.TransportOfferingSearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="transportOfferingSearchPagePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportOfferingSearchPagePopulator" alias="transportOfferingSearchPagePopulator" />
+	<bean id="defaultTransportOfferingSearchPagePopulator" class="de.hybris.platform.travelfacades.search.converters.populator.TransportOfferingSearchPagePopulator">
+		<property name="searchResultTransportOfferingConverter" ref="travelSearchResultTransportOfferingConverter" />
+	</bean>
+
+	<alias name="defaultTravelSearchResultTransportOfferingConverter" alias="travelSearchResultTransportOfferingConverter" />
+	<bean id="defaultTravelSearchResultTransportOfferingConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.TransportOfferingData" />
+		<property name="populators">
+			<list>
+				<ref bean="travelSearchResultTransportOfferingPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravelSearchResultTransportOfferingPopulator" alias="travelSearchResultTransportOfferingPopulator" />
+	<bean id="defaultTravelSearchResultTransportOfferingPopulator" class="de.hybris.platform.travelfacades.search.converters.populator.SearchResultTransportOfferingPopulator">
+	</bean>
+
+	<alias name="defaultSolrTravelSearchQueryDecoderPopulator" alias="solrTravelSearchQueryDecoderPopulator" />
+	<bean id="defaultSolrTravelSearchQueryDecoderPopulator" class="de.hybris.platform.travelfacades.search.converters.populator.SolrTravelSearchQueryDecoderPopulator">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="travelSolrSearchQueryEncoderPopulator" alias="solrSearchQueryEncoderPopulator"/>
+	<bean id="travelSolrSearchQueryEncoderPopulator"
+			class="de.hybris.platform.travelfacades.search.converters.populator.TravelSolrSearchQueryEncoderPopulator" parent="defaultSolrSearchQueryEncoderPopulator"
+	/>
+
+	<alias name="defaultSavedSearchPopulator" alias="savedSearchPopulator" />
+	<bean id="defaultSavedSearchPopulator" class="de.hybris.platform.travelfacades.populators.SavedSearchPopulator">
+		<property name="passengerTypeFacade" ref="passengerTypeFacade" />
+		<property name="travellerSortStrategy" ref="travellerSortStrategy" />
+		<property name="decodeSavedSearchStrategy" ref="decodeSavedSearchStrategy" />
+	</bean>
+
+	<alias name="defaultSavedSearchReversePopulator" alias="savedSearchReversePopulator" />
+	<bean id="defaultSavedSearchReversePopulator" class="de.hybris.platform.travelfacades.populators.SavedSearchReversePopulator">
+		<property name="encodeSavedSearchStrategy" ref="encodeSavedSearchStrategy" />
+	</bean>
+
+	<alias name="defaultSavedSearchConverter" alias="savedSearchConverter" />
+	<bean id="defaultSavedSearchConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.search.data.SavedSearchData" />
+		<property name="populators">
+			<list>
+				<ref bean="savedSearchPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSavedSearchReverseConverter" alias="savedSearchReverseConverter" />
+	<bean id="defaultSavedSearchReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.model.user.SavedSearchModel" />
+		<property name="populators">
+			<list>
+				<ref bean="savedSearchReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- SOLR beans -->
+	<alias name="defaultAccommodationOfferingSearchPageConverter" alias="accommodationOfferingSearchPageConverter" />
+	<bean id="defaultAccommodationOfferingSearchPageConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.search.facetdata.AccommodationOfferingSearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="accommodationOfferingSearchPagePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationOfferingSearchPagePopulator" alias="accommodationOfferingSearchPagePopulator" />
+	<bean id="defaultAccommodationOfferingSearchPagePopulator" class="de.hybris.platform.travelfacades.search.converters.populator.AccommodationOfferingSearchPagePopulator">
+		<property name="searchResultAccommodationOfferingConverter" ref="searchResultAccommodationOfferingConverter" />
+		<property name="facetConverter" ref="facetConverter" />
+		<property name="filteredFacetSearchPageConverter" ref="filteredFacetSearchPageConverter" />
+		<property name="searchStateConverter" ref="solrSearchStateConverter" />
+	</bean>
+
+	<alias name="defaultSearchResultAccommodationOfferingConverter" alias="searchResultAccommodationOfferingConverter" />
+	<bean id="defaultSearchResultAccommodationOfferingConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.AccommodationOfferingDayRateData" />
+		<property name="populators">
+			<list>
+				<ref bean="searchResultAccommodationOfferingPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultSearchResultAccommodationOfferingPopulator" alias="searchResultAccommodationOfferingPopulator" />
+	<bean id="defaultSearchResultAccommodationOfferingPopulator" class="de.hybris.platform.travelfacades.search.converters.populator.SearchResultAccommodationOfferingPopulator">
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultFilteredFacetSearchPageConverter" alias="filteredFacetSearchPageConverter" />
+	<bean id="defaultFilteredFacetSearchPageConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.search.facetdata.FilteredFacetSearchPageData" />
+		<property name="populators">
+			<list>
+				<ref bean="filteredFacetSearchPagePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultRoomPreferenceConverter" alias="roomPreferenceConverter" />
+	<bean id="defaultRoomPreferenceConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.accommodation.RoomPreferenceData" />
+		<property name="populators">
+			<list>
+				<ref bean="roomPreferencePopulator" />
+			</list>
+		</property>
+	</bean>
+	<alias name="defaultRoomPreferencePopulator" alias="roomPreferencePopulator" />
+	<bean id="defaultRoomPreferencePopulator" class="de.hybris.platform.travelfacades.facades.accommodation.populators.RoomPreferencePopulator">
+	</bean>
+
+	<bean id="guestCountReversePopulator" class="de.hybris.platform.travelfacades.populators.GuestCountReversePopulator">
+		<property name="passengerTypeService" ref="passengerTypeService" />
+	</bean>
+
+	<alias name="defaultGuestCountReverseConverter" alias="guestCountReverseConverter" />
+	<bean id="defaultGuestCountReverseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.travelservices.model.order.GuestCountModel" />
+		<property name="populators">
+			<list>
+				<ref bean="guestCountReversePopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultPaymentOptionPopulator" alias="paymentOptionPopulator" />
+	<bean id="defaultPaymentOptionPopulator" class="de.hybris.platform.travelfacades.populators.PaymentOptionPopulator">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultPaymentOptionConverter" alias="paymentOptionConverter" />
+	<bean id="defaultPaymentOptionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.travel.order.PaymentOptionData" />
+		<property name="populators">
+			<list>
+				<ref bean="paymentOptionPopulator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="originalOrderCodePopulator" class="de.hybris.platform.travelfacades.populators.OriginalOrderCodePopulator" />
+
+	<alias name="defaultAccommodationAutosuggestResponseParser" alias="accommodationAutosuggestResponseParser" />
+	<bean id="defaultAccommodationAutosuggestResponseParser" class="de.hybris.platform.travelfacades.accommodation.autosuggestion.parser.AccommodationAutosuggestResponseParser" />
+
+	<alias name="defaultAccommodationPlaceDetailResponseParser" alias="accommodationPlaceDetailResponseParser" />
+	<bean id="defaultAccommodationPlaceDetailResponseParser" class="de.hybris.platform.travelfacades.accommodation.autosuggestion.parser.AccommodationPlaceDetailResponseParser" />
+
+	<alias name="defaultSolrTravelSearchQueryDecoder" alias="solrTravelSearchQueryDecoder" />
+	<bean id="defaultSolrTravelSearchQueryDecoder" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData" />
+		<property name="populators">
+			<list>
+				<ref bean="solrTravelSearchQueryDecoderPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultTravelCategoryConverter" alias="travelCategoryConverter"/>
+	<bean id="defaultTravelCategoryConverter" parent="defaultCategoryConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="ignoreRulesPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultIgnoreRulesPopulator" alias="ignoreRulesPopulator"/>
+	<bean id="defaultIgnoreRulesPopulator"
+			class="de.hybris.platform.travelfacades.populators.IgnoreRulesPopulator" />
+			
+</beans>

@@ -1,0 +1,7 @@
+$lang = en
+
+INSERT_UPDATE UserGroup; UID[unique = true]; locname[lang = $lang]
+; travelagencygroup ; Travel agency users
+
+UPDATE SalesApplication; code[unique = true]; name[lang = $lang];
+; NDC ; NDC ;

@@ -1,0 +1,88 @@
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://www.zkoss.org/2005/zul"
+        xmlns:w="client">
+
+    <zk>
+        <html>
+        <![CDATA[
+            <script type="text/javascript">
+                jq('button[class^="y_manage"]').on('click', function(){
+                    jq(this).siblings().slideDown();
+                    jq('button[class^="y_manage"]').not(this).siblings().slideUp();
+                });
+            </script>
+            ]]>
+        </html>
+        <div style="background-color : white;">
+            <grid  style="margin-top:45px;border:none;">
+                <columns sizable="false">
+                    <column width="33%"/>
+                    <column width="33%"/>
+                    <column width="34%"/>
+                </columns>
+                <rows>
+                    <row height="150px"  style="border:none">
+                        <div height="150px">
+                            <button id="manageScheduleBtn" sclass="y_manageScheduleBtn" label="${labels.mainpanel.manage.schedule}" image="${wr}/images/calenderIcon.svg"
+                                    height="120px"/>
+                            <div sclass="y_manageScheduleLinks y_commandLinks" style="display:none;position: relative; left: 120px;top: -50px">
+                                <div>
+                                    <a id="createScheduleAnchor" label="${labels.mainpanel.create.schedule}" autodisable="self"
+                                       style="text-decoration:none;color:black"/>
+                                </div>
+                                <div>
+                                    <a id="modifyScheduleAnchor" label="${labels.mainpanel.modify.schedule}" autodisable="self"
+                                       style="text-decoration:none;color:black"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div height="150px">
+                            <button id="manageInventoryBtn" sclass="y_manageScheduleBtn" label="${labels.mainpanel.manage.inventory}" image="${wr}/images/graphIcon.svg"
+                                    height="120px"/>
+                            <div sclass="y_manageInventoryLinks y_commandLinks" style="display:none;position: relative; left: 120px;top: -50px">
+                                <div >
+                                    <a id="addBookingClassStockAnchor" label="${labels.mainpanel.add.stock.booking}"
+                                       autodisable="self" style="text-decoration:none;color:black"/>
+                                </div>
+                                <div>
+                                    <a id="addAncillaryStockAnchor" label="${labels.mainpanel.add.stock.ancillary}" autodisable="self"
+                                       style="text-decoration:none;color:black"/>
+                                </div>
+                                <div>
+                                    <a id="modifyInventoryAnchor" label="${labels.mainpanel.modify.inventory}" autodisable="self"
+                                       style="text-decoration:none;color:black"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div height="150px">
+                            <button id="createAncillaryBtn" label="${labels.mainpanel.create.ancillary}"
+                                    image="${wr}/images/suitcaseIcon.svg" height="120px" />
+                        </div>
+                    </row>
+                    <row height="150px"  style="border:none;">
+                        <div>
+                            <button id="createBundleBtn" label="${labels.mainpanel.create.bundle}" image="${wr}/images/boxIcon.svg"
+                                    height="120px" />
+                        </div>
+                        <div>
+                            <button id="createFareProductBtn" label="${labels.mainpanel.create.fare.product}"
+                                    image="${wr}/images/cartIcon.svg" height="120px" />
+                        </div>
+                        <div>
+                            <button id="openSeatmapBtn" label="${labels.mainpanel.open.seatmap}" image="${wr}/images/seatmapIcon.svg"
+                                    height="120px" />
+                        </div>
+                    </row>
+                    <row height="150px">
+                        <div>
+                            <button id="merchandisingWorkspaceBtn" label="${labels.mainpanel.merchandising.workspace}"
+                                    image="${wr}/images/penIcon.svg" height="120px" />
+                        </div>
+                    </row>
+                </rows>
+
+            </grid>
+        </div>
+
+    </zk>
+</widget>

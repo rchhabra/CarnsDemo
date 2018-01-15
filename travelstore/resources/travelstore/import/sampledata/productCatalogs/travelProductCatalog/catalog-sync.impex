@@ -1,0 +1,9 @@
+#
+# Update the Product Catalog Sync Job
+#
+
+$productCatalog = travelProductCatalog
+
+# adding itemtypes to the root types of the travelProductCatalog Sync Job
+UPDATE CatalogVersionSyncJob; code[unique = true]; roottypes(code)[mode = append];
+; sync $productCatalog:Staged->Online ; BundleTemplate, BundleTemplateStatus, BundleTemplateTransportOfferingMapping, AccommodationMap, TransportVehicleConfigurationMapping, ConfiguredAccommodation, AccommodationOfferingGallery, MarketingRatePlanInfo, RatePlanConfig ;

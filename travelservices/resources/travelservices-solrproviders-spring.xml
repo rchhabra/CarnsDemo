@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="transportOfferingActivitiesValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingActivitiesValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="transportOfferingOriginLocationCityValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationCityValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="locationOption" value="ORIGIN" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+	</bean>
+
+	<bean id="transportOfferingDestinationLocationCityValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationCityValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="locationOption" value="DESTINATION" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+	</bean>
+
+	<bean id="transportOfferingOriginLocationCountryValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationCountryValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="locationOption" value="ORIGIN" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+	</bean>
+
+	<bean id="transportOfferingDestinationLocationCountryValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationCountryValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="locationOption" value="DESTINATION" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+	</bean>
+
+	<bean id="customDateValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.CustomDateValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="transportOfferingOriginLocationHierarchyValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationHierarchyValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="locationOption" value="ORIGIN" />
+	</bean>
+
+	<bean id="transportOfferingDestinationLocationHierarchyValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationHierarchyValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="locationOption" value="DESTINATION" />
+	</bean>
+
+	<bean id="transportOfferingOriginLocationDataValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationDataValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="locationOption" value="ORIGIN" />
+	</bean>
+
+	<bean id="transportOfferingDestinationLocationDataValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingLocationDataValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="locationOption" value="DESTINATION" />
+	</bean>
+
+	<bean id="transportOfferingAllOriginsToDestinationValueProvider" class="de.hybris.platform.travelservices.solr.provider.impl.TransportOfferingAllOriginsToDestinationValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+	</bean>
+
+	<bean id="locationNamesValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.LocationNamesValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+	</bean>
+
+	<bean id="ratePlanConfigsValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.RatePlanConfigsValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<bean id="locationCodesValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.LocationCodesValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<bean id="contactNumberValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.ContactNumberValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<bean id="offeringImageUrlValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.OfferingImageUrlValueResolver"
+		parent="abstractValueResolver">
+		<property name="accommodationOfferingGalleryService" ref="accommodationOfferingGalleryService" />
+	</bean>
+
+	<bean id="minChildrenCountValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.MinChildrenCountValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<bean id="maxChildrenCountValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.MaxChildrenCountValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<bean id="accommodationCoordinatesValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.AccommodationCoordinatesValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<bean id="addressValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.AddressValueResolver" parent="abstractValueResolver">
+		<property name="addressFormatConverterMap">
+			<map>
+				<entry key="US" value-ref="usSingleLineAddressFormatConverter" />
+				<entry key="GB" value-ref="ukSingleLineAddressFormatConverter" />
+				<entry key="DE" value-ref="deSingleLineAddressFormatConverter" />
+				<entry key="JP" value-ref="jpSingleLineAddressFormatConverter" />
+			</map>
+		</property>
+		<property name="defaultAddressFormatConverter" ref="ukSingleLineAddressFormatConverter" />
+	</bean>
+
+	<bean id="abstractDateBasedValueResolver" abstract="true">
+		<property name="qualifierProvider" ref="noOpQualifierProvider" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<bean id="dateOfStayValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.DateOfStayValueResolver"
+		parent="abstractDateBasedValueResolver">
+	</bean>
+
+	<bean id="guestRatingValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.GuestRatingValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+	
+	<bean id="abstractPriceValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.AbstractPriceValueResolver"
+		parent="abstractDateBasedValueResolver">
+		<property name="qualifierProvider" ref="currencyQualifierProvider" />
+		<property name="priceService" ref="priceService" />
+	</bean>
+
+	<bean id="roomRatePriceValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.RoomRatePriceValueResolver"
+		parent="abstractPriceValueResolver">
+	</bean>
+	
+	<bean id="roomRateTaxValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.RoomRateTaxValueResolver"
+		parent="abstractPriceValueResolver">
+	</bean>
+
+	<bean id="roomRatePriceRangeValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.RoomRatePriceRangeValueResolver"
+			parent="abstractPriceValueResolver">
+	</bean>
+
+	<bean id="starRatingFacetValueDisplayNameProvider" class="de.hybris.platform.travelservices.solr.provider.impl.StarRatingFacetValueDisplayNameProvider">
+	</bean>
+
+	<bean id="accommodationInfosValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.AccommodationInfosValueResolver"
+		parent="abstractDateBasedValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+	</bean>
+
+	<bean id="amenityFacetValueDisplayNameProvider" class="de.hybris.platform.travelservices.solr.provider.impl.AmenityFacetValueDisplayNameProvider">
+		<property name="propertyFacilityService" ref="propertyFacilityService" />
+	</bean>
+
+	<bean id="amenityFieldValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.AmenityFieldValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+	</bean>
+
+	<bean id="boardTypeFieldValueResolver" class="de.hybris.platform.travelservices.solr.provider.impl.BoardTypeFieldValueResolver"
+		parent="abstractValueResolver">
+		<property name="qualifierProvider" ref="languageQualifierProvider" />
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+</beans>

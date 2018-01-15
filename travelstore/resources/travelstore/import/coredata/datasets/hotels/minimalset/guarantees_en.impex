@@ -1,0 +1,10 @@
+#
+# ImpEx for Importing Guarantee into travel accelerator
+#
+$lang = en
+
+UPDATE Guarantee; code[unique = true]; shortDescription[lang = $lang]; longDescription[lang = $lang];
+; deposit30      ; "30% deposit"     ; "A deposit of the 30% of the total will be required"
+; prePayment80   ; "80% Pre-Payment" ; "Pay 80% of the room rate 5 days before check-in date (or at booking time if it’s less than 5 days in advance)"
+; guarantee20    ; "20% guarantee"   ; "Pay 20% of the room rate now (If booking is 5 days or more in advance of the check in date)"
+; guaranteeNoPay ; "No pre-payment"  ; "No pre-payment will be charged. Full payment at check-in time"

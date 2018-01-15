@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-logged-in.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="my-company-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">User Details</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        
+    <div class="container">
+        <div class="col-xs-12 col-sm-3 side-to-top hidden-xs">
+            <aside id="sidebar">
+                <div class="promotions">
+                    <section>
+                        <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Explore the gardens of Croatia</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </div>
+        
+        
+        <div class="col-xs-12 col-sm-9">
+			<div class="row heading-with-button">
+				<div class="col-xs-7 col-sm-8">
+					<h2 class="h2">Edit User</h2>
+				</div>
+				<div class="col-xs-5 col-sm-4 button-inline">
+					<button class="btn btn-primary btn-block" href="#">Back to Users</button>
+				</div>
+			</div>
+			<div class="panel panel-primary panel-list">
+				<div class="panel-heading">
+					<h3 class="title">Edit User</h3>
+				</div>
+				<div class="panel-body">
+					<fieldset class="fieldset">
+						<legend class="sr-only">Edit User details</legend>
+						<div class="row">
+							<div class="form-group col-sm-6 col-xs-12">
+								<label class="control-label " for="user.title">
+									Title
+									<span class="mandatory"> </span>
+									<span class="skip"> </span>
+								</label>
+								<div class="control">
+									<select id="user.title" name="titleCode" class="form-control">
+										<option value="" disabled="disabled" selected="selected">Please select</option>
+										<option value="mr" selected="selected">Mr</option>
+										<option value="mrs">Mrs</option>
+										<option value="miss">Miss</option>
+										<option value="ms">Ms</option>
+										<option value="dr">Dr.</option>
+										<option value="rev">Rev.</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group">
+									<label class="control-label " for="user.firstName"> First Name</label>
+
+									<input id="user.firstName" name="firstName" class="text form-control" type="text" value="Akiro">
+								</div>
+							</div>
+						</div>
+						<!-- / .row -->
+						<div class="row">
+							<div class="col-sm-6 col-xs-12 nowrap">
+								<div class="form-group">
+									<label class="control-label " for="user.lastName"> Last Name</label>
+
+									<input id="user.lastName" name="lastName" class="text form-control" type="text" value="Nakamura">
+								</div>
+							</div>
+							<div class="col-sm-6 col-xs-12 nowrap">
+								<div class="form-group">
+									<label class="control-label " for="user.email"> Email</label>
+
+									<input id="user.email" name="email" class="text form-control" type="text" value="akiro.nakamura@rustic-hw.com">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group">
+									<label class="control-label " for="text.company.user.unit.title">
+										Parent Unit
+										<span class="mandatory"> </span>
+										<span class="skip"> </span>
+									</label>
+									<div class="control">
+										<select id="text.company.user.unit.title" name="parentB2BUnit" class="form-control">
+											<option value="" disabled="disabled" selected="selected">Please select</option>
+											<option value="Rustic" selected="selected">Rustic</option>
+											<option value="Rustic Services">Rustic Services</option>
+											<option value="Services East">Services East</option>
+											<option value="Rustic Retail">Rustic Retail</option>
+											<option value="Custom Retail">Custom Retail</option>
+											<option value="Services West">Services West</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group" id="roles">
+									<label>Roles:</label>
+									<div>
+										<input id="Roles1" name="roles" type="checkbox" value="b2badmingroup">
+										<label for="Roles1">B2B Administrator</label>
+									</div>
+									<div>
+										<input id="Roles2" name="roles" type="checkbox" value="b2bcustomergroup">
+										<label for="Roles2">B2B Customer</label>
+									</div>
+									<div>
+										<input id="Roles3" name="roles" type="checkbox" value="b2bmanagergroup">
+										<label for="Roles3">B2B Manager</label>
+									</div>
+									<div>
+										<input id="Roles4" name="roles" type="checkbox" value="b2bapprovergroup">
+										<label for="Roles4">B2B Approver</label>
+									</div>
+									<input type="hidden" name="_roles" value="on">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-6 bottom-align-parent btn-margin">
+								<button class="btn btn-primary btn-block bottom-align">Save</button>
+							</div>
+							<div class="form-group col-xs-12 col-sm-6  bottom-align-parent">
+								<button class="btn btn-primary btn-block bottom-align">Cancel</button>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+
+		</div>
+</div>
+
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+
+
+</body>
+
+</html>

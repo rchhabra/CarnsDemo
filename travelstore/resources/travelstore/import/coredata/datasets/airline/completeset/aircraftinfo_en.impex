@@ -1,0 +1,7 @@
+# ImpEx for Importing AircraftInfo into travel accelerator
+
+$lang = en
+
+INSERT_UPDATE AircraftInfo; code[unique = true]; name[lang = $lang]
+
+; A380-800 ; Etihad Airways Airbus A380

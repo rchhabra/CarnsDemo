@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+  <!-- Example Data POJO <bean class="de.hybris.platform.travelservices.data.MyPojo"> <property name="id" type="String"/> <property
+    name="flag" type="boolean"/> </bean> -->
+
+  <bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.data.SolrSearchQueryData">
+    <description>POJO representing a Search query.</description>
+    <property name="searchType" type="String"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelservices.search.facetdata.TransportOfferingSearchPageData&lt;STATE, RESULT>"
+          extends="de.hybris.platform.commerceservices.search.facetdata.FacetSearchPageData&lt;STATE, RESULT>">
+    <description>POJO containing the result page for transport offering search.</description>
+    <property name="freeTextSearch" type="String"/>
+    <property name="keywordRedirectUrl" type="String"/>
+    <property name="spellingSuggestion"
+            type="de.hybris.platform.commerceservices.search.facetdata.SpellingSuggestionData&lt;STATE>"/>
+  </bean>
+
+  <bean class="de.hybris.platform.commerceservices.stock.reservation.StockReservationData">
+    <description>POJO representing Stock Reservation Data.</description>
+    <property name="product" type="de.hybris.platform.core.model.product.ProductModel"/>
+    <!-- 		Deprecated property - use warehouse to ensure compatibility -->
+    <property name="transportOffering" type="de.hybris.platform.travelservices.model.warehouse.TransportOfferingModel"/>
+    <!--  -->
+    <property name="warehouse" type="de.hybris.platform.ordersplitting.model.WarehouseModel"/>
+    <property name="date" type="java.util.Date"/>
+    <property name="quantity" type="Integer"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelservices.price.data.PriceLevel">
+    <description>POJO representing Price level data.</description>
+    <property name="code" type="String"/>
+    <property name="value" type="String"/>
+  </bean>
+
+  <bean class="de.hybris.platform.order.events.SubmitOrderEvent">
+    <property name="travellers" type="java.util.List&lt;String>"/>
+    <property name="originDestinationRefNumber" type="int"/>
+  </bean>
+
+  <bean class="de.hybris.platform.solrfacetsearch.config.IndexedTypeFlexibleSearchQuery">
+    <property name="active" type="boolean"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelservices.order.data.EntryTypePaymentInfo">
+    <property name="entries" type="java.util.List&lt;de.hybris.platform.core.model.order.AbstractOrderEntryModel>"/>
+    <property name="entryType" type="de.hybris.platform.travelservices.enums.OrderEntryType"/>
+    <property name="bookingTimeAmount" type="java.lang.Double"/>
+    <property name="prePaymentRequested" type="java.lang.Double"/>
+    <property name="prePaymentDeadline" type="java.lang.Long"/>
+    <property name="checkInPayOff" type="java.lang.Double"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelservices.order.data.PaymentOptionInfo">
+    <property name="entryTypeInfos" type="java.util.List&lt;de.hybris.platform.travelservices.order.data.EntryTypePaymentInfo>"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelservices.stocklevel.StockLevelAttributes">
+    <description>POJO containing list of Stock level properties.</description>
+    <property name="code" type="java.lang.String"/>
+    <property name="availableQuantity" type="int"/>
+    <property name="oversellingQuantity" type="int"/>
+    <property name="inStockStatus" type="de.hybris.platform.basecommerce.enums.InStockStatus"/>
+  </bean>
+
+  <!-- Accommodation Offering specific bean configs -->
+
+  <bean class="de.hybris.platform.travelservices.search.facetdata.AccommodationOfferingSearchPageData&lt;STATE, RESULT>"
+          extends="de.hybris.platform.commerceservices.search.facetdata.FacetSearchPageData&lt;STATE, RESULT>">
+    <description>POJO containing the result page for accommodation offering search.</description>
+    <property name="freeTextSearch" type="String"/>
+    <property name="keywordRedirectUrl" type="String"/>
+    <property name="spellingSuggestion"
+            type="de.hybris.platform.commerceservices.search.facetdata.SpellingSuggestionData&lt;STATE>"/>
+    <property name="filteredFacets"
+            type="java.util.List&lt;de.hybris.platform.travelservices.search.facetdata.FilteredFacetSearchPageData&lt;STATE>>"/>
+  </bean>
+  <bean class="de.hybris.platform.travelservices.search.facetdata.FilteredFacetSearchPageData&lt;STATE>"
+          extends="de.hybris.platform.commerceservices.search.facetdata.FacetData&lt;STATE>">
+    <description>POJO containing list of facets used to filter results for accommodation offering search.</description>
+    <property name="clearFacetQuery" type="STATE"/>
+  </bean>
+
+</beans>
+

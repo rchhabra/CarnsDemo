@@ -1,0 +1,77 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$approved = approvalstatus(code)[default = 'approved']
+$prices = Europe1prices[translator = de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$defaultProductType = FARE_PRODUCT
+$productName = Fare Product
+
+$categories = supercategories(code, $catalogVersion)
+$taxGroup = Europe1PriceFactory_PTG(code)[default = FARES]
+
+#FareProduct data:- bookingClass:productCode, fareBasisCode:first letter of fareBasisCode should match with the booking class.
+INSERT_UPDATE FareProduct; code[unique = true]; bookingClass; fareBasisCode; $categories[default = 'CATEGORY_DEFAULT']; $catalogVersion; $approved; productType(code)[default = $defaultProductType]; $taxGroup; name[lang = $lang][default = $productName]
+; ORTC5   ; O ; ORTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; OOWC5   ; O ; OOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; ORTC6C7 ; O ; ORTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; OOW     ; O ; OOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; ORT     ; O ; ORT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; QRTC5   ; Q ; QRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; QOWC5   ; Q ; QOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; QRTC6C7 ; Q ; QRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; QOW     ; Q ; QOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; QRT     ; Q ; QRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; MRTC5   ; M ; MRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; MOWC5   ; M ; MOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; MRTC6C7 ; M ; MRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; MOW     ; M ; MOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; MRT     ; M ; MRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; KRTC5   ; K ; KRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; KOWC5   ; K ; KOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; KRTC6C7 ; K ; KRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; KOW     ; K ; KOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; KRT     ; K ; KRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; ERTC5   ; E ; ERTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; EOWC5   ; E ; EOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; ERTC6C7 ; E ; ERTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; EOW     ; E ; EOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; ERT     ; E ; ERT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; TRTC5   ; T ; TRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; TOWC5   ; T ; TOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; TRTC6C7 ; T ; TRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; TOW     ; T ; TOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; TRT     ; T ; TRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; WRTC5   ; W ; WRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; WOWC5   ; W ; WOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; WRTC6C7 ; W ; WRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; WOW     ; W ; WOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; WRT     ; W ; WRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; IRTC5   ; I ; IRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; IOWC5   ; I ; IOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; IRTC6C7 ; I ; IRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; IOW     ; I ; IOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; IRT     ; I ; IRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; RRTC5   ; R ; RRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; ROWC5   ; R ; ROWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; RRTC6C7 ; R ; RRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; ROW     ; R ; ROW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; RRT     ; R ; RRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; CRTC5   ; C ; CRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; COWC5   ; C ; COWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; CRTC6C7 ; C ; CRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; COW     ; C ; COW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; CRT     ; C ; CRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;
+
+; DRTC5   ; D ; DRTC5   ; CATEGORY_5, CATEGORY_RT             ; ; ;
+; DOWC5   ; D ; DOWC5   ; CATEGORY_5, CATEGORY_OW             ; ; ;
+; DRTC6C7 ; D ; DRTC6C7 ; CATEGORY_6, CATEGORY_7, CATEGORY_RT ; ; ;
+; DOW     ; D ; DOW     ; CATEGORY_DEFAULT, CATEGORY_OW       ; ; ;
+; DRT     ; D ; DRT     ; CATEGORY_DEFAULT, CATEGORY_RT       ; ; ;

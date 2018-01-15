@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+  <enumtypes>
+
+    <enumtype code="FactContextType" autocreate="false" generate="false">
+      <value code="CART"/>
+      <value code="FEE"/>
+      <value code="FILTER_FARE"/>
+      <value code="REFUND"/>
+      <value code="FILTER_BUNDLE"/>
+      <value code="SHOW_BUNDLE_TEMPLATE"/>
+      <value code="FILTER_TRANSPORTOFFERING"/>
+      <value code="SHOW_PRODUCTS"/>
+      <value code="SHOW_CATEGORIES"/>
+    </enumtype>
+
+    <enumtype code="RefundActionType" autocreate="true" generate="true">
+      <value code="REFUND_ALL"/>
+      <value code="RETAIN_ADMIN_FEE"/>
+    </enumtype>
+
+  </enumtypes>
+
+  <itemtypes>
+
+    <itemtype code="FeeSourceRuleTemplate"
+            extends="SourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.FeeSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+
+    <itemtype code="CancellationSourceRuleTemplate"
+            extends="SourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.CancellationSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+
+    <itemtype code="FareFilterSourceRuleTemplate"
+            extends="SourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.FareFilterSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+
+    <itemtype code="BundleFilterSourceRuleTemplate"
+            extends="SourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.BundleFilterSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+
+    <itemtype code="ShowBundleTemplateSourceRuleTemplate"
+            extends="SourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowBundleTemplateSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+    
+    <itemtype code="ProductSourceRuleTemplate"
+            extends="SourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.ProductSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+    
+    <itemtype code="ShowProductSourceRuleTemplate"
+            extends="ProductSourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowProductSourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+    
+    <itemtype code="ShowProductCategorySourceRuleTemplate"
+            extends="ProductSourceRuleTemplate"
+            jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowProductCategorySourceRuleTemplate"
+            autocreate="true"
+            generate="true">
+    </itemtype>
+
+    <itemtype code="FeeSourceRule" extends="SourceRule" jaloclass="de.hybris.platform.travelrulesengine.jalo.FeeSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+
+    <itemtype code="CancellationSourceRule" extends="SourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.CancellationSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+
+    <itemtype code="FareFilterSourceRule" extends="SourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.FareFilterSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+
+    <itemtype code="BundleFilterSourceRule" extends="SourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.BundleFilterSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+
+    <itemtype code="ShowBundleTemplateSourceRule" extends="SourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowBundleTemplateSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+    
+    <itemtype code="ProductSourceRule" extends="SourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.ProductSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+    
+    <itemtype code="ShowProductSourceRule" extends="ProductSourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowProductSourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+    
+    <itemtype code="ShowProductCategorySourceRule" extends="ProductSourceRule"
+              jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowProductCategorySourceRule"
+              autocreate="true" generate="true">
+    </itemtype>
+
+    <itemtype code="FareFilterResult" extends="GenericItem" jaloclass="de.hybris.platform.travelrulesengine.jalo.FareFilterResult"
+              autocreate="true" generate="true">
+      <deployment table="FareFilterResult" typecode="30045"/>
+      <attributes>
+        <attribute qualifier="fareProductCode" autocreate="true" type="java.lang.String">
+          <description>Fare Product that was evaluated by rules</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="valid" autocreate="true" type="java.lang.Boolean">
+          <description>Result of Fare Product rule evaluation</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="BundleFilterResult" extends="GenericItem" jaloclass="de.hybris.platform.travelrulesengine.jalo.BundleFilterResult"
+              autocreate="true" generate="true">
+      <deployment table="BundleFilterResult" typecode="30047"/>
+      <attributes>
+        <attribute qualifier="bundleType" autocreate="true" type="java.lang.String">
+          <description>Bundle Type that was excluded by rules</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="valid" autocreate="true" type="java.lang.Boolean">
+          <description>Result of Bundle Type rule evaluation</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="BundleTemplateShowResult" extends="GenericItem" jaloclass="de.hybris.platform.travelrulesengine.jalo.BundleTemplateShowResult">
+      <deployment table="BundleTemplateShowResult" typecode="6905"/>
+      <attributes>
+        <attribute qualifier="bundleTemplates" type="StringCollection">
+          <description>Bundle templates that where included in by rules</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    
+    <itemtype code="ShowProductActionResult" extends="GenericItem" jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowProductActionResult">
+      <deployment table="ShowProductActionResult" typecode="6909"/>
+      <attributes>
+        <attribute qualifier="products" type="StringCollection">
+          <description>Products that are assigned during rule evaluation</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    
+    <itemtype code="ShowProductCategoryActionResult" extends="GenericItem" jaloclass="de.hybris.platform.travelrulesengine.jalo.ShowProductCategoryActionResult">
+      <deployment table="categoryActionResult" typecode="6910"/>
+      <attributes>
+        <attribute qualifier="categories" type="StringCollection">
+          <description>Categories that are assigned during rule engine action execution</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="TransportOfferingFilterResult" extends="GenericItem" jaloclass="de.hybris.platform.travelrulesengine.jalo.TransportOfferingFilterResult"
+              autocreate="true" generate="true">
+      <deployment table="TOFilterResult" typecode="30050"/>
+      <attributes>
+        <attribute qualifier="transportOfferingCode" autocreate="true" type="java.lang.String">
+          <description>Transport Offering that was evaluated by rules</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="valid" autocreate="true" type="java.lang.Boolean">
+          <description>Result of Fare Product rule evaluation</description>
+          <modifiers read="true" write="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+  </itemtypes>
+</items>

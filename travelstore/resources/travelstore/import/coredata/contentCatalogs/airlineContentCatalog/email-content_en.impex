@@ -1,0 +1,40 @@
+#
+# Import the CMS content for the Airline site emails
+#
+$contentCatalog = airlineContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+$airlineEmailResource = jar:de.hybris.platform.travelstore.setup.TravelStoreSystemSetup&/travelstore/import/sampledata/contentCatalogs/$contentCatalog/emails
+
+# Import config properties into impex macros for modulegen
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$emailResource = $config-emailResourceValue
+
+# Language
+$lang = en
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate; code[unique = true]; description[lang = $lang]; templateScript[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; airline_Email_Customer_Registration_Body    ; "Customer Registration Email Body"    ; $airlineEmailResource/email-customerRegistrationBody.vm
+; airline_Email_Customer_Registration_Subject ; "Customer Registration Email Subject" ; $airlineEmailResource/email-customerRegistrationSubject.vm
+; airline_Email_Forgotten_Password_Body       ; "Forgotten Password Email Body"       ; $airlineEmailResource/email-forgottenPasswordBody.vm
+; airline_Email_Forgotten_Password_Subject    ; "Forgotten Password Email Subject"    ; $airlineEmailResource/email-forgottenPasswordSubject.vm
+; airline_Email_Booking_Confirmation_Body     ; "Booking Confirmation Email Body"     ; $airlineEmailResource/email-bookingConfirmationBody.vm
+; airline_Email_Booking_Confirmation_Subject  ; "Booking Confirmation Email Subject"  ; $airlineEmailResource/email-bookingConfirmationSubject.vm
+; airline_Email_Booking_Cancelled_Body        ; "Booking Cancellation Email Subject"  ; $airlineEmailResource/email-bookingCancelledBody.vm
+; airline_Email_Booking_Cancelled_Subject     ; "Booking Cancellation Email Subject"  ; $airlineEmailResource/email-bookingCancelledSubject.vm
+; airline_Email_Booking_Amendment_Subject     ; "Booking Amendment Email Subject"     ; $airlineEmailResource/email-bookingAmendmentSubject.vm
+; airline_Email_Booking_Amendment_Body        ; "Booking Amendment Email Body"        ; $airlineEmailResource/email-bookingAmendmentBody.vm
+; airline-SimpleBannerComponent-template      ; "CMSSimpleBannerComponent Template"   ; $emailResource/email-bannerComponentTemplate.vm
+; airline-BannerComponent-template            ; "CMSBannerComponent Template"         ; $emailResource/email-bannerComponentTemplate.vm
+; airline-CMSImageComponent-template          ; "CMSImageComponent Template"          ; $emailResource/email-cmsImageComponentTemplate.vm
+; airline-CMSLinkComponent-template           ; "CMSLinkComponent Template"           ; $emailResource/email-cmsLinkComponentTemplate.vm
+; airline-CMSParagraphComponent-template      ; "CMSParagraphComponent Template"      ; $emailResource/email-cmsParagraphComponentTemplate.vm
+
+# Email Pages
+UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; fromEmail[lang = $lang]; fromName[lang = $lang]
+; ; CustomerRegistrationEmail ; "codereview@replyltd.co.uk" ; "Airline Customer Services Team"
+; ; ForgottenPasswordEmail    ; "codereview@replyltd.co.uk" ; "Airline Customer Services Team"
+; ; OrderConfirmationEmail    ; "codereview@replyltd.co.uk" ; "Airline Customer Services Team"
+; ; OrderCancelledEmail       ; "codereview@replyltd.co.uk" ; "Airline Customer Services Team"
+; ; OrderAmendmentEmail       ; "codereview@replyltd.co.uk" ; "Airline Customer Services Team"

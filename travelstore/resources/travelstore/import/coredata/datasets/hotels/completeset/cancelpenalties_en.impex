@@ -1,0 +1,8 @@
+#
+# ImpEx for Importing CancelPenalty into travel accelerator
+#
+$lang=en
+
+INSERT_UPDATE CancelPenalty; code[unique = true]; description[lang=$lang]
+# Cancel penalty of 100% if cancellation happens less than 7 days before
+; nonRefundable ; Free cancellation before

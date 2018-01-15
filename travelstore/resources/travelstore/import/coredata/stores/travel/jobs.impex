@@ -1,0 +1,5 @@
+INSERT_UPDATE UpdateStockLevelsToAccommodationOfferingCronJob;code[unique=true];mappingDataFilePath;availabilityDataFilePath;maxAvailability;job(code)[default = updateStockLevelsToAccommodationOfferingJob]; sessionLanguage(isoCode)[default = en]
+;updateStockLevelsToAccommodationOfferingCronJob;"/travelstore/resources/travelstore/import/coredata/datasets/hotels/minimalset/csv/Hotel2RoomsMapping.csv";;50;;;
+
+INSERT_UPDATE MarketingRatePlanInfoCronjob;code[unique=true];ratePlanCode;accommodationOfferings(code);job(code)[default = marketingRatePlanInfoJob];sessionLanguage(isoCode)[default = en];batchSize
+;marketingRatePlanInfoCronjob;FC_Plan;;;;100

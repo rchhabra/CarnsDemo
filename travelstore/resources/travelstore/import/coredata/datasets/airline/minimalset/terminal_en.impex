@@ -1,0 +1,70 @@
+# ImpEx for Importing Terminals into travel accelerator
+
+$lang = en
+
+INSERT_UPDATE Terminal; code[unique = true]; name[lang = $lang]
+
+;LGW_NT; North Terminal;
+;LGW_ST; South Terminal;
+
+;LHR_T1; T1
+;LHR_T2; T2
+;LHR_T3; T3
+;LHR_T4; T4
+;LHR_T5; T5
+
+;JFK_T1; T1
+;JFK_T2; T2
+;JFK_T4; T4
+;JFK_T5; T5
+;JFK_T7; T7
+;JFK_T8; T8
+
+;CDG_T1; T1
+;CDG_T2; T2
+;CDG_T3; T3
+
+;EDI_T1; T1
+;LCY_T1; T1
+;LTN_T1; T1
+;SEN_T1; T1
+;STN_T1; T1
+
+;MAN_T1; T1
+;EDI_T1; T1
+;INV_T1; T1
+;BFS_T1; T1
+;CDG_T1; T1
+;ORY_T1; T1
+;NCE_T1; T1
+
+;LIN_T1; T1
+;MXP_T1; T1
+;CIA_T1; T1
+;FCO_T1; T1
+;VCE_T1; T1
+
+;BER_T1; T1
+;SXF_T1; T1
+;TXL_T1; T1
+;BRE_T1; T1
+;DUS_T1; T1
+;MGL_T1; T1
+;NRN_T1; T1
+;FRA_T1; T1
+;HHN_T1; T1
+;QGV_T1; T1
+;ALC_T1; T1
+;ATH_T1; T1
+;MLE_T1; T1
+
+;HKT_T1; T1
+;GOI_T1; T1
+;MIA_T1; T1
+;NAP_T1; T1
+;FLR_T1; T1
+;BKK_T1; T1
+;KUL_T1; T1
+;PRG_T1; T1
+;KEF_T1; T1
+;ICN_T1; T1

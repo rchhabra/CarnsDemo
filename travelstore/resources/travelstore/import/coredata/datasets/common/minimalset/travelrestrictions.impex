@@ -1,0 +1,22 @@
+# ImpEx for Importing Travelrestriction for the AncillaryProducts into travel accelerator
+
+INSERT_UPDATE TravelRestriction; code[unique = true]           ; effectiveDate; expireDate; travellerMaxOfferQty; travellerMinOfferQty; tripMaxOfferQty; tripMinOfferQty; addToCartCriteria(code); passengerTypes[mode = append]
+#PriorityProductsRestrictions
+                               ; PRICHECKIN1_Restriction       ;              ;           ; 1                   ; 0                   ;                ;                ;                        ;
+                               ; PRIBOARDING1_Restriction      ;              ;           ; 1                   ; 0                   ;                ;                ;                        ;
+
+#LoungeAccessProductsRestrictions
+                               ; LOUNGEACC1_Restriction        ;              ;           ; 1                   ; 0                   ;                ;                ;                        ;
+
+#Pre-OrderMealsProductsRestrictions
+                               ; STANDARDMEAL_Restriction      ;              ;           ; 1                   ; 0                   ;                ;                ;                        ;
+                               ; VEGETARIANMEAL_Restriction    ;              ;           ; 1                   ; 0                   ;                ;                ;                        ;
+                               ; CHILDMEAL_Restriction         ;              ;           ; 1                   ; 0                   ;                ;                ;                        ; child
+                               ; ALCOHOLIC_BEVERAGE_Restriction;              ;           ; 1                   ; 0                   ;                ;                ;                        ; adult
+
+#HoldItemsProductsRestrictions
+                               ; EXTRABAG20_Restriction        ;              ;           ; 2                   ; 0                   ;                ;                ;                        ;
+                               ; EXTRABAG32_Restriction        ;              ;           ; 2                   ; 0                   ;                ;                ;                        ;
+                               ; SKIS_Restriction              ;              ;           ; 2                   ; 0                   ;                ;                ;                        ;
+                               ; SURFBOARD_Restriction         ;              ;           ; 2                   ; 0                   ;                ;                ;                        ;
+                               ; GOLFCLUBS_Restriction         ;              ;           ; 2                   ; 0                   ;                ;                ;                        ;

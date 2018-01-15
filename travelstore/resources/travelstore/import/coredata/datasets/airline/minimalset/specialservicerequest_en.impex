@@ -1,0 +1,7 @@
+# ImpEx for Importing SpecialServiceRequest EN localisation into travel accelerator
+
+$lang = en
+
+INSERT_UPDATE SpecialServiceRequest; code[unique = true]; name[lang = $lang]
+
+; disability ; Disability and mobility assistance

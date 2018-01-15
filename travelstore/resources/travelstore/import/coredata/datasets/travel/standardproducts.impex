@@ -1,0 +1,11 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$categories = supercategories(code, $catalogVersion)
+$approved = approvalstatus(code)[default = 'approved']
+
+INSERT_UPDATE Product; code[unique = true]; name[lang = $lang]; $categories; $catalogVersion; $approved; unit(code)[default = pieces]
+#
+
+# Stock Levels
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true];available[default=200];reserved[default=0]
+#

@@ -1,0 +1,73 @@
+# ImpEx for Importing Locations
+
+# ImpEx for Importing Locations into travel accelerator
+
+# Macros / Replacement Parameter definitions
+$lang = en
+
+# Create Categories
+INSERT_UPDATE Location; code[unique = true]; name[lang = $lang]; description[lang = $lang]
+
+#Continents
+#;EU;Europe;Europe;
+
+#Regions
+; EUR ; Europe Region            ;
+; NOA ; North America Region     ;
+; SAS ; South Asia Region        ;
+; EAS ; East Asia Region  		 ;
+
+#Countries
+; GB  ; United Kingdom           ; United Kingdom ;
+; FR  ; France                   ; France         ;
+; IT  ; Italy                    ; Italy          ;
+; DE  ; Germany                  ; Germany        ;
+; ES  ; Spain                    ; Spain			
+; GR  ; Greece                   ; Greece
+; US  ; United States of America ; United States of America
+; MV  ; Maldives                 ; Maldives					;
+; TH ; Thailand				 	 ; Thailand					;
+; IN ; India 					 ; India					;
+; MY ; Malaysia				 	 ; Malaysia					;
+; CZ ; Czech Republic 			 ; Czech Republic			;
+; IS ; Iceland					 ; Iceland					;
+; KR ; South Korea				 ; South Korea				;
+
+#Cities
+; LON ; London                   ; City of London ;
+; MAN ; Manchester               ; Manchester     ;
+; EDI ; Edinburgh                ; Edinburgh      ;
+; INV ; Inverness                ; Inverness      ;
+; BFS ; Belfast                  ; Belfast        ;
+
+; NCE ; Nice                     ; Nice           ;
+; PAR ; Paris                    ; Paris          ;
+
+; MIL ; Milan                    ; Milan          ;
+; ROM ; Rome                     ; Rome           ;
+; VCE ; Venice                   ; Venice
+
+; BER ; Berlin                   ; Berlin         ;
+; BRE ; Bremen                   ; Bremen         ;
+; DUS ; Dusseldorf               ; Dusseldorf     ;
+; FRA ; Frankfurt                ; Frankfurt      ;
+; MUN ; Munich					 ; Munich		  ;
+
+; ALC ; Alicante                 ; Alicante       ;
+; MAD ; Madrid					 ; Madrid		  ;	
+
+; ATH ; Athens                   ; Athens         ;
+
+; NYC ; New York                 ; New York       ;
+
+; MLE ; Male                     ; Male           ;
+; HKT ; Phuket					 ; Phuket		  ;
+; GOI ; Goa						 ; Goa			  ;
+; MIA ; Miami					 ; Miami          ;
+; NAP ; Naples					 ; Naples		  ;
+; FLR ; Florence				 ; Florence		  ;
+; BKK ; Bangkok					 ; Bangkok		  ;
+; KUL ; Kuala Lumpur			 ; Kuala Lumpur   ;
+; PRG ; Prague					 ; Prague         ;
+; REK ; Reykjavik				 ; Reykjavik      ;
+; SEL ; Seoul					 ; Seoul		  ;

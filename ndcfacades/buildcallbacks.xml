@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<project name="ndcfacades_buildcallbacks">
+
+	<target name="generate-ndc" description="Generate NDC classes from xsd schemas for Travel Accelerator">
+		<property name="schemaFolder" value="xsds"/>
+		<sequential>
+			<ndcfacades_cleanup/>
+			<ndcfacades_setup schemaFolder="${schemaFolder}"/>
+			<ndcfacades_generate-ndc/>
+		</sequential>
+	</target>
+
+	<macrodef name="ndcfacades_cleanup">
+		<attribute name="destFolder" default="de/hybris/platform/ndcfacades/ndc"/>
+		<attribute name="wrapper" default="NdcXsdWrapper.xsd"/>
+		<sequential>
+			<delete dir="${ext.ndcfacades.path}/src/@{destFolder}"/>
+			<delete file="${ext.ndcfacades.path}/resources/ndc/@{wrapper}"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="ndcfacades_setup">
+		<attribute name="schemaFolder" default="xsds"/>
+		<attribute name="wrapper" default="NdcXsdWrapper.xsd"/>
+		<sequential>
+			<exec dir="${ext.ndcfacades.path}/resources/ndc" executable="cmd.exe" osfamily="windows">
+				<arg line='/c'/>
+				<arg line='generateWrapper.bat'/>
+				<arg line="@{schemaFolder}"/>
+				<arg line="@{wrapper}"/>
+			</exec>
+			<exec dir="${ext.ndcfacades.path}/resources/ndc" executable="sh" osfamily="unix">
+				<arg line='generateWrapper.sh'/>
+				<arg line="@{schemaFolder}"/>
+				<arg line="@{wrapper}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="ndcfacades_generate-ndc">
+		<attribute name="wrapper" default="NdcXsdWrapper.xsd"/>
+		<attribute name="package" default="de.hybris.platform.ndcfacades.ndc"/>
+		<sequential>
+			<exec dir="${ext.ndcfacades.path}/resources/ndc" executable="xjc">
+				<arg line='-p @{package} -d ${ext.ndcfacades.path}/src @{wrapper}'/>
+			</exec>
+		</sequential>
+	</macrodef>
+
+</project>

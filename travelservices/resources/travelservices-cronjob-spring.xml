@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="updateStockLevelsToTransportOfferingJob" class="de.hybris.platform.travelservices.cronjob.UpdateStockLevelsToTransportOfferingJob"
+		parent="abstractJobPerformable">
+		<property name="transportOfferingService" ref="transportOfferingService" />
+	</bean>
+
+	<bean id="updateStockLevelsToAccommodationOfferingJob" class="de.hybris.platform.travelservices.cronjob.UpdateStockLevelsToAccommodationOfferingJob"
+		parent="abstractJobPerformable">
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="productService" ref="productService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="baseExtDir" value="${HYBRIS_BIN_DIR}/ext-travel" />
+		<property name="scheduledDays" value="#{configurationService.configuration.getProperty('accommodationoffering.days.to.add.minimalset')}" />
+		<property name="setForceInStock" value="#{configurationService.configuration.getProperty('accommodation.roomrate.set.forceinstock')}" />
+	</bean>
+
+	<bean id="marketingRatePlanInfoJob" class="de.hybris.platform.travelservices.cronjob.MarketingRatePlanInfoJob" parent="abstractJobPerformable">
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="defaultAccommodationService" ref="defaultAccommodationService" />
+		<property name="modelService" ref="modelService" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="ratePlanConfigService" ref="ratePlanConfigService" />
+		<property name="marketingRatePlanInfoService" ref="marketingRatePlanInfoService" />
+	</bean>
+
+	<bean id="travelGeocodingJob" class="de.hybris.platform.travelservices.storelocator.TravelGeocodingJob" parent="geocodeAddressesJob">
+	</bean>
+</beans>

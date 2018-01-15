@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company. ~ All rights reserved. ~ ~ This software is the confidential and proprietary
+	information of SAP ~ Hybris ("Confidential Information"). You shall not disclose such ~ Confidential Information and shall use it only 
+	in accordance with the ~ terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultB2BReservationFacade" alias="b2bReservationFacade" />
+	<bean id="defaultB2BReservationFacade" class="de.hybris.platform.travelb2bfacades.reservation.impl.DefaultB2BReservationFacade">
+		<property name="travelb2bOrderService" ref="travelb2bOrderService" />
+		<property name="userService" ref="userService" />
+		<property name="b2bReservationPipelineManager" ref="b2bReservationPipelineManager" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultB2BReservationPipelineManager" alias="b2bReservationPipelineManager" />
+	<bean id="defaultB2BReservationPipelineManager" class="de.hybris.platform.travelb2bfacades.reservation.manager.impl.DefaultB2BReservationPipelineManager">
+		<property name="globalTravelReservationPipelineManager" ref="globalTravelReservationPipelineManager" />
+		<property name="handlers">
+			<list>
+				<ref bean="b2bReservationBasicHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultB2BReservationBasicHandler" alias="b2bReservationBasicHandler" />
+	<bean id="defaultB2BReservationBasicHandler" class="de.hybris.platform.travelb2bfacades.reservation.handlers.impl.DefaultB2BReservationBasicHandler">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+	<alias name="defaultTravelB2BBudgetFacade" alias="travelB2BBudgetFacade" />
+	<bean id="defaultTravelB2BBudgetFacade" class="de.hybris.platform.travelb2bfacades.budget.impl.DefaultTravelB2BBudgetFacade" parent="defaultB2BBudgetFacade" />
+
+</beans>

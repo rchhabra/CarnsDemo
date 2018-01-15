@@ -1,0 +1,28 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$approved = approvalstatus(code)[default = 'approved']
+$prices = Europe1prices[translator = de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$defaultProductType = FARE_PRODUCT
+$productName = Fare Product
+
+$categories = supercategories(code, $catalogVersion)
+$taxGroup = Europe1PriceFactory_PTG(code)[default = FARES]
+
+#FareProduct data:- bookingClass:productCode, fareBasisCode:first letter of fareBasisCode should match with the booking class.
+INSERT_UPDATE FareProduct; code[unique = true]; bookingClass; fareBasisCode; $catalogVersion; $approved; productType(code)[default = $defaultProductType]; $categories[default = 'FAREPRODUCT']; $taxGroup; name[lang = $lang][default = $productName]
+; ORTC5 ; O ; ORTC5 ; ; ; ;
+; QOWC5 ; Q ; QOWC5 ; ; ; ;
+; MOWC5 ; M ; MOWC5 ; ; ; ;
+; KOWC5 ; K ; KOWC5 ; ; ; ;
+
+; EOWC5 ; E ; EOWC5 ; ; ; ;
+; TOWC5 ; T ; TOWC5 ; ; ; ;
+; WOWC5 ; W ; WOWC5 ; ; ; ;
+; WRTC6 ; W ; WRTC6 ; ; ; ;
+
+; IOWC5 ; I ; IOWC5 ; ; ; ;
+; ROWC5 ; R ; ROWC5 ; ; ; ;
+; COWC5 ; C ; COWC5 ; ; ; ;
+; DOWC5 ; D ; DOWC5 ; ; ; ;
+
+

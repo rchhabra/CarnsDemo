@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias alias="travelRuleCompilerListener" name="defaultTravelRuleCompilerListener" />
+	<bean id="defaultTravelRuleCompilerListener" class="de.hybris.platform.travelrulesengine.compiler.listeners.TravelRuleCompilerListener" />
+
+	<bean id="travelRuleCompilerListenerDefinition" parent="ruleCompilerListenerDefinition">
+		<property name="listener" ref="travelRuleCompilerListener" />
+	</bean>
+
+	<alias alias="travelRuleIrProcessor" name="defaultTravelRuleIrProcessor" />
+	<bean id="defaultTravelRuleIrProcessor" class="de.hybris.platform.travelrulesengine.compiler.processors.TravelRuleIrProcessor" />
+
+	<bean id="travelRuleIrProcessorDefinition" parent="ruleIrProcessorDefinition">
+		<property name="ruleIrProcessor" ref="travelRuleIrProcessor" />
+	</bean>
+
+</beans>

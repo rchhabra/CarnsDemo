@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-logged-in.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="my-company-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Budgets</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        
+    <div class="container">
+        <div class="col-xs-12 col-sm-3 side-to-top hidden-xs">
+            <aside id="sidebar">
+                <div class="promotions">
+                    <section>
+                        <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Explore the gardens of Croatia</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </div>
+        
+        
+        <div class="col-xs-12 col-sm-9">
+            <div class="row heading-with-button">
+                <div class="col-xs-7 col-sm-8">
+                    <h2 class="h2">Budgets</h2>
+                </div>
+                <div class="col-xs-5 col-sm-4 button-inline">
+                    <button class="btn btn-primary btn-block" href="#">Add New</button>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="form-inline clearfix">
+                    <label for="sortBy">Sort by:</label>
+                      <select class="form-control" id="sortBy">
+                            <option value="Name" selected>Name</option>
+                            <option value="ID">ID</option>
+                            <option value="something-else">Something else&hellip;</option>
+                      </select>
+                 </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pagination-bar-results">
+                        5 Budgets found</div>
+                </div>
+            </div>
+            <div class="account-overview-table">
+            	<div class="responsive-table">
+                    <table class="table">
+                        <tbody><tr class="responsive-table-head hidden-xs">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Parent Unit</th>
+                            <th>Cost Centers</th>
+                            <th>Budget Amount</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Status</th>
+                        </tr>
+
+                        <tr class="responsive-table-item">
+                                <td class="hidden-sm hidden-md hidden-lg">ID</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Monthly 2.5K USD</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Name</td>
+                                <td class="responsive-table-cell">
+                                    Monthly 2.5K USD</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Parent Unit</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Rustic Retail</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Cost Centers</td>
+                                <td class="responsive-table-cell">
+                                    Retail<br>
+                                        </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Budget Amount</td>
+                                <td class="responsive-table-cell">
+                                    2,500.00 (USD)
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Start</td>
+                                <td class="responsive-table-cell">
+                                    Jan 1, 2010</td>
+                                <td class="hidden-sm hidden-md hidden-lg">End</td>
+                                <td class="responsive-table-cell">
+                                    Jul 12, 2034</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Status</td>
+                                <td class="responsive-table-cell">
+                                    <span>Active</span>
+                                            </td>
+                            </tr>
+                        <tr class="responsive-table-item">
+                                <td class="hidden-sm hidden-md hidden-lg">ID</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Monthly 20K USD</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Name</td>
+                                <td class="responsive-table-cell">
+                                    Monthly 20K USD</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Parent Unit</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Services West</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Cost Centers</td>
+                                <td class="responsive-table-cell">
+                                    Services West<br>
+                                        </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Budget Amount</td>
+                                <td class="responsive-table-cell">
+                                    20,000.00 (USD)
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Start</td>
+                                <td class="responsive-table-cell">
+                                    Jan 1, 2010</td>
+                                <td class="hidden-sm hidden-md hidden-lg">End</td>
+                                <td class="responsive-table-cell">
+                                    Jul 12, 2034</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Status</td>
+                                <td class="responsive-table-cell">
+                                    <span>Active</span>
+                                            </td>
+                            </tr>
+                        <tr class="responsive-table-item">
+                                <td class="hidden-sm hidden-md hidden-lg">ID</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Monthly 4K USD</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Name</td>
+                                <td class="responsive-table-cell">
+                                    Monthly 4K USD</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Parent Unit</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Custom Retail</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Cost Centers</td>
+                                <td class="responsive-table-cell">
+                                    Custom Retail<br>
+                                        </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Budget Amount</td>
+                                <td class="responsive-table-cell">
+                                    4,000.00 (USD)
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Start</td>
+                                <td class="responsive-table-cell">
+                                    Jan 1, 2010</td>
+                                <td class="hidden-sm hidden-md hidden-lg">End</td>
+                                <td class="responsive-table-cell">
+                                    Jul 12, 2034</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Status</td>
+                                <td class="responsive-table-cell">
+                                    <span>Active</span>
+                                            </td>
+                            </tr>
+                        <tr class="responsive-table-item">
+                                <td class="hidden-sm hidden-md hidden-lg">ID</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Monthly 50K USD</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Name</td>
+                                <td class="responsive-table-cell">
+                                    Monthly 50K USD</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Parent Unit</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Rustic</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Cost Centers</td>
+                                <td class="responsive-table-cell">
+                                    Rustic Global<br>
+                                        </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Budget Amount</td>
+                                <td class="responsive-table-cell">
+                                    50,000.00 (USD)
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Start</td>
+                                <td class="responsive-table-cell">
+                                    Jan 1, 2010</td>
+                                <td class="hidden-sm hidden-md hidden-lg">End</td>
+                                <td class="responsive-table-cell">
+                                    Jul 12, 2034</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Status</td>
+                                <td class="responsive-table-cell">
+                                    <span>Active</span>
+                                            </td>
+                            </tr>
+                        <tr class="responsive-table-item">
+                                <td class="hidden-sm hidden-md hidden-lg">ID</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Weekly 2.5K USD</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Name</td>
+                                <td class="responsive-table-cell">
+                                    Weekly 2.5K USD</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Parent Unit</td>
+                                <td class="responsive-table-cell">
+                                    <a href="" class="responsive-table-link">Services East</a>
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Cost Centers</td>
+                                <td class="responsive-table-cell">
+                                    Services East<br>
+                                        </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Budget Amount</td>
+                                <td class="responsive-table-cell">
+                                    2,500.00 (USD)
+                                    </td>
+                                <td class="hidden-sm hidden-md hidden-lg">Start</td>
+                                <td class="responsive-table-cell">
+                                    Jan 1, 2010</td>
+                                <td class="hidden-sm hidden-md hidden-lg">End</td>
+                                <td class="responsive-table-cell">
+                                    Jul 12, 2034</td>
+                                <td class="hidden-sm hidden-md hidden-lg">Status</td>
+                                <td class="responsive-table-cell">
+                                    <span>Active</span>
+                                            </td>
+                            </tr>
+                        </tbody></table>
+                </div>
+              </div>
+              <div class="clearfix">
+                <div class="form-inline clearfix">
+                    <label for="sortBy">Sort by:</label>
+                      <select class="form-control" id="sortBy">
+                            <option value="Name" selected>Name</option>
+                            <option value="ID">ID</option>
+                            <option value="something-else">Something else&hellip;</option>
+                      </select>
+                 </div>
+            </div>
+       </div>
+       </div>
+             
+
+
+           
+        <!-- / .container -->
+
+
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+    
+
+</body>
+
+</html>

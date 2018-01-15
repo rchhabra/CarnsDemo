@@ -1,0 +1,33 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE CabinClass; code[unique = true]; name[lang = $lang]; cabinClassIndex
+; M ; Economy  ; 1
+; J ; Business ; 2
+
+INSERT_UPDATE BundleTemplateTransportOfferingMapping; code[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); travelRoute(code); travelSector(code); transportOffering(code); cabinClass(code); $catalogVersion
+; BTTOM1  ; EconomyBundle     ; EDI_LGW_CDG ; ; ; M ;
+; BTTOM2  ; EconomyPlusBundle ; EDI_LGW_CDG ; ; ; M ;
+; BTTOM3  ; BusinessBundle    ; EDI_LGW_CDG ; ; ; J ;
+; BTTOM17 ; FamilyBundle      ; EDI_LGW_CDG ; ; ; M ;
+
+; BTTOM4  ; EconomyBundle     ; CDG_LGW_EDI ; ; ; M ;
+; BTTOM5  ; EconomyPlusBundle ; CDG_LGW_EDI ; ; ; M ;
+; BTTOM6  ; BusinessBundle    ; CDG_LGW_EDI ; ; ; J ;
+; BTTOM18 ; FamilyBundle      ; CDG_LGW_EDI ; ; ; M ;
+
+; BTTOM7  ; EconomyBundle     ; LGW_CDG_JFK ; ; ; M ;
+; BTTOM8  ; EconomyPlusBundle ; LGW_CDG_JFK ; ; ; M ;
+; BTTOM9  ; BusinessBundle    ; LGW_CDG_JFK ; ; ; J ;
+; BTTOM19 ; FamilyBundle      ; LGW_CDG_JFK ; ; ; M ;
+
+; BTTOM10 ; EconomyBundle     ; JFK_CDG_LGW ; ; ; M ;
+; BTTOM11 ; EconomyPlusBundle ; JFK_CDG_LGW ; ; ; M ;
+; BTTOM12 ; BusinessBundle    ; JFK_CDG_LGW ; ; ; J ;
+; BTTOM20 ; FamilyBundle      ; JFK_CDG_LGW ; ; ; M ;
+
+; BTTOM13 ; EconomyBundle     ;             ; ; ; M ;
+; BTTOM14 ; EconomyPlusBundle ;             ; ; ; M ;
+; BTTOM15 ; BusinessBundle    ;             ; ; ; J ;
+; BTTOM16 ; FamilyBundle      ;             ; ; ; M ;
+; BTTOS1  ; SpecialBundle     ;             ; ; ; M ;

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+
+  
+-->
+<!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="travelcheckout_before_clean"/>
+		 <macrodef name="travelcheckout_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="travelcheckout_before_build"/>
+		 <macrodef name="travelcheckout_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="travelcheckout_before_compile_core">
+		 <macrodef name="travelcheckout_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="travelcheckout_before_compile_web" />
+		 <macrodef name="travelcheckout_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="travelcheckout_before_compile_hmc" />
+		 <macrodef name="travelcheckout_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="travelcheckout_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="travelcheckout_before_ear"/>
+		 <macrodef name="travelcheckout_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="travelcheckout_before_production" />
+		 <macrodef name="travelcheckout_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="travelcheckout_before_yunitinit" />
+		 <macrodef name="travelcheckout_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="travelcheckout_before_yunit" />
+		 <macrodef name="travelcheckout_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="travelcheckout_after_dist"/>
+		 <macrodef name="travelcheckout_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="travelcheckout_before_dist_copy"/>
+		 <macrodef name="travelcheckout_after_dist_copy"/>
+ 
+-->
+<project name="travelcheckout_buildcallbacks">
+
+	<!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+	 -->
+	<macrodef name="travelcheckout_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+	<macrodef name="travelcheckout_after_build">
+		<sequential>
+			<echo level="info" message="Copy custom address form elements......" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/tags/responsive/address">
+				<fileset dir="${ext.travelcheckout.path}/acceleratoraddon/web/webroot/WEB-INF/tags/responsive/address">
+					<include name="billingAddressFormElements.tag" />
+				</fileset>
+			</copy>
+		</sequential>
+	</macrodef>
+
+</project>

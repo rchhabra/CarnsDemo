@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:annotation-config/> 
+
+  <!-- Process actions-->
+  <bean id="checkCreditCardOrderAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.CheckCreditCardOrderAction"
+        parent="abstractSimpleB2BApproveOrderDecisionAction">
+  </bean>
+
+  <bean id="checkOrderEntryCostCentersActive"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.CheckOrderEntryCostCentersActive"
+        parent="abstractSimpleB2BApproveOrderDecisionAction"/>
+
+  <bean id="startFulfilmentProcessAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.StartFulfilmentProcessAction"
+        parent="abstractProceduralB2BOrderApproveAction">
+    <property name="businessProcessService" ref="businessProcessService"/>
+  </bean>
+
+  <bean id="auditAutoApproval"
+        class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+        parent="abstractProceduralB2BOrderApproveAuditAction">
+    <property name="permissionResultHelper" ref="permissionResultHelper"/>
+    <property name="messageKey" value="approval.process.orderapprovedautomatically"/>
+  </bean>
+
+  <bean id="auditStartOfApproval"
+        class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+        parent="abstractProceduralB2BOrderApproveAuditAction">
+    <property name="permissionResultHelper" ref="permissionResultHelper"/>
+    <property name="messageKey" value="approval.process.ordersubmitted"/>
+  </bean>
+
+  <bean id="startWorkflowForAdmin"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.StartWorkFlowForAdmin"
+        parent="abstractProceduralB2BOrderApproveAction">
+    <property name="b2bWorkflowIntegrationService" ref="b2bWorkflowIntegrationService"/>
+    <property name="permissionResultHelper" ref="permissionResultHelper"/>
+    <property name="workflowProcessingService" ref="workflowProcessingService"/>
+    <property name="workflowService" ref="newestWorkflowService"/>
+    <property name="b2bUnitService" ref="b2bUnitService"/>
+    <property name="userService" ref="userService"/>
+  </bean>
+
+  <bean id="sendOrderPendingApprovalNotification"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.SendOrderPendingApprovalNotification"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="auditSubmittedToMerchantForApproval"
+        class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+        parent="abstractProceduralB2BOrderApproveAuditAction">
+    <property name="permissionResultHelper" ref="permissionResultHelper"/>
+    <property name="messageKey" value="approval.process.submittedtomerchant"/>
+  </bean>
+
+  <!-- Send rejection notification -->
+  <bean id="sendOrderApprovalRejectionNotification"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.SendOrderApprovalRejectionNotification"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="generateB2BOrderApprovalRejectionEmail"
+        class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+        parent="abstractAction">
+    <property name="modelService" ref="modelService"/>
+    <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+    <property name="frontendTemplateName" value="OrderApprovalRejectionEmailTemplate"/>
+    <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+    <property name="emailGenerationService" ref="emailGenerationService"/>
+  </bean>
+
+  <bean id="informOfOrderApproval"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.B2BAcceleratorInformOfOrderApproval">
+    <property name="fromAddress" value="b2b@hybris.com"/>
+    <property name="b2bEmailService" ref="b2bEmailService"/>
+  </bean>
+
+  <bean id="b2bSendOrderPlacedNotificationAction"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.SendOrderPlacedNotificationAction"
+        parent="abstractAction">
+    <property name="eventService" ref="eventService"/>
+  </bean>
+
+  <bean id="setBookingLineEntries"
+        class="de.hybris.platform.travelfulfilmentprocess.actions.b2b.AcceleratorBookingLineEntries"
+        parent="abstractSimpleB2BApproveOrderDecisionAction" />
+
+
+</beans>

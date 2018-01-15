@@ -1,0 +1,33 @@
+INSERT_UPDATE PropertyFacilityType;code[unique=true];name[lang=en]
+
+;SHOPS;Shops
+;COMMON_AREAS;Common areas
+;SERVICES_EXTRAS;Services extras
+;BUILDING_CHARACTERISTICS;Building characteristics
+;POOL_AND_WELLNESS;Pool and wellness
+;TRANSPORT;Transport
+;MISCELLANEOUS;Miscellaneous
+;OUTDOOR_VIEW;Outdoor view
+;SKI;Ski
+;ACCESSIBILITY;Accessibility
+;ROOM_AMENITIES;Room amenities
+;BATHROOM;Bathroom
+;BEDROOM;Bedroom
+;VIEW;View
+;OUTDOORS;Outdoors
+;PETS;Pets
+;LIVING_AREA;Living area
+;MEDIA_TECHNOLOGY;Media technology
+;FOOD_DRINK;Food drink
+;INTERNET;Internet
+;PARKING;Parking
+;RECEPTION_SERVICES;Reception services
+;CLEANING_SERVICES;Cleaning services
+;BUSINESS_FACILITIES;Business facilities
+;GENERAL;General
+;LANGUAGES_SPOKEN;Languages spoken
+;TRAVELLING_WITH_PETS_;Travelling with pets
+;ACTIVITIES;Activities
+;ENTERTAINMENT_AND_FAMILY_SERVICES;Entertainment and family services
+;KITCHEN;Kitchen
+;SERVICES;Services

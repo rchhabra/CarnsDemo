@@ -1,0 +1,104 @@
+#
+# ImpEx for Importing Customer Review into travel accelerator
+#
+$lang=en
+$catalogVersion=catalogVersion(catalog(id[default='testCatalog']),version[default='Online'])[unique=true,default='testCatalog:Online']
+$taxGroup = Europe1PriceFactory_PTG(code)[default = FARES]
+$approved = approvalstatus(code)[default = 'approved']
+$defaultProductType = ACCOMMODATION
+$categories = supercategories(code, $catalogVersion)
+
+$vendor=hotel
+$default=true
+$description = "In the city centre our hotel has compact and luxury accommodation in a contemporary design. Rail and Underground Stations are just a 5-minute walk away.<br>All rooms include hand crafted beds 40-inch Samsung HD TV with free Sky Sports and Movie channels. Free WiFi and an en suite shower room with complimentary toiletries. Each room also has under-bed storage for an overnight bag and wall-mounted hanging space for clothing. The Hotel also offers wheelchair accessible rooms.<br>Continental breakfast is served in The Café every morning including smoked salmon fresh croissants fresh fruit salad and bacon rolls. A selection of salads and hot savoury dishes are on offer throughout the day.<br>The sorrounding area is a great choice for travellers interested in shopping<br>This property also has one of the best-rated locations! Guests are happier about it compared to other properties in the area.<br>This property is also rated for the best value! Guests are getting more for their money when compared to other properties in this city.<br>We speak your language!"
+
+# Vendor
+INSERT_UPDATE Vendor; code[unique = true]; name
+; hotel   ; Hotel Vendor
+
+# Insert Categories
+INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
+; ACCOMMODATION
+
+INSERT_UPDATE ProductTaxGroup; code[unique = true]
+; FARES
+
+INSERT_UPDATE PassengerType; code[unique = true]; minAge; maxAge
+; adult  ; 16 ;
+; child  ; 2  ; 15
+; infant ; 0  ; 2
+
+INSERT_UPDATE GuestOccupancy;code[unique=true];passengerType(code);quantityMax;quantityMin
+;ADULT_2;adult;2;1
+
+INSERT_UPDATE AccommodationOffering;code[unique=true];provider(code);propertyFacility(code);starRating;vendor(code)[default=$vendor];default[default=$default];numberOfReviews;propertyInformation[lang = en , translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator];description[lang=en, default=$description]
+;DORSET_SQUARE_HOTEL;"";;5;;;1;
+
+
+INSERT_UPDATE Accommodation; code[unique = true]				; name[lang = en]; description[lang = en]	; size					; accommodationFacility(code); guestOccupancies(code)	; roomType(code)	; $categories[default = 'ACCOMMODATION']; $catalogVersion; $approved; $taxGroup; productType(code)[default = $defaultProductType]
+						   ; "DORSET_SQUARE_HOTELLUXURY_ROOM"	; "Luxury Room"  ; testDescription 			; 35 m2 (376 sq. ft.) 	;                            ; ADULT_2          		; TWO_PEOPLE_ROOM 	; ; ; ; ;
+
+INSERT_UPDATE CustomerReview; user(uid)[unique = true]		; headline						; comment		; rating	; blocked	; approvalstatus(code)	; language(isocode); accommodationoffering(code); product(code, $catalogVersion)[unique = true]	;bookingReference	;roomStayRefNumber
+							; jane.smith1@mailinator.com 	; Perfect Weekend Destination   ; testComment  	; 9.5 		; 0 		; approved 				; $lang 		   ; DORSET_SQUARE_HOTEL 		; DORSET_SQUARE_HOTELLUXURY_ROOM				;10000001			;0
+							
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;
+;0;DORSET_SQUARE_HOTEL;forceInStock;0;-1;0;0;"DORSET_SQUARE_HOTELLUXURY_ROOM";0;
+
+INSERT_UPDATE PropertyFacilityType;code[unique=true];name[lang=en]
+;BATHROOM;Bathroom
+INSERT_UPDATE PropertyFacility;type(code);code[unique=true];active[default = true]
+;BATHROOM;facil1;							
+
+
+INSERT_UPDATE RatePlanInclusion; shortDescription[lang = $lang][unique=true]; longDescription[lang = $lang][unique=true]; &inclusionRef
+; Luggage storage   ; Luggage storage   ; luggageStorageInclusion
+
+#INSERT_UPDATE RatePlan;code[unique=true];minStay;maxStay;ratePlanInclusion(&inclusionRef);cancelPenalty(code);guarantee(code);guestOccupancies(code);mealType(code);$catalogVersion;description[lang=en]
+#;5S_2P_NR_Plan_UK;;;;nonRefundable;guarantee20,prePayment80;;;;Non Refundable
+
+
+INSERT_UPDATE RatePlan;code[unique=true];ratePlanInclusion(&inclusionRef);$catalogVersion
+;5S_2P_NR_Plan_UK;luggageStorageInclusion
+
+$WeekDays=MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY
+$WeekendDays=SATURDAY,SUNDAY
+
+#################
+### DateRange ###
+#################
+
+INSERT_UPDATE DateRange;startingDate[dateformat = 'yyyy-MM-dd'][unique=true];endingDate[dateformat = 'yyyy-MM-dd'][unique=true];&dateRangeRef
+#2016
+;2016-06-11;2016-08-19;dateRange1
+;2016-08-20;2016-12-08;dateRange2
+;2016-12-09;2016-12-31;dateRange3
+
+#2017
+;2017-01-01;2017-01-01;dateRange4
+;2017-01-02;2017-06-10;dateRange5
+;2017-06-11;2017-08-19;dateRange6
+;2017-08-20;2017-12-08;dateRange7
+;2017-12-09;2017-12-31;dateRange8
+
+INSERT_UPDATE RoomRateProduct;code[unique=true];daysOfWeek(code);dateRanges(&dateRangeRef);$categories;$catalogVersion;$approved
+
+# TWO_PEOPLE_ROOM
+;5S_2P_LSWDNR_UK;$WeekDays;dateRange2,dateRange5,dateRange7;5S_2P_NR_Plan_UK;;
+;5S_2P_LSWENR_UK;$WeekendDays;dateRange2,dateRange5,dateRange7;5S_2P_NR_Plan_UK;;
+;5S_2P_HSWDNR_UK;$WeekDays;dateRange1,dateRange3,dateRange4,dateRange6;5S_2P_NR_Plan_UK;;
+;5S_2P_HSWENR_UK;$WeekendDays;dateRange1,dateRange3,dateRange4,dateRange6;5S_2P_NR_Plan_UK;;
+
+INSERT_UPDATE RatePlanConfig;code[unique=true]									;ratePlan(code)		;$catalogVersion
+							;DORSET_SQUARE_HOTELLUXURY_ROOM_5S_2P_NR_Plan_UK	;5S_2P_NR_Plan_UK	;
+
+UPDATE Accommodation; code[unique = true]			; ratePlan(code, $catalogVersion)[mode=append]; $catalogVersion
+					;DORSET_SQUARE_HOTELLUXURY_ROOM	;5S_2P_NR_Plan_UK
+
+INSERT_UPDATE RoomPreference; value[unique = true, lang = en]; preferenceType(code)[unique = true]; &roomPref
+; Twin Beds         ; BED_PREFERENCE ; roomPref1
+; Double Queen Size ; BED_PREFERENCE ; roomPref2
+; Double Bed        ; BED_PREFERENCE ; roomPref3
+
+UPDATE Accommodation; code[unique = true]	; $catalogVersion	; roomPreferences(&roomPref)
+; "DORSET_SQUARE_HOTELLUXURY_ROOM"     		; 					; roomPref1, roomPref2, roomPref3
+

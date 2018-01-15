@@ -1,0 +1,12 @@
+$productCatalog = travelProductCatalog
+$catalogVersion = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$ruleType = ruleType(code)[default = 'ANY']
+
+INSERT_UPDATE ChangeProductPriceBundleRule; id[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); conditionalProducts(code, $catalogVersion); targetProducts(code, $catalogVersion); $ruleType; price; currency(isocode)[default = GBP, unique = true]; billingEvent(code); $catalogVersion
+; economyplusrulegbp ; AncillaryProductEconomyPlusBundle ; ; PRIBOARDING1 ; ; 0 ; GBP ;
+; businessrulegbp1   ; AncillaryProductBusinessBundle    ; ; PRIBOARDING1 ; ; 0 ; GBP ;
+; businessrulegbp2   ; AncillaryProductBusinessBundle    ; ; LOUNGEACC1   ; ; 0 ; GBP ;
+
+; economyplusruleeur ; AncillaryProductEconomyPlusBundle ; ; PRIBOARDING1 ; ; 0 ; EUR ;
+; businessruleeur1   ; AncillaryProductBusinessBundle    ; ; PRIBOARDING1 ; ; 0 ; EUR ;
+; businessruleeur2   ; AncillaryProductBusinessBundle    ; ; LOUNGEACC1   ; ; 0 ; EUR ;

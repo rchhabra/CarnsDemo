@@ -1,0 +1,27 @@
+package de.hybris.platform.travelrulesengine.rules
+
+import de.hybris.platform.ruleengineservices.rao.CartRAO;
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import de.hybris.platform.ruleengineservices.rao.OrderEntryRAO;
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import java.util.ArrayList;
+import java.util.Map;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleAddAdminFeeToCartAction;
+
+rule "adminFee"
+@ruleCode("adminFee")
+@moduleName("travel-rules-module")
+dialect "mvel"
+
+    when
+    	$cart:CartRAO()
+		$result : RuleEngineResultRAO()
+		$entries : ArrayList(size == 0) from collect( OrderEntryRAO(product.getCode()=="AdminFee"))
+    then
+    	Map variables = [
+		   "de.hybris.platform.ruleengineservices.rao.CartRAO": $cart,
+		   "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO": $result
+		];
+    	ruleAddAdminFeeToCartAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), null);
+end

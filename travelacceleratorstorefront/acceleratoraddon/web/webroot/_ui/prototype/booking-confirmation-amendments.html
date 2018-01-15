@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="my-account-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="breadcrumb-wrap">
+            <div class="container breadcrumb-inner-wrap" >
+                <ul class="breadcrumbs ">
+                    <li class="col-xs-4 breadcrumb"><a href="#">Ancillary</a></li>
+                    <li class="col-xs-4 breadcrumb"><a href="#">Payment/Refund</a></li>
+                    <li class="col-xs-4 breadcrumb"><a href="#">Summary</a></li>
+                    <li class="col-xs-4 breadcrumb active"><a href="#">Confirmation</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            
+            <div class="col-xs-12 col-sm-9">
+                <div class="row heading-with-button">
+                    <div class="col-xs-7 col-sm-8">
+                        <h2 class="h2">Booking Confirmation</h2>
+                    </div>
+                    <div class="col-xs-5 col-sm-4 button-inline">
+                        <a class="btn btn-primary btn-block">Manage Booking</a>
+                    </div>
+                </div>
+                <!-- My Saved Payment -->
+                <div class="panel panel-primary panel-list my-account-panels">
+                    <div class="panel-heading">
+                        <h3 class="title">Booking Details</h3>
+                    </div>
+                    <div class="panel-body collapse in" id="saved-payment">
+                        <div class="row">
+                            <div class="panel button-wrap">
+                                <div class="col-xs-12 col-md-4">
+                                    <dl class="booking status">
+                                        <dt>Booking Reference:</dt>
+                                        <dd>PR3425</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default my-account-secondary-panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Price Summary</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table id="my-account-table" class="col-xs-12">
+                                    <thead>
+                                        <tr>
+                                            <th><span class="sr-only">Passengers</span></th>
+                                            <th>Fare</th>
+                                            <th>Taxes/Fees</th>
+                                            <th>Extras</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-title="Person">Adult X 2</td>
+                                            <td data-title="Fare">&pound;400</td>
+                                            <td data-title="Taxes/Fees">&pound;50</td>
+                                            <td data-title="Extras">&pound;85</td>
+                                            <td data-title="Total">&pound;535</td>
+                                        </tr>
+                                        <tr>
+                                            <td data-title="Person">Child X 1</td>
+                                            <td data-title="Fare">&pound;150</td>
+                                            <td data-title="Taxes/Fees">&pound;50</td>
+                                            <td data-title="Extras">&pound;0</td>
+                                            <td data-title="Total">&pound;200</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td colspan="3">Price charged to debit card ending <span class="card-number">2354</span></td>
+                                            <td class="text-center">&pound;735</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- OUTBOUND -->
+                        <div class="journey-wrapper">
+                            <div class="panel panel-default my-account-secondary-panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">London (LHR)
+                                    <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+                                    Dubai (DBX)
+                                </h3>
+                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#outbound-section" aria-expanded="true" aria-controls="outbound-section">Collapse / Expand</button>
+                                </div>
+                                <div class="panel-body collapse in" id="outbound-section">
+                                    <div class="fieldset">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="journey-details">
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Flight Number:</dt>
+                                                            <dd>RA0101</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Departs:</dt>
+                                                            <dd>07:00 01 SEP 2015</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Arrives:</dt>
+                                                            <dd>08:30 01 SEP 2015</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Terminal:</dt>
+                                                            <dd>5</dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- / .row -->
+                                    </div>
+                                </div>
+                                <!-- / .panel-body -->
+                            </div>
+                            <!-- / .panel.my-account-secondary-panel -->
+                            <div class="panel panel-default my-account-secondary-panel collapse in" id="passenger-summary-section-1">
+                                <div class="panel-heading divided">
+                                    <h3 class="panel-title">Passenger Summary</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="fieldset">
+                                        <!-- Passenger Row-->
+                                        <div class="row passenger-row">
+                                            <div class="col-xs-12 name-row">
+                                                <dl>
+                                                    <dt class="sr-only">Passenger Name:</dt>
+                                                    <dd>John Smith - Traveller Reference: 456789</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!-- / Passenger Row-->
+                                        <!-- Passenger Row-->
+                                        <div class="row passenger-row">
+                                            <div class="col-xs-12 name-row">
+                                                <dl>
+                                                    <dt class="sr-only">Passenger Name:</dt>
+                                                    <dd>Jane Smith - Traveller Reference: 23456</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!-- / Passenger Row-->
+                                        <!-- Passenger Row-->
+                                        <div class="row passenger-row">
+                                            <div class="col-xs-12 name-row">
+                                                <dl>
+                                                    <dt class="sr-only">Passenger Name:</dt>
+                                                    <dd>Janet Smith - Traveller Reference: 675395</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!-- / Passenger Row-->
+                                    </div>
+                                </div>
+                                <!-- / .panel-body -->
+                            </div>
+                            <!-- / .panel -->
+                        </div>
+                        <!-- / .journey-wrapper -->
+                        <!-- / OUTBOUND -->
+                        <!-- INBOUND -->
+                        <div class="journey-wrapper">
+                            <div class="panel panel-default my-account-secondary-panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Dubai (DBX)
+                                    <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+                                    London (LHR)
+                                </h3>
+                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#inbound-section" aria-expanded="true" aria-controls="inbound-section">Collapse / Expand</button>
+                                </div>
+                                <div class="panel-body collapse in" id="inbound-section">
+                                    <div class="fieldset">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="journey-details">
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Flight Number:</dt>
+                                                            <dd>RA14567</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Departs:</dt>
+                                                            <dd>13:00 27 SEP 2015</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Arrives:</dt>
+                                                            <dd>16:30 27 SEP 2015</dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                                        <dl>
+                                                            <dt>Terminal:</dt>
+                                                            <dd>2</dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- / .row -->
+                                    </div>
+                                </div>
+                                <!-- / .panel-body -->
+                            </div>
+                            <!-- / .panel.my-account-secondary-panel -->
+                            <div class="panel panel-default my-account-secondary-panel collapse in" id="passenger-summary-section-2">
+                                <div class="panel-heading divided">
+                                    <h3 class="panel-title">Passenger Summary</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="fieldset">
+                                        <!-- Passenger Row-->
+                                        <div class="row passenger-row">
+                                            <div class="col-xs-12 name-row">
+                                                <dl>
+                                                    <dt class="sr-only">Passenger Name:</dt>
+                                                    <dd>John Smith - Traveller Reference: 456789</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!-- / Passenger Row-->
+                                        <!-- Passenger Row-->
+                                        <div class="row passenger-row">
+                                            <div class="col-xs-12 name-row">
+                                                <dl>
+                                                    <dt class="sr-only">Passenger Name:</dt>
+                                                    <dd>Jane Smith - Traveller Reference: 23456</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!-- / Passenger Row-->
+                                        <!-- Passenger Row-->
+                                        <div class="row passenger-row">
+                                            <div class="col-xs-12 name-row">
+                                                <dl>
+                                                    <dt class="sr-only">Passenger Name:</dt>
+                                                    <dd>Janet Smith - Traveller Reference: 675395</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <!-- / Passenger Row-->
+                                    </div>
+                                </div>
+                                <!-- / .panel-body -->
+                            </div>
+                            <!-- / .panel -->
+                        </div>
+                        <!-- / .journey-wrapper -->
+                        <!-- / INBOUND -->
+                    </div>
+                    <!-- / .panel-body (outer) -->
+                </div>
+                <!-- / .panel (outer) -->
+                <div class="row bottom-row">
+                    <div class="col-xs-5 col-sm-4 col-xs-offset-7 col-sm-offset-8">
+                        <a class="btn btn-primary btn-block">Manage Booking</a>
+                    </div>
+                </div>
+                <!-- / My Saved Payment -->
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                    <aside id="sidebar" class="y_itinerarySideBar">
+                        <div class="promotions side-to-top hidden-xs">
+                            <section>
+                        <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Explore the gardens of Croatia</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                        </div>
+                    </aside>
+                </div>
+        </div>
+        <!-- / .container -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

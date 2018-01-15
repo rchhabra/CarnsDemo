@@ -1,0 +1,159 @@
+#
+# Import the Solr configuration for the Hotels store
+#
+$serverConfigName = hotelsSolrServerConfig
+$indexConfigName = hotelsSolrIndexConfig
+$searchConfigName = hotelsPageSize
+$facetSearchConfigName = hotelsIndex
+$facetSearchConfigDescription = Hotels Solr Index
+$searchIndexNamePrefix = hotels
+$solrIndexedType = hotelsIndexedType
+$indexBaseSite = hotels
+$indexLanguages = en
+$indexCurrencies = GBP, EUR
+
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+# Create the solr server configuration
+INSERT_UPDATE SolrServerConfig; name[unique = true]; mode(code); embeddedMaster
+; $serverConfigName ; standalone ; false
+
+INSERT_UPDATE SolrEndpointUrl; solrServerConfig(name)[unique = true]; url[unique = true]; master[unique = true, default = false]
+; $serverConfigName ; http://localhost:8983/solr ; true
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig; name[unique = true]; batchSize; numberOfThreads; indexMode(code);
+; $indexConfigName ; 100 ; 1 ; TWO_PHASE ;
+
+# Create the faceted search configuration
+# Page size is set to a high value as all results are required for accommodation search
+# Number of results returned: days * accommodation offering matching the searched criteria
+# per current data setup 30 days * 300 accommodation offering ~ 10000
+INSERT_UPDATE SolrSearchConfig; description[unique = true]; pageSize; legacyMode
+; $searchConfigName ; 10000 ; false
+
+INSERT_UPDATE SolrIndexedTypeDefaultSortOrderMapping; indexedType[unique = true]; defaultSortOrder
+; MarketingRatePlanInfo ; boosted, starRating, averageUserRating
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+INSERT_UPDATE SolrIndexedType; identifier[unique = true]; type(code); variant; sorts(&sortRefID)
+; $solrIndexedType ; MarketingRatePlanInfo ; false ; sortRef1, sortRef2, sortRef3, sortRef4
+
+INSERT_UPDATE SolrFacetSearchConfig; name[unique = true]; description; indexNamePrefix; languages(isocode); currencies(isocode); solrServerConfig(name); solrSearchConfig(description); solrIndexConfig(name); solrIndexedTypes(identifier); enabledLanguageFallbackMechanism
+; $facetSearchConfigName ; $facetSearchConfigDescription ; $searchIndexNamePrefix ; $indexLanguages ; $indexCurrencies ; $serverConfigName ; $searchConfigName ; $indexConfigName ; $solrIndexedType ; true
+
+UPDATE BaseSite; uid[unique = true]; solrFacetSearchConfiguration(name)
+; $indexBaseSite ; $facetSearchConfigName
+
+# Define Guest range set
+INSERT_UPDATE SolrValueRangeSet; name[unique = true]; qualifier; type; solrValueRanges(&rangeValueRefID)
+; accommodationGuestRatingRange ; ; double ; rangeRefGuestRating0, rangeRefGuestRating6, rangeRefGuestRating7, rangeRefGuestRating8, rangeRefGuestRating9
+
+# Define Guest Ranges
+INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to
+; rangeRefGuestRating0 ; accommodationGuestRatingRange ; No Rating    ; 0 ; 5.99
+; rangeRefGuestRating6 ; accommodationGuestRatingRange ; Pleasant 6+  ; 6 ; 10
+; rangeRefGuestRating7 ; accommodationGuestRatingRange ; Good 7+      ; 7 ; 10
+; rangeRefGuestRating8 ; accommodationGuestRatingRange ; Very Good 8+ ; 8 ; 10
+; rangeRefGuestRating9 ; accommodationGuestRatingRange ; Wonderful 9+ ; 9 ; 10
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet; name[unique = true]; qualifier; type; solrValueRanges(&rangeValueRefID)
+; accommodationPriceRangeEUR ; EUR ; double ; rangeRefEUR1, rangeRefEUR2, rangeRefEUR3, rangeRefEUR4, rangeRefEUR5, rangeRefEUR6
+; accommodationPriceRangeGBP ; GBP ; double ; rangeRefGBP1, rangeRefGBP2, rangeRefGBP3, rangeRefGBP4, rangeRefGBP5, rangeRefGBP6
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to
+; rangeRefEUR1 ; accommodationPriceRangeEUR ; €0 - €100   ; 0   ; 100.99
+; rangeRefEUR2 ; accommodationPriceRangeEUR ; €101 - €200 ; 101 ; 200.99
+; rangeRefEUR3 ; accommodationPriceRangeEUR ; €201 - €300 ; 201 ; 300.99
+; rangeRefEUR4 ; accommodationPriceRangeEUR ; €301 - €400 ; 301 ; 400.99
+; rangeRefEUR5 ; accommodationPriceRangeEUR ; €401 - €500 ; 401 ; 500.99
+; rangeRefEUR6 ; accommodationPriceRangeEUR ; €501+       ; 501 ;
+
+
+; rangeRefGBP1 ; accommodationPriceRangeGBP ; £0 - £100   ; 0   ; 100.99
+; rangeRefGBP2 ; accommodationPriceRangeGBP ; £100 - £200 ; 101 ; 200.99
+; rangeRefGBP3 ; accommodationPriceRangeGBP ; £201 - £300 ; 201 ; 300.99
+; rangeRefGBP4 ; accommodationPriceRangeGBP ; £301 - £400 ; 301 ; 400.99
+; rangeRefGBP5 ; accommodationPriceRangeGBP ; £401 - £500 ; 401 ; 500.99
+; rangeRefGBP6 ; accommodationPriceRangeGBP ; £501+       ; 501 ;
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider; valueProviderParameter
+; $solrIndexedType ; itemtype           ; string       ; ;      ;      ;      ; ; ;                                       ;
+; $solrIndexedType ; code               ; string       ; ;      ;      ;      ; ; ; springELValueProvider                 ; getCode()
+; $solrIndexedType ; propertyName       ; sortabletext ; ;      ; true ;      ; ; ; springELValueProvider                 ; getAccommodationOffering().getName(#lang)
+; $solrIndexedType ; locationNames      ; sortabletext ; ;      ; true ; true ; ; ; locationNamesValueResolver            ;
+; $solrIndexedType ; ratePlanConfigs    ; string 	   ; ;      ;      ; true ; ; ; ratePlanConfigsValueResolver            ;
+; $solrIndexedType ; address            ; string       ; ;      ;      ;      ; ; ; addressValueResolver                  ;
+; $solrIndexedType ; contactNumber      ; string       ; ;      ;      ;      ; ; ; contactNumberValueResolver            ;
+; $solrIndexedType ; averageUserRating  ; double       ; ;      ;      ;      ; ; ; springELValueProvider                 ; getAccommodationOffering().getAverageUserRating()
+; $solrIndexedType ; numberOfReviews    ; int          ; ;      ;      ;      ; ; ; springELValueProvider                 ; getAccommodationOffering().getNumberOfReviews()
+; $solrIndexedType ; imageUrl           ; string       ; ;      ;      ;      ; ; ; offeringImageUrlValueResolver         ;
+; $solrIndexedType ; priceValue         ; double       ; ; true ;      ;      ; ; ; roomRatePriceValueResolver            ;
+; $solrIndexedType ; taxValue     	    ; double       ; ; true ;      ;      ; ; ; roomRateTaxValueResolver	          ;
+; $solrIndexedType ; accommodationInfos ; string       ; ;      ; true ; true ; ; ; accommodationInfosValueResolver       ;
+; $solrIndexedType ; minChildrenCount   ; int          ; ;      ;      ;      ; ; ; minChildrenCountValueResolver         ;
+; $solrIndexedType ; maxChildrenCount   ; int          ; ;      ;      ;      ; ; ; maxChildrenCountValueResolver         ;
+; $solrIndexedType ; latlon             ; location_rpt ; ;      ;      ;      ; ; ; accommodationCoordinatesValueResolver ;
+; $solrIndexedType ; boosted            ; boolean      ; ;      ;      ;      ; ; ; springELValueProvider                 ; getAccommodationOffering().getBoosted()
+; $solrIndexedType ; popularity         ; int          ; ;      ;      ;      ; ; ; springELValueProvider                 ; getAccommodationOffering().getPopularity()
+
+# Full text search query fields
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; ftsQuery[default = false]; ftsQueryBoost; ftsFuzzyQuery[default = false]; ftsFuzzyQueryBoost; ftsWildcardQuery[default = false]; ftsWildcardQueryType(code)[default = PREFIX_AND_POSTFIX]; ftsWildcardQueryBoost;
+; $solrIndexedType ; locationNames ; ; ; ; ; true ; ; 10 ;
+; $solrIndexedType ; propertyName  ; ; ; ; ; true ; ; 20 ;
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); localized[default = false]; multiValue[default = true]; categoryField[default = true]; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider
+
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); multiValue[default = true]; facet[default = true]; facetType(code); facetSort(code); priority; visible; categoryField[default = true]; fieldValueProvider; valueProviderParameter; facetDisplayNameProvider; customFacetSortProvider
+; $solrIndexedType ; starRating ; int    ; false ; ; MultiSelectOr  ; Custom ; 5000 ; true ; ; springELValueProvider       ; getAccommodationOffering().getStarRating() ; starRatingFacetValueDisplayNameProvider ; numericFacetSortProviderAsc
+; $solrIndexedType ; amenities  ; string ; true  ; ; MultiSelectAnd ; Alpha  ; 5000 ; true ; ; amenityFieldValueResolver   ;                                            ; amenityFacetValueDisplayNameProvider    ;
+; $solrIndexedType ; boardType  ; string ; true  ; ; MultiSelectOr  ; Alpha  ; 5000 ; true ; ; boardTypeFieldValueResolver ;                                            ;                                         ;
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = true]; facetType(code); facetSort(code); ftsWildcardQuery[default = false]; priority; visible; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider; valueProviderParameter; facetDisplayNameProvider; customFacetSortProvider; topValuesProvider; rangeSets(name)
+; $solrIndexedType ; locationCodes  ; string ; ;      ; ;      ; ; MultiSelectOr ; Alpha ; ; 10000 ; false ; ; ; locationCodesValueResolver      ;                                      ; ; ;                          ;                                                        ;
+; $solrIndexedType ; propertyCode   ; string ; ;      ; ;      ; ; MultiSelectOr ; Alpha ; ; 10000 ; false ; ; ; springELValueProvider           ; getAccommodationOffering().getCode() ; ; ;                          ;                                                        ;
+; $solrIndexedType ; numberOfAdults ; int    ; ;      ; ;      ; ; MultiSelectOr ; Count ; ; 10000 ; false ; ; ; springELValueProvider           ; getNumberOfAdults()                  ; ; ;                          ;                                                        ;
+; $solrIndexedType ; dateOfStay     ; string ; ;      ; ;      ; ; MultiSelectOr ; Alpha ; ; 10000 ; false ; ; ; dateOfStayValueResolver         ;                                      ; ; ;                          ;                                                        ;
+; $solrIndexedType ; guestRating    ; double ; ;      ; ; true ; ; Refine        ; Alpha ; ; 5000  ; true  ; ; ; guestRatingValueResolver        ;                                      ; ; ; defaultTopValuesProvider ; accommodationGuestRatingRange                          ;
+; $solrIndexedType ; priceRange     ; double ; ; true ; ;      ; ; MultiSelectOr ; Alpha ; ; 10000 ; true  ; ; ; roomRatePriceRangeValueResolver ;                                      ; ; ; defaultTopValuesProvider ; accommodationPriceRangeGBP, accommodationPriceRangeEUR ;
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery; solrIndexedType(identifier)[unique = true]; identifier[unique = true]; type(code); injectCurrentDate[default = true]; injectCurrentTime[default = true]; injectLastIndexTime[default = true]; query; user(uid); active[default = true]
+; $solrIndexedType ; $searchIndexNamePrefix-fullQuery   ; full   ; ; ; false ; "SELECT {PK} FROM {MarketingRatePlanInfo}"                                        ; anonymous ;
+; $solrIndexedType ; $searchIndexNamePrefix-updateQuery ; update ; ; ;       ; "SELECT {PK} FROM {MarketingRatePlanInfo} where {modifiedtime} >= ?lastIndexTime" ; anonymous ;
+
+# Define the available sorts
+INSERT_UPDATE SolrSort; &sortRefID; indexedType(identifier)[unique = true]; code[unique = true]; useBoost; visible[default = true]
+; sortRef1 ; $solrIndexedType ; boost-dsc    ; true ; false
+; sortRef2 ; $solrIndexedType ; most-popular ; false
+; sortRef3 ; $solrIndexedType ; guest-rating ; false
+; sortRef4 ; $solrIndexedType ; star-rating  ; false
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField; sort(indexedType(identifier), code)[unique = true]; fieldName[unique = true]; ascending[unique = true]
+; $solrIndexedType:boost-dsc    ; boosted           ; true
+; $solrIndexedType:most-popular ; popularity        ; false
+; $solrIndexedType:guest-rating ; averageUserRating ; false
+; $solrIndexedType:star-rating  ; starRating        ; false
+
+## Boost Rules
+INSERT_UPDATE GlobalSolrSearchProfile; code[unique = true]; indexedType(identifier)
+; searchProfile1 ; $solrIndexedType
+
+INSERT_UPDATE SolrBoostRule; propertyValue; boostFactor[unique = true]; operator(code); solrIndexedProperty(solrIndexedType(identifier), name)[unique = true]; solrSearchProfiles(code)
+; true                  ; 50 ; EQUAL_TO ; $solrIndexedType:boosted      ; searchProfile1
+; HILTON_LONDON_WEMBLEY ; 75 ; EQUAL_TO ; $solrIndexedType:propertyCode ; searchProfile1
+

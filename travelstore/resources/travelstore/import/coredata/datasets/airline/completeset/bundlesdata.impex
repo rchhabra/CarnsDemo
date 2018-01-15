@@ -1,0 +1,34 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$economyFareProducts = ORTC5, QOWC5, MOWC5, KOWC5
+$economyPlusFareProducts = EOWC5, TOWC5, WOWC5, WRTC6
+$businessFareProducts = IOWC5, ROWC5, COWC5, DOWC5
+$economyPlusAncillaryProducts = PRIBOARDING1
+$businessAncillaryProducts = PRIBOARDING1, LOUNGEACC1
+
+INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = approved]; $catalogVersion
+; Approved_Status ; ;
+
+INSERT_UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; name[lang = $lang]; type(code); parentTemplate(id, $catalogVersion); status(id, $catalogVersion); $catalogVersion; promotional[default = false]
+; EconomyBundle                     ; ; Economy Bundle                ; ECONOMY      ;                   ; Approved_Status ;
+; EconomyPlusBundle                 ; ; Economy Plus Bundle           ; ECONOMY_PLUS ;                   ; Approved_Status ;
+; BusinessBundle                    ; ; Business Bundle               ; BUSINESS     ;                   ; Approved_Status ;
+
+; FareProductEconomyBundle          ; ; Economy Fare Bundle           ; ECONOMY      ; EconomyBundle     ; Approved_Status ;
+; FareProductEconomyPlusBundle      ; ; Economy Plus Fare Bundle      ; ECONOMY_PLUS ; EconomyPlusBundle ; Approved_Status ;
+; FareProductBusinessBundle         ; ; Business Fare Bundle          ; BUSINESS     ; BusinessBundle    ; Approved_Status ;
+
+; AncillaryProductEconomyBundle     ; ; Economy Ancillary Bundle      ; ECONOMY      ; EconomyBundle     ; Approved_Status ;
+; AncillaryProductEconomyPlusBundle ; ; Economy Plus Ancillary Bundle ; ECONOMY_PLUS ; EconomyPlusBundle ; Approved_Status ;
+; AncillaryProductBusinessBundle    ; ; Business Ancillary Bundle     ; BUSINESS     ; BusinessBundle    ; Approved_Status ;
+
+#Add relevant FareProducts & Accommodation products to FareProductBundles & AncillaryProductBundle respectively.
+
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; products(code, $catalogVersion)[mode = replace]; $catalogVersion
+; FareProductEconomyBundle          ; ; $economyFareProducts          ;
+; FareProductEconomyPlusBundle      ; ; $economyPlusFareProducts      ;
+; FareProductBusinessBundle         ; ; $businessFareProducts         ;
+
+; AncillaryProductEconomyBundle     ; ;                               ;
+; AncillaryProductEconomyPlusBundle ; ; $economyPlusAncillaryProducts ;
+; AncillaryProductBusinessBundle    ; ; $businessAncillaryProducts    ;

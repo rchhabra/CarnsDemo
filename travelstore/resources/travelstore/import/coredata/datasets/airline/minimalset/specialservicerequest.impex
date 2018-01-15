@@ -1,0 +1,5 @@
+# ImpEx for Importing SpecialServiceRequest codes into travel accelerator
+
+INSERT_UPDATE SpecialServiceRequest; code[unique = true]
+
+; disability

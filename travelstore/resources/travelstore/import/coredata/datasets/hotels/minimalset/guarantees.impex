@@ -1,0 +1,10 @@
+#
+# ImpEx for Importing Guarantee into travel accelerator
+#
+$lang=en
+
+INSERT_UPDATE Guarantee;code[unique=true];percentageAmount;absoluteDeadline;relativeDeadline;type(code)
+;deposit30        ;   30     ;  ;  172800000 ;  DEPOSIT
+;prePayment80     ;   80     ;  ;  432000000 ;  PREPAYMENT
+;guarantee20      ;   20     ;  ;            ;  GUARANTEE
+;guaranteeNoPay   ;          ;  ;            ;  GUARANTEE

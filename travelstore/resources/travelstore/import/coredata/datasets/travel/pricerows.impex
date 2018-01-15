@@ -1,0 +1,8 @@
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion
+# Prices in GBP
+#
+
+# Prices in EUR
+#

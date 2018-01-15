@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+
+
+-->
+
+
+
+<!-- WARNING: This is the Spring WEB configuration file. If you want to replace items or managers you have to do this from the extensions 
+	core configuration file (ndcwebservices/resources/ndcwebservices-spring.xml) -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+		    http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/context
+			  http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="de.hybris.platform.ndcwebservices"  scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver" />
+
+	<import resource="config/cache-config-spring.xml"/>
+	<import resource="config/security-spring.xml"/>
+	<import resource="config/error-config-spring.xml"/>
+	<import resource="config/field-mapping-spring.xml"/>	
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages/messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<!-- Spring managed FilterChain for hybris Filter stack -->
+	<bean id="ndcwebservicesPlatformFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+		<constructor-arg>
+			<list>
+				<ref bean="log4jFilter" />
+				<ref bean="tenantActivationFilter" />
+				<ref bean="sessionFilter" />
+				<ref bean="ndcWebserviceFilter" />
+
+				<!-- Security -->
+				<ref bean="springSecurityFilterChain" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="ndcWebserviceFilter" class="de.hybris.platform.ndcwebservices.filters.NDCWebserviceFilter">
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="contextInformationLoader" ref="contextInformationLoader" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="siteChannelValidationStrategy" ref="siteChannelValidationStrategy" />
+	</bean>
+
+	<!-- Context information loader - bean that load context information -->
+	<alias name="defaultContextInformationLoader" alias="contextInformationLoader" />
+	<bean id="defaultContextInformationLoader"
+		  class="de.hybris.platform.acceleratorcms.context.impl.DefaultContextInformationLoader">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="i18NService" ref="i18NService" />
+		<property name="modelService" ref="modelService" />
+		<property name="timeService" ref="timeService" />
+		<property name="userService" ref="userService" />
+		<property name="strategies" ref="contextLoadStrategiesList" />
+		<property name="previewRequestStrategies" ref="previewRequestStrategiesList" />
+	</bean>
+
+	<alias name="defaultContextLoadStrategiesList" alias="contextLoadStrategiesList" />
+	<util:list id="defaultContextLoadStrategiesList">
+		<bean id="loadUserStrategy" parent="defaultContextInformationLoader"
+			  class="de.hybris.platform.acceleratorcms.context.impl.DefaultContextInformationLoader$LoadUserStrategy" />
+		<bean id="loadUserGroupStrategy" parent="defaultContextInformationLoader"
+			  class="de.hybris.platform.acceleratorcms.context.impl.DefaultContextInformationLoader$LoadUserGroupStrategy" />
+		<bean id="loadLanguageStrategy" parent="defaultContextInformationLoader"
+			  class="de.hybris.platform.acceleratorcms.context.impl.DefaultContextInformationLoader$LoadLanguageStrategy" />
+		<bean id="loadDateStrategy" parent="defaultContextInformationLoader"
+			  class="de.hybris.platform.acceleratorcms.context.impl.DefaultContextInformationLoader$LoadDateStrategy" />
+	</util:list>
+
+	<bean id="restSessionFilter" class="de.hybris.platform.webservicescommons.filter.RestSessionFilter">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<!-- Filter that catches and resolves exceptions thrown from other filters. Can be added to filter chain if you need such functionality -->
+	<alias alias="exceptionTranslationFilter" name="defaultExceptionTranslationFilter" />
+	<bean id="defaultExceptionTranslationFilter" class="de.hybris.platform.webservicescommons.filter.ExceptionTranslationFilter">
+		<property name="restHandlerExceptionResolver" ref="restHandlerExceptionResolver" />
+	</bean>
+
+</beans>

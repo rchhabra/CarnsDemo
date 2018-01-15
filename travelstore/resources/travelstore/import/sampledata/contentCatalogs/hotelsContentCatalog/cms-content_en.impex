@@ -1,0 +1,199 @@
+$contentCatalog = hotelsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$siteResource = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/travelstore/import/sampledata/contentCatalogs/$contentCatalog
+$paragraphs_en = $siteResource/paragraphs/en
+$banner_messages_en = $siteResource/images/banners/messages/en
+$picture = media(code, $contentCV);
+
+# Language
+$lang = en
+
+# Site Logo Component
+INSERT_UPDATE Media; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; $contentCV[unique = true]; folder(qualifier)[default = images];
+; logo.svg ; $siteResource/images/theme/logo.svg ; logo.svg ; "Home"
+
+UPDATE Media; code[unique = true]; mime; $contentCV[unique = true]; folder(qualifier)[default = images];
+; logo.svg ; image/svg+xml
+
+UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture
+; ; SiteLogoComponent ; logo.svg
+
+# CMS Link Components
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; FAQLink                    ; "FAQ's"
+; ; PrivacyPolicyLink          ; "Privacy Policy"
+; ; TermsConditionsLink        ; "Terms & Conditions"
+; ; HelpLink                   ; "Help"
+; ; ContactUsLink              ; "Contact Us"
+; ; AccountProfileLink         ; "My Personal Details"
+; ; HomepageLink               ; "Home"
+; ; OffersLink                 ; "Offers"
+; ; ThingsToDoLink             ; "Things To Do"
+; ; MyBookingsLink             ; "My Bookings"
+; ; SavedPaymentInfoLink       ; "My Saved Payments"
+; ; OrderApprovalDashboardLink ; "Order Approval Dashboard"
+; ; MyConsentsLink       	   ; "My Consents"
+
+#########################
+### Side Banner template
+#########################
+
+INSERT_UPDATE Media; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/png']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; PromoSide_boat.jpg  ; $siteResource/images/banners/PromoSide_boat.jpg  ; PromoSide_boat.jpg  ; "View" ;
+; PromoSide_rocks.jpg ; $siteResource/images/banners/PromoSide_rocks.jpg ; PromoSide_rocks.jpg ; "View" ;
+; PromoSide_green.jpg ; $siteResource/images/banners/PromoSide_green.jpg ; PromoSide_green.jpg ; "View" ;
+
+#########################
+### NORMAL CONTENT PAGES
+#########################
+
+######
+### Home Page
+######
+
+INSERT_UPDATE Media; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; HomeCarousel_burano.jpg    ; $siteResource/images/banners/HomeCarousel_burano.jpg    ; HomeCarousel_burano.jpg    ; "View" ;
+; HomeCarousel_maldives.jpg  ; $siteResource/images/banners/HomeCarousel_maldives.jpg  ; HomeCarousel_maldives.jpg  ; "View" ;
+; HomeCarousel_NYC.jpg       ; $siteResource/images/banners/HomeCarousel_NYC.jpg       ; HomeCarousel_NYC.jpg       ; "View" ;
+; HomePromo_01statue.jpg     ; $siteResource/images/banners/HomePromo_01statue.jpg     ; HomePromo_01statue.jpg     ; "View" ;
+; HomePromo_02oceanrocks.jpg ; $siteResource/images/banners/HomePromo_02oceanrocks.jpg ; HomePromo_02oceanrocks.jpg ; "View" ;
+; HomePromo_03porthole.jpg   ; $siteResource/images/banners/HomePromo_03porthole.jpg   ; HomePromo_03porthole.jpg   ; "View" ;
+; HomePromo_04gondola.jpg    ; $siteResource/images/banners/HomePromo_04gondola.jpg    ; HomePromo_04gondola.jpg    ; "View" ;
+
+# Multiple banners will be used when styling and js for carousel is applied
+
+UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; HomeCarousel1BannerComponent ; HomeCarousel_burano.jpg   ; $banner_messages_en/homeCarouselBanner1PromoMessage.html
+; ; HomeCarousel2BannerComponent ; HomeCarousel_NYC.jpg      ; $banner_messages_en/homeCarouselBanner2PromoMessage.html
+; ; HomeCarousel3BannerComponent ; HomeCarousel_maldives.jpg ; $banner_messages_en/homeCarouselBanner3PromoMessage.html
+
+UPDATE ResponsiveBackgroundBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; HomePromoABannerComponent ; HomePromo_01statue.jpg     ; $banner_messages_en/homePromoBannerAMessage.html
+; ; HomePromoBBannerComponent ; HomePromo_02oceanrocks.jpg ; $banner_messages_en/homePromoBannerBMessage.html
+; ; HomePromoCBannerComponent ; HomePromo_03porthole.jpg   ; $banner_messages_en/homePromoBannerCMessage.html
+; ; HomePromoDBannerComponent ; HomePromo_04gondola.jpg    ; $banner_messages_en/homePromoBannerDMessage.html
+
+######
+### Privacy Policy Page
+######
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; PrivacyPolicyHeaderCMSParagraph  ; $paragraphs_en/privacyPolicyHeaderCMSParagraph.html
+; ; PrivacyPolicyContentCMSParagraph ; $paragraphs_en/privacyPolicyContentCMSParagraph.html
+
+######
+### FAQ Page
+######
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; FAQMenuCMSParagraph ; $paragraphs_en/faqMenuCMSParagraph.html
+; ; FAQTextCMSParagraph ; $paragraphs_en/faqTextCMSParagraph.html
+
+######
+### Terms & Conditions 
+######
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; TermsConditionsMenuCMSParagraph ; $paragraphs_en/termsConditionsMenuCMSParagraph.html
+; ; TermsConditionsTextCMSParagraph ; $paragraphs_en/termsConditionsTextCMSParagraph.html
+
+######
+### Contact Us Page
+######
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; ContactUsHeaderCMSParagraph  ; $paragraphs_en/contactUsHeaderCMSParagraph.html
+; ; ContactUsContentCMSParagraph ; $paragraphs_en/contactUsContentCMSParagraph.html
+
+######
+### Help Page
+######
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; HelpHeaderCMSParagraph  ; $paragraphs_en/helpHeaderCMSParagraph.html
+; ; HelpContentCMSParagraph ; $paragraphs_en/helpContentCMSParagraph.html
+
+#############################
+### FUNCTIONAL CONTENT PAGES
+#############################
+
+######
+### Hotel Search page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; AccommodationSearchSideBannerComponent ; PromoSide_boat.jpg ; $banner_messages_en/sideBoatBannerMessage.html
+
+######
+### Hotel Details Page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; HotelDetailsSideBannerComponent ; PromoSide_boat.jpg ; $banner_messages_en/sideBoatBannerMessage.html
+
+######
+### Guest Details Page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; GuestDetailsSideBannerComponent ; PromoSide_boat.jpg ; $banner_messages_en/sideBoatBannerMessage.html
+
+######
+### Payment Details Page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; PaymentMethodSideBannerComponent ; PromoSide_boat.jpg ; $banner_messages_en/sideBoatBannerMessage.html
+
+#####
+###	BOOKING CONFIRMATION PAGE
+#####
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; BookingConfirmationLeft1BannerComponent ; PromoSide_green.jpg ; $banner_messages_en/sideGreenBannerMessage.html
+; ; BookingConfirmationLeft2BannerComponent ; PromoSide_rocks.jpg ; $banner_messages_en/sideRocksBannerMessage.html
+; ; BookingConfirmationLeft3BannerComponent ; PromoSide_boat.jpg  ; $banner_messages_en/sideBoatBannerMessage.html
+
+######
+### My Profile Page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; MyProfileSide1BannerComponent ; PromoSide_green.jpg ; $banner_messages_en/sideGreenBannerMessage.html
+; ; MyProfileSide2BannerComponent ; PromoSide_rocks.jpg ; $banner_messages_en/sideRocksBannerMessage.html
+; ; MyProfileSide3BannerComponent ; PromoSide_boat.jpg  ; $banner_messages_en/sideBoatBannerMessage.html
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; UpdateProfileConfirmationCMSParagraph ; $paragraphs_en/updateProfileConfirmationCMSParagraph.html
+
+######
+### Account Details Page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; AccountDetails1BannerComponent ; PromoSide_green.jpg ; $banner_messages_en/sideGreenBannerMessage.html
+; ; AccountDetails2BannerComponent ; PromoSide_rocks.jpg ; $banner_messages_en/sideRocksBannerMessage.html
+; ; AccountDetails3BannerComponent ; PromoSide_boat.jpg  ; $banner_messages_en/sideBoatBannerMessage.html
+
+######
+### Booking Details Page
+######
+
+UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture; content[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; BookingDetails1BannerComponent ; PromoSide_green.jpg ; $banner_messages_en/sideGreenBannerMessage.html
+; ; BookingDetails2BannerComponent ; PromoSide_rocks.jpg ; $banner_messages_en/sideRocksBannerMessage.html
+; ; BookingDetails3BannerComponent ; PromoSide_boat.jpg  ; $banner_messages_en/sideBoatBannerMessage.html
+
+#########################
+### FOOTER
+#########################
+
+UPDATE FooterComponent; $contentCV[unique = true]; uid[unique = true]; notice[lang = $lang]
+; ; FooterComponent         ; "Copyright © 2016"
+; ; FooterCheckoutComponent ; "Copyright © 2016"
+
+#########################
+### HEADER LINKS
+#########################
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; ContactInfoCMSParagraph ; "Contact Us: 02034995253"

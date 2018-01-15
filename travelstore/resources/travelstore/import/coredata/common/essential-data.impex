@@ -1,0 +1,114 @@
+# Import essential data for the Accelerator
+#
+# Includes:
+# * Languages
+# * Currencies
+# * Titles
+# * Vendors
+# * MediaFolders
+# * MediaFormats
+
+# Languages
+INSERT_UPDATE Language; isocode[unique = true]; fallbackLanguages(isocode); active[default = true]
+; en ;    ; ;
+; de ; en ; ;
+; ja ; en ; ;
+; zh ; en ; ;
+
+# Currencies
+INSERT_UPDATE Currency; isocode[unique = true]; conversion; digits; symbol
+; GBP ; 1 ; 2 ; £
+
+# Vendor
+INSERT_UPDATE Vendor; code[unique = true]; name
+; airline ; Airline Vendor
+; hotel   ; Hotel Vendor
+
+INSERT_UPDATE Warehouse; code[unique = true]; name; vendor(code)
+; default ; Default Warehouse ; airline
+
+# Disable preview for email pages
+UPDATE CMSPageType; code[unique = true]; previewDisabled
+; EmailPage ; true
+
+# Titles
+INSERT_UPDATE Title; code[unique = true]
+; mr
+; mrs
+; miss
+; ms
+; dr
+; rev
+
+# Media Folders
+INSERT_UPDATE MediaFolder; qualifier[unique = true]; path[unique = true]
+; images            ; images
+; email-body        ; email-body
+; email-attachments ; email-attachments
+
+# Media formats
+INSERT_UPDATE MediaFormat; qualifier[unique = true]
+; 1200Wx1200H
+; 515Wx515H
+; 365Wx246H
+; 300Wx300H
+; 96Wx96H
+; 65Wx65H
+; 30Wx30H
+; mobile
+; tablet
+; desktop
+; widescreen
+; 860Wx465H
+; 300Wx300H
+; 100Wx100H
+
+INSERT_UPDATE ComponentTypeGroups2ComponentType; source(code)[unique = true]; target(code)[unique = true]
+; wide   ; ResponsiveBackgroundBannerComponent
+; wide   ; ActivityBannerComponent
+; wide   ; TripFinderBannerComponent
+; wide   ; SidePromoBannerComponent
+; narrow ; ResponsiveBackgroundBannerComponent
+; narrow ; ActivityBannerComponent
+; narrow ; TripFinderBannerComponent
+; narrow ; SidePromoBannerComponent
+
+REMOVE ComponentTypeGroups2ComponentType; source(code)[unique = true]; target(code)[unique = true]
+; wide   ; AccountNavigationComponent
+; wide   ; AccountNavigationCollectionComponent
+; wide   ; ProductAddToCartComponent
+; wide   ; ProductVariantSelectorComponent
+; narrow ; AccountNavigationComponent
+; narrow ; AccountNavigationCollectionComponent
+; narrow ; ProductAddToCartComponent
+; narrow ; ProductVariantSelectorComponent
+
+############################
+###	COMPONENT SAMPLE DATA
+############################
+INSERT_UPDATE PassengerType; code[unique = true]; minAge; maxAge
+; adult  ; 16 ;
+; child  ; 2  ; 15
+; infant ; 0  ; 2
+
+#############################################
+###	Terminal and Travel Provider SAMPLE DATA
+#############################################
+
+INSERT_UPDATE Terminal; code[unique = true]
+; T1
+; T2
+
+INSERT_UPDATE TravelProvider; code[unique = true]
+; HY
+
+# Bundle Type
+INSERT_UPDATE BundleType; code[unique = true]
+; FAMILY
+; SPECIAL
+
+###############################
+# Create UserPriceGroups
+
+INSERT_UPDATE UserPriceGroup; code[unique = true]
+; B2B_DEFAULT_PRICE_GROUP

@@ -1,0 +1,576 @@
+$contentCatalog = hotelsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+##############################################
+############# LINKS ##########################
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; name; url; &linkRef; &componentRef; target(code)[default = 'sameWindow']; styleAttributes
+; ; HomepageLink               ; Home                       ; /                                    ; HomepageLink               ; HomepageLink               ;
+; ; OffersLink                 ; Offers                     ; #                                    ; OffersLink                 ; OffersLink                 ;
+; ; ThingsToDoLink             ; Things To Do               ; #                                    ; ThingsToDoLink             ; ThingsToDoLink             ;
+; ; AccountProfileLink         ; AccountProfileLink         ; /my-account/profile                  ; AccountProfileLink         ; AccountProfileLink         ; ; class="title"
+; ; AccountProfileStaticLink   ; AccountProfileStaticLink   ; /my-account/profile                  ; AccountProfileStaticLink   ; AccountProfileStaticLink   ; ; class="myacc-link myacc-profile"
+; ; FAQLink                    ; FAQs                       ; /faq                                 ; FAQLink                    ; FAQLink                    ;
+; ; PrivacyPolicyLink          ; Privacy Policy             ; /privacy-policy                      ; PrivacyPolicyLink          ; PrivacyPolicyLink          ;
+; ; TermsConditionsLink        ; Terms & Conditions         ; /terms-conditions                    ; TermsConditionsLink        ; TermsConditionsLink        ;
+; ; HelpLink                   ; Help Link                  ; /help                                ; HelpLink                   ; HelpLink                   ;
+; ; ContactUsLink              ; Contact Us                 ; /contact-us                          ; ContactUsLink              ; ContactUsLink              ;
+; ; SavedPaymentInfoLink       ; SavedPaymentInfoLink       ; /my-account/payment-details          ; SavedPaymentInfoLink       ; SavedPaymentInfoLink       ; ; class="title"
+; ; MyBookingsLink             ; MyBookingsLink             ; /my-account/my-bookings              ; MyBookingsLink             ; MyBookingsLink             ; ; class="title"
+; ; OrderApprovalDashboardLink ; OrderApprovalDashboardLink ; /my-account/order-approval-dashboard ; OrderApprovalDashboardLink ; OrderApprovalDashboardLink ; ; class="title"
+; ; MyConsentsLink             ; MyConsentsLink             ; /my-account/consents                 ; MyConsentsLink             ; MyConsentsLink             ; ; class="title"
+
+#######################################
+############# SITE LOGO ###############
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; SiteLogoSlot ; SiteLogoComponent
+
+##############################################
+############# NAVIGATION NODES ###############
+
+# Root Navigation Node
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; children(uid, $contentCV)[mode = append]
+; root ; ; root ; ;
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
+; SiteRootNode      ; ; SiteRootNode ; root         ; ; SiteRootNode
+; HotelsNavNode     ; ; Hotels Site  ; SiteRootNode ; ; HotelsNavNode
+; HomeNavNode       ; ; Home         ; SiteRootNode ; ; HomeNavNode
+; OffersNavNode     ; ; Offers       ; SiteRootNode ; ; OffersNavNode
+; ThingsToDoNavNode ; ; Things To Do ; SiteRootNode ; ; ThingsToDoNavNode
+; MyAccountNavNode  ; ; My Account   ; SiteRootNode ; ; MyAccountNavNode
+
+##############################################
+############# FOOTER #########################
+
+# CMS Footer Component
+INSERT_UPDATE FooterComponent; $contentCV[unique = true]; uid[unique = true]; wrapAfter; &componentRef; navigationNodes(&nodeRef)
+; ; FooterComponent         ; 1 ; FooterComponent         ; HotelsFooterNavNode
+; ; FooterCheckoutComponent ; 1 ; FooterCheckoutComponent ;
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; FooterSlot         ; FooterComponent
+; ; FooterCheckoutSlot ; FooterCheckoutComponent
+
+# CMS Navigation Nodes
+INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
+; HotelsFooterNavNode ; ; Hotels Pages ; SiteRootNode ; FAQLink, PrivacyPolicyLink, TermsConditionsLink, HelpLink, ContactUsLink ; HotelsFooterNavNode
+
+##############################################
+############# NAVIGATION BAR #################
+
+INSERT_UPDATE NavigationBarComponent; $contentCV[unique = true]; uid[unique = true]; name; wrapAfter; navigationNode(&nodeRef); link(uid, $contentCV); styleClass; dropDownLayout(code); &componentRef
+; ; HomeBarComponent       ; Home Bar Component         ; 10 ; HomeNavNode       ; HomepageLink   ; ; AUTO ; HomeBarComponent
+; ; OffersBarComponent     ; Offers Bar Component       ; 10 ; OffersNavNode     ; OffersLink     ; ; AUTO ; OffersBarComponent
+; ; ThingsToDoBarComponent ; Things To Do Bar Component ; 10 ; ThingsToDoNavNode ; ThingsToDoLink ; ; AUTO ; ThingsToDoBarComponent
+
+# Navigation Bar Collection Component
+INSERT_UPDATE NavigationBarCollectionComponent; $contentCV[unique = true]; uid[unique = true]; name; components(uid, $contentCV); &componentRef
+; ; NavBarComponent ; Navigation Bar Collection Component ; HomeBarComponent, OffersBarComponent, ThingsToDoBarComponent ; NavBarComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; NavigationBarSlot ; NavBarComponent
+
+##############################################
+############# HEADER LINKS ###################
+
+# CMS Paragraph Component
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; ContactInfoCMSParagraph ; Contact information ; ContactInfoCMSParagraph
+
+# CMS Language and Currency Component
+INSERT_UPDATE LanguageCurrencyComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; LangCurrencyComponent ; Language and Currency Component ; LangCurrencyComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; HeaderLinksSlot ; HelpLink, ContactInfoCMSParagraph, LangCurrencyComponent
+
+##############################################
+########### COMPONENTS #######################
+
+INSERT_UPDATE TravelJspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+; ; MyProfileComponent                                ; My Profile Component                             ; pages/account/myProfile.jsp                               ; ; MyProfileComponent
+; ; NewCustomerCheckoutLoginComponent                 ; New Customer Checkout Login Component            ; pages/checkout/checkoutNewCustomerLogin.jsp               ; ; NewCustomerCheckoutLoginComponent
+; ; AccountOrderDetailsShippingComponent              ; Account Order Details Shipping Info Component    ; pages/account/accountOrderDetailShippingInfo.jsp          ; ; AccountOrderDetailsShippingComponent
+; ; AccountOrderDetailsItemsComponent                 ; Account Order Details Items Info Component       ; pages/account/accountOrderDetailItems.jsp                 ; ; AccountOrderDetailsItemsComponent
+; ; AccountOrderApprovalDetailsComponent              ; Account OrderApproval Details Component          ; pages/account/accountOrderApprovalDetailsPage.jsp         ; ; AccountOrderApprovalDetailsComponent
+; ; AccountOrderApprovalDetailsHeadlineComponent      ; Account OrderApproval Details Headline Component ; pages/account/accountOrderApprovalDetailHeadline.jsp      ; ; AccountOrderApprovalDetailsHeadlineComponent
+; ; AccountOrderApprovalDetailsOverviewComponent      ; Account OrderApproval Details Overview Component ; pages/account/accountOrderDetailOverview.jsp              ; ; AccountOrderApprovalDetailsOverviewComponent
+; ; AccountOrderApprovalDetailsBottomActionsComponent ; Account OrderApproval Details Component          ; pages/account/accountOrderApprovalDetailBottomActions.jsp ; ; AccountOrderApprovalDetailsBottomActionsComponent
+; ; OrderApprovalDashboardComponent                   ; Order Approval Dashboard Component               ; pages/account/accountOrderApprovalDashboardPage.jsp       ; ; OrderApprovalDashboardComponent
+; ; MyConsentsComponent                               ; My Consents Component                            ; pages/account/myConsents.jsp                              ; ; MyConsentsComponent
+
+##############################################
+########### ASM Restrictions #################
+
+INSERT_UPDATE AssistedServiceSessionRestriction; $contentCV[unique = true]; uid[unique = true]; name;
+; ; AssistedServiceSessionRestriction ; ASM Session Restriction ;
+
+##############################################
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; actions(uid, $contentCV); &componentRef
+; ; NewCustomerLoginComponent               ; New Customer Login Component                ; accountNewCustomerLogin.jsp       ; ; NewCustomerLoginComponent
+; ; ReturningCustomerLoginComponent         ; Returning Customer Login Component          ; accountReturningCustomerLogin.jsp ; ; ReturningCustomerLoginComponent
+; ; UpdatePasswordComponent                 ; Update Password Component                   ; accountChangePasswordPage.jsp     ; ; UpdatePasswordComponent
+; ; UpdateProfileComponent                  ; Update Profile Component                    ; accountProfileEditPage.jsp        ; ; UpdateProfileComponent
+; ; UpdateEmailComponent                    ; Update Email Component                      ; accountProfileEmailEditPage.jsp   ; ; UpdateEmailComponent
+; ; SavedPaymentInfoComponent               ; Saved Payment Info Component                ; accountPaymentInfoPage.jsp        ; ; SavedPaymentInfoComponent
+; ; ReturningCustomerCheckoutLoginComponent ; Returning Customer Checkout Login Component ; checkouReturningCustomerLogin.jsp ; ; ReturningCustomerCheckoutLoginComponent
+; ; GuestCheckoutLoginComponent             ; Guest Checkout Login Component              ; checkoutGuestLogin.jsp            ; ; GuestCheckoutLoginComponent
+
+INSERT_UPDATE AccommodationFinderComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef;
+; ; AccommodationFinderComponent ; Accommodation Finder Component ; AccommodationFinderComponent ;
+
+# ManageMyBooking Component
+INSERT_UPDATE ManageMyBookingComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; ManageMyBookingComponent ; ManageMyBooking Component ; ManageMyBookingComponent
+
+# Site Logo Component
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; urlLink
+; ; SiteLogoComponent ; Site Logo Component ; SiteLogoComponent ; "/"
+
+# Accommodation breakdown component
+INSERT_UPDATE AccommodationBreakdownComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationBreakdownComponent ; Accommodation Breakdown Component ; AccommodationBreakdownComponent
+
+# Booking total component
+INSERT_UPDATE BookingTotalComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; BookingTotalComponent ; Booking Total Component ; BookingTotalComponent
+
+# Booking Details Component
+INSERT_UPDATE AccommodationBookingDetailsComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationBookingDetailsComponent ; Accommodation Booking Details Component ; AccommodationBookingDetailsComponent
+
+# Booking List Component
+INSERT_UPDATE AccommodationBookingListComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationBookingListComponent ; Accommodation Booking List Component ; AccommodationBookingListComponent
+
+###########################################################
+########### CONTENT SLOTS FOR PAGES #######################
+
+################
+### HOMEPAGE
+################
+
+# Components
+INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; HomeCarousel1BannerComponent ; Home Carousel 1 Banner Component ; HomeCarousel1BannerComponent
+; ; HomeCarousel2BannerComponent ; Home Carousel 2 Banner Component ; HomeCarousel2BannerComponent
+; ; HomeCarousel3BannerComponent ; Home Carousel 3 Banner Component ; HomeCarousel3BannerComponent
+
+INSERT_UPDATE ResponsiveBackgroundBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; styleAttributes; urlLink
+; ; HomePromoABannerComponent ; Promo A Banner Component ; HomePromoABannerComponent ; class="cta" ; #
+; ; HomePromoBBannerComponent ; Promo B Banner Component ; HomePromoBBannerComponent ; class="cta" ; #
+; ; HomePromoCBannerComponent ; Promo C Banner Component ; HomePromoCBannerComponent ; class="cta" ; #
+; ; HomePromoDBannerComponent ; Promo D Banner Component ; HomePromoDBannerComponent ; class="cta" ; #
+
+INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; timeout; banners(&componentRef); &componentRef
+; ; HomepageCarouselComponent ; Homepage Carousel ; 10 ; HomeCarousel1BannerComponent, HomeCarousel2BannerComponent, HomeCarousel3BannerComponent ; HomepageCarouselComponent
+
+# Content Slots for Homepage
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; AccommodationFinderSlot ; Accommodation Finder Slot      ; true ; AccommodationFinderComponent
+; ; ManageMyBookingSlot     ; Manage My Booking Slot         ; true ; ManageMyBookingComponent
+; ; HomeCarouselSlot        ; Slot for Carousel of home page ; true ; HomepageCarouselComponent
+; ; HomeSection4ASlot       ; Slot for Section 4A            ; true ; HomePromoABannerComponent,HomePromoBBannerComponent,HomePromoCBannerComponent,HomePromoDBannerComponent
+
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'homepage']; contentSlot(uid, $contentCV)[unique = true]
+; ; HomePage-Section1  ; Section1  ; ; AccommodationFinderSlot
+; ; HomePage-Section2A ; Section2A ; ; ManageMyBookingSlot
+; ; HomePage-Section3  ; Section3  ; ; HomeCarouselSlot
+; ; HomePage-Section4A ; Section4A ; ; HomeSection4ASlot
+
+
+################
+###	MY ACCOUNT
+################
+
+##### Account My Profile
+
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; MyProfileSide1BannerComponent ; My Profile Side 1 Banner Component ; MyProfileSide1BannerComponent
+; ; MyProfileSide2BannerComponent ; My Profile Side 2 Banner Component ; MyProfileSide2BannerComponent
+; ; MyProfileSide3BannerComponent ; My Profile Side 3 Banner Component ; MyProfileSide3BannerComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; MyProfileSideSlot ; My Profile Side Slot ; true ; MyProfileSide1BannerComponent, MyProfileSide2BannerComponent, MyProfileSide3BannerComponent
+
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; MyProfileTopSlot    ; My Profile Top Slot    ; true ;
+; ; MyProfileBodySlot   ; My Profile Body Slot   ; true ; MyProfileComponent
+; ; MyProfileBottomSlot ; My Profile Bottom Slot ; true ; MyBookingsLink, SavedPaymentInfoLink, MyConsentsLink, OrderApprovalDashboardLink
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'profilePage']; contentSlot(uid, $contentCV)[unique = true]
+; ; Profile-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; Profile-TopContent    ; TopContent    ; ; MyProfileTopSlot
+; ; Profile-BodyContent   ; BodyContent   ; ; MyProfileBodySlot
+; ; Profile-BottomContent ; BottomContent ; ; MyProfileBottomSlot
+
+##### My Account: My Saved Payment
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; SavedPaymentInfoTopSlot    ; Saved Payment Info Top Slot    ; true ; AccountProfileLink, MyBookingsLink
+; ; SavedPaymentInfoBodySlot   ; Saved Payment Info Body Slot   ; true ; SavedPaymentInfoComponent
+; ; SavedPaymentInfoBottomSlot ; Saved Payment Info Bottom Slot ; true ; MyConsentsLink, OrderApprovalDashboardLink
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'payment-details']; contentSlot(uid, $contentCV)[unique = true]
+; ; SavedPaymentInfo-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; SavedPaymentInfo-TopContent    ; TopContent    ; ; SavedPaymentInfoTopSlot
+; ; SavedPaymentInfo-BodyContent   ; BodyContent   ; ; SavedPaymentInfoBodySlot
+; ; SavedPaymentInfo-BottomContent ; BottomContent ; ; SavedPaymentInfoBottomSlot
+
+
+##### My Account: My Bookings Page
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; MyBookingsTopSlot    ; My Bookings Top Slot         ; true ; AccountProfileLink,
+; ; MyBookingsBodySlot   ; My Bookings Info Body Slot   ; true ; AccommodationBookingListComponent
+; ; MyBookingsBottomSlot ; My Bookings Info Bottom Slot ; true ; SavedPaymentInfoLink, MyConsentsLink, OrderApprovalDashboardLink
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'my-bookings']; contentSlot(uid, $contentCV)[unique = true]
+; ; MyBookings-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; MyBookings-TopContent    ; TopContent    ; ; MyBookingsTopSlot
+; ; MyBookings-BodyContent   ; BodyContent   ; ; MyBookingsBodySlot
+; ; MyBookings-BottomContent ; BottomContent ; ; MyBookingsBottomSlot
+
+###### Account Update Password
+# ContentSlot
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; UpdatePasswordTopSlot    ; Update Password Top Slot    ; true ;
+; ; UpdatePasswordBodySlot   ; Update Password Body Slot   ; true ; UpdatePasswordComponent
+; ; UpdatePasswordBottomSlot ; Update Password Bottom Slot ; true ; MyBookingsLink, SavedPaymentInfoLink, MyConsentsLink, OrderApprovalDashboardLink
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'updatePassword']; contentSlot(uid, $contentCV)[unique = true]
+; ; UpdatePassword-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; UpdatePassword-TopContent    ; TopContent    ; ; UpdatePasswordTopSlot
+; ; UpdatePassword-BodyContent   ; BodyContent   ; ; UpdatePasswordBodySlot
+; ; UpdatePassword-BottomContent ; BottomContent ; ; UpdatePasswordBottomSlot
+
+###### Account Update Profile
+
+# Components
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; UpdateProfileConfirmationCMSParagraph ; Update Profile Confirmation ; UpdateProfileConfirmationCMSParagraph
+
+# ContentSlot
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; UpdateProfileTopSlot     ; Update Profile Top Slot    ; true ;
+; ; UpdateProfileTopInfoSlot ; Update Profile Top Slot    ; true ; UpdateProfileConfirmationCMSParagraph
+; ; UpdateProfileBodySlot    ; Update Profile Body Slot   ; true ; UpdateProfileComponent
+; ; UpdateProfileBottomSlot  ; Update Profile Bottom Slot ; true ; MyBookingsLink, SavedPaymentInfoLink, MyConsentsLink, OrderApprovalDashboardLink
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'update-profile']; contentSlot(uid, $contentCV)[unique = true]
+; ; UpdateProfile-SideContent    ; SideContent    ; ; MyProfileSideSlot
+; ; UpdateProfile-TopContent     ; TopContent     ; ; UpdateProfileTopSlot
+; ; UpdateProfile-TopInfoContent ; TopInfoContent ; ; UpdateProfileTopInfoSlot
+; ; UpdateProfile-BodyContent    ; BodyContent    ; ; UpdateProfileBodySlot
+; ; UpdateProfile-BottomContent  ; BottomContent  ; ; UpdateProfileBottomSlot
+
+###### Account Update Email
+# ContentSlot
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; UpdateEmailTopSlot    ; Update Email Top Slot    ; true ;
+; ; UpdateEmailBodySlot   ; Update Email Body Slot   ; true ; UpdateEmailComponent
+; ; UpdateEmailBottomSlot ; Update Email Bottom Slot ; true ; MyBookingsLink, SavedPaymentInfoLink, MyConsentsLink, OrderApprovalDashboardLink
+
+# ContentSlotForPage
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'update-email']; contentSlot(uid, $contentCV)[unique = true]
+; ; UpdateEmail-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; UpdateEmail-TopContent    ; TopContent    ; ; UpdateEmailTopSlot
+; ; UpdateEmail-BodyContent   ; BodyContent   ; ; UpdateEmailBodySlot
+; ; UpdateEmail-BottomContent ; BottomContent ; ; UpdateEmailBottomSlot
+
+# Components
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccountDetails1BannerComponent ; Account Details 1 Banner Component ; AccountDetails1BannerComponent
+; ; AccountDetails2BannerComponent ; Account Details 2 Banner Component ; AccountDetails2BannerComponent
+; ; AccountDetails3BannerComponent ; Account Details 3 Banner Component ; AccountDetails3BannerComponent
+
+##### My Account: My Consents
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; MyConsentsTopSlot    ; My Consents Top Slot    ; true ; AccountProfileLink, MyBookingsLink, SavedPaymentInfoLink
+; ; MyConsentsBodySlot   ; My Consents Body Slot   ; true ; MyConsentsComponent
+; ; MyConsentsBottomSlot ; My Consents Bottom Slot ; true ; OrderApprovalDashboardLink
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'consents']; contentSlot(uid, $contentCV)[unique = true]
+; ; MyConsents-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; MyConsents-TopContent    ; TopContent    ; ; MyConsentsTopSlot
+; ; MyConsents-BodyContent   ; BodyContent   ; ; MyConsentsBodySlot
+; ; MyConsents-BottomContent ; BottomContent ; ; MyConsentsBottomSlot
+
+##### My Account: Order Approval Dashboard
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; OrderApprovalDashboardTopSlot    ; Order Approval Dashboard Top Slot    ; true ; AccountProfileLink, MyBookingsLink, SavedPaymentInfoLink, MyConsentsLink
+; ; OrderApprovalDashboardBodySlot   ; Order Approval Dashboard Body Slot   ; true ; OrderApprovalDashboardComponent
+; ; OrderApprovalDashboardBottomSlot ; Order Approval Dashboard Bottom Slot ; true ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'order-approval-dashboard']; contentSlot(uid, $contentCV)[unique = true]
+; ; OrderApprovalDashboard-SideContent   ; SideContent   ; ; MyProfileSideSlot
+; ; OrderApprovalDashboard-TopContent    ; TopContent    ; ; OrderApprovalDashboardTopSlot
+; ; OrderApprovalDashboard-BodyContent   ; BodyContent   ; ; OrderApprovalDashboardBodySlot
+; ; OrderApprovalDashboard-BottomContent ; BottomContent ; ; OrderApprovalDashboardBottomSlot
+
+#### Order Approval Details
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; OrderApprovalDetailsSlot          ; Order Approval Details Slot                ; true ; AccountOrderApprovalDetailsHeadlineComponent, AccountOrderApprovalDetailsOverviewComponent, AccountOrderApprovalDetailsComponent, AccountOrderDetailsShippingComponent, AccountOrderDetailsItemsComponent, AccountOrderApprovalDetailsBottomActionsComponent ;
+; ; OrderApprovalDetailsLeftPromoSlot ; Promo Slot for Order Approval Details page ; true ; AccountDetails1BannerComponent, AccountDetails2BannerComponent, AccountDetails3BannerComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'order-approval-details']; contentSlot(uid, $contentCV)[unique = true]
+; ; OrderApprovalDetails-RightContent ; RightContent ; ; OrderApprovalDetailsSlot
+; ; OrderApprovalDetails-LeftContent  ; LeftContent  ; ; OrderApprovalDetailsLeftPromoSlot
+
+#### CMS User Group Restrictions
+INSERT_UPDATE CMSUserGroupRestriction; $contentCV[unique = true]; uid[unique = true]; name; userGroups(uid); includeSubgroups; components(&linkRef)
+; ; MyAccountLinkApproverGroupRestriction ; My Account Link Approver Group Restriction ; b2bapprovergroup, b2badmingroup ; true ; OrderApprovalDashboardLink
+
+####################
+###	MANAGE BOOKING
+####################
+
+##### Manage Booking
+
+# Components
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; BookingDetails1BannerComponent ; Booking Details 1 Banner Component ; BookingDetails1BannerComponent
+; ; BookingDetails2BannerComponent ; Booking Details 2 Banner Component ; BookingDetails2BannerComponent
+; ; BookingDetails3BannerComponent ; Booking Details 3 Banner Component ; BookingDetails3BannerComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; BookingDetailsSlot          ; Manage Booking Slot                 ; true ; AccommodationBookingDetailsComponent
+; ; BookingDetailsLeftPromoSlot ; Promo Slot for Booking Details page ; true ; BookingDetails1BannerComponent, BookingDetails2BannerComponent, BookingDetails3BannerComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'bookingDetailsPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; BookingDetails-RightContent ; RightContent ; ; BookingDetailsSlot
+; ; BookingDetails-LeftContent  ; LeftContent  ; ; BookingDetailsLeftPromoSlot
+
+################
+###	LOGIN
+################
+
+### Customer Login
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; LeftContentSlot-login  ; Left Content Slot for Customer Login  ; true ; NewCustomerLoginComponent       ; ; ;
+; ; RightContentSlot-login ; Right Content Slot for Customer Login ; true ; ReturningCustomerLoginComponent ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'login']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; LeftContentSlot-login  ; LeftContentSlot  ; ; LeftContentSlot-login  ; ; ;
+; ; RightContentSlot-login ; RightContentSlot ; ; RightContentSlot-login ; ; ;
+
+#####################
+###	CHECKOUT LOGIN
+#####################
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef);;;
+; ; LeftContentSlot-checkout-login   ; Left Content Slot for Checkout Login   ; true ; NewCustomerCheckoutLoginComponent       ; ; ;
+; ; CenterContentSlot-checkout-login ; Center Content Slot for Checkout Login ; true ; ReturningCustomerCheckoutLoginComponent ; ; ;
+; ; RightContentSlot-checkout-login  ; Right Content Slot for Checkout Login  ; true ; GuestCheckoutLoginComponent             ; ; ;
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'checkout-login']; contentSlot(uid, $contentCV)[unique = true];;;
+; ; LeftContentSlot-checkout-login   ; LeftContentSlot   ; ; LeftContentSlot-checkout-login   ; ; ;
+; ; CenterContentSlot-checkout-login ; CenterContentSlot ; ; CenterContentSlot-checkout-login ; ; ;
+; ; RightContentSlot-checkout-login  ; RightContentSlot  ; ; RightContentSlot-checkout-login  ; ; ;
+
+
+###################
+###	PRIVACY POLICY
+###################
+
+# Components
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; PrivacyPolicyHeaderCMSParagraph  ; Privacy Policy header  ; PrivacyPolicyHeaderCMSParagraph
+; ; PrivacyPolicyContentCMSParagraph ; Privacy Policy content ; PrivacyPolicyContentCMSParagraph
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; PrivacyPolicySlot ; Content Slot for Privacy Policy ; true ; PrivacyPolicyHeaderCMSParagraph, PrivacyPolicyContentCMSParagraph
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'privacyPolicyPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; PrivacyPolicy-MiddleContentSlot ; MiddleContent ; ; PrivacyPolicySlot
+
+
+###################
+###	FAQ
+###################
+
+# Components
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; FAQMenuCMSParagraph ; FAQ Menu ; FAQMenuCMSParagraph
+; ; FAQTextCMSParagraph ; FAQ Text ; FAQTextCMSParagraph
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; FAQMenuSlot ; Content Slot for FAQ menu ; true ; FAQMenuCMSParagraph
+; ; FAQTextSlot ; Content Slot for FAQ text ; true ; FAQTextCMSParagraph
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'faqPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; FAQ-LeftContentSlot  ; LeftContent  ; ; FAQMenuSlot
+; ; FAQ-RightContentSlot ; RightContent ; ; FAQTextSlot
+
+
+#########################
+###	TERMS & CONDITIONS
+#########################
+
+# Components
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; TermsConditionsMenuCMSParagraph ; Terms Conditions Menu ; TermsConditionsMenuCMSParagraph
+; ; TermsConditionsTextCMSParagraph ; Terms Conditions Text ; TermsConditionsTextCMSParagraph
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; TermsConditionsMenuSlot ; Content Slot for Terms Conditions menu ; true ; TermsConditionsMenuCMSParagraph
+; ; TermsConditionsTextSlot ; Content Slot for Terms Conditions text ; true ; TermsConditionsTextCMSParagraph
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'termsConditionsPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; TermsConditions-LeftContentSlot  ; LeftContent  ; ; TermsConditionsMenuSlot
+; ; TermsConditions-RightContentSlot ; RightContent ; ; TermsConditionsTextSlot
+
+
+#########################
+###	CONTACT US
+#########################
+
+# Components
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; ContactUsHeaderCMSParagraph  ; Contact Us header  ; ContactUsHeaderCMSParagraph
+; ; ContactUsContentCMSParagraph ; Contact Us Content ; ContactUsContentCMSParagraph
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; ContactUsContentSlot ; Content Slot for Contact Us page ; true ; ContactUsHeaderCMSParagraph, ContactUsContentCMSParagraph
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'contactUsPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; ContactUs-LeftContentSlot ; LeftContent ; ; ContactUsContentSlot
+
+#########################
+###	HELP
+#########################
+
+INSERT_UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; HelpHeaderCMSParagraph  ; Help Header  ; HelpHeaderCMSParagraph
+; ; HelpContentCMSParagraph ; Help Content ; HelpContentCMSParagraph
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; HelpContentSlot ; Content Slot for Help page ; true ; HelpHeaderCMSParagraph, HelpContentCMSParagraph
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'helpPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; Help-MiddleContent ; MiddleContent ; ; HelpContentSlot
+
+############################
+###	ACCOMMODATION SEARCH
+############################
+
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationSearchSideBannerComponent ; Accommodation Search Side Banner Component ; AccommodationSearchSideBannerComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; AccommodationSearchSideContentSlot                ; Side Content slot on Accommodation Search page                  ; true ; AccommodationSearchSideBannerComponent
+; ; AccommodationSearchAccommodationFinderContentSlot ; Accommodation Finder Content Slot for Accommodation Search page ; true ; AccommodationFinderComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accommodationSearchPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; AccommodationSearch-SideContent ; SideContent ; ; AccommodationSearchSideContentSlot
+; ; AccommodationSearch-LeftContent ; LeftContent ; ; AccommodationSearchAccommodationFinderContentSlot
+
+############################
+###	HOTEL DETAILS
+############################
+
+# Components
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; HotelDetailsSideBannerComponent ; Hotel Details Side Banner Component ; HotelDetailsSideBannerComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; HotelDetailsSideContentSlot ; Side Content slot on Hotel Details page ; true ; HotelDetailsSideBannerComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'accommodationDetailsPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; HotelDetails-SideContent ; SideContent ; ; HotelDetailsSideContentSlot
+
+############################
+###	GUEST DETAILS
+############################
+
+# Components
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; GuestDetailsSideBannerComponent ; Guest Details Side Banner Component ; GuestDetailsSideBannerComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; GuestDetailsSideContentSlot ; Side Content slot on Guest Details page ; true ; GuestDetailsSideBannerComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'guestDetailsPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; GuestDetails-SideContent ; SideContent ; ; GuestDetailsSideContentSlot
+
+############################
+###	PAYMENT METHOD PAGE
+############################
+
+# Components
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; PaymentMethodSideBannerComponent ; Silent Order Payment Side Banner Component ; PaymentMethodSideBannerComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; PaymentMethodSideContentSlot ; Side Content slot on Silent Order Post Payment Page ; true ; PaymentMethodSideBannerComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'paymentMethodPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; PaymentMethod-SideContent ; SideContent ; ; PaymentMethodSideContentSlot
+
+############################
+###	CHECKOUT SUMMARY  PAGE
+############################
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(uid, $contentCV)
+; ; CheckoutSummaryCenterContentSlot ; Center Content slot on Checkout Summary Page ; true ; AccommodationReservationComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'multiStepCheckoutSummaryPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; CheckoutSummary-CenterContent ; CenterContent ; ; CheckoutSummaryCenterContentSlot
+
+############################
+###	BOOKING CONFIRMATION  PAGE
+############################
+
+# Components
+INSERT_UPDATE SidePromoBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; BookingConfirmationLeft1BannerComponent ; Booking Confirmation Left 1 Banner Component ; BookingConfirmationLeft1BannerComponent
+; ; BookingConfirmationLeft2BannerComponent ; Booking Confirmation Left 2 Banner Component ; BookingConfirmationLeft2BannerComponent
+; ; BookingConfirmationLeft3BannerComponent ; Booking Confirmation Left 3 Banner Component ; BookingConfirmationLeft3BannerComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; BookingConfirmationLeftContentSlot  ; Left Content slot on Booking Confirmation Page  ; true ; BookingConfirmationLeft1BannerComponent, BookingConfirmationLeft2BannerComponent, BookingConfirmationLeft3BannerComponent
+; ; BookingConfirmationRightContentSlot ; Right Content slot on Booking Confirmation Page ; true ; AccommodationBreakdownComponent, BookingTotalComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'bookingConfirmationPage']; contentSlot(uid, $contentCV)[unique = true]
+; ; BookingConfirmation-LeftContent  ; LeftContent  ; ; BookingConfirmationLeftContentSlot
+; ; BookingConfirmation-RightContent ; RightContent ; ; BookingConfirmationRightContentSlot
+
+############################
+###	ASM JSPs
+############################
+
+# CMS Assisted Service Sub-Components
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; &componentRef
+; ; ASMLoginComponent        ; Assisted Service Agent Login Component        ; /WEB-INF/views/addons/assistedservicestorefront/responsive/fragments/asmLoginComponent.jsp              ; ASMLoginComponent
+; ; ASMEmulateUserComponent  ; Assisted Service Agent Emulate User Component ; /WEB-INF/views/addons/assistedservicestorefront/responsive/fragments/asmEmulateUserComponent.jsp        ; ASMEmulateUserComponent
+; ; ASMBindComponent         ; Assisted Service Bind User/Cart Component     ; /WEB-INF/views/addons/assistedservicestorefront/responsive/fragments/asmBindComponent.jsp               ; ASMBindComponent
+; ; ASMHeaderComponent       ; Assisted Service Header Component             ; /WEB-INF/views/addons/assistedservicestorefront/responsive/fragments/asmHeaderComponent.jsp             ; ASMHeaderComponent
+; ; ASMFooterComponent       ; Assisted Service Footer Component             ; /WEB-INF/views/addons/assistedservicestorefront/responsive/fragments/asmFooterComponent.jsp             ; ASMFooterComponent
+; ; ASMCustomerListComponent ; Assisted Service Customer List Component      ; /WEB-INF/views/addons/assistedservicestorefront/responsive/fragments/asmCustomerListButtonComponent.jsp ; ASMCustomerListComponent
+
+# CMS Assisted Service Extends
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; &componentRef
+; ; AccountOrderDetailsTotalsComponent ; Account Order Details Order Totals Component ; /WEB-INF/views/addons/assistedservicestorefront/desktop/updates/accountOrderDetailOrderTotals.jsp ; AccountOrderDetailsTotalsComponent
+

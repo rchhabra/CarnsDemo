@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!-- Enums -->
+	<enum class="de.hybris.platform.commercefacades.travel.enums.BookingChannelType">
+		<value>WEB</value>
+		<value>CSA</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.TripType">
+		<value>SINGLE</value>
+		<value>RETURN</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.TransportOfferingType">
+		<value>DIRECT</value>
+		<value>INDIRECT</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.TransportOfferingOption">
+		<value>BASIC</value>
+		<value>STATUS</value>
+		<value>TERMINAL</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.TravelSectorOption">
+		<value>BASIC</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.FareSelectionDisplayOrder">
+		<value>PRICE</value>
+		<value>NUMBER_OF_STOPS</value>
+		<value>DEPARTURE_TIME</value>
+		<value>ARRIVAL_TIME</value>
+		<value>TRAVEL_TIME</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.CategoryOption">
+		<value>TRAVEL_RESTRICTION</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<value>AMEND_ANCILLARY</value>
+		<value>CANCEL_BOOKING</value>
+		<value>CHECK_IN_ALL</value>
+		<value>CHECK_IN</value>
+		<value>REMOVE_TRAVELLER</value>
+		<value>ACCEPT_BOOKING</value>
+		<value>REJECT_BOOKING</value>
+		<value>ADD_REQUEST</value>
+		<value>CANCEL_REQUEST</value>
+		<value>CANCEL_ACCOMMODATION_BOOKING</value>
+		<value>CHANGE_DATES</value>
+		<value>ADD_ROOM</value>
+		<value>PAY_NOW</value>
+		<value>CANCEL_COMPLETE_BOOKING</value>
+		<value>WRITE_REVIEW</value>
+		<value>CANCEL_TRANSPORT_BOOKING</value>
+        <value>AMEND_EXTRAS</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.TravellerStatus">
+		<value>CHECKED_IN</value>
+		<value>READY</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.AwardType">
+		<value>STAR_RATING</value>
+		<value>USER_RATING</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.SuggestionType">
+		<value>PROPERTY</value>
+		<value>LOCATION</value>
+		<value>AIRPORTGROUP</value>
+		<value>CITY</value>
+	</enum>
+
+	<enum class="de.hybris.platform.commercefacades.travel.enums.PaymentType">
+		<value>CREDIT_CARD</value>
+		<value>COST_CENTER</value>
+	</enum>
+
+	<!-- DATA objects with corresponding item types -->
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="type" type="de.hybris.platform.commerceservices.enums.CustomerType"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravellerData">
+		<property name="formId" type="String" />
+		<property name="uid" type="String" />
+		<property name="label" type="String" />
+		<property name="travellerInfo" type="de.hybris.platform.commercefacades.travel.TravellerInfoData" />
+		<property name="travellerType" type="String" />
+		<property name="booker" type="boolean" />
+		<property name="specialRequestDetail" type="de.hybris.platform.commercefacades.travel.SpecialRequestDetailData" />
+		<property name="savedTravellerUid" type="String" />
+		<property name="travellerStatusInfo" type="java.util.Map&lt;String,de.hybris.platform.commercefacades.travel.enums.TravellerStatus>" />
+		<property name="versionID" type="String" />
+		<property name="simpleUID" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.SpecialRequestDetailData">
+		<property name="specialServiceRequests" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.SpecialServiceRequestData>" />
+		<property name="remarks" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.RemarkData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.SpecialServiceRequestData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.RemarkData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravellerInfoData">
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PassengerInformationData" extends="de.hybris.platform.commercefacades.travel.TravellerInfoData">
+		<property name="savedTravellerUId" type="String" />
+		<property name="firstName" type="String" />
+		<property name="surname" type="String" />
+		<property name="dateOfBirth" type="java.util.Date" />
+		<property name="passengerType" type="de.hybris.platform.commercefacades.travel.PassengerTypeData" />
+		<property name="title" type="de.hybris.platform.commercefacades.user.data.TitleData" />
+		<property name="membershipNumber" type="String" />
+		<property name="gender" type="String" />
+		<property name="reasonForTravel" type="String" />
+		<property name="saveDetails" type="boolean" />
+		<property name="documentNumber" type="String" />
+		<property name="documentType" type="de.hybris.platform.travelservices.enums.DocumentType" />
+		<property name="APIType" type="String" />
+		<property name="countryOfIssue" type="de.hybris.platform.commercefacades.user.data.CountryData" />
+		<property name="documentExpiryDate" type="java.util.Date" />
+		<property name="nationality" type="de.hybris.platform.commercefacades.user.data.CountryData" />
+		<property name="email" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.VehicleInformationData" extends="de.hybris.platform.commercefacades.travel.TravellerInfoData">
+		<property name="registration" type="String" />
+		<property name="make" type="String" />
+		<property name="model" type="String" />
+		<property name="year" type="Integer" />
+		<property name="height" type="double" />
+		<property name="length" type="double" />
+		<property name="weight" type="double" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PassengerTypeData">
+		<property name="code" type="String" />
+		<property name="passengerType" type="String" />
+		<property name="identifier" type="String" />
+		<property name="name" type="String" />
+		<property name="minAge" type="Integer" />
+		<property name="maxAge" type="Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.CabinClassData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+		<property name="index" type="Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravelBundleTemplateData" extends="de.hybris.platform.configurablebundlefacades.data.BundleTemplateData">
+		<property name="bundleType" type="String"></property>
+		<property name="fareProducts" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.FareProductData>" />
+		<property name="fareProductBundleTemplateId" type="String"></property>
+		<property name="transportOfferings" type="java.util.List&lt;TransportOfferingData>" />
+		<property name="available" type="boolean" />
+		<property name="nonFareProducts"
+			type="java.util.Map&lt;String,java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>>" />
+		<property name="promotional" type="boolean" />
+		<property name="includedAncillaries" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.IncludedAncillaryData>" />
+		<property name="ignoreRules" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.IncludedAncillaryData">
+		<property name="criteria" type="String" />
+		<property name="products" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.DiscountData">
+		<property name="purpose" type="String" />
+		<property name="price" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PassengerInfoData">
+		<property name="passengerMap" type="java.util.Map&lt;de.hybris.platform.commercefacades.travel.PassengerTypeData,Integer>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TaxData">
+		<property name="code" type="String" />
+		<property name="price" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TerminalData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TransportFacilityData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+		<property name="location" type="de.hybris.platform.commercefacades.travel.LocationData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TransportOfferingData">
+		<property name="code" type="String" />
+		<property name="number" type="String" />
+		<property name="departureTime" type="java.util.Date" />
+		<property name="departureTimeZoneId" type="java.time.ZoneId" />
+		<property name="arrivalTime" type="java.util.Date" />
+		<property name="arrivalTimeZoneId" type="java.time.ZoneId" />
+		<property name="updatedDepartureTime" type="java.util.Date" />
+		<property name="originTerminal" type="de.hybris.platform.commercefacades.travel.TerminalData" />
+		<property name="destinationTerminal" type="de.hybris.platform.commercefacades.travel.TerminalData" />
+		<property name="sector" type="de.hybris.platform.commercefacades.travel.TravelSectorData" />
+		<property name="stopLocations" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TransportFacilityData>" />
+		<property name="travelProvider" type="de.hybris.platform.commercefacades.travel.TravelProviderData" />
+		<property name="duration" type="java.util.Map&lt;String,Integer>" />
+		<property name="durationValue" type="Long" />
+		<property name="status" type="String" />
+		<property name="type" type="String" />
+		<property name="originLocationCity" type="String" />
+		<property name="destinationLocationCity" type="String" />
+		<property name="originLocationCountry" type="String" />
+		<property name="destinationLocationCountry" type="String" />
+		<property name="transportVehicle" type="de.hybris.platform.commercefacades.travel.TransportVehicleData" />
+		<property name="active" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravelProviderData">
+		<property name="code" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravelRouteData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+		<property name="origin" type="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="destination" type="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="sectors" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TravelSectorData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravelSectorData">
+		<property name="code" type="String" />
+		<property name="origin" type="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="destination" type="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="routes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TravelRouteData>" />
+		<property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TransportOfferingData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.FareProductData" extends="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="bookingClass" type="String"></property>
+		<property name="fareBasisCode" type="String"></property>
+		<property name="selected" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.LocationData" extends="de.hybris.platform.commercefacades.product.data.CategoryData">
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TransportVehicleData">
+		<property name="vehicleInfo" type="de.hybris.platform.commercefacades.travel.TransportVehicleInfoData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TransportVehicleInfoData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ReasonForTravelData">
+		<property name="code" type="String" />
+		<property name="name" type="String" />
+	</bean>
+
+	<!-- DATA objects without corresponding item types -->
+
+	<bean class="de.hybris.platform.commercefacades.travel.FareSearchRequestData">
+		<property name="originDestinationInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.OriginDestinationInfoData>" />
+		<property name="pos" type="POSData" />
+		<property name="searchProcessingInfo" type="SearchProcessingInfoData" />
+		<property name="transportOfferingInfo" type="TransportOfferingInfoData" />
+		<property name="tripType" type="de.hybris.platform.commercefacades.travel.enums.TripType" />
+		<property name="travelPreferences" type="TravelPreferencesData" />
+		<property name="passengerTypes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+		<property name="travellerInfoSummary" type="TravellerInfoSummaryData" />
+		<property name="salesApplication" type="de.hybris.platform.commerceservices.enums.SalesApplication" />
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.travel.CheckedBaggageInfoDetailData">
+		<property name="weight" type="java.lang.Double" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.BaggageInfoData">
+		<property name="traveller" type="de.hybris.platform.commercefacades.travel.TravellerData"></property>
+		<property name="checkedBaggageInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.CheckedBaggageInfoDetailData>"></property>
+		<property name="checkedBaggageWeightTotal" type="java.lang.Double"></property>
+		<property name="handBaggageWeightTotal" type="java.lang.Double"></property>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.BookingInfoData">
+		<property name="bookingReference" type="java.lang.String" />
+		<property name="originDestinationRefNumberList" type="java.util.List&lt;Integer>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravellerTransportOfferingInfoData">
+		<property name="seatBoardingInfo" type="de.hybris.platform.commercefacades.travel.seatmap.data.SelectedSeatData" />
+		<property name="bookingInfo" type="de.hybris.platform.commercefacades.travel.BookingInfoData" />
+		<property name="specialServiceRequests" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.SpecialServiceRequestData>" />
+		<property name="transportOffering" type="de.hybris.platform.commercefacades.travel.TransportOfferingData" />
+		<property name="traveller" type="de.hybris.platform.commercefacades.travel.TravellerData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.CheckInRequestData">
+		<property name="baggageInfo" type="de.hybris.platform.commercefacades.travel.BaggageInfoData" />
+		<property name="messageFunction" type="java.lang.String" />
+		<property name="travellerTransportOfferingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TravellerTransportOfferingInfoData>" />
+		<!-- TODO: create our own extension of CCPaymentInfoData -->
+		<property name="paymentInfo" type="de.hybris.platform.commercefacades.order.data.CCPaymentInfoData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.CheckInResponseData">
+		<property name="bookingReference" type="String" />
+		<property name="errors" type="java.util.Map&lt;String,java.util.List&lt;java.lang.String>>" />
+		<property name="warnings" type="java.util.List&lt;java.lang.String>" />
+	</bean>
+
+
+	<bean class="de.hybris.platform.commercefacades.travel.OriginDestinationInfoData">
+		<property name="referenceNumber" type="int" />
+		<property name="departureLocation" type="String" />
+		<property name="arrivalLocation" type="String" />
+		<property name="departureTime" type="java.util.Date" />
+		<property name="arrivalTime" type="java.util.Date" />
+		<property name="departureLocationType" type="de.hybris.platform.travelservices.enums.LocationType"/>
+		<property name="arrivalLocationType" type="de.hybris.platform.travelservices.enums.LocationType"/>
+		<property name="itinerary" type="de.hybris.platform.commercefacades.travel.ItineraryData"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.travel.DealOriginDestinationInfoData" extends="de.hybris.platform.commercefacades.travel.OriginDestinationInfoData" >
+		<property name="cabinClass" type="String" />
+		<property name="packageId" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.POSData">
+		<property name="source" type="SourceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.SourceData">
+		<property name="bookingChannel" type="BookingChannelData" />
+		<property name="isoCurrencyCode" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.BookingChannelData">
+		<property name="type" type="de.hybris.platform.commercefacades.travel.enums.BookingChannelType" />
+		<property name="name" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.SearchProcessingInfoData">
+		<!-- ENUM: to be defined -->
+		<property name="displayOrder" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TransportOfferingInfoData">
+		<property name="travelProvider" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravelPreferencesData">
+		<property name="cabinPreference" type="String" />
+		<property name="fareRestrictionPreferences" type="String" />
+		<property name="transportOfferingPreferences" type="TransportOfferingPreferencesData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TransportOfferingPreferencesData">
+		<property name="transportOfferingType" type="de.hybris.platform.commercefacades.travel.enums.TransportOfferingType" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravellerInfoSummaryData">
+		<property name="travellerDetails" type="TravellerDetailsData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravellerDetailsData">
+		<property name="traveller" type="TravellerData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.DiscountPricingData">
+		<property name="price" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="purpose" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.FareDetailsData">
+		<property name="fareProduct" type="de.hybris.platform.commercefacades.travel.FareProductData" />
+		<property name="fareBasisCode" type="String" />
+		<property name="tripType" type="de.hybris.platform.commercefacades.travel.enums.TripType" />
+		<property name="discount" type="de.hybris.platform.commercefacades.travel.DiscountPricingData" />
+		<property name="passengerTypes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.FareInfoData">
+		<property name="fareDetails" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.FareDetailsData>" />
+		<property name="origin" type="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="destination" type="de.hybris.platform.commercefacades.travel.TransportFacilityData" />
+		<property name="ruleInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.RuleInfoData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.FareSelectionData">
+		<property name="pricedItineraries" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PricedItineraryData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.FeeData">
+		<property name="name" type="String" />
+		<property name="price" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ItineraryData">
+		<property name="tripType" type="de.hybris.platform.commercefacades.travel.enums.TripType" />
+		<property name="route" type="de.hybris.platform.commercefacades.travel.TravelRouteData" />
+		<property name="duration" type="java.util.Map&lt;String,Integer>" />
+		<property name="travellers" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TravellerData>" />
+		<property name="originDestinationOptions" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.OriginDestinationOptionData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ItineraryPricingInfoData">
+		<property name="totalFare" type="de.hybris.platform.commercefacades.travel.TotalFareData" />
+		<property name="bundleTemplates" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TravelBundleTemplateData>" />
+		<property name="ptcFareBreakdownDatas" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PTCFareBreakdownData>" />
+		<property name="available" type="boolean" />
+		<property name="bundleType" type="String" />
+		<property name="bundleTypeName" type="String" />
+		<property name="travellerBreakdowns" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.TravellerBreakdownData>" />
+		<property name="promotional" type="boolean" />
+		<property name="selected" type="boolean" />
+		<property name="itineraryIdentifier" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TotalFareData">
+		<property name="basePrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="taxPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="discountPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="extrasPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalBaseExtrasPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalFees" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="taxes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TaxData>" />
+		<property name="fees" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.FeeData>" />
+		<property name="discounts" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.DiscountData>" />
+		<property name="wasRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="priceDifference" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.OriginDestinationOptionData">
+		<property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TransportOfferingData>" />
+		<property name="travelRouteCode" type="String" />
+		<property name="originDestinationRefNumber" type="int" />
+		<property name="active" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PassengerFareData">
+		<property name="baseFare" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalFare" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="taxes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TaxData>" />
+		<property name="fees" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.FeeData>" />
+		<property name="discounts" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.DiscountData>" />
+		<property name="perPax" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="wasRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData">
+		<property name="passengerType" type="de.hybris.platform.commercefacades.travel.PassengerTypeData" />
+		<property name="quantity" type="int" />
+		<property name="age" type="int" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PricedItineraryData">
+		<property name="available" type="boolean" />
+		<property name="itinerary" type="de.hybris.platform.commercefacades.travel.ItineraryData" />
+		<property name="itineraryPricingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ItineraryPricingInfoData>" />
+		<property name="originDestinationRefNumber" type="int" />
+		<property name="id" type="int" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.PTCFareBreakdownData">
+		<property name="fareBasisCodes" type="java.util.List&lt;String>" />
+		<property name="passengerTypeQuantity" type="de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData" />
+		<property name="fareInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.FareInfoData>" />
+		<property name="passengerFare" type="de.hybris.platform.commercefacades.travel.PassengerFareData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.RuleInfoData">
+		<property name="type" type="String" />
+		<property name="description" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ScheduledRouteData">
+		<property name="referenceNumber" type="int" />
+		<property name="route" type="de.hybris.platform.commercefacades.travel.TravelRouteData" />
+		<property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TransportOfferingData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.search.data.SearchData">
+		<property name="searchType" type="String" />
+		<property name="filterTerms" type="java.util.Map&lt;String,String>" />
+		<property name="freeTextSearch" type="String" />
+		<property name="sort" type="String" />
+		<property name="query" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData">
+		<property name="offerStage" type="String" />
+		<property name="itineraries" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ItineraryData>" />
+		<property name="selectedOffers" type="de.hybris.platform.commercefacades.travel.ancillary.data.SelectedOffersData" />
+		<property name="seatMapRequest" type="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapRequestData" />
+		<property name="selectedPricedItineraries" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PricedItineraryData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.OfferResponseData">
+		<property name="seatMap" type="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapResponseData" />
+		<property name="offerGroups" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OfferGroupData>" />
+		<property name="itineraries" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ItineraryData>" />
+		<property name="upgradeOptionDatas" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.UpgradeOptionData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.SelectedOffersData">
+		<property name="offerGroups" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OfferGroupData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.OfferGroupData" extends="de.hybris.platform.commercefacades.product.data.CategoryData">
+		<property name="originDestinationOfferInfos"
+			type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OriginDestinationOfferInfoData>" />
+		<property name="travelRestriction" type="de.hybris.platform.commercefacades.travel.ancillary.data.TravelRestrictionData" />
+		<property name="offerPricingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OfferPricingInfoData>" />
+		<property name="ignoreRules" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.TravelRestrictionData">
+		<property name="effectiveDate" type="java.util.Date" />
+		<property name="expireDate" type="java.util.Date" />
+		<property name="travellerMaxOfferQty" type="java.lang.Integer" />
+		<property name="travellerMinOfferQty" type="java.lang.Integer" />
+		<property name="tripMaxOfferQty" type="java.lang.Integer" />
+		<property name="tripMinOfferQty" type="java.lang.Integer" />
+		<property name="addToCartCriteria" type="String" />
+		<property name="passengerTypes" type="java.util.List&lt;String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.UpgradeOptionData">
+		<property name="originDestinationReferenceNumber" type="java.lang.Integer" />
+		<property name="itineraryPricingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ItineraryPricingInfoData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.OfferPricingInfoData">
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="travellerBreakdowns" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.TravellerBreakdownData>" />
+		<property name="travelRestriction" type="de.hybris.platform.commercefacades.travel.ancillary.data.TravelRestrictionData" />
+		<property name="bundleIndicator" type="Integer" />
+		<property name="bookingBreakdown" type="de.hybris.platform.commercefacades.travel.ancillary.data.BookingBreakdownData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.TravellerBreakdownData">
+		<property name="traveller" type="de.hybris.platform.commercefacades.travel.TravellerData" />
+		<property name="fareBasisCodes" type="java.util.List&lt;String>" />
+		<property name="passengerFare" type="de.hybris.platform.commercefacades.travel.PassengerFareData" />
+		<property name="quantity" type="Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.BookingBreakdownData">
+		<property name="passengerFare" type="de.hybris.platform.commercefacades.travel.PassengerFareData" />
+		<property name="quantity" type="Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.reservation.data.ReservationData">
+		<property name="reservationItems" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.reservation.data.ReservationItemData>" />
+		<property name="totalFare" type="de.hybris.platform.commercefacades.travel.TotalFareData" />
+		<property name="code" type="String" />
+		<property name="bookingStatusCode" type="String" />
+		<property name="bookingStatusName" type="String" />
+		<property name="totalToPay" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="offerPricingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OfferPricingInfoData>" />
+		<property name="offerBreakdowns" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.reservation.data.OfferBreakdownData>" />
+		<property name="paymentType" type="de.hybris.platform.commercefacades.travel.enums.PaymentType" />
+		<property name="paymentTransaction" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.order.PaymentTransactionData>" />
+		<property name="salesApplication" type="String" />
+		<property name="additionalSecurity" type="java.lang.Boolean" />
+		<property name="filteredTravellers" type="java.lang.Boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.reservation.data.ReservationItemData">
+		<property name="reservationItinerary" type="de.hybris.platform.commercefacades.travel.ItineraryData" />
+		<property name="originDestinationRefNumber" type="int" />
+		<property name="reservationPricingInfo" type="de.hybris.platform.commercefacades.travel.reservation.data.ReservationPricingInfoData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.reservation.data.ReservationPricingInfoData">
+		<property name="itineraryPricingInfo" type="de.hybris.platform.commercefacades.travel.ItineraryPricingInfoData" />
+		<property name="totalFare" type="de.hybris.platform.commercefacades.travel.TotalFareData" />
+		<property name="originDestinationOfferInfos"
+			type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OriginDestinationOfferInfoData>" />
+		<property name="offerBreakdowns" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.reservation.data.OfferBreakdownData>" />
+		<property name="selectedSeats" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SelectedSeatData>" />
+		<property name="segmentInfoDatas" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SegmentInfoData>"></property>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapResponseData">
+		<property name="seatMap" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapData>" />
+        <property name="segmentInfoDatas" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SegmentInfoData>"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapData">
+		<property name="accommodationMapCode" type="String" />
+		<property name="bookingReferenceId" type="String" />
+		<property name="fareBasisCode" type="String" />
+		<property name="transportOffering" type="de.hybris.platform.commercefacades.travel.TransportOfferingData" />
+		<property name="seatMapDetail" type="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapDetailData" />
+		<property name="selectedSeats" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SelectedSeatData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapDetailData">
+		<property name="cabin" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.CabinData>" />
+		<property name="decks" type="java.util.List&lt;de.hybris.platform.travelservices.enums.DeckType>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.CabinData">
+		<property name="startingRow" type="Integer" deprecated="Deprecated since version 4.0. This property will be removed in future release."/>
+		<property name="endingRow" type="Integer" deprecated="Deprecated since version 4.0. This property will be removed in future release."/>
+		<property name="upperDeckIndicator" type="Boolean" />
+		<property name="columnHeaders" type="java.util.List&lt;String>" deprecated="Deprecated since version 4.0. This property will be removed in future release."/>
+		<property name="cabinClass" type="de.hybris.platform.commercefacades.travel.CabinClassData" />
+		<property name="seatAvailability" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SeatAvailabilityData>" />
+		<property name="rowInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.RowInfoData>" />
+		<property name="priceData" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+        <property name="cabinName" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatAvailabilityData">
+		<property name="seatNumber" type="String" />
+		<property name="availabilityIndicator" type="String" />
+		<property name="transportOfferingCode" type="String" />
+		<property name="traveller" type="de.hybris.platform.commercefacades.travel.TravellerData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.RowInfoData">
+		<property name="rowNum" type="Integer" deprecated="Deprecated since version 4.0. This property will be removed in future release."/>
+		<property name="seatInfo" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SeatInfoData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatInfoData">
+		<property name="columnSpan" type="Integer" deprecated="Deprecated since version 4.0. This property will be removed in future release."/>
+		<property name="columnNumber" type="Integer" deprecated="Deprecated since version 4.0. This property will be removed in future release."/>
+		<property name="seatNumber" type="String" />
+		<property name="seatFeature" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SeatFeatureData>" />
+		<property name="totalFare" type="de.hybris.platform.commercefacades.travel.TotalFareData" />
+		<property name="seatUid" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatFeatureData">
+		<property name="seatFeatureType" type="String" />
+		<property name="seatFeatureDescription" type="String" />
+		<property name="seatFeaturePosition" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SelectedSeatData">
+		<property name="transportOffering" type="de.hybris.platform.commercefacades.travel.TransportOfferingData" />
+		<property name="seatNumber" type="String" />
+		<property name="traveller" type="de.hybris.platform.commercefacades.travel.TravellerData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SegmentInfoData">
+		<property name="transportOfferingCode" type="String" />
+		<property name="fareBasisCode" type="String" />
+        <property name="cabinClass" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.seatmap.data.SeatMapRequestData">
+		<property name="selectedSeats" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SelectedSeatData>" />
+		<property name="segmentInfoDatas" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.seatmap.data.SegmentInfoData>"></property>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.reservation.data.OfferBreakdownData">
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="quantity" type="Integer" />
+		<property name="totalFare" type="de.hybris.platform.commercefacades.travel.TotalFareData" />
+		<property name="included" type="Boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.data.OriginDestinationOfferInfoData">
+		<property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TransportOfferingData>" />
+		<property name="offerPricingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ancillary.data.OfferPricingInfoData>" />
+		<property name="originDestinationRefNumber" type="int" />
+		<property name="travelRouteCode" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.ancillary.accommodation.data.ConfiguredAccommodationData">
+		<property name="bookable" type="Boolean" />
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.AddBundleToCartRequestData">
+		<property name="addBundleToCartData" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.AddBundleToCartData>" />
+		<property name="passengerTypes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.AddBundleToCartData">
+		<property name="productCode" type="String" />
+		<property name="bundleTemplateId" type="String" />
+		<property name="transportOfferings" type="java.util.List&lt;String>" />
+		<property name="travelRouteCode" type="String" />
+		<property name="originDestinationRefNumber" type="Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.TravellerPreferenceData">
+		<property name="type" type="String" />
+		<property name="value" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="productType" type="String" />
+        <property name="ignoreRules" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.storelocator.data.TimeZoneResponseData">
+		<property name="dstOffset" type="java.lang.Double" />
+		<property name="rawOffset" type="java.lang.Double" />
+		<property name="timeZoneId" type="String" />
+		<property name="timeZoneName" type="String" />
+		<property name="status" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.BookingActionData">
+		<property name="actionType" type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption" />
+		<property name="actionUrl" type="String" />
+		<property name="alternativeMessages" type="java.util.List&lt;String>" />
+		<property name="traveller" type="de.hybris.platform.commercefacades.travel.TravellerData" />
+		<property name="originDestinationRefNumber" type="int" />
+		<property name="enabled" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.AccommodationBookingActionData">
+		<property name="actionType" type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption" />
+		<property name="actionUrl" type="java.lang.String" />
+		<property name="alternativeMessages" type="java.util.List&lt;java.lang.String>" />
+		<property name="enabled" type="boolean" />
+		<property name="roomStayRefNumber" type="java.lang.Integer" />
+		<property name="requestCode" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.BookingActionRequestData">
+		<property name="bookingReference" type="String" />
+		<property name="userId" type="String" />
+		<property name="requestActions" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.enums.ActionTypeOption>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.BookingActionResponseData">
+		<property name="bookingReference" type="String" />
+		<property name="userId" type="String" />
+		<property name="bookingActions" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.BookingActionData>" />
+		<property name="accommodationBookingActions" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.AccommodationBookingActionData>" />
+		<property name="globalBookingActions" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.BookingActionData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.AddToCartResponseData">
+		<property name="valid" type="boolean" />
+		<property name="errors" type="java.util.List&lt;java.lang.String>" />
+		<property name="minOriginDestinationRefNumber" type="Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.SelectPaymentOptionResponseData">
+		<property name="valid" type="boolean" />
+		<property name="errors" type="java.util.List&lt;java.lang.String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="originalOrderCode" type="String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.search.data.SavedSearchData">
+		<property name="tripType" type="java.lang.String" />
+		<property name="arrivalLocation" type="java.lang.String" />
+		<property name="arrivalLocationName" type="java.lang.String" />
+		<property name="departureLocation" type="java.lang.String" />
+		<property name="departureLocationName" type="java.lang.String" />
+		<property name="arrivalLocationSuggestionType" type="java.lang.String" />
+		<property name="departureLocationSuggestionType" type="java.lang.String" />
+		<property name="returnDateTime" type="java.lang.String" />
+		<property name="departingDateTime" type="java.lang.String" />
+		<property name="cabinClass" type="java.lang.String" />
+		<property name="passengerTypeQuantities" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+		<property name="pK" type="java.lang.String" />
+	</bean>
+
+	<!-- accommodation specific beans -->
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationSearchRequestData">
+		<property name="criterion" type="de.hybris.platform.commercefacades.accommodation.search.CriterionData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationSearchResponseData">
+		<property name="criterion" type="de.hybris.platform.commercefacades.accommodation.search.CriterionData" />
+		<property name="properties" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.PropertyData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.CriterionData">
+		<property name="address" type="de.hybris.platform.commercefacades.accommodation.user.data.SearchAddressData" />
+		<property name="awards" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.AwardData>" />
+		<property name="amenities" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.property.FacilityData>" />
+		<property name="mapArea" type="de.hybris.platform.commercefacades.accommodation.search.MapAreaData" />
+		<property name="mealPlan" type="java.lang.String" />
+		<property name="position" type="de.hybris.platform.commercefacades.accommodation.search.PositionData" />
+		<property name="radius" type="de.hybris.platform.commercefacades.accommodation.search.RadiusData" />
+		<property name="stayDateRange" type="de.hybris.platform.commercefacades.accommodation.search.StayDateRangeData" />
+		<property name="roomStayCandidates" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.search.RoomStayCandidateData>" />
+		<property name="accommodationReference" type="de.hybris.platform.commercefacades.accommodation.PropertyData" />
+		<property name="propertyFilterText" type="java.lang.String" />
+		<property name="suggestionType" type="java.lang.String" />
+		<property name="sort" type="java.lang.String" />
+		<property name="query" type="java.lang.String" />
+		<property name="facets"
+			type="java.util.List&lt;de.hybris.platform.commerceservices.search.facetdata.FacetData&lt;de.hybris.platform.commercefacades.search.data.SearchStateData>>" />
+		<property name="filteredFacets"
+			type="java.util.List&lt;de.hybris.platform.travelservices.search.facetdata.FilteredFacetSearchPageData&lt;de.hybris.platform.commercefacades.search.data.SearchStateData>>" />
+		<property name="sorts" type="java.util.List&lt;de.hybris.platform.commerceservices.search.pagedata.SortData>" />
+		<property name="bundleTemplateId" type="java.lang.String" />
+		<property name="currencyIso" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.property.FacilityData">
+		<property name="facilityType" type="java.lang.String" />
+		<property name="qualityLevel" type="java.lang.String" />
+		<property name="quantity" type="Integer" />
+		<property name="description" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.MapAreaData">
+		<property name="eastLongitude" type="java.lang.Double" />
+		<property name="northLongitude" type="java.lang.Double" />
+		<property name="southLatitude" type="java.lang.Double" />
+		<property name="westLatitude" type="java.lang.Double" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.PositionData">
+		<property name="longitude" type="java.lang.Double" />
+		<property name="latitude" type="java.lang.Double" />
+		<property name="altitude" type="java.lang.Double" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.RadiusData">
+		<property name="value" type="java.lang.Double" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.StayDateRangeData">
+		<property name="startTime" type="java.util.Date" />
+		<property name="endTime" type="java.util.Date" />
+		<property name="lengthOfStay" type="java.lang.Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.RoomStayCandidateData">
+		<property name="passengerTypeQuantityList" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+		<property name="services" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.ServiceData>" />
+		<property name="roomStayCandidateRefNumber" type="java.lang.Integer" />
+		<property name="accommodationCode" type="java.lang.String" />
+		<property name="ratePlanCode" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.AccommodationInfoData">
+		<property name="accommodationName" type="java.lang.String" />
+		<property name="cardinality" type="java.lang.Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.search.RateRangeData">
+		<property name="actualRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="wasRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalDiscount" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="currencyCode" type="java.lang.String" />
+		<property name="accommodationInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.search.AccommodationInfoData>" />
+		<property name="dayRates" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.DayRateData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.DayRateData">
+		<property name="dateOfStay" type="java.util.Date" />
+		<property name="dailyActualRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="dailyWasRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="dailyDiscount" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AwardData">
+		<property name="type" type="de.hybris.platform.commercefacades.travel.enums.AwardType" />
+		<property name="rating" type="java.lang.Double" />
+		<property name="additionalInfo" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.PropertyData">
+		<property name="address" type="de.hybris.platform.commercefacades.user.data.AddressData" />
+		<property name="amenities" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.property.FacilityData>" />
+		<property name="awards" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.AwardData>" />
+		<property name="relativePosition" type="de.hybris.platform.commercefacades.accommodation.search.PositionData" />
+		<property name="position" type="de.hybris.platform.commercefacades.accommodation.search.PositionData" />
+		<property name="rateRange" type="de.hybris.platform.commercefacades.accommodation.search.RateRangeData" />
+		<property name="availabilityStatus" type="java.lang.String" />
+		<property name="brandCode" type="java.lang.String" />
+		<property name="chainCode" type="java.lang.String" />
+		<property name="chainName" type="java.lang.String" />
+		<property name="accommodationOfferingCode" type="java.lang.String" />
+		<property name="accommodationOfferingName" type="java.lang.String" />
+		<property name="location" type="de.hybris.platform.commercefacades.travel.LocationData" />
+		<property name="images" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ImageData>" />
+		<property name="promoted" type="java.lang.Boolean" />
+		<property name="description" type="java.lang.String" />
+		<property name="propertyInformation" type="java.lang.String" />
+		<property name="ratePlanConfigs" type="java.util.List&lt;java.lang.String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationOfferingDayRateData">
+		<property name="accommodationOfferingCode" type="java.lang.String" />
+		<property name="accommodationOfferingName" type="java.lang.String" />
+		<property name="accommodationInfos" type="java.util.List&lt;java.lang.String>" />
+		<property name="dateOfStay" type="java.util.Date" />
+		<property name="adultsCount" type="Integer" />
+		<property name="childrenCountMin" type="Integer" />
+		<property name="childrenCountMax" type="Integer" />
+		<property name="latitude" type="java.lang.Double" />
+		<property name="longitude" type="java.lang.Double" />
+		<property name="priceRange" type="de.hybris.platform.acceleratorfacades.order.data.PriceRangeData" />
+		<property name="starRating" type="java.lang.Integer" />
+		<property name="averageUserRating" type="java.lang.Double" />
+		<property name="numberOfReviews" type="Integer" />
+		<property name="addressData" type="de.hybris.platform.commercefacades.user.data.AddressData" />
+		<property name="mainImageMediaUrl" type="String" />
+		<property name="price" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalTaxes" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="promotionalDiscount" type="de.hybris.platform.commercefacades.travel.DiscountData" />
+		<property name="chainCode" type="java.lang.String" />
+		<property name="chainName" type="java.lang.String" />
+		<property name="roomStayCandidateRefNumber" type="java.lang.Integer" />
+		<property name="locationNames" type="java.util.List&lt;java.lang.String>" />
+		<property name="locationCodes" type="String" />
+		<property name="boosted" type="java.lang.Boolean" />
+		<property name="ratePlanConfigs" type="java.util.List&lt;java.lang.String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.user.data.SearchAddressData" extends="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="formattedIndicator" type="boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ReviewData">
+		<property name="numOfDays" type="Long" />
+		<property name="roomStayRefNumber" type="java.lang.Integer" />
+		<property name="bookingReference" type="java.lang.String" />
+		<property name="accommodationOfferingCode" type="java.lang.String" />
+		<property name="productCode" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.GlobalSuggestionData">
+		<property name="name" type="java.lang.String" />
+		<property name="code" type="java.lang.String" />
+		<property name="suggestionType" type="de.hybris.platform.commercefacades.travel.enums.SuggestionType" />
+		<property name="locationType" type="java.lang.String" />
+		<property name="latitude" type="java.lang.Double" />
+		<property name="longitude" type="java.lang.Double" />
+		<property name="radius" type="java.lang.Double" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AutocompletePredictionData">
+		<property name="description" type="java.lang.String" />
+		<property name="placeId" type="java.lang.String" />
+		<property name="types" type="java.util.List&lt;java.lang.String>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AutocompletionResponseData">
+		<property name="predictions" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.AutocompletePredictionData>" />
+		<property name="status" type="java.lang.String" />
+		<property name="message" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.PlaceDetailsResponseData">
+		<property name="formattedAddress" type="java.lang.String" />
+		<property name="types" type="java.util.List&lt;java.lang.String>" />
+		<property name="latitude" type="java.lang.String" />
+		<property name="longitude" type="java.lang.String" />
+		<property name="status" type="java.lang.String" />
+		<property name="name" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationAvailabilityRequestData">
+		<property name="criterion" type="de.hybris.platform.commercefacades.accommodation.search.CriterionData" />
+		<property name="reservedRoomStays" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.ReservedRoomStayData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.GuestOccupancyData">
+		<property name="code" type="java.lang.String" />
+		<property name="passengerType" type="de.hybris.platform.commercefacades.travel.PassengerTypeData" />
+		<property name="quantityMax" type="java.lang.Integer" />
+		<property name="quantityMin" type="java.lang.Integer" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationFacilityData">
+		<property name="code" type="java.lang.String" />
+		<property name="shortDescription" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RateData">
+		<property name="actualRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="wasRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalDiscount" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="basePrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="taxes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.TaxData>" />
+		<property name="totalTax" type="de.hybris.platform.commercefacades.travel.TaxData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RoomRateData" extends="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="rate" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+		<property name="rateType" type="java.lang.String" />
+		<property name="stayDateRange" type="de.hybris.platform.commercefacades.accommodation.search.StayDateRangeData" />
+		<property name="additionalItems" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AbstractFinancialInfoData">
+		<property name="code" type="java.lang.String" />
+		<property name="percentageAmount" type="java.lang.Double" />
+		<property name="fixedAmount" type="java.lang.Double" />
+		<property name="absoluteDeadline" type="java.util.Date" />
+		<property name="relativeDeadline" type="java.lang.Long" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.GuaranteeData" extends="de.hybris.platform.commercefacades.accommodation.AbstractFinancialInfoData">
+		<property name="shortDescription" type="java.lang.String" />
+		<property name="longDescription" type="java.lang.String" />
+		<property name="type" type="de.hybris.platform.travelservices.enums.GuaranteeType" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.CancelPenaltyData" extends="de.hybris.platform.commercefacades.accommodation.AbstractFinancialInfoData">
+		<property name="formattedDescription" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RatePlanData" extends="de.hybris.platform.commercefacades.product.data.CategoryData">
+		<property name="formattedDescription" type="java.lang.Integer" />
+		<property name="availableQuantity" type="java.lang.Integer" />
+		<property name="minLengthOfStay" type="java.lang.Integer" />
+		<property name="maxLengthOfStay" type="java.lang.Integer" />
+		<property name="roomRates" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.RoomRateData>" />
+		<property name="occupancies" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.GuestOccupancyData>" />
+		<property name="guarantees" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.GuaranteeData>" />
+		<property name="cancelPenalties" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.CancelPenaltyData>" />
+		<property name="actualRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="wasRate" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="totalDiscount" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="priceDifference" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="ratePlanInclusions" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.RatePlanInclusionData>" />
+		<property name="mealTypes" type="java.util.List&lt;java.lang.String>" />
+		<property name="selected" type="java.lang.Boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RoomTypeData" extends="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="sizeMeasurement" type="java.lang.String" />
+		<property name="bedType" type="java.lang.String" />
+		<property name="roomLocation" type="java.lang.String" />
+		<property name="roomView" type="java.lang.String" />
+		<property name="occupancies" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.GuestOccupancyData>" />
+		<property name="facilities" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.AccommodationFacilityData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RoomStayData">
+		<property name="roomStayRefNumber" type="java.lang.Integer" />
+		<property name="fromPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="roomTypes" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.RoomTypeData>" />
+		<property name="ratePlans" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.RatePlanData>" />
+		<property name="checkInDate" type="java.util.Date" />
+		<property name="checkOutDate" type="java.util.Date" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationAvailabilityResponseData">
+		<property name="accommodationReference" type="de.hybris.platform.commercefacades.accommodation.PropertyData" />
+		<property name="roomStays" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.RoomStayData>" />
+		<property name="lengthOfStay" type="java.lang.Integer" />
+		<property name="reservedRoomStays" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.ReservedRoomStayData>" />
+		<property name="configRoomsUnavailable" type="java.lang.Boolean" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationReservationData">
+		<property name="code" type="java.lang.String" />
+		<property name="currencyIso" type="java.lang.String" />
+		<property name="bookingStatusCode" type="String" />
+		<property name="bookingStatusName" type="String" />
+		<property name="accommodationReference" type="de.hybris.platform.commercefacades.accommodation.PropertyData" />
+		<property name="roomStays" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.ReservedRoomStayData>" />
+		<property name="totalRate" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+		<property name="totalToPay" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="paymentType" type="de.hybris.platform.commercefacades.travel.enums.PaymentType" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.GlobalTravelReservationData">
+		<property name="accommodationReservationData" type="de.hybris.platform.commercefacades.accommodation.AccommodationReservationData" />
+		<property name="reservationData" type="de.hybris.platform.commercefacades.travel.reservation.data.ReservationData" />
+		<property name="bookingStatusCode" type="String" />
+		<property name="bookingStatusName" type="String" />
+		<property name="code" type="java.lang.String" />
+		<property name="customerData" type="de.hybris.platform.commercefacades.user.data.CustomerData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.ReservedRoomStayData" extends="de.hybris.platform.commercefacades.accommodation.RoomStayData">
+		<property name="reservedGuests" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.GuestData>" />
+		<property name="services" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.ServiceData>" />
+		<property name="guestCounts" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+		<property name="totalRate" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+		<property name="baseRate" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+		<property name="specialRequestDetail" type="de.hybris.platform.commercefacades.travel.SpecialRequestDetailData" />
+		<property name="roomPreferences" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.RoomPreferenceData>" />
+		<property name="groupIndex" type="java.lang.Integer" />
+        <property name="arrivalTime" type="java.lang.String" />
+        <property name="nonModifiable" type="java.lang.Boolean"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.GuestData">
+		<property name="primaryIndicator" type="java.lang.Boolean" />
+		<property name="profile" type="de.hybris.platform.commercefacades.accommodation.ProfileData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.ProfileData">
+		<property name="firstName" type="java.lang.String" />
+		<property name="lastName" type="java.lang.String" />
+		<property name="contactNumber" type="java.lang.String" />
+		<property name="email" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.ServiceData">
+		<property name="code" type="java.lang.String" />
+		<property name="ratePlanCode" type="java.lang.String" />
+		<property name="quantity" type="java.lang.Integer" />
+		<property name="inclusive" type="java.lang.Boolean" />
+		<property name="price" type="de.hybris.platform.commercefacades.accommodation.ServiceRateData" />
+		<property name="serviceDetails" type="de.hybris.platform.commercefacades.accommodation.ServiceDetailData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.ServiceRateData">
+		<property name="rate" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+		<property name="timeSpan" type="de.hybris.platform.commercefacades.accommodation.TimeSpanData" />
+		<property name="basePrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="total" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.ServiceDetailData">
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="guestCounts" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+		<property name="restriction" type="de.hybris.platform.commercefacades.accommodation.AccommodationRestrictionData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.TimeSpanData">
+		<property name="startDate" type="java.util.Date" />
+		<property name="endDate" type="java.util.Date" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AvailableServiceData">
+		<property name="services" type="java.util.List&lt;de.hybris.platform.commercefacades.accommodation.ServiceData>" />
+		<property name="roomStayRefNumber" type="int" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.AccommodationRestrictionData">
+		<property name="minQuantity" type="int" />
+		<property name="maxQuantity" type="int" />
+		<property name="addToCartCriteria" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RoomRateCartData">
+		<property name="code" type="java.lang.String" />
+		<property name="cardinality" type="java.lang.Integer" />
+		<property name="dates" type="java.util.List&lt;java.util.Date>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RoomPreferenceData">
+		<property name="code" type="java.lang.String" />
+		<property name="value" type="java.lang.String" />
+		<property name="roomPreferenceType" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RatePlanInclusionData">
+		<property name="shortDescription" type="java.lang.String" />
+		<property name="longDescription" type="java.lang.String" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.order.PaymentTransactionData">
+		<property name="entryNumbers" type="java.util.List&lt;java.lang.Integer>" />
+		<property name="transactionAmount" type="java.lang.Double" />
+		<property name="bookingType" type="java.lang.String" />
+		<property name="paymentTransactionEntryData" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.order.PaymentTransactionEntryData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.order.PaymentTransactionEntryData">
+		<property name="type" type="de.hybris.platform.payment.enums.PaymentTransactionType" />
+		<property name="transactionStatus" type="java.lang.String" />
+		<property name="amount" type="java.math.BigDecimal" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.travel.order.PaymentOptionData">
+		<property name="associatedTransactions" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.order.PaymentTransactionData>" />
+		<property name="bookingTimeAmount" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="prepaymentAmount" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+		<property name="prepaymentDeadlineInDays" type="java.lang.Integer" />
+		<property name="checkInPayOff" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.accommodation.RoomStayGroupData">
+		<property name="accommodationCode" type="java.lang.String" />
+		<property name="ratePlanCode" type="java.lang.String" />
+		<property name="quantity" type="java.lang.Integer" />
+	</bean>
+	
+	
+	<bean class="de.hybris.platform.commercefacades.packages.request.PackageRequestData">
+		<property name="packageId" type="java.lang.String" />
+		<property name="startingDatePattern" type="java.lang.String" />
+		<property name="transportPackageRequest" type="de.hybris.platform.commercefacades.packages.request.TransportPackageRequestData" />
+		<property name="accommodationPackageRequest" type="de.hybris.platform.commercefacades.packages.request.AccommodationPackageRequestData" />
+		<property name="bundleTemplates" type="java.util.List&lt;de.hybris.platform.configurablebundlefacades.data.BundleTemplateData>" />
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.packages.request.TransportPackageRequestData">
+		<property name="fareSearchRequest" type="de.hybris.platform.commercefacades.travel.FareSearchRequestData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.packages.request.AccommodationPackageRequestData">
+		<property name="accommodationAvailabilityRequest" type="de.hybris.platform.commercefacades.accommodation.AccommodationAvailabilityRequestData" />
+		<property name="accommodationSearchRequest" type="de.hybris.platform.commercefacades.accommodation.AccommodationSearchRequestData" />
+	</bean>
+	
+	
+	<bean class="de.hybris.platform.commercefacades.packages.response.PackagesResponseData">
+		<property name="packageResponses" type="java.util.List&lt;de.hybris.platform.commercefacades.packages.response.PackageResponseData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.packages.response.PackageResponseData">
+		<property name="price" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+		<property name="available" type="boolean" />
+		<property name="startingDatePattern" type="java.lang.String" />
+		<property name="transportPackageResponse" type="de.hybris.platform.commercefacades.packages.response.TransportPackageResponseData" />
+		<property name="accommodationPackageResponse" type="de.hybris.platform.commercefacades.packages.response.AccommodationPackageResponseData" />
+		<property name="standardPackageResponses" type="java.util.List&lt;de.hybris.platform.commercefacades.packages.response.StandardPackageResponseData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.packages.response.TransportPackageResponseData">
+		<property name="fareSearchResponse" type="de.hybris.platform.commercefacades.travel.FareSelectionData" />
+		<property name="reservationData" type="de.hybris.platform.commercefacades.travel.reservation.data.ReservationData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.packages.response.AccommodationPackageResponseData">
+		<property name="accommodationAvailabilityResponse" type="de.hybris.platform.commercefacades.accommodation.AccommodationAvailabilityResponseData" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.packages.response.StandardPackageResponseData">
+		<property name="packageProducts" type="java.util.List&lt;de.hybris.platform.commercefacades.packages.response.PackageProductData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.packages.response.PackageProductData">
+		<property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData" />
+		<property name="quantity" type="java.lang.Integer" />
+		<property name="price" type="de.hybris.platform.commercefacades.accommodation.RateData" />
+	</bean>
+	
+	<!-- Package DTO -->
+	
+	<bean class="de.hybris.platform.commercefacades.packages.request.PackageSearchRequestData" extends="de.hybris.platform.commercefacades.accommodation.AccommodationSearchRequestData">
+		<property name="fareSearchRequestData" type="de.hybris.platform.commercefacades.travel.FareSearchRequestData" />
+		<property name="minPrice" type="java.lang.Long"></property>
+		<property name="maxPrice" type="java.lang.Long"></property>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.packages.response.PackageSearchResponseData" extends="de.hybris.platform.commercefacades.accommodation.AccommodationSearchResponseData" />
+	
+	<bean class="de.hybris.platform.commercefacades.packages.PackageData" extends="de.hybris.platform.commercefacades.accommodation.PropertyData">
+		<property name="fareSelectionData" type="de.hybris.platform.commercefacades.travel.FareSelectionData" />
+		<property name="totalPackagePrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="filtered" type="java.lang.Boolean"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.packages.cart.AddDealToCartData">
+		<property name="dealBundleId" type="java.lang.String"/>
+		<property name="itineraryPricingInfos" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.ItineraryPricingInfoData>" />
+		<property name="passengerTypes" type="java.util.List&lt;de.hybris.platform.commercefacades.travel.PassengerTypeQuantityData>" />
+		<property name="startingDate" type="java.util.Date"/>
+		<property name="endingDate" type="java.util.Date"/>
+	</bean>
+</beans>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+
+  
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+
+  <itemtypes>
+    <itemtype code="ConsignmentProcess" autocreate="false" generate="false">
+      <attributes>
+        <attribute qualifier="done" type="boolean">
+          <description>Mark process as done</description>
+          <modifiers optional="false" initial="false"/>
+          <persistence type="property"/>
+          <defaultvalue>Boolean.FALSE</defaultvalue>
+        </attribute>
+
+        <attribute qualifier="waitingForConsignment" type="boolean">
+          <description>Mark that process is waiting for consignment</description>
+          <modifiers optional="false" initial="false"/>
+          <persistence type="property"/>
+          <defaultvalue>Boolean.FALSE</defaultvalue>
+        </attribute>
+
+        <attribute qualifier="warehouseConsignmentState" type="WarehouseConsignmentState">
+          <description>State of warehouse process.</description>
+          <persistence type="property"/>
+          <modifiers initial="false" optional="true"/>
+        </attribute>
+
+      </attributes>
+    </itemtype>
+    <itemtype code="OrderProcess" autocreate="false" generate="true">
+      <attributes>
+        <attribute qualifier="originDestinationRefNumber" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="travellers" type="StringList">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="CheckInProcess" autocreate="true" generate="true"
+              jaloclass="de.hybris.platform.orderprocessing.jalo.CheckInProcess"
+              extends="BusinessProcess">
+      <attributes>
+        <attribute qualifier="order" type="Order">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="originDestinationRefNumber" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="travellers" type="StringList">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+  </itemtypes>
+</items>

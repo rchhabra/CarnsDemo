@@ -1,0 +1,21 @@
+$contentCatalog = travelContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+# Language
+$lang = en
+
+# CMS Link Components
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; BudgetLink      ; "Budgets"
+; ; CostCenterLink  ; "Cost Centers"
+; ; PermissionsLink ; "Permissions"
+; ; UnitsLink       ; "Units"
+; ; UserGroupsLink  ; "User Groups"
+; ; UsersLink       ; "Users"
+; ; OrdersLink		; "Orders"
+
+# CMS Navigation Nodes
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; MyCompanyNavNode ; "My Company"
+
+

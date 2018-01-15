@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <alias name="defaultBackofficeTransportOfferingService" alias="backofficeTransportOfferingService" />
+    <bean id="defaultBackofficeTransportOfferingService" class="de.hybris.platform.travelbackofficeservices.services.impl.DefaultBackofficeTransportOfferingService" parent="transportOfferingService">
+        <property name="backofficeTransportOfferingDao" ref="backofficeTransportOfferingDao"/>
+    </bean>
+
+    <bean id="manageTransportOfferingForScheduleConfigurationJob" class="de.hybris.platform.travelbackofficeservices.cronjob.ManageTransportOfferingForScheduleConfigurationJob" parent="abstractJobPerformable">
+        <property name="modelService" ref="modelService" />
+        <property name="backofficeTransportOfferingService" ref="backofficeTransportOfferingService" />
+        <property name="travelBackofficeNotificationUtils" ref="travelBackofficeNotificationUtils" />
+    </bean>
+
+    <alias name="defaultTravelBackofficeStockService" alias="travelbackofficeStockService" />
+    <bean id="defaultTravelBackofficeStockService" parent="travelStockService" class="de.hybris.platform.travelbackofficeservices.stock.impl.DefaultTravelBackofficeStockService"/>
+
+    <alias name="defaultBackofficeScheduleConfigurationService" alias="backofficeScheduleConfigurationService"/>
+    <bean id="defaultBackofficeScheduleConfigurationService" class="de.hybris.platform.travelbackofficeservices.services.impl.DefaultBackofficeScheduleConfigurationService">
+        <property name="backofficeScheduleConfigurationDao" ref="backofficeScheduleConfigurationDao"/>
+    </bean>
+
+    <alias name="defaultBackofficeScheduleConfigurationDao" alias="backofficeScheduleConfigurationDao"/>
+    <bean id="defaultBackofficeScheduleConfigurationDao" class="de.hybris.platform.travelbackofficeservices.dao.impl.DefaultBackofficeScheduleConfigurationDao">
+        <constructor-arg value="scheduleConfiguration" />
+    </bean>
+
+    <alias name="defaultBackofficeTransportOfferingDao" alias="backofficeTransportOfferingDao"/>
+    <bean id="defaultBackofficeTransportOfferingDao" class="de.hybris.platform.travelbackofficeservices.dao.impl.DefaultBackofficeTransportOfferingDao" parent="transportOfferingDao"/>
+
+
+    <!-- Cron Job -->
+
+    <bean id="updateLocationsToTransportOfferingJob" class="de.hybris.platform.travelbackofficeservices.cronjob.UpdateLocationsToTransportOfferingJob"
+            parent="abstractJobPerformable">
+        <property name="backofficeTransportOfferingService" ref="backofficeTransportOfferingService" />
+    </bean>
+
+    <bean id="manageScheduleConfigurationsJob" class="de.hybris.platform.travelbackofficeservices.cronjob.ManageScheduleConfigurationsJob" parent="abstractJobPerformable">
+        <property name="backofficeScheduleConfigurationService" ref="backofficeScheduleConfigurationService"/>
+        <property name="backofficeTransportOfferingService" ref="backofficeTransportOfferingService"/>
+        <property name="enumerationService" ref="enumerationService"/>
+    </bean>
+    
+    <alias name="defaultTravelBackofficeNotificationUtils" alias="travelBackofficeNotificationUtils" />
+	<bean id="defaultTravelBackofficeNotificationUtils" class="de.hybris.platform.travelbackofficeservices.utils.TravelBackofficeNotificationUtils">
+		<property name="modelService" ref="modelService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="timeService" ref="timeService"/>
+		<property name="i18nService" ref="i18NService" />
+		<property name="userService" ref="userService" />
+	</bean>
+	
+</beans>

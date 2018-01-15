@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="eclipsebin/classes" path="testsrc"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/platform"/>
+	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="src"/>
+	<classpathentry kind="src" output="eclipsebin/classes" path="gensrc"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/travelservices"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/subscriptionbundlefacades"/>
+	<classpathentry kind="lib" path="/platform/bootstrap/modelclasses"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/acceleratorfacades"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/travelrulesengine"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/b2bacceleratorfacades"/>
+	<classpathentry kind="src" path="/subscriptionfacades"/>
+	<classpathentry kind="src" path="/configurablebundlefacades"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+</classpath>

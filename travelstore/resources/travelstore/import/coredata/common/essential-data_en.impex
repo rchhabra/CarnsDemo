@@ -1,0 +1,47 @@
+# Language
+$lang = en
+
+# Bundle Types
+UPDATE BundleType; code[unique = true]; name[lang = $lang]
+; ECONOMY      ; Economy
+; ECONOMY_PLUS ; Economy Plus
+; BUSINESS     ; Business
+
+UPDATE PassengerType; code[unique = true]; name[lang = $lang]
+; adult  ; Adult
+; child  ; Child
+; infant ; Infant
+
+
+INSERT_UPDATE Terminal; code[unique = true]; name[lang = $lang]
+; T1 ; Terminal 1
+; T2 ; Terminal 2
+
+INSERT_UPDATE TravelProvider; code[unique = true]; name[lang = $lang]
+; HY ; Hybris Air
+
+UPDATE OrderStatus; code[unique = true]; name[lang = $lang]
+; ORDER_SPLIT              ; In Progress
+; PAST                     ; Past
+; ACTIVE_DISRUPTED_PENDING ; Active Disrupted Pending
+; ACTIVE_DISRUPTED         ; Active Disrupted
+
+UPDATE ReasonForTravel; code[unique = true]; name[lang = $lang]
+; BUSINESS ; Business
+; LEISURE  ; Leisure
+
+# Bundle Type
+UPDATE BundleType; code[unique = true]; name[lang = $lang]
+; FAMILY  ; Family Special
+; SPECIAL ; Special
+
+# Transport Offering Status
+UPDATE TransportOfferingStatus; code[unique = true]; name[lang = $lang]
+; DELAYED   ; DELAYED
+; CANCELLED ; CANCELLED
+; BOARDED   ; BOARDED
+; SCHEDULED ; SCHEDULED
+; DEPARTED  ; DEPARTED
+
+UPDATE UserPriceGroup; code[unique = true]; name[lang = $lang];
+; B2B_DEFAULT_PRICE_GROUP ; A DEFAULT B2B USERPRICEGROUP ;

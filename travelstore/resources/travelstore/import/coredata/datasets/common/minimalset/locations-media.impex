@@ -1,0 +1,46 @@
+# Macros / Replacement Parameter definitions
+$productCatalog = travelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$picture = picture(code, $catalogVersion)
+$siteResource = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/travelstore/import/coredata/datasets/common/minimalset
+
+# Import Category Media
+INSERT_UPDATE Media; code[unique = true]; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpeg']; $catalogVersion
+; /images/paris.jpg     ; paris.jpg     ; $siteResource/images/paris.jpg     ;
+; /images/london.jpg    ; london.jpg    ; $siteResource/images/london.jpg    ;
+; /images/edinburgh.jpg ; edinburgh.jpg ; $siteResource/images/edinburgh.jpg ;
+; /images/default.jpg   ; default.jpg   ; $siteResource/images/default.jpg   ;
+
+
+UPDATE Location; code[unique = true]; $picture
+; LON ; /images/london.jpg
+; EDI ; /images/edinburgh.jpg
+; PAR ; /images/paris.jpg
+; MAN ; /images/default.jpg
+; INV ; /images/default.jpg
+; BFS ; /images/default.jpg
+; NCE ; /images/default.jpg
+; MIL ; /images/default.jpg
+; ROM ; /images/default.jpg
+; BER ; /images/default.jpg
+; BRE ; /images/default.jpg
+; DUS ; /images/default.jpg
+; FRA ; /images/default.jpg
+; ALC ; /images/default.jpg
+; VCE ; /images/default.jpg
+; ATH ; /images/default.jpg
+; NYC ; /images/default.jpg
+; MLE ; /images/default.jpg
+; MUN ; /images/default.jpg
+; MAD ; /images/default.jpg
+; HKT ; /images/default.jpg
+; GOI ; /images/default.jpg
+; MIA ; /images/default.jpg
+; NAP ; /images/default.jpg
+; FLR ; /images/default.jpg
+; BKK ; /images/default.jpg
+; KUL ; /images/default.jpg
+; PRG ; /images/default.jpg
+; REK ; /images/default.jpg
+; SEL ; /images/default.jpg
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <style>
+
+         
+    </style>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-accommodation.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+
+        // Asynchronously load the hotel image gallery template
+        $.get('templates/hotel-image-gallery.tmpl.htm', function(hotelGalleryTemplate) {
+          $.tmpl(hotelGalleryTemplate).appendTo('.accommodation-image-gallery');
+        });
+    </script>
+</head>
+
+<body class="content-page">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <header class="row header"></header>
+        <div class="container">
+            <h2 class="h2">Hotel Room Image Gallery</h2>
+            <div class="row">
+                <div class="col-xs-12 col-sm-9 y_nonItineraryContentArea">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#hotel-gallery-modal">
+                      Open Hotel image gallery
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="hotel-gallery-modal" tabindex="-1" role="dialog">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header clearfix">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          </div>
+                          <div class="modal-body">
+                             <div class="accommodation-image-gallery"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <aside id="sidebar" class="y_itinerarySideBar">
+                        <div class="promotions hidden-xs">
+                            <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                            <section>
+                                <img src="assets/images/dubai.jpg" class="img-responsive" alt="dubai">
+                                <div class="promotion-content">
+                                    <h2 class="h4">Ships to Arabian Gulf</h2>
+                                    <p>Explore the azure waters of Sharm El Sheikh, Egypt, or explore the many shops at this luxury travel destination.</p>
+                                </div>
+                            </section>
+                            <section>
+                                <img src="assets/images/dubai.jpg" class="img-responsive" alt="dubai">
+                                <div class="promotion-content">
+                                    <h2 class="h4">Free nights and big discounts</h2>
+                                    <p>Dubai hotel deals and special prices on 30+ hotels all in one spot. Find the perfect hotel within your budget.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-wrapper"></footer>
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+
+</body>
+
+</html>

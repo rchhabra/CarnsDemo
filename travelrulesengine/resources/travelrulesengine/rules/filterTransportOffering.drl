@@ -1,0 +1,32 @@
+package de.hybris.platform.travelrulesengine.rules
+
+import de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO;
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import de.hybris.platform.travelrulesengine.rao.FareSearchRequestRAO;
+import de.hybris.platform.travelrulesengine.rao.PassengerTypeQuantityRAO;
+import de.hybris.platform.travelrulesengine.utils.TravelRuleUtils;
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import java.util.Map;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleTransportOfferingFilterAction;
+
+rule "filterTransportOffering"
+@ruleCode("filterTransportOffering")
+@moduleName("travel-rules-module")
+dialect "mvel"
+    when
+         $result : RuleEngineResultRAO()
+         $transportOffering : TransportOfferingRAO()
+         $fareSearchRequestRAO : FareSearchRequestRAO()
+         (
+            PassengerTypeQuantityRAO(passengerType.code == "infant", quantity > 0)
+         )
+         eval(TravelRuleUtils.getHour($transportOffering.getDepartureTime()) >= 18)
+    then
+    	Map variables = [
+		   "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO": $result,
+		   "de.hybris.platform.travelrulesengine.rao.FareSearchRequestRAO": $fareSearchRequestRAO,
+		   "de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO": $transportOffering
+		];
+    	ruleTransportOfferingFilterAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), null);
+end

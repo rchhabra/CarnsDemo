@@ -1,0 +1,12 @@
+#################################################################################################################
+################################################# Cron Jobs #####################################################
+#################################################################################################################
+
+INSERT_UPDATE ManageTransportOfferingForScheduleConfigurationCronJob;code[unique=true];job(code)[default = manageTransportOfferingForScheduleConfigurationJob];sessionLanguage(isoCode)[default=en]
+;manageTransportOfferingForScheduleConfigurationCronJob;
+
+#Impex to invoke Cronjob to update Origin and Destination Facilities/Locations  to transportOfferings.
+
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;; sessionLanguage(isoCode)[default = en]
+;updateLocationsToTransportOfferingJob;updateLocationsToTransportOfferingJob;false;
+;manageScheduleConfigurationsJob;manageScheduleConfigurationsJob;false;

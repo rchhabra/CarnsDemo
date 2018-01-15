@@ -1,0 +1,6 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+# Insert Categories
+INSERT_UPDATE Category; code[unique = true]; name[lang = $lang]; description[lang = $lang]; $catalogVersion
+# Deliberately empty for future purposes

@@ -1,0 +1,63 @@
+#
+# ImpEx for Importing Activity into travel accelerator
+#
+INSERT_UPDATE Activity; code[unique = true]
+
+# Activities in London
+; britishMuseum
+; vanda
+; nationalGallery
+; towerOfLondon
+; bigBen
+; city_break
+
+# Activities in Manchester
+; oldTrafford
+; manchesterArtGallery
+; etihadStadium
+; manchesterCathedral
+; sports_trips
+
+# Activities in Edinburgh
+; arthursSeat
+; edinburghOldTown
+; nationalMuseumOfScotland
+; culture_break
+; family_friends
+; winter_sun
+
+# Heathrow Airport specific activites
+; theMicroscopyCongress
+
+# Edinburgh Airport specific activites
+; liveAviationExcercise
+
+# Manchester Airport specific activites
+; aviationConference
+
+# Activities in Alicante
+; beach_holiday
+
+#
+# ImpEx for Importing LocationActivityRelation into travel accelerator
+#
+INSERT_UPDATE Location; code[unique = true]; activity(code)
+; LON ; britishMuseum, vanda, nationalGallery, towerOfLondon, bigBen, city_break
+; MAN ; oldTrafford, manchesterArtGallery, etihadStadium, manchesterCathedral, city_break, sports_trips
+; EDI ; arthursSeat, edinburghOldTown, nationalMuseumOfScotland, city_break, culture_break, family_friends
+; PAR ; city_break, family_friends, winter_sun, sports_trips
+; ALC ; beach_holiday
+; NCE ; city_break, beach_holiday, sports_trips, family_friends
+; ATH ; city_break, beach_holiday, culture_break, family_friends
+; VCE ; city_break, culture_break, family_friends
+; NYC ; city_break, culture_break, family_friends
+; MLE ; city_break, beach_holiday, sports_trips
+
+#
+# ImpEx for Importing TransportFacilityLocationRelation into travel accelerator
+#
+INSERT_UPDATE TransportFacility; code[unique = true]; activity(code)
+; LGW ; theMicroscopyCongress
+; CDG ; theMicroscopyCongress
+; MAN ; aviationConference
+; EDI ; liveAviationExcercise

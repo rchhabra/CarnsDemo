@@ -1,0 +1,34 @@
+#Impex to invoke Cronjob to update StockLevels to transportOfferings.
+$domesticAirports=EMA,CBG,QFO,LTN,NWI,SEN,STN,LHR,LCY,NCL,BWF,LPL,MAN,SOU,ESH,QLA,LYX,KRH,QUG,BBS,GLO,EXT,BOH,NQY,LEQ,ISC,BRS,BHX,DSA,HUY,LBA,BFS,BHD,LDY,ABZ,OBN,BEB,BRR,CAL,COL,CSA,NRL,INV,SCS,DND,LSI,EOI,ILY,NDY,PPW,PIK,GLA,KOI,SYY,SKL,SOY,LWK,TRE,WRY,WHS,WIC,HAW,CEG,VLY,SWS,CWL,ACI,GCI,IOM,JER
+
+$economyStock=O->200,Q->200,M->200,N->200,K->200,L->200,S->200,V->200,H->200,B->200,Y->200
+$economyPlusStock=T->200,E->200,W->200
+$businessStock=I->200,R->200,C->200,D->200,J->200
+
+$economyAncillaryStock=ACECONSEAT1->200
+$economyPlusAncillaryStock=ACPECOSEAT1->200
+$businessAncillaryStock=ACBIZZSEAT1->200
+
+$priorityStockLevel=PRICHECKIN1->100,PRIBOARDING1->100
+$loungeAccessStockLevel=LOUNGEACC1->150
+$mealsStockLevel=STANDARDMEAL->200,VEGETARIANMEAL->150,CHILDMEAL->0,CHAMPAGNE->150
+$holditemsStockLevel=EXTRABAG20->200,EXTRABAG32->100,SKIS->0,SURFBOARD->5,GOLFCLUBS->10
+$ancillaryStockLevel=$priorityStockLevel,$loungeAccessStockLevel,$mealsStockLevel,$holditemsStockLevel
+
+INSERT_UPDATE UpdateStockLevelsToTransportOfferingCronJob;code[unique=true];domesticAirports;economyStockLevels[map-delimiter=,];economyPlusStockLevels[map-delimiter=,];businessStockLevel[map-delimiter=,];economyAncillaryStockLevels[map-delimiter=,];economyPlusAncillaryStockLevels[map-delimiter=,];businessAncillaryStockLevel[map-delimiter=,];ancillaryStockLevel[map-delimiter=,];job(code)[default=updateStockLevelsToTransportOfferingJob];sessionLanguage(isoCode)[default=en]
+;updateStockLevelsToTransportOfferingCronJob;$domesticAirports;$economyStock;$economyPlusStock;$businessStock;$economyAncillaryStock;$economyPlusAncillaryStock;$businessAncillaryStock;$ancillaryStockLevel
+
+UPDATE GeocodeAddressesCronJob[batchmode=true];itemType(code)[unique=true];active
+;GeocodeAddressesCronJob;false
+
+INSERT_UPDATE GeocodeAddressesCronJob;code[unique=true];job(code)[default=travelGeocodingJob];sessionLanguage(isoCode)[default=en];batchSize
+;travelGeocodeAddressesCronJob;;;0
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression;maxAcceptableDelay
+;travelGeocodeAddressesCronJob;0 50 23 * * ?;-1
+
+#Impex to invoke Cronjob to update StockLevels to accommodationOfferings.
+$accommodationServices=WIFI->10,GYM_ACCESS->10,ENGLISH_BREAKFAST->10
+
+INSERT_UPDATE UpdateStockLevelsToAccommodationOfferingCronJob;code[unique=true];job(code)[default = updateStockLevelsToAccommodationOfferingJob];serviceProductsStockLevels[map-delimiter=,]
+;updateStockLevelsToAccommodationOfferingCronJob;;$accommodationServices

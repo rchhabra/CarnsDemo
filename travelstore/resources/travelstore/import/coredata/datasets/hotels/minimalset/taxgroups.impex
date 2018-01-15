@@ -1,0 +1,48 @@
+#Impex to create tax groups. 
+
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE ProductTaxGroup;code[unique=true]
+;uk-tax-group
+;de-tax-group
+;es-tax-group
+;fr-tax-group
+;it-tax-group
+;gr-tax-group
+;us-tax-group
+;cz-tax-group
+;kr-tax-group
+;my-tax-group
+;th-tax-group
+;is-tax-group
+;in-tax-group
+
+INSERT_UPDATE Tax;code[unique=true];
+;uk-hotel-accommodation-vat
+;de-hotel-accommodation-vat
+;es-hotel-accommodation-vat
+;fr-hotel-accommodation-vat
+;it-hotel-accommodation-vat
+;gr-hotel-accommodation-vat
+;us-hotel-accommodation-vat
+;cz-hotel-accommodation-vat
+;kr-hotel-accommodation-vat
+;my-hotel-accommodation-vat
+;th-hotel-accommodation-vat
+;is-hotel-accommodation-vat
+;in-hotel-accommodation-vat
+
+INSERT_UPDATE TaxRow;tax(code)[unique=true];pg(code)[unique=true];value
+;uk-hotel-accommodation-vat;uk-tax-group;20
+;de-hotel-accommodation-vat;de-tax-group;7
+;es-hotel-accommodation-vat;es-tax-group;10
+;fr-hotel-accommodation-vat;fr-tax-group;10
+;it-hotel-accommodation-vat;it-tax-group;10
+;gr-hotel-accommodation-vat;gr-tax-group;6
+;us-hotel-accommodation-vat;us-tax-group;18
+;cz-hotel-accommodation-vat;cz-tax-group;15
+;kr-hotel-accommodation-vat;kr-tax-group;10
+;my-hotel-accommodation-vat;my-tax-group;6
+;th-hotel-accommodation-vat;th-tax-group;7
+;is-hotel-accommodation-vat;is-tax-group;11
+;in-hotel-accommodation-vat;in-tax-group;10

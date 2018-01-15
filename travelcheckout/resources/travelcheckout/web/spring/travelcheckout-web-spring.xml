@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/util 
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<context:annotation-config />
+
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/checkout/multi/hop">hopPaymentResponseController</prop>
+				<prop key="/checkout/multi/payment-method">paymentMethodCheckoutStepController</prop>
+				<prop key="/checkout/multi/sop">sopPaymentResponseController</prop>
+				<prop key="/checkout/multi/summary">summaryCheckoutStepController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="de.hybris.platform.travelcheckout" />
+
+	<!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties resource bundle as javascript variables -->
+	<bean id="defaultTravelcheckoutJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+		<property name="addOnName" value="travelcheckout" />
+	</bean>
+
+	<bean id="defaultTravelcheckoutBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee"
+		class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+		<property name="messageSource" ref="defaultTravelcheckoutJavaScriptMessageResourceAccessor" />
+	</bean>
+
+	<bean id="getTravelcheckoutBeforeViewHandler" parent="beforeViewHandlerAdapter">
+		<property name="adaptee">
+			<ref bean="defaultTravelcheckoutBeforeViewJsPropsHandlerAdaptee" />
+		</property>
+	</bean>
+	<bean id="TravelcheckoutBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+		<property name="add" ref="getTravelcheckoutBeforeViewHandler" />
+	</bean>
+
+	<!--Checkout GroupMap -->
+	<util:map id="checkoutFlowGroupMap">
+		<entry key="travelCheckoutGroup" value-ref="travelCheckoutGroup" />
+	</util:map>
+	<!--Checkout GroupMap -->
+
+	<alias name="defaultPaymentMethodCheckoutStep" alias="paymentMethodCheckoutStep" />
+	<bean id="defaultPaymentMethodCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="travelCheckoutGroup" />
+		<!-- <property name="checkoutStepValidator" ref="defaultPaymentMethodCheckoutValidator" /> -->
+		<property name="transitions">
+			<map merge="true">
+				<entry key="current" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+				<entry key="next" value-ref="REDIRECT_TO_SUMMARY" />
+			</map>
+		</property>
+		<property name="progressBarId" value="paymentMethod" />
+	</bean>
+
+	<alias name="defaultSummaryCheckoutStep" alias="summaryCheckoutStep" />
+	<bean id="defaultSummaryCheckoutStep" parent="checkoutStep">
+		<property name="checkoutGroup" ref="travelCheckoutGroup" />
+		<!-- <property name="checkoutStepValidator" ref="defaultSummaryCheckoutValidator" /> -->
+		<property name="transitions">
+			<map merge="true">
+				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+				<entry key="current" value-ref="REDIRECT_TO_SUMMARY" />
+				<entry key="next" value="redirect:/checkout/bookingConfirmation/%s" />
+			</map>
+		</property>
+		<property name="progressBarId" value="confirmOrder" />
+	</bean>
+
+	<!---Default checkout group -->
+
+	<alias name="defaultMultiStepCheckoutGroup" alias="travelCheckoutGroup" />
+	<bean id="defaultMultiStepCheckoutGroup" class="de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutGroup">
+		<property name="groupId" value="defaultGroup" />
+		<property name="checkoutStepMap">
+			<map merge="true">
+				<entry key="payment-method" value-ref="paymentMethodCheckoutStep" />
+				<entry key="summary" value-ref="summaryCheckoutStep" />
+			</map>
+		</property>
+		<property name="validationResultsMap">
+			<map merge="true">
+				<entry key="REDIRECT_TO_PAYMENT_METHOD" value-ref="REDIRECT_TO_PAYMENT_METHOD" />
+			</map>
+		</property>
+		<property name="checkoutProgressBar">
+			<map merge="true">
+				<entry key="1" value-ref="paymentMethodCheckoutStep" />
+				<entry key="2" value-ref="defaultSummaryCheckoutStep" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="REDIRECT_TO_PAYMENT_METHOD" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/payment-method/add" />
+	</bean>
+
+	<bean id="REDIRECT_TO_SUMMARY" class="java.lang.String">
+		<constructor-arg value="redirect:/checkout/multi/summary/view" />
+	</bean>
+
+	<!-- Controller bean defintions and URL mappings overriding the default behaviour -->
+
+	<bean name="hopPaymentResponseController" class="de.hybris.platform.storefront.controllers.pages.checkout.steps.HopPaymentResponseController" />
+	<bean name="paymentMethodCheckoutStepController" class="de.hybris.platform.storefront.controllers.pages.checkout.steps.PaymentMethodCheckoutStepController" />
+	<bean name="sopPaymentResponseController" class="de.hybris.platform.storefront.controllers.pages.checkout.steps.SopPaymentResponseController" />
+	<bean name="summaryCheckoutStepController" class="de.hybris.platform.storefront.controllers.pages.checkout.steps.SummaryCheckoutStepController" />
+
+	<bean id="paymentTypeFormValidator" class="de.hybris.platform.travelcheckout.forms.validation.PaymentTypeFormValidator" />
+
+</beans>

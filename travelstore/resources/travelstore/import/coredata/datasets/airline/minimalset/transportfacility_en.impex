@@ -1,0 +1,54 @@
+# ImpEx for Importing TransportFacilities into travel accelerator
+
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE TransportFacility; code[unique = true]; name[lang = $lang]
+
+; LHR ; Heathrow
+; LCY ; London City Airport
+; LGW ; Gatwick
+; LTN ; Luton Airport
+; SEN ; Southend
+; STN ; Stansted
+; MAN ; Ringway International Airport
+; EDI ; Edinburgh
+; INV ; Inverness
+; BFS ; Aldergrove International Airport
+
+; CDG ; Charles De Gaulle
+; ORY ; Orly
+; NCE ; Cote D Azur International Airport
+
+; LIN ; Linate
+; MXP ; Milano Malpensa
+; CIA ; Ciampino
+; FCO ; Leonardo Da Vinci (Fiumicino)
+; VCE ; Marco Polo
+
+; BER ; Brandenburg
+; SXF ; Berlin-Schoenefeld
+; TXL ; Berlin-tegel / Otto Lilienthal
+; BRE ; Bremen
+; DUS ; Düsseldorf International Airport
+; MGL ; Moenchen-gl. - Dus Exp
+; NRN ; Weeze
+; FRA ; Frankfurt International Airport
+; HHN ; Frankfurt-Hahn
+; QGV ; Neu Isenburg ;
+; ALC ; Alicante
+
+; ATH ; Eleftherios Venizelos Intl
+; JFK ; John F Kennedy Intl
+; MLE ; Ibrahim Nasir Intl
+
+; HKT ; Phuket International Airport
+; GOI ; Goa International Airport
+; MIA ; Miami International Airport
+; NAP ; Naples International Airport
+; FLR ; Florence Airport Peretola
+; BKK ; Suvarnabhumi Airport
+; KUL ; Kuala Lumpur International Airport
+; PRG ; Vaclav Havel Airport Prague
+; KEF ; Keflavik International Airport
+; ICN ; Incheon International Airport					 

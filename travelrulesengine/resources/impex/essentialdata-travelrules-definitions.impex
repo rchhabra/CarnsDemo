@@ -1,0 +1,254 @@
+$lang = en
+
+############################# CONDITIONS ##########################
+
+INSERT_UPDATE RuleConditionDefinitionCategory; id[unique = true]; name[lang = $lang]; priority
+; fare_search    ; Fare Search    ; 1500
+; fare_product   ; Fare Product   ; 1400
+; cancel_booking ; Cancel Booking ; 1300
+
+INSERT_UPDATE RuleConditionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; allowsChildren; translatorId; translatorParameters; categories(id)
+; y_fare_triptype   ; Fare Trip Type     ; 1300 ; Fare Product is available for actual search                                                            ; false ; ruleFareTripTypeConditionTranslator   ; ; fare_product
+; y_fare_category5  ; Fare Category 5    ; 1200 ; Fare Product is in category {category} and the search is made {operator} {advanceDays} days in advance ; false ; ruleFareCategory5ConditionTranslator  ; ; fare_product
+; y_fare_category67 ; Fare Category 6, 7 ; 1100 ; Fare Product is in category {category} and the duration of stay is {operator} {durationOfStay}         ; false ; ruleFareCategory67ConditionTranslator ; ; fare_product
+; y_cancel_advance  ; Cancel advance     ; 1000 ; Cancelled booking departs in {operator} {cancellationAdvance} days                                     ; false ; ruleCancelAdvanceConditionTranslator  ; ; cancel_booking
+
+INSERT_UPDATE RuleConditionDefinitionParameter; definition(id)[unique = true]; id[unique = true]; priority; name[lang = $lang]; description[lang = $lang]; type; value; required[default = true]
+; y_fare_category5  ; advanceDays         ; 1500 ; Number of days in advance ; Number of days in advance the search has to be made for fare product to be valid ; java.lang.Integer                                       ;                 ;
+; y_fare_category5  ; category            ; 1200 ; Category                  ; Valid Fare Product Category                                                      ; ItemType(Category)                                      ;                 ;
+; y_fare_category5  ; operator            ; 1000 ; Operator                  ; Operator to compare the advance days value                                       ; Enum(de.hybris.platform.ruledefinitions.AmountOperator) ; """LESS_THAN""" ;
+; y_fare_category67 ; durationOfStay      ; 1500 ; Duration of stay          ; Number of days between outbound and return journey                               ; java.lang.Integer                                       ;                 ;
+; y_fare_category67 ; category            ; 1200 ; Category                  ; Valid Fare Product Category                                                      ; ItemType(Category)                                      ;                 ;
+; y_fare_category67 ; operator            ; 1000 ; Operator                  ; Operator to compare the duration of stay value                                   ; Enum(de.hybris.platform.ruledefinitions.AmountOperator) ; """LESS_THAN""" ;
+; y_cancel_advance  ; cancellationAdvance ; 1000 ; Cancellation Advance      ; Number of days cancellation is done in advance                                   ; java.lang.Integer                                       ;                 ;
+; y_cancel_advance  ; operator            ; 1000 ; Operator                  ; Operator to compare cancellation advance days                                    ; Enum(de.hybris.platform.ruledefinitions.AmountOperator) ; """LESS_THAN""" ;
+
+
+############################# ACTIONS ##########################
+
+INSERT_UPDATE RuleActionDefinitionCategory; id[unique = true]; name[lang = $lang]; priority
+; bundle_filter ; Bundle Filter ; 1800
+; fare_filter   ; Fare Filter   ; 1700
+; cart_fees     ; Cart Fees     ; 1600
+; cancel_fees   ; Cancel Fees   ; 1500
+
+INSERT_UPDATE RuleActionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; translatorId; translatorParameters; categories(id)
+; y_discard_fare   ; Discard fare         ; 1000 ; Discard fare product for current search ; ruleExecutableActionTranslator ; actionId->ruleFareFilterAction        ; fare_filter
+; y_cart_admin_fee ; Admin fee on cart    ; 1000 ; Apply admin fee on the cart             ; ruleExecutableActionTranslator ; actionId->ruleAddAdminFeeToCartAction ; cart_fees
+; y_retain_fee     ; Retain fee on cancel ; 1000 ; Retain Admin Fee when cancel            ; ruleExecutableActionTranslator ; actionId->ruleRetainAdminFeeAction    ; cancel_fees
+
+
+############################# CONDITON DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[default = FareFilterSourceRule][unique = true]
+                                                    ; y_fare_triptype              ;
+                                                    ; y_fare_category5             ;
+                                                    ; y_fare_category67            ;
+                                                    ; y_cancel_advance             ; CancellationSourceRule
+
+
+
+############################# ACTION DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleActionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[unique = true]
+; y_discard_fare   ; FareFilterSourceRule
+; y_cart_admin_fee ; FeeSourceRule
+; y_retain_fee     ; CancellationSourceRule
+
+
+###################################################################################### CART ##############################################################################
+############################# CONDITION ##########################
+
+INSERT_UPDATE RuleConditionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; allowsChildren; translatorId; translatorParameters; categories(id)
+; y_cart_search_date             ; Search date             ; 900 ; When the add to cart is performed on a date {operator} {date}                         ; false ; ruleSearchDateCartConditionTranslator        ; ; cart
+
+; y_cart_market_location         ; Market location         ; 900 ; When the Market location is in {inclMarketLocations}, but not in {excMarketLocations} ; false ; ruleMarketLocationCartConditionTranslator    ; ; cart
+
+; y_cart_passenger_type_quantity ; Passenger type quantity ; 900 ; When the selected {ptc} quantity is {operator} {quantity}                             ; false ; rulePassengerTypeQuantityCartConditionTranslator ; ; cart
+
+; y_cart_sales_application       ; Channel                      ; 900 ; When the Channel is {channel}                                                    ; false ; ruleSalesApplicationCartConditionTranslator      ; ; cart
+
+; y_cart_travel_dates            ; Travel dates            ; 900 ; When the travel dates are {operator} than {date}                                    ; false ; ruleTravelDateCartConditionTranslator                ; ; cart
+
+; y_cart_origin_destination_locations ; Origin Destination locations ; 900 ; When the Departure location is in {inclDepLocations}, but not in {excDepLocations} and the Arrival location is in {inclArrLocations}, but not in {excArrLocations} ; false ; ruleOriginDestinationLocationCartConditionTranslator ; ; cart
+
+INSERT_UPDATE RuleConditionDefinitionParameter; definition(id)[unique = true]      ; id[unique = true]  ; priority; name[lang = $lang]          ; description[lang = $lang]                 ; type                                                   ; value          ; required[default = true]; validators
+                                              ; y_cart_search_date                 ; date               ; 1000    ; Date                        ; Date from or to which the condition is set; java.util.Date                                         ;                ;                         ;
+                                              ; y_cart_search_date                 ; operator           ; 1000    ; Operator                    ; Operator to compare the dates             ; Enum(de.hybris.platform.ruledefinitions.AmountOperator); """LESS_THAN""";                         ;
+
+                                              ; y_cart_market_location             ; inclMarketLocations; 1000    ; Included Market locations   ; Included Market locations                 ; List(ItemType(Location))                               ;                ; false                   ;
+                                              ; y_cart_market_location             ; excMarketLocations ; 1000    ; Excluded Market locations   ; Excluded Market locations                 ; List(ItemType(Location))                               ;                ; false                   ;
+
+                                              ; y_cart_passenger_type_quantity     ; ptc                ; 1000    ; Passenger type              ; Passenger type                            ; ItemType(PassengerType)                                ;                ;                         ;
+                                              ; y_cart_passenger_type_quantity     ; operator           ; 1000    ; Operator                    ; Operator to compare the quantity          ; Enum(de.hybris.platform.ruledefinitions.AmountOperator);                ;                         ;
+                                              ; y_cart_passenger_type_quantity     ; quantity           ; 1000    ; Passenger quantity          ; Passenger quantity                        ; java.lang.Integer                                      ;                ;                         ; rulePositiveNumberParameterValidator
+
+                                              ; y_cart_sales_application           ; channel            ; 1000    ; Channel                     ; Channel                                   ; ItemType(SalesApplication)                             ;                ;                         ;
+                                              ; y_cart_travel_dates                ; date               ; 1000    ; Date                        ; Date from or to which the condition is set; java.util.Date                                         ;                ;                         ;
+                                              ; y_cart_travel_dates                ; operator           ; 1000    ; Operator                    ; Operator to compare the dates             ; Enum(de.hybris.platform.ruledefinitions.AmountOperator); """LESS_THAN""";                         ;
+
+                                              ; y_cart_origin_destination_locations; inclDepLocations   ; 1000    ; Included departure locations; Included departure locations              ; List(ItemType(Location))                               ;                ; false                   ;
+                                              ; y_cart_origin_destination_locations; excDepLocations    ; 1000    ; Excluded departure locations; Excluded departure locations              ; List(ItemType(Location))                               ;                ; false                   ;
+                                              ; y_cart_origin_destination_locations; inclArrLocations   ; 1000    ; Included arrival locations  ; Included arrival locations                ; List(ItemType(Location))                               ;                ; false                   ;
+                                              ; y_cart_origin_destination_locations; excArrLocations    ; 1000    ; Excluded arrival locations  ; Excluded arrival locations                ; List(ItemType(Location))                               ;                ; false                   ;
+
+
+############################# CONDITON DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[default = PromotionSourceRule][unique = true]
+; y_cart_search_date             ; 
+
+; y_cart_market_location         ; 
+
+; y_cart_passenger_type_quantity ; 
+
+; y_cart_sales_application 		 ;
+
+; y_cart_travel_dates 			 ; 
+; y_cart_origin_destination_locations; 
+
+
+
+###################################################################################### SHOW PRODUCT ##############################################################################
+############################# CONDITION ##########################
+
+INSERT_UPDATE RuleConditionDefinitionCategory; id[unique = true]; name[lang = $lang]; priority
+; ancillary_search    ; Ancillary Search    ; 1500
+
+INSERT_UPDATE RuleConditionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; allowsChildren; translatorId										; translatorParameters	; categories(id)
+; y_ancillary_sales_application       ; Channel for Ancillaries                    ; 900 ; When the Channel is {channel}           ; false 		; ruleSalesApplOfferRequestConditionTranslator      	; 						; ancillary_search
+; y_ancillary_passenger_type_quantity ; Passenger type quantity      			   ; 900 ; When the searched {ptc} is {operator} {quantity}                                 ; false ; rulePassengerTypeQuantityProductConditionTranslator     ; ; ancillary_search
+; y_ancillary_travel_customers             	  ; Customers                    			   ; 900 ; Target {customer_groups_operator} customer groups {customer_groups} or customers {customers}                                                                       ; false ; ruleCustomersProductConditionTranslator                 ; ; ancillary_search
+
+; y_ancillary_origin_destination_locations ; Origin Destination locations ; 900 ; When the Departure location is in {inclDepLocations}, but not in {excDepLocations} and the Arrival location is in {inclArrLocations}, but not in {excArrLocations} ; false ; ruleLocationProductConditionTranslator ; ; ancillary_search
+
+; y_ancillary_market_location              ; Market location              ; 900 ; When the Market location is in {inclMarketLocations}, but not in {excMarketLocations}                                                                              ; false ; ruleMarketLocationProductConditionTranslator            ; ; ancillary_search
+
+; y_ancillary_travel_dates                 ; Travel dates                 ; 900 ; When the travel dates are {operator} than {date}                                                                                                                 ; false ; ruleTravelDateProductConditionTranslator                ; ; ancillary_search
+
+
+INSERT_UPDATE RuleConditionDefinitionParameter; definition(id)[unique = true]; id[unique = true]; priority; name[lang = $lang]; description[lang = $lang]; type; value; required[default = true]; validators
+; y_ancillary_sales_application       ; channel             ; 1000 ; Channel                   ; Channel                                    ; ItemType(SalesApplication)                              ;                 ;       ;
+; y_ancillary_passenger_type_quantity      ; ptc                      ; 1000 ; Passenger type                    ; Passenger type                                                             ; ItemType(PassengerType)                                     ;                    ;       ;
+; y_ancillary_passenger_type_quantity      ; operator                 ; 1000 ; Operator                          ; Operator to compare the quantity                                           ; Enum(de.hybris.platform.ruledefinitions.AmountOperator)     ;                    ;       ;
+; y_ancillary_passenger_type_quantity      ; quantity                 ; 1000 ; Passenger quantity                ; Passenger quantity                                                         ; java.lang.Integer                                           ;                    ;       ; rulePositiveNumberParameterValidator
+
+; y_ancillary_travel_customers             ; customer_groups_operator ; 1400 ; Customer group selection operator ; Customer should be part of ANY or ALL customer groups                      ; Enum(de.hybris.platform.ruledefinitions.CollectionOperator) ; """CONTAINS_ANY""" ;       ;
+; y_ancillary_travel_customers             ; customer_groups          ; 1300 ; Customer groups                   ; List of qualifying customer groups                                         ; List(ItemType(UserGroup))                                   ;                    ; false ;
+; y_ancillary_travel_customers             ; customers                ; 1200 ; Customers                         ; List of qualifying customers                                               ; List(ItemType(Customer))                                    ;                    ; false ;
+; y_ancillary_travel_customers             ; excluded_customer_groups ; 1100 ; Excluded customer groups          ; List of sub-groups that should be excluded from qualifying customer groups ; List(ItemType(UserGroup))                                   ;                    ; false ;
+; y_ancillary_travel_customers             ; excluded_customers       ; 1000 ; Excluded customers                ; List of customers that should be excluded from qualifying customer groups  ; List(ItemType(Customer))                                    ;                    ; false ;
+
+; y_ancillary_origin_destination_locations ; inclDepLocations         ; 1000 ; Included departure locations      ; Included departure locations                                               ; List(ItemType(Location))                                    ;                    ; false ;
+; y_ancillary_origin_destination_locations ; excDepLocations          ; 1000 ; Excluded departure locations      ; Excluded departure locations                                               ; List(ItemType(Location))                                    ;                    ; false ;
+; y_ancillary_origin_destination_locations ; inclArrLocations         ; 1000 ; Included arrival locations        ; Included arrival locations                                                 ; List(ItemType(Location))                                    ;                    ; false ;
+; y_ancillary_origin_destination_locations ; excArrLocations          ; 1000 ; Excluded arrival locations        ; Excluded arrival locations                                                 ; List(ItemType(Location))                                    ;                    ; false ;
+
+; y_ancillary_market_location              ; inclMarketLocations      ; 1000 ; Included Market locations         ; Included Market locations                                                  ; List(ItemType(Location))                                    ;                    ; false ;
+; y_ancillary_market_location              ; excMarketLocations       ; 1000 ; Excluded Market locations         ; Excluded Market locations                                                  ; List(ItemType(Location))                                    ;                    ; false ;
+
+; y_ancillary_travel_dates                 ; date                     ; 1000 ; Date                              ; Date from or to which the condition is set                                 ; java.util.Date                                              ;                    ;       ;
+; y_ancillary_travel_dates                 ; operator                 ; 1000 ; Operator                          ; Operator to compare the dates                                              ; Enum(de.hybris.platform.ruledefinitions.AmountOperator)     ; """LESS_THAN"""    ;       ;
+
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[default = ProductSourceRule][unique = true]
+; y_ancillary_sales_application 		 ; 
+; y_ancillary_passenger_type_quantity    ;
+; y_ancillary_travel_customers    ;
+; y_ancillary_origin_destination_locations    ;
+; y_ancillary_market_location    ;
+; y_ancillary_travel_dates    ;
+
+############################# ACTIONS ##########################
+
+INSERT_UPDATE RuleActionDefinitionCategory; id[unique = true]; name[lang = $lang]; priority
+; show_product ; Show Product ; 1800
+; show_category ; Show Category; 1800
+
+INSERT_UPDATE RuleActionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; translatorId; translatorParameters; categories(id)
+; y_show_product_template ; Show Product ; 1000 ; Show {products} for the current search ; ruleExecutableActionTranslator ; actionId->ruleShowProductAction ; show_product
+; y_show_product_category_template ; Show Product Category ; 1000 ; Show {categories} for the current search ; ruleExecutableActionTranslator ; actionId->ruleShowProductCategoriesAction ; show_category
+
+INSERT_UPDATE RuleActionDefinitionParameter; definition(id)[unique = true]; id[unique = true]; priority; name[lang = $lang]; description[lang = $lang]; type; value; required[default = true]
+; y_show_product_template ; products ; 1000 ; Show Products Action ; Products that will be shown ; List(ItemType(Product)) ; ;
+; y_show_product_category_template ; categories ; 1000 ; Show Categories Action ; Product Categories that will be shown ; List(ItemType(Category)) ; ;
+
+############################# ACTION DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleActionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[unique = true]
+; y_show_product_template ; ProductSourceRule
+; y_show_product_category_template;ProductSourceRule
+
+ 
+###################################################################################### SHOW BUNDLE ##############################################################################
+############################# CONDITION ##########################
+
+INSERT_UPDATE RuleConditionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; allowsChildren; translatorId; translatorParameters; categories(id)
+; y_travel_dates                 ; Travel dates                 ; 900 ; When the Travel dates are {operator} than {date}                                                                                                                 ; false ; ruleTravelDateConditionTranslator                ; ; fare_search
+
+; y_origin_destination_locations ; Origin Destination locations ; 900 ; When the Departure location is in {inclDepLocations}, but not in {excDepLocations} and the Arrival location is in {inclArrLocations}, but not in {excArrLocations} ; false ; ruleOriginDestinationLocationConditionTranslator ; ; fare_search
+
+; y_market_location              ; Market location              ; 900 ; When the Market location is in {inclMarketLocations}, but not in {excMarketLocations}                                                                              ; false ; ruleMarketLocationConditionTranslator            ; ; fare_search
+
+; y_passenger_type_quantity      ; Passenger type quantity      ; 900 ; When the searched {ptc} is {operator} {quantity}                                                                                                                   ; false ; rulePassengerTypeQuantityConditionTranslator     ; ; fare_search
+
+; y_sales_application            ; Channel                      ; 900 ; When the Channel is {channel}                                                                                                                                      ; false ; ruleSalesApplicationConditionTranslator          ; ; fare_search
+
+; y_travel_customers             ; Customers                    ; 900 ; Target {customer_groups_operator} customer groups {customer_groups} or customers {customers}                                                                       ; false ; ruleCustomersConditionTranslator                 ; ; fare_search
+
+; y_search_date                  ; Search date                  ; 900 ; When the search is performed on a date {operator} {date}                                                                                                           ; false ; ruleSearchDateConditionTranslator                ; ; fare_search
+
+INSERT_UPDATE RuleConditionDefinitionParameter; definition(id)[unique = true]; id[unique = true]; priority; name[lang = $lang]; description[lang = $lang]; type; value; required[default = true]; validators
+; y_travel_dates                 ; date                     ; 1000 ; Date                              ; Date from or to which the condition is set                                 ; java.util.Date                                              ;                    ;       ;
+; y_travel_dates                 ; operator                 ; 1000 ; Operator                          ; Operator to compare the dates                                              ; Enum(de.hybris.platform.ruledefinitions.AmountOperator)     ; """LESS_THAN"""    ;       ;
+
+; y_origin_destination_locations ; inclDepLocations         ; 1000 ; Included departure locations      ; Included departure locations                                               ; List(ItemType(Location))                                    ;                    ; false ;
+; y_origin_destination_locations ; excDepLocations          ; 1000 ; Excluded departure locations      ; Excluded departure locations                                               ; List(ItemType(Location))                                    ;                    ; false ;
+; y_origin_destination_locations ; inclArrLocations         ; 1000 ; Included arrival locations        ; Included arrival locations                                                 ; List(ItemType(Location))                                    ;                    ; false ;
+; y_origin_destination_locations ; excArrLocations          ; 1000 ; Excluded arrival locations        ; Excluded arrival locations                                                 ; List(ItemType(Location))                                    ;                    ; false ;
+
+; y_passenger_type_quantity      ; ptc                      ; 1000 ; Passenger type                    ; Passenger type                                                             ; ItemType(PassengerType)                                     ;                    ;       ;
+; y_passenger_type_quantity      ; operator                 ; 1000 ; Operator                          ; Operator to compare the quantity                                           ; Enum(de.hybris.platform.ruledefinitions.AmountOperator)     ;                    ;       ;
+; y_passenger_type_quantity      ; quantity                 ; 1000 ; Passenger quantity                ; Passenger quantity                                                         ; java.lang.Integer                                           ;                    ;       ; rulePositiveNumberParameterValidator
+
+; y_sales_application            ; channel                  ; 1000 ; Channel                           ; Channel                                                                    ; ItemType(SalesApplication)                                  ;                    ;       ;
+
+; y_travel_customers             ; customer_groups_operator ; 1400 ; Customer group selection operator ; Customer should be part of ANY or ALL customer groups                      ; Enum(de.hybris.platform.ruledefinitions.CollectionOperator) ; """CONTAINS_ANY""" ;       ;
+; y_travel_customers             ; customer_groups          ; 1300 ; Customer groups                   ; List of qualifying customer groups                                         ; List(ItemType(UserGroup))                                   ;                    ; false ;
+; y_travel_customers             ; customers                ; 1200 ; Customers                         ; List of qualifying customers                                               ; List(ItemType(Customer))                                    ;                    ; false ;
+; y_travel_customers             ; excluded_customer_groups ; 1100 ; Excluded customer groups          ; List of sub-groups that should be excluded from qualifying customer groups ; List(ItemType(UserGroup))                                   ;                    ; false ;
+; y_travel_customers             ; excluded_customers       ; 1000 ; Excluded customers                ; List of customers that should be excluded from qualifying customer groups  ; List(ItemType(Customer))                                    ;                    ; false ;
+
+; y_search_date                  ; date                     ; 1000 ; Date                              ; Date from or to which the condition is set                                 ; java.util.Date                                              ;                    ;       ;
+; y_search_date                  ; operator                 ; 1000 ; Operator                          ; Operator to compare the dates                                              ; Enum(de.hybris.platform.ruledefinitions.AmountOperator)     ; """LESS_THAN"""    ;       ;
+
+; y_market_location              ; inclMarketLocations      ; 1000 ; Included Market locations         ; Included Market locations                                                  ; List(ItemType(Location))                                    ;                    ; false ;
+; y_market_location              ; excMarketLocations       ; 1000 ; Excluded Market locations         ; Excluded Market locations                                                  ; List(ItemType(Location))                                    ;                    ; false ;
+
+
+############################# CONDITON DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleConditionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[default = FareFilterSourceRule][unique = true]
+; y_travel_dates                 ; ShowBundleTemplateSourceRule
+
+; y_origin_destination_locations ; ShowBundleTemplateSourceRule
+
+; y_passenger_type_quantity      ; ShowBundleTemplateSourceRule
+
+; y_sales_application            ; ShowBundleTemplateSourceRule
+
+; y_travel_customers             ; ShowBundleTemplateSourceRule
+
+; y_search_date                  ; ShowBundleTemplateSourceRule
+
+; y_market_location              ; ShowBundleTemplateSourceRule
+
+
+############################# ACTIONS ##########################
+
+INSERT_UPDATE RuleActionDefinitionCategory; id[unique = true]; name[lang = $lang]; priority
+; show_bundle_template ; Show Bundle ; 1800
+
+INSERT_UPDATE RuleActionDefinition; id[unique = true]; name[lang = $lang]; priority; breadcrumb[lang = $lang]; translatorId; translatorParameters; categories(id)
+; y_show_bundle_template ; Show Bundle Template ; 1000 ; Show {bundle_templates} for the current search ; ruleExecutableActionTranslator ; actionId->ruleShowBundleTemplateAction ; show_bundle_template
+
+INSERT_UPDATE RuleActionDefinitionParameter; definition(id)[unique = true]; id[unique = true]; priority; name[lang = $lang]; description[lang = $lang]; type; value; required[default = true]
+; y_show_bundle_template ; bundle_templates ; 1000 ; Show bundle templates ; Bundle templates that will be included in current search ; List(ItemType(BundleTemplate)) ; ;
+
+############################# ACTION DEFINITION RULE TYPE MAPPINGS ##########################
+INSERT_UPDATE RuleActionDefinitionRuleTypeMapping; definition(id)[unique = true]; ruleType(code)[unique = true]
+; y_show_bundle_template ; ShowBundleTemplateSourceRule

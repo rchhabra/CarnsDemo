@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+
+           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <context:annotation-config/>
+
+  <!-- support for JSR303 annotation used for Form object validation -->
+  <mvc:annotation-driven/>
+
+  <alias name="defaultStorefrontTenantDefaultFilterChainList" alias="storefrontTenantDefaultFilterChainList"/>
+  <util:list id="defaultStorefrontTenantDefaultFilterChainList">
+    <!-- generic platform filters -->
+    <ref bean="log4jFilter"/>
+    <ref bean="storefrontSessionFilter"/>
+
+    <!-- filter to log the current request -->
+    <ref bean="requestLoggerFilter"/>
+
+    <!-- filter to setup the cms integration -->
+    <ref bean="cmsSiteFilter"/>
+
+    <!-- filter to initialize the storefront -->
+    <ref bean="storefrontFilter"/>
+
+    <!-- filter to handle url encoding attributes -->
+    <ref bean="urlEncoderFilter"/>
+
+    <!-- Security -->
+    <ref bean="springSecurityFilterChain"/>
+    
+    <!-- filter to log out guest user if he/she attempts to access a page outside of manage my booking flow -->
+    <ref bean="manageMyBookingFilter"/>
+
+    <!-- filter to log out guest user if he/she attempts to access a page outside of checkout flow -->
+    <ref bean="anonymousCheckoutFilter"/>
+
+    <!-- filter to restore items in cart -->
+    <ref bean="cartRestorationFilter"/>
+
+    <!-- filter to restore customer preferred location -->
+    <ref bean="customerLocationRestorationFilter"/>
+
+    <!-- btg filters -->
+    <!-- Remove these filters to disable BTG integration. Also remove the BtgSegmentBeforeViewHandler -->
+    <ref bean="sessionTimeoutCookieFilter"/>
+
+  </util:list>
+
+  <bean name="sessionCookieController"
+        class="de.hybris.platform.travelacceleratorstorefront.controllers.misc.SessionCookieController"/>
+  <bean name="checkoutLoginController"
+        class="de.hybris.platform.travelacceleratorstorefront.controllers.pages.TravelCheckoutLoginPageController"/>
+  <bean name="orderApprovalController"
+        class="de.hybris.platform.travelacceleratorstorefront.controllers.imported.OrderApprovalController"/>
+  <bean name="homePageController"
+        class="de.hybris.platform.travelacceleratorstorefront.controllers.pages.HomePageController"/>
+  <bean name="bookingConfirmationPageController"
+          class="de.hybris.platform.travelacceleratorstorefront.controllers.pages.BookingConfirmationPageController"/>
+  <bean name="bookingDetailsPageController"
+          class="de.hybris.platform.travelacceleratorstorefront.controllers.pages.BookingDetailsPageController"/>
+  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="/session-cookie/renew-session">sessionCookieController</prop>
+        <prop key="/">homePageController</prop>
+        <prop key="/checkout/bookingConfirmation/**">bookingConfirmationPageController</prop>
+        <prop key="/manage-booking/booking-details/**">bookingDetailsPageController</prop>
+      </props>
+    </property>
+  </bean>
+  <context:component-scan base-package="de.hybris.platform.travelacceleratorstorefront"/>
+
+  <bean id="storefrontSessionFilter" class="de.hybris.platform.servicelayer.web.SessionFilter" >
+    <property name="sessionService" ref="sessionService"/>
+  </bean>
+
+  <!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties resource bundle as javascript variables -->
+  <bean id="defaultTravelacceleratorstorefrontJavaScriptMessageResourceAccessor"
+        parent="abstractJavaScriptMessageResourceAccessor">
+    <property name="addOnName" value="travelacceleratorstorefront"/>
+  </bean>
+
+  <bean id="defaultTravelacceleratorstorefrontBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee"
+        class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+    <property name="messageSource" ref="defaultTravelacceleratorstorefrontJavaScriptMessageResourceAccessor"/>
+  </bean>
+
+  <bean id="getTravelacceleratorstorefrontBeforeViewHandler" parent="beforeViewHandlerAdapter">
+    <property name="adaptee">
+      <ref bean="defaultTravelacceleratorstorefrontBeforeViewJsPropsHandlerAdaptee"/>
+    </property>
+  </bean>
+  <bean id="TravelacceleratorstorefrontBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList"
+        parent="listMergeDirective">
+    <property name="add" ref="getTravelacceleratorstorefrontBeforeViewHandler"/>
+  </bean>
+
+  <!-- Default substituting CMS Component Renderer -->
+  <bean id="substitutingAddOnJspIncludeCMSComponentRenderer"
+        class="de.hybris.platform.travelacceleratorstorefront.component.renderer.DefaultAddOnSubstitutingCMSComponentRenderer"
+        parent="addOnJspIncludeCMSComponentRenderer">
+    <property name="extensionSubstitutionService" ref="extensionSubstitutionService"/>
+  </bean>
+
+  <bean id="travelJspIncludeComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="TravelJspIncludeComponent"/>
+    <property name="renderer" ref="travelJspIncludeComponentRenderer"/>
+  </bean>
+  <bean id="travelJspIncludeComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"
+        class="de.hybris.platform.travelacceleratorstorefront.component.renderer.TravelAddOnCMSComponentRender"/>
+
+  <bean id="responsiveBackgroundBannerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="ResponsiveBackgroundBannerComponent"/>
+    <property name="renderer" ref="responsiveBackgroundBannerComponentRenderer"/>
+  </bean>
+  <bean id="responsiveBackgroundBannerComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <bean id="travelRotatingImagesComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="RotatingImagesComponent"/>
+    <property name="renderer" ref="travelRotatingImagesComponentRenderer"/>
+  </bean>
+  <bean id="travelRotatingImagesComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <bean id="travelNavigationComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="NavigationComponent"/>
+    <property name="renderer" ref="travelNavigationComponentRenderer"/>
+  </bean>
+  <bean id="travelNavigationComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <bean id="travelFooterComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="FooterComponent"/>
+    <property name="renderer" ref="travelFooterComponentRenderer"/>
+  </bean>
+  <bean id="travelFooterComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <bean id="activityBannerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="ActivityBannerComponent"/>
+    <property name="renderer" ref="activityBannerComponentRenderer"/>
+  </bean>
+  <bean id="activityBannerComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <bean id="tripFinderBannerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="TripFinderBannerComponent"/>
+    <property name="renderer" ref="tripFinderBannerComponentRenderer"/>
+  </bean>
+  <bean id="tripFinderBannerComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <bean id="sidePromoBannerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="SidePromoBannerComponent"/>
+    <property name="renderer" ref="sidePromoBannerComponentRenderer"/>
+  </bean>
+  <bean id="sidePromoBannerComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+
+  <alias name="travelLoginCheckoutAuthenticationSuccessHandler" alias="loginCheckoutAuthenticationSuccessHandler"/>
+  <bean id="travelLoginCheckoutAuthenticationSuccessHandler"
+        class="de.hybris.platform.travelacceleratorstorefront.security.TravelStorefrontAuthenticationSuccessHandler">
+    <property name="customerFacade" ref="customerFacade"/>
+    <property name="cartRestorationStrategy" ref="cartRestorationStrategy"/>
+    <property name="uiExperienceService" ref="uiExperienceService"/>
+    <property name="sessionService" ref="sessionService" />
+    <property name="cartFacade" ref="cartFacade"/>
+    <property name="cmsSiteService" ref="cmsSiteService"/>
+    <property name="forceDefaultTargetForUiExperienceLevel">
+      <map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
+        <entry key="DESKTOP" value="true"/>
+        <entry key="MOBILE" value="true"/>
+      </map>
+    </property>
+    <property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+    <property name="redirectStrategy" ref="commerceRedirectStrategy"/>
+    <property name="restrictedPages">
+      <list>
+        <value>/login/checkout</value>
+      </list>
+    </property>
+    <property name="listRedirectUrlsForceDefaultTarget">
+      <list></list>
+    </property>
+  </bean>
+
+  <bean id="sessionTimeoutCookieFilter" class="de.hybris.platform.travelacceleratorstorefront.filters.SessionTimeoutCookieFilter">
+    <property name="enhancedCookieGenerator" ref="sessionTimeoutCookieGenerator"/>
+    <property name="timeService" ref="timeService"/>
+  </bean>
+
+  <alias name="defaultSessionTimeoutCookieGenerator" alias="sessionTimeoutCookieGenerator"/>
+  <bean id="defaultSessionTimeoutCookieGenerator"
+        class="de.hybris.platform.travelacceleratorstorefront.security.cookie.EnhancedCookieGenerator">
+    <property name="cookieSecure" value="false"/>
+    <property name="cookieName" value="sessionCookie"/>
+    <property name="cookieMaxAge"
+              value="#{configurationService.configuration.getProperty('default.session.timeout')}"/>
+    <property name="useDefaultPath" value="false"/>
+    <property name="httpOnly" value="false"/>
+  </bean>
+
+  <!-- MVC Interceptors -->
+  <alias name="defaultBeforeControllerHandlersList" alias="beforeControllerHandlersList"/>
+  <util:list id="defaultBeforeControllerHandlersList">
+    <!-- List of handlers to run -->
+    <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.SecurityUserCheckBeforeControllerHandler"/>
+    <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.RequireHardLoginBeforeControllerHandler">
+      <property name="userService" ref="userService"/>
+      <property name="redirectStrategy" ref="redirectStrategy"/>
+      <property name="loginUrl" value="/login"/>
+      <property name="loginAndCheckoutUrl" value="/login/checkout"/>
+      <property name="cookieGenerator" ref="guidCookieGenerator"/>
+      <property name="sessionService" ref="sessionService"/>
+      <property name="cartService" ref="cartService"/>
+    </bean>
+    <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.DeviceDetectionBeforeControllerHandler"/>
+    <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.SetLanguageBeforeControllerHandler"/>
+    <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.SetUiExperienceBeforeControllerHandler"/>
+    <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.ThemeBeforeControllerHandler"/>
+  </util:list>
+
+  <bean id="loginAuthenticationSuccessHandler"
+        class="de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontAuthenticationSuccessHandler">
+    <property name="customerFacade" ref="customerFacade"/>
+    <property name="defaultTargetUrl"
+              value="#{'responsive' == '${commerceservices.default.desktop.ui.experience}' ? '/' : '/my-account'}"/>
+    <property name="useReferer" value="true"/>
+    <property name="requestCache" ref="httpSessionRequestCache"/>
+    <property name="cartRestorationStrategy" ref="cartRestorationStrategy"/>
+    <property name="uiExperienceService" ref="uiExperienceService"/>
+    <property name="cartFacade" ref="cartFacade"/>
+    <property name="forceDefaultTargetForUiExperienceLevel">
+      <map key-type="de.hybris.platform.commerceservices.enums.UiExperienceLevel" value-type="java.lang.Boolean">
+        <entry key="DESKTOP" value="false"/>
+        <entry key="MOBILE" value="false"/>
+      </map>
+    </property>
+    <property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+    <property name="restrictedPages">
+      <list>
+        <value>/login</value>
+      </list>
+    </property>
+    <property name="listRedirectUrlsForceDefaultTarget">
+      <list>
+        <value>/checkout</value>
+        <value>/manage-booking</value>
+        <!-- to handle correct forgot password/login redirection to home page -->
+        <value>/login/pw/change</value>
+      </list>
+    </property>
+  </bean>
+
+  <!-- Logout Success Handler -->
+  <bean id="logoutSuccessHandler" class="de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontLogoutSuccessHandler">
+    <property name="defaultTargetUrl" value="/?logout=true"/>
+    <property name="guidCookieStrategy" ref="guidCookieStrategy"/>
+    <property name="useReferer" value="true"/>
+    <property name="restrictedPages">
+      <list>
+        <value>/my-account</value>
+        <value>/checkout</value>
+        <value>/manage-booking</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="manageMyBookingFilter" class="de.hybris.platform.travelacceleratorstorefront.filters.ManageMyBookingFilter">
+    <property name="mmbSessionCleanUpStrategy" ref="manageMyBookingSessionCleanUpStrategy"/>
+  </bean>
+  
+  <alias name="defaultManageMyBookingSessionCleanUpStrategy" alias="manageMyBookingSessionCleanUpStrategy"/>
+  <bean id="defaultManageMyBookingSessionCleanUpStrategy"
+        class="de.hybris.platform.travelacceleratorstorefront.security.impl.DefaultManageMyBookingSessionCleanUpStrategy">
+    <property name="sessionService" ref="sessionService"/>
+    <property name="manageMyBookingUrlPattern"
+              value="#{configurationService.configuration.getProperty('travelacceleratorstorefront.managemybooking.url.pattern')}"/>
+    <property name="excludedUrls"
+              value="#{configurationService.configuration.getProperty('travelacceleratorstorefront.managebooking.excluded.urls.pattern')}"/>
+  </bean>
+
+  <bean depends-on="customer360JspProvidersMap" parent="mapMergeDirective">
+    <property name="key" value="headingFragment" />
+    <property name="value" value="addon:/travelacceleratorstorefront/fragments/customer360/heading" />
+  </bean>
+
+  <bean depends-on="customer360JspProvidersMap" parent="mapMergeDirective">
+    <property name="key" value="customerCartFragment" />
+    <property name="value" value="addon:/travelacceleratorstorefront/fragments/customer360/cartData" />
+  </bean>
+
+  <bean depends-on="customer360JspProvidersMap" parent="mapMergeDirective">
+    <property name="key" value="generalActivityFragment" />
+    <property name="value" value="addon:/travelacceleratorstorefront/fragments/customer360/generalActivity" />
+  </bean>
+
+  <alias name="defaultTravelAssistedServiceRedirectStrategy" alias="assistedServiceRedirectStrategy"/>
+  <bean id="defaultTravelAssistedServiceRedirectStrategy" class="de.hybris.platform.travelacceleratorstorefront.strategies.asm.DefaultTravelAssistedServiceRedirectStrategy">
+    <property name="cartService" ref="travelCartService" />
+    <property name="userService" ref="userService" />
+    <property name="sessionService" ref="sessionService" />
+    <property name="assistedServiceService" ref="assistedServiceService" />
+    <property name="redirectStrategyMap" ref="redirectStrategyMap" />
+    <property name="travelCartFacade" ref="cartFacade" />
+  </bean>
+
+  <util:map id="redirectStrategyMap" key-type="java.lang.String" >
+    <entry key="BOOKING_TRANSPORT_ONLY" value-ref="asRedirectForTransportOnlyStrategy"/>
+    <entry key="BOOKING_ACCOMMODATION_ONLY" value-ref="asRedirectForAccommodationOnlyStrategy"/>
+    <entry key="BOOKING_TRANSPORT_ACCOMMODATION" value-ref="asRedirectForTransportAccommodationStrategy"/>
+    <entry key="BOOKING_PACKAGE" value-ref="asRedirectForBookingPackageStrategy"/>
+  </util:map>
+
+  <bean id="abstractASRedirectStrategy" class="de.hybris.platform.travelacceleratorstorefront.strategies.asm.AbstractASRedirectStrategy" abstract="true">
+    <property name="travellerSortStrategy" ref="travellerSortStrategy" />
+    <property name="passengerTypeFacade" ref="passengerTypeFacade" />
+    <property name="transportOfferingFacade" ref="transportOfferingFacade" />
+    <property name="sessionService" ref="sessionService" />
+  </bean>
+
+  <alias name="defaultASRedirectForTransportOnlyStrategy" alias="asRedirectForTransportOnlyStrategy"/>
+  <bean id="defaultASRedirectForTransportOnlyStrategy" class="de.hybris.platform.travelacceleratorstorefront.strategies.asm.ASRedirectForTransportOnlyStrategy" parent="abstractASRedirectStrategy">
+    <property name="cabinClassFacade" ref="cabinClassFacade" />
+    <property name="travellerFacade" ref="travellerFacade" />
+  </bean>
+
+  <alias name="defaultASRedirectForAccommodationOnlyStrategy" alias="asRedirectForAccommodationOnlyStrategy"/>
+  <bean id="defaultASRedirectForAccommodationOnlyStrategy" class="de.hybris.platform.travelacceleratorstorefront.strategies.asm.ASRedirectForAccommodationOnlyStrategy" parent="abstractASRedirectStrategy">
+    <property name="travellerSortStrategy" ref="travellerSortStrategy" />
+    <property name="passengerTypeFacade" ref="passengerTypeFacade" />
+  </bean>
+
+  <alias name="defaultASRedirectForBookingPackageStrategy" alias="asRedirectForBookingPackageStrategy"/>
+  <bean id="defaultASRedirectForBookingPackageStrategy" class="de.hybris.platform.travelacceleratorstorefront.strategies.asm.ASRedirectForBookingPackageStrategy" parent="abstractASRedirectStrategy">
+    <property name="dealCartFacade" ref="dealCartFacade" />
+    <property name="dealBundleTemplateFacade" ref="dealBundleTemplateFacade" />
+    <property name="cabinClassFacade" ref="cabinClassFacade" />
+    <property name="travellerFacade" ref="travellerFacade" />
+  </bean>
+
+  <alias name="defaultASRedirectForTransportAccommodationStrategy" alias="asRedirectForTransportAccommodationStrategy"/>
+  <bean id="defaultASRedirectForTransportAccommodationStrategy" class="de.hybris.platform.travelacceleratorstorefront.strategies.asm.ASRedirectForTransportAccommodationStrategy" parent="abstractASRedirectStrategy">
+    <property name="cabinClassFacade" ref="cabinClassFacade" />
+    <property name="travellerFacade" ref="travellerFacade" />
+    <property name="transportFacilityFacade" ref="transportFacilityFacade" />
+    <property name="travelLocationFacade" ref="travelLocationFacade" />
+    <property name="accommodationSuggestionFacade" ref="accommodationSuggestionFacade" />
+  </bean>
+
+  <mvc:interceptors>
+   <mvc:interceptor>
+      <mvc:mapping path="/**"/>
+      <mvc:exclude-mapping path="/view/ReservationOverlayTotalsComponentController/**"/>
+      <mvc:exclude-mapping path="/view/PaymentOptionsComponentController/**"/>
+      <mvc:exclude-mapping path="/view/DefaultCMSComponentController/**"/>
+      <mvc:exclude-mapping path="/view/AccommodationReservationComponentController/**"/>
+      <mvc:exclude-mapping path="/view/TransportReservationComponentController/**"/>
+      <mvc:exclude-mapping path="/view/ReservationTotalsComponentController/**"/>
+      <mvc:exclude-mapping path="/view/TransportSummaryComponentController/**"/>
+      <mvc:exclude-mapping path="/view/AccommodationSummaryComponentController/**"/>
+      <mvc:exclude-mapping path="/checkout/**"/>
+      <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.RemoveTransactionsBeforeControllerInterceptor"></bean>
+   </mvc:interceptor>
+  </mvc:interceptors>
+  
+   <mvc:interceptors>
+   <mvc:interceptor>
+      <mvc:mapping path="/_s/currency"/>
+      <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.beforecontroller.CurrencyUpdateBeforeControllerHandler"/>
+   </mvc:interceptor>
+  </mvc:interceptors>
+  
+   <mvc:interceptors>
+   <mvc:interceptor>
+      <mvc:mapping path="/accommodation-search"/>
+      <mvc:mapping path="/package-listing"/>
+      <bean class="de.hybris.platform.travelacceleratorstorefront.interceptors.aftercontroller.AfterListingPageControllerInterceptor"/>
+   </mvc:interceptor>
+  </mvc:interceptors>
+
+</beans>

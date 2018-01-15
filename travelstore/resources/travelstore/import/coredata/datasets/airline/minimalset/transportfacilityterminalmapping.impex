@@ -1,0 +1,56 @@
+# ImpEx for Importing TransportFacilityTerminalMapping into travel accelerator
+
+UPDATE TransportFacility; code[unique=true]; terminals(code);
+
+;LGW;LGW_NT,LGW_ST;
+
+;LHR;LHR_T1,LHR_T2,LHR_T3,LHR_T4,LHR_T5;
+
+;JFK;JFK_T1,JFK_T2,JFK_T4,JFK_T5,JFK_T7,JFK_T8;
+
+;CDG;CDG_T1,CDG_T2,CDG_T3;
+
+;EDI; EDI_T1;
+;LCY; LCY_T1
+;LTN; LTN_T1
+;SEN; SEN_T1
+;STN; STN_T1
+
+;MAN; MAN_T1
+;EDI; EDI_T1
+;INV; INV_T1
+;BFS; BFS_T1
+;CDG; CDG_T1
+;ORY; ORY_T1
+;NCE; NCE_T1
+
+;LIN; LIN_T1
+;MXP; MXP_T1
+;CIA; CIA_T1
+;FCO; FCO_T1
+;VCE; VCE_T1
+
+;BER; BER_T1
+;SXF; SXF_T1
+;TXL; TXL_T1
+;BRE; BRE_T1
+;DUS; DUS_T1
+;MGL; MGL_T1
+;NRN; NRN_T1
+;FRA; FRA_T1
+;HHN; HHN_T1
+;QGV; QGV_T1
+;ALC; ALC_T1
+;ATH; ATH_T1
+;MLE; MLE_T1
+
+;HKT; HKT_T1
+;GOI; GOI_T1
+;MIA; MIA_T1
+;NAP; NAP_T1
+;FLR; FLR_T1
+;BKK; BKK_T1
+;KUL; KUL_T1
+;PRG; PRG_T1
+;KEF; KEF_T1
+;ICN; ICN_T1

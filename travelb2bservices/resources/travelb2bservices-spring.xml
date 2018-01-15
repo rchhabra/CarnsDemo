@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company. ~ All rights reserved. ~ ~ This software is the confidential and proprietary
+	information of SAP ~ Hybris ("Confidential Information"). You shall not disclose such ~ Confidential Information and shall use it only 
+	in accordance with the ~ terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<alias name="defaultTravelB2BOrderService" alias="travelb2bOrderService" />
+	<bean id="defaultTravelB2BOrderService" class="de.hybris.platform.travelb2bservices.order.impl.DefaultTravelB2BOrderService">
+		<property name="pagedB2BTravelOrderDao" ref="pagedB2BTravelOrderDao" />
+		<property name="b2bTravelOrderDao" ref="b2bTravelOrderDao" />
+	</bean>
+
+	<alias name="defaultPagedB2BTravelOrderDao" alias="pagedB2BTravelOrderDao" />
+	<bean id="defaultPagedB2BTravelOrderDao" class="de.hybris.platform.travelb2bservices.dao.impl.DefaultPagedB2BTravelOrderDao">
+		<constructor-arg value="Order" />
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultB2BTravelOrderDao" alias="b2bTravelOrderDao" />
+	<bean id="defaultB2BTravelOrderDao" class="de.hybris.platform.travelb2bservices.dao.impl.DefaultB2BTravelOrderDao">
+		<constructor-arg value="Order" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<bean id="TravelB2BServicesUtils" class="de.hybris.platform.travelb2bservices.utils.TravelB2BServicesUtils" />
+
+	<alias name="travelAfterSessionUserChangeListener" alias="defaultAfterSessionUserChangeListener" />
+	<bean id="travelAfterSessionUserChangeListener" class="de.hybris.platform.travelb2bservices.listeners.TravelAfterSessionUserChangeListener"
+		parent="abstractEventListener">
+		<property name="b2bUnitService" ref="b2bUnitService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="cartService" ref="cartService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+</beans>

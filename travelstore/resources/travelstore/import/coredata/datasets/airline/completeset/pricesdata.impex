@@ -1,0 +1,900 @@
+$catalog-id = travelProductCatalog
+$catalog-version = Staged
+$catalogVersion = catalogversion(catalog(id[default = $catalog-id]), version[default = $catalog-version])[unique = true, default = $catalog-id:$catalog-version]
+
+# Default Prices for Economy fare products in GBP
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 29  ; pieces ; ; ; ; ;
+; QOWC5 ; GBP ; ; ; 39  ; pieces ; ; ; ; ;
+; MOWC5 ; GBP ; ; ; 45  ; pieces ; ; ; ; ;
+; KOWC5 ; GBP ; ; ; 55  ; pieces ; ; ; ; ;
+
+# Default Prices for Economy plus fare products in GBP
+; EOWC5 ; GBP ; ; ; 59  ; pieces ; ; ; ; ;
+; TOWC5 ; GBP ; ; ; 79  ; pieces ; ; ; ; ;
+; WOWC5 ; GBP ; ; ; 89  ; pieces ; ; ; ; ;
+; WRTC6 ; GBP ; ; ; 99  ; pieces ; ; ; ; ;
+
+# Default Prices for business fare products in GBP
+; IOWC5 ; GBP ; ; ; 119 ; pieces ; ; ; ; ;
+; ROWC5 ; GBP ; ; ; 139 ; pieces ; ; ; ; ;
+; COWC5 ; GBP ; ; ; 159 ; pieces ; ; ; ; ;
+; DOWC5 ; GBP ; ; ; 169 ; pieces ; ; ; ; ;
+
+# Default Prices for Economy fare products in EUR
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; EUR ; ; ; 37  ; pieces ; ; ; ; ;
+; QOWC5 ; EUR ; ; ; 50  ; pieces ; ; ; ; ;
+; MOWC5 ; EUR ; ; ; 58  ; pieces ; ; ; ; ;
+; KOWC5 ; EUR ; ; ; 71  ; pieces ; ; ; ; ;
+
+# Default Prices for Economy plus fare products in EUR
+; EOWC5 ; EUR ; ; ; 76  ; pieces ; ; ; ; ;
+; TOWC5 ; EUR ; ; ; 102 ; pieces ; ; ; ; ;
+; WOWC5 ; EUR ; ; ; 115 ; pieces ; ; ; ; ;
+; WRTC6 ; EUR ; ; ; 127 ; pieces ; ; ; ; ;
+
+# Default Prices for business fare products in EUR
+; IOWC5 ; EUR ; ; ; 153 ; pieces ; ; ; ; ;
+; ROWC5 ; EUR ; ; ; 179 ; pieces ; ; ; ; ;
+; COWC5 ; EUR ; ; ; 205 ; pieces ; ; ; ; ;
+; DOWC5 ; EUR ; ; ; 218 ; pieces ; ; ; ; ;
+
+# Prices for multi sector Route
+# EDI_LGW_BCN:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 109 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ORTC5 ; GBP ; ; ; 109 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ORTC5 ; EUR ; ; ; 141 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ORTC5 ; EUR ; ; ; 141 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 119 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; QOWC5 ; GBP ; ; ; 119 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; QOWC5 ; EUR ; ; ; 154 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; QOWC5 ; EUR ; ; ; 154 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 129 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; MOWC5 ; GBP ; ; ; 129 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; MOWC5 ; EUR ; ; ; 167 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; MOWC5 ; EUR ; ; ; 167 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 139 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; KOWC5 ; GBP ; ; ; 139 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+# EDI_LGW_BCN:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 118 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; EOWC5 ; GBP ; ; ; 118 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; EOWC5 ; EUR ; ; ; 152 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; EOWC5 ; EUR ; ; ; 152 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 158 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; TOWC5 ; GBP ; ; ; 158 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; TOWC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; TOWC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 178 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; WOWC5 ; GBP ; ; ; 178 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; WOWC5 ; EUR ; ; ; 230 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; WOWC5 ; EUR ; ; ; 230 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 198 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; WRTC6 ; GBP ; ; ; 198 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; WRTC6 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; WRTC6 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+# EDI_LGW_BCN:business bundle
+; EOWC5 ; GBP ; ; ; 238 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; EOWC5 ; GBP ; ; ; 238 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; EOWC5 ; EUR ; ; ; 306 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; EOWC5 ; EUR ; ; ; 306 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 278 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ROWC5 ; GBP ; ; ; 278 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ROWC5 ; EUR ; ; ; 359 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ROWC5 ; EUR ; ; ; 359 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+
+# EDI_LGW_AMS:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 125 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ORTC5 ; GBP ; ; ; 191 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ORTC5 ; EUR ; ; ; 162 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ORTC5 ; EUR ; ; ; 247 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 154 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; QOWC5 ; GBP ; ; ; 123 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; QOWC5 ; EUR ; ; ; 199 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; QOWC5 ; EUR ; ; ; 159 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 182 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; MOWC5 ; GBP ; ; ; 153 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; MOWC5 ; EUR ; ; ; 236 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; MOWC5 ; EUR ; ; ; 198 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 115 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; KOWC5 ; GBP ; ; ; 142 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; KOWC5 ; EUR ; ; ; 149 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; KOWC5 ; EUR ; ; ; 184 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+# EDI_LGW_AMS:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 221 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; EOWC5 ; GBP ; ; ; 204 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; EOWC5 ; EUR ; ; ; 286 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; EOWC5 ; EUR ; ; ; 264 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 229 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; TOWC5 ; GBP ; ; ; 243 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; TOWC5 ; EUR ; ; ; 296 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; TOWC5 ; EUR ; ; ; 314 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 287 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; WOWC5 ; GBP ; ; ; 222 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; WOWC5 ; EUR ; ; ; 371 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; WOWC5 ; EUR ; ; ; 287 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 243 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; WRTC6 ; GBP ; ; ; 268 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; WRTC6 ; EUR ; ; ; 314 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; WRTC6 ; EUR ; ; ; 347 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+# EDI_LGW_AMS:business bundle
+; EOWC5 ; GBP ; ; ; 302 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; EOWC5 ; GBP ; ; ; 294 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; EOWC5 ; EUR ; ; ; 390 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; EOWC5 ; EUR ; ; ; 380 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 324 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ROWC5 ; GBP ; ; ; 310 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ROWC5 ; EUR ; ; ; 419 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ROWC5 ; EUR ; ; ; 400 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 352 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; COWC5 ; EUR ; ; ; 455 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 310 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; DOWC5 ; GBP ; ; ; 345 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; DOWC5 ; EUR ; ; ; 400 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; DOWC5 ; EUR ; ; ; 446 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+
+# EDI_LGW_BUD:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 192 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ORTC5 ; GBP ; ; ; 205 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ORTC5 ; EUR ; ; ; 248 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ORTC5 ; EUR ; ; ; 265 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 201 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; QOWC5 ; GBP ; ; ; 275 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; QOWC5 ; EUR ; ; ; 260 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; QOWC5 ; EUR ; ; ; 356 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 145 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; MOWC5 ; GBP ; ; ; 123 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; MOWC5 ; EUR ; ; ; 188 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; MOWC5 ; EUR ; ; ; 159 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 110 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; KOWC5 ; GBP ; ; ; 167 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; KOWC5 ; EUR ; ; ; 216 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+# EDI_LGW_BUD:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 323 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; EOWC5 ; GBP ; ; ; 342 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; EOWC5 ; EUR ; ; ; 418 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; EOWC5 ; EUR ; ; ; 442 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 301 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; TOWC5 ; GBP ; ; ; 312 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; TOWC5 ; EUR ; ; ; 389 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; TOWC5 ; EUR ; ; ; 403 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 342 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; WOWC5 ; GBP ; ; ; 315 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; WOWC5 ; EUR ; ; ; 442 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; WOWC5 ; EUR ; ; ; 407 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 303 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; WRTC6 ; GBP ; ; ; 311 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; WRTC6 ; EUR ; ; ; 392 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; WRTC6 ; EUR ; ; ; 402 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+# EDI_LGW_BUD:business bundle
+; EOWC5 ; GBP ; ; ; 429 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; EOWC5 ; GBP ; ; ; 386 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; EOWC5 ; EUR ; ; ; 554 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; EOWC5 ; EUR ; ; ; 499 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 392 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ROWC5 ; GBP ; ; ; 401 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ROWC5 ; EUR ; ; ; 506 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ROWC5 ; EUR ; ; ; 518 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 489 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; COWC5 ; GBP ; ; ; 401 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; COWC5 ; EUR ; ; ; 632 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; COWC5 ; EUR ; ; ; 518 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 433 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; DOWC5 ; GBP ; ; ; 456 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; DOWC5 ; EUR ; ; ; 560 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; DOWC5 ; EUR ; ; ; 589 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+
+
+# EDI_LGW_CPH:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 202 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ORTC5 ; GBP ; ; ; 158 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ORTC5 ; EUR ; ; ; 261 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ORTC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 223 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; QOWC5 ; GBP ; ; ; 242 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; QOWC5 ; EUR ; ; ; 288 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; QOWC5 ; EUR ; ; ; 313 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 116 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; MOWC5 ; GBP ; ; ; 121 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; MOWC5 ; EUR ; ; ; 150 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; MOWC5 ; EUR ; ; ; 156 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 182 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; KOWC5 ; GBP ; ; ; 134 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; KOWC5 ; EUR ; ; ; 235 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; KOWC5 ; EUR ; ; ; 173 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+# EDI_LGW_CPH:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 276 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; EOWC5 ; GBP ; ; ; 282 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; EOWC5 ; EUR ; ; ; 356 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; EOWC5 ; EUR ; ; ; 364 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 305 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; TOWC5 ; GBP ; ; ; 323 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; TOWC5 ; EUR ; ; ; 394 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; TOWC5 ; EUR ; ; ; 417 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 291 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; WOWC5 ; GBP ; ; ; 301 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; WOWC5 ; EUR ; ; ; 376 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; WOWC5 ; EUR ; ; ; 389 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 310 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; WRTC6 ; GBP ; ; ; 296 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; WRTC6 ; EUR ; ; ; 400 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; WRTC6 ; EUR ; ; ; 382 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+# EDI_LGW_CPH:business bundle
+; EOWC5 ; GBP ; ; ; 467 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; EOWC5 ; GBP ; ; ; 430 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; EOWC5 ; EUR ; ; ; 603 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; EOWC5 ; EUR ; ; ; 555 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 502 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ROWC5 ; GBP ; ; ; 492 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ROWC5 ; EUR ; ; ; 648 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ROWC5 ; EUR ; ; ; 635 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 487 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; COWC5 ; GBP ; ; ; 522 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; COWC5 ; EUR ; ; ; 629 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; COWC5 ; EUR ; ; ; 674 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 404 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; DOWC5 ; GBP ; ; ; 427 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; DOWC5 ; EUR ; ; ; 522 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; DOWC5 ; EUR ; ; ; 551 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+
+# EDI_LGW_FAO:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 240 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ORTC5 ; GBP ; ; ; 262 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ORTC5 ; EUR ; ; ; 310 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ORTC5 ; EUR ; ; ; 338 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 295 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; QOWC5 ; GBP ; ; ; 272 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; QOWC5 ; EUR ; ; ; 381 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; QOWC5 ; EUR ; ; ; 351 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 302 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; MOWC5 ; GBP ; ; ; 306 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; MOWC5 ; EUR ; ; ; 390 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; MOWC5 ; EUR ; ; ; 395 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 257 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; KOWC5 ; GBP ; ; ; 232 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; KOWC5 ; EUR ; ; ; 332 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; KOWC5 ; EUR ; ; ; 300 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+# EDI_LGW_FAO:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 378 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; EOWC5 ; GBP ; ; ; 391 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; EOWC5 ; EUR ; ; ; 488 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; EOWC5 ; EUR ; ; ; 505 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 421 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; TOWC5 ; GBP ; ; ; 401 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; TOWC5 ; EUR ; ; ; 544 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; TOWC5 ; EUR ; ; ; 518 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 452 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; WOWC5 ; GBP ; ; ; 435 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; WOWC5 ; EUR ; ; ; 584 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; WOWC5 ; EUR ; ; ; 562 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 439 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; WRTC6 ; GBP ; ; ; 375 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; WRTC6 ; EUR ; ; ; 567 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; WRTC6 ; EUR ; ; ; 484 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+# EDI_LGW_FAO:business bundle
+; EOWC5 ; GBP ; ; ; 502 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; EOWC5 ; GBP ; ; ; 472 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; EOWC5 ; EUR ; ; ; 648 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; EOWC5 ; EUR ; ; ; 610 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 535 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ROWC5 ; GBP ; ; ; 578 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ROWC5 ; EUR ; ; ; 691 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ROWC5 ; EUR ; ; ; 746 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 572 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; COWC5 ; GBP ; ; ; 493 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; COWC5 ; EUR ; ; ; 739 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; COWC5 ; EUR ; ; ; 637 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 555 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; DOWC5 ; GBP ; ; ; 512 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; DOWC5 ; EUR ; ; ; 717 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; DOWC5 ; EUR ; ; ; 661 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+
+# EDI_LGW_GVA:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 207 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ORTC5 ; GBP ; ; ; 251 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ORTC5 ; EUR ; ; ; 267 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ORTC5 ; EUR ; ; ; 324 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 119 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; QOWC5 ; GBP ; ; ; 131 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; QOWC5 ; EUR ; ; ; 154 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; QOWC5 ; EUR ; ; ; 169 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 186 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; MOWC5 ; GBP ; ; ; 175 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; MOWC5 ; EUR ; ; ; 240 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; MOWC5 ; EUR ; ; ; 226 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 167 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; KOWC5 ; GBP ; ; ; 201 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; KOWC5 ; EUR ; ; ; 216 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; KOWC5 ; EUR ; ; ; 260 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+# EDI_LGW_GVA:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 287 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; EOWC5 ; GBP ; ; ; 275 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; EOWC5 ; EUR ; ; ; 371 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; EOWC5 ; EUR ; ; ; 355 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 302 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; TOWC5 ; GBP ; ; ; 323 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; TOWC5 ; EUR ; ; ; 390 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; TOWC5 ; EUR ; ; ; 417 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 311 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; WOWC5 ; GBP ; ; ; 298 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; WOWC5 ; EUR ; ; ; 402 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; WOWC5 ; EUR ; ; ; 385 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 295 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; WRTC6 ; GBP ; ; ; 314 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; WRTC6 ; EUR ; ; ; 381 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; WRTC6 ; EUR ; ; ; 406 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+# EDI_LGW_GVA:business bundle
+; EOWC5 ; GBP ; ; ; 412 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; EOWC5 ; GBP ; ; ; 403 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; EOWC5 ; EUR ; ; ; 532 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; EOWC5 ; EUR ; ; ; 520 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 442 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ROWC5 ; GBP ; ; ; 457 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ROWC5 ; EUR ; ; ; 571 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ROWC5 ; EUR ; ; ; 590 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 489 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; COWC5 ; GBP ; ; ; 402 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; COWC5 ; EUR ; ; ; 632 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; COWC5 ; EUR ; ; ; 519 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 512 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; DOWC5 ; GBP ; ; ; 506 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; DOWC5 ; EUR ; ; ; 661 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; DOWC5 ; EUR ; ; ; 654 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+
+# EDI_LGW_MAD:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 114 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ORTC5 ; GBP ; ; ; 114 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ORTC5 ; EUR ; ; ; 147 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ORTC5 ; EUR ; ; ; 147 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 148 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; QOWC5 ; GBP ; ; ; 112 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; QOWC5 ; EUR ; ; ; 191 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; QOWC5 ; EUR ; ; ; 145 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 163 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; MOWC5 ; GBP ; ; ; 180 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; MOWC5 ; EUR ; ; ; 211 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; MOWC5 ; EUR ; ; ; 232 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 110 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; KOWC5 ; GBP ; ; ; 110 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+# EDI_LGW_MAD:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 201 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; EOWC5 ; GBP ; ; ; 187 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; EOWC5 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; EOWC5 ; EUR ; ; ; 242 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 232 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; TOWC5 ; GBP ; ; ; 232 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; TOWC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; TOWC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 178 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; WOWC5 ; GBP ; ; ; 178 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; WOWC5 ; EUR ; ; ; 230 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; WOWC5 ; EUR ; ; ; 230 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 198 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; WRTC6 ; GBP ; ; ; 205 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; WRTC6 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; WRTC6 ; EUR ; ; ; 265 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+# EDI_LGW_MAD:business bundle
+; EOWC5 ; GBP ; ; ; 274 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; EOWC5 ; GBP ; ; ; 301 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; EOWC5 ; EUR ; ; ; 354 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; EOWC5 ; EUR ; ; ; 389 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 321 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ROWC5 ; GBP ; ; ; 278 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ROWC5 ; EUR ; ; ; 415 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ROWC5 ; EUR ; ; ; 359 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; COWC5 ; GBP ; ; ; 309 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; COWC5 ; EUR ; ; ; 399 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+
+# EDI_LGW_PMO:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 112 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ORTC5 ; GBP ; ; ; 143 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ORTC5 ; EUR ; ; ; 145 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ORTC5 ; EUR ; ; ; 185 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 132 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; QOWC5 ; GBP ; ; ; 114 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; QOWC5 ; EUR ; ; ; 170 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; QOWC5 ; EUR ; ; ; 147 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 129 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; MOWC5 ; GBP ; ; ; 90  ; pieces ; ; ; ; ; PMO_LGW_EDI
+; MOWC5 ; EUR ; ; ; 167 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; MOWC5 ; EUR ; ; ; 116 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 110 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; KOWC5 ; GBP ; ; ; 110 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; KOWC5 ; EUR ; ; ; 142 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+# EDI_LGW_PMO:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 118 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; EOWC5 ; GBP ; ; ; 118 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; EOWC5 ; EUR ; ; ; 152 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; EOWC5 ; EUR ; ; ; 152 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 158 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; TOWC5 ; GBP ; ; ; 158 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; TOWC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; TOWC5 ; EUR ; ; ; 204 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 178 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; WOWC5 ; GBP ; ; ; 178 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; WOWC5 ; EUR ; ; ; 230 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; WOWC5 ; EUR ; ; ; 230 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 198 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; WRTC6 ; GBP ; ; ; 198 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; WRTC6 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; WRTC6 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+# EDI_LGW_PMO:business bundle
+; EOWC5 ; GBP ; ; ; 238 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; EOWC5 ; GBP ; ; ; 238 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; EOWC5 ; EUR ; ; ; 306 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; EOWC5 ; EUR ; ; ; 306 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 278 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ROWC5 ; GBP ; ; ; 278 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ROWC5 ; EUR ; ; ; 359 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ROWC5 ; EUR ; ; ; 359 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+
+# EDI_LGW_VCE:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 127 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ORTC5 ; GBP ; ; ; 131 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ORTC5 ; EUR ; ; ; 164 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ORTC5 ; EUR ; ; ; 169 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 142 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; QOWC5 ; GBP ; ; ; 78  ; pieces ; ; ; ; ; VCE_LGW_EDI
+; QOWC5 ; EUR ; ; ; 183 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; QOWC5 ; EUR ; ; ; 101 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 114 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; MOWC5 ; GBP ; ; ; 90  ; pieces ; ; ; ; ; VCE_LGW_EDI
+; MOWC5 ; EUR ; ; ; 147 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; MOWC5 ; EUR ; ; ; 116 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 121 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; KOWC5 ; GBP ; ; ; 112 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; KOWC5 ; EUR ; ; ; 156 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; KOWC5 ; EUR ; ; ; 145 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+# EDI_LGW_VCE:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 215 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; EOWC5 ; GBP ; ; ; 221 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; EOWC5 ; EUR ; ; ; 278 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; EOWC5 ; EUR ; ; ; 285 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 203 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; TOWC5 ; GBP ; ; ; 199 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; TOWC5 ; EUR ; ; ; 262 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; TOWC5 ; EUR ; ; ; 257 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 212 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; WOWC5 ; GBP ; ; ; 234 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; WOWC5 ; EUR ; ; ; 274 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; WOWC5 ; EUR ; ; ; 302 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 193 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; WRTC6 ; GBP ; ; ; 205 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; WRTC6 ; EUR ; ; ; 249 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; WRTC6 ; EUR ; ; ; 265 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+# EDI_LGW_PMO:business bundle
+; EOWC5 ; GBP ; ; ; 310 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; EOWC5 ; GBP ; ; ; 322 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; EOWC5 ; EUR ; ; ; 400 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; EOWC5 ; EUR ; ; ; 416 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 378 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ROWC5 ; GBP ; ; ; 290 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ROWC5 ; EUR ; ; ; 488 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ROWC5 ; EUR ; ; ; 375 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 353 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; COWC5 ; GBP ; ; ; 318 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; COWC5 ; EUR ; ; ; 456 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; COWC5 ; EUR ; ; ; 411 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 303 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; DOWC5 ; EUR ; ; ; 391 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+
+# EDI_LGW_ZRH:Economy bundle
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ORTC5 ; GBP ; ; ; 142 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ORTC5 ; GBP ; ; ; 153 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ORTC5 ; EUR ; ; ; 183 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ORTC5 ; EUR ; ; ; 198 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; QOWC5 ; GBP ; ; ; 119 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; QOWC5 ; GBP ; ; ; 99  ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; QOWC5 ; EUR ; ; ; 154 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; QOWC5 ; EUR ; ; ; 128 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; MOWC5 ; GBP ; ; ; 167 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; MOWC5 ; GBP ; ; ; 115 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; MOWC5 ; EUR ; ; ; 216 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; MOWC5 ; EUR ; ; ; 149 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; KOWC5 ; GBP ; ; ; 145 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; KOWC5 ; GBP ; ; ; 171 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; KOWC5 ; EUR ; ; ; 187 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; KOWC5 ; EUR ; ; ; 221 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+# EDI_LGW_ZRH:Economy plus bundle
+; EOWC5 ; GBP ; ; ; 206 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; EOWC5 ; GBP ; ; ; 234 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; EOWC5 ; EUR ; ; ; 266 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; EOWC5 ; EUR ; ; ; 302 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; TOWC5 ; GBP ; ; ; 245 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; TOWC5 ; GBP ; ; ; 210 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; TOWC5 ; EUR ; ; ; 316 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; TOWC5 ; EUR ; ; ; 271 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; WOWC5 ; GBP ; ; ; 272 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; WOWC5 ; GBP ; ; ; 250 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; WOWC5 ; EUR ; ; ; 351 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; WOWC5 ; EUR ; ; ; 323 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; WRTC6 ; GBP ; ; ; 223 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; WRTC6 ; GBP ; ; ; 198 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; WRTC6 ; EUR ; ; ; 288 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; WRTC6 ; EUR ; ; ; 256 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+# EDI_LGW_ZRH:business bundle
+; EOWC5 ; GBP ; ; ; 342 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; EOWC5 ; GBP ; ; ; 309 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; EOWC5 ; EUR ; ; ; 442 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; EOWC5 ; EUR ; ; ; 399 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; ROWC5 ; GBP ; ; ; 378 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ROWC5 ; GBP ; ; ; 382 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ROWC5 ; EUR ; ; ; 488 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ROWC5 ; EUR ; ; ; 493 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; COWC5 ; GBP ; ; ; 356 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; COWC5 ; GBP ; ; ; 290 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; COWC5 ; EUR ; ; ; 460 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; COWC5 ; EUR ; ; ; 375 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; DOWC5 ; GBP ; ; ; 338 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; DOWC5 ; EUR ; ; ; 437 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+
+
+####################
+# Ancillary Prices #
+####################
+
+# Accommodation Prices for multi-sector Routes
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; BCN_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_BCN
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; BCN_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; AMS_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_AMS
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; AMS_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; BUD_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_BUD
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; BUD_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; CPH_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_CPH
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; CPH_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; FAO_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_FAO
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; FAO_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; GVA_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_GVA
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; GVA_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; MAD_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_MAD
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; MAD_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; PMO_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_PMO
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; PMO_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; VCE_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_VCE
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; VCE_LGW_EDI
+
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ACECONSEAT1 ; GBP ; ; ; 5  ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ACPECOSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ACBIZZSEAT1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ACECONSEAT1 ; EUR ; ; ; 6  ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ACPECOSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; EDI_LGW_ZRH
+; ACBIZZSEAT1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ; ZRH_LGW_EDI
+
+# Default Accommodation prices
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; ACECONSEAT1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+; ACPECOSEAT1 ; GBP ; ; ; 20 ; pieces ; ; ; ; ;
+; ACBIZZSEAT1 ; GBP ; ; ; 30 ; pieces ; ; ; ; ;
+
+# Prices in EUR
+; ACECONSEAT1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ;
+; ACPECOSEAT1 ; EUR ; ; ; 26 ; pieces ; ; ; ; ;
+; ACBIZZSEAT1 ; EUR ; ; ; 39 ; pieces ; ; ; ; ;
+
+
+# Priority Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; PRICHECKIN1  ; GBP ; ; ; 5  ; pieces ; ; ; ; ;
+; PRIBOARDING1 ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+
+# Prices in EUR
+; PRICHECKIN1  ; EUR ; ; ; 6  ; pieces ; ; ; ; ;
+; PRIBOARDING1 ; EUR ; ; ; 13 ; pieces ; ; ; ; ;
+
+
+# Lounge Access Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; LOUNGEACC1 ; GBP ; ; ; 15 ; pieces ; ; ; ; ;
+
+# Prices in EUR
+; LOUNGEACC1 ; EUR ; ; ; 19 ; pieces ; ; ; ; ;
+
+
+# Meal Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; STANDARDMEAL   ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+; VEGETARIANMEAL ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+; CHILDMEAL      ; GBP ; ; ; 5  ; pieces ; ; ; ; ;
+; CHAMPAGNE      ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+
+# Prices in EUR
+; STANDARDMEAL   ; EUR ; ; ; 13 ; pieces ; ; ; ; ;
+; VEGETARIANMEAL ; EUR ; ; ; 13 ; pieces ; ; ; ; ;
+; CHILDMEAL      ; EUR ; ; ; 6  ; pieces ; ; ; ; ;
+; CHAMPAGNE      ; GBP ; ; ; 13 ; pieces ; ; ; ; ;
+
+
+# Hold Item Product
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price; unit(code); $catalogVersion; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+# Prices in GBP
+; EXTRABAG20 ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+; EXTRABAG32 ; GBP ; ; ; 20 ; pieces ; ; ; ; ;
+; SKIS       ; GBP ; ; ; 20 ; pieces ; ; ; ; ;
+; SURFBOARD  ; GBP ; ; ; 30 ; pieces ; ; ; ; ;
+; GOLFCLUBS  ; GBP ; ; ; 10 ; pieces ; ; ; ; ;
+
+# Prices in EUR
+; EXTRABAG20 ; EUR ; ; ; 13 ; pieces ; ; ; ; ;
+; EXTRABAG32 ; EUR ; ; ; 26 ; pieces ; ; ; ; ;
+; SKIS       ; EUR ; ; ; 26 ; pieces ; ; ; ; ;
+; SURFBOARD  ; EUR ; ; ; 39 ; pieces ; ; ; ; ;
+; GOLFCLUBS  ; EUR ; ; ; 13 ; pieces ; ; ; ; ;
+
+
+# Fee Products
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; currency(isocode)[unique = true]; minqtd[default = '1']; net[default = true]; price[unique = true]; unit(code); $catalogVersion; user(uid); transportOfferingCode; travelSectorCode; travelRouteCode
+; AdminFee ; GBP ; ; ; 13 ; pieces ; ; ; ; ;
+; AdminFee ; EUR ; ; ; 17 ; pieces ; ; ; ; ;

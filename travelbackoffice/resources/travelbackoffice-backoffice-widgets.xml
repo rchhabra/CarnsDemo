@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company. ~ All rights reserved. ~ ~ This software is the confidential and proprietary
+	information of SAP ~ Hybris ("Confidential Information"). You shall not disclose such ~ Confidential Information and shall use
+	 it only in accordance with the ~ terms of the license agreement you entered into with SAP Hybris. -->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+
+
+	<widget-connection inputId="input" outputId="nodeSelected" sourceWidgetId="travelbackoffice-explorer-tree"
+		targetWidgetId="travelbackoffice-tree-node-adapter" />
+	<widget-connection inputId="genericInput" outputId="true" sourceWidgetId="travelbackoffice-tree-node-adapter"
+		targetWidgetId="travelbackoffice-typecode-extractor" />
+	<widget-connection inputId="genericInput" outputId="true" sourceWidgetId="travelbackoffice-tree-node-adapter"
+		targetWidgetId="travelbackoffice-search-enabler" />
+	<widget-connection inputId="genericInput" outputId="false" sourceWidgetId="travelbackoffice-tree-node-adapter"
+		targetWidgetId="travelbackoffice-search-disabler" />
+	<widget-connection inputId="type" outputId="genericOutput" sourceWidgetId="travelbackoffice-typecode-extractor"
+		targetWidgetId="travelbackoffice-search-logic" />
+	<widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="travelbackoffice-search-enabler"
+		targetWidgetId="travelbackoffice-text-search" />
+	<widget-connection inputId="enabled" outputId="genericOutput" sourceWidgetId="travelbackoffice-search-disabler"
+		targetWidgetId="travelbackoffice-text-search" />
+	<widget-connection inputId="searchtext" outputId="query" sourceWidgetId="travelbackoffice-text-search"
+		targetWidgetId="travelbackoffice-search-logic" />
+	<widget-connection inputId="pageable" outputId="pageable" sourceWidgetId="travelbackoffice-search-logic"
+		targetWidgetId="travelbackoffice-simple-list" />
+
+	<widget-extension widgetId="backoffice_dashboard">
+
+		<widget id="mainPanel" widgetDefinitionId="de.hybris.platform.travelbackoffice.widgets.mainpanel" slotId="dashboardWidgets" template="false">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+		<widget id="modifyWizard" widgetDefinitionId="de.hybris.platform.travelbackoffice.widget.modifywizard" slotId="cockpitWidgetChildrenInvisible" template="true">
+			<widget id="wizardNotificationWidget" widgetDefinitionId="com.hybris.backoffice.notificationarea" slotId="wizardNotificationarea" template="false">
+                 <setting key="notificationId" type="String">creationWizard</setting>
+                 <setting key="widgetStyleAttribute" type="String"></setting>
+                 <setting key="debugLog" type="Boolean">false</setting>
+                 <setting key="widgetStyleClass" type="String"></setting>
+                 <setting key="stackSize" type="Integer">3</setting>
+                 <setting key="useDynamicNotificationId" type="Boolean">true</setting>
+                 <virtual-sockets/>
+            </widget>
+           	<instance-settings socketEventRoutingMode="LAST_USED">
+               <create onInit="false" reuseExisting="false">
+                   <all-incoming-events/>
+               </create>
+               <close>
+                   <all-outgoing-events/>
+               </close>
+               <select onInit="false">
+                   <all-incoming-events/>
+               </select>
+           </instance-settings>
+           <setting key="widgetStyleAttribute" type="String"></setting>
+           <setting key="widgetStyleClass" type="String"></setting>
+           <setting key="isNestedObjectCreationDisabled" type="Boolean">true</setting>
+           <virtual-sockets/>
+        </widget>
+		
+	</widget-extension>
+	
+	<widget-extension widgetId="backoffice_content_container">
+
+		<widget id="seatMap" widgetDefinitionId="de.hybris.platform.travelbackoffice.widget.seatmap" slotId="perspectives" template="true">
+			<setting key="widgetStyleClass" type="String"></setting>
+			<setting key="widgetStyleAttribute" type="String"></setting>
+			<virtual-sockets/>
+		</widget>
+
+	</widget-extension>
+	
+	<widget-connection outputId="contextMap" sourceWidgetId="mainPanel" inputId="context" targetWidgetId="configurableFlow" />
+
+	<widget-connection outputId="contextMapForModifyWizard" sourceWidgetId="mainPanel" inputId="context" targetWidgetId="modifyWizard" />
+
+	<widget-connection outputId="seatmapContext" sourceWidgetId="mainPanel" inputId="contextMap" targetWidgetId="seatMap" />
+
+	<widget-connection outputId="treeNode" sourceWidgetId="mainPanel" inputId="nodeIdSelected" targetWidgetId="explorerTree" />
+
+</widgets>

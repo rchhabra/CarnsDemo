@@ -1,0 +1,49 @@
+$lang=en
+$catalogVersion=catalogVersion(catalog(id[default='testCatalog']),version[default='Online'])[unique=true,default='testCatalog:Online']
+
+# Search Restrictions apply for customergroup
+INSERT_UPDATE SearchRestriction;code[unique=true];query;principal(UID);restrictedType(code);active;generate[default=FALSE]
+;Frontend_BundleTemplate_Test;{catalogVersion} IN ( ?session.catalogversions );customergroup;BundleTemplate;true;
+;Frontend_BundleTemplateStatus_Test;{catalogVersion} IN ( ?session.catalogversions );customergroup;BundleTemplateStatus;true;
+
+
+
+
+INSERT_UPDATE BundleTemplateStatus;id[unique=true];status(code)[default=approved];$catalogVersion
+;Approved_Status1
+;Approved_Status2
+;Approved_Status3
+
+INSERT_UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];name[lang=$lang];type(code);parentTemplate(id);status(id);$catalogVersion
+;EconomyBundleTest;;Economy Class Bundle;ECONOMY;;Approved_Status1;
+
+;FareProductEconomyBundleTest;;Economy Fare Bundle;ECONOMY;EconomyBundleTest;Approved_Status1;
+
+;AncillaryProductEconomyBundleTest;;Economy Ancillary Bundle;ECONOMY;EconomyBundleTest;Approved_Status1;
+
+
+
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];products(code, $catalogVersion);$catalogVersion
+;FareProductEconomyBundleTest;;FPLGWCDGOCAT1Test,FPLGWCDGOCAT2Test
+;AncillaryProductEconomyBundleTest;;ACECONSEAT1Test
+
+
+# Selection creteria
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogVersion
+;FareProductBundle_PickExactlyOneTest		;1
+
+
+
+# Auto pick Selection creteria
+INSERT_UPDATE AutoPickBundleSelectionCriteria;id[unique=true];$catalogVersion
+;IncludedAncillary_AutoPickBundleSelectionTest
+
+
+ 
+#Update the BundleTemplate with Selectioncriteria
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];bundleSelectionCriteria(id, $catalogVersion);$catalogVersion
+;FareProductEconomyBundleTest					; ;FareProductBundle_PickExactlyOneTest
+;AncillaryProductEconomyBundleTest				; ;IncludedAncillary_AutoPickBundleSelectionTest
+
+
+

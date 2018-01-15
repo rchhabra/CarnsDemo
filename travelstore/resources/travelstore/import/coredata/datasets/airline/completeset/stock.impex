@@ -1,0 +1,2 @@
+INSERT_UPDATE StockLevel; productCode[unique = true]; warehouse(code)[unique = true]; inStockStatus(code)
+; AdminFee ; default ; forceInStock

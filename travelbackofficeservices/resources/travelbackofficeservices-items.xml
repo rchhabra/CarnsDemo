@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <relations>
+        <relation localized="false" code="TransportOfferingOriginLocationRelation">
+            <deployment table="TransOfferOrgLocation" typecode="6906"/>
+            <sourceElement type="TransportOffering" qualifier="transportOfferings" cardinality="many">
+                <modifiers/>
+            </sourceElement>
+            <targetElement type="Location" qualifier="originLocations" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers/>
+            </targetElement>
+        </relation>
+        <relation localized="false" code="TransportOfferingDestinationLocationRelation">
+            <deployment table="TransOfferDesLocation" typecode="6907"/>
+            <sourceElement type="TransportOffering" qualifier="transportOfferings" cardinality="many">
+                <modifiers/>
+            </sourceElement>
+            <targetElement type="Location" qualifier="destinationLocations" cardinality="many" collectiontype="list" ordered="true">
+                <modifiers/>
+            </targetElement>
+        </relation>
+    </relations>
+
+    <itemtypes>
+        <itemtype code="TransportOffering" autocreate="false" generate="false">
+            <description>It represents a specific transport offering</description>
+            <attributes>
+                <attribute qualifier="originTransportFacility" type="TransportFacility">
+                    <persistence type="property"/>
+                    <description>It represents an origin transport facility of the transport offering</description>
+                </attribute>
+                <attribute qualifier="destinationTransportFacility" type="TransportFacility">
+                    <persistence type="property"/>
+                    <description>It represents a destination transport facility of the transport offering</description>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="ManageInventory" jaloclass="de.hybris.platform.travelbackofficeservices.jalo.travel.ManageInventory">
+            <description>This type represents is created to create a nav-node in backoffice.</description>
+            <deployment table="ManageInventory" typecode="6908"/>
+            <attributes>
+                <attribute type="java.lang.String" qualifier="code">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+        
+        <itemtype code="ManageAncillaryInventory" jaloclass="de.hybris.platform.travelbackofficeservices.jalo.travel.ManageAncillaryInventory">
+            <description>This type associated to "create stock for ancillary product" in backoffice.</description>
+            <deployment table="ManageAncillaryInventory" typecode="6916"/>
+            <attributes>
+                <attribute type="java.lang.String" qualifier="code">
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+        
+        <itemtype code="StockLevel" autocreate="false" generate="false">
+        	<description>Extending StockLevel type to include backoffice related attributes</description>
+        	<attributes>
+	          <attribute type="java.lang.Boolean" qualifier="selected">
+	          	 <defaultvalue>Boolean.FALSE</defaultvalue>
+	             <persistence type="property" />
+	          </attribute>
+        	</attributes>
+        </itemtype>
+        
+         <itemtype code="TravelWorkflowItemAttachment" extends="WorkflowItemAttachment" jaloclass="de.hybris.platform.travelbackofficeservices.jalo.travel.TravelWorkflowItemAttachment" autocreate="true" generate="true">
+        	<description>Extending WorkflowItemAttachment type to make item attribute non mandatory</description>
+        	<attributes>
+	          <attribute autocreate="true" redeclare="true" qualifier="item" type="Item">
+					<modifiers initial="true" read="true" write="true" optional="true" />
+					<persistence type="property" />
+					<description>The item this attachment references</description>
+				</attribute>
+        	</attributes>
+        </itemtype>
+
+            <itemtype code="ManageTransportOfferingForScheduleConfigurationCronJob" extends="CronJob" jaloclass="de.hybris.platform.travelbackofficeservices.jalo.cronjob.ManageTransportOfferingForScheduleConfigurationCronJob">
+                <description>This type represents a cron job that create/modify a list of Transport Offering based on given ScheduleConfiguration.</description>
+                <attributes>
+                    <attribute type="ScheduleConfiguration" qualifier="scheduleConfiguration">
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+    </itemtypes>
+</items>

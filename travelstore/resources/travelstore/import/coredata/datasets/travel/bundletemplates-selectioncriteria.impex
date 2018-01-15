@@ -1,0 +1,140 @@
+$productCatalog = travelProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+#Update the BundleTemplate with Selectioncriteria
+### FARE PRODUCT BUNDLES
+
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria; id[unique = true]; n; $catalogVersion
+; PhuketFareProductBundle_PickExactlyOne            ; 1  ;
+; GoaFareProductBundle_PickExactlyOne               ; 1  ;
+; MiamiFareProductBundle_PickExactlyOne             ; 1  ;
+; AmalfiFareProductBundle_PickExactlyOne            ; 1  ;
+
+; LondonFareProductBundle_PickExactlyOne            ; 1  ;
+; ParisFareProductBundle_PickExactlyOne             ; 1  ;
+; FlorenceFareProductBundle_PickExactlyOne          ; 1  ;
+; RomeFareProductBundle_PickExactlyOne              ; 1  ;
+
+; BangkokFareProductBundle_PickExactlyOne           ; 1  ;
+; MalaysiaFareProductBundle_PickExactlyOne          ; 1  ;
+; PragueFareProductBundle_PickExactlyOne            ; 1  ;
+; IcelandFareProductBundle_PickExactlyOne           ; 1  ;
+
+; Olympics1FareProductBundle_PickExactlyOne         ; 1  ;
+; Olympics2FareProductBundle_PickExactlyOne         ; 1  ;
+; Olympics3FareProductBundle_PickExactlyOne         ; 1  ;
+; SnowboardSpecialFareProductBundle_PickExactlyOne  ; 1  ;
+
+
+INSERT_UPDATE AutoPickBundleSelectionCriteria; id[unique = true]; $catalogVersion
+; PhuketIncludedAncillary_AutoPickBundleSelection                ;
+; GoaIncludedAncillary_AutoPickBundleSelection                   ;
+; MiamiIncludedAncillary_AutoPickBundleSelection                 ;
+; AmalfiIncludedAncillary_AutoPickBundleSelection                ;
+
+; LondonIncludedAncillary_AutoPickBundleSelection                ;
+; ParisIncludedAncillary_AutoPickBundleSelection                 ;
+; FlorenceIncludedAncillary_AutoPickBundleSelection              ;
+; RomeIncludedAncillary_AutoPickBundleSelection                  ;
+
+
+; BangkokIncludedAncillary_AutoPickBundleSelection               ;
+; MalaysiaIncludedAncillary_AutoPickBundleSelection              ;
+; PragueIncludedAncillary_AutoPickBundleSelection                ;
+; IcelandIncludedAncillary_AutoPickBundleSelection               ;
+
+
+; Olympics1IncludedAncillary_AutoPickBundleSelection             ;
+; Olympics2IncludedAncillary_AutoPickBundleSelection             ;
+; Olympics3IncludedAncillary_AutoPickBundleSelection             ;
+; SnowboardSpecialIncludedAncillary_AutoPickBundleSelection      ;
+
+
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; bundleSelectionCriteria(id, $catalogVersion); $catalogVersion
+#Beach destinations
+; PhuketOutboundFareProductBundle           ; ; PhuketFareProductBundle_PickExactlyOne          ;
+; PhuketInboundFareProductBundle            ; ; PhuketFareProductBundle_PickExactlyOne          ;
+; GoaOutboundFareProductBundle              ; ; GoaFareProductBundle_PickExactlyOne             ;
+; GoaInboundFareProductBundle               ; ; GoaFareProductBundle_PickExactlyOne             ;
+; MiamiOutboundFareProductBundle            ; ; MiamiFareProductBundle_PickExactlyOne           ;
+; MiamiInboundFareProductBundle             ; ; MiamiFareProductBundle_PickExactlyOne           ;
+; AmalfiOutboundFareProductBundle           ; ; AmalfiFareProductBundle_PickExactlyOne          ;
+; AmalfiInboundFareProductBundle            ; ; AmalfiFareProductBundle_PickExactlyOne          ;
+
+#Explore Europe
+; LondonOutboundFareProductBundle           ; ; LondonFareProductBundle_PickExactlyOne          ;
+; LondonInboundFareProductBundle            ; ; LondonFareProductBundle_PickExactlyOne          ;
+; ParisOutboundFareProductBundle            ; ; ParisFareProductBundle_PickExactlyOne           ;
+; ParisInboundFareProductBundle             ; ; ParisFareProductBundle_PickExactlyOne           ;
+; FlorenceOutboundFareProductBundle         ; ; FlorenceFareProductBundle_PickExactlyOne        ;
+; FlorenceInboundFareProductBundle          ; ; FlorenceFareProductBundle_PickExactlyOne        ;
+; RomeOutboundFareProductBundle             ; ; RomeFareProductBundle_PickExactlyOne            ;
+; RomeInboundFareProductBundle              ; ; RomeFareProductBundle_PickExactlyOne            ;
+
+#Great Savings
+; BangkokOutboundFareProductBundle          ; ; BangkokFareProductBundle_PickExactlyOne         ;
+; BangkokInboundFareProductBundle           ; ; BangkokFareProductBundle_PickExactlyOne         ;
+; MalaysiaOutboundFareProductBundle         ; ; MalaysiaFareProductBundle_PickExactlyOne        ;
+; MalaysiaInboundFareProductBundle          ; ; MalaysiaFareProductBundle_PickExactlyOne        ;
+; PragueOutboundFareProductBundle           ; ; PragueFareProductBundle_PickExactlyOne          ;
+; PragueInboundFareProductBundle            ; ; PragueFareProductBundle_PickExactlyOne          ;
+; IcelandOutboundFareProductBundle          ; ; IcelandFareProductBundle_PickExactlyOne         ;
+; IcelandInboundFareProductBundle           ; ; IcelandFareProductBundle_PickExactlyOne         ;
+
+#Winter Olympics
+; WinterOlympics1OutboundFareProductBundle  ; ; Olympics1FareProductBundle_PickExactlyOne       ;
+; WinterOlympics1InboundFareProductBundle   ; ; Olympics1FareProductBundle_PickExactlyOne       ;
+; WinterOlympics2OutboundFareProductBundle  ; ; Olympics2FareProductBundle_PickExactlyOne       ;
+; WinterOlympics2InboundFareProductBundle   ; ; Olympics2FareProductBundle_PickExactlyOne       ;
+; WinterOlympics3OutboundFareProductBundle  ; ; Olympics3FareProductBundle_PickExactlyOne       ;
+; WinterOlympics3InboundFareProductBundle   ; ; Olympics3FareProductBundle_PickExactlyOne       ;
+; SnowboardSpecialOutboundFareProductBundle ; ; SnowboardSpecialFareProductBundle_PickExactlyOne;
+; SnowboardSpecialInboundFareProductBundle  ; ; SnowboardSpecialFareProductBundle_PickExactlyOne;
+
+### ANCILLARY PRODUCT BUNDLE
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; bundleSelectionCriteria(id, $catalogVersion); $catalogVersion
+#Beach destinations
+; PhuketOutboundAncillaryProductBundle           ; ; PhuketIncludedAncillary_AutoPickBundleSelection                ;
+; PhuketInboundAncillaryProductBundle            ; ; PhuketIncludedAncillary_AutoPickBundleSelection                ;
+; GoaOutboundAncillaryProductBundle              ; ; GoaIncludedAncillary_AutoPickBundleSelection                   ;
+; GoaInboundAncillaryProductBundle               ; ; GoaIncludedAncillary_AutoPickBundleSelection                   ;
+; MiamiOutboundAncillaryProductBundle            ; ; MiamiIncludedAncillary_AutoPickBundleSelection                 ;
+; MiamiInboundAncillaryProductBundle             ; ; MiamiIncludedAncillary_AutoPickBundleSelection                 ;
+; AmalfiOutboundAncillaryProductBundle           ; ; AmalfiIncludedAncillary_AutoPickBundleSelection                ;
+; AmalfiInboundAncillaryProductBundle            ; ; AmalfiIncludedAncillary_AutoPickBundleSelection                ;
+
+#Explore Europe
+; LondonOutboundAncillaryProductBundle           ; ; LondonIncludedAncillary_AutoPickBundleSelection                ;
+; LondonInboundAncillaryProductBundle            ; ; LondonIncludedAncillary_AutoPickBundleSelection                ;
+; ParisOutboundAncillaryProductBundle            ; ; ParisIncludedAncillary_AutoPickBundleSelection                 ;
+; ParisInboundAncillaryProductBundle             ; ; ParisIncludedAncillary_AutoPickBundleSelection                 ;
+; FlorenceOutboundAncillaryProductBundle         ; ; FlorenceIncludedAncillary_AutoPickBundleSelection              ;
+; FlorenceInboundAncillaryProductBundle          ; ; FlorenceIncludedAncillary_AutoPickBundleSelection              ;
+; RomeOutboundAncillaryProductBundle             ; ; RomeIncludedAncillary_AutoPickBundleSelection                  ;
+; RomeInboundAncillaryProductBundle              ; ; RomeIncludedAncillary_AutoPickBundleSelection                  ;
+
+#Great Savings
+; BangkokOutboundAncillaryProductBundle          ; ; BangkokIncludedAncillary_AutoPickBundleSelection               ;
+; BangkokInboundAncillaryProductBundle           ; ; BangkokIncludedAncillary_AutoPickBundleSelection               ;
+; MalaysiaOutboundAncillaryProductBundle         ; ; MalaysiaIncludedAncillary_AutoPickBundleSelection              ;
+; MalaysiaInboundAncillaryProductBundle          ; ; MalaysiaIncludedAncillary_AutoPickBundleSelection              ;
+; PragueOutboundAncillaryProductBundle           ; ; PragueIncludedAncillary_AutoPickBundleSelection                ;
+; PragueInboundAncillaryProductBundle            ; ; PragueIncludedAncillary_AutoPickBundleSelection                ;
+; IcelandOutboundAncillaryProductBundle          ; ; IcelandIncludedAncillary_AutoPickBundleSelection               ;
+; IcelandInboundAncillaryProductBundle           ; ; IcelandIncludedAncillary_AutoPickBundleSelection               ;
+
+#Winter Olympics
+; WinterOlympics1OutboundAncillaryProductBundle  ; ; Olympics1IncludedAncillary_AutoPickBundleSelection             ;
+; WinterOlympics1InboundAncillaryProductBundle   ; ; Olympics1IncludedAncillary_AutoPickBundleSelection             ;
+; WinterOlympics2OutboundAncillaryProductBundle  ; ; Olympics2IncludedAncillary_AutoPickBundleSelection             ;
+; WinterOlympics2InboundAncillaryProductBundle   ; ; Olympics2IncludedAncillary_AutoPickBundleSelection             ;
+; WinterOlympics3OutboundAncillaryProductBundle  ; ; Olympics3IncludedAncillary_AutoPickBundleSelection             ;
+; WinterOlympics3InboundAncillaryProductBundle   ; ; Olympics3IncludedAncillary_AutoPickBundleSelection             ;
+; SnowboardSpecialOutboundAncillaryProductBundle ; ; SnowboardSpecialIncludedAncillary_AutoPickBundleSelection      ;
+; SnowboardSpecialInboundAncillaryProductBundle  ; ; SnowboardSpecialIncludedAncillary_AutoPickBundleSelection      ;
+
+
+
+### STANDART PRODUCT BUNDLE
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; bundleSelectionCriteria(id, $catalogVersion); $catalogVersion
+#

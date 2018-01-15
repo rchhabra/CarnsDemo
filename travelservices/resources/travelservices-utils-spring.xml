@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:map id="calculateTotalPriceForChangeDatesStrategyMap" key-type="java.lang.String"
+		value-type="de.hybris.platform.travelservices.strategies.CalculateTotalPriceForChangeDatesStrategy">
+		<entry key="NO_GUARANTEES" value-ref="calculateTotalPriceWithoutGuaranteeForChangeDatesStrategy" />
+		<entry key="GUARANTEES" value-ref="calculateTotalPriceWithGuaranteeForChangeDatesStrategy" />
+	</util:map>
+
+	<util:map id="changeDatesPaymentActionStrategyMap" key-type="java.lang.String"
+		value-type="de.hybris.platform.travelservices.strategies.payment.changedates.ChangeDatesPaymentActionStrategy">
+		<entry key="REFUND" value-ref="changeDatesRefundAction" />
+		<entry key="SAME" value-ref="changeDatesSameAction" />
+		<entry key="PAYABLE" value-ref="changeDatesPayableAction" />
+	</util:map>
+
+
+	<util:map id="manageStockByEntryTypeStrategyMap" key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+		<entry key="TRANSPORT" value-ref="transportManageStockStrategy" />
+		<entry key="ACCOMMODATION" value-ref="accommodationManageStockStrategy" />
+		<entry key="DEFAULT" value-ref="defaultEntryTypeManageStockStrategy" />
+	</util:map>
+
+	<util:map id="transportManageStockByProductTypeStrategyMap" key-type="java.lang.String">
+		<entry key="FareProductModel" value-ref="travelManageStockStrategy" />
+		<entry key="DEFAULT" value-ref="defaultTransportProductStockStrategy" />
+	</util:map>
+
+	<util:map id="accommodationManageStockByProductTypeStrategyMap" key-type="java.lang.String">
+		<entry key="RoomRateProductModel" value-ref="roomRateStockStrategy" />
+		<entry key="DEFAULT" value-ref="defaultAccommodationProductStockStrategy" />
+	</util:map>
+
+	<util:map id="travelManageStockStrategyMap" key-type="de.hybris.platform.travelservices.enums.AddToCartCriteriaType">
+		<entry key="PER_LEG_PER_PAX" value-ref="travelManageStockStrategy" />
+		<entry key="PER_LEG" value-ref="noActionManageStockStrategy" />
+		<entry key="PER_PAX" value-ref="noActionManageStockStrategy" />
+		<entry key="PER_BOOKING" value-ref="noActionManageStockStrategy" />
+	</util:map>
+
+	<util:map id="stockReservationCreationStrategyMap" key-type="de.hybris.platform.travelservices.enums.AddToCartCriteriaType">
+		<entry key="PER_LEG_PER_PAX" value-ref="stockReservationCreationStrategy" />
+		<entry key="PER_LEG" value-ref="stockReservationForDefaultWarehouseCreationStrategy" />
+		<entry key="PER_PAX" value-ref="stockReservationForDefaultWarehouseCreationStrategy" />
+		<entry key="PER_BOOKING" value-ref="stockReservationForDefaultWarehouseCreationStrategy" />
+	</util:map>
+
+	<util:map id="stockReservationReleaseByEntryTypeStrategyMap" key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+		<entry key="TRANSPORT" value-ref="transportStockReservationReleaseStrategy" />
+		<entry key="ACCOMMODATION" value-ref="accommodationStockReservationReleaseStrategy" />
+		<entry key="DEFAULT" value-ref="defaultStockReservationReleaseStrategy" />
+	</util:map>
+
+	<util:map id="transportStockReservationCreationByProductTypeStrategyMap" key-type="java.lang.String">
+		<entry key="FareProductModel" value-ref="stockReservationCreationStrategy" />
+		<entry key="DEFAULT" value-ref="defaultTransportReservationCreationStrategy" />
+	</util:map>
+
+	<util:map id="accommodationStockReservationCreationByProductTypeStrategyMap" key-type="java.lang.String">
+		<entry key="RoomRateProductModel" value-ref="roomRateReservationCreationStrategy" />
+		<entry key="DEFAULT" value-ref="defaultAccommodationReservationCreationStrategy" />
+	</util:map>
+
+	<util:map id="cartEntryValidationStrategyByEntryTypeMap" key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+		<entry key="TRANSPORT" value-ref="transportCartEntryValidationStrategy" />
+		<entry key="ACCOMMODATION" value-ref="accommodationCartEntryValidationStrategy" />
+        <entry key="DEFAULT" value-ref="defaultCartEntryValidationStrategy" />
+	</util:map>
+
+	<util:map id="entryTypeStockResolvingStrategyMap" key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+		<entry key="TRANSPORT" value-ref="transportStockResolvingStrategy" />
+		<entry key="ACCOMMODATION" value-ref="accommodationStockResolvingStrategy" />
+		<entry key="DEFAULT" value-ref="entryTypeStockResolvingStrategy" />
+	</util:map>
+
+	<util:map id="strategyByProductTypeMap" key-type="java.lang.String">
+		<entry key="RoomRateProductModel" value-ref="roomRateStockResolvingStrategy" />
+		<entry key="DEFAULT" value-ref="defaultAccommodationProductStockResolvingStrategy" />
+	</util:map>
+
+	<util:map id="guaranteesPriorityMap" key-type="de.hybris.platform.travelservices.enums.GuaranteeType" value-type="java.lang.Integer">
+		<entry key="PREPAYMENT" value="1" />
+		<entry key="DEPOSIT" value="2" />
+		<entry key="GUARANTEE" value="3" />
+
+	</util:map>
+
+	<util:map id="offerGroupToOriginDestinationMapping" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="PRIORITYCHECKIN" value="TravelRoute" />
+		<entry key="HOLDITEM" value="TravelRoute" />
+		<entry key="PRIORITYBOARDING" value="TransportOffering" />
+		<entry key="LOUNGEACCESS" value="TransportOffering" />
+		<entry key="MEAL" value="TransportOffering" />
+		<entry key="SPECIAL" value="TransportOffering" />
+		<entry key="ACCOMMODATION" value="TransportOffering" />
+		<entry key="DEFAULT" value="TravelRoute" />
+	</util:map>
+	
+	<util:map id="refundPaymentTransactionStrategyMap" key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+		<entry key="TRANSPORT" value-ref="defaultRefundPaymentTransactionStrategy" />
+		<entry key="ACCOMMODATION" value-ref="accommodationRefundPaymentTransactionStrategy" />
+		<entry key="DEFAULT" value-ref="defaultRefundPaymentTransactionStrategy" />
+	</util:map>
+
+	<util:list id="defaultRoomBedPreferenceCodes" value-type="java.lang.String">
+		<value>#{configurationService.configuration.getProperty('accommodation.room.bed.preference.code.default')}</value>
+	</util:list>
+
+</beans>

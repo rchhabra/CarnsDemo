@@ -1,0 +1,20 @@
+# Macros / Replacement Parameter definitions
+$lang = en
+
+#
+# ImpEx for Importing Activity into travel accelerator
+#
+INSERT_UPDATE Activity; code[unique = true]
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/activities.csv""), ""utf-8"", new char[] {','}, 0, 0);"
+
+#
+# ImpEx for Importing LocationActivityRelation into travel accelerator
+#
+INSERT_UPDATE Location; code[unique = true]; activity(code)
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/locationactivities.csv""), ""utf-8"", new char[] {','}, 0, 0);"
+
+#
+# ImpEx for Importing TransportFacilityLocationRelation into travel accelerator
+#
+INSERT_UPDATE TransportFacility; code[unique = true]; activity(code)
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/transportfacilityactivities.csv""), ""utf-8"", new char[] {','}, 0, 0);"

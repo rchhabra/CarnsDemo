@@ -1,0 +1,8 @@
+# Language
+$lang = en
+
+# B2BUnit
+UPDATE B2BUnit; uid[unique = true]; locname[lang = $lang]
+; HybrisTravelAgency ; Hybris Travel Agency
+; Pronto             ; Pronto
+; Rustic             ; Rustic

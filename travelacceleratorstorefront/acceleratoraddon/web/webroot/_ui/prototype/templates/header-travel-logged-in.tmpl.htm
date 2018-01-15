@@ -1,0 +1,148 @@
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="user-options-wrapper">
+            <div class="container simple-banner-component">
+                <a href="/yacceleratorstorefront/" class="navbar-brand">
+                    <img src="assets/images/logotravelstore.svg" class="img-responsive" alt="Airline Store">
+                </a>
+                <div class="navbar-right">
+                    <ul class="user-options mt-10 flexbox row">
+                        <li class="y_loggedIn">Welcome Gina</li>
+						<li class="y_myAccountLink">
+							<a href="/yacceleratorstorefront/my-account/profile"> My Account</a>
+						</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Company</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#">Budgets</a>
+							</li>
+							<li>
+								<a href="#">Cost Centres</a>
+							</li>
+							<li>
+								<a href="#">Units</a>
+							</li>
+							<li>
+								<a href="#">Users</a>
+							</li>
+							<li>
+								<a href="#">User Groups</a>
+							</li>
+							<li>
+								<a href="#">Permissions</a>
+							</li>
+						</ul>
+					</li>
+					<li class="y_signButton">
+						<a href="/yacceleratorstorefront/logout"> Sign Out</a>
+					</li>
+					<li>
+							<a href="/yacceleratorstorefront/help" title="Help">Help</a>
+						</li>
+						<li>
+							<div class="content">Contact Us: 02034995253</div>
+						</li>
+                        <li>
+                            <ul class="languagecurrencycomponent">
+                                <li>
+                                    <form id="y_currencyForm" action="/yacceleratorstorefront/_s/currency" method="post">
+                                        <div class="form-group currency-select">
+                                            <span class="control-label sr-only" for="currency-selector">Currency selector</span>
+                                            <!-- Currency Picker -->
+                                            <div class="currency-select position">
+                                                <select id="currency-selector" class="y_currencySelector" style="display: none;">
+                                                    <option value="0" selected="selected" >&pound;</option>
+                                                    <option value="1" >&euro;</option>
+                                                    <option value="2" >&dollar;</option>
+                                                </select>
+                                            </div>
+                                            <!-- Currency Picker -->
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                    
+                </div>
+            </div>
+            <!-- / .container -->
+        </div>
+        <!-- /.container-fluid -->
+	<div class="container" {%if HideMenu%}style="display: none;"{%/if%}>
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="y_navbar nav navbar-nav">
+				<li class="nav-link-login greeting">
+					<div class="userGroup">
+						<div class="userName">Welcome Gina</div>
+					</div>
+				</li>
+				<li class="nav-link-login active">
+					<a href="/yacceleratorstorefront/my-account/profile"> My Account</a>
+				</li>
+				<li class="dropdown nav-link-login">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="My Company">My Company</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">Budgets</a>
+						</li>
+						<li>
+							<a href="#">Cost Centres</a>
+						</li>
+						<li>
+							<a href="#">Units</a>
+						</li>
+						<li>
+							<a href="#">Users</a>
+						</li>
+						<li>
+							<a href="#">User Groups</a>
+						</li>
+						<li>
+							<a href="#">Permissions</a>
+						</li>
+					</ul>
+				</li>
+				<li class="">
+					<a href="/yacceleratorstorefront/" title="Book Trip">Book Trip</a>
+				</li>
+				<li class="">
+					<a href="/yacceleratorstorefront/travel-information" title="Travel Information">Travel Information</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="Business Users">Business Users</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#" title="Using your loyalty points">Using your loyalty points</a>
+						</li>
+						<li>
+							<a href="#" title="Offers and News">Offers and News</a>
+						</li>
+						<li>
+							<a href="#" title="Join the club">Join the club</a>
+						</li>
+						<li>
+							<a href="#" title="Contact Us">Contact Us</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-link-login">
+					<a class="userSign" href="https://ec2-52-31-0-203.eu-west-1.compute.amazonaws.com/yacceleratorstorefront/logout"> Sign Out</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid -->
+    </nav>

@@ -1,0 +1,10 @@
+#
+# Import the Travel BaseStore
+#
+
+# Language
+$lang = en
+
+# Create Base Store
+UPDATE BaseStore; uid[unique = true]; name[lang = $lang]
+; travel ; "Travel Store"

@@ -1,0 +1,10 @@
+#
+# ImpEx for Importing Service Products into travel accelerator
+#
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+UPDATE ExtraProduct; code[unique = true]; name[lang = $lang]; description[lang = $lang]; $catalogVersion
+; WIFI              ; "Wi-Fi"                      ; "Wi-Fi connection"                                                                                                                           ;
+; GYM_ACCESS        ; "Gym Access"                 ; "Access to the gym"                                                                                                                          ;
+; ENGLISH_BREAKFAST ; "Full English Breakfast"     ; "Enjoy a Full English breakfast at the property"                                                                                             ;

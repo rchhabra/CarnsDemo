@@ -1,0 +1,8 @@
+INSERT_UPDATE MealType;code[unique=true];name[lang=en]
+
+;ALL_INCLUSIVE;All Included
+;BED_BREAKFAST;Bed and Breakfast
+;FULL_BOARD; Full Board
+;LUNCH;Lunch
+;DINNER;Dinner
+;BREAKFAST_LUNCH;Breakfast and Lunch

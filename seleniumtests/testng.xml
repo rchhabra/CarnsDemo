@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!-- <suite name="TestNG on specified classes" thread-count="1">
+	<test name="TestNGAnt">
+		<classes>
+			<class name="de.hybris.platform.sample.AirlineSampleTest"/>
+			<class name="de.hybris.platform.sample.HotelsSampleTest"/>
+			<class name="de.hybris.platform.sample.TravelSampleTest"/>
+		</classes>
+	</test>
+</suite> -->
+
+<suite name="TestNG on single package" verbose="1">
+    <test name="all-tests">
+        <packages>
+            <package name="de.hybris.platform.sample"/>
+        </packages>
+    </test>
+</suite>
+
+<!-- <suite name="TestNG on multiple packages" verbose="1">
+    <test name="all-tests">
+        <packages>
+            <package name="de.hybris.platform.sample"/>
+            <package name="de.hybris.platform.sample2"/>
+        </packages>
+    </test>
+</suite> -->
+
+<!-- <suite name="TestNG on all packages" verbose="1">
+  <test name="all-packages">
+    <packages>
+      <package name=".*" />
+    </packages>
+  </test>
+</suite> -->

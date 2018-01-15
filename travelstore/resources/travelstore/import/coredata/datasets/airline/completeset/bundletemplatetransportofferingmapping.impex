@@ -1,0 +1,92 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE CabinClass; code[unique = true]; name[lang = $lang]; cabinClassIndex
+; M ; Economy  ; 1
+; J ; Business ; 2
+
+INSERT_UPDATE BundleTemplateTransportOfferingMapping; code[unique = true]; bundleTemplate(id, version[default = 1.0], $catalogVersion); travelRoute(code); travelSector(code); transportOffering(code); cabinClass(code); $catalogVersion
+; BTTOM1  ; EconomyBundle     ; EDI_LGW_BCN ; ; ; M ;
+; BTTOM2  ; EconomyPlusBundle ; EDI_LGW_BCN ; ; ; M ;
+; BTTOM3  ; BusinessBundle    ; EDI_LGW_BCN ; ; ; J ;
+
+; BTTOM4  ; EconomyBundle     ; BCN_LGW_EDI ; ; ; M ;
+; BTTOM5  ; EconomyPlusBundle ; BCN_LGW_EDI ; ; ; M ;
+; BTTOM6  ; BusinessBundle    ; BCN_LGW_EDI ; ; ; J ;
+
+; BTTOM7  ; EconomyBundle     ; EDI_LGW_AMS ; ; ; M ;
+; BTTOM8  ; EconomyPlusBundle ; EDI_LGW_AMS ; ; ; M ;
+; BTTOM9  ; BusinessBundle    ; EDI_LGW_AMS ; ; ; J ;
+
+; BTTOM10 ; EconomyBundle     ; AMS_LGW_EDI ; ; ; M ;
+; BTTOM11 ; EconomyPlusBundle ; AMS_LGW_EDI ; ; ; M ;
+; BTTOM12 ; BusinessBundle    ; AMS_LGW_EDI ; ; ; J ;
+
+; BTTOM13 ; EconomyBundle     ; EDI_LGW_BUD ; ; ; M ;
+; BTTOM14 ; EconomyPlusBundle ; EDI_LGW_BUD ; ; ; M ;
+; BTTOM15 ; BusinessBundle    ; EDI_LGW_BUD ; ; ; J ;
+
+; BTTOM16 ; EconomyBundle     ; BUD_LGW_EDI ; ; ; M ;
+; BTTOM17 ; EconomyPlusBundle ; BUD_LGW_EDI ; ; ; M ;
+; BTTOM18 ; BusinessBundle    ; BUD_LGW_EDI ; ; ; J ;
+
+; BTTOM19 ; EconomyBundle     ; EDI_LGW_CPH ; ; ; M ;
+; BTTOM20 ; EconomyPlusBundle ; EDI_LGW_CPH ; ; ; M ;
+; BTTOM21 ; BusinessBundle    ; EDI_LGW_CPH ; ; ; J ;
+
+; BTTOM22 ; EconomyBundle     ; CPH_LGW_EDI ; ; ; M ;
+; BTTOM23 ; EconomyPlusBundle ; CPH_LGW_EDI ; ; ; M ;
+; BTTOM24 ; BusinessBundle    ; CPH_LGW_EDI ; ; ; J ;
+
+; BTTOM25 ; EconomyBundle     ; EDI_LGW_FAO ; ; ; M ;
+; BTTOM26 ; EconomyPlusBundle ; EDI_LGW_FAO ; ; ; M ;
+; BTTOM27 ; BusinessBundle    ; EDI_LGW_FAO ; ; ; J ;
+
+; BTTOM28 ; EconomyBundle     ; FAO_LGW_EDI ; ; ; M ;
+; BTTOM29 ; EconomyPlusBundle ; FAO_LGW_EDI ; ; ; M ;
+; BTTOM30 ; BusinessBundle    ; FAO_LGW_EDI ; ; ; J ;
+
+; BTTOM31 ; EconomyBundle     ; EDI_LGW_GVA ; ; ; M ;
+; BTTOM32 ; EconomyPlusBundle ; EDI_LGW_GVA ; ; ; M ;
+; BTTOM33 ; BusinessBundle    ; EDI_LGW_GVA ; ; ; J ;
+
+; BTTOM34 ; EconomyBundle     ; GVA_LGW_EDI ; ; ; M ;
+; BTTOM35 ; EconomyPlusBundle ; GVA_LGW_EDI ; ; ; M ;
+; BTTOM36 ; BusinessBundle    ; GVA_LGW_EDI ; ; ; J ;
+
+; BTTOM37 ; EconomyBundle     ; EDI_LGW_MAD ; ; ; M ;
+; BTTOM38 ; EconomyPlusBundle ; EDI_LGW_MAD ; ; ; M ;
+; BTTOM39 ; BusinessBundle    ; EDI_LGW_MAD ; ; ; J ;
+
+; BTTOM40 ; EconomyBundle     ; MAD_LGW_EDI ; ; ; M ;
+; BTTOM41 ; EconomyPlusBundle ; MAD_LGW_EDI ; ; ; M ;
+; BTTOM42 ; BusinessBundle    ; MAD_LGW_EDI ; ; ; J ;
+
+; BTTOM43 ; EconomyBundle     ; EDI_LGW_PMO ; ; ; M ;
+; BTTOM44 ; EconomyPlusBundle ; EDI_LGW_PMO ; ; ; M ;
+; BTTOM45 ; BusinessBundle    ; EDI_LGW_PMO ; ; ; J ;
+
+; BTTOM46 ; EconomyBundle     ; PMO_LGW_EDI ; ; ; M ;
+; BTTOM47 ; EconomyPlusBundle ; PMO_LGW_EDI ; ; ; M ;
+; BTTOM48 ; BusinessBundle    ; PMO_LGW_EDI ; ; ; J ;
+
+; BTTOM49 ; EconomyBundle     ; EDI_LGW_VCE ; ; ; M ;
+; BTTOM50 ; EconomyPlusBundle ; EDI_LGW_VCE ; ; ; M ;
+; BTTOM51 ; BusinessBundle    ; EDI_LGW_VCE ; ; ; J ;
+
+; BTTOM52 ; EconomyBundle     ; VCE_LGW_EDI ; ; ; M ;
+; BTTOM53 ; EconomyPlusBundle ; VCE_LGW_EDI ; ; ; M ;
+; BTTOM54 ; BusinessBundle    ; VCE_LGW_EDI ; ; ; J ;
+
+; BTTOM55 ; EconomyBundle     ; EDI_LGW_ZRH ; ; ; M ;
+; BTTOM56 ; EconomyPlusBundle ; EDI_LGW_ZRH ; ; ; M ;
+; BTTOM57 ; BusinessBundle    ; EDI_LGW_VCE ; ; ; J ;
+
+; BTTOM58 ; EconomyBundle     ; ZRH_LGW_EDI ; ; ; M ;
+; BTTOM59 ; EconomyPlusBundle ; ZRH_LGW_EDI ; ; ; M ;
+; BTTOM60 ; BusinessBundle    ; ZRH_LGW_EDI ; ; ; J ;
+
+; BTTOM61 ; EconomyBundle     ;             ; ; ; M ;
+; BTTOM62 ; EconomyPlusBundle ;             ; ; ; M ;
+; BTTOM63 ; BusinessBundle    ;             ; ; ; J ;
+; BTTOM64 ; BusinessBundle    ;             ; ; ; J ;

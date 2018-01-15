@@ -1,0 +1,26 @@
+# Macros / Replacement Parameter definitions
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$lang = en
+
+#
+# ImpEx for Importing localized name for AircraftCabin into travel accelerator
+#
+UPDATE AircraftCabin; $catalogVersion; uid[unique = true]; name[lang = $lang]
+; ; config1-EconPlusClassCabin      ;   Economy Plus
+; ; config1-BizClassCabin           ;   Business
+; ; config1-EconCabinLower          ;   Economy
+; ; config1-EconCabinUpper          ;   Economy
+
+UPDATE ProximityItem; code[unique = true]; description
+; LAVATORY_FRONT ; Lavatory
+; LAVATORY_BACK ; Lavatory
+; EMERGENCY_EXIT ; Emergency Exit
+; GALLEY_FRONT ; Galley
+; GALLEY_BACK ; Galley
+; BASSINET ; Bassinet
+; ACCESSIBILITY ; Accessibility
+
+UPDATE AccommodationCharacteristics; code[unique = true]; description
+; EXTRALEGROOM      ; Seat with extra leg room
+; REDUCEDMOBILITY   ; Reduced mobility seat
+; LIMITEDCOMFORT    ; Limited comfort seat

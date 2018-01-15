@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:h="http://www.w3.org/1999/xhtml" xmlns:zk="http://www.zkoss.org/2005/zk"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd ">
+	
+	<zscript><![CDATA[
+	                  
+	import de.hybris.platform.travelservices.model.travel.ScheduleConfigurationModel;
+	import de.hybris.platform.travelservices.model.travel.ScheduleConfigurationDayModel;
+	import de.hybris.platform.cronjob.enums.DayOfWeek;
+	
+	import org.zkoss.zul.Window;
+	import java.util.stream.Collectors;
+	import java.util.stream.Stream;
+	import java.time.temporal.ChronoUnit;
+	import java.time.LocalDate;
+	import java.time.ZoneId;
+	import org.apache.commons.lang3.BooleanUtils;
+	import org.apache.commons.lang3.StringUtils;
+	import org.zkoss.util.resource.Labels;
+	
+	public class CreateSchedulePreviewDynamicValue extends Window
+	{
+		public int getTotalTransportOfferings()
+		{
+			int totalTransportOfferings = 0;
+			widgetInstanceManager.getModel().put("fromPreviewStep", Boolean.TRUE);
+			final ScheduleConfigurationModel scheduleConfiguration = widgetInstanceManager.getModel().getValue("item",
+					ScheduleConfigurationModel.class);
+			final List selectedScheduleConfigDays = getSelectedScheduleConfigDays(
+					scheduleConfiguration);
+			final LocalDate startDate = scheduleConfiguration.getStartDate().toInstant().atZone(ZoneId.systemDefault())
+					.toLocalDate();
+			final LocalDate endDate = scheduleConfiguration.getEndDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			for (LocalDate date = startDate; date.isBefore(endDate) || date.isEqual(endDate); date = date.plusDays(1))
+			{
+				if(checkIfValidScheduleConfigDay(selectedScheduleConfigDays, date))
+				{
+					totalTransportOfferings ++;
+				}
+			}
+			return totalTransportOfferings;
+		}
+
+		public boolean checkIfValidScheduleConfigDay(List selectedScheduleConfigDays, LocalDate date)
+		{
+			for (Object object : selectedScheduleConfigDays)
+			{
+				if (((ScheduleConfigurationDayModel)object).getDayOfWeek().ordinal() == date.getDayOfWeek().getValue() % 7)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public List getSelectedScheduleConfigDays(ScheduleConfigurationModel scheduleConfiguration)
+		{
+			List scheduleConfigurationDays = new ArrayList();
+			for(DayOfWeek dayOfWeek : DayOfWeek.values())
+			{
+				ScheduleConfigurationDayModel scheduleConfigurationDay = widgetInstanceManager.getModel()
+						.getValue(dayOfWeek.getCode(), ScheduleConfigurationDayModel.class);
+				if(!Objects.isNull(scheduleConfigurationDay) && BooleanUtils.isTrue(scheduleConfigurationDay.getSelected()))
+				{
+					scheduleConfigurationDays.add(scheduleConfigurationDay);
+				}
+			}
+			return scheduleConfigurationDays;
+		}
+		
+		public String getDurationLabel(ScheduleConfigurationDayModel scheduleConfigurationDay)
+		{
+			final StringBuilder label = new StringBuilder();
+			if(!Objects.isNull(scheduleConfigurationDay.getDurationHrs()))
+			{
+				label.append(scheduleConfigurationDay.getDurationHrs().toString()).append(Labels.getLabel
+						("com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.departuretime.hr").toLowerCase());
+			}
+			if(!Objects.isNull(scheduleConfigurationDay.getDurationMins()))
+			{
+				label.append(StringUtils.SPACE).append(scheduleConfigurationDay.getDurationMins().toString()).append(Labels.getLabel
+						("com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.departuretime.min").toLowerCase());
+			}
+			return label.toString();
+		}
+	}
+	]]>
+    </zscript>
+	
+	<window use="CreateSchedulePreviewDynamicValue" id="window" style="padding-bottom:10px;font-weight: bold;">
+		<label if="${widgetModel.item.transportOfferings != null}" value="${window.getTotalTransportOfferings()}  ${c:l('de.hybris.platform.travelbackoffice.widget.modifyschedule.modifyscheduleconfiguration.preview.totaltransportofferingeffected')}"/>
+		
+		<grid style="padding-top:30px; padding-bottom:20px; border-right: 0px #CCC;">
+			<columns>
+				<column />
+				<column width="200px;"/>
+				<column width="200px;"/>
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.number')}" />
+					<label value="${widgetModel.item.number}"/>
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.startdate')}" />
+					<label value="${c:formatDate(widgetModel.item.startDate, 'dd/MM/yyyy')}" />
+				</row>
+				<row>
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.travelprovider')}" />
+					<label value="${widgetModel.item.travelProvider.code}" />
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.enddate')}" />
+					<label value="${c:formatDate(widgetModel.item.endDate, 'dd/MM/yyyy')}" />
+				</row>
+				<row>
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.travelsector')}" />
+					<label value="${widgetModel.item.travelSector.name}" />
+				</row>
+			</rows>
+		</grid>
+	
+    	<label if="${widgetModel.item.transportOfferings == null}" value="${window.getTotalTransportOfferings()}  ${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.preview.totaltransportofferings.text')}"/>
+	
+		<grid sizedByContent="true" class="schedule-config-day">
+			<columns style="background-color: #F0F0F0;">
+				<column label="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.day')}"/>
+				<column label="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.departuretime')}" />
+				<column label="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.duration')}" />
+				<column label="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.originterminal')}" />
+				<column label="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.destinationterminal')}" />
+				<column label="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.transportvehicle')}" align="center" />
+			</columns>
+			<rows>
+				<row if="${widgetModel.MONDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.monday')}" />
+					<label value="${c:formatDate(widgetModel.MONDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.MONDAY)}" />
+					<label value="${widgetModel.MONDAY.originTerminal.name}" />
+					<label value="${widgetModel.MONDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.MONDAY.transportVehicle.code}" />
+				</row>
+				<row if="${widgetModel.TUESDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.tuesday')}" />
+					<label value="${c:formatDate(widgetModel.TUESDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.TUESDAY)}" />
+					<label value="${widgetModel.TUESDAY.originTerminal.name}" />
+					<label value="${widgetModel.TUESDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.TUESDAY.transportVehicle.code}" />
+				</row>
+				<row if="${widgetModel.WEDNESDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.wednesday')}" />
+					<label value="${c:formatDate(widgetModel.WEDNESDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.WEDNESDAY)}" />
+					<label value="${widgetModel.WEDNESDAY.originTerminal.name}" />
+					<label value="${widgetModel.WEDNESDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.WEDNESDAY.transportVehicle.code}" />
+				</row>
+				<row if="${widgetModel.THURSDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.thursday')}" />
+					<label value="${c:formatDate(widgetModel.THURSDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.THURSDAY)}" />
+					<label value="${widgetModel.THURSDAY.originTerminal.name}" />
+					<label value="${widgetModel.THURSDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.THURSDAY.transportVehicle.code}" />
+				</row>
+				<row if="${widgetModel.FRIDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.friday')}" />
+					<label value="${c:formatDate(widgetModel.FRIDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.FRIDAY)}" />
+					<label value="${widgetModel.FRIDAY.originTerminal.name}" />
+					<label value="${widgetModel.FRIDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.FRIDAY.transportVehicle.code}" />
+				</row>
+				<row if="${widgetModel.SATURDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.saturday')}" />
+					<label value="${c:formatDate(widgetModel.SATURDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.SATURDAY)}" />
+					<label value="${widgetModel.SATURDAY.originTerminal.name}" />
+					<label value="${widgetModel.SATURDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.SATURDAY.transportVehicle.code}" />
+				</row>
+					<row if="${widgetModel.SUNDAY.selected =='true'}" align="center">
+					<label value="${c:l('com.hybris.cockpitng.widgets.configurableflow.create.scheduleconfiguration.scheduleconfigurationday.sunday')}" />
+					<label value="${c:formatDate(widgetModel.SUNDAY.departureTime, 'HH:mm')}hrs" />
+					<label value="${window.getDurationLabel(widgetModel.SUNDAY)}" />
+					<label value="${widgetModel.SUNDAY.originTerminal.name}" />
+					<label value="${widgetModel.SUNDAY.destinationTerminal.name}" />
+					<label value="${widgetModel.SUNDAY.transportVehicle.code}" />
+				</row>
+				
+			</rows>
+		</grid>
+	</window>
+</zk>

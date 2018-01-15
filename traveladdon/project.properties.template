@@ -1,0 +1,34 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform 
+# 
+# Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+# All rights reserved.
+#  
+# This software is the confidential and proprietary information of hybris 
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with hybris.
+#
+#  
+# -----------------------------------------------------------------------
+
+# you can put key/value pairs here.
+# Use Config.getParameter(..) to retrieve the values during runtime.
+
+traveladdon.key=value
+
+# Specifies the location of the spring context file added automatically to the global platform application context.
+traveladdon.application-context=traveladdon-spring.xml
+
+yacceleratorstorefront.additionalWebSpringConfigs.traveladdon=classpath:/traveladdon/web/spring/traveladdon-web-spring.xml
+
+traveladdon.javascript.paths.responsive=/responsive/common/js/acc.seat.js;/responsive/common/js/acc.farefinder.js;/responsive/common/js/acc.transportofferingstatus.js;/responsive/common/js/acc.fareselection.js;/responsive/common/js/acc.tripfinder.js;/responsive/common/js/acc.ancillary.js;/responsive/common/js/acc.travellerdetails.js;/responsive/common/js/acc.managebookings.js;/responsive/common/js/acc.checkin.js;/responsive/common/js/acc.advancePassengerInfo.js;/responsive/common/js/jquery.sumoselect.js;/responsive/common/js/acc.ancillaryGroup.js
+
+travellerdetails.form.property.adultAgesRange=16-20,21-30,31-40,41-50,51-60,61-65,65+
+travellerdetails.form.property.childrenAgeRange=2,3,4,5,6,7,8,9,10,11,12,13,14,15
+travellerdetails.form.property.infantAgeRange=0,1
+travellerdetails.form.property.adultTitles=dr,miss,mr,mrs,ms,rev
+travellerdetails.form.property.childrenTitles=mr,miss
+
+# The ID of the consent that we show at registration page
+registration.consent.id.airline=AIRLINE_CONSENT_DEMO

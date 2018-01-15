@@ -1,0 +1,105 @@
+# ImpEx for Importing TravelSector into travel accelerator
+
+$origin = origin(code)
+$destination = destination(code)
+
+INSERT_UPDATE TravelSector; code[unique = true]; $origin; $destination
+
+; LGW_CDG ; LGW ; CDG
+; LTN_CDG ; LTN ; CDG
+
+; CDG_LGW ; CDG ; LGW
+; CDG_LTN ; CDG ; LTN
+
+; LGW_EDI ; LGW ; EDI
+; EDI_LGW ; EDI ; LGW
+
+; EDI_CDG ; EDI ; CDG
+; CDG_EDI ; CDG ; EDI
+
+; ALC_LGW ; ALC ; LGW
+; LGW_ALC ; LGW ; ALC
+
+; LGW_NCE ; LGW ; NCE
+; NCE_LGW ; NCE ; LGW
+
+; LGW_VCE ; LGW ; VCE
+; VCE_LGW ; VCE ; LGW
+
+; LGW_ATH ; LGW ; ATH
+; ATH_LGW ; ATH ; LGW
+
+; LGW_JFK ; LGW ; JFK
+; JFK_LGW ; JFK ; LGW
+
+; LGW_MLE ; LGW ; MLE
+; MLE_LGW ; MLE ; LGW
+
+; CDG_JFK ; CDG ; JFK
+; JFK_CDG ; JFK ; CDG
+
+; CDG_HKT ; CDG ; HKT
+; HKT_CDG ; HKT ; CDG
+
+; LTN_HKT ; LTN ; HKT
+; HKT_LTN ; HKT ; LTN
+
+; CDG_GOI ; CDG ; GOI
+; GOI_CDG ; GOI ; CDG
+
+; LTN_GOI ; LTN ; GOI
+; GOI_LTN ; GOI ; LTN
+
+; CDG_MIA ; CDG ; MIA
+; MIA_CDG ; MIA ; CDG
+
+; LTN_MIA ; LTN ; MIA
+; MIA_LTN ; MIA ; LTN
+
+; CDG_NAP ; CDG ; NAP
+; NAP_CDG ; NAP ; CDG
+
+; LTN_NAP ; LTN ; NAP
+; NAP_LTN ; NAP ; LTN
+
+; CDG_FLR ; CDG ; FLR
+; FLR_CDG ; FLR ; CDG
+
+; LTN_FLR ; LTN ; FLR
+; FLR_LTN ; FLR ; LTN
+
+; CDG_FCO ; CDG ; FCO
+; FCO_CDG ; FCO ; CDG
+
+; LTN_FCO ; LTN ; FCO
+; FCO_LTN ; FCO ; LTN
+
+; CDG_BKK ; CDG ; BKK
+; BKK_CDG ; BKK ; CDG
+
+; LTN_BKK ; LTN ; BKK
+; BKK_LTN ; BKK ; LTN
+
+; CDG_KUL ; CDG ; KUL
+; KUL_CDG ; KUL ; CDG
+
+; LTN_KUL ; LTN ; KUL
+; KUL_LTN ; KUL ; LTN
+
+; CDG_PRG ; CDG ; PRG
+; PRG_CDG ; PRG ; CDG
+
+; LTN_PRG ; LTN ; PRG
+; PRG_LTN ; PRG ; LTN
+
+; CDG_KEF ; CDG ; KEF
+; KEF_CDG ; KEF ; CDG
+
+; LTN_KEF ; LTN ; KEF
+; KEF_LTN ; KEF ; LTN
+
+; CDG_ICN ; CDG ; ICN
+; ICN_CDG ; ICN ; CDG
+
+; LTN_ICN ; LTN ; ICN
+; ICN_LTN ; ICN ; LTN

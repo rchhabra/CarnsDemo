@@ -1,0 +1,4 @@
+# ImpEx for Importing Travelrestriction for the AncillaryProducts into travel accelerator
+
+INSERT_UPDATE TravelRestriction; code[unique = true]; effectiveDate; expireDate; travellerMaxOfferQty; travellerMinOfferQty; tripMaxOfferQty; tripMinOfferQty; addToCartCriteria(code); passengerTypes[mode = append]
+# Moved to Common folder 

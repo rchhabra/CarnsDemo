@@ -1,0 +1,1716 @@
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$economyAccommodation = product(code, $catalogVersion)
+$economyPlusAccommodation = product(code, $catalogVersion)
+$businessAccommodation = product(code, $catalogVersion)
+
+INSERT_UPDATE ProximityItem; code[unique = true]; type(code); relativePosition(code)
+; LAVATORY_FRONT ; LAVATORY ; FRONT
+; LAVATORY_BACK ; LAVATORY ; BACK
+; EMERGENCY_EXIT ; EMERGENCY_EXIT ; FRONT
+; GALLEY_FRONT ; GALLEY ; FRONT
+; GALLEY_BACK ; GALLEY ; BACK
+; BASSINET ; BASSINET ;
+; ACCESSIBILITY ; ACCESSIBILITY ;
+
+INSERT_UPDATE AccommodationCharacteristics; code[unique = true]; type(code)
+; EXTRALEGROOM      ; SEAT
+; REDUCEDMOBILITY   ; SEAT
+; LIMITEDCOMFORT    ; SEAT
+
+INSERT_UPDATE AircraftDeck; $catalogVersion; uid[unique = true]; identifier; bookable; type(code); superConfiguredAccommodation(uid, $catalogVersion); proximityItem(code); accommodationMap(code, $catalogVersion); deckType(code); number
+#Deck
+; ; config1-LowerDeck ; LowerDeck ; false ; DECK ; ; ; config1 ; LOWER ; 2
+; ; config1-UpperDeck ; UpperDeck ; false ; DECK ; ; ; config1 ; UPPER ; 1
+
+INSERT_UPDATE AircraftCabin; $catalogVersion; uid[unique = true]; identifier; bookable; type(code); superConfiguredAccommodation(uid, $catalogVersion); proximityItem(code); accommodationMap(code, $catalogVersion); cabinClass(code); number; columnHeaders
+; ; config1-EconPlusClassCabin ; EconPlusClassCabin ; false ; CABIN ; config1-UpperDeck ; ; ; M ; 1 ; A, B, C, -, D, E, F, G, -, H, J, K
+; ; config1-BizClassCabin      ; BizCabin           ; false ; CABIN ; config1-UpperDeck ; ; ; J ; 2 ; A, B, C, -, D, E, F, G, -, H, J, K
+; ; config1-EconCabinLower     ; EconCabin          ; false ; CABIN ; config1-LowerDeck ; ; ; M ; 1 ; A, B, C, -, D, E, F, G, -, H, J, K
+; ; config1-EconCabinUpper     ; EconCabin          ; false ; CABIN ; config1-UpperDeck ; ; ; M ; 1 ; A, B, C, -, D, E, F, G, -, H, J, K
+
+INSERT_UPDATE ConfiguredAccommodation; $catalogVersion; uid[unique = true]; identifier; bookable; type(code); superConfiguredAccommodation(uid, $catalogVersion); proximityItem(code); number; characteristics(code); $economyAccommodation[default = 'ACECONSEAT1']
+
+#---------------ECONOMY DECK STARTS-----------------------
+
+
+#Row22
+; ; config1-EconRow22  ; EconRow22  ; false ; ROW    ; config1-EconCabinUpper  ; ; 22
+
+#Row22-->EconColumns
+; ; config1-EconCol221 ; EconCol221 ; false ; COLUMN ; config1-EconRow22  ;  ; 1
+; ; config1-EconCol222 ; EconCol222 ; false ; COLUMN ; config1-EconRow22  ; ; 2
+; ; config1-EconCol223 ; EconCol223 ; false ; COLUMN ; config1-EconRow22  ; ; 3
+
+#Row22-->EconColumn1--->Seats (no seats)
+
+#Row22-->EconColumn2--->Seats
+; ; config1-22D        ; 22D        ; true  ; SEAT   ; config1-EconCol222 ; GALLEY_FRONT
+; ; config1-22E        ; 22E        ; true  ; SEAT   ; config1-EconCol222 ; BASSINET, GALLEY_FRONT
+; ; config1-22F        ; 22F        ; true  ; SEAT   ; config1-EconCol222 ; GALLEY_FRONT
+; ; config1-22G        ; 22G        ; true  ; SEAT   ; config1-EconCol222 ; GALLEY_FRONT
+
+#Row22-->EconColumn3--->Seats (no seats)
+
+#--------------------------------------
+#Row23
+; ; config1-EconRow23  ; EconRow23  ; false ; ROW    ; config1-EconCabinUpper  ; ; 23
+
+#Row23-->EconColumns
+; ; config1-EconCol231 ; EconCol231 ; false ; COLUMN ; config1-EconRow23  ; ; 1
+; ; config1-EconCol232 ; EconCol232 ; false ; COLUMN ; config1-EconRow23  ; ; 2
+; ; config1-EconCol233 ; EconCol233 ; false ; COLUMN ; config1-EconRow23  ; ; 3
+
+#Row23-->EconColumn1--->Seats
+; ; config1-23A        ; 23A        ; true  ; SEAT   ; config1-EconCol231 ; ACCESSIBILITY ; ; REDUCEDMOBILITY
+; ; config1-23B        ; 23B        ; true  ; SEAT   ; config1-EconCol231 ;
+
+#Row23-->EconColumn2--->Seats
+; ; config1-23D        ; 23D        ; true  ; SEAT   ; config1-EconCol232 ;
+; ; config1-23E        ; 23E        ; true  ; SEAT   ; config1-EconCol232 ;
+; ; config1-23F        ; 23F        ; true  ; SEAT   ; config1-EconCol232 ;
+; ; config1-23G        ; 23G        ; true  ; SEAT   ; config1-EconCol232 ;
+
+#Row23-->EconColumn3--->Seats
+; ; config1-23J        ; 23J        ; true  ; SEAT   ; config1-EconCol233 ;
+; ; config1-23K        ; 23K        ; true  ; SEAT   ; config1-EconCol233 ; ACCESSIBILITY ; ; REDUCEDMOBILITY
+
+#--------------------------------------
+#Row24
+; ; config1-EconRow24  ; EconRow24  ; false ; ROW    ; config1-EconCabinUpper  ; ; 24
+
+#Row24-->EconColumns
+; ; config1-EconCol241 ; EconCol241 ; false ; COLUMN ; config1-EconRow24  ; ; 1
+; ; config1-EconCol242 ; EconCol242 ; false ; COLUMN ; config1-EconRow24  ; ; 2
+; ; config1-EconCol243 ; EconCol243 ; false ; COLUMN ; config1-EconRow24  ; ; 3
+
+#Row24-->EconColumn1--->Seats
+; ; config1-24A        ; 24A        ; true  ; SEAT   ; config1-EconCol241 ;
+; ; config1-24B        ; 24B        ; true  ; SEAT   ; config1-EconCol241 ;
+
+#Row24-->EconColumn2--->Seats
+; ; config1-24D        ; 24D        ; true  ; SEAT   ; config1-EconCol242 ;
+; ; config1-24E        ; 24E        ; true  ; SEAT   ; config1-EconCol242 ;
+; ; config1-24F        ; 24F        ; true  ; SEAT   ; config1-EconCol242 ;
+; ; config1-24G        ; 24G        ; true  ; SEAT   ; config1-EconCol242 ;
+
+#Row24-->EconColumn3--->Seats
+; ; config1-24J        ; 24J        ; true  ; SEAT   ; config1-EconCol243 ;
+; ; config1-24K        ; 24K        ; true  ; SEAT   ; config1-EconCol243 ;
+
+#--------------------------------------
+#Row25
+; ; config1-EconRow25  ; EconRow25  ; false ; ROW    ; config1-EconCabinUpper  ; ; 25
+
+#Row25-->EconColumns
+; ; config1-EconCol251 ; EconCol251 ; false ; COLUMN ; config1-EconRow25  ; ; 1
+; ; config1-EconCol252 ; EconCol252 ; false ; COLUMN ; config1-EconRow25  ; ; 2
+; ; config1-EconCol253 ; EconCol253 ; false ; COLUMN ; config1-EconRow25  ; ; 3
+
+#Row25-->EconColumn1--->Seats
+; ; config1-25A        ; 25A        ; true  ; SEAT   ; config1-EconCol251 ;
+; ; config1-25B        ; 25B        ; true  ; SEAT   ; config1-EconCol251 ;
+
+#Row25-->EconColumn2--->Seats
+; ; config1-25D        ; 25D        ; true  ; SEAT   ; config1-EconCol252 ;
+; ; config1-25E        ; 25E        ; true  ; SEAT   ; config1-EconCol252 ;
+; ; config1-25F        ; 25F        ; true  ; SEAT   ; config1-EconCol252 ;
+; ; config1-25G        ; 25G        ; true  ; SEAT   ; config1-EconCol252 ;
+
+#Row25-->EconColumn3--->Seats
+; ; config1-25J        ; 25J        ; true  ; SEAT   ; config1-EconCol253 ;
+; ; config1-25K        ; 25K        ; true  ; SEAT   ; config1-EconCol253 ;
+
+#--------------------------------------
+#Row26
+; ; config1-EconRow26  ; EconRow26  ; false ; ROW    ; config1-EconCabinUpper  ; ; 26
+
+#Row26-->EconColumns
+; ; config1-EconCol261 ; EconCol261 ; false ; COLUMN ; config1-EconRow26  ; ; 1
+; ; config1-EconCol262 ; EconCol262 ; false ; COLUMN ; config1-EconRow26  ; ; 2
+; ; config1-EconCol263 ; EconCol263 ; false ; COLUMN ; config1-EconRow26  ; ; 3
+
+#Row26-->EconColumn1--->Seats
+; ; config1-26A        ; 26A        ; true  ; SEAT   ; config1-EconCol261 ;
+; ; config1-26B        ; 26B        ; true  ; SEAT   ; config1-EconCol261 ;
+
+#Row26-->EconColumn2--->Seats
+; ; config1-26D        ; 26D        ; true  ; SEAT   ; config1-EconCol262 ;
+; ; config1-26E        ; 26E        ; true  ; SEAT   ; config1-EconCol262 ;
+; ; config1-26F        ; 26F        ; true  ; SEAT   ; config1-EconCol262 ;
+; ; config1-26G        ; 26G        ; true  ; SEAT   ; config1-EconCol262 ;
+
+#Row26-->EconColumn3--->Seats
+; ; config1-26J        ; 26J        ; true  ; SEAT   ; config1-EconCol263 ;
+; ; config1-26K        ; 26K        ; true  ; SEAT   ; config1-EconCol263 ;
+
+#--------------------------------------
+#Row27
+; ; config1-EconRow27  ; EconRow27  ; false ; ROW    ; config1-EconCabinUpper  ; ; 27
+
+#Row27-->EconColumns
+; ; config1-EconCol271 ; EconCol271 ; false ; COLUMN ; config1-EconRow27  ; ; 1
+; ; config1-EconCol272 ; EconCol272 ; false ; COLUMN ; config1-EconRow27  ; ; 2
+; ; config1-EconCol273 ; EconCol273 ; false ; COLUMN ; config1-EconRow27  ; ; 3
+
+#Row27-->EconColumn1--->Seats
+; ; config1-27A        ; 27A        ; true  ; SEAT   ; config1-EconCol271 ;
+; ; config1-27B        ; 27B        ; true  ; SEAT   ; config1-EconCol271 ;
+
+#Row27-->EconColumn2--->Seats
+; ; config1-27D        ; 27D        ; true  ; SEAT   ; config1-EconCol272 ;
+; ; config1-27E        ; 27E        ; true  ; SEAT   ; config1-EconCol272 ;
+; ; config1-27F        ; 27F        ; true  ; SEAT   ; config1-EconCol272 ;
+; ; config1-27G        ; 27G        ; true  ; SEAT   ; config1-EconCol272 ;
+
+#Row27-->EconColumn3--->Seats
+; ; config1-27J        ; 27J        ; true  ; SEAT   ; config1-EconCol273 ;
+; ; config1-27K        ; 27K        ; true  ; SEAT   ; config1-EconCol273 ;
+
+#--------------------------------------
+#Row28
+; ; config1-EconRow28  ; EconRow28  ; false ; ROW    ; config1-EconCabinUpper  ; ; 28
+
+#Row28-->EconColumns
+; ; config1-EconCol281 ; EconCol281 ; false ; COLUMN ; config1-EconRow28  ; ; 1
+; ; config1-EconCol282 ; EconCol282 ; false ; COLUMN ; config1-EconRow28  ; ; 2
+; ; config1-EconCol286 ; EconCol286 ; false ; COLUMN ; config1-EconRow28  ; ; 3
+
+#Row28-->EconColumn1--->Seats
+; ; config1-28A        ; 28A        ; true  ; SEAT   ; config1-EconCol281 ;
+; ; config1-28B        ; 28B        ; true  ; SEAT   ; config1-EconCol281 ;
+
+#Row28-->EconColumn2--->Seats
+; ; config1-28D        ; 28D        ; true  ; SEAT   ; config1-EconCol282 ;
+; ; config1-28E        ; 28E        ; true  ; SEAT   ; config1-EconCol282 ;
+; ; config1-28F        ; 28F        ; true  ; SEAT   ; config1-EconCol282 ;
+; ; config1-28G        ; 28G        ; true  ; SEAT   ; config1-EconCol282 ;
+
+#Row28-->EconColumn3--->Seats
+; ; config1-28J        ; 28J        ; true  ; SEAT   ; config1-EconCol286 ;
+; ; config1-28K        ; 28K        ; true  ; SEAT   ; config1-EconCol286 ;
+
+#--------------------------------------
+#Row29
+; ; config1-EconRow29  ; EconRow29  ; false ; ROW    ; config1-EconCabinUpper  ; ; 29
+
+#Row29-->EconColumns
+; ; config1-EconCol291 ; EconCol291 ; false ; COLUMN ; config1-EconRow29  ; ; 1
+; ; config1-EconCol292 ; EconCol292 ; false ; COLUMN ; config1-EconRow29  ; ; 2
+; ; config1-EconCol293 ; EconCol293 ; false ; COLUMN ; config1-EconRow29  ; ; 3
+
+#Row29-->EconColumn1--->Seats
+; ; config1-29A        ; 29A        ; true  ; SEAT   ; config1-EconCol291 ;
+; ; config1-29B        ; 29B        ; true  ; SEAT   ; config1-EconCol291 ;
+
+#Row29-->EconColumn2--->Seats
+; ; config1-29D        ; 29D        ; true  ; SEAT   ; config1-EconCol292 ; GALLEY_BACK
+; ; config1-29E        ; 29E        ; true  ; SEAT   ; config1-EconCol292 ; GALLEY_BACK
+; ; config1-29F        ; 29F        ; true  ; SEAT   ; config1-EconCol292 ; GALLEY_BACK
+; ; config1-29G        ; 29G        ; true  ; SEAT   ; config1-EconCol292 ; GALLEY_BACK
+
+#Row29-->EconColumn3--->Seats
+; ; config1-29J        ; 29J        ; true  ; SEAT   ; config1-EconCol293 ;
+; ; config1-29K        ; 29K        ; true  ; SEAT   ; config1-EconCol293 ;
+
+#--------------------------------------
+
+##############################################
+######### END OF ECONOMY ON UPPER DECK
+##############################################
+
+#Row43
+; ; config1-EconRow43  ; EconRow43  ; false ; ROW    ; config1-EconCabinLower  ; ; 43
+
+#Row43-->EconColumns
+; ; config1-EconCol431 ; EconCol431 ; false ; COLUMN ; config1-EconRow43  ; ; 1
+; ; config1-EconCol432 ; EconCol432 ; false ; COLUMN ; config1-EconRow43  ; ; 2
+; ; config1-EconCol433 ; EconCol433 ; false ; COLUMN ; config1-EconRow43  ; ; 3
+
+#Row43-->EconColumn1--->Seats
+; ; config1-43A        ; 43A        ; true  ; SEAT   ; config1-EconCol431 ; LAVATORY_FRONT, ACCESSIBILITY ; ; REDUCEDMOBILITY
+; ; config1-43B        ; 43B        ; true  ; SEAT   ; config1-EconCol431 ; LAVATORY_FRONT, BASSINET
+; ; config1-43C        ; 43C        ; true  ; SEAT   ; config1-EconCol431 ; LAVATORY_FRONT
+
+#Row43-->EconColumn2--->Seats (no seats)
+
+#Row43-->EconColumn3--->Seats
+; ; config1-43H        ; 43H        ; true  ; SEAT   ; config1-EconCol433 ; LAVATORY_FRONT
+; ; config1-43J        ; 43J        ; true  ; SEAT   ; config1-EconCol433 ; LAVATORY_FRONT, BASSINET
+; ; config1-43K        ; 43K        ; true  ; SEAT   ; config1-EconCol433 ; LAVATORY_FRONT, ACCESSIBILITY ; ; REDUCEDMOBILITY
+
+#--------------------------------------
+#Row44
+; ; config1-EconRow44  ; EconRow44  ; false ; ROW    ; config1-EconCabinLower  ; ; 44
+
+#Row44-->EconColumns
+; ; config1-EconCol441 ; EconCol441 ; false ; COLUMN ; config1-EconRow44  ; ; 1
+; ; config1-EconCol442 ; EconCol442 ; false ; COLUMN ; config1-EconRow44  ; ; 2
+; ; config1-EconCol443 ; EconCol443 ; false ; COLUMN ; config1-EconRow44  ; ; 3
+
+#Row44-->EconColumn1--->Seats
+; ; config1-44A        ; 44A        ; true  ; SEAT   ; config1-EconCol441 ;
+; ; config1-44B        ; 44B        ; true  ; SEAT   ; config1-EconCol441 ;
+; ; config1-44C        ; 44C        ; true  ; SEAT   ; config1-EconCol441 ;
+
+#Row44-->EconColumn2--->Seats (no seats)
+
+#Row44-->EconColumn3--->Seats
+; ; config1-44H        ; 44H        ; true  ; SEAT   ; config1-EconCol443 ;
+; ; config1-44J        ; 44J        ; true  ; SEAT   ; config1-EconCol443 ;
+; ; config1-44K        ; 44K        ; true  ; SEAT   ; config1-EconCol443 ;
+
+#--------------------------------------
+#Row45
+; ; config1-EconRow45  ; EconRow45  ; false ; ROW    ; config1-EconCabinLower  ; ; 45
+
+#Row45-->EconColumns
+; ; config1-EconCol451 ; EconCol451 ; false ; COLUMN ; config1-EconRow45  ; ; 1
+; ; config1-EconCol452 ; EconCol452 ; false ; COLUMN ; config1-EconRow45  ; ; 2
+; ; config1-EconCol453 ; EconCol453 ; false ; COLUMN ; config1-EconRow45  ; ; 3
+
+#Row45-->EconColumn1--->Seats
+; ; config1-45A        ; 45A        ; true  ; SEAT   ; config1-EconCol451 ;
+; ; config1-45B        ; 45B        ; true  ; SEAT   ; config1-EconCol451 ;
+; ; config1-45C        ; 45C        ; true  ; SEAT   ; config1-EconCol451 ;
+
+#Row45-->EconColumn2--->Seats
+; ; config1-45D        ; 45D        ; true  ; SEAT   ; config1-EconCol452 ; ; ; LIMITEDCOMFORT
+; ; config1-45E        ; 45E        ; true  ; SEAT   ; config1-EconCol452 ; ; ; LIMITEDCOMFORT
+; ; config1-45F        ; 45F        ; true  ; SEAT   ; config1-EconCol452 ; ; ; LIMITEDCOMFORT
+; ; config1-45G        ; 45G        ; true  ; SEAT   ; config1-EconCol452 ; ; ; LIMITEDCOMFORT
+
+#Row45-->EconColumn3--->Seats
+; ; config1-45H        ; 45H        ; true  ; SEAT   ; config1-EconCol453 ;
+; ; config1-45J        ; 45J        ; true  ; SEAT   ; config1-EconCol453 ;
+; ; config1-45K        ; 45K        ; true  ; SEAT   ; config1-EconCol453 ;
+
+#--------------------------------------
+#Row46
+; ; config1-EconRow46  ; EconRow46  ; false ; ROW    ; config1-EconCabinLower  ; ; 46
+
+#Row46-->EconColumns
+; ; config1-EconCol461 ; EconCol461 ; false ; COLUMN ; config1-EconRow46  ; ; 1
+; ; config1-EconCol462 ; EconCol462 ; false ; COLUMN ; config1-EconRow46  ; ; 2
+; ; config1-EconCol463 ; EconCol463 ; false ; COLUMN ; config1-EconRow46  ; ; 3
+
+#Row46-->EconColumn1--->Seats
+; ; config1-46A        ; 46A        ; true  ; SEAT   ; config1-EconCol461 ;
+; ; config1-46B        ; 46B        ; true  ; SEAT   ; config1-EconCol461 ;
+; ; config1-46C        ; 46C        ; true  ; SEAT   ; config1-EconCol461 ;
+
+#Row46-->EconColumn2--->Seats
+; ; config1-46D        ; 46D        ; true  ; SEAT   ; config1-EconCol462 ;
+; ; config1-46E        ; 46E        ; true  ; SEAT   ; config1-EconCol462 ;
+; ; config1-46F        ; 46F        ; true  ; SEAT   ; config1-EconCol462 ;
+; ; config1-46G        ; 46G        ; true  ; SEAT   ; config1-EconCol462 ;
+
+#Row46-->EconColumn3--->Seats
+; ; config1-46H        ; 46H        ; true  ; SEAT   ; config1-EconCol463 ;
+; ; config1-46J        ; 46J        ; true  ; SEAT   ; config1-EconCol463 ;
+; ; config1-46K        ; 46K        ; true  ; SEAT   ; config1-EconCol463 ;
+
+#--------------------------------------
+#Row47
+; ; config1-EconRow47  ; EconRow47  ; false ; ROW    ; config1-EconCabinLower  ; ; 47
+
+#Row47-->EconColumns
+; ; config1-EconCol471 ; EconCol471 ; false ; COLUMN ; config1-EconRow47  ; ; 1
+; ; config1-EconCol472 ; EconCol472 ; false ; COLUMN ; config1-EconRow47  ; ; 2
+; ; config1-EconCol473 ; EconCol473 ; false ; COLUMN ; config1-EconRow47  ; ; 3
+
+#Row47-->EconColumn1--->Seats
+; ; config1-47A        ; 47A        ; true  ; SEAT   ; config1-EconCol471 ;
+; ; config1-47B        ; 47B        ; true  ; SEAT   ; config1-EconCol471 ;
+; ; config1-47C        ; 47C        ; true  ; SEAT   ; config1-EconCol471 ;
+
+#Row47-->EconColumn2--->Seats
+; ; config1-47D        ; 47D        ; true  ; SEAT   ; config1-EconCol472 ;
+; ; config1-47E        ; 47E        ; true  ; SEAT   ; config1-EconCol472 ;
+; ; config1-47F        ; 47F        ; true  ; SEAT   ; config1-EconCol472 ;
+; ; config1-47G        ; 47G        ; true  ; SEAT   ; config1-EconCol472 ;
+
+#Row47-->EconColumn3--->Seats
+; ; config1-47H        ; 47H        ; true  ; SEAT   ; config1-EconCol473 ;
+; ; config1-47J        ; 47J        ; true  ; SEAT   ; config1-EconCol473 ;
+; ; config1-47K        ; 47K        ; true  ; SEAT   ; config1-EconCol473 ;
+
+#--------------------------------------
+#Row48
+; ; config1-EconRow48  ; EconRow48  ; false ; ROW    ; config1-EconCabinLower  ; ; 48
+
+#Row48-->EconColumns
+; ; config1-EconCol481 ; EconCol481 ; false ; COLUMN ; config1-EconRow48  ; ; 1
+; ; config1-EconCol482 ; EconCol482 ; false ; COLUMN ; config1-EconRow48  ; ; 2
+; ; config1-EconCol486 ; EconCol486 ; false ; COLUMN ; config1-EconRow48  ; ; 3
+
+#Row48-->EconColumn1--->Seats
+; ; config1-48A        ; 48A        ; true  ; SEAT   ; config1-EconCol481 ;
+; ; config1-48B        ; 48B        ; true  ; SEAT   ; config1-EconCol481 ;
+; ; config1-48C        ; 48C        ; true  ; SEAT   ; config1-EconCol481 ;
+
+#Row48-->EconColumn2--->Seats
+; ; config1-48D        ; 48D        ; true  ; SEAT   ; config1-EconCol482 ;
+; ; config1-48E        ; 48E        ; true  ; SEAT   ; config1-EconCol482 ;
+; ; config1-48F        ; 48F        ; true  ; SEAT   ; config1-EconCol482 ;
+; ; config1-48G        ; 48G        ; true  ; SEAT   ; config1-EconCol482 ;
+
+#Row48-->EconColumn3--->Seats
+; ; config1-48H        ; 48H        ; true  ; SEAT   ; config1-EconCol486 ;
+; ; config1-48J        ; 48J        ; true  ; SEAT   ; config1-EconCol486 ;
+; ; config1-48K        ; 48K        ; true  ; SEAT   ; config1-EconCol486 ;
+
+#--------------------------------------
+#Row49
+; ; config1-EconRow49  ; EconRow49  ; false ; ROW    ; config1-EconCabinLower  ; ; 49
+
+#Row49-->EconColumns
+; ; config1-EconCol491 ; EconCol491 ; false ; COLUMN ; config1-EconRow49  ; ; 1
+; ; config1-EconCol492 ; EconCol492 ; false ; COLUMN ; config1-EconRow49  ; ; 2
+; ; config1-EconCol493 ; EconCol493 ; false ; COLUMN ; config1-EconRow49  ; ; 3
+
+#Row49-->EconColumn1--->Seats
+; ; config1-49A        ; 49A        ; true  ; SEAT   ; config1-EconCol491 ;
+; ; config1-49B        ; 49B        ; true  ; SEAT   ; config1-EconCol491 ;
+; ; config1-49C        ; 49C        ; true  ; SEAT   ; config1-EconCol491 ;
+
+#Row49-->EconColumn2--->Seats
+; ; config1-49D        ; 49D        ; true  ; SEAT   ; config1-EconCol492 ;
+; ; config1-49E        ; 49E        ; true  ; SEAT   ; config1-EconCol492 ;
+; ; config1-49F        ; 49F        ; true  ; SEAT   ; config1-EconCol492 ;
+; ; config1-49G        ; 49G        ; true  ; SEAT   ; config1-EconCol492 ;
+
+#Row49-->EconColumn3--->Seats
+; ; config1-49H        ; 49H        ; true  ; SEAT   ; config1-EconCol493 ;
+; ; config1-49J        ; 49J        ; true  ; SEAT   ; config1-EconCol493 ;
+; ; config1-49K        ; 49K        ; true  ; SEAT   ; config1-EconCol493 ;
+
+#--------------------------------------
+#Row50
+; ; config1-EconRow50  ; EconRow50  ; false ; ROW    ; config1-EconCabinLower  ; ; 50
+
+#Row50-->EconColumns
+; ; config1-EconCol501 ; EconCol501 ; false ; COLUMN ; config1-EconRow50  ; ; 1
+; ; config1-EconCol502 ; EconCol502 ; false ; COLUMN ; config1-EconRow50  ; ; 2
+; ; config1-EconCol503 ; EconCol503 ; false ; COLUMN ; config1-EconRow50  ; ; 3
+
+#Row50-->EconColumn1--->Seats
+; ; config1-50A        ; 50A        ; true  ; SEAT   ; config1-EconCol501 ; GALLEY_BACK
+; ; config1-50B        ; 50B        ; true  ; SEAT   ; config1-EconCol501 ; GALLEY_BACK
+; ; config1-50C        ; 50C        ; true  ; SEAT   ; config1-EconCol501 ; GALLEY_BACK
+
+#Row50-->EconColumn2--->Seats
+; ; config1-50D        ; 50D        ; true  ; SEAT   ; config1-EconCol502 ;
+; ; config1-50E        ; 50E        ; true  ; SEAT   ; config1-EconCol502 ;
+; ; config1-50F        ; 50F        ; true  ; SEAT   ; config1-EconCol502 ;
+; ; config1-50G        ; 50G        ; true  ; SEAT   ; config1-EconCol502 ;
+
+#Row50-->EconColumn3--->Seats
+; ; config1-50H        ; 50H        ; true  ; SEAT   ; config1-EconCol503 ; GALLEY_BACK
+; ; config1-50J        ; 50J        ; true  ; SEAT   ; config1-EconCol503 ; GALLEY_BACK
+; ; config1-50K        ; 50K        ; true  ; SEAT   ; config1-EconCol503 ; GALLEY_BACK
+
+#--------------------------------------
+#Row51
+; ; config1-EconRow51  ; EconRow51  ; false ; ROW    ; config1-EconCabinLower  ; ; 51
+
+#Row51-->EconColumns
+; ; config1-EconCol511 ; EconCol511 ; false ; COLUMN ; config1-EconRow51  ; ; 1
+; ; config1-EconCol512 ; EconCol512 ; false ; COLUMN ; config1-EconRow51  ; ; 2
+; ; config1-EconCol513 ; EconCol513 ; false ; COLUMN ; config1-EconRow51  ; ; 3
+
+#Row51-->EconColumn1--->Seats (no seats)
+
+#Row51-->EconColumn2--->Seats
+; ; config1-51D        ; 51D        ; true  ; SEAT   ; config1-EconCol512 ; GALLEY_BACK
+; ; config1-51E        ; 51E        ; true  ; SEAT   ; config1-EconCol512 ; GALLEY_BACK
+; ; config1-51F        ; 51F        ; true  ; SEAT   ; config1-EconCol512 ; GALLEY_BACK
+; ; config1-51G        ; 51G        ; true  ; SEAT   ; config1-EconCol512 ; GALLEY_BACK
+
+#Row51-->EconColumn3--->Seats (no seats)
+
+#--------------------------------------
+#Row52
+; ; config1-EconRow52  ; EconRow52  ; false ; ROW    ; config1-EconCabinLower  ; ; 52
+
+#Row52-->EconColumns
+; ; config1-EconCol521 ; EconCol521 ; false ; COLUMN ; config1-EconRow52  ; ; 1
+; ; config1-EconCol522 ; EconCol522 ; false ; COLUMN ; config1-EconRow52  ; ; 2
+; ; config1-EconCol523 ; EconCol523 ; false ; COLUMN ; config1-EconRow52  ; ; 3
+
+#Row52-->EconColumn1--->Seats
+; ; config1-52A        ; 52A        ; true  ; SEAT   ; config1-EconCol521 ; GALLEY_FRONT
+; ; config1-52B        ; 52B        ; true  ; SEAT   ; config1-EconCol521 ; GALLEY_FRONT
+; ; config1-52C        ; 52C        ; true  ; SEAT   ; config1-EconCol521 ; GALLEY_FRONT
+
+#Row52-->EconColumn2--->Seats (no seats)
+
+#Row52-->EconColumn3--->Seats
+; ; config1-52H        ; 52H        ; true  ; SEAT   ; config1-EconCol523 ; GALLEY_FRONT
+; ; config1-52J        ; 52J        ; true  ; SEAT   ; config1-EconCol523 ; GALLEY_FRONT
+; ; config1-52K        ; 52K        ; true  ; SEAT   ; config1-EconCol523 ; GALLEY_FRONT
+
+#--------------------------------------
+#Row53
+; ; config1-EconRow53  ; EconRow53  ; false ; ROW    ; config1-EconCabinLower  ; ; 53
+
+#Row53-->EconColumns
+; ; config1-EconCol531 ; EconCol531 ; false ; COLUMN ; config1-EconRow53  ; ; 1
+; ; config1-EconCol532 ; EconCol532 ; false ; COLUMN ; config1-EconRow53  ; ; 2
+; ; config1-EconCol533 ; EconCol533 ; false ; COLUMN ; config1-EconRow53  ; ; 3
+
+#Row53-->EconColumn1--->Seats
+; ; config1-53A        ; 53A        ; true  ; SEAT   ; config1-EconCol531 ;
+; ; config1-53B        ; 53B        ; true  ; SEAT   ; config1-EconCol531 ;
+; ; config1-53C        ; 53C        ; true  ; SEAT   ; config1-EconCol531 ;
+
+#Row53-->EconColumn2--->Seats (no seats)
+
+#Row53-->EconColumn3--->Seats
+; ; config1-53H        ; 53H        ; true  ; SEAT   ; config1-EconCol533 ;
+; ; config1-53J        ; 53J        ; true  ; SEAT   ; config1-EconCol533 ;
+; ; config1-53K        ; 53K        ; true  ; SEAT   ; config1-EconCol533 ;
+
+#--------------------------------------
+#Row54
+; ; config1-EconRow54  ; EconRow54  ; false ; ROW    ; config1-EconCabinLower  ; ; 54
+
+#Row54-->EconColumns
+; ; config1-EconCol541 ; EconCol541 ; false ; COLUMN ; config1-EconRow54  ; ; 1
+; ; config1-EconCol542 ; EconCol542 ; false ; COLUMN ; config1-EconRow54  ; ; 2
+; ; config1-EconCol543 ; EconCol543 ; false ; COLUMN ; config1-EconRow54  ; ; 3
+
+#Row54-->EconColumn1--->Seats
+; ; config1-54A        ; 54A        ; true  ; SEAT   ; config1-EconCol541 ;
+; ; config1-54B        ; 54B        ; true  ; SEAT   ; config1-EconCol541 ;
+; ; config1-54C        ; 54C        ; true  ; SEAT   ; config1-EconCol541 ;
+
+#Row54-->EconColumn2--->Seats
+; ; config1-54D        ; 54D        ; true  ; SEAT   ; config1-EconCol542 ; GALLEY_FRONT
+; ; config1-54E        ; 54E        ; true  ; SEAT   ; config1-EconCol542 ; GALLEY_FRONT
+; ; config1-54F        ; 54F        ; true  ; SEAT   ; config1-EconCol542 ; GALLEY_FRONT
+; ; config1-54G        ; 54G        ; true  ; SEAT   ; config1-EconCol542 ; GALLEY_FRONT
+
+#Row54-->EconColumn3--->Seats
+; ; config1-54H        ; 54H        ; true  ; SEAT   ; config1-EconCol543 ;
+; ; config1-54J        ; 54J        ; true  ; SEAT   ; config1-EconCol543 ;
+; ; config1-54K        ; 54K        ; true  ; SEAT   ; config1-EconCol543 ;
+
+#--------------------------------------
+#Row55
+; ; config1-EconRow55  ; EconRow55  ; false ; ROW    ; config1-EconCabinLower  ; ; 55
+
+#Row55-->EconColumns
+; ; config1-EconCol551 ; EconCol551 ; false ; COLUMN ; config1-EconRow55  ; ; 1
+; ; config1-EconCol552 ; EconCol552 ; false ; COLUMN ; config1-EconRow55  ; ; 2
+; ; config1-EconCol553 ; EconCol553 ; false ; COLUMN ; config1-EconRow55  ; ; 3
+
+#Row55-->EconColumn1--->Seats
+; ; config1-55A        ; 55A        ; true  ; SEAT   ; config1-EconCol551 ;
+; ; config1-55B        ; 55B        ; true  ; SEAT   ; config1-EconCol551 ;
+; ; config1-55C        ; 55C        ; true  ; SEAT   ; config1-EconCol551 ;
+
+#Row55-->EconColumn2--->Seats
+; ; config1-55D        ; 55D        ; true  ; SEAT   ; config1-EconCol552 ;
+; ; config1-55E        ; 55E        ; true  ; SEAT   ; config1-EconCol552 ;
+; ; config1-55F        ; 55F        ; true  ; SEAT   ; config1-EconCol552 ;
+; ; config1-55G        ; 55G        ; true  ; SEAT   ; config1-EconCol552 ;
+
+#Row55-->EconColumn3--->Seats
+; ; config1-55H        ; 55H        ; true  ; SEAT   ; config1-EconCol553 ;
+; ; config1-55J        ; 55J        ; true  ; SEAT   ; config1-EconCol553 ;
+; ; config1-55K        ; 55K        ; true  ; SEAT   ; config1-EconCol553 ;
+
+#--------------------------------------
+#Row56
+; ; config1-EconRow56  ; EconRow56  ; false ; ROW    ; config1-EconCabinLower  ; ; 56
+
+#Row56-->EconColumns
+; ; config1-EconCol561 ; EconCol561 ; false ; COLUMN ; config1-EconRow56  ; ; 1
+; ; config1-EconCol562 ; EconCol562 ; false ; COLUMN ; config1-EconRow56  ; ; 2
+; ; config1-EconCol563 ; EconCol563 ; false ; COLUMN ; config1-EconRow56  ; ; 3
+
+#Row56-->EconColumn1--->Seats
+; ; config1-56A        ; 56A        ; true  ; SEAT   ; config1-EconCol561 ;
+; ; config1-56B        ; 56B        ; true  ; SEAT   ; config1-EconCol561 ;
+; ; config1-56C        ; 56C        ; true  ; SEAT   ; config1-EconCol561 ;
+
+#Row56-->EconColumn2--->Seats
+; ; config1-56D        ; 56D        ; true  ; SEAT   ; config1-EconCol562 ;
+; ; config1-56E        ; 56E        ; true  ; SEAT   ; config1-EconCol562 ;
+; ; config1-56F        ; 56F        ; true  ; SEAT   ; config1-EconCol562 ;
+; ; config1-56G        ; 56G        ; true  ; SEAT   ; config1-EconCol562 ;
+
+#Row56-->EconColumn3--->Seats
+; ; config1-56H        ; 56H        ; true  ; SEAT   ; config1-EconCol563 ;
+; ; config1-56J        ; 56J        ; true  ; SEAT   ; config1-EconCol563 ;
+; ; config1-56K        ; 56K        ; true  ; SEAT   ; config1-EconCol563 ;
+
+#--------------------------------------
+#Row57
+; ; config1-EconRow57  ; EconRow57  ; false ; ROW    ; config1-EconCabinLower  ; ; 57
+
+#Row57-->EconColumns
+; ; config1-EconCol571 ; EconCol571 ; false ; COLUMN ; config1-EconRow57  ; ; 1
+; ; config1-EconCol572 ; EconCol572 ; false ; COLUMN ; config1-EconRow57  ; ; 2
+; ; config1-EconCol573 ; EconCol573 ; false ; COLUMN ; config1-EconRow57  ; ; 3
+
+#Row57-->EconColumn1--->Seats
+; ; config1-57A        ; 57A        ; true  ; SEAT   ; config1-EconCol571 ;
+; ; config1-57B        ; 57B        ; true  ; SEAT   ; config1-EconCol571 ;
+; ; config1-57C        ; 57C        ; true  ; SEAT   ; config1-EconCol571 ;
+
+#Row57-->EconColumn2--->Seats
+; ; config1-57D        ; 57D        ; true  ; SEAT   ; config1-EconCol572 ;
+; ; config1-57E        ; 57E        ; true  ; SEAT   ; config1-EconCol572 ;
+; ; config1-57F        ; 57F        ; true  ; SEAT   ; config1-EconCol572 ;
+; ; config1-57G        ; 57G        ; true  ; SEAT   ; config1-EconCol572 ;
+
+#Row57-->EconColumn3--->Seats
+; ; config1-57H        ; 57H        ; true  ; SEAT   ; config1-EconCol573 ;
+; ; config1-57J        ; 57J        ; true  ; SEAT   ; config1-EconCol573 ;
+; ; config1-57K        ; 57K        ; true  ; SEAT   ; config1-EconCol573 ;
+
+#--------------------------------------
+#Row58
+; ; config1-EconRow58  ; EconRow58  ; false ; ROW    ; config1-EconCabinLower  ; ; 58
+
+#Row58-->EconColumns
+; ; config1-EconCol581 ; EconCol581 ; false ; COLUMN ; config1-EconRow58  ; ; 1
+; ; config1-EconCol582 ; EconCol582 ; false ; COLUMN ; config1-EconRow58  ; ; 2
+; ; config1-EconCol586 ; EconCol586 ; false ; COLUMN ; config1-EconRow58  ; ; 3
+
+#Row58-->EconColumn1--->Seats
+; ; config1-58A        ; 58A        ; true  ; SEAT   ; config1-EconCol581 ;
+; ; config1-58B        ; 58B        ; true  ; SEAT   ; config1-EconCol581 ;
+; ; config1-58C        ; 58C        ; true  ; SEAT   ; config1-EconCol581 ;
+
+#Row58-->EconColumn2--->Seats
+; ; config1-58D        ; 58D        ; true  ; SEAT   ; config1-EconCol582 ;
+; ; config1-58E        ; 58E        ; true  ; SEAT   ; config1-EconCol582 ;
+; ; config1-58F        ; 58F        ; true  ; SEAT   ; config1-EconCol582 ;
+; ; config1-58G        ; 58G        ; true  ; SEAT   ; config1-EconCol582 ;
+
+#Row58-->EconColumn3--->Seats
+; ; config1-58H        ; 58H        ; true  ; SEAT   ; config1-EconCol586 ;
+; ; config1-58J        ; 58J        ; true  ; SEAT   ; config1-EconCol586 ;
+; ; config1-58K        ; 58K        ; true  ; SEAT   ; config1-EconCol586 ;
+
+#--------------------------------------
+#Row59
+; ; config1-EconRow59  ; EconRow59  ; false ; ROW    ; config1-EconCabinLower  ; ; 59
+
+#Row59-->EconColumns
+; ; config1-EconCol591 ; EconCol591 ; false ; COLUMN ; config1-EconRow59  ; ; 1
+; ; config1-EconCol592 ; EconCol592 ; false ; COLUMN ; config1-EconRow59  ; ; 2
+; ; config1-EconCol593 ; EconCol593 ; false ; COLUMN ; config1-EconRow59  ; ; 3
+
+#Row59-->EconColumn1--->Seats
+; ; config1-59A        ; 59A        ; true  ; SEAT   ; config1-EconCol591 ;
+; ; config1-59B        ; 59B        ; true  ; SEAT   ; config1-EconCol591 ;
+; ; config1-59C        ; 59C        ; true  ; SEAT   ; config1-EconCol591 ;
+
+#Row59-->EconColumn2--->Seats
+; ; config1-59D        ; 59D        ; true  ; SEAT   ; config1-EconCol592 ;
+; ; config1-59E        ; 59E        ; true  ; SEAT   ; config1-EconCol592 ;
+; ; config1-59F        ; 59F        ; true  ; SEAT   ; config1-EconCol592 ;
+; ; config1-59G        ; 59G        ; true  ; SEAT   ; config1-EconCol592 ;
+
+#Row59-->EconColumn3--->Seats
+; ; config1-59H        ; 59H        ; true  ; SEAT   ; config1-EconCol593 ;
+; ; config1-59J        ; 59J        ; true  ; SEAT   ; config1-EconCol593 ;
+; ; config1-59K        ; 59K        ; true  ; SEAT   ; config1-EconCol593 ;
+
+#--------------------------------------
+#Row60
+; ; config1-EconRow60  ; EconRow60  ; false ; ROW    ; config1-EconCabinLower  ; ; 60
+
+#Row60-->EconColumns
+; ; config1-EconCol601 ; EconCol601 ; false ; COLUMN ; config1-EconRow60  ; ; 1
+; ; config1-EconCol602 ; EconCol602 ; false ; COLUMN ; config1-EconRow60  ; ; 2
+; ; config1-EconCol603 ; EconCol603 ; false ; COLUMN ; config1-EconRow60  ; ; 3
+
+#Row60-->EconColumn1--->Seats
+; ; config1-60A        ; 60A        ; true  ; SEAT   ; config1-EconCol601 ;
+; ; config1-60B        ; 60B        ; true  ; SEAT   ; config1-EconCol601 ;
+; ; config1-60C        ; 60C        ; true  ; SEAT   ; config1-EconCol601 ;
+
+#Row60-->EconColumn2--->Seats
+; ; config1-60D        ; 60D        ; true  ; SEAT   ; config1-EconCol602 ;
+; ; config1-60E        ; 60E        ; true  ; SEAT   ; config1-EconCol602 ;
+; ; config1-60F        ; 60F        ; true  ; SEAT   ; config1-EconCol602 ;
+; ; config1-60G        ; 60G        ; true  ; SEAT   ; config1-EconCol602 ;
+
+#Row60-->EconColumn3--->Seats
+; ; config1-60H        ; 60H        ; true  ; SEAT   ; config1-EconCol603 ;
+; ; config1-60J        ; 60J        ; true  ; SEAT   ; config1-EconCol603 ;
+; ; config1-60K        ; 60K        ; true  ; SEAT   ; config1-EconCol603 ;
+
+#--------------------------------------
+#Row61
+; ; config1-EconRow61  ; EconRow61  ; false ; ROW    ; config1-EconCabinLower  ; ; 61
+
+#Row61-->EconColumns
+; ; config1-EconCol611 ; EconCol611 ; false ; COLUMN ; config1-EconRow61  ; ; 1
+; ; config1-EconCol612 ; EconCol612 ; false ; COLUMN ; config1-EconRow61  ; ; 2
+; ; config1-EconCol613 ; EconCol613 ; false ; COLUMN ; config1-EconRow61  ; ; 3
+
+#Row61-->EconColumn1--->Seats
+; ; config1-61A        ; 61A        ; true  ; SEAT   ; config1-EconCol611 ;
+; ; config1-61B        ; 61B        ; true  ; SEAT   ; config1-EconCol611 ;
+; ; config1-61C        ; 61C        ; true  ; SEAT   ; config1-EconCol611 ;
+
+#Row61-->EconColumn2--->Seats
+; ; config1-61D        ; 61D        ; true  ; SEAT   ; config1-EconCol612 ;
+; ; config1-61E        ; 61E        ; true  ; SEAT   ; config1-EconCol612 ;
+; ; config1-61F        ; 61F        ; true  ; SEAT   ; config1-EconCol612 ;
+; ; config1-61G        ; 61G        ; true  ; SEAT   ; config1-EconCol612 ;
+
+#Row61-->EconColumn3--->Seats
+; ; config1-61H        ; 61H        ; true  ; SEAT   ; config1-EconCol613 ;
+; ; config1-61J        ; 61J        ; true  ; SEAT   ; config1-EconCol613 ;
+; ; config1-61K        ; 61K        ; true  ; SEAT   ; config1-EconCol613 ;
+
+#--------------------------------------
+#Row62
+; ; config1-EconRow62  ; EconRow62  ; false ; ROW    ; config1-EconCabinLower  ; ; 62
+
+#Row62-->EconColumns
+; ; config1-EconCol621 ; EconCol621 ; false ; COLUMN ; config1-EconRow62  ; ; 1
+; ; config1-EconCol622 ; EconCol622 ; false ; COLUMN ; config1-EconRow62  ; ; 2
+; ; config1-EconCol623 ; EconCol623 ; false ; COLUMN ; config1-EconRow62  ; ; 3
+
+#Row62-->EconColumn1--->Seats
+; ; config1-62A        ; 62A        ; true  ; SEAT   ; config1-EconCol621 ;
+; ; config1-62B        ; 62B        ; true  ; SEAT   ; config1-EconCol621 ;
+; ; config1-62C        ; 62C        ; true  ; SEAT   ; config1-EconCol621 ;
+
+#Row62-->EconColumn2--->Seats
+; ; config1-62D        ; 62D        ; true  ; SEAT   ; config1-EconCol622 ;
+; ; config1-62E        ; 62E        ; true  ; SEAT   ; config1-EconCol622 ;
+; ; config1-62F        ; 62F        ; true  ; SEAT   ; config1-EconCol622 ;
+; ; config1-62G        ; 62G        ; true  ; SEAT   ; config1-EconCol622 ;
+
+#Row62-->EconColumn3--->Seats
+; ; config1-62H        ; 62H        ; true  ; SEAT   ; config1-EconCol623 ;
+; ; config1-62J        ; 62J        ; true  ; SEAT   ; config1-EconCol623 ;
+; ; config1-62K        ; 62K        ; true  ; SEAT   ; config1-EconCol623 ;
+
+#--------------------------------------
+#Row63
+; ; config1-EconRow63  ; EconRow63  ; false ; ROW    ; config1-EconCabinLower  ; ; 63
+
+#Row63-->EconColumns
+; ; config1-EconCol631 ; EconCol631 ; false ; COLUMN ; config1-EconRow63  ; ; 1
+; ; config1-EconCol632 ; EconCol632 ; false ; COLUMN ; config1-EconRow63  ; ; 2
+; ; config1-EconCol633 ; EconCol633 ; false ; COLUMN ; config1-EconRow63  ; ; 3
+
+#Row63-->EconColumn1--->Seats
+; ; config1-63A        ; 63A        ; true  ; SEAT   ; config1-EconCol631 ;
+; ; config1-63B        ; 63B        ; true  ; SEAT   ; config1-EconCol631 ;
+; ; config1-63C        ; 63C        ; true  ; SEAT   ; config1-EconCol631 ;
+
+#Row63-->EconColumn2--->Seats
+; ; config1-63D        ; 63D        ; true  ; SEAT   ; config1-EconCol632 ;
+; ; config1-63E        ; 63E        ; true  ; SEAT   ; config1-EconCol632 ;
+; ; config1-63F        ; 63F        ; true  ; SEAT   ; config1-EconCol632 ;
+; ; config1-63G        ; 63G        ; true  ; SEAT   ; config1-EconCol632 ;
+
+#Row63-->EconColumn3--->Seats
+; ; config1-63H        ; 63H        ; true  ; SEAT   ; config1-EconCol633 ;
+; ; config1-63J        ; 63J        ; true  ; SEAT   ; config1-EconCol633 ;
+; ; config1-63K        ; 63K        ; true  ; SEAT   ; config1-EconCol633 ;
+
+#--------------------------------------
+#Row64
+; ; config1-EconRow64  ; EconRow64  ; false ; ROW    ; config1-EconCabinLower  ; ; 64
+
+#Row64-->EconColumns
+; ; config1-EconCol641 ; EconCol641 ; false ; COLUMN ; config1-EconRow64  ; ; 1
+; ; config1-EconCol642 ; EconCol642 ; false ; COLUMN ; config1-EconRow64  ; ; 2
+; ; config1-EconCol643 ; EconCol643 ; false ; COLUMN ; config1-EconRow64  ; ; 3
+
+#Row64-->EconColumn1--->Seats
+; ; config1-64A        ; 64A        ; true  ; SEAT   ; config1-EconCol641 ;
+; ; config1-64B        ; 64B        ; true  ; SEAT   ; config1-EconCol641 ;
+; ; config1-64C        ; 64C        ; true  ; SEAT   ; config1-EconCol641 ;
+
+#Row64-->EconColumn2--->Seats
+; ; config1-64D        ; 64D        ; true  ; SEAT   ; config1-EconCol642 ;
+; ; config1-64E        ; 64E        ; true  ; SEAT   ; config1-EconCol642 ;
+; ; config1-64F        ; 64F        ; true  ; SEAT   ; config1-EconCol642 ;
+; ; config1-64G        ; 64G        ; true  ; SEAT   ; config1-EconCol642 ;
+
+#Row64-->EconColumn3--->Seats
+; ; config1-64H        ; 64H        ; true  ; SEAT   ; config1-EconCol643 ;
+; ; config1-64J        ; 64J        ; true  ; SEAT   ; config1-EconCol643 ;
+; ; config1-64K        ; 64K        ; true  ; SEAT   ; config1-EconCol643 ;
+
+#--------------------------------------
+#Row65
+; ; config1-EconRow65  ; EconRow65  ; false ; ROW    ; config1-EconCabinLower  ; ; 65
+
+#Row65-->EconColumns
+; ; config1-EconCol651 ; EconCol651 ; false ; COLUMN ; config1-EconRow65  ; ; 1
+; ; config1-EconCol652 ; EconCol652 ; false ; COLUMN ; config1-EconRow65  ; ; 2
+; ; config1-EconCol653 ; EconCol653 ; false ; COLUMN ; config1-EconRow65  ; ; 3
+
+#Row65-->EconColumn1--->Seats
+; ; config1-65A        ; 65A        ; true  ; SEAT   ; config1-EconCol651 ; LAVATORY_BACK
+; ; config1-65B        ; 65B        ; true  ; SEAT   ; config1-EconCol651 ; LAVATORY_BACK
+; ; config1-65C        ; 65C        ; true  ; SEAT   ; config1-EconCol651 ; LAVATORY_BACK
+
+#Row65-->EconColumn2--->Seats
+; ; config1-65D        ; 65D        ; true  ; SEAT   ; config1-EconCol652 ; LAVATORY_BACK
+; ; config1-65E        ; 65E        ; true  ; SEAT   ; config1-EconCol652 ; LAVATORY_BACK
+; ; config1-65F        ; 65F        ; true  ; SEAT   ; config1-EconCol652 ; LAVATORY_BACK
+; ; config1-65G        ; 65G        ; true  ; SEAT   ; config1-EconCol652 ; LAVATORY_BACK
+
+#Row65-->EconColumn3--->Seats
+; ; config1-65H        ; 65H        ; true  ; SEAT   ; config1-EconCol653 ;
+; ; config1-65J        ; 65J        ; true  ; SEAT   ; config1-EconCol653 ;
+; ; config1-65K        ; 65K        ; true  ; SEAT   ; config1-EconCol653 ;
+
+#--------------------------------------
+#Row66
+; ; config1-EconRow66  ; EconRow66  ; false ; ROW    ; config1-EconCabinLower  ; ; 66
+
+#Row66-->EconColumns
+; ; config1-EconCol661 ; EconCol661 ; false ; COLUMN ; config1-EconRow66  ; ; 1
+; ; config1-EconCol662 ; EconCol662 ; false ; COLUMN ; config1-EconRow66  ; ; 2
+; ; config1-EconCol663 ; EconCol663 ; false ; COLUMN ; config1-EconRow66  ; ; 3
+
+#Row66-->EconColumn1--->Seats (no seats)
+
+#Row66-->EconColumn2--->Seats (no seats)
+
+#Row66-->EconColumn3--->Seats
+; ; config1-66H        ; 66H        ; true  ; SEAT   ; config1-EconCol663 ; LAVATORY_BACK
+; ; config1-66J        ; 66J        ; true  ; SEAT   ; config1-EconCol663 ; LAVATORY_BACK
+; ; config1-66K        ; 66K        ; true  ; SEAT   ; config1-EconCol663 ; LAVATORY_BACK
+
+#--------------------------------------
+#Row67
+; ; config1-EconRow67  ; EconRow67  ; false ; ROW    ; config1-EconCabinLower  ; ; 67
+
+#Row67-->EconColumns
+; ; config1-EconCol671 ; EconCol671 ; false ; COLUMN ; config1-EconRow67  ; ; 1
+; ; config1-EconCol672 ; EconCol672 ; false ; COLUMN ; config1-EconRow67  ; ; 2
+; ; config1-EconCol673 ; EconCol673 ; false ; COLUMN ; config1-EconRow67  ; ; 3
+
+#Row67-->EconColumn1--->Seats
+; ; config1-67B        ; 67B        ; true  ; SEAT   ; config1-EconCol671 ; EMERGENCY_EXIT, LAVATORY_FRONT
+; ; config1-67C        ; 67C        ; true  ; SEAT   ; config1-EconCol671 ; EMERGENCY_EXIT, LAVATORY_FRONT
+
+#Row67-->EconColumn2--->Seats
+; ; config1-67D        ; 67D        ; true  ; SEAT   ; config1-EconCol672 ; LAVATORY_FRONT ; ; LIMITEDCOMFORT
+; ; config1-67E        ; 67E        ; true  ; SEAT   ; config1-EconCol672 ;
+; ; config1-67F        ; 67F        ; true  ; SEAT   ; config1-EconCol672 ;
+; ; config1-67G        ; 67G        ; true  ; SEAT   ; config1-EconCol672 ; LAVATORY_FRONT ; ; LIMITEDCOMFORT
+
+#Row67-->EconColumn3--->Seats
+; ; config1-67H        ; 67H        ; true  ; SEAT   ; config1-EconCol673 ; EMERGENCY_EXIT, LAVATORY_FRONT
+; ; config1-67J        ; 67J        ; true  ; SEAT   ; config1-EconCol673 ; EMERGENCY_EXIT, LAVATORY_FRONT
+
+#--------------------------------------
+#Row68
+; ; config1-EconRow68  ; EconRow68  ; false ; ROW    ; config1-EconCabinLower  ; ; 68
+
+#Row68-->EconColumns
+; ; config1-EconCol681 ; EconCol681 ; false ; COLUMN ; config1-EconRow68  ; ; 1
+; ; config1-EconCol682 ; EconCol682 ; false ; COLUMN ; config1-EconRow68  ; ; 2
+; ; config1-EconCol686 ; EconCol686 ; false ; COLUMN ; config1-EconRow68  ; ; 3
+
+#Row68-->EconColumn1--->Seats
+; ; config1-68A        ; 68A        ; true  ; SEAT   ; config1-EconCol681 ;
+; ; config1-68B        ; 68B        ; true  ; SEAT   ; config1-EconCol681 ;
+; ; config1-68C        ; 68C        ; true  ; SEAT   ; config1-EconCol681 ;
+
+#Row68-->EconColumn2--->Seats
+; ; config1-68D        ; 68D        ; true  ; SEAT   ; config1-EconCol682 ;
+; ; config1-68E        ; 68E        ; true  ; SEAT   ; config1-EconCol682 ;
+; ; config1-68F        ; 68F        ; true  ; SEAT   ; config1-EconCol682 ;
+; ; config1-68G        ; 68G        ; true  ; SEAT   ; config1-EconCol682 ;
+
+#Row68-->EconColumn3--->Seats
+; ; config1-68H        ; 68H        ; true  ; SEAT   ; config1-EconCol686 ;
+; ; config1-68J        ; 68J        ; true  ; SEAT   ; config1-EconCol686 ;
+; ; config1-68K        ; 68K        ; true  ; SEAT   ; config1-EconCol686 ;
+
+#--------------------------------------
+#Row69
+; ; config1-EconRow69  ; EconRow69  ; false ; ROW    ; config1-EconCabinLower  ; ; 69
+
+#Row69-->EconColumns
+; ; config1-EconCol691 ; EconCol691 ; false ; COLUMN ; config1-EconRow69  ; ; 1
+; ; config1-EconCol692 ; EconCol692 ; false ; COLUMN ; config1-EconRow69  ; ; 2
+; ; config1-EconCol693 ; EconCol693 ; false ; COLUMN ; config1-EconRow69  ; ; 3
+
+#Row69-->EconColumn1--->Seats
+; ; config1-69A        ; 69A        ; true  ; SEAT   ; config1-EconCol691 ;
+; ; config1-69B        ; 69B        ; true  ; SEAT   ; config1-EconCol691 ;
+; ; config1-69C        ; 69C        ; true  ; SEAT   ; config1-EconCol691 ;
+
+#Row69-->EconColumn2--->Seats
+; ; config1-69D        ; 69D        ; true  ; SEAT   ; config1-EconCol692 ;
+; ; config1-69E        ; 69E        ; true  ; SEAT   ; config1-EconCol692 ;
+; ; config1-69F        ; 69F        ; true  ; SEAT   ; config1-EconCol692 ;
+; ; config1-69G        ; 69G        ; true  ; SEAT   ; config1-EconCol692 ;
+
+#Row69-->EconColumn3--->Seats
+; ; config1-69H        ; 69H        ; true  ; SEAT   ; config1-EconCol693 ;
+; ; config1-69J        ; 69J        ; true  ; SEAT   ; config1-EconCol693 ;
+; ; config1-69K        ; 69K        ; true  ; SEAT   ; config1-EconCol693 ;
+
+#--------------------------------------
+#Row70
+; ; config1-EconRow70  ; EconRow70  ; false ; ROW    ; config1-EconCabinLower  ; ; 70
+
+#Row70-->EconColumns
+; ; config1-EconCol701 ; EconCol701 ; false ; COLUMN ; config1-EconRow70  ; ; 1
+; ; config1-EconCol702 ; EconCol702 ; false ; COLUMN ; config1-EconRow70  ; ; 2
+; ; config1-EconCol703 ; EconCol703 ; false ; COLUMN ; config1-EconRow70  ; ; 3
+
+#Row70-->EconColumn1--->Seats
+; ; config1-70A        ; 70A        ; true  ; SEAT   ; config1-EconCol701 ;
+; ; config1-70B        ; 70B        ; true  ; SEAT   ; config1-EconCol701 ;
+; ; config1-70C        ; 70C        ; true  ; SEAT   ; config1-EconCol701 ;
+
+#Row70-->EconColumn2--->Seats
+; ; config1-70D        ; 70D        ; true  ; SEAT   ; config1-EconCol702 ;
+; ; config1-70E        ; 70E        ; true  ; SEAT   ; config1-EconCol702 ;
+; ; config1-70F        ; 70F        ; true  ; SEAT   ; config1-EconCol702 ;
+; ; config1-70G        ; 70G        ; true  ; SEAT   ; config1-EconCol702 ;
+
+#Row70-->EconColumn3--->Seats
+; ; config1-70H        ; 70H        ; true  ; SEAT   ; config1-EconCol703 ;
+; ; config1-70J        ; 70J        ; true  ; SEAT   ; config1-EconCol703 ;
+; ; config1-70K        ; 70K        ; true  ; SEAT   ; config1-EconCol703 ;
+
+#--------------------------------------
+#Row71
+; ; config1-EconRow71  ; EconRow71  ; false ; ROW    ; config1-EconCabinLower  ; ; 71
+
+#Row71-->EconColumns
+; ; config1-EconCol711 ; EconCol711 ; false ; COLUMN ; config1-EconRow71  ; ; 1
+; ; config1-EconCol712 ; EconCol712 ; false ; COLUMN ; config1-EconRow71  ; ; 2
+; ; config1-EconCol713 ; EconCol713 ; false ; COLUMN ; config1-EconRow71  ; ; 3
+
+#Row71-->EconColumn1--->Seats
+; ; config1-71A        ; 71A        ; true  ; SEAT   ; config1-EconCol711 ;
+; ; config1-71B        ; 71B        ; true  ; SEAT   ; config1-EconCol711 ;
+; ; config1-71C        ; 71C        ; true  ; SEAT   ; config1-EconCol711 ;
+
+#Row71-->EconColumn2--->Seats
+; ; config1-71D        ; 71D        ; true  ; SEAT   ; config1-EconCol712 ;
+; ; config1-71E        ; 71E        ; true  ; SEAT   ; config1-EconCol712 ;
+; ; config1-71F        ; 71F        ; true  ; SEAT   ; config1-EconCol712 ;
+; ; config1-71G        ; 71G        ; true  ; SEAT   ; config1-EconCol712 ;
+
+#Row71-->EconColumn3--->Seats
+; ; config1-71H        ; 71H        ; true  ; SEAT   ; config1-EconCol713 ;
+; ; config1-71J        ; 71J        ; true  ; SEAT   ; config1-EconCol713 ;
+; ; config1-71K        ; 71K        ; true  ; SEAT   ; config1-EconCol713 ;
+
+#--------------------------------------
+#Row72
+; ; config1-EconRow72  ; EconRow72  ; false ; ROW    ; config1-EconCabinLower  ; ; 72
+
+#Row72-->EconColumns
+; ; config1-EconCol721 ; EconCol721 ; false ; COLUMN ; config1-EconRow72  ; ; 1
+; ; config1-EconCol722 ; EconCol722 ; false ; COLUMN ; config1-EconRow72  ; ; 2
+; ; config1-EconCol723 ; EconCol723 ; false ; COLUMN ; config1-EconRow72  ; ; 3
+
+#Row72-->EconColumn1--->Seats
+; ; config1-72A        ; 72A        ; true  ; SEAT   ; config1-EconCol721 ;
+; ; config1-72B        ; 72B        ; true  ; SEAT   ; config1-EconCol721 ;
+; ; config1-72C        ; 72C        ; true  ; SEAT   ; config1-EconCol721 ;
+
+#Row72-->EconColumn2--->Seats
+; ; config1-72D        ; 72D        ; true  ; SEAT   ; config1-EconCol722 ;
+; ; config1-72E        ; 72E        ; true  ; SEAT   ; config1-EconCol722 ;
+; ; config1-72F        ; 72F        ; true  ; SEAT   ; config1-EconCol722 ;
+; ; config1-72G        ; 72G        ; true  ; SEAT   ; config1-EconCol722 ;
+
+#Row72-->EconColumn3--->Seats
+; ; config1-72H        ; 72H        ; true  ; SEAT   ; config1-EconCol723 ;
+; ; config1-72J        ; 72J        ; true  ; SEAT   ; config1-EconCol723 ;
+; ; config1-72K        ; 72K        ; true  ; SEAT   ; config1-EconCol723 ;
+
+#--------------------------------------
+#Row73
+; ; config1-EconRow73  ; EconRow73  ; false ; ROW    ; config1-EconCabinLower  ; ; 73
+
+#Row73-->EconColumns
+; ; config1-EconCol731 ; EconCol731 ; false ; COLUMN ; config1-EconRow73  ; ; 1
+; ; config1-EconCol732 ; EconCol732 ; false ; COLUMN ; config1-EconRow73  ; ; 2
+; ; config1-EconCol733 ; EconCol733 ; false ; COLUMN ; config1-EconRow73  ; ; 3
+
+#Row73-->EconColumn1--->Seats
+; ; config1-73A        ; 73A        ; true  ; SEAT   ; config1-EconCol731 ;
+; ; config1-73B        ; 73B        ; true  ; SEAT   ; config1-EconCol731 ;
+; ; config1-73C        ; 73C        ; true  ; SEAT   ; config1-EconCol731 ;
+
+#Row73-->EconColumn2--->Seats
+; ; config1-73D        ; 73D        ; true  ; SEAT   ; config1-EconCol732 ;
+; ; config1-73E        ; 73E        ; true  ; SEAT   ; config1-EconCol732 ;
+; ; config1-73F        ; 73F        ; true  ; SEAT   ; config1-EconCol732 ;
+; ; config1-73G        ; 73G        ; true  ; SEAT   ; config1-EconCol732 ;
+
+#Row73-->EconColumn3--->Seats
+; ; config1-73H        ; 73H        ; true  ; SEAT   ; config1-EconCol733 ;
+; ; config1-73J        ; 73J        ; true  ; SEAT   ; config1-EconCol733 ;
+; ; config1-73K        ; 73K        ; true  ; SEAT   ; config1-EconCol733 ;
+
+#--------------------------------------
+#Row74
+; ; config1-EconRow74  ; EconRow74  ; false ; ROW    ; config1-EconCabinLower  ; ; 74
+
+#Row74-->EconColumns
+; ; config1-EconCol741 ; EconCol741 ; false ; COLUMN ; config1-EconRow74  ; ; 1
+; ; config1-EconCol742 ; EconCol742 ; false ; COLUMN ; config1-EconRow74  ; ; 2
+; ; config1-EconCol743 ; EconCol743 ; false ; COLUMN ; config1-EconRow74  ; ; 3
+
+#Row74-->EconColumn1--->Seats
+; ; config1-74A        ; 74A        ; true  ; SEAT   ; config1-EconCol741 ;
+; ; config1-74B        ; 74B        ; true  ; SEAT   ; config1-EconCol741 ;
+; ; config1-74C        ; 74C        ; true  ; SEAT   ; config1-EconCol741 ;
+
+#Row74-->EconColumn2--->Seats
+; ; config1-74D        ; 74D        ; true  ; SEAT   ; config1-EconCol742 ;
+; ; config1-74E        ; 74E        ; true  ; SEAT   ; config1-EconCol742 ;
+; ; config1-74F        ; 74F        ; true  ; SEAT   ; config1-EconCol742 ;
+; ; config1-74G        ; 74G        ; true  ; SEAT   ; config1-EconCol742 ;
+
+#Row74-->EconColumn3--->Seats
+; ; config1-74H        ; 74H        ; true  ; SEAT   ; config1-EconCol743 ;
+; ; config1-74J        ; 74J        ; true  ; SEAT   ; config1-EconCol743 ;
+; ; config1-74K        ; 74K        ; true  ; SEAT   ; config1-EconCol743 ;
+
+
+#--------------------------------------
+#Row75
+; ; config1-EconRow75  ; EconRow75  ; false ; ROW    ; config1-EconCabinLower  ; ; 75
+
+#Row75-->EconColumns
+; ; config1-EconCol751 ; EconCol751 ; false ; COLUMN ; config1-EconRow75  ; ; 1
+; ; config1-EconCol752 ; EconCol752 ; false ; COLUMN ; config1-EconRow75  ; ; 2
+; ; config1-EconCol753 ; EconCol753 ; false ; COLUMN ; config1-EconRow75  ; ; 3
+
+#Row75-->EconColumn1--->Seats
+; ; config1-75A        ; 75A        ; true  ; SEAT   ; config1-EconCol751 ;
+; ; config1-75B        ; 75B        ; true  ; SEAT   ; config1-EconCol751 ;
+; ; config1-75C        ; 75C        ; true  ; SEAT   ; config1-EconCol751 ;
+
+#Row75-->EconColumn2--->Seats
+; ; config1-75D        ; 75D        ; true  ; SEAT   ; config1-EconCol752 ;
+; ; config1-75E        ; 75E        ; true  ; SEAT   ; config1-EconCol752 ;
+; ; config1-75F        ; 75F        ; true  ; SEAT   ; config1-EconCol752 ;
+; ; config1-75G        ; 75G        ; true  ; SEAT   ; config1-EconCol752 ;
+
+#Row75-->EconColumn3--->Seats
+; ; config1-75H        ; 75H        ; true  ; SEAT   ; config1-EconCol753 ;
+; ; config1-75J        ; 75J        ; true  ; SEAT   ; config1-EconCol753 ;
+; ; config1-75K        ; 75K        ; true  ; SEAT   ; config1-EconCol753 ;
+
+#--------------------------------------
+#Row76
+; ; config1-EconRow76  ; EconRow76  ; false ; ROW    ; config1-EconCabinLower  ; ; 76
+
+#Row76-->EconColumns
+; ; config1-EconCol761 ; EconCol761 ; false ; COLUMN ; config1-EconRow76  ; ; 1
+; ; config1-EconCol762 ; EconCol762 ; false ; COLUMN ; config1-EconRow76  ; ; 2
+; ; config1-EconCol763 ; EconCol763 ; false ; COLUMN ; config1-EconRow76  ; ; 3
+
+#Row76-->EconColumn1--->Seats
+; ; config1-76A        ; 76A        ; true  ; SEAT   ; config1-EconCol761 ;
+; ; config1-76B        ; 76B        ; true  ; SEAT   ; config1-EconCol761 ;
+; ; config1-76C        ; 76C        ; true  ; SEAT   ; config1-EconCol761 ;
+
+#Row76-->EconColumn2--->Seats
+; ; config1-76D        ; 76D        ; true  ; SEAT   ; config1-EconCol762 ;
+; ; config1-76E        ; 76E        ; true  ; SEAT   ; config1-EconCol762 ;
+; ; config1-76F        ; 76F        ; true  ; SEAT   ; config1-EconCol762 ;
+; ; config1-76G        ; 76G        ; true  ; SEAT   ; config1-EconCol762 ;
+
+#Row76-->EconColumn3--->Seats
+; ; config1-76H        ; 76H        ; true  ; SEAT   ; config1-EconCol763 ;
+; ; config1-76J        ; 76J        ; true  ; SEAT   ; config1-EconCol763 ;
+; ; config1-76K        ; 76K        ; true  ; SEAT   ; config1-EconCol763 ;
+
+#--------------------------------------
+#Row77
+; ; config1-EconRow77  ; EconRow77  ; false ; ROW    ; config1-EconCabinLower  ; ; 77
+
+#Row77-->EconColumns
+; ; config1-EconCol771 ; EconCol771 ; false ; COLUMN ; config1-EconRow77  ; ; 1
+; ; config1-EconCol772 ; EconCol772 ; false ; COLUMN ; config1-EconRow77  ; ; 2
+; ; config1-EconCol773 ; EconCol773 ; false ; COLUMN ; config1-EconRow77  ; ; 3
+
+#Row77-->EconColumn1--->Seats
+; ; config1-77A        ; 77A        ; true  ; SEAT   ; config1-EconCol771 ;
+; ; config1-77B        ; 77B        ; true  ; SEAT   ; config1-EconCol771 ;
+; ; config1-77C        ; 77C        ; true  ; SEAT   ; config1-EconCol771 ;
+
+#Row77-->EconColumn2--->Seats
+; ; config1-77D        ; 77D        ; true  ; SEAT   ; config1-EconCol772 ;
+; ; config1-77E        ; 77E        ; true  ; SEAT   ; config1-EconCol772 ;
+; ; config1-77F        ; 77F        ; true  ; SEAT   ; config1-EconCol772 ;
+; ; config1-77G        ; 77G        ; true  ; SEAT   ; config1-EconCol772 ;
+
+#Row77-->EconColumn3--->Seats
+; ; config1-77H        ; 77H        ; true  ; SEAT   ; config1-EconCol773 ;
+; ; config1-77J        ; 77J        ; true  ; SEAT   ; config1-EconCol773 ;
+; ; config1-77K        ; 77K        ; true  ; SEAT   ; config1-EconCol773 ;
+
+#--------------------------------------
+#Row78
+; ; config1-EconRow78  ; EconRow78  ; false ; ROW    ; config1-EconCabinLower  ; ; 78
+
+#Row78-->EconColumns
+; ; config1-EconCol781 ; EconCol781 ; false ; COLUMN ; config1-EconRow78  ; ; 1
+; ; config1-EconCol782 ; EconCol782 ; false ; COLUMN ; config1-EconRow78  ; ; 2
+; ; config1-EconCol786 ; EconCol786 ; false ; COLUMN ; config1-EconRow78  ; ; 3
+
+#Row78-->EconColumn1--->Seats
+; ; config1-78A        ; 78A        ; true  ; SEAT   ; config1-EconCol781 ;
+; ; config1-78B        ; 78B        ; true  ; SEAT   ; config1-EconCol781 ;
+; ; config1-78C        ; 78C        ; true  ; SEAT   ; config1-EconCol781 ;
+
+#Row78-->EconColumn2--->Seats
+; ; config1-78D        ; 78D        ; true  ; SEAT   ; config1-EconCol782 ; GALLEY_BACK
+; ; config1-78E        ; 78E        ; true  ; SEAT   ; config1-EconCol782 ; GALLEY_BACK
+; ; config1-78F        ; 78F        ; true  ; SEAT   ; config1-EconCol782 ; GALLEY_BACK
+; ; config1-78G        ; 78G        ; true  ; SEAT   ; config1-EconCol782 ; GALLEY_BACK
+
+#Row78-->EconColumn3--->Seats
+; ; config1-78H        ; 78H        ; true  ; SEAT   ; config1-EconCol786 ;
+; ; config1-78J        ; 78J        ; true  ; SEAT   ; config1-EconCol786 ;
+; ; config1-78K        ; 78K        ; true  ; SEAT   ; config1-EconCol786 ;
+
+#--------------------------------------
+#Row79
+; ; config1-EconRow79  ; EconRow79  ; false ; ROW    ; config1-EconCabinLower  ; ; 79
+
+#Row79-->EconColumns
+; ; config1-EconCol791 ; EconCol791 ; false ; COLUMN ; config1-EconRow79  ; ; 1
+; ; config1-EconCol792 ; EconCol792 ; false ; COLUMN ; config1-EconRow79  ; ; 2
+; ; config1-EconCol793 ; EconCol793 ; false ; COLUMN ; config1-EconRow79  ; ; 3
+
+#Row79-->EconColumn1--->Seats
+; ; config1-79A        ; 79A        ; true  ; SEAT   ; config1-EconCol791 ;
+; ; config1-79B        ; 79B        ; true  ; SEAT   ; config1-EconCol791 ;
+; ; config1-79C        ; 79C        ; true  ; SEAT   ; config1-EconCol791 ;
+
+#Row79-->EconColumn2--->Seats (no seats)
+
+#Row79-->EconColumn3--->Seats
+; ; config1-79H        ; 79H        ; true  ; SEAT   ; config1-EconCol793 ;
+; ; config1-79J        ; 79J        ; true  ; SEAT   ; config1-EconCol793 ;
+; ; config1-79K        ; 79K        ; true  ; SEAT   ; config1-EconCol793 ;
+
+#--------------------------------------
+#Row80
+; ; config1-EconRow80  ; EconRow80  ; false ; ROW    ; config1-EconCabinLower  ; ; 80
+
+#Row80-->EconColumns
+; ; config1-EconCol801 ; EconCol801 ; false ; COLUMN ; config1-EconRow80  ; ; 1
+; ; config1-EconCol802 ; EconCol802 ; false ; COLUMN ; config1-EconRow80  ; ; 2
+; ; config1-EconCol803 ; EconCol803 ; false ; COLUMN ; config1-EconRow80  ; ; 3
+
+#Row80-->EconColumn1--->Seats
+; ; config1-80B        ; 80B        ; true  ; SEAT   ; config1-EconCol801 ; ; ; EXTRALEGROOM
+; ; config1-80C        ; 80C        ; true  ; SEAT   ; config1-EconCol801 ; ; ; EXTRALEGROOM
+
+#Row80-->EconColumn2--->Seats (no seats)
+
+#Row80-->EconColumn3--->Seats
+; ; config1-80H        ; 80H        ; true  ; SEAT   ; config1-EconCol803 ; ; ; EXTRALEGROOM
+; ; config1-80J        ; 80J        ; true  ; SEAT   ; config1-EconCol803 ; ; ; EXTRALEGROOM
+
+#--------------------------------------
+#Row81
+; ; config1-EconRow81  ; EconRow81  ; false ; ROW    ; config1-EconCabinLower  ; ; 81
+
+#Row81-->EconColumns
+; ; config1-EconCol811 ; EconCol811 ; false ; COLUMN ; config1-EconRow81  ; ; 1
+; ; config1-EconCol812 ; EconCol812 ; false ; COLUMN ; config1-EconRow81  ; ; 2
+; ; config1-EconCol813 ; EconCol813 ; false ; COLUMN ; config1-EconRow81  ; ; 3
+
+#Row81-->EconColumn1--->Seats
+; ; config1-81A        ; 81A        ; true  ; SEAT   ; config1-EconCol811 ;
+; ; config1-81B        ; 81B        ; true  ; SEAT   ; config1-EconCol811 ;
+; ; config1-81C        ; 81C        ; true  ; SEAT   ; config1-EconCol811 ;
+
+#Row81-->EconColumn2--->Seats (no seats)
+
+#Row81-->EconColumn3--->Seats
+; ; config1-81H        ; 81H        ; true  ; SEAT   ; config1-EconCol813 ;
+; ; config1-81J        ; 81J        ; true  ; SEAT   ; config1-EconCol813 ;
+; ; config1-81K        ; 81K        ; true  ; SEAT   ; config1-EconCol813 ;
+
+#--------------------------------------
+#Row82
+; ; config1-EconRow82  ; EconRow82  ; false ; ROW    ; config1-EconCabinLower  ; ; 82
+
+#Row82-->EconColumns
+; ; config1-EconCol821 ; EconCol821 ; false ; COLUMN ; config1-EconRow82  ; ; 1
+; ; config1-EconCol822 ; EconCol822 ; false ; COLUMN ; config1-EconRow82  ; ; 2
+; ; config1-EconCol823 ; EconCol823 ; false ; COLUMN ; config1-EconRow82  ; ; 3
+
+#Row82-->EconColumn1--->Seats
+; ; config1-82A        ; 82A        ; true  ; SEAT   ; config1-EconCol821 ;
+; ; config1-82B        ; 82B        ; true  ; SEAT   ; config1-EconCol821 ;
+; ; config1-82C        ; 82C        ; true  ; SEAT   ; config1-EconCol821 ;
+
+#Row82-->EconColumn2--->Seats
+; ; config1-82D        ; 82D        ; true  ; SEAT   ; config1-EconCol822 ; GALLEY_FRONT
+; ; config1-82E        ; 82E        ; true  ; SEAT   ; config1-EconCol822 ; GALLEY_FRONT
+; ; config1-82F        ; 82F        ; true  ; SEAT   ; config1-EconCol822 ; GALLEY_FRONT
+; ; config1-82G        ; 82G        ; true  ; SEAT   ; config1-EconCol822 ; GALLEY_FRONT
+
+#Row82-->EconColumn3--->Seats
+; ; config1-82H        ; 82H        ; true  ; SEAT   ; config1-EconCol823 ;
+; ; config1-82J        ; 82J        ; true  ; SEAT   ; config1-EconCol823 ;
+; ; config1-82K        ; 82K        ; true  ; SEAT   ; config1-EconCol823 ;
+
+#--------------------------------------
+#Row83
+; ; config1-EconRow83  ; EconRow83  ; false ; ROW    ; config1-EconCabinLower  ; ; 83
+
+#Row83-->EconColumns
+; ; config1-EconCol831 ; EconCol831 ; false ; COLUMN ; config1-EconRow83  ; ; 1
+; ; config1-EconCol832 ; EconCol832 ; false ; COLUMN ; config1-EconRow83  ; ; 2
+; ; config1-EconCol833 ; EconCol833 ; false ; COLUMN ; config1-EconRow83  ; ; 3
+
+#Row83-->EconColumn1--->Seats
+; ; config1-83A        ; 83A        ; true  ; SEAT   ; config1-EconCol831 ;
+; ; config1-83B        ; 83B        ; true  ; SEAT   ; config1-EconCol831 ;
+; ; config1-83C        ; 83C        ; true  ; SEAT   ; config1-EconCol831 ;
+
+#Row83-->EconColumn2--->Seats
+; ; config1-83D        ; 83D        ; true  ; SEAT   ; config1-EconCol832 ;
+; ; config1-83E        ; 83E        ; true  ; SEAT   ; config1-EconCol832 ;
+; ; config1-83F        ; 83F        ; true  ; SEAT   ; config1-EconCol832 ;
+; ; config1-83G        ; 83G        ; true  ; SEAT   ; config1-EconCol832 ;
+
+#Row83-->EconColumn3--->Seats
+; ; config1-83H        ; 83H        ; true  ; SEAT   ; config1-EconCol833 ;
+; ; config1-83J        ; 83J        ; true  ; SEAT   ; config1-EconCol833 ;
+; ; config1-83K        ; 83K        ; true  ; SEAT   ; config1-EconCol833 ;
+
+#--------------------------------------
+#Row84
+; ; config1-EconRow84  ; EconRow84  ; false ; ROW    ; config1-EconCabinLower  ; ; 84
+
+#Row84-->EconColumns
+; ; config1-EconCol841 ; EconCol841 ; false ; COLUMN ; config1-EconRow84  ; ; 1
+; ; config1-EconCol842 ; EconCol842 ; false ; COLUMN ; config1-EconRow84  ; ; 2
+; ; config1-EconCol843 ; EconCol843 ; false ; COLUMN ; config1-EconRow84  ; ; 3
+
+#Row84-->EconColumn1--->Seats
+; ; config1-84A        ; 84A        ; true  ; SEAT   ; config1-EconCol841 ;
+; ; config1-84B        ; 84B        ; true  ; SEAT   ; config1-EconCol841 ;
+; ; config1-84C        ; 84C        ; true  ; SEAT   ; config1-EconCol841 ;
+
+#Row84-->EconColumn2--->Seats
+; ; config1-84D        ; 84D        ; true  ; SEAT   ; config1-EconCol842 ;
+; ; config1-84E        ; 84E        ; true  ; SEAT   ; config1-EconCol842 ;
+; ; config1-84F        ; 84F        ; true  ; SEAT   ; config1-EconCol842 ;
+; ; config1-84G        ; 84G        ; true  ; SEAT   ; config1-EconCol842 ;
+
+#Row84-->EconColumn3--->Seats
+; ; config1-84H        ; 84H        ; true  ; SEAT   ; config1-EconCol843 ;
+; ; config1-84J        ; 84J        ; true  ; SEAT   ; config1-EconCol843 ;
+; ; config1-84K        ; 84K        ; true  ; SEAT   ; config1-EconCol843 ;
+
+#--------------------------------------
+#Row85
+; ; config1-EconRow85  ; EconRow85  ; false ; ROW    ; config1-EconCabinLower  ; ; 85
+
+#Row85-->EconColumns
+; ; config1-EconCol851 ; EconCol851 ; false ; COLUMN ; config1-EconRow85  ; ; 1
+; ; config1-EconCol852 ; EconCol852 ; false ; COLUMN ; config1-EconRow85  ; ; 2
+; ; config1-EconCol853 ; EconCol853 ; false ; COLUMN ; config1-EconRow85  ; ; 3
+
+#Row85-->EconColumn1--->Seats
+; ; config1-85A        ; 85A        ; true  ; SEAT   ; config1-EconCol851 ;
+; ; config1-85B        ; 85B        ; true  ; SEAT   ; config1-EconCol851 ;
+; ; config1-85C        ; 85C        ; true  ; SEAT   ; config1-EconCol851 ;
+
+#Row85-->EconColumn2--->Seats (no seats)
+
+#Row85-->EconColumn3--->Seats
+; ; config1-85H        ; 85H        ; true  ; SEAT   ; config1-EconCol853 ;
+; ; config1-85J        ; 85J        ; true  ; SEAT   ; config1-EconCol853 ;
+; ; config1-85K        ; 85K        ; true  ; SEAT   ; config1-EconCol853 ;
+
+#--------------------------------------
+#Row86
+; ; config1-EconRow86  ; EconRow86  ; false ; ROW    ; config1-EconCabinLower  ; ; 86
+
+#Row86-->EconColumns
+; ; config1-EconCol861 ; EconCol861 ; false ; COLUMN ; config1-EconRow86  ; ; 1
+; ; config1-EconCol862 ; EconCol862 ; false ; COLUMN ; config1-EconRow86  ; ; 2
+; ; config1-EconCol863 ; EconCol863 ; false ; COLUMN ; config1-EconRow86  ; ; 3
+
+#Row86-->EconColumn1--->Seats
+; ; config1-86A        ; 86A        ; true  ; SEAT   ; config1-EconCol861 ;
+; ; config1-86B        ; 86B        ; true  ; SEAT   ; config1-EconCol861 ;
+; ; config1-86C        ; 86C        ; true  ; SEAT   ; config1-EconCol861 ;
+
+#Row86-->EconColumn2--->Seats (no seats)
+
+#Row86-->EconColumn3--->Seats
+; ; config1-86H        ; 86H        ; true  ; SEAT   ; config1-EconCol863 ;
+; ; config1-86J        ; 86J        ; true  ; SEAT   ; config1-EconCol863 ;
+; ; config1-86K        ; 86K        ; true  ; SEAT   ; config1-EconCol863 ;
+
+#--------------------------------------
+#Row87
+; ; config1-EconRow87  ; EconRow87  ; false ; ROW    ; config1-EconCabinLower  ; ; 87
+
+#Row87-->EconColumns
+; ; config1-EconCol871 ; EconCol871 ; false ; COLUMN ; config1-EconRow87  ; ; 1
+; ; config1-EconCol872 ; EconCol872 ; false ; COLUMN ; config1-EconRow87  ; ; 2
+; ; config1-EconCol873 ; EconCol873 ; false ; COLUMN ; config1-EconRow87  ; ; 3
+
+#Row87-->EconColumn1--->Seats
+; ; config1-87A        ; 87A        ; true  ; SEAT   ; config1-EconCol871 ;
+; ; config1-87B        ; 87B        ; true  ; SEAT   ; config1-EconCol871 ;
+; ; config1-87C        ; 87C        ; true  ; SEAT   ; config1-EconCol871 ;
+
+#Row87-->EconColumn2--->Seats (no seats)
+
+#Row87-->EconColumn3--->Seats
+; ; config1-87H        ; 87H        ; true  ; SEAT   ; config1-EconCol873 ;
+; ; config1-87J        ; 87J        ; true  ; SEAT   ; config1-EconCol873 ;
+; ; config1-87K        ; 87K        ; true  ; SEAT   ; config1-EconCol873 ;
+
+#--------------------------------------
+#Row88
+; ; config1-EconRow88  ; EconRow88  ; false ; ROW    ; config1-EconCabinLower  ; ; 88
+
+#Row88-->EconColumns
+; ; config1-EconCol881 ; EconCol881 ; false ; COLUMN ; config1-EconRow88  ; ; 1
+; ; config1-EconCol882 ; EconCol882 ; false ; COLUMN ; config1-EconRow88  ; ; 2
+; ; config1-EconCol886 ; EconCol886 ; false ; COLUMN ; config1-EconRow88  ; ; 3
+
+#Row88-->EconColumn1--->Seats
+; ; config1-88A        ; 88A        ; true  ; SEAT   ; config1-EconCol881 ; LAVATORY_BACK
+; ; config1-88B        ; 88B        ; true  ; SEAT   ; config1-EconCol881 ; LAVATORY_BACK
+; ; config1-88C        ; 88C        ; true  ; SEAT   ; config1-EconCol881 ; LAVATORY_BACK
+
+#Row88-->EconColumn2--->Seats (no seats)
+
+#Row88-->EconColumn3--->Seats
+; ; config1-88H        ; 88H        ; true  ; SEAT   ; config1-EconCol886 ; LAVATORY_BACK
+; ; config1-88J        ; 88J        ; true  ; SEAT   ; config1-EconCol886 ; LAVATORY_BACK
+; ; config1-88K        ; 88K        ; true  ; SEAT   ; config1-EconCol886 ; LAVATORY_BACK
+
+#-----------------LOWER DECK ENDS---------------------
+
+#---------------UPPER DECK (EconPlus Class Cabin)STARTS-----------------------
+
+INSERT_UPDATE ConfiguredAccommodation; $catalogVersion; uid[unique = true]; identifier; bookable; type(code); superConfiguredAccommodation(uid, $catalogVersion); proximityItem(code); number; characteristics(code); $economyPlusAccommodation[default = 'ACPECOSEAT1']
+
+#Row6
+; ; config1-EconPlusClassRow6   ; EconPlusClassRow6   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 6  ; ;
+
+#Row6-->EconPlusClassColumns
+; ; config1-EconPlusClassCol61  ; EconPlusClassCol61  ; false ; COLUMN ; config1-EconPlusClassRow6   ;                  ; 1
+; ; config1-EconPlusClassCol62  ; EconPlusClassCol62  ; false ; COLUMN ; config1-EconPlusClassRow6   ;                  ; 2
+; ; config1-EconPlusClassCol63  ; EconPlusClassCol63  ; false ; COLUMN ; config1-EconPlusClassRow6   ;                  ; 3
+
+#Row6-->EconPlusClassColumn1---> (no seats)
+
+#Row6-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-6D        ; 6D        ; true  ; SEAT   ; config1-EconPlusClassCol62  ;  GALLEY_FRONT        ;    ;    ;
+; ; config1-EconPlusClass-6G        ; 6G        ; true  ; SEAT   ; config1-EconPlusClassCol62  ;  GALLEY_FRONT        ;    ;    ;
+
+#Row6-->EconPlusClassColumn3---> (no seats)
+
+#--------------------------------------
+
+#Row7
+; ; config1-EconPlusClassRow7   ; EconPlusClassRow7   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 7  ; ;
+
+#Row7-->EconPlusClassColumns
+; ; config1-EconPlusClassCol71  ; EconPlusClassCol71  ; false ; COLUMN ; config1-EconPlusClassRow7   ;                  ; 1
+; ; config1-EconPlusClassCol72  ; EconPlusClassCol72  ; false ; COLUMN ; config1-EconPlusClassRow7   ;                  ; 2
+; ; config1-EconPlusClassCol73  ; EconPlusClassCol73  ; false ; COLUMN ; config1-EconPlusClassRow7   ;                  ; 3
+
+#Row7-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-7A        ; 7A        ; true  ; SEAT   ; config1-EconPlusClassCol71  ;          ;    ;    ;
+
+#Row7-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-7E        ; 7E        ; true  ; SEAT   ; config1-EconPlusClassCol72  ;          ;    ;    ;
+; ; config1-EconPlusClass-7F        ; 7F        ; true  ; SEAT   ; config1-EconPlusClassCol72  ;          ;    ;    ;
+
+#Row7-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-7K        ; 7K        ; true  ; SEAT   ; config1-EconPlusClassCol73  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row8
+; ; config1-EconPlusClassRow8   ; EconPlusClassRow8   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 8  ; ;
+
+#Row8-->EconPlusClassColumns
+; ; config1-EconPlusClassCol81  ; EconPlusClassCol81  ; false ; COLUMN ; config1-EconPlusClassRow8   ;                  ; 1
+; ; config1-EconPlusClassCol82  ; EconPlusClassCol82  ; false ; COLUMN ; config1-EconPlusClassRow8   ;                  ; 2
+; ; config1-EconPlusClassCol86  ; EconPlusClassCol86  ; false ; COLUMN ; config1-EconPlusClassRow8   ;                  ; 3
+
+#Row8-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-8B        ; 8B        ; true  ; SEAT   ; config1-EconPlusClassCol81  ;          ;    ;    ;
+
+#Row8-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-8D        ; 8D        ; true  ; SEAT   ; config1-EconPlusClassCol82  ;          ;    ;    ;
+; ; config1-EconPlusClass-8G        ; 8G        ; true  ; SEAT   ; config1-EconPlusClassCol82  ;          ;    ;    ;
+
+#Row8-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-8J        ; 8J        ; true  ; SEAT   ; config1-EconPlusClassCol86  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row9
+; ; config1-EconPlusClassRow9   ; EconPlusClassRow9   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 9  ; ;
+
+#Row9-->EconPlusClassColumns
+; ; config1-EconPlusClassCol91  ; EconPlusClassCol91  ; false ; COLUMN ; config1-EconPlusClassRow9   ;                  ; 1
+; ; config1-EconPlusClassCol92  ; EconPlusClassCol92  ; false ; COLUMN ; config1-EconPlusClassRow9   ;                  ; 2
+; ; config1-EconPlusClassCol93  ; EconPlusClassCol93  ; false ; COLUMN ; config1-EconPlusClassRow9   ;                  ; 3
+
+#Row9-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-9A        ; 9A        ; true  ; SEAT   ; config1-EconPlusClassCol91  ;          ;    ;    ;
+
+#Row9-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-9E        ; 9E        ; true  ; SEAT   ; config1-EconPlusClassCol92  ;          ;    ;    ;
+; ; config1-EconPlusClass-9F        ; 9F        ; true  ; SEAT   ; config1-EconPlusClassCol92  ;          ;    ;    ;
+
+#Row9-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-9K        ; 9K        ; true  ; SEAT   ; config1-EconPlusClassCol93  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row10
+; ; config1-EconPlusClassRow10   ; EconPlusClassRow10   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 10  ; ;
+
+#Row10-->EconPlusClassColumns
+; ; config1-EconPlusClassCol101  ; EconPlusClassCol101  ; false ; COLUMN ; config1-EconPlusClassRow10   ;                  ; 1
+; ; config1-EconPlusClassCol102  ; EconPlusClassCol102  ; false ; COLUMN ; config1-EconPlusClassRow10   ;                  ; 2
+; ; config1-EconPlusClassCol103  ; EconPlusClassCol103  ; false ; COLUMN ; config1-EconPlusClassRow10   ;                  ; 3
+
+#Row10-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-10B        ; 10B        ; true  ; SEAT   ; config1-EconPlusClassCol101  ;          ;    ;    ;
+
+#Row10-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-10D        ; 10D        ; true  ; SEAT   ; config1-EconPlusClassCol102  ;          ;    ;    ;
+; ; config1-EconPlusClass-10G        ; 10G        ; true  ; SEAT   ; config1-EconPlusClassCol102  ;          ;    ;    ;
+
+#Row10-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-10J        ; 10J        ; true  ; SEAT   ; config1-EconPlusClassCol103  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row11
+; ; config1-EconPlusClassRow11   ; EconPlusClassRow11   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 11  ; ;
+
+#Row11-->EconPlusClassColumns
+; ; config1-EconPlusClassCol111  ; EconPlusClassCol111  ; false ; COLUMN ; config1-EconPlusClassRow11   ;                  ; 1
+; ; config1-EconPlusClassCol112  ; EconPlusClassCol112  ; false ; COLUMN ; config1-EconPlusClassRow11   ;                  ; 2
+; ; config1-EconPlusClassCol113  ; EconPlusClassCol113  ; false ; COLUMN ; config1-EconPlusClassRow11   ;                  ; 3
+
+#Row11-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-11A        ; 11A        ; true  ; SEAT   ; config1-EconPlusClassCol111  ;          ;    ;    ;
+
+#Row11-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-11E        ; 11E        ; true  ; SEAT   ; config1-EconPlusClassCol112  ;          ;    ;    ;
+; ; config1-EconPlusClass-11F        ; 11F        ; true  ; SEAT   ; config1-EconPlusClassCol112  ;          ;    ;    ;
+
+#Row11-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-11K        ; 11K        ; true  ; SEAT   ; config1-EconPlusClassCol113  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row12
+; ; config1-EconPlusClassRow12   ; EconPlusClassRow12   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 12  ; ;
+
+#Row12-->EconPlusClassColumns
+; ; config1-EconPlusClassCol121  ; EconPlusClassCol121  ; false ; COLUMN ; config1-EconPlusClassRow12   ;                  ; 1
+; ; config1-EconPlusClassCol122  ; EconPlusClassCol122  ; false ; COLUMN ; config1-EconPlusClassRow12   ;                  ; 2
+; ; config1-EconPlusClassCol123  ; EconPlusClassCol123  ; false ; COLUMN ; config1-EconPlusClassRow12   ;                  ; 3
+
+#Row12-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-12B        ; 12B        ; true  ; SEAT   ; config1-EconPlusClassCol121  ;          ;    ;    ;
+
+#Row12-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-12D        ; 12D        ; true  ; SEAT   ; config1-EconPlusClassCol122  ;          ;    ;    ;
+; ; config1-EconPlusClass-12G        ; 12G        ; true  ; SEAT   ; config1-EconPlusClassCol122  ;          ;    ;    ;
+
+#Row12-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-12J        ; 12J        ; true  ; SEAT   ; config1-EconPlusClassCol123  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row14
+; ; config1-EconPlusClassRow14   ; EconPlusClassRow14   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 14  ; ;
+
+#Row14-->EconPlusClassColumns
+; ; config1-EconPlusClassCol141  ; EconPlusClassCol141  ; false ; COLUMN ; config1-EconPlusClassRow14   ;                  ; 1
+; ; config1-EconPlusClassCol142  ; EconPlusClassCol142  ; false ; COLUMN ; config1-EconPlusClassRow14   ;                  ; 2
+; ; config1-EconPlusClassCol143  ; EconPlusClassCol143  ; false ; COLUMN ; config1-EconPlusClassRow14   ;                  ; 3
+
+#Row14-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-14A        ; 14A        ; true  ; SEAT   ; config1-EconPlusClassCol141  ;          ;    ;    ;
+
+#Row14-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-14E        ; 14E        ; true  ; SEAT   ; config1-EconPlusClassCol142  ;          ;    ;    ;
+; ; config1-EconPlusClass-14F        ; 14F        ; true  ; SEAT   ; config1-EconPlusClassCol142  ;          ;    ;    ;
+
+#Row14-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-14K        ; 14K        ; true  ; SEAT   ; config1-EconPlusClassCol143  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row15
+; ; config1-EconPlusClassRow15   ; EconPlusClassRow15   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 15  ; ;
+
+#Row15-->EconPlusClassColumns
+; ; config1-EconPlusClassCol151  ; EconPlusClassCol151  ; false ; COLUMN ; config1-EconPlusClassRow15   ;                  ; 1
+; ; config1-EconPlusClassCol152  ; EconPlusClassCol152  ; false ; COLUMN ; config1-EconPlusClassRow15   ;                  ; 2
+; ; config1-EconPlusClassCol153  ; EconPlusClassCol153  ; false ; COLUMN ; config1-EconPlusClassRow15   ;                  ; 3
+
+#Row15-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-15B        ; 15B        ; true  ; SEAT   ; config1-EconPlusClassCol151  ;          ;    ;    ;
+
+#Row15-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-15D        ; 15D        ; true  ; SEAT   ; config1-EconPlusClassCol152  ;          ;    ;    ;
+; ; config1-EconPlusClass-15G        ; 15G        ; true  ; SEAT   ; config1-EconPlusClassCol152  ;          ;    ;    ;
+
+#Row15-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-15J        ; 15J        ; true  ; SEAT   ; config1-EconPlusClassCol153  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+
+#Row16
+; ; config1-EconPlusClassRow16   ; EconPlusClassRow16   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 16  ; ;
+
+#Row16-->EconPlusClassColumns
+; ; config1-EconPlusClassCol161  ; EconPlusClassCol161  ; false ; COLUMN ; config1-EconPlusClassRow16   ;                  ; 1
+; ; config1-EconPlusClassCol162  ; EconPlusClassCol162  ; false ; COLUMN ; config1-EconPlusClassRow16   ;                  ; 2
+; ; config1-EconPlusClassCol163  ; EconPlusClassCol163  ; false ; COLUMN ; config1-EconPlusClassRow16   ;                  ; 3
+
+#Row16-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-16A        ; 16A        ; true  ; SEAT   ; config1-EconPlusClassCol161  ;          ;    ;    ;
+
+#Row16-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-16E        ; 16E        ; true  ; SEAT   ; config1-EconPlusClassCol162  ;          ;    ;    ;
+; ; config1-EconPlusClass-16F        ; 16F        ; true  ; SEAT   ; config1-EconPlusClassCol162  ;          ;    ;    ;
+
+#Row16-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-16K        ; 16K        ; true  ; SEAT   ; config1-EconPlusClassCol163  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row17
+; ; config1-EconPlusClassRow17   ; EconPlusClassRow17   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 17  ; ;
+
+#Row17-->EconPlusClassColumns
+; ; config1-EconPlusClassCol171  ; EconPlusClassCol171  ; false ; COLUMN ; config1-EconPlusClassRow17   ;                  ; 1
+; ; config1-EconPlusClassCol172  ; EconPlusClassCol172  ; false ; COLUMN ; config1-EconPlusClassRow17   ;                  ; 2
+; ; config1-EconPlusClassCol173  ; EconPlusClassCol173  ; false ; COLUMN ; config1-EconPlusClassRow17   ;                  ; 3
+
+#Row17-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-17B        ; 17B        ; true  ; SEAT   ; config1-EconPlusClassCol171  ;          ;    ;    ;
+
+#Row17-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-17D        ; 17D        ; true  ; SEAT   ; config1-EconPlusClassCol172  ;          ;    ;    ;
+; ; config1-EconPlusClass-17G        ; 17G        ; true  ; SEAT   ; config1-EconPlusClassCol172  ;          ;    ;    ;
+
+#Row17-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-17J        ; 17J        ; true  ; SEAT   ; config1-EconPlusClassCol173  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row18
+; ; config1-EconPlusClassRow18   ; EconPlusClassRow18   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 18  ; ;
+
+#Row18-->EconPlusClassColumns
+; ; config1-EconPlusClassCol181  ; EconPlusClassCol181  ; false ; COLUMN ; config1-EconPlusClassRow18   ;                  ; 1
+; ; config1-EconPlusClassCol182  ; EconPlusClassCol182  ; false ; COLUMN ; config1-EconPlusClassRow18   ;                  ; 2
+; ; config1-EconPlusClassCol186  ; EconPlusClassCol186  ; false ; COLUMN ; config1-EconPlusClassRow18   ;                  ; 3
+
+#Row18-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-18A        ; 18A        ; true  ; SEAT   ; config1-EconPlusClassCol181  ;          ;    ;    ;
+
+#Row18-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-18E        ; 18E        ; true  ; SEAT   ; config1-EconPlusClassCol182  ;          ;    ;    ;
+; ; config1-EconPlusClass-18F        ; 18F        ; true  ; SEAT   ; config1-EconPlusClassCol182  ;          ;    ;    ;
+
+#Row18-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-18K        ; 18K        ; true  ; SEAT   ; config1-EconPlusClassCol186  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row19
+; ; config1-EconPlusClassRow19   ; EconPlusClassRow19   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 19  ; ;
+
+#Row19-->EconPlusClassColumns
+; ; config1-EconPlusClassCol191  ; EconPlusClassCol191  ; false ; COLUMN ; config1-EconPlusClassRow19   ;                  ; 1
+; ; config1-EconPlusClassCol192  ; EconPlusClassCol192  ; false ; COLUMN ; config1-EconPlusClassRow19   ;                  ; 2
+; ; config1-EconPlusClassCol193  ; EconPlusClassCol193  ; false ; COLUMN ; config1-EconPlusClassRow19   ;                  ; 3
+
+#Row19-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-19B        ; 19B        ; true  ; SEAT   ; config1-EconPlusClassCol191  ;          ;    ;    ;
+
+#Row19-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-19D        ; 19D        ; true  ; SEAT   ; config1-EconPlusClassCol192  ;          ;    ;    ;
+; ; config1-EconPlusClass-19G        ; 19G        ; true  ; SEAT   ; config1-EconPlusClassCol192  ;          ;    ;    ;
+
+#Row19-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-19J        ; 19J        ; true  ; SEAT   ; config1-EconPlusClassCol193  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row20
+; ; config1-EconPlusClassRow20   ; EconPlusClassRow20   ; false ; ROW    ; config1-EconPlusClassCabin  ;                  ; 20  ; ;
+
+#Row20-->EconPlusClassColumns
+; ; config1-EconPlusClassCol201  ; EconPlusClassCol201  ; false ; COLUMN ; config1-EconPlusClassRow20   ;                  ; 1
+; ; config1-EconPlusClassCol202  ; EconPlusClassCol202  ; false ; COLUMN ; config1-EconPlusClassRow20   ;                  ; 2
+; ; config1-EconPlusClassCol203  ; EconPlusClassCol203  ; false ; COLUMN ; config1-EconPlusClassRow20   ;                  ; 3
+
+#Row20-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-20A        ; 20A        ; true  ; SEAT   ; config1-EconPlusClassCol201  ;          ;    ;    ;
+
+#Row20-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-20E        ; 20E        ; true  ; SEAT   ; config1-EconPlusClassCol202  ;          ;    ;    ;
+; ; config1-EconPlusClass-20F        ; 20F        ; true  ; SEAT   ; config1-EconPlusClassCol202  ;          ;    ;    ;
+
+#Row20-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-20K        ; 20K        ; true  ; SEAT   ; config1-EconPlusClassCol203  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row21
+; ; config1-EconPlusClassRow21   ; EconPlusClassRow21   ; false ; ROW    ; config1-EconPlusClassCabin  ;   ; 21  ; ;
+
+#Row21-->EconPlusClassColumns
+; ; config1-EconPlusClassCol211  ; EconPlusClassCol211  ; false ; COLUMN ; config1-EconPlusClassRow21   ;   ; 1
+; ; config1-EconPlusClassCol212  ; EconPlusClassCol212  ; false ; COLUMN ; config1-EconPlusClassRow21   ;   ; 2
+; ; config1-EconPlusClassCol213  ; EconPlusClassCol213  ; false ; COLUMN ; config1-EconPlusClassRow21   ;   ; 3
+
+#Row21-->EconPlusClassColumn1--->Seats
+; ; config1-EconPlusClass-21B        ; 21B        ; true  ; SEAT   ; config1-EconPlusClassCol211  ;    ;    ;    ;
+
+#Row21-->EconPlusClassColumn2--->Seats
+; ; config1-EconPlusClass-21D        ; 21D        ; true  ; SEAT   ; config1-EconPlusClassCol212  ; GALLEY_BACK ;    ;    ;
+; ; config1-EconPlusClass-21G        ; 21G        ; true  ; SEAT   ; config1-EconPlusClassCol212  ; GALLEY_BACK ;    ;    ;
+
+#Row21-->EconPlusClassColumn3--->Seats
+; ; config1-EconPlusClass-21J        ; 21J        ; true  ; SEAT   ; config1-EconPlusClassCol213  ;    ;    ;    ;
+
+
+#-----------------UPPER DECK(EconPlus Class Cabin) ENDS---------------------
+
+
+#---------------UPPER DECK (Business Class Cabin)STARTS-----------------------
+
+INSERT_UPDATE ConfiguredAccommodation; $catalogVersion; uid[unique = true]; identifier; bookable; type(code); superConfiguredAccommodation(uid, $catalogVersion); proximityItem(code); number; characteristics(code); $businessAccommodation[default = 'ACBIZZSEAT1']
+
+#Row1
+; ; config1-BizClassRow1   ; BizClassRow1   ; false ; ROW    ; config1-BizClassCabin  ;                  ; 1  ; ;
+
+#Row1-->BizClassColumns
+; ; config1-BizClassCol11  ; BizClassCol11  ; false ; COLUMN ; config1-BizClassRow1   ;                  ; 1
+; ; config1-BizClassCol12  ; BizClassCol12  ; false ; COLUMN ; config1-BizClassRow1   ;                  ; 2
+; ; config1-BizClassCol13  ; BizClassCol13  ; false ; COLUMN ; config1-BizClassRow1   ;                  ; 3
+
+#Row1-->BizClassColumn1--->Seats
+; ; config1-BizClass-1A        ; 1A        ; true  ; SEAT   ; config1-BizClassCol11  ;  ACCESSIBILITY ; ; REDUCEDMOBILITY
+
+#Row1-->BizClassColumn2--->Seats
+; ; config1-BizClass-1E        ; 1E        ; true  ; SEAT   ; config1-BizClassCol12  ;  GALLEY_FRONT  ;    ;    ;
+; ; config1-BizClass-1F        ; 1F        ; true  ; SEAT   ; config1-BizClassCol12  ;  GALLEY_FRONT  ;    ;    ;
+
+#Row1-->BizClassColumn3--->Seats
+; ; config1-BizClass-1K        ; 1K        ; true  ; SEAT   ; config1-BizClassCol13  ;  ACCESSIBILITY ; ; REDUCEDMOBILITY
+
+
+#--------------------------------------
+
+#Row2
+; ; config1-BizClassRow2   ; BizClassRow2   ; false ; ROW    ; config1-BizClassCabin  ;                  ; 2  ; ;
+
+#Row2-->BizClassColumns
+; ; config1-BizClassCol21  ; BizClassCol11  ; false ; COLUMN ; config1-BizClassRow2   ;                  ; 1
+; ; config1-BizClassCol22  ; BizClassCol12  ; false ; COLUMN ; config1-BizClassRow2   ;                  ; 2
+; ; config1-BizClassCol23  ; BizClassCol13  ; false ; COLUMN ; config1-BizClassRow2   ;                  ; 3
+
+#Row2-->BizClassColumn1--->Seats
+; ; config1-BizClass-2A        ; 2A        ; true  ; SEAT   ; config1-BizClassCol21  ;          ;    ;    ;
+
+#Row2-->BizClassColumn2--->Seats
+; ; config1-BizClass-2E        ; 2E        ; true  ; SEAT   ; config1-BizClassCol22  ;          ;    ;    ;
+; ; config1-BizClass-2F        ; 2F        ; true  ; SEAT   ; config1-BizClassCol22  ;          ;    ;    ;
+
+#Row2-->BizClassColumn3--->Seats
+; ; config1-BizClass-2K        ; 2K        ; true  ; SEAT   ; config1-BizClassCol23  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row3
+; ; config1-BizClassRow3   ; BizClassRow3   ; false ; ROW    ; config1-BizClassCabin  ;                  ; 3  ; ;
+
+#Row3-->BizClassColumns
+; ; config1-BizClassCol31  ; BizClassCol11  ; false ; COLUMN ; config1-BizClassRow3   ;                  ; 1
+; ; config1-BizClassCol32  ; BizClassCol12  ; false ; COLUMN ; config1-BizClassRow3   ;                  ; 2
+; ; config1-BizClassCol33  ; BizClassCol13  ; false ; COLUMN ; config1-BizClassRow3   ;                  ; 3
+
+#Row3-->BizClassColumn1--->Seats
+; ; config1-BizClass-3A        ; 3A        ; true  ; SEAT   ; config1-BizClassCol31  ;          ;    ;    ;
+
+#Row3-->BizClassColumn2--->Seats
+; ; config1-BizClass-3E        ; 3E        ; true  ; SEAT   ; config1-BizClassCol32  ;  GALLEY_BACK        ;    ;    ;
+; ; config1-BizClass-3F        ; 3F        ; true  ; SEAT   ; config1-BizClassCol32  ;  GALLEY_BACK        ;    ;    ;
+
+#Row3-->BizClassColumn3--->Seats
+; ; config1-BizClass-3K        ; 3K        ; true  ; SEAT   ; config1-BizClassCol33  ;          ;    ;    ;
+
+#--------------------------------------
+
+
+#Row4
+; ; config1-BizClassRow4   ; BizClassRow4   ; false ; ROW    ; config1-BizClassCabin  ;                  ; 4  ; ;
+
+#Row4-->BizClassColumns
+; ; config1-BizClassCol41  ; BizClassCol11  ; false ; COLUMN ; config1-BizClassRow4   ;                  ; 1
+; ; config1-BizClassCol42  ; BizClassCol12  ; false ; COLUMN ; config1-BizClassRow4   ;                  ; 2
+; ; config1-BizClassCol43  ; BizClassCol13  ; false ; COLUMN ; config1-BizClassRow4   ;                  ; 3
+
+#Row4-->BizClassColumn1--->Seats
+; ; config1-BizClass-4A        ; 4A        ; true  ; SEAT   ; config1-BizClassCol41  ; GALLEY_BACK ;    ;    ;
+
+#Row4-->BizClassColumn2--->Seats
+; ; config1-BizClass-4E        ; 4E        ; true  ; SEAT   ; config1-BizClassCol42  ;          ;    ;    ;
+; ; config1-BizClass-4F        ; 4F        ; true  ; SEAT   ; config1-BizClassCol42  ;          ;    ;    ;
+
+#Row4-->BizClassColumn3--->Seats
+; ; config1-BizClass-4K        ; 4K        ; true  ; SEAT   ; config1-BizClassCol43  ; LAVATORY_BACK        ;    ;    ;
+
+
+#-----------------UPPER DECK(Business Class Cabin) ENDS---------------------

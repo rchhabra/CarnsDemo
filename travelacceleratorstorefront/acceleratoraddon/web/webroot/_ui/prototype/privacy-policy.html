@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="content-page">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <header class="row header"></header>
+        <div class="container">
+
+            <div class="payment-policy-wrap">
+                <h2 class="h2">Privacy Policy</h2>
+
+                <p>We are committed to protecting your privacy, and takes its responsibilities regarding the security of customer information very seriously. This policy explains how we use customer information and how we protect your privacy.</p>
+
+                <h3>Use of Customer Information</h3>
+
+                <p>We require certain information to allow us to process your flight booking. easyJet collects the details provided by you, together with information we learn about you from your use of our service and your visits to our web site and other sites accessible from them. We also collect information about the transactions you undertake including details of payment cards used.</p>
+
+                <p>We may collect additional information in connection with your participation in any promotions or competitions offered by us and information you provide when giving us feedback.</p>
+
+                <p>We will use your information to provide and personalise our service. We will also use your contact details to communicate with you. We may use your information to send you offers and news about easyJet products and services or those of other carefully selected companies which we think may be of interest to you. We may contact you by post, email, telephone (including SMS) or fax for these purposes. Your confirmation e-mails (which may include details of flight bookings or other services booked through our websites) may include marketing material which we may feel will be of interest to you from other third parties.</p>
+
+                <p>Your data may be used for the following purposes: accounting, billing and audit, credit or other payment card verification and screening, immigration and customs control, safety, security, health, administrative and legal purposes, statistical and marketing analysis, systems testing, maintenance and development, customer surveys, customer relations and to help us in any future dealings with you, for example by identifying your requirements and preferences.</p>
+
+                <p>Once you have registered with easyJet.com, you will be provided with access to a "Contact Preferences" page that will allow you to tailor our commercial communications to your preferences. You can opt-out of receiving e-mail updates at any time by going to My easyJet.com.</p>
+
+                <p>If you do not want to receive commercial communications from us, please select your choices by using the opt-out box available on that page.</p>
+
+                <p>We like to receive feedback from our customers to help us improve our service. We may contact you by post, e-mail, telephone or fax to ask your opinions.</p>
+
+                <h3>Site tracking</h3>
+
+                <p>We use tracking software to monitor customer traffic patterns and site usage to help us develop the design and layout of the site to better meet the needs of visitors to easyJet.com. This software does not enable us to capture any personally identifying information.</p>
+
+                <h3>Security to protect your information and data retention</h3>
+
+                <p>When you book a flight or enter personally identifying information, your details are transmitted across the internet securely using high-grade encryption (128 bit).</p>
+
+                <p>Furthermore, as required by the UK Data Protection Acts of 1984 and 1998, we follow strict security procedures in the storage and disclosure of information which you have given us, to prevent unauthorised access. Our security procedures mean that we may request proof of identity before we are able to disclose sensitive information to you.</p>
+            </div>
+
+        </div>
+        <footer class="footer-wrapper"></footer>
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

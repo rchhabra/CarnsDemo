@@ -1,0 +1,40 @@
+#
+# Import the CMS content for the Hotel site emails
+#
+$contentCatalog = hotelsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+$hotelEmailResource = jar:de.hybris.platform.travelstore.setup.TravelStoreSystemSetup&/travelstore/import/sampledata/contentCatalogs/$contentCatalog/emails
+
+# Import config properties into impex macros for modulegen
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$emailResource = $config-emailResourceValue
+
+# Language
+$lang = en
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate; code[unique = true]; description[lang = $lang]; templateScript[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; hotel_Email_Customer_Registration_Body    ; "Customer Registration Email Body"    ; $hotelEmailResource/email-customerRegistrationBody.vm
+; hotel_Email_Customer_Registration_Subject ; "Customer Registration Email Subject" ; $hotelEmailResource/email-customerRegistrationSubject.vm
+; hotel_Email_Forgotten_Password_Body       ; "Forgotten Password Email Body"       ; $hotelEmailResource/email-forgottenPasswordBody.vm
+; hotel_Email_Forgotten_Password_Subject    ; "Forgotten Password Email Subject"    ; $hotelEmailResource/email-forgottenPasswordSubject.vm
+; hotel_Email_Booking_Confirmation_Body     ; "Booking Confirmation Email Body"     ; $hotelEmailResource/email-bookingConfirmationBody.vm
+; hotel_Email_Booking_Confirmation_Subject  ; "Booking Confirmation Email Subject"  ; $hotelEmailResource/email-bookingConfirmationSubject.vm
+; hotel_Email_Booking_Cancelled_Body        ; "Booking Cancellation Email Subject"  ; $hotelEmailResource/email-bookingCancelledBody.vm
+; hotel_Email_Booking_Cancelled_Subject     ; "Booking Cancellation Email Subject"  ; $hotelEmailResource/email-bookingCancelledSubject.vm
+; hotel_Email_Booking_Amendment_Subject     ; "Booking Amendment Email Subject"     ; $hotelEmailResource/email-bookingAmendmentSubject.vm
+; hotel_Email_Booking_Amendment_Body        ; "Booking Amendment Email Body"        ; $hotelEmailResource/email-bookingAmendmentBody.vm
+; hotel-SimpleBannerComponent-template      ; "CMSSimpleBannerComponent Template"   ; $emailResource/email-bannerComponentTemplate.vm
+; hotel-BannerComponent-template            ; "CMSBannerComponent Template"         ; $emailResource/email-bannerComponentTemplate.vm
+; hotel-CMSImageComponent-template          ; "CMSImageComponent Template"          ; $emailResource/email-cmsImageComponentTemplate.vm
+; hotel-CMSLinkComponent-template           ; "CMSLinkComponent Template"           ; $emailResource/email-cmsLinkComponentTemplate.vm
+; hotel-CMSParagraphComponent-template      ; "CMSParagraphComponent Template"      ; $emailResource/email-cmsParagraphComponentTemplate.vm
+
+# Email Pages
+UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; fromEmail[lang = $lang]; fromName[lang = $lang]
+; ; CustomerRegistrationEmail ; "codereview@replyltd.co.uk" ; "Hotel Customer Services Team"
+; ; ForgottenPasswordEmail    ; "codereview@replyltd.co.uk" ; "Hotel Customer Services Team"
+; ; OrderConfirmationEmail    ; "codereview@replyltd.co.uk" ; "Hotel Customer Services Team"
+; ; OrderCancelledEmail       ; "codereview@replyltd.co.uk" ; "Hotel Customer Services Team"
+; ; OrderAmendmentEmail       ; "codereview@replyltd.co.uk" ; "Hotel Customer Services Team"

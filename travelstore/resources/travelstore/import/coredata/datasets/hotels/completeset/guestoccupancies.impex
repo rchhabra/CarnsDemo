@@ -1,0 +1,12 @@
+
+INSERT_UPDATE GuestOccupancy;code[unique=true];passengerType(code);quantityMax;quantityMin
+;ADULT_1;adult;1;1
+;ADULT_2;adult;2;1
+;ADULT_3;adult;3;1
+;ADULT_4;adult;4;1
+;ADULT_5;adult;5;1
+;ADULT_6;adult;6;1
+;CHILD_1;child;1;0
+;CHILD_2;child;2;0
+;CHILD_3;child;3;0
+;CHILD_4;child;4;0

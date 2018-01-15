@@ -1,0 +1,128 @@
+#
+# Import the CMS content for the site emails
+#
+$contentCatalog = hotelsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$wideContent = CMSImageComponent, BannerComponent
+$storefrontExtensionName = travelacceleratorstorefront
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$jarResourceCms = $config-jarResourceCmsValue
+$emailResource = $config-emailResourceValue
+$emailPackageName = $config-emailContextPackageName
+$emailPackageName_ext = de.hybris.platform.travelfacades.accommodation.process.email.context
+$jarResourceCmsStorefront = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/$storefrontExtensionName/import/cockpits/cmscockpit
+
+# Email page Template
+INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]; name; active; frontendTemplateName; subject(code); htmlTemplate(code); restrictedPageTypes(code)
+; ; CustomerRegistrationEmailTemplate ; Customer Registration Email Template ; true ; customerRegistrationEmail ; hotel_Email_Customer_Registration_Subject ; hotel_Email_Customer_Registration_Body ; EmailPage
+; ; ForgottenPasswordEmailTemplate    ; Forgotten Password Email Template    ; true ; forgottenPasswordEmail    ; hotel_Email_Forgotten_Password_Subject    ; hotel_Email_Forgotten_Password_Body    ; EmailPage
+; ; OrderConfirmationEmailTemplate    ; Order Confirmation Email Template    ; true ; orderConfirmationEmail    ; hotel_Email_Booking_Confirmation_Subject  ; hotel_Email_Booking_Confirmation_Body  ; EmailPage
+; ; OrderCancelledEmailTemplate       ; Order Cancelled Email Template       ; true ; orderCancelledEmail       ; hotel_Email_Booking_Cancelled_Subject     ; hotel_Email_Booking_Cancelled_Body     ; EmailPage
+; ; OrderAmendmentEmailTemplate       ; Order Amendment Email Template       ; true ; orderAmendmentEmail       ; hotel_Email_Booking_Amendment_Subject     ; hotel_Email_Booking_Amendment_Body     ; EmailPage
+
+# Templates for CMS Cockpit Page Edit
+UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]; velocityTemplate[translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; CustomerRegistrationEmailTemplate ; $jarResourceCms/structure-view/structure_customerRegistrationEmailTemplate.vm
+; ; ForgottenPasswordEmailTemplate    ; $jarResourceCms/structure-view/structure_forgottenPasswordEmailTemplate.vm
+; ; OrderConfirmationEmailTemplate    ; $jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
+; ; OrderCancelledEmailTemplate       ; $jarResourceCms/structure-view/structure_orderCancelledEmailTemplate.vm
+; ; OrderAmendmentEmailTemplate       ; $jarResourceCmsStorefront/structure-view/structure_orderAmendmentEmailTemplate.vm
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'CustomerRegistrationEmailTemplate']; validComponentTypes(code)
+; SiteLogo      ; ;              ; logo
+; TopContent    ; ; $wideContent ;
+; BottomContent ; ; $wideContent ;
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ForgottenPasswordEmailTemplate']; validComponentTypes(code)
+; SiteLogo      ; ;              ; logo
+; TopContent    ; ; $wideContent ;
+; BottomContent ; ; $wideContent ;
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'OrderConfirmationEmailTemplate']; validComponentTypes(code)
+; SiteLogo      ; ;              ; logo
+; TopContent    ; ; $wideContent ;
+; BottomContent ; ; $wideContent ;
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'OrderCancelledEmailTemplate']; validComponentTypes(code)
+; SiteLogo      ; ;              ; logo
+; TopContent    ; ; $wideContent ;
+; BottomContent ; ; $wideContent ;
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'OrderAmendmentEmailTemplate']; validComponentTypes(code)
+; SiteLogo      ; ;              ; logo
+; TopContent    ; ; $wideContent ;
+; BottomContent ; ; $wideContent ;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active
+; ; EmailTopSlot      ; Default Email Top Slot    ; true
+; ; EmailBottomSlot   ; Default Email Bottom Slot ; true
+; ; EmailSiteLogoSlot ; Default Email Site Slot   ; true
+
+# Bind Content Slots to Email Page Templates
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'CustomerRegistrationEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-CustomerRegistrationEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
+; ; TopContent-CustomerRegistrationEmail    ; TopContent    ; ; EmailTopSlot      ; true
+; ; BottomContent-CustomerRegistrationEmail ; BottomContent ; ; EmailBottomSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ForgottenPasswordEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-ForgottenPasswordEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
+; ; TopContent-ForgottenPasswordEmail    ; TopContent    ; ; EmailTopSlot      ; true
+; ; BottomContent-ForgottenPasswordEmail ; BottomContent ; ; EmailBottomSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'OrderConfirmationEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-OrderConfirmationEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
+; ; TopContent-OrderConfirmationEmail    ; TopContent    ; ; EmailTopSlot      ; true
+; ; BottomContent-OrderConfirmationEmail ; BottomContent ; ; EmailBottomSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'OrderCancelledEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-OrderCancelledEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
+; ; TopContent-OrderCancelledEmail    ; TopContent    ; ; EmailTopSlot      ; true
+; ; BottomContent-OrderCancelledEmail ; BottomContent ; ; EmailBottomSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'OrderAmendmentEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-OrderAmendmentEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
+; ; TopContent-OrderAmendmentEmail    ; TopContent    ; ; EmailTopSlot      ; true
+; ; BottomContent-OrderAmendmentEmail ; BottomContent ; ; EmailBottomSlot   ; true
+
+# Email Pages
+INSERT_UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); defaultPage; approvalStatus(code)[default = 'approved']
+; ; CustomerRegistrationEmail ; Customer Registration Email ; CustomerRegistrationEmailTemplate ; true ;
+; ; ForgottenPasswordEmail    ; Forgotten Password Email    ; ForgottenPasswordEmailTemplate    ; true ;
+; ; OrderConfirmationEmail    ; Order Confirmation Email    ; OrderConfirmationEmailTemplate    ; true ;
+; ; OrderCancelledEmail       ; Order Cancelled Email       ; OrderCancelledEmailTemplate       ; true ;
+; ; OrderAmendmentEmail       ; Order Amendment Email       ; OrderAmendmentEmailTemplate       ; true ;
+
+# CMS components velocity templates
+INSERT_UPDATE RendererTemplate; code[unique = true]; contextClass; rendererType(code)[default = 'velocity']
+; hotel-CMSImageComponent-template     ; java.util.Map
+; hotel-BannerComponent-template       ; java.util.Map
+; hotel-SimpleBannerComponent-template ; java.util.Map
+; hotel-CMSLinkComponent-template      ; java.util.Map
+; hotel-CMSParagraphComponent-template ; java.util.Map
+
+# Email velocity templates
+INSERT_UPDATE RendererTemplate; code[unique = true]; contextClass; rendererType(code)[default = 'velocity']
+; hotel_Email_Customer_Registration_Body    ; $emailPackageName.CustomerEmailContext
+; hotel_Email_Customer_Registration_Subject ; $emailPackageName.CustomerEmailContext
+; hotel_Email_Forgotten_Password_Body       ; $emailPackageName.ForgottenPasswordEmailContext
+; hotel_Email_Forgotten_Password_Subject    ; $emailPackageName.ForgottenPasswordEmailContext
+; hotel_Email_Booking_Confirmation_Body     ; $emailPackageName_ext.BookingNotificationEmailContext
+; hotel_Email_Booking_Confirmation_Subject  ; $emailPackageName_ext.BookingNotificationEmailContext
+; hotel_Email_Booking_Cancelled_Body        ; $emailPackageName_ext.BookingCancelledEmailContext
+; hotel_Email_Booking_Cancelled_Subject     ; $emailPackageName_ext.BookingCancelledEmailContext
+; hotel_Email_Booking_Amendment_Subject     ; $emailPackageName_ext.BookingAmendmentEmailContext
+; hotel_Email_Booking_Amendment_Body        ; $emailPackageName_ext.BookingAmendmentEmailContext
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]
+; ; EmailPageModel_preview ; text/gif ; EmailPageModel_preview.gif ; $jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
+; ; CustomerRegistrationEmail ; EmailPageModel_preview
+; ; ForgottenPasswordEmail    ; EmailPageModel_preview
+; ; OrderConfirmationEmail    ; EmailPageModel_preview
+; ; OrderCancelledEmail       ; EmailPageModel_preview
+; ; OrderAmendmentEmail       ; EmailPageModel_preview

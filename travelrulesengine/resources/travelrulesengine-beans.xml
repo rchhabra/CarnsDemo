@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+ -->
+
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+  <bean class="de.hybris.platform.ruleengineservices.rao.ProductRAO">
+    <property name="productType" type="de.hybris.platform.travelservices.enums.ProductType"/>
+  </bean>
+
+  <bean class="de.hybris.platform.ruleengineservices.rao.OrderEntryRAO">
+    <property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO>"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.FeeRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="price" type="java.math.BigDecimal"/>
+    <property name="addedOrderEntry" type="de.hybris.platform.ruleengineservices.rao.OrderEntryRAO"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.FareProductRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.ProductRAO">
+    <property name="valid" type="boolean"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.FareSearchRequestRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="tripType" type="de.hybris.platform.commercefacades.travel.enums.TripType"/>
+    <property name="legInfos" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.LegInfoRAO>"/>
+    <property name="advanceDays" type="int"/>
+    <property name="durationOfStay" type="int"/>
+    <property name="passengerTypeQuantities"
+              type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.PassengerTypeQuantityRAO>"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.SearchParamsRAO"
+          extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="tripType" type="de.hybris.platform.commercefacades.travel.enums.TripType"/>
+    <property name="legInfos" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.LegInfoRAO>"/>
+    <property name="originLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="destinationLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="originatingLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="passengerTypeQuantities"
+            type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.PassengerTypeQuantityRAO>"/>
+    <property name="salesApplication" type="java.lang.String"/>
+    <property name="user" type="de.hybris.platform.ruleengineservices.rao.UserRAO"/>
+    <property name="searchDate" type="java.util.Date"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.LocationRao"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="code" type="java.lang.String"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.PassengerTypeQuantityRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="passengerType" type="de.hybris.platform.travelrulesengine.rao.PassengerTypeRAO"/>
+    <property name="quantity" type="int"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.PassengerTypeRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="code" type="String"/>
+    <property name="name" type="String"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.LegInfoRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="referenceNumber" type="int"/>
+    <property name="departureTime" type="java.util.Date"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.FilterFareRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="fareProductCode" type="String"/>
+    <property name="valid" type="boolean"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.FilterBundleRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="bundleType" type="String"/>
+    <property name="valid" type="boolean"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.ShowBundleTemplatesRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="bundleTemplates" type="java.util.List&lt;java.lang.String>"/>
+  </bean>
+  
+  <bean class="de.hybris.platform.travelrulesengine.rao.ShowProductsActionRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="products" type="java.util.List&lt;java.lang.String>"/>
+  </bean>
+  
+  <bean class="de.hybris.platform.travelrulesengine.rao.ShowProductCategoriesActionRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="categories" type="java.util.List&lt;java.lang.String>"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.FilterTransportOfferingRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="transportOfferingCode" type="String"/>
+    <property name="valid" type="boolean"/>
+    <property name="active" type="boolean"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.RefundActionRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractRuleActionRAO">
+    <property name="refundAction" type="de.hybris.platform.travelrulesengine.enums.RefundActionType"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="transportOfferingCode" type="String"/>
+    <property name="valid" type="boolean"/>
+    <property name="departureTime" type="java.util.Date"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.ItineraryRAO">
+    <property name="transportOfferings" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO>"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.ReservationItemRAO">
+    <property name="itinerary" type="de.hybris.platform.travelrulesengine.rao.ItineraryRAO"/>
+    <property name="originDestinationRefNumber" type="int"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.BookingRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="reservationItems" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.ReservationItemRAO>"/>
+    <property name="bookingStatus" type="de.hybris.platform.core.enums.OrderStatus"/>
+  </bean>
+
+  <bean class="de.hybris.platform.travelrulesengine.rao.CancelBookingRAO"
+        extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="booking" type="de.hybris.platform.travelrulesengine.rao.BookingRAO"/>
+    <property name="advanceCancellationDays" type="int"/>
+  </bean>
+
+  <bean class="de.hybris.platform.ruleengineservices.rao.AbstractOrderRAO" extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="searchDate" type="java.util.Date" />
+    <property name="originatingLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="passengerTypeQuantities"
+            type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.PassengerTypeQuantityRAO>"/>
+    <property name="salesApplication" type="java.lang.String"/>        
+    <property name="tripType" type="de.hybris.platform.travelservices.enums.TripType"/>
+    <property name="legInfos" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.LegInfoRAO>"/>        
+    <property name="originLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="destinationLocations" type="java.util.Set&lt;java.lang.String>"/>        
+  </bean>
+  
+  <bean class="de.hybris.platform.travelrulesengine.rao.OfferRequestRAO"
+          extends="de.hybris.platform.ruleengineservices.rao.AbstractActionedRAO">
+    <property name="tripType" type="de.hybris.platform.commercefacades.travel.enums.TripType"/>
+    <property name="legInfos" type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.LegInfoRAO>"/>
+    <property name="originLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="destinationLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="originatingLocations" type="java.util.Set&lt;java.lang.String>"/>
+    <property name="passengerTypeQuantities"
+            type="java.util.List&lt;de.hybris.platform.travelrulesengine.rao.PassengerTypeQuantityRAO>"/>
+    <property name="salesApplication" type="java.lang.String"/>
+    <property name="user" type="de.hybris.platform.ruleengineservices.rao.UserRAO"/>
+  </bean>
+
+</beans>

@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Apr 07 14:15:55 UTC 2017
+builddate=20170407 1415
+description=ndc171webservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=ndc171webservices
+releasedate=20170406 1647
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

@@ -1,0 +1,5 @@
+# ImpEx for Importing TransportVehicle into travel accelerator
+
+INSERT_UPDATE TransportVehicle; code[unique = true]; type(code); transportVehicleInfo(code)
+
+; AIRCRAFT_A380-800_1 ; AIRCRAFT ; A380-800

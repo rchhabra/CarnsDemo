@@ -1,0 +1,6 @@
+# ImpEx for Importing TransportFacilities into travel accelerator
+$lang = en
+
+#Data set-up for TransportFacilities with identifiers as IATA data.
+INSERT_UPDATE TransportFacility; code[unique = true]; name[lang = $lang]
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/transportfacilities_en.csv""), ""utf-8"", new char[] {','}, 0, 0);"

@@ -1,0 +1,46 @@
+// Mixins
+
+
+// Flexbox
+.flex() {
+    display: -webkit-box; 
+    display: -moz-box; 
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flexbox {
+    // Enables a row of items to space themselves evenly
+    .flex();
+    flex-flow: row wrap;
+    > * {
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+}
+/* Reset of Placeholder text behaviour */
+.reset-placeholder() {
+    :focus::-webkit-input-placeholder { color: transparent; }
+    :focus::-moz-placeholder          { color: transparent; } /* Firefox 19+ */
+    :focus:-moz-placeholder           { color: transparent; } /* Firefox 18 */
+}
+/* Color of Placeholder text */
+.placeholder-color(@color: #ccc) {
+    ::-webkit-input-placeholder       { color: @color; }
+    ::-moz-placeholder                { color: @color; opacity: 1; } /* Firefox 19+ */
+    :-moz-placeholder                 { color: @color; opacity: 1; } /* Firefox 18 */
+    :-ms-input-placeholder            { color: @color; }
+    ::placeholder                     { color: @color; }
+    .placeholder                      { color: @color; }
+}
+
+/* forms.less */
+/* Reset of Placeholder text behaviour */
+.reset-placeholder();
+/* Color of Placeholder text */
+.placeholder-color(#ccc);
+
+/*-- PTR Customless  --*/
+.relative {
+    position: relative;
+}

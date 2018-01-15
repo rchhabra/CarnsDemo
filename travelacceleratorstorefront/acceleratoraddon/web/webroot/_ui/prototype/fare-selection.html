@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body>
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="breadcrumb-wrap">
+            <div class="container breadcrumb-inner-wrap">
+                    <ul class="breadcrumbs">
+                        <li class="col-xs-4 breadcrumb active"><a href="#">Flight Search</a></li>
+                        <li class="col-xs-4 breadcrumb"><a href="#">Ancillary</a></li>
+                        <li class="col-xs-4 breadcrumb"><a href="#">Traveller Details</a></li>
+                        <li class="col-xs-4 breadcrumb"><a href="#">Payment</a></li>
+                        <li class="col-xs-4 breadcrumb"><a href="#">Summary</a></li>
+                        <li class="col-xs-4 breadcrumb"><a href="#">Confirmation</a></li>
+                    </ul>
+                </div>
+        </div>
+        <div class="container">
+            <div class="col-xs-12">
+                <h2 class="h2">Please choose your flight</h2>
+            </div>
+            <div class="fare-selection-wrap clearfix y_fareSelectionSection">
+                <div class="col-xs-12 col-sm-9 fare-selection-body y_nonItineraryContentArea">
+                    <div class="fare-selection form-wrapper col-xs-12 col-sm-10 col-sm-offset-1">
+                        <form class="fe-validate form-background form-booking-trip y_fareFinderForm">
+                        <fieldset>
+                            <legend class="with-icon heading-booking-trip primary-legend">Modify Search</legend>
+                            <button type="button" class="modal-only close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="fieldset-inner-wrapper">
+                                <!-- One way / return radio -->
+                                <div class="radio-button-row">
+                                    <input type="radio" name="trip-type" class="y_fareFinderRoundTripBtn" id="radio-rt" checked value="Round Trip">
+                                    <label for="radio-rt">Round Trip</label>
+                                    <input type="radio" name="trip-type" class="y_fareFinderOneWayBtn" id="radio-ow" value="One Way">
+                                    <label for="radio-ow">One Way</label>
+                                </div>
+                                <!-- / One way / return radio -->
+                                <!-- From / To input fields -->
+                                <div class="row input-row">
+                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="fromLocation">From</label>
+                                        <input type="search" class="y_fareFinderOriginLocation input-grid col-xs-12 form-control" id="fromLocation" name="fromLocation" placeholder="From">
+                                        <div id="y_fareFinderOriginLocationSuggestions" class="autocomplete-suggestions-wrapper hidden"><div class="y_suggestionsResults autocomplete-suggestions">
+                                            <ul>
+                                                <li class="parent"><span class="title"><strong>edi</strong>nburgh - United Kingdom</span>
+                                                        <ul>
+                                                              <li class="child"><a href="" class="autocomplete-suggestion" data-value="EDI"><strong>edi</strong>nburgh (<strong>edi</strong>) United Kingdom</a></li>
+                                                              <li class="child"><a href="" class="autocomplete-suggestion" data-value="LTN"><strong>edi</strong>had (<strong>edi</strong>) United Emirites</a></li>
+                                                        </ul>
+                                                    </li>
+                                            </ul>
+                                        </div></div>
+                                    </div>
+                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="toLocation">To</label>
+                                        <input type="search" class="col-xs-12 y_fareFinderAirportToLocations input-grid form-control" id="toLocation" name="toLocation" placeholder="To">
+                                    </div>
+                                </div>
+                                <!-- / From / To input fields -->
+                                <!-- Departing / Returning dates input fields -->
+                                <div class="row input-row">
+                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="datePickerDeparting">Departing</label>
+                                        <input type="text" class="col-xs-12 datepicker input-grid form-control" id="datePickerDeparting" name="datePickerDeparting" placeholder="Departing" autocomplete="off">
+                                    </div>
+                                    <div class="y_fareFinderReturnField">
+                                        <div class="input-required-wrap col-xs-12 col-sm-6">
+                                            <label class="sr-only" for="datePickerReturning">Returning</label>
+                                            <input type="text" class="col-xs-12 datepicker input-grid form-control" id="datePickerReturning" name="datePickerReturning" placeholder="Returning" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Departing / Returning dates input fields -->
+                                <div class="row input-row less-margin">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="flightClass">Class</label>
+                                        <select class="form-control" id="flightClass" required>
+                                            <option value="" disabled selected>Class</option>
+                                            <option>Economy</option>
+                                            <option>First Class</option>
+                                            <option>Business Class</option>
+                                        </select>
+                                        <a tabindex="0" class="link-trigger" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="Please contact us at least 48 hours before your flight departs in order to help us make your journey as easy as possible even if your flight is operated by one of our airline alliance or franchise partners because they may have different restrictions.<br><br>If you have any questions please call us. To ensure we can provide the best possible service.">Special Assistance <i class="glyphicon glyphicon-info-sign"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <!-- Adult Row -->
+                                        <div class="input-group input-stacked">
+                                            <span class="input-group-btn">
+                                              <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="minus" data-field="quant[1]">
+                                                  <span class="glyphicon glyphicon-minus">
+                                                  <span class="sr-only">Remove one</span>
+                                                  </span>
+                                              </button>
+                                            </span>
+                                            <label for="numberOfAdults" class="sr-only">Number of adults</label>
+                                            <input type="text" name="quant[1]" id="numberOfAdults" class="form-control y_inputNumber fe-dont-validate" value="2" data-min="1" data-max="10" readonly disabled>
+                                            <div class="input-group-addon text-number"> Adult<span class="age-range">
+                                                (16+<span class="years"> years</span>)</span>
+                                            </div>
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="plus" data-field="quant[1]">
+                                            <span class="glyphicon glyphicon-plus">
+                                                <span class="sr-only">Add one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <input id="y_fareFinderTravelingWithChildren" name="travelingWithChildren" type="hidden" value="false">
+                                        <!-- / Adult Row -->
+                                        <!-- Child Row -->
+                                        <div class="input-group input-stacked hidden y_fareFinderTravelingChildren" id="add-child">
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" disabled="disabled" data-type="minus" data-field="quant[2]">
+                                            <span class="glyphicon glyphicon-minus">
+                                                <span class="sr-only">Remove one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                            <label for="numberOfChildren" class="sr-only">Number of children</label>
+                                            <input type="text" name="quant[2]" id="numberOfChildren" class="form-control y_inputNumber fe-dont-validate" value="0" data-min="0" data-max="10" readonly disabled>
+                                            <div class="input-group-addon text-number">Children<span class="age-range">(2-15<span class="years"> years</span>)</span></div>
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="plus" data-field="quant[2]">
+                                            <span class="glyphicon glyphicon-plus">
+                                                <span class="sr-only">Add one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <!-- / Child Row -->
+                                        <!-- Infant Row -->
+                                        <div class="input-group input-stacked hidden y_fareFinderTravelingChildren" id="add-infant">
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment fe-dont-validate" disabled="disabled" data-type="minus" data-field="quant[3]">
+                                            <span class="glyphicon glyphicon-minus">
+                                                <span class="sr-only">Remove one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                            <label for="numberOfInfants" class="sr-only">Number of infants</label>
+                                            <input type="text" name="quant[3]" id="numberOfInfants" class="form-control y_inputNumber fe-dont-validate" value="0" data-min="0" data-max="10" readonly disabled>
+                                            <div class="input-group-addon text-number"> Infants<span class="age-range">(0-1<span class="years"> years</span>)</span></div>
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="plus" data-field="quant[3]">
+                                            <span class="glyphicon glyphicon-plus">
+                                                <span class="sr-only">Add one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <!-- / Infant Row -->
+                                        <a href="#" class="link-trigger y_fareFinderChildrenTrigger"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Travel with children</a>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <a tabindex="0" class="link-trigger short" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="Age refers to the age at the time of arrival date of the last leg of the journey: Adult[16+], Child[2-15], Infant[0-1]: Adult[16+], Child[2-15], Infant[0-1]">Age Information <i class="glyphicon glyphicon-info-sign"></i></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- CTA (Search Flights) -->
+                                <div class="row margin-cancel">
+                                    <div class="col-xs-12 btn-wrapper full-width">
+                                        <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-sm-offset-6">Search Flights</button>
+                                    </div>
+                                </div>
+                                <!--  / CTA (Search Flights) -->
+                            </div>
+                            <!-- / .fieldset-inner-wrapper -->
+                        </fieldset>
+                    </form>
+                    </div>
+                    <!-- / .form-wrapper -->
+                    
+                    <!-- Fare Table -->
+                    <div class="fare-table-wrapper clearfix">
+                        <div class="col-xs-12">
+                            <div class="fare-table-inner-wrap">
+                                <div class="with-icon heading-booking-trip-blue">
+                                    <h2 class="h4">Outbound</h2>
+                                    <h3 class="h5">London&nbsp;(LHR) - Dubai&nbsp;(DXB)</h3>
+                                </div>
+                                <!-- Tab wrapper -->
+                                <div id="y_outbound" class="y_fareResultTabWrapper tab-wrapper clearfix">
+                                    <div class="nav-tabs-wrapper y_fareResultNavTabs">
+                                        <a href="#" data-toggle="tab" class="y_fareResultNext next">&#10095;</a>
+                                        <a href="#" data-toggle="tab" class="y_fareResultPrev prev">&#10094;</a>
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation">
+                                                <a href="#outbound-tab-001" aria-controls="outbound-tab-001" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">30 december</span>
+                                                    <span class="tab-price">from &pound;110.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#outbound-tab-002" aria-controls="outbound-tab-002" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">31 december</span>
+                                                    <span class="tab-price">from &pound;110.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation" class="active">
+                                                <a href="#outbound-tab-003" aria-controls="outbound-tab-003" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">01 january</span>
+                                                    <span class="tab-price">from &pound;65.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#outbound-tab-004" aria-controls="outbound-tab-004" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">02 january</span>
+                                                    <span class="tab-price">from &pound;160.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#outbound-tab-005" aria-controls="outbound-tab-005" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">03 january</span>
+                                                    <span class="tab-price">from &pound;135.00</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                    </div>
+                                    <div class="y_fareResultTabContent tab-content">
+                                        <div role="tabpanel" class="tab-pane fade" id="outbound-tab-001">
+                                            <p>Tab 01</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="outbound-tab-002">
+                                            <p>Tab 02</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade in active" id="outbound-tab-003">
+                                            <div class="clearfix">
+                                                <div class="y_fareResultSort form-inline clearfix">
+                                                    <label for="outbound-sort-by-1">Sort by:</label>
+                                                    <select class="form-control" id="outbound-sort-by-1">
+                                                        <option value="number-of-stops" selected>Number of stop</option>
+                                                        <option value="price">Price</option>
+                                                        <option value="something-else">Something else&hellip;</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <ul class="list-unstyled">
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-001">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="duration-info col-xs-6 col-sm-5 col-reset">1 stop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span>
+                                                                    <span class="y_fareResultLowestPrice from-price">1000</span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="panel-group col-xs-12" role="tablist" aria-multiselectable="true">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading clearfix" role="tab" id="headingTwo">
+                                                                        <div class="col-xs-6 col-sm-5">
+                                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="info-trigger y_fareResultInfoTrigger">
+                                                                                <i class="glyphicon glyphicon-info-sign"></i>Journey Details</a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                                        <div class="panel-body">
+                                                                            <div class="clearfix">
+                                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">From location</dt>
+                                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                                    <dt class="sr-only">Departure time</dt>
+                                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                                </dl>
+                                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">Destination location</dt>
+                                                                                    <dd class="location-info heading">Istanbul&nbsp;(IST)</dd>
+                                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                                </dl>
+                                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                                    <dd class="duration-info col-reset">1 hr 00 mins</dd>
+                                                                                </dl>
+                                                                            </div>
+                                                                            <div class="clearfix">
+                                                                                <ul class="flight-details flight-details-stop col-xs-12">
+                                                                                    <li class="flight-number col-sm-12 test">
+                                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <span class="col-xs-12 one-stop-divide y_fareResultStopDivide glyphicon glyphicon-transfer"></span>
+                                                                            </div>
+                                                                            <div class="clearfix">
+                                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">From location</dt>
+                                                                                    <dd class="location-info heading">Istanbul&nbsp;(IST)</dd>
+                                                                                    <dt class="sr-only">Departure time</dt>
+                                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                                </dl>
+                                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">Destination location</dt>
+                                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                                </dl>
+                                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                                </dl>
+                                                                                <ul class="flight-details col-xs-12">
+                                                                                    <li class="col-xs-12 flight-number">
+                                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label class="selected">
+                                                                    <input type="radio" checked name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;65.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;200.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;900.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-002">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-003">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-004">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-005" class="">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-006" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-007" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span>
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-008" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-009" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="outbound-result-row-010" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="outbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                            </ul>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="outbound-tab-004">
+                                            <p>Tab 04</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="outbound-tab-005">
+                                            <p>Tab 05</p>
+                                        </div>
+                                        <div class="col-xs-12 y_fareResultShowMore">
+                                            <button type="submit" class="btn btn-primary col-xs-4 col-xs-offset-4 col-sm-5 col-sm-offset-7">Show more</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="with-icon heading-booking-trip-blue">
+                                    <h2 class="h4">Inbound</h2>
+                                    <h3 class="h5">Dubai&nbsp;(DXB) - London&nbsp;(LHR)</h3>
+                                </div>
+                                <!-- Tab wrapper -->
+                                <div id="y_inbound" class="y_fareResultTabWrapper tab-wrapper clearfix">
+                                    <div class="nav-tabs-wrapper y_fareResultNavTabs">
+                                        <!-- Nav tabs -->
+                                        <a href="#" data-toggle="tab" class="y_fareResultNext next">&#10095;</a>
+                                        <a href="#" data-toggle="tab" class="y_fareResultPrev prev">&#10094;</a>
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation">
+                                                <a href="#inbound-tab-001" aria-controls="inbound-tab-001" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">30 december</span>
+                                                    <span class="tab-price">from &pound;110.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#inbound-tab-002" aria-controls="inbound-tab-002" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">31 december</span>
+                                                    <span class="tab-price">from &pound;110.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation" class="active">
+                                                <a href="#inbound-tab-003" aria-controls="inbound-tab-003" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">01 january</span>
+                                                    <span class="tab-price">from &pound;100.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#inbound-tab-004" aria-controls="inbound-tab-004" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">02 january</span>
+                                                    <span class="tab-price">from &pound;160.00</span>
+                                                </a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#inbound-tab-005" aria-controls="inbound-tab-005" role="tab" data-toggle="tab">
+                                                    <span class="tab-date">03 january</span>
+                                                    <span class="tab-price">from &pound;135.00</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Tab panes -->
+                                    <div class="y_fareResultTabContent tab-content">
+                                        <div role="tabpanel" class="tab-pane fade" id="inbound-tab-001">
+                                            <p>Tab 01</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="inbound-tab-002">
+                                            <p>Tab 02</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade in active" id="inbound-tab-003">
+                                            <div class="clearfix">
+                                                <div class="y_fareResultSort form-inline clearfix">
+                                                    <label for="inbound-sort-by-1">Sort by:</label>
+                                                    <select class="form-control" id="inbound-sort-by-1">
+                                                        <option value="number-of-stops" selected>Number of stop</option>
+                                                        <option value="price">Price</option>
+                                                        <option value="something-else">Something else&hellip;</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <ul class="list-unstyled">
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-001">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="duration-info col-xs-6 col-sm-5 col-reset">1 stop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span>
+                                                                    <span class="y_fareResultLowestPrice from-price">1000</span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="panel-group col-xs-12" role="tablist" aria-multiselectable="true">
+                                                                <div class="panel panel-default">
+                                                                    <div class="panel-heading clearfix" role="tab" id="headingOne">
+                                                                        <div class="col-xs-6 col-sm-5">
+                                                                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" class="info-trigger y_fareResultInfoTrigger">
+                                                                                <i class="glyphicon glyphicon-info-sign"></i>Journey Details</a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                                        <div class="panel-body">
+                                                                            <div class="clearfix">
+                                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">From location</dt>
+                                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                                    <dt class="sr-only">Departure time</dt>
+                                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                                </dl>
+                                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">Destination location</dt>
+                                                                                    <dd class="location-info heading">Istanbul&nbsp;(IST)</dd>
+                                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                                </dl>
+                                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                                    <dd class="duration-info col-reset">1 hr 00 mins</dd>
+                                                                                </dl>
+                                                                            </div>
+                                                                            <div class="clearfix">
+                                                                                <ul class="flight-details flight-details-stop col-xs-12">
+                                                                                    <li class="flight-number col-sm-12 test">
+                                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <span class="col-xs-12 one-stop-divide y_fareResultStopDivide glyphicon glyphicon-transfer"></span>
+                                                                            </div>
+                                                                            <div class="clearfix">
+                                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">From location</dt>
+                                                                                    <dd class="location-info heading">Istanbul&nbsp;(IST)</dd>
+                                                                                    <dt class="sr-only">Departure time</dt>
+                                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                                </dl>
+                                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                                    <dt class="sr-only">Destination location</dt>
+                                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                                </dl>
+                                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                                </dl>
+                                                                                <ul class="flight-details col-xs-12">
+                                                                                    <li class="col-xs-12 flight-number">
+                                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-002">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-003">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-004">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-005">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-006" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-007" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-008" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-009" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!-- / Flight option row-->
+                                                <!-- Flight option row-->
+                                                <li id="inbound-result-row-010" class="hidden">
+                                                    <div class="flight-option y_fareResultTravelOption">
+                                                        <div class="travel-details y_fareResultTravelDetails col-xs-12 col-sm-7">
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="from-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">From location</dt>
+                                                                    <dd class="location-info heading">Dubai&nbsp;(DXB)</dd>
+                                                                    <dt class="sr-only">Departure time</dt>
+                                                                    <dd class="time-info">07:00 20 Aug</dd>
+                                                                </dl>
+                                                                <dl class="to-details col-xs-6 col-sm-4">
+                                                                    <dt class="sr-only">Destination location</dt>
+                                                                    <dd class="location-info heading">London&nbsp;(LHR)</dd>
+                                                                    <dt class="sr-only">Arrival time</dt>
+                                                                    <dd class="time-info">08:30 01 Jan</dd>
+                                                                </dl>
+                                                                <dl class="flight-duration col-xs-12 col-sm-4">
+                                                                    <dt class="sr-only">Flight duration</dt>
+                                                                    <dd class="duration-info col-xs-6 col-sm-7 col-reset">1 hr 30 mins</dd>
+                                                                    <dd class="stop-off col-xs-6 col-sm-5 col-reset">Nonstop</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-3 from-price">
+                                                                <button class="select-class-trigger y_fareResultPriceButton">
+                                                                    <span>From</span> 
+                                                                    <span class="y_fareResultLowestPrice from-price"></span>
+                                                                    <span class="arrow">&#9656;</span>
+                                                                </button>
+                                                                <button class="select-class-trigger y_fareResultChangeButton change-selection hidden">change</button>
+                                                            </div>
+                                                            <div class="col-xs-9 col-sm-12">
+                                                                <dl class="flight-details flight-details-stop col-xs-12">
+                                                                    <dt class="mobile-show info-trigger y_fareResultInfoTrigger"><i class="glyphicon glyphicon-info-sign"></i>Flight details</dt>
+                                                                    <dd class="flight-number hide-on-mobile col-sm-6">
+                                                                        <span class="heading">Flight</span> RAI1234 Boeing 747
+                                                                    </dd>
+                                                                </dl>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flight-class-select y_fareResultClassSelectGroup col-xs-12 col-sm-5 hide-on-mobile">
+                                                            <fieldset>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Economy Plus</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                                <label>
+                                                                    <input type="radio" name="inbound-name" class="y_fareResultSelect" />
+                                                                    <span class="class-desc">Business</span>
+                                                                    <span class="price-desc">&pound;100.00</span>
+                                                                </label>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                   <!-- / Flight option row-->
+                                            </ul>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="inbound-tab-004">
+                                            <p>Tab 04</p>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="inbound-tab-005">
+                                            <p>Tab 05</p>
+                                        </div>
+                                        <div class="col-xs-12 y_fareResultShowMore">
+                                            <button type="submit" class="btn btn-primary col-xs-4 col-xs-offset-4 col-sm-5 col-sm-offset-7">Show more</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row bottom-row">
+                                      <div class="col-xs-5 col-sm-4 col-xs-offset-7 col-sm-offset-8">
+                                          <button class="btn btn-primary btn-block">Save Search</button>
+                                      </div>
+                                  </div>
+                                <div class="panel panel-default my-account-primary-panel about-fare">
+                                    <div class="panel-heading">
+                                        <h2 class="panel-title h4">About Your Fare</h2>
+                                        <button class="show-hide-button collapsed" type="button" data-toggle="collapse" data-target=".about-fare .panel-body" aria-expanded="false">Collapse / Expand</button>
+                                    </div>
+                                    <div class="panel-body collapse">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <!-- / .y_fareResultTabWrapper tab-wrapper -->
+                        </div>
+                    </div>
+                    <!-- / Fare Table -->
+                </div>
+                <div class="col-xs-12 col-sm-3">
+                    <aside id="sidebar" class="reservation y_reservationSideBar">
+                        <div class="main-wrap">
+                            <section class="hidden-xs">
+                              <h2 class="text-center h4">Your Reservation</h2>
+                            </section>
+                            <div class="visible-xs-block sidebar-mobile-content-section clearfix">
+                                <div class="text-center">
+                                    <span class="glyphicon glyphicon-align-justify y_fareSlide"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <img src="assets/images/photos/edinburgh.jpg" class="img-responsive hidden-xs" alt="edinburgh">
+                            </div>
+                            <div id="grand-total-wrap">
+                                <div class="col-xs-12">
+                                    <h3 class="h5">Order No.: 000000002</h3>
+                                </div>
+                                <dl class="reservation-summary">
+                                    <dt class="col-xs-12 grand-total">Grand Total to pay</dt>
+                                    <dd class="col-xs-12 grand-price">&pound;460.00</dd>
+                                    <dd class="col-xs-12">Include: flight, taxes and charges</dd>
+                                </dl>
+                            </div>
+                            <div class="inner-wrap y_reservationSideBarContent">
+                                <div class="form-group clearfix hidden-xs">
+                                    <div class="col-xs-offset-2 col-xs-8">
+                                        <div class="row">
+                                            <a class="btn btn-primary col-xs-12" data-toggle="modal" data-target="#reservationModal">See full reservation</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <section class="panel panel-primary">
+                                    <div class="panel-heading hidden-xs">
+                                        <h2 class="h4">Flight Summary</h2>
+                                        <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#summary" aria-expanded="true" aria-controls="summary">Collapse / Expand</button>
+                                    </div>
+                                    <div class="panel-body collapse" id="summary">
+                                        <div id="y_fareSelectionMockInboundItinerary">
+                                            <div class="sidebar-content-section">
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-9 col-md-9 col-lg-10">
+                                                        <h3 class="h5">LHR > PAR:</h3>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2 hidden-xs">
+                                                        <button type="button" class="info-btn" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="This flight will be stopping to refuel.">
+                                                            <i class="glyphicon glyphicon-info-sign"><span class="sr-only">Information</span></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <dl class="row">
+                                                    <dt class="col-xs-4 col-sm-12 col-md-4">Depart:</dt>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">13:00 hrs</dd>
+                                                </dl>
+                                                <dl class="row">
+                                                    <dt class="col-xs-4 col-sm-12 col-md-4">Arrival:</dt>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">14:30 hrs</dd>
+                                                </dl>
+                                            </div>
+                                            <div class="sidebar-content-section">
+                                                <div class="row">
+                                                    <div class="col-xs-10 col-sm-9 col-md-9 col-lg-10">
+                                                        <h3 class="h5">PAR > DXB:</h3>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-2 hidden-xs">
+                                                        <button type="button" class="info-btn" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="This flight will be stopping to refuel.">
+                                                            <i class="glyphicon glyphicon-info-sign"><span class="sr-only">Information</span></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <dl class="row">
+                                                    <dt class="col-xs-4 col-sm-12 col-md-4">Depart:</dt>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">13:00 hrs</dd>
+                                                </dl>
+                                                <dl class="row">
+                                                    <dt class="col-xs-4 col-sm-12 col-md-4">Arrival:</dt>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                                    <dd class="col-xs-4 col-sm-12 col-md-4">14:30 hrs</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <dl class="clearfix hidden-xs">
+                                                <dt class="col-xs-6">2 x Adult</dt>
+                                                <dd class="col-xs-6">&pound;400</dd>
+                                                <dt class="col-xs-6">1 x Child</dt>
+                                                <dd class="col-xs-6">&pound;200</dd>
+                                                <dt class="col-xs-6">Extras</dt>
+                                                <dd class="col-xs-6">&pound;90</dd>
+                                                <dt class="col-xs-6">Taxes / Fees</dt>
+                                                <dd class="col-xs-6">&pound;400</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="promotions hidden-xs">
+                            <section>
+                                <img src="http://i0.wp.com/easyonigiri.com/wp-content/uploads/2015/03/Mochi1.jpg" class="img-responsive" alt="dessert">
+                                <div class="promotion-content">
+                                    <h2 class="h4">Taste of Tokyo 2016</h2>
+                                    <p>Taste of Dubai has created one of the finest corporate hospitality experiences in Middle East for you to offer to your valued clients.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </aside>
+                   <div class="continue">
+                        <button class="btn btn-secondary col-xs-offset-1 col-xs-10 col-sm-offset-9 col-sm-3 col-md-offset-9 col-md-2" href="#">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal (Special Assistance)-->
+        <div class="modal fade" id="special-requirements-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Special Assistance</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Do you required special assitance?</h3>
+                        <p>Please contact us at least 48 hours before your flight departs in order to help us make your journey as easy as possible even if your flight is operated by one of our airline alliance or franchise partners because they may have different restrictions.</p>
+                        <p>If you have any questions please call us. To ensure we can provide the best possible service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Special Assistance)-->
+        <!-- Full Reservation overlay Component -->
+        <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title">Your Reservation</h3>
+                    </div>
+                    <div class="container reservation-booking-reference">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-lg-8">
+                                <dl class="booking-number">
+                                    <dt>Booking Reference:</dt>
+                                    <dd>00000015</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="modal-body">
+                    <div class="panel panel-primary panel-list booking room-details clearfix">
+                        <div class="panel-heading">
+                            <h4 class="panel-title title">Flight Price Summary</h4>
+                        </div>
+                        <div class="panel panel-default my-account-secondary-panel clearfix">
+                            <!-- OUTBOUND -->
+                            <div class="journey-wrapper">
+                                <div class="panel-default my-account-secondary-panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">London Heathrow (LHR)
+                                            <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+                                            Paris (PAR)
+                                        </h3>
+                                        <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#outbound-section" aria-expanded="true" aria-controls="outbound-section">Collapse / Expand</button>
+                                    </div>
+                                    <div class="panel-body collapse" id="outbound-section">
+                                        <form>
+                                            <fieldset class="fieldset">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="journey-details">
+                                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                                <dl>
+                                                                    <dt>Departs:</dt>
+                                                                    <dd>07:00 06 JUN 2016</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                                <dl>
+                                                                    <dt>Arrives:</dt>
+                                                                    <dd>08:30 01 JAN 2016</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-12">
+                                                                <p>2 x Adults: <strong>£ 400.00</strong></p>
+                                                            </div>
+                                                            <div class="itinerary-table responsive-table booking-table">
+                                                              <table class="table">
+                                                                  <thead>
+                                                                    <tr>
+                                                                      <th class="pull-left">Your Extras</th>
+                                                                    </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Extra Bag 20kg</td>
+                                                                          <td class="status">20</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">1 x Standard Meal</td>
+                                                                          <td class="status">10</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">1 x Vegetarian Meal</td>
+                                                                          <td class="status">10</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x  Lounge Access</td>
+                                                                          <td class="status">30</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Priority Check-in</td>
+                                                                          <td class="status">10</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Priority Boarding</td>
+                                                                          <td class="status">20</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Economy seat</td>
+                                                                          <td class="status">20</td>
+                                                                      </tr>
+                                                                  </tbody>
+                                                              </table>
+                                                              <span class="cart-total pull-right">Total per room: &pound;550</span>
+                                                          </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- / .row -->
+                                            </fieldset>
+                                        </form>
+                                    </div><!-- / .panel-body -->
+                                </div><!-- / .panel.my-account-secondary-panel -->
+                            </div><!-- / .journey-wrapper -->
+                            <!-- / OUTBOUND -->
+
+                            <!-- INBOUND -->
+                            <div class="journey-wrapper">
+                                <div class="panel-default my-account-secondary-panel">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Paris (PAR)
+                                            <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+                                            Dubai (DBX)
+                                        </h3>
+                                        <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#inbound-section" aria-expanded="true" aria-controls="inbound-section">Collapse / Expand</button>
+                                    </div>
+                                    <div class="panel-body collapse" id="inbound-section">
+                                        <form>
+                                            <fieldset class="fieldset">
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="journey-details">
+                                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                                <dl>
+                                                                    <dt>Departs:</dt>
+                                                                    <dd>10:00 06 JUN 2016</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                                                <dl>
+                                                                    <dt>Arrives:</dt>
+                                                                    <dd>12:30 06 JUN 2016</dd>
+                                                                </dl>
+                                                            </div>
+                                                            <div class="col-xs-12">
+                                                                <p>2 x Adults: <strong>£ 350.00</strong></p>
+                                                            </div>
+                                                            <div class="itinerary-table responsive-table booking-table">
+                                                              <table class="table">
+                                                                  <thead>
+                                                                    <tr>
+                                                                      <th class="pull-left">Your Extras</th>
+                                                                    </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Extra Bag 20kg</td>
+                                                                          <td class="status">20</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">1 x Standard Meal</td>
+                                                                          <td class="status">10</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">1 x Vegetarian Meal</td>
+                                                                          <td class="status">10</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x  Lounge Access</td>
+                                                                          <td class="status">30</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Priority Check-in</td>
+                                                                          <td class="status">10</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Priority Boarding</td>
+                                                                          <td class="status">20</td>
+                                                                      </tr>
+                                                                      <tr class="responsive-table-item">
+                                                                          <td class="responsive-table-cell">2 x Economy seat</td>
+                                                                          <td class="status">20</td>
+                                                                      </tr>
+                                                                  </tbody>
+                                                              </table>
+                                                              <span class="cart-total pull-right">Total per room: &pound;550</span>
+                                                          </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- / .row -->
+                                            </fieldset>
+                                        </form>
+                                    </div><!-- / .panel-body -->
+                                </div><!-- / .panel.my-account-secondary-panel -->
+                            </div><!-- / .journey-wrapper -->
+                            <!-- / INBOUND -->
+                            <!-- flight summary information -->
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Summary</h3>
+                                <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#summary-section" aria-expanded="true" aria-controls="summary-section">Collapse / Expand</button>
+                            </div>
+                            <div class="panel-body collapse" id="summary-section">
+                              <div class="itinerary-table responsive-table booking-table">
+                                <table class="table">
+                                    <tbody>
+                                        <tr class="responsive-table-item">
+                                            <td class="responsive-table-cell">2 x Adult 20kg</td>
+                                            <td class="status">700</td>
+                                        </tr>
+                                        <tr class="responsive-table-item">
+                                            <td class="responsive-table-cell">Extras</td>
+                                            <td class="status">280</td>
+                                        </tr>
+                                        <tr class="responsive-table-item">
+                                            <td class="responsive-table-cell">Taxes / Fees</td>
+                                            <td class="status">341</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="container">
+                                  <span class="cart-total pull-right">Total per room: &pound;1100</span>
+                                </div>
+                              </div>
+                            </div>
+                        <!-- /flight summary information -->
+                        </div>
+                    </div>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        <!-- / Full Reservation overlay -->
+        <!-- / .container -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <!-- Live Reload Script -->
+    <script src="//localhost:54321/livereload.js"></script>
+
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

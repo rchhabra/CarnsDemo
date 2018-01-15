@@ -1,0 +1,1591 @@
+#############################################
+###	Taxes
+#############################################
+
+INSERT_UPDATE Tax; code[unique = true]; name;
+; VAT ; "Value Added Tax"          ;
+; APD ; "Air Passenger Duty"       ;
+; PSC ; "Passenger Service Charge" ;
+; LC  ; "Lounge Access Charges"    ;
+
+#############################################
+###	Product Tax Groups
+#############################################
+
+INSERT_UPDATE ProductTaxGroup; code[unique = true]
+; FARES
+; LOUNGE
+
+#############################################
+###	Tax Rows
+#############################################
+
+# Fare Products - Country specific taxes
+INSERT_UPDATE TaxRow; tax(code); value[unique = true]; currency(isocode)[unique = true]; originCountry[unique = true]; pg(code)[unique = true]; passengerType[unique = true]
+# GBP
+; VAT ; 0  ; GBP ; GB ; FARES ; adult
+; APD ; 26 ; GBP ; GB ; FARES ; adult
+
+# EUR
+; VAT ; 0  ; EUR ; GB ; FARES ; adult
+; APD ; 33 ; EUR ; GB ; FARES ; adult
+
+; APD ; 33 ; EUR ; AD ; FARES ; adult
+; VAT ; 0  ; EUR ; AD ; FARES ; adult
+
+; APD ; 26 ; GBP ; AD ; FARES ; adult
+; VAT ; 0  ; GBP ; AD ; FARES ; adult
+
+; APD ; 33 ; EUR ; AE ; FARES ; adult
+; VAT ; 0  ; EUR ; AE ; FARES ; adult
+
+; APD ; 26 ; GBP ; AE ; FARES ; adult
+; VAT ; 0  ; GBP ; AE ; FARES ; adult
+
+; APD ; 33 ; EUR ; AF ; FARES ; adult
+; VAT ; 0  ; EUR ; AF ; FARES ; adult
+
+; APD ; 26 ; GBP ; AF ; FARES ; adult
+; VAT ; 0  ; GBP ; AF ; FARES ; adult
+
+; APD ; 33 ; EUR ; AG ; FARES ; adult
+; VAT ; 0  ; EUR ; AG ; FARES ; adult
+
+; APD ; 26 ; GBP ; AG ; FARES ; adult
+; VAT ; 0  ; GBP ; AG ; FARES ; adult
+
+; APD ; 33 ; EUR ; AI ; FARES ; adult
+; VAT ; 0  ; EUR ; AI ; FARES ; adult
+
+; APD ; 26 ; GBP ; AI ; FARES ; adult
+; VAT ; 0  ; GBP ; AI ; FARES ; adult
+
+; APD ; 33 ; EUR ; AL ; FARES ; adult
+; VAT ; 0  ; EUR ; AL ; FARES ; adult
+
+; APD ; 26 ; GBP ; AL ; FARES ; adult
+; VAT ; 0  ; GBP ; AL ; FARES ; adult
+
+; APD ; 33 ; EUR ; AM ; FARES ; adult
+; VAT ; 0  ; EUR ; AM ; FARES ; adult
+
+; APD ; 26 ; GBP ; AM ; FARES ; adult
+; VAT ; 0  ; GBP ; AM ; FARES ; adult
+
+; APD ; 33 ; EUR ; AN ; FARES ; adult
+; VAT ; 0  ; EUR ; AN ; FARES ; adult
+
+; APD ; 26 ; GBP ; AN ; FARES ; adult
+; VAT ; 0  ; GBP ; AN ; FARES ; adult
+
+; APD ; 33 ; EUR ; AO ; FARES ; adult
+; VAT ; 0  ; EUR ; AO ; FARES ; adult
+
+; APD ; 26 ; GBP ; AO ; FARES ; adult
+; VAT ; 0  ; GBP ; AO ; FARES ; adult
+
+; APD ; 33 ; EUR ; AQ ; FARES ; adult
+; VAT ; 0  ; EUR ; AQ ; FARES ; adult
+
+; APD ; 26 ; GBP ; AQ ; FARES ; adult
+; VAT ; 0  ; GBP ; AQ ; FARES ; adult
+
+; APD ; 33 ; EUR ; AR ; FARES ; adult
+; VAT ; 0  ; EUR ; AR ; FARES ; adult
+
+; APD ; 26 ; GBP ; AR ; FARES ; adult
+; VAT ; 0  ; GBP ; AR ; FARES ; adult
+
+; APD ; 33 ; EUR ; AS ; FARES ; adult
+; VAT ; 0  ; EUR ; AS ; FARES ; adult
+
+; APD ; 26 ; GBP ; AS ; FARES ; adult
+; VAT ; 0  ; GBP ; AS ; FARES ; adult
+
+; APD ; 33 ; EUR ; AT ; FARES ; adult
+; VAT ; 0  ; EUR ; AT ; FARES ; adult
+
+; APD ; 26 ; GBP ; AT ; FARES ; adult
+; VAT ; 0  ; GBP ; AT ; FARES ; adult
+
+; APD ; 33 ; EUR ; AU ; FARES ; adult
+; VAT ; 0  ; EUR ; AU ; FARES ; adult
+
+; APD ; 26 ; GBP ; AU ; FARES ; adult
+; VAT ; 0  ; GBP ; AU ; FARES ; adult
+
+; APD ; 33 ; EUR ; AW ; FARES ; adult
+; VAT ; 0  ; EUR ; AW ; FARES ; adult
+
+; APD ; 26 ; GBP ; AW ; FARES ; adult
+; VAT ; 0  ; GBP ; AW ; FARES ; adult
+
+; APD ; 33 ; EUR ; AX ; FARES ; adult
+; VAT ; 0  ; EUR ; AX ; FARES ; adult
+
+; APD ; 26 ; GBP ; AX ; FARES ; adult
+; VAT ; 0  ; GBP ; AX ; FARES ; adult
+
+; APD ; 33 ; EUR ; AZ ; FARES ; adult
+; VAT ; 0  ; EUR ; AZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; AZ ; FARES ; adult
+; VAT ; 0  ; GBP ; AZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; BA ; FARES ; adult
+; VAT ; 0  ; EUR ; BA ; FARES ; adult
+
+; APD ; 26 ; GBP ; BA ; FARES ; adult
+; VAT ; 0  ; GBP ; BA ; FARES ; adult
+
+; APD ; 33 ; EUR ; BB ; FARES ; adult
+; VAT ; 0  ; EUR ; BB ; FARES ; adult
+
+; APD ; 26 ; GBP ; BB ; FARES ; adult
+; VAT ; 0  ; GBP ; BB ; FARES ; adult
+
+; APD ; 33 ; EUR ; BD ; FARES ; adult
+; VAT ; 0  ; EUR ; BD ; FARES ; adult
+
+; APD ; 26 ; GBP ; BD ; FARES ; adult
+; VAT ; 0  ; GBP ; BD ; FARES ; adult
+
+; APD ; 33 ; EUR ; BE ; FARES ; adult
+; VAT ; 0  ; EUR ; BE ; FARES ; adult
+
+; APD ; 26 ; GBP ; BE ; FARES ; adult
+; VAT ; 0  ; GBP ; BE ; FARES ; adult
+
+; APD ; 33 ; EUR ; BF ; FARES ; adult
+; VAT ; 0  ; EUR ; BF ; FARES ; adult
+
+; APD ; 26 ; GBP ; BF ; FARES ; adult
+; VAT ; 0  ; GBP ; BF ; FARES ; adult
+
+; APD ; 33 ; EUR ; BG ; FARES ; adult
+; VAT ; 0  ; EUR ; BG ; FARES ; adult
+
+; APD ; 26 ; GBP ; BG ; FARES ; adult
+; VAT ; 0  ; GBP ; BG ; FARES ; adult
+
+; APD ; 33 ; EUR ; BH ; FARES ; adult
+; VAT ; 0  ; EUR ; BH ; FARES ; adult
+
+; APD ; 26 ; GBP ; BH ; FARES ; adult
+; VAT ; 0  ; GBP ; BH ; FARES ; adult
+
+; APD ; 33 ; EUR ; BI ; FARES ; adult
+; VAT ; 0  ; EUR ; BI ; FARES ; adult
+
+; APD ; 26 ; GBP ; BI ; FARES ; adult
+; VAT ; 0  ; GBP ; BI ; FARES ; adult
+
+; APD ; 33 ; EUR ; BJ ; FARES ; adult
+; VAT ; 0  ; EUR ; BJ ; FARES ; adult
+
+; APD ; 26 ; GBP ; BJ ; FARES ; adult
+; VAT ; 0  ; GBP ; BJ ; FARES ; adult
+
+; APD ; 33 ; EUR ; BL ; FARES ; adult
+; VAT ; 0  ; EUR ; BL ; FARES ; adult
+
+; APD ; 26 ; GBP ; BL ; FARES ; adult
+; VAT ; 0  ; GBP ; BL ; FARES ; adult
+
+; APD ; 33 ; EUR ; BM ; FARES ; adult
+; VAT ; 0  ; EUR ; BM ; FARES ; adult
+
+; APD ; 26 ; GBP ; BM ; FARES ; adult
+; VAT ; 0  ; GBP ; BM ; FARES ; adult
+
+; APD ; 33 ; EUR ; BN ; FARES ; adult
+; VAT ; 0  ; EUR ; BN ; FARES ; adult
+
+; APD ; 26 ; GBP ; BN ; FARES ; adult
+; VAT ; 0  ; GBP ; BN ; FARES ; adult
+
+; APD ; 33 ; EUR ; BO ; FARES ; adult
+; VAT ; 0  ; EUR ; BO ; FARES ; adult
+
+; APD ; 26 ; GBP ; BO ; FARES ; adult
+; VAT ; 0  ; GBP ; BO ; FARES ; adult
+
+; APD ; 33 ; EUR ; BQ ; FARES ; adult
+; VAT ; 0  ; EUR ; BQ ; FARES ; adult
+
+; APD ; 26 ; GBP ; BQ ; FARES ; adult
+; VAT ; 0  ; GBP ; BQ ; FARES ; adult
+
+; APD ; 33 ; EUR ; BR ; FARES ; adult
+; VAT ; 0  ; EUR ; BR ; FARES ; adult
+
+; APD ; 26 ; GBP ; BR ; FARES ; adult
+; VAT ; 0  ; GBP ; BR ; FARES ; adult
+
+; APD ; 33 ; EUR ; BS ; FARES ; adult
+; VAT ; 0  ; EUR ; BS ; FARES ; adult
+
+; APD ; 26 ; GBP ; BS ; FARES ; adult
+; VAT ; 0  ; GBP ; BS ; FARES ; adult
+
+; APD ; 33 ; EUR ; BT ; FARES ; adult
+; VAT ; 0  ; EUR ; BT ; FARES ; adult
+
+; APD ; 26 ; GBP ; BT ; FARES ; adult
+; VAT ; 0  ; GBP ; BT ; FARES ; adult
+
+; APD ; 33 ; EUR ; BV ; FARES ; adult
+; VAT ; 0  ; EUR ; BV ; FARES ; adult
+
+; APD ; 26 ; GBP ; BV ; FARES ; adult
+; VAT ; 0  ; GBP ; BV ; FARES ; adult
+
+; APD ; 33 ; EUR ; BW ; FARES ; adult
+; VAT ; 0  ; EUR ; BW ; FARES ; adult
+
+; APD ; 26 ; GBP ; BW ; FARES ; adult
+; VAT ; 0  ; GBP ; BW ; FARES ; adult
+
+; APD ; 33 ; EUR ; BY ; FARES ; adult
+; VAT ; 0  ; EUR ; BY ; FARES ; adult
+
+; APD ; 26 ; GBP ; BY ; FARES ; adult
+; VAT ; 0  ; GBP ; BY ; FARES ; adult
+
+; APD ; 33 ; EUR ; BZ ; FARES ; adult
+; VAT ; 0  ; EUR ; BZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; BZ ; FARES ; adult
+; VAT ; 0  ; GBP ; BZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; CA ; FARES ; adult
+; VAT ; 0  ; EUR ; CA ; FARES ; adult
+
+; APD ; 26 ; GBP ; CA ; FARES ; adult
+; VAT ; 0  ; GBP ; CA ; FARES ; adult
+
+; APD ; 33 ; EUR ; CC ; FARES ; adult
+; VAT ; 0  ; EUR ; CC ; FARES ; adult
+
+; APD ; 26 ; GBP ; CC ; FARES ; adult
+; VAT ; 0  ; GBP ; CC ; FARES ; adult
+
+; APD ; 33 ; EUR ; CD ; FARES ; adult
+; VAT ; 0  ; EUR ; CD ; FARES ; adult
+
+; APD ; 26 ; GBP ; CD ; FARES ; adult
+; VAT ; 0  ; GBP ; CD ; FARES ; adult
+
+; APD ; 33 ; EUR ; CF ; FARES ; adult
+; VAT ; 0  ; EUR ; CF ; FARES ; adult
+
+; APD ; 26 ; GBP ; CF ; FARES ; adult
+; VAT ; 0  ; GBP ; CF ; FARES ; adult
+
+; APD ; 33 ; EUR ; CG ; FARES ; adult
+; VAT ; 0  ; EUR ; CG ; FARES ; adult
+
+; APD ; 26 ; GBP ; CG ; FARES ; adult
+; VAT ; 0  ; GBP ; CG ; FARES ; adult
+
+; APD ; 33 ; EUR ; CH ; FARES ; adult
+; VAT ; 0  ; EUR ; CH ; FARES ; adult
+
+; APD ; 26 ; GBP ; CH ; FARES ; adult
+; VAT ; 0  ; GBP ; CH ; FARES ; adult
+
+; APD ; 33 ; EUR ; CI ; FARES ; adult
+; VAT ; 0  ; EUR ; CI ; FARES ; adult
+
+; APD ; 26 ; GBP ; CI ; FARES ; adult
+; VAT ; 0  ; GBP ; CI ; FARES ; adult
+
+; APD ; 33 ; EUR ; CK ; FARES ; adult
+; VAT ; 0  ; EUR ; CK ; FARES ; adult
+
+; APD ; 26 ; GBP ; CK ; FARES ; adult
+; VAT ; 0  ; GBP ; CK ; FARES ; adult
+
+; APD ; 33 ; EUR ; CL ; FARES ; adult
+; VAT ; 0  ; EUR ; CL ; FARES ; adult
+
+; APD ; 26 ; GBP ; CL ; FARES ; adult
+; VAT ; 0  ; GBP ; CL ; FARES ; adult
+
+; APD ; 33 ; EUR ; CM ; FARES ; adult
+; VAT ; 0  ; EUR ; CM ; FARES ; adult
+
+; APD ; 26 ; GBP ; CM ; FARES ; adult
+; VAT ; 0  ; GBP ; CM ; FARES ; adult
+
+; APD ; 33 ; EUR ; CN ; FARES ; adult
+; VAT ; 0  ; EUR ; CN ; FARES ; adult
+
+; APD ; 26 ; GBP ; CN ; FARES ; adult
+; VAT ; 0  ; GBP ; CN ; FARES ; adult
+
+; APD ; 33 ; EUR ; CO ; FARES ; adult
+; VAT ; 0  ; EUR ; CO ; FARES ; adult
+
+; APD ; 26 ; GBP ; CO ; FARES ; adult
+; VAT ; 0  ; GBP ; CO ; FARES ; adult
+
+; APD ; 33 ; EUR ; CR ; FARES ; adult
+; VAT ; 0  ; EUR ; CR ; FARES ; adult
+
+; APD ; 26 ; GBP ; CR ; FARES ; adult
+; VAT ; 0  ; GBP ; CR ; FARES ; adult
+
+; APD ; 33 ; EUR ; CS ; FARES ; adult
+; VAT ; 0  ; EUR ; CS ; FARES ; adult
+
+; APD ; 26 ; GBP ; CS ; FARES ; adult
+; VAT ; 0  ; GBP ; CS ; FARES ; adult
+
+; APD ; 33 ; EUR ; CU ; FARES ; adult
+; VAT ; 0  ; EUR ; CU ; FARES ; adult
+
+; APD ; 26 ; GBP ; CU ; FARES ; adult
+; VAT ; 0  ; GBP ; CU ; FARES ; adult
+
+; APD ; 33 ; EUR ; CV ; FARES ; adult
+; VAT ; 0  ; EUR ; CV ; FARES ; adult
+
+; APD ; 26 ; GBP ; CV ; FARES ; adult
+; VAT ; 0  ; GBP ; CV ; FARES ; adult
+
+; APD ; 33 ; EUR ; CW ; FARES ; adult
+; VAT ; 0  ; EUR ; CW ; FARES ; adult
+
+; APD ; 26 ; GBP ; CW ; FARES ; adult
+; VAT ; 0  ; GBP ; CW ; FARES ; adult
+
+; APD ; 33 ; EUR ; CX ; FARES ; adult
+; VAT ; 0  ; EUR ; CX ; FARES ; adult
+
+; APD ; 26 ; GBP ; CX ; FARES ; adult
+; VAT ; 0  ; GBP ; CX ; FARES ; adult
+
+; APD ; 33 ; EUR ; CY ; FARES ; adult
+; VAT ; 0  ; EUR ; CY ; FARES ; adult
+
+; APD ; 26 ; GBP ; CY ; FARES ; adult
+; VAT ; 0  ; GBP ; CY ; FARES ; adult
+
+; APD ; 33 ; EUR ; CZ ; FARES ; adult
+; VAT ; 0  ; EUR ; CZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; CZ ; FARES ; adult
+; VAT ; 0  ; GBP ; CZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; DE ; FARES ; adult
+; VAT ; 0  ; EUR ; DE ; FARES ; adult
+
+; APD ; 26 ; GBP ; DE ; FARES ; adult
+; VAT ; 0  ; GBP ; DE ; FARES ; adult
+
+; APD ; 33 ; EUR ; DJ ; FARES ; adult
+; VAT ; 0  ; EUR ; DJ ; FARES ; adult
+
+; APD ; 26 ; GBP ; DJ ; FARES ; adult
+; VAT ; 0  ; GBP ; DJ ; FARES ; adult
+
+; APD ; 33 ; EUR ; DK ; FARES ; adult
+; VAT ; 0  ; EUR ; DK ; FARES ; adult
+
+; APD ; 26 ; GBP ; DK ; FARES ; adult
+; VAT ; 0  ; GBP ; DK ; FARES ; adult
+
+; APD ; 33 ; EUR ; DM ; FARES ; adult
+; VAT ; 0  ; EUR ; DM ; FARES ; adult
+
+; APD ; 26 ; GBP ; DM ; FARES ; adult
+; VAT ; 0  ; GBP ; DM ; FARES ; adult
+
+; APD ; 33 ; EUR ; DO ; FARES ; adult
+; VAT ; 0  ; EUR ; DO ; FARES ; adult
+
+; APD ; 26 ; GBP ; DO ; FARES ; adult
+; VAT ; 0  ; GBP ; DO ; FARES ; adult
+
+; APD ; 33 ; EUR ; DZ ; FARES ; adult
+; VAT ; 0  ; EUR ; DZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; DZ ; FARES ; adult
+; VAT ; 0  ; GBP ; DZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; EC ; FARES ; adult
+; VAT ; 0  ; EUR ; EC ; FARES ; adult
+
+; APD ; 26 ; GBP ; EC ; FARES ; adult
+; VAT ; 0  ; GBP ; EC ; FARES ; adult
+
+; APD ; 33 ; EUR ; EE ; FARES ; adult
+; VAT ; 0  ; EUR ; EE ; FARES ; adult
+
+; APD ; 26 ; GBP ; EE ; FARES ; adult
+; VAT ; 0  ; GBP ; EE ; FARES ; adult
+
+; APD ; 33 ; EUR ; EG ; FARES ; adult
+; VAT ; 0  ; EUR ; EG ; FARES ; adult
+
+; APD ; 26 ; GBP ; EG ; FARES ; adult
+; VAT ; 0  ; GBP ; EG ; FARES ; adult
+
+; APD ; 33 ; EUR ; EH ; FARES ; adult
+; VAT ; 0  ; EUR ; EH ; FARES ; adult
+
+; APD ; 26 ; GBP ; EH ; FARES ; adult
+; VAT ; 0  ; GBP ; EH ; FARES ; adult
+
+; APD ; 33 ; EUR ; ER ; FARES ; adult
+; VAT ; 0  ; EUR ; ER ; FARES ; adult
+
+; APD ; 26 ; GBP ; ER ; FARES ; adult
+; VAT ; 0  ; GBP ; ER ; FARES ; adult
+
+; APD ; 33 ; EUR ; ES ; FARES ; adult
+; VAT ; 0  ; EUR ; ES ; FARES ; adult
+
+; APD ; 26 ; GBP ; ES ; FARES ; adult
+; VAT ; 0  ; GBP ; ES ; FARES ; adult
+
+; APD ; 33 ; EUR ; ET ; FARES ; adult
+; VAT ; 0  ; EUR ; ET ; FARES ; adult
+
+; APD ; 26 ; GBP ; ET ; FARES ; adult
+; VAT ; 0  ; GBP ; ET ; FARES ; adult
+
+; APD ; 33 ; EUR ; FI ; FARES ; adult
+; VAT ; 0  ; EUR ; FI ; FARES ; adult
+
+; APD ; 26 ; GBP ; FI ; FARES ; adult
+; VAT ; 0  ; GBP ; FI ; FARES ; adult
+
+; APD ; 33 ; EUR ; FJ ; FARES ; adult
+; VAT ; 0  ; EUR ; FJ ; FARES ; adult
+
+; APD ; 26 ; GBP ; FJ ; FARES ; adult
+; VAT ; 0  ; GBP ; FJ ; FARES ; adult
+
+; APD ; 33 ; EUR ; FK ; FARES ; adult
+; VAT ; 0  ; EUR ; FK ; FARES ; adult
+
+; APD ; 26 ; GBP ; FK ; FARES ; adult
+; VAT ; 0  ; GBP ; FK ; FARES ; adult
+
+; APD ; 33 ; EUR ; FM ; FARES ; adult
+; VAT ; 0  ; EUR ; FM ; FARES ; adult
+
+; APD ; 26 ; GBP ; FM ; FARES ; adult
+; VAT ; 0  ; GBP ; FM ; FARES ; adult
+
+; APD ; 33 ; EUR ; FO ; FARES ; adult
+; VAT ; 0  ; EUR ; FO ; FARES ; adult
+
+; APD ; 26 ; GBP ; FO ; FARES ; adult
+; VAT ; 0  ; GBP ; FO ; FARES ; adult
+
+; APD ; 33 ; EUR ; FR ; FARES ; adult
+; VAT ; 0  ; EUR ; FR ; FARES ; adult
+
+; APD ; 26 ; GBP ; FR ; FARES ; adult
+; VAT ; 0  ; GBP ; FR ; FARES ; adult
+
+; APD ; 33 ; EUR ; GA ; FARES ; adult
+; VAT ; 0  ; EUR ; GA ; FARES ; adult
+
+; APD ; 26 ; GBP ; GA ; FARES ; adult
+; VAT ; 0  ; GBP ; GA ; FARES ; adult
+
+; APD ; 33 ; EUR ; GB ; FARES ; adult
+; VAT ; 0  ; EUR ; GB ; FARES ; adult
+
+; APD ; 26 ; GBP ; GB ; FARES ; adult
+; VAT ; 0  ; GBP ; GB ; FARES ; adult
+
+; APD ; 33 ; EUR ; GD ; FARES ; adult
+; VAT ; 0  ; EUR ; GD ; FARES ; adult
+
+; APD ; 26 ; GBP ; GD ; FARES ; adult
+; VAT ; 0  ; GBP ; GD ; FARES ; adult
+
+; APD ; 33 ; EUR ; GE ; FARES ; adult
+; VAT ; 0  ; EUR ; GE ; FARES ; adult
+
+; APD ; 26 ; GBP ; GE ; FARES ; adult
+; VAT ; 0  ; GBP ; GE ; FARES ; adult
+
+; APD ; 33 ; EUR ; GF ; FARES ; adult
+; VAT ; 0  ; EUR ; GF ; FARES ; adult
+
+; APD ; 26 ; GBP ; GF ; FARES ; adult
+; VAT ; 0  ; GBP ; GF ; FARES ; adult
+
+; APD ; 33 ; EUR ; GG ; FARES ; adult
+; VAT ; 0  ; EUR ; GG ; FARES ; adult
+
+; APD ; 26 ; GBP ; GG ; FARES ; adult
+; VAT ; 0  ; GBP ; GG ; FARES ; adult
+
+; APD ; 33 ; EUR ; GH ; FARES ; adult
+; VAT ; 0  ; EUR ; GH ; FARES ; adult
+
+; APD ; 26 ; GBP ; GH ; FARES ; adult
+; VAT ; 0  ; GBP ; GH ; FARES ; adult
+
+; APD ; 33 ; EUR ; GI ; FARES ; adult
+; VAT ; 0  ; EUR ; GI ; FARES ; adult
+
+; APD ; 26 ; GBP ; GI ; FARES ; adult
+; VAT ; 0  ; GBP ; GI ; FARES ; adult
+
+; APD ; 33 ; EUR ; GL ; FARES ; adult
+; VAT ; 0  ; EUR ; GL ; FARES ; adult
+
+; APD ; 26 ; GBP ; GL ; FARES ; adult
+; VAT ; 0  ; GBP ; GL ; FARES ; adult
+
+; APD ; 33 ; EUR ; GM ; FARES ; adult
+; VAT ; 0  ; EUR ; GM ; FARES ; adult
+
+; APD ; 26 ; GBP ; GM ; FARES ; adult
+; VAT ; 0  ; GBP ; GM ; FARES ; adult
+
+; APD ; 33 ; EUR ; GN ; FARES ; adult
+; VAT ; 0  ; EUR ; GN ; FARES ; adult
+
+; APD ; 26 ; GBP ; GN ; FARES ; adult
+; VAT ; 0  ; GBP ; GN ; FARES ; adult
+
+; APD ; 33 ; EUR ; GP ; FARES ; adult
+; VAT ; 0  ; EUR ; GP ; FARES ; adult
+
+; APD ; 26 ; GBP ; GP ; FARES ; adult
+; VAT ; 0  ; GBP ; GP ; FARES ; adult
+
+; APD ; 33 ; EUR ; GQ ; FARES ; adult
+; VAT ; 0  ; EUR ; GQ ; FARES ; adult
+
+; APD ; 26 ; GBP ; GQ ; FARES ; adult
+; VAT ; 0  ; GBP ; GQ ; FARES ; adult
+
+; APD ; 33 ; EUR ; GR ; FARES ; adult
+; VAT ; 0  ; EUR ; GR ; FARES ; adult
+
+; APD ; 26 ; GBP ; GR ; FARES ; adult
+; VAT ; 0  ; GBP ; GR ; FARES ; adult
+
+; APD ; 33 ; EUR ; GS ; FARES ; adult
+; VAT ; 0  ; EUR ; GS ; FARES ; adult
+
+; APD ; 26 ; GBP ; GS ; FARES ; adult
+; VAT ; 0  ; GBP ; GS ; FARES ; adult
+
+; APD ; 33 ; EUR ; GT ; FARES ; adult
+; VAT ; 0  ; EUR ; GT ; FARES ; adult
+
+; APD ; 26 ; GBP ; GT ; FARES ; adult
+; VAT ; 0  ; GBP ; GT ; FARES ; adult
+
+; APD ; 33 ; EUR ; GU ; FARES ; adult
+; VAT ; 0  ; EUR ; GU ; FARES ; adult
+
+; APD ; 26 ; GBP ; GU ; FARES ; adult
+; VAT ; 0  ; GBP ; GU ; FARES ; adult
+
+; APD ; 33 ; EUR ; GW ; FARES ; adult
+; VAT ; 0  ; EUR ; GW ; FARES ; adult
+
+; APD ; 26 ; GBP ; GW ; FARES ; adult
+; VAT ; 0  ; GBP ; GW ; FARES ; adult
+
+; APD ; 33 ; EUR ; GY ; FARES ; adult
+; VAT ; 0  ; EUR ; GY ; FARES ; adult
+
+; APD ; 26 ; GBP ; GY ; FARES ; adult
+; VAT ; 0  ; GBP ; GY ; FARES ; adult
+
+; APD ; 33 ; EUR ; HK ; FARES ; adult
+; VAT ; 0  ; EUR ; HK ; FARES ; adult
+
+; APD ; 26 ; GBP ; HK ; FARES ; adult
+; VAT ; 0  ; GBP ; HK ; FARES ; adult
+
+; APD ; 33 ; EUR ; HM ; FARES ; adult
+; VAT ; 0  ; EUR ; HM ; FARES ; adult
+
+; APD ; 26 ; GBP ; HM ; FARES ; adult
+; VAT ; 0  ; GBP ; HM ; FARES ; adult
+
+; APD ; 33 ; EUR ; HN ; FARES ; adult
+; VAT ; 0  ; EUR ; HN ; FARES ; adult
+
+; APD ; 26 ; GBP ; HN ; FARES ; adult
+; VAT ; 0  ; GBP ; HN ; FARES ; adult
+
+; APD ; 33 ; EUR ; HR ; FARES ; adult
+; VAT ; 0  ; EUR ; HR ; FARES ; adult
+
+; APD ; 26 ; GBP ; HR ; FARES ; adult
+; VAT ; 0  ; GBP ; HR ; FARES ; adult
+
+; APD ; 33 ; EUR ; HT ; FARES ; adult
+; VAT ; 0  ; EUR ; HT ; FARES ; adult
+
+; APD ; 26 ; GBP ; HT ; FARES ; adult
+; VAT ; 0  ; GBP ; HT ; FARES ; adult
+
+; APD ; 33 ; EUR ; HU ; FARES ; adult
+; VAT ; 0  ; EUR ; HU ; FARES ; adult
+
+; APD ; 26 ; GBP ; HU ; FARES ; adult
+; VAT ; 0  ; GBP ; HU ; FARES ; adult
+
+; APD ; 33 ; EUR ; ID ; FARES ; adult
+; VAT ; 0  ; EUR ; ID ; FARES ; adult
+
+; APD ; 26 ; GBP ; ID ; FARES ; adult
+; VAT ; 0  ; GBP ; ID ; FARES ; adult
+
+; APD ; 33 ; EUR ; IE ; FARES ; adult
+; VAT ; 0  ; EUR ; IE ; FARES ; adult
+
+; APD ; 26 ; GBP ; IE ; FARES ; adult
+; VAT ; 0  ; GBP ; IE ; FARES ; adult
+
+; APD ; 33 ; EUR ; IL ; FARES ; adult
+; VAT ; 0  ; EUR ; IL ; FARES ; adult
+
+; APD ; 26 ; GBP ; IL ; FARES ; adult
+; VAT ; 0  ; GBP ; IL ; FARES ; adult
+
+; APD ; 33 ; EUR ; IM ; FARES ; adult
+; VAT ; 0  ; EUR ; IM ; FARES ; adult
+
+; APD ; 26 ; GBP ; IM ; FARES ; adult
+; VAT ; 0  ; GBP ; IM ; FARES ; adult
+
+; APD ; 33 ; EUR ; IN ; FARES ; adult
+; VAT ; 0  ; EUR ; IN ; FARES ; adult
+
+; APD ; 26 ; GBP ; IN ; FARES ; adult
+; VAT ; 0  ; GBP ; IN ; FARES ; adult
+
+; APD ; 33 ; EUR ; IO ; FARES ; adult
+; VAT ; 0  ; EUR ; IO ; FARES ; adult
+
+; APD ; 26 ; GBP ; IO ; FARES ; adult
+; VAT ; 0  ; GBP ; IO ; FARES ; adult
+
+; APD ; 33 ; EUR ; IQ ; FARES ; adult
+; VAT ; 0  ; EUR ; IQ ; FARES ; adult
+
+; APD ; 26 ; GBP ; IQ ; FARES ; adult
+; VAT ; 0  ; GBP ; IQ ; FARES ; adult
+
+; APD ; 33 ; EUR ; IR ; FARES ; adult
+; VAT ; 0  ; EUR ; IR ; FARES ; adult
+
+; APD ; 26 ; GBP ; IR ; FARES ; adult
+; VAT ; 0  ; GBP ; IR ; FARES ; adult
+
+; APD ; 33 ; EUR ; IS ; FARES ; adult
+; VAT ; 0  ; EUR ; IS ; FARES ; adult
+
+; APD ; 26 ; GBP ; IS ; FARES ; adult
+; VAT ; 0  ; GBP ; IS ; FARES ; adult
+
+; APD ; 33 ; EUR ; IT ; FARES ; adult
+; VAT ; 0  ; EUR ; IT ; FARES ; adult
+
+; APD ; 26 ; GBP ; IT ; FARES ; adult
+; VAT ; 0  ; GBP ; IT ; FARES ; adult
+
+; APD ; 33 ; EUR ; JE ; FARES ; adult
+; VAT ; 0  ; EUR ; JE ; FARES ; adult
+
+; APD ; 26 ; GBP ; JE ; FARES ; adult
+; VAT ; 0  ; GBP ; JE ; FARES ; adult
+
+; APD ; 33 ; EUR ; JM ; FARES ; adult
+; VAT ; 0  ; EUR ; JM ; FARES ; adult
+
+; APD ; 26 ; GBP ; JM ; FARES ; adult
+; VAT ; 0  ; GBP ; JM ; FARES ; adult
+
+; APD ; 33 ; EUR ; JO ; FARES ; adult
+; VAT ; 0  ; EUR ; JO ; FARES ; adult
+
+; APD ; 26 ; GBP ; JO ; FARES ; adult
+; VAT ; 0  ; GBP ; JO ; FARES ; adult
+
+; APD ; 33 ; EUR ; JP ; FARES ; adult
+; VAT ; 0  ; EUR ; JP ; FARES ; adult
+
+; APD ; 26 ; GBP ; JP ; FARES ; adult
+; VAT ; 0  ; GBP ; JP ; FARES ; adult
+
+; APD ; 33 ; EUR ; KE ; FARES ; adult
+; VAT ; 0  ; EUR ; KE ; FARES ; adult
+
+; APD ; 26 ; GBP ; KE ; FARES ; adult
+; VAT ; 0  ; GBP ; KE ; FARES ; adult
+
+; APD ; 33 ; EUR ; KG ; FARES ; adult
+; VAT ; 0  ; EUR ; KG ; FARES ; adult
+
+; APD ; 26 ; GBP ; KG ; FARES ; adult
+; VAT ; 0  ; GBP ; KG ; FARES ; adult
+
+; APD ; 33 ; EUR ; KH ; FARES ; adult
+; VAT ; 0  ; EUR ; KH ; FARES ; adult
+
+; APD ; 26 ; GBP ; KH ; FARES ; adult
+; VAT ; 0  ; GBP ; KH ; FARES ; adult
+
+; APD ; 33 ; EUR ; KI ; FARES ; adult
+; VAT ; 0  ; EUR ; KI ; FARES ; adult
+
+; APD ; 26 ; GBP ; KI ; FARES ; adult
+; VAT ; 0  ; GBP ; KI ; FARES ; adult
+
+; APD ; 33 ; EUR ; KM ; FARES ; adult
+; VAT ; 0  ; EUR ; KM ; FARES ; adult
+
+; APD ; 26 ; GBP ; KM ; FARES ; adult
+; VAT ; 0  ; GBP ; KM ; FARES ; adult
+
+; APD ; 33 ; EUR ; KN ; FARES ; adult
+; VAT ; 0  ; EUR ; KN ; FARES ; adult
+
+; APD ; 26 ; GBP ; KN ; FARES ; adult
+; VAT ; 0  ; GBP ; KN ; FARES ; adult
+
+; APD ; 33 ; EUR ; KP ; FARES ; adult
+; VAT ; 0  ; EUR ; KP ; FARES ; adult
+
+; APD ; 26 ; GBP ; KP ; FARES ; adult
+; VAT ; 0  ; GBP ; KP ; FARES ; adult
+
+; APD ; 33 ; EUR ; KR ; FARES ; adult
+; VAT ; 0  ; EUR ; KR ; FARES ; adult
+
+; APD ; 26 ; GBP ; KR ; FARES ; adult
+; VAT ; 0  ; GBP ; KR ; FARES ; adult
+
+; APD ; 33 ; EUR ; KW ; FARES ; adult
+; VAT ; 0  ; EUR ; KW ; FARES ; adult
+
+; APD ; 26 ; GBP ; KW ; FARES ; adult
+; VAT ; 0  ; GBP ; KW ; FARES ; adult
+
+; APD ; 33 ; EUR ; KY ; FARES ; adult
+; VAT ; 0  ; EUR ; KY ; FARES ; adult
+
+; APD ; 26 ; GBP ; KY ; FARES ; adult
+; VAT ; 0  ; GBP ; KY ; FARES ; adult
+
+; APD ; 33 ; EUR ; KZ ; FARES ; adult
+; VAT ; 0  ; EUR ; KZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; KZ ; FARES ; adult
+; VAT ; 0  ; GBP ; KZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; LA ; FARES ; adult
+; VAT ; 0  ; EUR ; LA ; FARES ; adult
+
+; APD ; 26 ; GBP ; LA ; FARES ; adult
+; VAT ; 0  ; GBP ; LA ; FARES ; adult
+
+; APD ; 33 ; EUR ; LB ; FARES ; adult
+; VAT ; 0  ; EUR ; LB ; FARES ; adult
+
+; APD ; 26 ; GBP ; LB ; FARES ; adult
+; VAT ; 0  ; GBP ; LB ; FARES ; adult
+
+; APD ; 33 ; EUR ; LC ; FARES ; adult
+; VAT ; 0  ; EUR ; LC ; FARES ; adult
+
+; APD ; 26 ; GBP ; LC ; FARES ; adult
+; VAT ; 0  ; GBP ; LC ; FARES ; adult
+
+; APD ; 33 ; EUR ; LI ; FARES ; adult
+; VAT ; 0  ; EUR ; LI ; FARES ; adult
+
+; APD ; 26 ; GBP ; LI ; FARES ; adult
+; VAT ; 0  ; GBP ; LI ; FARES ; adult
+
+; APD ; 33 ; EUR ; LK ; FARES ; adult
+; VAT ; 0  ; EUR ; LK ; FARES ; adult
+
+; APD ; 26 ; GBP ; LK ; FARES ; adult
+; VAT ; 0  ; GBP ; LK ; FARES ; adult
+
+; APD ; 33 ; EUR ; LR ; FARES ; adult
+; VAT ; 0  ; EUR ; LR ; FARES ; adult
+
+; APD ; 26 ; GBP ; LR ; FARES ; adult
+; VAT ; 0  ; GBP ; LR ; FARES ; adult
+
+; APD ; 33 ; EUR ; LS ; FARES ; adult
+; VAT ; 0  ; EUR ; LS ; FARES ; adult
+
+; APD ; 26 ; GBP ; LS ; FARES ; adult
+; VAT ; 0  ; GBP ; LS ; FARES ; adult
+
+; APD ; 33 ; EUR ; LT ; FARES ; adult
+; VAT ; 0  ; EUR ; LT ; FARES ; adult
+
+; APD ; 26 ; GBP ; LT ; FARES ; adult
+; VAT ; 0  ; GBP ; LT ; FARES ; adult
+
+; APD ; 33 ; EUR ; LU ; FARES ; adult
+; VAT ; 0  ; EUR ; LU ; FARES ; adult
+
+; APD ; 26 ; GBP ; LU ; FARES ; adult
+; VAT ; 0  ; GBP ; LU ; FARES ; adult
+
+; APD ; 33 ; EUR ; LV ; FARES ; adult
+; VAT ; 0  ; EUR ; LV ; FARES ; adult
+
+; APD ; 26 ; GBP ; LV ; FARES ; adult
+; VAT ; 0  ; GBP ; LV ; FARES ; adult
+
+; APD ; 33 ; EUR ; LY ; FARES ; adult
+; VAT ; 0  ; EUR ; LY ; FARES ; adult
+
+; APD ; 26 ; GBP ; LY ; FARES ; adult
+; VAT ; 0  ; GBP ; LY ; FARES ; adult
+
+; APD ; 33 ; EUR ; MA ; FARES ; adult
+; VAT ; 0  ; EUR ; MA ; FARES ; adult
+
+; APD ; 26 ; GBP ; MA ; FARES ; adult
+; VAT ; 0  ; GBP ; MA ; FARES ; adult
+
+; APD ; 33 ; EUR ; MC ; FARES ; adult
+; VAT ; 0  ; EUR ; MC ; FARES ; adult
+
+; APD ; 26 ; GBP ; MC ; FARES ; adult
+; VAT ; 0  ; GBP ; MC ; FARES ; adult
+
+; APD ; 33 ; EUR ; MD ; FARES ; adult
+; VAT ; 0  ; EUR ; MD ; FARES ; adult
+
+; APD ; 26 ; GBP ; MD ; FARES ; adult
+; VAT ; 0  ; GBP ; MD ; FARES ; adult
+
+; APD ; 33 ; EUR ; ME ; FARES ; adult
+; VAT ; 0  ; EUR ; ME ; FARES ; adult
+
+; APD ; 26 ; GBP ; ME ; FARES ; adult
+; VAT ; 0  ; GBP ; ME ; FARES ; adult
+
+; APD ; 33 ; EUR ; MF ; FARES ; adult
+; VAT ; 0  ; EUR ; MF ; FARES ; adult
+
+; APD ; 26 ; GBP ; MF ; FARES ; adult
+; VAT ; 0  ; GBP ; MF ; FARES ; adult
+
+; APD ; 33 ; EUR ; MG ; FARES ; adult
+; VAT ; 0  ; EUR ; MG ; FARES ; adult
+
+; APD ; 26 ; GBP ; MG ; FARES ; adult
+; VAT ; 0  ; GBP ; MG ; FARES ; adult
+
+; APD ; 33 ; EUR ; MH ; FARES ; adult
+; VAT ; 0  ; EUR ; MH ; FARES ; adult
+
+; APD ; 26 ; GBP ; MH ; FARES ; adult
+; VAT ; 0  ; GBP ; MH ; FARES ; adult
+
+; APD ; 33 ; EUR ; MK ; FARES ; adult
+; VAT ; 0  ; EUR ; MK ; FARES ; adult
+
+; APD ; 26 ; GBP ; MK ; FARES ; adult
+; VAT ; 0  ; GBP ; MK ; FARES ; adult
+
+; APD ; 33 ; EUR ; ML ; FARES ; adult
+; VAT ; 0  ; EUR ; ML ; FARES ; adult
+
+; APD ; 26 ; GBP ; ML ; FARES ; adult
+; VAT ; 0  ; GBP ; ML ; FARES ; adult
+
+; APD ; 33 ; EUR ; MM ; FARES ; adult
+; VAT ; 0  ; EUR ; MM ; FARES ; adult
+
+; APD ; 26 ; GBP ; MM ; FARES ; adult
+; VAT ; 0  ; GBP ; MM ; FARES ; adult
+
+; APD ; 33 ; EUR ; MN ; FARES ; adult
+; VAT ; 0  ; EUR ; MN ; FARES ; adult
+
+; APD ; 26 ; GBP ; MN ; FARES ; adult
+; VAT ; 0  ; GBP ; MN ; FARES ; adult
+
+; APD ; 33 ; EUR ; MO ; FARES ; adult
+; VAT ; 0  ; EUR ; MO ; FARES ; adult
+
+; APD ; 26 ; GBP ; MO ; FARES ; adult
+; VAT ; 0  ; GBP ; MO ; FARES ; adult
+
+; APD ; 33 ; EUR ; MP ; FARES ; adult
+; VAT ; 0  ; EUR ; MP ; FARES ; adult
+
+; APD ; 26 ; GBP ; MP ; FARES ; adult
+; VAT ; 0  ; GBP ; MP ; FARES ; adult
+
+; APD ; 33 ; EUR ; MQ ; FARES ; adult
+; VAT ; 0  ; EUR ; MQ ; FARES ; adult
+
+; APD ; 26 ; GBP ; MQ ; FARES ; adult
+; VAT ; 0  ; GBP ; MQ ; FARES ; adult
+
+; APD ; 33 ; EUR ; MR ; FARES ; adult
+; VAT ; 0  ; EUR ; MR ; FARES ; adult
+
+; APD ; 26 ; GBP ; MR ; FARES ; adult
+; VAT ; 0  ; GBP ; MR ; FARES ; adult
+
+; APD ; 33 ; EUR ; MS ; FARES ; adult
+; VAT ; 0  ; EUR ; MS ; FARES ; adult
+
+; APD ; 26 ; GBP ; MS ; FARES ; adult
+; VAT ; 0  ; GBP ; MS ; FARES ; adult
+
+; APD ; 33 ; EUR ; MT ; FARES ; adult
+; VAT ; 0  ; EUR ; MT ; FARES ; adult
+
+; APD ; 26 ; GBP ; MT ; FARES ; adult
+; VAT ; 0  ; GBP ; MT ; FARES ; adult
+
+; APD ; 33 ; EUR ; MU ; FARES ; adult
+; VAT ; 0  ; EUR ; MU ; FARES ; adult
+
+; APD ; 26 ; GBP ; MU ; FARES ; adult
+; VAT ; 0  ; GBP ; MU ; FARES ; adult
+
+; APD ; 33 ; EUR ; MV ; FARES ; adult
+; VAT ; 0  ; EUR ; MV ; FARES ; adult
+
+; APD ; 26 ; GBP ; MV ; FARES ; adult
+; VAT ; 0  ; GBP ; MV ; FARES ; adult
+
+; APD ; 33 ; EUR ; MW ; FARES ; adult
+; VAT ; 0  ; EUR ; MW ; FARES ; adult
+
+; APD ; 26 ; GBP ; MW ; FARES ; adult
+; VAT ; 0  ; GBP ; MW ; FARES ; adult
+
+; APD ; 33 ; EUR ; MX ; FARES ; adult
+; VAT ; 0  ; EUR ; MX ; FARES ; adult
+
+; APD ; 26 ; GBP ; MX ; FARES ; adult
+; VAT ; 0  ; GBP ; MX ; FARES ; adult
+
+; APD ; 33 ; EUR ; MY ; FARES ; adult
+; VAT ; 0  ; EUR ; MY ; FARES ; adult
+
+; APD ; 26 ; GBP ; MY ; FARES ; adult
+; VAT ; 0  ; GBP ; MY ; FARES ; adult
+
+; APD ; 33 ; EUR ; MZ ; FARES ; adult
+; VAT ; 0  ; EUR ; MZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; MZ ; FARES ; adult
+; VAT ; 0  ; GBP ; MZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; NA ; FARES ; adult
+; VAT ; 0  ; EUR ; NA ; FARES ; adult
+
+; APD ; 26 ; GBP ; NA ; FARES ; adult
+; VAT ; 0  ; GBP ; NA ; FARES ; adult
+
+; APD ; 33 ; EUR ; NC ; FARES ; adult
+; VAT ; 0  ; EUR ; NC ; FARES ; adult
+
+; APD ; 26 ; GBP ; NC ; FARES ; adult
+; VAT ; 0  ; GBP ; NC ; FARES ; adult
+
+; APD ; 33 ; EUR ; NE ; FARES ; adult
+; VAT ; 0  ; EUR ; NE ; FARES ; adult
+
+; APD ; 26 ; GBP ; NE ; FARES ; adult
+; VAT ; 0  ; GBP ; NE ; FARES ; adult
+
+; APD ; 33 ; EUR ; NF ; FARES ; adult
+; VAT ; 0  ; EUR ; NF ; FARES ; adult
+
+; APD ; 26 ; GBP ; NF ; FARES ; adult
+; VAT ; 0  ; GBP ; NF ; FARES ; adult
+
+; APD ; 33 ; EUR ; NG ; FARES ; adult
+; VAT ; 0  ; EUR ; NG ; FARES ; adult
+
+; APD ; 26 ; GBP ; NG ; FARES ; adult
+; VAT ; 0  ; GBP ; NG ; FARES ; adult
+
+; APD ; 33 ; EUR ; NI ; FARES ; adult
+; VAT ; 0  ; EUR ; NI ; FARES ; adult
+
+; APD ; 26 ; GBP ; NI ; FARES ; adult
+; VAT ; 0  ; GBP ; NI ; FARES ; adult
+
+; APD ; 33 ; EUR ; NL ; FARES ; adult
+; VAT ; 0  ; EUR ; NL ; FARES ; adult
+
+; APD ; 26 ; GBP ; NL ; FARES ; adult
+; VAT ; 0  ; GBP ; NL ; FARES ; adult
+
+; APD ; 33 ; EUR ; NO ; FARES ; adult
+; VAT ; 0  ; EUR ; NO ; FARES ; adult
+
+; APD ; 26 ; GBP ; NO ; FARES ; adult
+; VAT ; 0  ; GBP ; NO ; FARES ; adult
+
+; APD ; 33 ; EUR ; NP ; FARES ; adult
+; VAT ; 0  ; EUR ; NP ; FARES ; adult
+
+; APD ; 26 ; GBP ; NP ; FARES ; adult
+; VAT ; 0  ; GBP ; NP ; FARES ; adult
+
+; APD ; 33 ; EUR ; NR ; FARES ; adult
+; VAT ; 0  ; EUR ; NR ; FARES ; adult
+
+; APD ; 26 ; GBP ; NR ; FARES ; adult
+; VAT ; 0  ; GBP ; NR ; FARES ; adult
+
+; APD ; 33 ; EUR ; NU ; FARES ; adult
+; VAT ; 0  ; EUR ; NU ; FARES ; adult
+
+; APD ; 26 ; GBP ; NU ; FARES ; adult
+; VAT ; 0  ; GBP ; NU ; FARES ; adult
+
+; APD ; 33 ; EUR ; NZ ; FARES ; adult
+; VAT ; 0  ; EUR ; NZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; NZ ; FARES ; adult
+; VAT ; 0  ; GBP ; NZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; OM ; FARES ; adult
+; VAT ; 0  ; EUR ; OM ; FARES ; adult
+
+; APD ; 26 ; GBP ; OM ; FARES ; adult
+; VAT ; 0  ; GBP ; OM ; FARES ; adult
+
+; APD ; 33 ; EUR ; PA ; FARES ; adult
+; VAT ; 0  ; EUR ; PA ; FARES ; adult
+
+; APD ; 26 ; GBP ; PA ; FARES ; adult
+; VAT ; 0  ; GBP ; PA ; FARES ; adult
+
+; APD ; 33 ; EUR ; PE ; FARES ; adult
+; VAT ; 0  ; EUR ; PE ; FARES ; adult
+
+; APD ; 26 ; GBP ; PE ; FARES ; adult
+; VAT ; 0  ; GBP ; PE ; FARES ; adult
+
+; APD ; 33 ; EUR ; PF ; FARES ; adult
+; VAT ; 0  ; EUR ; PF ; FARES ; adult
+
+; APD ; 26 ; GBP ; PF ; FARES ; adult
+; VAT ; 0  ; GBP ; PF ; FARES ; adult
+
+; APD ; 33 ; EUR ; PG ; FARES ; adult
+; VAT ; 0  ; EUR ; PG ; FARES ; adult
+
+; APD ; 26 ; GBP ; PG ; FARES ; adult
+; VAT ; 0  ; GBP ; PG ; FARES ; adult
+
+; APD ; 33 ; EUR ; PH ; FARES ; adult
+; VAT ; 0  ; EUR ; PH ; FARES ; adult
+
+; APD ; 26 ; GBP ; PH ; FARES ; adult
+; VAT ; 0  ; GBP ; PH ; FARES ; adult
+
+; APD ; 33 ; EUR ; PK ; FARES ; adult
+; VAT ; 0  ; EUR ; PK ; FARES ; adult
+
+; APD ; 26 ; GBP ; PK ; FARES ; adult
+; VAT ; 0  ; GBP ; PK ; FARES ; adult
+
+; APD ; 33 ; EUR ; PL ; FARES ; adult
+; VAT ; 0  ; EUR ; PL ; FARES ; adult
+
+; APD ; 26 ; GBP ; PL ; FARES ; adult
+; VAT ; 0  ; GBP ; PL ; FARES ; adult
+
+; APD ; 33 ; EUR ; PM ; FARES ; adult
+; VAT ; 0  ; EUR ; PM ; FARES ; adult
+
+; APD ; 26 ; GBP ; PM ; FARES ; adult
+; VAT ; 0  ; GBP ; PM ; FARES ; adult
+
+; APD ; 33 ; EUR ; PN ; FARES ; adult
+; VAT ; 0  ; EUR ; PN ; FARES ; adult
+
+; APD ; 26 ; GBP ; PN ; FARES ; adult
+; VAT ; 0  ; GBP ; PN ; FARES ; adult
+
+; APD ; 33 ; EUR ; PR ; FARES ; adult
+; VAT ; 0  ; EUR ; PR ; FARES ; adult
+
+; APD ; 26 ; GBP ; PR ; FARES ; adult
+; VAT ; 0  ; GBP ; PR ; FARES ; adult
+
+; APD ; 33 ; EUR ; PS ; FARES ; adult
+; VAT ; 0  ; EUR ; PS ; FARES ; adult
+
+; APD ; 26 ; GBP ; PS ; FARES ; adult
+; VAT ; 0  ; GBP ; PS ; FARES ; adult
+
+; APD ; 33 ; EUR ; PT ; FARES ; adult
+; VAT ; 0  ; EUR ; PT ; FARES ; adult
+
+; APD ; 26 ; GBP ; PT ; FARES ; adult
+; VAT ; 0  ; GBP ; PT ; FARES ; adult
+
+; APD ; 33 ; EUR ; PW ; FARES ; adult
+; VAT ; 0  ; EUR ; PW ; FARES ; adult
+
+; APD ; 26 ; GBP ; PW ; FARES ; adult
+; VAT ; 0  ; GBP ; PW ; FARES ; adult
+
+; APD ; 33 ; EUR ; PY ; FARES ; adult
+; VAT ; 0  ; EUR ; PY ; FARES ; adult
+
+; APD ; 26 ; GBP ; PY ; FARES ; adult
+; VAT ; 0  ; GBP ; PY ; FARES ; adult
+
+; APD ; 33 ; EUR ; QA ; FARES ; adult
+; VAT ; 0  ; EUR ; QA ; FARES ; adult
+
+; APD ; 26 ; GBP ; QA ; FARES ; adult
+; VAT ; 0  ; GBP ; QA ; FARES ; adult
+
+; APD ; 33 ; EUR ; RE ; FARES ; adult
+; VAT ; 0  ; EUR ; RE ; FARES ; adult
+
+; APD ; 26 ; GBP ; RE ; FARES ; adult
+; VAT ; 0  ; GBP ; RE ; FARES ; adult
+
+; APD ; 33 ; EUR ; RO ; FARES ; adult
+; VAT ; 0  ; EUR ; RO ; FARES ; adult
+
+; APD ; 26 ; GBP ; RO ; FARES ; adult
+; VAT ; 0  ; GBP ; RO ; FARES ; adult
+
+; APD ; 33 ; EUR ; RS ; FARES ; adult
+; VAT ; 0  ; EUR ; RS ; FARES ; adult
+
+; APD ; 26 ; GBP ; RS ; FARES ; adult
+; VAT ; 0  ; GBP ; RS ; FARES ; adult
+
+; APD ; 33 ; EUR ; RU ; FARES ; adult
+; VAT ; 0  ; EUR ; RU ; FARES ; adult
+
+; APD ; 26 ; GBP ; RU ; FARES ; adult
+; VAT ; 0  ; GBP ; RU ; FARES ; adult
+
+; APD ; 33 ; EUR ; RW ; FARES ; adult
+; VAT ; 0  ; EUR ; RW ; FARES ; adult
+
+; APD ; 26 ; GBP ; RW ; FARES ; adult
+; VAT ; 0  ; GBP ; RW ; FARES ; adult
+
+; APD ; 33 ; EUR ; SA ; FARES ; adult
+; VAT ; 0  ; EUR ; SA ; FARES ; adult
+
+; APD ; 26 ; GBP ; SA ; FARES ; adult
+; VAT ; 0  ; GBP ; SA ; FARES ; adult
+
+; APD ; 33 ; EUR ; SB ; FARES ; adult
+; VAT ; 0  ; EUR ; SB ; FARES ; adult
+
+; APD ; 26 ; GBP ; SB ; FARES ; adult
+; VAT ; 0  ; GBP ; SB ; FARES ; adult
+
+; APD ; 33 ; EUR ; SC ; FARES ; adult
+; VAT ; 0  ; EUR ; SC ; FARES ; adult
+
+; APD ; 26 ; GBP ; SC ; FARES ; adult
+; VAT ; 0  ; GBP ; SC ; FARES ; adult
+
+; APD ; 33 ; EUR ; SD ; FARES ; adult
+; VAT ; 0  ; EUR ; SD ; FARES ; adult
+
+; APD ; 26 ; GBP ; SD ; FARES ; adult
+; VAT ; 0  ; GBP ; SD ; FARES ; adult
+
+; APD ; 33 ; EUR ; SE ; FARES ; adult
+; VAT ; 0  ; EUR ; SE ; FARES ; adult
+
+; APD ; 26 ; GBP ; SE ; FARES ; adult
+; VAT ; 0  ; GBP ; SE ; FARES ; adult
+
+; APD ; 33 ; EUR ; SG ; FARES ; adult
+; VAT ; 0  ; EUR ; SG ; FARES ; adult
+
+; APD ; 26 ; GBP ; SG ; FARES ; adult
+; VAT ; 0  ; GBP ; SG ; FARES ; adult
+
+; APD ; 33 ; EUR ; SH ; FARES ; adult
+; VAT ; 0  ; EUR ; SH ; FARES ; adult
+
+; APD ; 26 ; GBP ; SH ; FARES ; adult
+; VAT ; 0  ; GBP ; SH ; FARES ; adult
+
+; APD ; 33 ; EUR ; SI ; FARES ; adult
+; VAT ; 0  ; EUR ; SI ; FARES ; adult
+
+; APD ; 26 ; GBP ; SI ; FARES ; adult
+; VAT ; 0  ; GBP ; SI ; FARES ; adult
+
+; APD ; 33 ; EUR ; SJ ; FARES ; adult
+; VAT ; 0  ; EUR ; SJ ; FARES ; adult
+
+; APD ; 26 ; GBP ; SJ ; FARES ; adult
+; VAT ; 0  ; GBP ; SJ ; FARES ; adult
+
+; APD ; 33 ; EUR ; SK ; FARES ; adult
+; VAT ; 0  ; EUR ; SK ; FARES ; adult
+
+; APD ; 26 ; GBP ; SK ; FARES ; adult
+; VAT ; 0  ; GBP ; SK ; FARES ; adult
+
+; APD ; 33 ; EUR ; SL ; FARES ; adult
+; VAT ; 0  ; EUR ; SL ; FARES ; adult
+
+; APD ; 26 ; GBP ; SL ; FARES ; adult
+; VAT ; 0  ; GBP ; SL ; FARES ; adult
+
+; APD ; 33 ; EUR ; SM ; FARES ; adult
+; VAT ; 0  ; EUR ; SM ; FARES ; adult
+
+; APD ; 26 ; GBP ; SM ; FARES ; adult
+; VAT ; 0  ; GBP ; SM ; FARES ; adult
+
+; APD ; 33 ; EUR ; SN ; FARES ; adult
+; VAT ; 0  ; EUR ; SN ; FARES ; adult
+
+; APD ; 26 ; GBP ; SN ; FARES ; adult
+; VAT ; 0  ; GBP ; SN ; FARES ; adult
+
+; APD ; 33 ; EUR ; SO ; FARES ; adult
+; VAT ; 0  ; EUR ; SO ; FARES ; adult
+
+; APD ; 26 ; GBP ; SO ; FARES ; adult
+; VAT ; 0  ; GBP ; SO ; FARES ; adult
+
+; APD ; 33 ; EUR ; SR ; FARES ; adult
+; VAT ; 0  ; EUR ; SR ; FARES ; adult
+
+; APD ; 26 ; GBP ; SR ; FARES ; adult
+; VAT ; 0  ; GBP ; SR ; FARES ; adult
+
+; APD ; 33 ; EUR ; SS ; FARES ; adult
+; VAT ; 0  ; EUR ; SS ; FARES ; adult
+
+; APD ; 26 ; GBP ; SS ; FARES ; adult
+; VAT ; 0  ; GBP ; SS ; FARES ; adult
+
+; APD ; 33 ; EUR ; ST ; FARES ; adult
+; VAT ; 0  ; EUR ; ST ; FARES ; adult
+
+; APD ; 26 ; GBP ; ST ; FARES ; adult
+; VAT ; 0  ; GBP ; ST ; FARES ; adult
+
+; APD ; 33 ; EUR ; SV ; FARES ; adult
+; VAT ; 0  ; EUR ; SV ; FARES ; adult
+
+; APD ; 26 ; GBP ; SV ; FARES ; adult
+; VAT ; 0  ; GBP ; SV ; FARES ; adult
+
+; APD ; 33 ; EUR ; SX ; FARES ; adult
+; VAT ; 0  ; EUR ; SX ; FARES ; adult
+
+; APD ; 26 ; GBP ; SX ; FARES ; adult
+; VAT ; 0  ; GBP ; SX ; FARES ; adult
+
+; APD ; 33 ; EUR ; SY ; FARES ; adult
+; VAT ; 0  ; EUR ; SY ; FARES ; adult
+
+; APD ; 26 ; GBP ; SY ; FARES ; adult
+; VAT ; 0  ; GBP ; SY ; FARES ; adult
+
+; APD ; 33 ; EUR ; SZ ; FARES ; adult
+; VAT ; 0  ; EUR ; SZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; SZ ; FARES ; adult
+; VAT ; 0  ; GBP ; SZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; TC ; FARES ; adult
+; VAT ; 0  ; EUR ; TC ; FARES ; adult
+
+; APD ; 26 ; GBP ; TC ; FARES ; adult
+; VAT ; 0  ; GBP ; TC ; FARES ; adult
+
+; APD ; 33 ; EUR ; TD ; FARES ; adult
+; VAT ; 0  ; EUR ; TD ; FARES ; adult
+
+; APD ; 26 ; GBP ; TD ; FARES ; adult
+; VAT ; 0  ; GBP ; TD ; FARES ; adult
+
+; APD ; 33 ; EUR ; TF ; FARES ; adult
+; VAT ; 0  ; EUR ; TF ; FARES ; adult
+
+; APD ; 26 ; GBP ; TF ; FARES ; adult
+; VAT ; 0  ; GBP ; TF ; FARES ; adult
+
+; APD ; 33 ; EUR ; TG ; FARES ; adult
+; VAT ; 0  ; EUR ; TG ; FARES ; adult
+
+; APD ; 26 ; GBP ; TG ; FARES ; adult
+; VAT ; 0  ; GBP ; TG ; FARES ; adult
+
+; APD ; 33 ; EUR ; TH ; FARES ; adult
+; VAT ; 0  ; EUR ; TH ; FARES ; adult
+
+; APD ; 26 ; GBP ; TH ; FARES ; adult
+; VAT ; 0  ; GBP ; TH ; FARES ; adult
+
+; APD ; 33 ; EUR ; TJ ; FARES ; adult
+; VAT ; 0  ; EUR ; TJ ; FARES ; adult
+
+; APD ; 26 ; GBP ; TJ ; FARES ; adult
+; VAT ; 0  ; GBP ; TJ ; FARES ; adult
+
+; APD ; 33 ; EUR ; TK ; FARES ; adult
+; VAT ; 0  ; EUR ; TK ; FARES ; adult
+
+; APD ; 26 ; GBP ; TK ; FARES ; adult
+; VAT ; 0  ; GBP ; TK ; FARES ; adult
+
+; APD ; 33 ; EUR ; TL ; FARES ; adult
+; VAT ; 0  ; EUR ; TL ; FARES ; adult
+
+; APD ; 26 ; GBP ; TL ; FARES ; adult
+; VAT ; 0  ; GBP ; TL ; FARES ; adult
+
+; APD ; 33 ; EUR ; TM ; FARES ; adult
+; VAT ; 0  ; EUR ; TM ; FARES ; adult
+
+; APD ; 26 ; GBP ; TM ; FARES ; adult
+; VAT ; 0  ; GBP ; TM ; FARES ; adult
+
+; APD ; 33 ; EUR ; TN ; FARES ; adult
+; VAT ; 0  ; EUR ; TN ; FARES ; adult
+
+; APD ; 26 ; GBP ; TN ; FARES ; adult
+; VAT ; 0  ; GBP ; TN ; FARES ; adult
+
+; APD ; 33 ; EUR ; TO ; FARES ; adult
+; VAT ; 0  ; EUR ; TO ; FARES ; adult
+
+; APD ; 26 ; GBP ; TO ; FARES ; adult
+; VAT ; 0  ; GBP ; TO ; FARES ; adult
+
+; APD ; 33 ; EUR ; TR ; FARES ; adult
+; VAT ; 0  ; EUR ; TR ; FARES ; adult
+
+; APD ; 26 ; GBP ; TR ; FARES ; adult
+; VAT ; 0  ; GBP ; TR ; FARES ; adult
+
+; APD ; 33 ; EUR ; TT ; FARES ; adult
+; VAT ; 0  ; EUR ; TT ; FARES ; adult
+
+; APD ; 26 ; GBP ; TT ; FARES ; adult
+; VAT ; 0  ; GBP ; TT ; FARES ; adult
+
+; APD ; 33 ; EUR ; TV ; FARES ; adult
+; VAT ; 0  ; EUR ; TV ; FARES ; adult
+
+; APD ; 26 ; GBP ; TV ; FARES ; adult
+; VAT ; 0  ; GBP ; TV ; FARES ; adult
+
+; APD ; 33 ; EUR ; TW ; FARES ; adult
+; VAT ; 0  ; EUR ; TW ; FARES ; adult
+
+; APD ; 26 ; GBP ; TW ; FARES ; adult
+; VAT ; 0  ; GBP ; TW ; FARES ; adult
+
+; APD ; 33 ; EUR ; TZ ; FARES ; adult
+; VAT ; 0  ; EUR ; TZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; TZ ; FARES ; adult
+; VAT ; 0  ; GBP ; TZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; UA ; FARES ; adult
+; VAT ; 0  ; EUR ; UA ; FARES ; adult
+
+; APD ; 26 ; GBP ; UA ; FARES ; adult
+; VAT ; 0  ; GBP ; UA ; FARES ; adult
+
+; APD ; 33 ; EUR ; UG ; FARES ; adult
+; VAT ; 0  ; EUR ; UG ; FARES ; adult
+
+; APD ; 26 ; GBP ; UG ; FARES ; adult
+; VAT ; 0  ; GBP ; UG ; FARES ; adult
+
+; APD ; 33 ; EUR ; UM ; FARES ; adult
+; VAT ; 0  ; EUR ; UM ; FARES ; adult
+
+; APD ; 26 ; GBP ; UM ; FARES ; adult
+; VAT ; 0  ; GBP ; UM ; FARES ; adult
+
+; APD ; 33 ; EUR ; US ; FARES ; adult
+; VAT ; 0  ; EUR ; US ; FARES ; adult
+
+; APD ; 26 ; GBP ; US ; FARES ; adult
+; VAT ; 0  ; GBP ; US ; FARES ; adult
+
+; APD ; 33 ; EUR ; UY ; FARES ; adult
+; VAT ; 0  ; EUR ; UY ; FARES ; adult
+
+; APD ; 26 ; GBP ; UY ; FARES ; adult
+; VAT ; 0  ; GBP ; UY ; FARES ; adult
+
+; APD ; 33 ; EUR ; UZ ; FARES ; adult
+; VAT ; 0  ; EUR ; UZ ; FARES ; adult
+
+; APD ; 26 ; GBP ; UZ ; FARES ; adult
+; VAT ; 0  ; GBP ; UZ ; FARES ; adult
+
+; APD ; 33 ; EUR ; VA ; FARES ; adult
+; VAT ; 0  ; EUR ; VA ; FARES ; adult
+
+; APD ; 26 ; GBP ; VA ; FARES ; adult
+; VAT ; 0  ; GBP ; VA ; FARES ; adult
+
+; APD ; 33 ; EUR ; VC ; FARES ; adult
+; VAT ; 0  ; EUR ; VC ; FARES ; adult
+
+; APD ; 26 ; GBP ; VC ; FARES ; adult
+; VAT ; 0  ; GBP ; VC ; FARES ; adult
+
+; APD ; 33 ; EUR ; VE ; FARES ; adult
+; VAT ; 0  ; EUR ; VE ; FARES ; adult
+
+; APD ; 26 ; GBP ; VE ; FARES ; adult
+; VAT ; 0  ; GBP ; VE ; FARES ; adult
+
+; APD ; 33 ; EUR ; VG ; FARES ; adult
+; VAT ; 0  ; EUR ; VG ; FARES ; adult
+
+; APD ; 26 ; GBP ; VG ; FARES ; adult
+; VAT ; 0  ; GBP ; VG ; FARES ; adult
+
+; APD ; 33 ; EUR ; VI ; FARES ; adult
+; VAT ; 0  ; EUR ; VI ; FARES ; adult
+
+; APD ; 26 ; GBP ; VI ; FARES ; adult
+; VAT ; 0  ; GBP ; VI ; FARES ; adult
+
+; APD ; 33 ; EUR ; VN ; FARES ; adult
+; VAT ; 0  ; EUR ; VN ; FARES ; adult
+
+; APD ; 26 ; GBP ; VN ; FARES ; adult
+; VAT ; 0  ; GBP ; VN ; FARES ; adult
+
+; APD ; 33 ; EUR ; VU ; FARES ; adult
+; VAT ; 0  ; EUR ; VU ; FARES ; adult
+
+; APD ; 26 ; GBP ; VU ; FARES ; adult
+; VAT ; 0  ; GBP ; VU ; FARES ; adult
+
+; APD ; 33 ; EUR ; WF ; FARES ; adult
+; VAT ; 0  ; EUR ; WF ; FARES ; adult
+
+; APD ; 26 ; GBP ; WF ; FARES ; adult
+; VAT ; 0  ; GBP ; WF ; FARES ; adult
+
+; APD ; 33 ; EUR ; WS ; FARES ; adult
+; VAT ; 0  ; EUR ; WS ; FARES ; adult
+
+; APD ; 26 ; GBP ; WS ; FARES ; adult
+; VAT ; 0  ; GBP ; WS ; FARES ; adult
+
+; APD ; 33 ; EUR ; XK ; FARES ; adult
+; VAT ; 0  ; EUR ; XK ; FARES ; adult
+
+; APD ; 26 ; GBP ; XK ; FARES ; adult
+; VAT ; 0  ; GBP ; XK ; FARES ; adult
+
+; APD ; 33 ; EUR ; YE ; FARES ; adult
+; VAT ; 0  ; EUR ; YE ; FARES ; adult
+
+; APD ; 26 ; GBP ; YE ; FARES ; adult
+; VAT ; 0  ; GBP ; YE ; FARES ; adult
+
+; APD ; 33 ; EUR ; YT ; FARES ; adult
+; VAT ; 0  ; EUR ; YT ; FARES ; adult
+
+; APD ; 26 ; GBP ; YT ; FARES ; adult
+; VAT ; 0  ; GBP ; YT ; FARES ; adult
+
+; APD ; 33 ; EUR ; ZA ; FARES ; adult
+; VAT ; 0  ; EUR ; ZA ; FARES ; adult
+
+; APD ; 26 ; GBP ; ZA ; FARES ; adult
+; VAT ; 0  ; GBP ; ZA ; FARES ; adult
+
+; APD ; 33 ; EUR ; ZM ; FARES ; adult
+; VAT ; 0  ; EUR ; ZM ; FARES ; adult
+
+; APD ; 26 ; GBP ; ZM ; FARES ; adult
+; VAT ; 0  ; GBP ; ZM ; FARES ; adult
+
+; APD ; 33 ; EUR ; ZW ; FARES ; adult
+; VAT ; 0  ; EUR ; ZW ; FARES ; adult
+
+; APD ; 26 ; GBP ; ZW ; FARES ; adult
+; VAT ; 0  ; GBP ; ZW ; FARES ; adult
+
+# Fare Products - TransportFacility specific taxes
+INSERT_UPDATE TaxRow; tax(code); value[unique = true]; currency(isocode)[unique = true]; originTransportFacility[unique = true]; pg(code)[unique = true]; passengerType[unique = true]
+# GBP
+; PSC ; 2  ; GBP ; LGW ; FARES ; infant
+; PSC ; 5  ; GBP ; LGW ; FARES ; child
+; PSC ; 10 ; GBP ; LGW ; FARES ; adult
+; PSC ; 2  ; GBP ; LTN ; FARES ; infant
+; PSC ; 5  ; GBP ; LTN ; FARES ; child
+; PSC ; 10 ; GBP ; LTN ; FARES ; adult
+; PSC ; 1  ; GBP ; EDI ; FARES ; infant
+; PSC ; 3  ; GBP ; EDI ; FARES ; child
+; PSC ; 5  ; GBP ; EDI ; FARES ; adult
+; PSC ; 2  ; GBP ; CDG ; FARES ; infant
+; PSC ; 5  ; GBP ; CDG ; FARES ; child
+; PSC ; 10 ; GBP ; CDG ; FARES ; adult
+
+# EUR
+; PSC ; 3  ; EUR ; LGW ; FARES ; infant
+; PSC ; 6  ; EUR ; LGW ; FARES ; child
+; PSC ; 13 ; EUR ; LGW ; FARES ; adult
+; PSC ; 2  ; EUR ; LTN ; FARES ; infant
+; PSC ; 6  ; EUR ; LTN ; FARES ; child
+; PSC ; 13 ; EUR ; LTN ; FARES ; adult
+; PSC ; 1  ; EUR ; EDI ; FARES ; infant
+; PSC ; 3  ; EUR ; EDI ; FARES ; child
+; PSC ; 6  ; EUR ; EDI ; FARES ; adult
+; PSC ; 3  ; EUR ; CDG ; FARES ; infant
+; PSC ; 6  ; EUR ; CDG ; FARES ; child
+; PSC ; 13 ; EUR ; CDG ; FARES ; adult
+
+# Ancillary Products - Country specific taxes
+INSERT_UPDATE TaxRow; tax(code); value[unique = true]; currency(isocode)[unique = true]; originCountry[unique = true]; pg(code)[unique = true]; passengerType[unique = true]
+# GBP
+; VAT ; 5 ; GBP ; GB ; LOUNGE ; adult
+
+# EUR
+; VAT ; 6 ; EUR ; GB ; LOUNGE ; adult
+
+# Ancillary Products - TransportFacility specific taxes
+INSERT_UPDATE TaxRow; tax(code); value[unique = true]; currency(isocode)[unique = true]; originTransportFacility[unique = true]; pg(code)[unique = true]; passengerType[unique = true]
+# GBP
+; LC ; 25 ; GBP ; LTN ; LOUNGE ; adult
+; LC ; 30 ; GBP ; CDG ; LOUNGE ; adult
+
+# EUR
+; LC ; 32 ; EUR ; LTN ; LOUNGE ; adult
+; LC ; 38 ; EUR ; CDG ; LOUNGE ; adult

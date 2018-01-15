@@ -1,0 +1,10 @@
+# ImpEx for Importing AccommodationRestriction for the serviceProducts into travel accelerator
+
+# Free quantity
+INSERT_UPDATE AccommodationRestriction; code[unique = true]; tripMaxOfferQty; tripMinOfferQty
+; WIFI_RESTRICTION    ; ; ;
+; BREAKFAST_RESTRICTION ; ; ;
+
+# Exactly 1
+INSERT_UPDATE AddExactlyNRestriction; code[unique = true]; tripMaxOfferQty[default=1]; tripMinOfferQty[default=1]
+; GYM_RESTRICTION         ; ; ;

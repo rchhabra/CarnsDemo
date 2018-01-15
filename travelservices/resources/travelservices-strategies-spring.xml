@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultTravelOrderCancelStateMappingStrategy" alias="defaultOrderCancelStateMappingStrategy" />
+	<bean id="defaultTravelOrderCancelStateMappingStrategy" class="de.hybris.platform.travelservices.ordercancel.impl.denialstrategies.DefaultTravelOrderCancelStateMappingStrategy" />
+
+	<alias name="travelImmediateCancelRequestExecutor" alias="immediateCancelRequestExecutor"/>
+	<bean id="travelImmediateCancelRequestExecutor" class="de.hybris.platform.ordercancel.impl.executors.ImmediateCancelRequestExecutor"
+		scope="prototype">
+		<property name="modelService" ref="modelService" />
+		<property name="orderCancelRecordsHandler" ref="orderCancelRecordsHandler" />
+		<property name="completeCancelStatusChangeStrategy" ref="setCancellledStrategy" />
+		<property name="paymentServiceAdapter" ref="orderCancelPaymentServiceAdapter" />
+		<property name="notificationServiceAdapter" ref="sendEventOrderCancelNotification" />
+	</bean>
+
+	<alias name="defaultOrderCancelPaymentServiceAdapter" alias="orderCancelPaymentServiceAdapter" />
+	<bean id="defaultOrderCancelPaymentServiceAdapter" class="de.hybris.platform.travelservices.ordercancel.impl.DefaultOrderCancelPaymentServiceAdapter">
+		<lookup-method name="lookupBookingService" bean="bookingService" />
+	</bean>
+
+	<alias name="defaultRefundAllActionStrategy" alias="refundAllActionStrategy" />
+	<bean id="defaultRefundAllActionStrategy" class="de.hybris.platform.travelservices.strategies.impl.RefundAllActionStrategy">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultRetainAdminFeeOnRefundStrategy" alias="retainAdminFeeOnRefundStrategy" />
+	<bean id="defaultRetainAdminFeeOnRefundStrategy" class="de.hybris.platform.travelservices.strategies.impl.RetainAdminFeeOnRefundStrategy">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultTotalRefundCalculationStrategy" alias="totalRefundCalculationStrategy" />
+	<bean id="defaultTotalRefundCalculationStrategy" class="de.hybris.platform.travelservices.ordercancel.impl.DefaultTotalRefundCalculationStrategy">
+		<property name="travelRulesService" ref="travelDroolsService" />
+		<property name="refundActionStrategyMap">
+			<map>
+				<entry key="DEFAULT" value-ref="refundAllActionStrategy" />
+				<entry key="REFUND_ALL" value-ref="refundAllActionStrategy" />
+				<entry key="RETAIN_ADMIN_FEE" value-ref="retainAdminFeeOnRefundStrategy" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationTotalRefundCalculationStrategy" alias="accommodationTotalRefundCalculationStrategy" />
+	<bean id="defaultAccommodationTotalRefundCalculationStrategy" class="de.hybris.platform.travelservices.ordercancel.impl.DefaultAccommodationTotalRefundCalculationStrategy" parent="transactionCalculationStrategy">
+		<property name="cancelPenaltiesCalculationService" ref="cancelPenaltiesCalculationService"/>
+	</bean>
+   
+   <alias name="defaultStandardTotalRefundCalculationStrategy" alias="standardTotalRefundCalculationStrategy" />
+   <bean id="defaultStandardTotalRefundCalculationStrategy" class="de.hybris.platform.travelservices.ordercancel.impl.StandardTotalRefundCalculationStrategy">
+      <property name="refundActionStrategy" ref="refundAllActionStrategy" />
+   </bean>
+
+	<alias name="defaultOrderTotalByEntryTypeCalculationStrategy" alias="orderTotalByEntryTypeCalculationStrategy" />
+	<bean id="defaultOrderTotalByEntryTypeCalculationStrategy" class="de.hybris.platform.travelservices.accommodation.strategies.impl.DefaultOrderTotalByEntryTypeCalculationStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultOrderTotalPaidCalculationStrategy" alias="orderTotalPaidCalculationStrategy" />
+	<bean id="defaultOrderTotalPaidCalculationStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.DefaultOrderTotalPaidCalculationStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultOrderTotalPaidForAccommodationGroupCalculationStrategy" alias="orderTotalPaidForAccommodationGroupCalculationStrategy" />
+	<bean id="defaultOrderTotalPaidForAccommodationGroupCalculationStrategy"
+		class="de.hybris.platform.travelservices.strategies.payment.impl.DefaultOrderTotalPaidForAccommodationGroupCalculationStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultOrderTotalPaidForOrderEntryTypeCalculationStrategy" alias="orderTotalPaidForOrderEntryTypeCalculationStrategy" />
+	<bean id="defaultOrderTotalPaidForOrderEntryTypeCalculationStrategy"
+		class="de.hybris.platform.travelservices.strategies.payment.impl.DefaultOrderTotalPaidForOrderEntryTypeCalculationStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultCalculateTotalPriceWithGuaranteeForChangeDatesStrategy" alias="calculateTotalPriceWithGuaranteeForChangeDatesStrategy" />
+	<bean id="defaultCalculateTotalPriceWithGuaranteeForChangeDatesStrategy" class="de.hybris.platform.travelservices.strategies.impl.DefaultCalculateTotalPriceWithGuaranteeForChangeDatesStrategy">
+		<property name="bookingService" ref="bookingService" />
+		<property name="ratePlanService" ref="ratePlanService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultCalculateTotalPriceWithoutGuaranteeForChangeDatesStrategy" alias="calculateTotalPriceWithoutGuaranteeForChangeDatesStrategy" />
+	<bean id="defaultCalculateTotalPriceWithoutGuaranteeForChangeDatesStrategy"
+		class="de.hybris.platform.travelservices.strategies.impl.DefaultCalculateTotalPriceWithoutGuaranteeForChangeDatesStrategy">
+	</bean>
+
+	<alias name="defaultChangeDatesRefundAction" alias="changeDatesRefundAction" />
+	<bean id="defaultChangeDatesRefundAction" class="de.hybris.platform.travelservices.strategies.payment.changedates.impl.ChangeDatesRefundAction">
+		<property name="cartService" ref="cartService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="modelService" ref="modelService" />
+		<property name="orderTotalPaidForAccommodationGroupCalculationStrategy" ref="orderTotalPaidForAccommodationGroupCalculationStrategy" />
+	</bean>
+
+	<alias name="defaultChangeDatesSameAction" alias="changeDatesSameAction" />
+	<bean id="defaultChangeDatesSameAction" class="de.hybris.platform.travelservices.strategies.payment.changedates.impl.ChangeDatesSameAction">
+		<property name="cartService" ref="cartService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultChangeDatesPayableAction" alias="changeDatesPayableAction" />
+	<bean id="defaultChangeDatesPayableAction" class="de.hybris.platform.travelservices.strategies.payment.changedates.impl.ChangeDatesPayableAction">
+		<property name="cartService" ref="cartService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultChangeDatesOrderTotalToPayStrategy" alias="changeDatesOrderTotalToPayStrategy" />
+	<bean id="defaultChangeDatesOrderTotalToPayStrategy" class="de.hybris.platform.travelservices.strategies.payment.changedates.impl.DefaultChangeDatesOrderTotalToPayStrategy">
+		<property name="bookingService" ref="bookingService" />
+		<property name="cartService" ref="cartService" />
+		<property name="ratePlanService" ref="ratePlanService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+
+	<alias alias="stockLevelProductID" name="defaultTravelStockLevelProductStrategy" />
+	<bean id="defaultTravelStockLevelProductStrategy" class="de.hybris.platform.travelservices.fare.search.strategies.DefaultTravelStockLevelProductStrategy"
+		parent="defaultStockLevelProductID">
+		<property name="productsQualifierMap">
+			<map>
+				<entry key="FARE_PRODUCT" value="bookingClass" />
+				<entry key="FareProductModel" value="bookingClass" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="transportEntryManageStockStrategy" alias="transportManageStockStrategy" />
+	<bean id="transportEntryManageStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.transport.impl.TransportEntryManageStockStrategy">
+		<property name="transportManageStockByProductTypeStrategyMap" ref="transportManageStockByProductTypeStrategyMap" />
+	</bean>
+
+	<alias name="defaultTransportProductStockStrategy" alias="defaultTransportProductStockStrategy" />
+	<bean id="defaultTransportProductStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.transport.impl.DefaultTransportProductManageStockStrategy">
+		<property name="travelManageStockStrategyMap" ref="travelManageStockStrategyMap" />
+		<property name="travelRestrictionService" ref="travelRestrictionService" />
+	</bean>
+
+	<alias name="accommodationEntryManageStockStrategy" alias="accommodationManageStockStrategy" />
+	<bean id="accommodationEntryManageStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.AccommodationEntryManageStockStrategy">
+		<property name="accommodationManageStockByProductTypeStrategyMap" ref="accommodationManageStockByProductTypeStrategyMap" />
+	</bean>
+
+	<alias name="roomRateManageStockStrategy" alias="roomRateStockStrategy" />
+	<bean id="roomRateManageStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.RoomRateManageStockStrategy">
+		<property name="stockService" ref="stockService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="defaultAccommodationProductManageStockStrategy" alias="defaultAccommodationProductStockStrategy" />
+	<bean id="defaultAccommodationProductManageStockStrategy"
+		class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.DefaultAccommodationProductManageStockStrategy">
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="defaultEntryTypeManageStockStrategy" alias="defaultEntryTypeManageStockStrategy" />
+	<bean id="defaultEntryTypeManageStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.impl.DefaultEntryTypeManageStockStrategy">
+        <property name="stockService" ref="stockService" />
+        <property name="warehouseService" ref="warehouseService" />
+	</bean>
+
+	<alias name="defaultTravelManageStockStrategy" alias="travelManageStockStrategy" />
+	<bean id="defaultTravelManageStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.transport.impl.DefaultTravelManageStockStrategy">
+		<property name="stockService" ref="stockService" />
+	</bean>
+
+	<alias name="noActionManageStockStrategy" alias="noActionManageStockStrategy" />
+	<bean id="noActionManageStockStrategy" class="de.hybris.platform.travelservices.strategies.stock.impl.NoActionManageStockStrategy">
+	</bean>
+
+	<alias name="defaultTransportStockReservationReleaseStrategy" alias="transportStockReservationReleaseStrategy" />
+	<bean id="defaultTransportStockReservationReleaseStrategy" class="de.hybris.platform.travelservices.strategies.stock.transport.impl.TransportStockReservationReleaseStrategy">
+		<property name="transportStockReservationCreationStrategyMap" ref="transportStockReservationCreationByProductTypeStrategyMap" />
+	</bean>
+
+	<alias name="defaultTransportReservationCreationStrategy" alias="defaultTransportReservationCreationStrategy" />
+	<bean id="defaultTransportReservationCreationStrategy" class="de.hybris.platform.travelservices.strategies.stock.transport.impl.DefaultTransportReservationCreationStrategy">
+		<property name="travelRestrictionService" ref="travelRestrictionService" />
+		<property name="stockReservationCreationStrategyMap" ref="stockReservationCreationStrategyMap" />
+	</bean>
+
+	<alias name="defaultAccommodationStockReservationReleaseStrategy" alias="accommodationStockReservationReleaseStrategy" />
+	<bean id="defaultAccommodationStockReservationReleaseStrategy"
+		class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.AccommodationStockReservationReleaseStrategy">
+		<property name="accommodationStockReservationCreationStrategyMap" ref="accommodationStockReservationCreationByProductTypeStrategyMap" />
+	</bean>
+
+	<alias name="defaultAccommodationReservationCreationStrategy" alias="defaultAccommodationReservationCreationStrategy" />
+	<bean id="defaultAccommodationReservationCreationStrategy"
+		class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.DefaultAccommodationReservationCreationStrategy" />
+
+	<alias name="defaultRoomRateReservationCreationStrategy" alias="roomRateReservationCreationStrategy" />
+	<bean id="defaultRoomRateReservationCreationStrategy" class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.RoomRateReservationCreationStrategy" />
+
+	<alias name="defaultStockReservationReleaseStrategy" alias="defaultStockReservationReleaseStrategy" />
+	<bean id="defaultStockReservationReleaseStrategy" class="de.hybris.platform.travelservices.strategies.stock.impl.DefaultStockReservationReleaseStrategy">
+	</bean>
+
+	<alias name="defaultStockReservationCreationStrategy" alias="stockReservationCreationStrategy" />
+	<bean id="defaultStockReservationCreationStrategy" class="de.hybris.platform.travelservices.strategies.stock.impl.DefaultStockReservationCreationStrategy">
+	</bean>
+
+	<alias name="stockReservationForDefaultWarehouseCreationStrategy" alias="stockReservationForDefaultWarehouseCreationStrategy" />
+	<bean id="stockReservationForDefaultWarehouseCreationStrategy" class="de.hybris.platform.travelservices.strategies.stock.impl.StockReservationForDefaultWarehouseCreationStrategy">
+	</bean>
+
+	<alias name="abstractCartEntryValidationStrategy" alias="abstractCartEntryValidationStrategy" />
+	<bean id="abstractCartEntryValidationStrategy" class="de.hybris.platform.travelservices.strategies.cart.validation.AbstractCartEntryValidationStrategy"
+		abstract="true">
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="modelService" ref="modelService" />
+		<property name="cartService" ref="cartService" />
+		<property name="productService" ref="productService" />
+		<property name="entryTypeStockResolvingStrategyMap" ref="entryTypeStockResolvingStrategyMap" />
+	</bean>
+
+	<alias name="defaultTransportCartEntryValidationStrategy" alias="transportCartEntryValidationStrategy" />
+	<bean id="defaultTransportCartEntryValidationStrategy" class="de.hybris.platform.travelservices.strategies.cart.validation.impl.TransportCartEntryValidationStrategy"
+		parent="abstractCartEntryValidationStrategy" />
+
+	<alias name="defaultAccommodationCartEntryValidationStrategy" alias="accommodationCartEntryValidationStrategy" />
+	<bean id="defaultAccommodationCartEntryValidationStrategy" class="de.hybris.platform.travelservices.strategies.cart.validation.impl.AccommodationCartEntryValidationStrategy"
+		parent="abstractCartEntryValidationStrategy" >
+		<property name="accommodationCommerceCartService" ref="accommodationCommerceCartService"/>
+	</bean>
+      
+    <alias name="defaultCartEntryValidationStrategy" alias="cartEntryValidationStrategy" />
+    <bean id="defaultCartEntryValidationStrategy" class="de.hybris.platform.travelservices.strategies.cart.validation.impl.DefaultCartEntryValidationStrategy"
+        parent="abstractCartEntryValidationStrategy" />  
+
+
+	<alias name="defaultTravelCartValidationStrategy" alias="cartValidationStrategy" />
+	<bean id="defaultTravelCartValidationStrategy" class="de.hybris.platform.travelservices.strategies.cart.validation.impl.DefaultTravelCartValidationStrategy"
+		parent="defaultCartValidationStrategy">
+		<property name="cartEntryValidationStrategyByEntryTypeMap" ref="cartEntryValidationStrategyByEntryTypeMap" />
+	</bean>
+
+	<alias name="defaultEntryTypeStockResolvingStrategy" alias="entryTypeStockResolvingStrategy" />
+	<bean id="defaultEntryTypeStockResolvingStrategy" class="de.hybris.platform.travelservices.strategies.stock.impl.DefaultEntryTypeStockResolvingStrategy">
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="defaultTransportStockResolvingStrategy" alias="transportStockResolvingStrategy" />
+	<bean id="defaultTransportStockResolvingStrategy" class="de.hybris.platform.travelservices.strategies.stock.transport.impl.TransportStockResolvingStrategy">
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="defaultRoomRateStockResolvingStrategy" alias="roomRateStockResolvingStrategy" />
+	<bean id="defaultRoomRateStockResolvingStrategy" class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.RoomRateStockResolvingStrategy">
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<bean id="defaultAccommodationProductStockResolvingStrategy"
+		class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.DefaultAccommodationProductStockResolvingStrategy">
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="defaultAccommodationStockResolvingStrategy" alias="accommodationStockResolvingStrategy" />
+	<bean id="defaultAccommodationStockResolvingStrategy" class="de.hybris.platform.travelservices.strategies.stock.accommodation.impl.AccommodationStockResolvingStrategy">
+		<property name="strategyByProductTypeMap" ref="strategyByProductTypeMap" />
+	</bean>
+
+	<alias alias="commerceStockLevelCalculationStrategy" name="defaultTravelCommerceStockLevelCalculationStrategy" />
+	<bean id="defaultTravelCommerceStockLevelCalculationStrategy" class="de.hybris.platform.travelservices.stock.strategies.impl.DefaultTravelCommerceAvailabilityCalculationStrategy"
+		parent="defaultCommerceStockLevelCalculationStrategy" />
+
+	<alias name="defaultReplaceCartMergingStrategy" alias="commerceCartMergingStrategy" />
+	<bean id="defaultReplaceCartMergingStrategy" class="de.hybris.platform.travelservices.order.impl.ReplaceCartMergingStrategy"
+		parent="abstractCommerceCartStrategy">
+		<property name="userService" ref="userService" />
+		<property name="commerceCartService" ref="commerceCartService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="commerceAddToCartStrategy" ref="commerceAddToCartStrategy" />
+		<property name="mergeAction" value="OVERWRITE" />
+	</bean>
+
+	<alias alias="checkoutCustomerStrategy" name="defaultTravelCheckoutCustomerStrategy" />
+	<bean id="defaultTravelCheckoutCustomerStrategy" class="de.hybris.platform.travelservices.strategies.impl.DefaultTravelCheckoutCustomerStrategy"
+		parent="defaultCheckoutCustomerStrategy">
+		<property name="bookingService" ref="bookingService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultAutoAccommodationAllocationStrategy" alias="autoAccommodationAllocationStrategy" />
+	<bean id="defaultAutoAccommodationAllocationStrategy" class="de.hybris.platform.travelservices.strategies.impl.DefaultAutoAccommodationAllocationStrategy">
+		<property name="accommodationMapService" ref="accommodationMapService" />
+		<property name="modelService" ref="modelService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="configuredAccomNumberComparator" ref="configuredAccomNumberComparator" />
+	</bean>
+
+	<bean id="travelProductBasedAutoAccommodationAllocationStrategy" class="de.hybris.platform.travelservices.strategies.impl.TravelProductBasedAutoAccommodationAllocationStrategy">
+		<property name="accommodationMapService" ref="accommodationMapService" />
+		<property name="modelService" ref="modelService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="configuredAccomNumberComparator" ref="configuredAccomNumberComparator" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="productReferenceService" ref="productReferenceService" />
+	</bean>
+
+	<alias name="travelEventPublishingSubmitOrderStrategy" alias="eventPublishingSubmitOrderStrategy" />
+	<bean id="travelEventPublishingSubmitOrderStrategy" class="de.hybris.platform.travelservices.strategies.impl.TravelEventPublishingSubmitOrderStrategy">
+		<property name="eventService" ref="eventService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultTravelPDTRowsQueryStrategy" alias="travelPDTRowsQueryStrategy" />
+	<bean id="defaultTravelPDTRowsQueryStrategy" class="de.hybris.platform.travelservices.price.strategies.impl.TravelPDTRowsQueryStrategy">		
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias alias="currentFactoryFindPricingStrategy" name="currentTravelPricingStrategy" />
+	<bean id="currentTravelPricingStrategy" class="de.hybris.platform.travelservices.price.strategies.impl.FindTravelPricingWithCurrentPriceFactoryStrategy"
+		parent="currentFactoryFindBundlePricingStrategy">
+		<property name="transportFacilityService" ref="transportFacilityService" />
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="travelBundleCommerceAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+	<bean id="travelBundleCommerceAddToCartStrategy" class="de.hybris.platform.travelservices.order.impl.TravelBundleCommerceAddToCartStrategy"
+			parent="bundleCommerceAddToCartStrategy">
+		<property name="sessionService" ref="sessionService" />
+        <property name="calculationService" ref="calculationService" />
+    </bean>
+
+	<!-- Payment options -->
+
+	<bean id="fullInAdvancePaymentOptionStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.FullInAdvancePaymentOptionStrategy">
+		<property name="entryTypePaymentInfoCreationStrategies">
+			<util:list>
+				<ref bean="transportationPayInAdvancePaymentInfoStrategy" />
+				<ref bean="accommodationPayInAdvancePaymentInfoStrategy" />
+                <ref bean="defaultPayInAdvancePaymentInfoStrategy" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="partiallyDelayedPaymentOptionStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.PartiallyDelayedPaymentOptionStrategy">
+		<property name="bookingService" ref="bookingService" />
+		<property name="entryTypePaymentInfoCreationStrategies">
+			<util:list>
+				<ref bean="transportationPayInAdvancePaymentInfoStrategy" />
+				<ref bean="accommodationDelayedPaymentInfoStrategy" />
+                <ref bean="defaultPayInAdvancePaymentInfoStrategy" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="transportationPayInAdvancePaymentInfoStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.TransportationPayInAdvancePaymentInfoStrategy">
+	</bean>
+
+	<bean id="accommodationPayInAdvancePaymentInfoStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.AccommodationPayInAdvancePaymentInfoStrategy">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+   
+    <bean id="defaultPayInAdvancePaymentInfoStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.DefaultPayInAdvancePaymentInfoStrategy">
+    </bean>
+
+	<bean id="accommodationDelayedPaymentInfoStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.AccommodationDelayedPaymentInfoStrategy">
+		<property name="bookingService" ref="bookingService" />
+		<property name="ratePlanService" ref="ratePlanService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean id="accommodationPayNowPaymentOptionStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.AccommodationPayNowPaymentOptionStrategy">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultConsignmentsStatusOverrideStrategy" alias="consignmentsStatusOverrideStrategy" />
+	<bean id="defaultConsignmentsStatusOverrideStrategy" class="de.hybris.platform.travelservices.strategies.impl.ConsignmentsStatusOverrideStrategy">
+		<property name="modelService" ref="modelService" />
+	</bean>
+	
+	<alias name="defaultTransactionCalculationStrategy" alias="transactionCalculationStrategy"/>
+	<bean id="defaultTransactionCalculationStrategy" class="de.hybris.platform.travelservices.accommodation.strategies.impl.TransactionCalculationStrategy">
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+	
+	<alias name="defaultAbstractPaymentTransactionEntryCreationStrategy" alias="abstractPaymentTransactionEntryCreationStrategy"/>
+	<bean id="defaultAbstractPaymentTransactionEntryCreationStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.AbstractPaymentTransactionEntryCreationStrategy" abstract="true">
+		<property name="timeService" ref="timeService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="paymentService" ref="paymentService"/>
+		<property name="orderService" ref="orderService"/>
+		<property name="transactionCalculationStrategy" ref="transactionCalculationStrategy"/>
+	</bean>
+	
+	<alias name="defaultRefundTransactionEntryCreationStrategy" alias="defaultRefundTransactionEntryCreationStrategy"/>
+	<bean id="defaultRefundTransactionEntryCreationStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.DefaultRefundTransactionEntryCreationStrategy"
+		parent="abstractPaymentTransactionEntryCreationStrategy">
+		<property name="orderTotalByEntryTypeCalculationStrategy" ref="orderTotalByEntryTypeCalculationStrategy"/>
+		<property name="totalRefundCalculationStrategy" ref="totalRefundCalculationStrategy"/>
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+	
+	<alias name="defaultAccommodationRefundTransactionEntryCreationStrategy" alias="accommodationRefundTransactionEntryCreationStrategy"/>
+	<bean id="defaultAccommodationRefundTransactionEntryCreationStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.AccommodationRefundTransactionEntryCreationStrategy"
+		parent="abstractPaymentTransactionEntryCreationStrategy">
+		<property name="ratePlanService" ref="ratePlanService"/>
+		<property name="orderTotalPaidForAccommodationGroupCalculationStrategy" ref="orderTotalPaidForAccommodationGroupCalculationStrategy"/>
+		<property name="cancelPenaltiesCalculationService" ref="cancelPenaltiesCalculationService"/>
+		<property name="bookingService" ref="bookingService" />	
+	</bean>
+	
+	<alias name="defaultRefundPaymentTransactionStrategy" alias="defaultRefundPaymentTransactionStrategy"/>
+	<bean id="defaultRefundPaymentTransactionStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.DefaultRefundPaymentTransactionStrategy">
+		<property name="defaultRefundTransactionEntryCreationStrategy" ref="defaultRefundTransactionEntryCreationStrategy"/>
+	</bean>
+	
+	<alias name="defaultAccommodationRefundPaymentTransactionStrategy" alias="accommodationRefundPaymentTransactionStrategy"/>
+	<bean id="defaultAccommodationRefundPaymentTransactionStrategy" class="de.hybris.platform.travelservices.strategies.payment.impl.AccommodationRefundPaymentTransactionStrategy">
+		<property name="accommodationRefundTransactionEntryCreationStrategy" ref="accommodationRefundTransactionEntryCreationStrategy"/>
+	</bean>
+	
+	<alias name="defaultTravelOrderCodeGenerationStrategy" alias="travelOrderCodeGenerationStrategy"/>
+	<bean id="defaultTravelOrderCodeGenerationStrategy" class="de.hybris.platform.travelservices.strategies.impl.DefaultTravelOrderCodeGenerationStrategy">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+
+</beans>

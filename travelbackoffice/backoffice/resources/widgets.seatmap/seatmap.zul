@@ -1,0 +1,76 @@
+<widget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:noNamespaceSchemaLocation="http://www.zkoss.org/2005/zul"
+		xmlns:w="client"
+		xmlns:n="http://www.zkoss.org/2005/zk/native">
+	<style src="${wr}/seatmap.css"/>
+
+	<zk>
+
+		<html>
+	        <![CDATA[
+				<script type="text/javascript">
+	                function showReference(className){
+	                    jq(".y_reference-editor").slideUp();
+	                    if(className){
+	                        var classSelector = "." + className;
+	                        jq(classSelector).slideDown();
+	                    }
+	                }
+				</script>
+			]]>
+			<zscript><![CDATA[ 
+	       		
+	    	]]> 
+	        </zscript>
+    	</html>
+		<div style="background-color : white; padding: 15px;" sclass="seatmap-div">
+			<grid sclass="yw-seatmap-test">
+				<columns sizable="false">
+					<column width="33%"/>
+					<column width="33%"/>
+					<column width="34%"/>
+				</columns>
+				<rows>
+					<row height="80px"  style="border:none">
+						<div height="80px">
+							<label value="${labels.seatmap.transportVehicle}"/>
+							<editor id="transportVehicleReferenceEditor" sclass="y_editorSelection" type="Reference(TransportVehicle)" >
+								<custom-attributes pageSize="5" isNestedObjectCreationDisabled="true"/>
+							</editor>
+						</div>
+					</row>
+					<row height="80px"  style="border:none">
+						<radiogroup>
+					        <vlayout>
+					            <radio id="travelRoute"  label="${c:l('create.wizard.bundle.step1.route')}" w:onCheck="showReference('y_travelRouteReferenceDiv')"/>
+					            <div sclass="y_travelRouteReferenceDiv y_reference-editor" style="${isTravelRoute?'':'display: none;'} height: 50px;">
+					                <editor id="travelRouteReferenceEditor" type="Reference(TravelRoute)" property="mapping.travelRoute">
+					                    <custom-attributes pageSize="5"/>
+					                </editor>
+					            </div>
+					            <radio id="travelSector"  label="${c:l('create.wizard.bundle.step1.sector')}" w:onCheck="showReference('y_travelSectorReferenceDiv')"/>
+					            <div zclass="y_travelSectorReferenceDiv y_reference-editor" style="${isTravelSector?'':'display: none;'} height: 50px;">
+					                <editor id="travelSectorReferenceEditor" type="Reference(TravelSector)" property="mapping.travelSector">
+					                    <custom-attributes pageSize="5"/>
+					                </editor>
+					            </div>
+					            <radio id="transportOffering" label="${c:l('create.wizard.bundle.step1.flight')}" w:onCheck="showReference('y_transportOfferingReferenceDiv')"/>
+					            <div zclass="y_transportOfferingReferenceDiv y_reference-editor" style="${isFlight?'':'display: none;'} height: 50px;">
+					                <editor id="transportOfferingReferenceEditor" type="Reference(TransportOffering)" property="mapping.transportOffering">
+					                    <custom-attributes pageSize="5"/>
+					                </editor>
+					            </div>
+					        </vlayout>
+    					</radiogroup>
+					</row>
+					<row height="80px"  style="border:none">
+						<div height="80px">
+							<button id="searchBtn" label="${labels.seatmap.search}"/>
+						</div>
+					</row>
+				</rows>
+			</grid>
+		</div>
+
+	</zk>
+</widget>

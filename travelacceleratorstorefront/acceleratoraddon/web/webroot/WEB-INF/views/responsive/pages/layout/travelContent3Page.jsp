@@ -1,0 +1,25 @@
+<%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="template" tagdir="/WEB-INF/tags/addons/travelacceleratorstorefront/responsive/template"%>
+<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
+<template:page pageTitle="${pageTitle}">
+	<%-- RIGHT WIDE --%>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-3 side-to-top">
+				<cms:pageSlot position="LeftContent" var="feature">
+					<cms:component component="${feature}" />
+				</cms:pageSlot>
+				<div class="promotions hidden-xs">
+					<cms:pageSlot position="SideContent" var="feature" element="section">
+						<cms:component component="${feature}" />
+					</cms:pageSlot>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-9">
+				<cms:pageSlot position="RightContent" var="feature">
+					<cms:component component="${feature}" />
+				</cms:pageSlot>
+			</div>
+		</div>
+	</div>
+</template:page>

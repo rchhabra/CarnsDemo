@@ -1,0 +1,5 @@
+# ImpEx for Importing AircraftInfo into travel accelerator
+
+INSERT_UPDATE AircraftInfo; code[unique = true]
+
+; A380-800

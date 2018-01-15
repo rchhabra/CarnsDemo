@@ -1,0 +1,50 @@
+<div>
+    <table width="100%" cellspacing="0" style="margin:0;padding:0;table-layout:auto;border:1px solid #1E4EBF;">
+        <tbody>
+        <tr>
+            <td height="100px" colspan="6" class="structureViewSection">
+                <cockpit code="TopHeaderSlot"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" height="125px" width="25%" class="structureViewSection">
+                <cockpit code="SiteLogo"/>
+            </td>
+            <td colspan="4" class="structureViewSection">
+                <cockpit code="HeaderLinks" />
+            </td>
+        </tr>
+        <tr>
+            <td height="600px" colspan="4" rowspan="2" width="66%" style="vertical-align:top;" class="structureViewSection">
+                <div>Personal Details page data</div>
+            </td>
+            <td height="400px" colspan="2" style="vertical-align:top;" class="structureViewSection">
+                <cockpit code="Reservation"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="200px" colspan="2" class="structureViewSection">
+                <cockpit code="SideContent"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="200px" colspan="4" width="66%" class="structureViewSection">
+                <cockpit code="BottomContent"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="200px" colspan="6" class="structureViewSection">
+                <cockpit code="ReservationOverlay"/>
+            </td>
+        </tr>
+        <tr>
+            <td height="200px" colspan="6" class="structureViewSection">
+                <cockpit code="Footer"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="width:100%; border-top: 2px solid #bbb" class="cmsContentEditor">
+        <cockpit code="editor"/>
+    </div>
+</div>

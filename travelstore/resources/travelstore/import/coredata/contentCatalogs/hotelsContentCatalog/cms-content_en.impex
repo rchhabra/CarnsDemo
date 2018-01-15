@@ -1,0 +1,38 @@
+#
+# Import CMS content for the Hotels site
+#
+
+$contentCatalog = hotelsContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+# Language
+$lang = en
+
+# Content Pages
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; homepage                     ; "Home"
+; ; login                        ; "Login"
+; ; checkout-login               ; "Checkout Login"
+; ; bookingConfirmationPage      ; "Booking Confirmation"
+; ; profilePage                  ; "My Profile"
+; ; notFound                     ; "Page Not Found"
+; ; bookingDetailsPage           ; "Booking Details"
+; ; orderFailedPage              ; "Order Failed"
+; ; contactUsPage                ; "Contact Us"
+; ; faqPage                      ; "Frequently Asked Questions"
+; ; privacyPolicyPage            ; "Privacy Policy"
+; ; termsConditionsPage          ; "Terms & Conditions"
+; ; accommodationSearchPage      ; "Accommodation Search"
+; ; accommodationDetailsPage     ; "Accommodation Details"
+; ; guestDetailsPage             ; "Guest Details"
+; ; paymentMethodPage            ; "Payment Method Page"
+; ; helpPage                     ; "Help"
+; ; updatePassword               ; "Update Forgotten Password"
+; ; multiStepCheckoutSummaryPage ; "Checkout"
+; ; payment-details              ; "Saved Payment Details"
+; ; my-saved-searches            ; "My Saved Searches"
+; ; disability-and-mobility      ; "Disability & Mobility"
+; ; preferences                  ; "Preferences"
+; ; order-approval-dashboard     ; "Order Approval Dashboard"
+; ; order-approval-details       ; "Order Approval Details"
+; ; consents                     ; "My Consents"

@@ -1,0 +1,374 @@
+/*------- Accommodation & Deal pages start -------*/
+
+.accommodation-selection-wrap,
+.deal-selection-wrap {
+    margin-left: -15px;
+    margin-right: -15px;
+    .modify-search {
+    	margin-bottom: 0;
+    }
+    .alert {
+    	margin-top: 20px;
+    }
+    .accommodation-results-wrapper,
+    .deal-results-wrapper {
+        margin-left: -15px;
+        margin-right: -15px;
+        .accommodation-items {
+        	padding-top: 0;
+        }
+		#map {
+			height: 900px; /* overriding (default) 100% */
+		}
+    }
+    #filter,
+    #results-options {
+        margin-bottom: 10px;
+        padding-left: 0;
+        padding-right: 0;
+        label {
+            color: #000;
+        }
+    }
+    .results-list {
+    	.h4 {
+    		color: #6d6e71;
+            margin-top: 0;
+            margin-bottom: 20px;
+    	}
+    }
+}
+
+.deal-selection-wrap {
+	.primary-custom-content {
+		margin-bottom: 40px;
+	}
+}
+
+.package-details-wrap {
+	.modify-search {
+    	margin-bottom: 20px;
+    }
+}
+
+@media (max-width: @screen-xs-max) {
+    .fixed {
+        position: fixed;
+        &.nav-pills {
+        	position: relative;
+        }
+    }
+    .row-offcanvas-left {
+        #filter .sidebar-nav {
+        	overflow-y: scroll;
+		    overflow-x: hidden;
+            &.nav {
+                &.fixed {
+                    left: 0;
+                    overflow-y: scroll;
+                    bottom: 0;
+                    p {
+                        position: relative;
+                        z-index: 51;
+                    }
+                }
+            }
+            &.fixed {
+            	pointer-events: auto;
+                top: 64px;
+                left: 0;
+                bottom: 0;
+                right: 25%;
+                border: 1px solid #ddd;
+                background-color: #f5f5f5;
+                box-shadow: 1px 1px 10px #444;
+                z-index: 2;
+                .nav > li > a:hover,
+                .nav > li > a:focus {
+                    color: #000;
+                }
+                .dropdown-menu {
+                    border: 0;
+                    box-shadow: none;
+                    background: transparent;
+                    width: 100%;
+                    position: static;
+                }
+            }
+            form, .filter-form {
+            	padding: 0;
+            }
+        }
+    }
+    .overflow {
+        overflow: hidden;
+    }
+}
+
+/* off canvas filter slide */
+@media (max-width: @screen-xs-max) {
+    .row-offcanvas {
+        position: relative;
+        // -webkit-transition: all 0.25s ease-out;
+        // -moz-transition: all 0.25s ease-out;
+        // transition: all 0.25s ease-out;
+    }
+    .row-offcanvas-left .sidebar-offcanvas {
+        left: -55%;
+        position: absolute;
+        top: 0;
+        width: 40%;
+    }
+    .row-offcanvas-left.active {
+        left: 55%;
+        -webkit-transition: all 0.25s ease-out;
+        -moz-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+        .accommodation-selection-wrap {
+        	pointer-events: none;
+        }
+    }
+}
+
+/* Amenities list */
+
+.amenities-items {
+	> li ul {
+		display: none;
+	}
+}
+
+/* /Amenities list */
+
+#filter {
+	.sidebar-nav {
+		.checkbox {
+			margin: 5px 0;
+		}
+	}
+
+	/*------- Full width filter dropdown start -------*/
+	@media (min-width: @screen-sm) {
+		.full-width-dropdown {
+			&.open {
+				position: static;
+				padding: 0;
+			}
+			.dropdown-menu {
+				left: 0;
+				right: 0;
+			}
+		}
+	}
+	/*------- Full width filter dropdown end -------*/
+}
+
+/*------- Accommodation & Deal pages end -------*/
+
+/*------- Room/Guest details start -------*/
+
+.room-details {
+	&.panel-list {
+		.panel {
+			background: transparent;
+			margin-top: 20px;
+			&:first-child {			
+				border-bottom: 1px solid #47b6b1;
+			}
+		}
+		.panel-body {
+			background: #fff;
+		}
+	}
+	.panel {
+		&.my-account-secondary-panel {
+			border-top: 1px solid #47b6b1;
+			.lead-guest-details {
+				padding: 15px;
+			}
+		}
+	}
+	.room-wrapper {
+		margin: 0 20px;
+		background: #fff;
+	}
+	.room-costs {
+		padding-top: 20px;
+	}
+	.lead-details {
+		padding: 15px;
+	}
+	.accommodation-items {
+		padding-top: 0;
+		li {
+			background-color: transparent;
+			border: none;
+			margin-bottom: 0;
+		}
+		h3 {
+			float: none;
+			margin-right: 0;
+		}
+	}
+	.room {
+		h3 {
+			margin-top: 0;
+		}
+		>.panel-body {
+			border-bottom: 1px solid #47b6b1;
+			padding: 0;
+		}
+	}
+	[id*="booking-extras"] {
+		&.panel-body {
+			padding: 0;
+			margin-bottom: 0;
+		}
+		.list-group {
+			margin-bottom: 0;
+			&.no-padding {
+				.list-group-item {
+					&:last-child {
+						border-bottom: 0;
+					}
+				}
+			}
+			.list-group-item {
+				background-color: #fff;
+				&:first-child {
+					border-top: 0;
+				}
+			}
+		}
+	}
+}
+[id*="booking-extras"] { 
+	.extra-item {
+		padding: 15px;
+		padding-left: 50px;
+		color: #fff;
+		background-color: #076480;
+		word-wrap: break-word;
+        background-image: url("@{theme-images-url}/icon-guest-addon.png");
+		background-repeat: no-repeat;
+		background-position: 10px center;
+		@media (max-width: @screen-xs-max) {
+		    display: flex;
+		}
+		@media (max-width: @screen-xs) {
+		    width: 100%;
+		}
+
+		&.preferences {
+			padding-left: 15px;
+            background-image: none;
+		}
+		span {
+			line-height: 30px;
+		}
+	}
+	.extra-item-selection {
+	    color: #076480;
+	    text-align: center;
+	    padding: 15px;
+	    @media (max-width: @screen-xs) {
+		    width: 100%;
+		}
+	}
+	.input-row {
+		padding: 0;
+		@media (max-width: @screen-xs-max) {
+			flex-wrap: wrap;
+		}
+	}
+	.list-group-item {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	&.hotel-ancillary-extras {
+		li:last-child {
+			border-bottom: 0;
+		}
+		.input-row {
+			background-color: #fff;
+		}	
+	}
+}
+
+.panel-hotel {
+	.panel-body {
+		padding-top: 0;
+		padding-bottom: 0;
+		.panel-hotel-extra {
+			.nav-tabs > li {
+				position: relative;
+				a {
+					span:first-child {
+						position: absolute;
+						background: #dcdddf;
+						border-bottom: 1px solid #bbb;
+						padding: 2px 5px;
+						left: 0;
+						color: #6d6e71;
+						font-weight: bold;
+						right: 0;
+						top: 0;
+						text-align: center;
+					}
+					span:last-child {
+						padding-top: 20px;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+.cart-total {
+	font-weight: bold;
+}
+
+.room {
+	.table {
+		margin-top: 10px;
+		margin-bottom: 0;
+	}
+}
+
+/*------- Room/Guest details end -------*/
+
+/*------- Cart page start -------*/
+
+.summary-panels {
+	.panel-price-summary {
+		margin-bottom: 20px;
+	}
+}
+
+.room-panel {
+	.room {
+		border-bottom: 1px solid #47b6b1;
+		padding-bottom: 20px;
+	}
+	.panel.panel-default {
+		.panel-body {
+			padding: 0;
+		}
+	}
+}
+
+.panel-list {
+	.payment-type {
+		&.form-group {
+			label {
+	    		display: inline;
+	    		color: black;
+	    		font-weight: normal;
+	    	}
+		}
+    }
+}
+
+
+/*------- Cart page end -------*/

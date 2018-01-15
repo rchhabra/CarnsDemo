@@ -1,0 +1,18 @@
+# Language
+$lang = en
+
+############################# TRAVEL RULES ##########################
+UPDATE FeeSourceRule; code[unique = true]; name[lang = $lang]; description[lang = $lang]
+; adminFee ; Admin fee on cart ; An admin fee is added to cart during purchase journey
+
+UPDATE FareFilterSourceRule; code[unique = true]; name[lang = $lang]; description[lang = $lang]
+; filterFareTripType  ; Filter Fare Trip Type  ; Filter Fare based on search trip type
+; filterFareCategory5 ; Filter Fare Category 5 ; Filter Fare based on category 5 condition
+; filterFareCategory6 ; Filter Fare Category 6 ; Filter Fare based on category 6 condition
+; filterFareCategory7 ; Filter Fare Category 7 ; Filter Fare based on category 7 condition
+
+UPDATE CancellationSourceRule; code[unique = true]; name[lang = $lang]; description[lang = $lang]
+; retainFee ; Retain admin fee on cancellation ; Admin fee is retained if user cancels their booking less than 1 day before the departure
+
+UPDATE ShowBundleTemplateSourceRule; code[unique = true]; name[lang = $lang]; description[lang = $lang]
+; showBundleTemplate ; Show Bundle Template ; Bundle templates are shown for sale

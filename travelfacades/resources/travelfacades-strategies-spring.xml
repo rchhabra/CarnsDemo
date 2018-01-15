@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<alias name="defaultPriceAscendingSortStrategy" alias="priceAscendingSortStrategy" />
+	<bean id="defaultPriceAscendingSortStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.PriceAscendingSortStrategy">
+	</bean>
+
+	<alias name="defaultPriceDescendingSortStrategy" alias="priceDescendingSortStrategy" />
+	<bean id="defaultPriceDescendingSortStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.PriceDescendingSortStrategy">
+	</bean>
+
+	<alias name="pricedFirstSortStrategy" alias="propertiesSortStrategy" />
+	<bean id="pricedFirstSortStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.PricedPropertiesFirstSortStrategy">
+	</bean>
+
+	<alias name="defaultUpdateSortsStrategy" alias="updateCriterionSortsStrategy" />
+	<bean id="defaultUpdateSortsStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.UpdateSortsStrategy" />
+
+	<alias name="defaultUpdateFacetsStrategy" alias="updateCriterionFacetsStrategy" />
+	<bean id="defaultUpdateFacetsStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.UpdateFacetsStrategy" />
+
+	<alias name="defaultUpdateFilteredFacetsStrategy" alias="updateCriterionFilteredFacetsStrategy" />
+	<bean id="defaultUpdateFilteredFacetsStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.UpdateFilteredFacetsStrategy" />
+
+	<alias name="defaultUpdateQueryStrategy" alias="updateCriterionQueryStrategy" />
+	<bean id="defaultUpdateQueryStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.search.strategies.impl.UpdateQueryStrategy" />
+
+	<!-- BookingActionStrategies -->
+	<bean name="abstractBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AbstractBookingActionStrategy"
+		abstract="true">
+		<property name="bookingActionTypeUrlMap" ref="bookingActionTypeUrlMap" />
+	</bean>
+
+	<bean name="bookingLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.BookingLevelBookingActionStrategy"
+		parent="abstractBookingActionStrategy">
+		<property name="bookingActionTypeAltMessagesMap" ref="bookingActionTypeAltMessagesMap" />
+	</bean>
+	<bean name="originDestinationRefLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.OriginDestinationRefLevelBookingActionStrategy"
+		parent="abstractBookingActionStrategy">
+		<property name="bookingActionTypeAltMessagesMap" ref="bookingActionTypeAltMessagesMap" />
+	</bean>
+	<bean name="travellerLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.TravellerLevelBookingActionStrategy"
+		parent="abstractBookingActionStrategy">
+		<property name="bookingActionTypeAltMessagesMap" ref="bookingActionTypeAltMessagesMap" />
+	</bean>
+
+	<bean name="abstractAccommodationBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AbstractAccommodationBookingActionStrategy"
+		abstract="true">
+		<property name="accommodationBookingActionTypeUrlMap" ref="accommodationBookingActionTypeUrlMap" />
+	</bean>
+
+	<bean id="accommodationRoomStayLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationRoomStayLevelBookingActionStrategy"
+		parent="abstractAccommodationBookingActionStrategy" />
+
+	<bean id="accommodationRequestLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationRequestLevelBookingActionStrategy"
+		parent="abstractAccommodationBookingActionStrategy" />
+
+	<bean id="accommodationBookingLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationBookingLevelBookingActionStrategy"
+		parent="abstractAccommodationBookingActionStrategy" />
+
+	<bean id="globalBookingLevelBookingActionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.GlobalBookingLevelBookingActionStrategy">
+		<property name="globalBookingActionTypeUrlMap" ref="globalBookingActionTypeUrlMap" />
+	</bean>
+
+	<!-- BookingActionEnabledEvaluatorStrategies -->
+	<bean name="bookingStatusRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.BookingStatusRestrictionStrategy">
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.CANCELLED" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.CANCELLING" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.AMENDMENTINPROGRESS" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.ACTIVE_DISRUPTED_PENDING" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.ORDER_SPLIT" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.PAST" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.APPROVED" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.PENDING_APPROVAL" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.SUSPENDED" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.WAIT_FRAUD_MANUAL_CHECK" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="userActionTypeRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.UserActionTypeRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="removeTravellerUserActionTypeRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.RemoveTravellerUserActionTypeRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="userGroupTypeRestriction" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.UserGroupTypeRestriction">
+		<property name="userService" ref="userService" />
+		<property name="restrictedUserGroupCodeList">
+			<util:list value-type="java.lang.String">
+				<value>b2badmingroup</value>
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="lastAdultTravellerRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.LastAdultTravellerRestrictionStrategy">
+		<property name="bookingService" ref="bookingService"/>
+	</bean>
+
+	<bean name="pastLegsRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.PastLegsRestrictionStrategy">
+		<property name="timeService" ref="timeService" />
+	</bean>
+	<bean name="pastLegRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.PastLegRestrictionStrategy">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean name="departedLegsAmendRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.DepartedLegsRestrictionStrategy">
+		<property name="timeService" ref="timeService" />
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="departedLegsCancelRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.DepartedLegsRestrictionStrategy">
+		<property name="timeService" ref="timeService" />
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="departedLegRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.DepartedLegRestrictionStrategy">
+		<property name="timeService" ref="timeService" />
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="checkInWindowRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.CheckInWindowRestrictionStrategy">
+		<property name="configurationService" ref="configurationService" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<bean name="additionalSecurityRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AdditionalSecurityRestrictionStrategy">
+	</bean>
+
+	<bean name="transportOfferingStatusRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.TransportOfferingStatusRestrictionStrategy">
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="journeyCheckInRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.JourneyCheckInRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="timeService" ref="timeService" />
+		<property name="consignmentStatusList">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.basecommerce.enums.ConsignmentStatus.CHECKED_IN" />
+				<util:constant static-field="de.hybris.platform.basecommerce.enums.ConsignmentStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="legCheckInRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.LegCheckInRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<bean name="travellerCheckInRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.TravellerCheckInRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<bean name="disruptedBookingStatusStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.DisruptedBookingStatusStrategy" />
+
+	<bean id="paymentTypeRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.PaymentTypeRestrictionStrategy">
+		<property name="notAllowedPaymentTypes">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.commercefacades.travel.enums.PaymentType.COST_CENTER" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="accommodationBookingStatusRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationBookingStatusRestrictionStrategy">
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.CANCELLED" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.CANCELLING" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.AMENDMENTINPROGRESS" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.ACTIVE_DISRUPTED_PENDING" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.ORDER_SPLIT" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.PAST" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.SUSPENDED" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.WAIT_FRAUD_MANUAL_CHECK" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="roomStayCheckInDateRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.RoomStayCheckInDateRestrictionStrategy" />
+
+	<bean id="maxRequestNumberRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.MaxRequestNumberRestrictionStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<bean name="accommodationUserActionTypeRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationUserActionTypeRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+	</bean>
+
+	<bean name="accommodationUserGroupTypeRestriction" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationUserGroupTypeRestriction">
+		<property name="userService" ref="userService" />
+		<property name="restrictedUserGroupCodeList">
+			<util:list value-type="java.lang.String">
+				<value>b2badmingroup</value>
+			</util:list>
+		</property>
+	</bean>
+
+	<bean name="maxAccommodationNumberRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.MaxAccommodationNumberRestrictionStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<bean name="totalPaymentTransactionRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.TotalPaymentTransactionRestrictionStrategy">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="orderTotalByEntryTypeCalculationStrategy" ref="orderTotalByEntryTypeCalculationStrategy" />
+	</bean>
+
+	<bean name="accommodationExpiredBookingStatusRestrictionStrategy"
+		class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationExpiredBookingStatusRestrictionStrategy">
+		<property name="allowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.PAST" />
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.ACTIVE" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="roomStayExpiredCheckOutDateRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.RoomStayExpiredCheckOutDateRestrictionStrategy">
+		<property name="statusesToIgnore">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.PAST" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="previouslySubmittedReviewRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.PreviouslySubmittedReviewRestrictionStrategy">
+		<property name="accommodationOfferingCustomerReviewService" ref="accommodationOfferingCustomerReviewService" />
+	</bean>
+
+	<bean name="cancelCompleteBookingRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.CancelCompleteBookingRestrictionStrategy">
+	</bean>
+
+	<bean name="globalUserGroupTypeRestriction" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.GlobalUserGroupTypeRestriction">
+		<property name="userService" ref="userService" />
+		<property name="restrictedUserGroupCodeList">
+			<util:list value-type="java.lang.String">
+				<value>b2badmingroup</value>
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="accommodationPaymentTypeRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationPaymentTypeRestrictionStrategy">
+		<property name="notAllowedPaymentTypes">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.commercefacades.travel.enums.PaymentType.COST_CENTER" />
+			</util:list>
+		</property>
+	</bean>
+
+	<bean id="transportDealBundleRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.TransportDealBundleRestrictionStrategy" >
+		<property name="dealBundleTemplateService" ref="dealBundleTemplateService" />
+	</bean>
+
+	<bean id="accommodationDealBundleRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.AccommodationDealBundleRestrictionStrategy" >
+		<property name="dealBundleTemplateService" ref="dealBundleTemplateService" />
+	</bean>
+
+	<bean id="cancelCompleteBookingDealBundleRestrictionStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.CancelCompleteBookingDealBundleRestrictionStrategy" >
+		<property name="dealBundleTemplateService" ref="dealBundleTemplateService" />
+	</bean>
+
+	<alias name="lowestFareStrategy" alias="productsSortStrategy" />
+	<bean id="lowestFareStrategy" class="de.hybris.platform.travelfacades.strategies.impl.LowestFareStrategy" />
+
+	<bean id="priceSortingStrategy" class="de.hybris.platform.travelfacades.fare.sorting.strategies.PriceSortingStrategy" />
+	<bean id="numberOfStopsSortingStrategy" class="de.hybris.platform.travelfacades.fare.sorting.strategies.NumberOfStopsSortingStrategy" />
+	<bean id="departureTimeSortingStrategy" class="de.hybris.platform.travelfacades.fare.sorting.strategies.DepartureTimeSortingStrategy" />
+	<bean id="arrivalTimeSortingStrategy" class="de.hybris.platform.travelfacades.fare.sorting.strategies.ArrivalTimeSortingStrategy" />
+	<bean id="travelTimeSortingStrategy" class="de.hybris.platform.travelfacades.fare.sorting.strategies.TravelTimeSortingStrategy" />
+
+	<alias name="defaultTravelRestrictionStrategy" alias="travelRestrictionStrategy" />
+	<bean id="defaultTravelRestrictionStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TravelRestrictionStrategy" />
+
+	<alias name="defaultOfferSortStrategy" alias="offerSortStrategy" />
+	<bean id="defaultOfferSortStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultOfferSortStrategy">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultTravellerSortStrategy" alias="travellerSortStrategy" />
+	<bean id="defaultTravellerSortStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultTravellerSortStrategy">
+		<property name="sortedPassengerTypes" ref="sortedPassengerTypes" />
+	</bean>
+
+	<alias name="defaultTravellerStatusValidationStrategy" alias="travellerStatusValidationStrategy" />
+	<bean id="defaultTravellerStatusValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TravellerStatusValidationStrategy">
+		<property name="cartFacade" ref="cartFacade" />
+		<property name="checkInFacade" ref="checkInFacade" />
+	</bean>
+
+	<alias name="defaultBundledProductValidationStrategy" alias="bundledProductValidationStrategy" />
+	<bean id="defaultBundledProductValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.BundledProductValidationStrategy">
+		<property name="bookingService" ref="bookingService" />
+		<property name="cartService" ref="cartService" />
+	</bean>
+
+	<alias name="defaultProductAvailabilityValidationStrategy" alias="productAvailabilityValidationStrategy" />
+	<bean id="defaultProductAvailabilityValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.ProductAvailabilityValidationStrategy">
+		<property name="cartFacade" ref="cartFacade" />
+	</bean>
+
+	<alias name="defaultTravelRestrictionValidationStrategy" alias="travelRestrictionValidationStrategy" />
+	<bean id="defaultTravelRestrictionValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TravelRestrictionValidationStrategy">
+		<property name="travelRestrictionFacade" ref="travelRestrictionFacade" />
+	</bean>
+
+	<alias name="defaultTravellerStatusAccommodationValidationStrategy" alias="travellerStatusAccommodationValidationStrategy" />
+	<bean id="defaultTravellerStatusAccommodationValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TravellerStatusAccommodationValidationStrategy">
+		<property name="cartFacade" ref="cartFacade" />
+		<property name="checkInFacade" ref="checkInFacade" />
+	</bean>
+
+	<alias name="defaultOriginDestinationRefNumberValidationStrategy" alias="originDestinationRefNumberValidationStrategy" />
+	<bean id="defaultOriginDestinationRefNumberValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.OriginDestinationRefNumberValidationStrategy">
+		<property name="cartService" ref="cartService" />
+	</bean>
+
+	<alias name="defaultOriginDestinationValidationStrategy" alias="originDestinationValidationStrategy" />
+	<bean id="defaultOriginDestinationValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.OriginDestinationValidationStrategy">
+		<property name="cartService" ref="cartService" />
+		<property name="travelRouteService" ref="travelRouteService" />
+	</bean>
+
+	<alias name="defaultDepartureArrivalTimesValidationStrategy" alias="departureArrivalTimesValidationStrategy" />
+	<bean id="defaultDepartureArrivalTimesValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DepartureArrivalTimesValidationStrategy">
+		<property name="cartService" ref="cartService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+	</bean>
+
+	<alias name="defaultTransportOfferingsTimesValidationStrategy" alias="transportOfferingsTimesValidationStrategy" />
+	<bean id="defaultTransportOfferingsTimesValidationStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TransportOfferingsTimesValidationStrategy">
+		<property name="cartService" ref="cartService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+	</bean>
+
+	<alias name="defaultAddAccommodationToCartStrategy" alias="addAccommodationToCartStrategy" />
+	<bean id="defaultAddAccommodationToCartStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultAddAccommodationToCartStrategy">
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<alias name="defaultCheckInEvaluatorStrategy" alias="checkInEvaluatorStrategy" />
+	<bean id="defaultCheckInEvaluatorStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultCheckInEvaluatorStrategy">
+		<property name="configurationService" ref="configurationService" />
+		<property name="timeService" ref="timeService" />
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<alias name="defaultAncillaryOfferGroupDisplayStrategy" alias="ancillaryOfferGroupDisplayStrategy" />
+	<bean id="defaultAncillaryOfferGroupDisplayStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultAncillaryOfferGroupDisplayStrategy">
+	</bean>
+
+
+	<alias name="defaultTransportOfferingPastDepartureDateStrategy" alias="transportOfferingPastDepartureDateStrategy" />
+	<bean id="defaultTransportOfferingPastDepartureDateStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TransportOfferingPastDepartureDateStrategy">
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultTransportOfferingStatusStrategy" alias="transportOfferingStatusStrategy" />
+	<bean id="defaultTransportOfferingStatusStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TransportOfferingStatusStrategy">
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+				<util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<alias name="defaultTravellerStatusStrategy" alias="travellerStatusStrategy" />
+	<bean id="defaultTravellerStatusStrategy" class="de.hybris.platform.travelfacades.strategies.impl.TravellerStatusStrategy">
+		<property name="travelCartFacade" ref="cartFacade" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="notAllowedStatusList">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.basecommerce.enums.ConsignmentStatus.CHECKED_IN" />
+				<util:constant static-field="de.hybris.platform.basecommerce.enums.ConsignmentStatus.CANCELLED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<alias name="defaultProductFixedPriceDiscountEvaluationStrategy" alias="productFixedPriceDiscountEvaluationStrategy" />
+	<bean id="defaultProductFixedPriceDiscountEvaluationStrategy"
+		class="de.hybris.platform.travelfacades.facades.accommodation.strategies.impl.ProductFixedPriceDiscountEvaluationStrategy">
+	</bean>
+
+	<alias name="defaultProductPercentageDiscountEvaluationStrategy" alias="productPercentageDiscountEvaluationStrategy" />
+	<bean id="defaultProductPercentageDiscountEvaluationStrategy"
+		class="de.hybris.platform.travelfacades.facades.accommodation.strategies.impl.ProductPercentageDiscountEvaluationStrategy">
+	</bean>
+
+	<alias name="defaultCancelPenaltiesDescriptionCreationStrategy" alias="cancelPenaltiesDescriptionCreationStrategy" />
+	<bean id="defaultCancelPenaltiesDescriptionCreationStrategy"
+		class="de.hybris.platform.travelfacades.facades.accommodation.strategies.impl.DefaultCancelPenaltiesDescriptionCreationStrategy" />
+
+	<alias name="defaultCalculatePaymentTypeForChangeDatesStrategy" alias="calculatePaymentTypeForChangeDatesStrategy" />
+	<bean id="defaultCalculatePaymentTypeForChangeDatesStrategy" class="de.hybris.platform.travelfacades.booking.action.strategies.impl.DefaultCalculatePaymentTypeForChangeDatesStrategy">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="calculateTotalPriceForChangeDatesStrategyMap" ref="calculateTotalPriceForChangeDatesStrategyMap" />
+	</bean>
+
+	<bean id="perLegPerPaxPopulatePropertyMapStrategy" class="de.hybris.platform.travelfacades.order.strategies.impl.PerLegPerPaxPopulatePropertyMapStrategy">
+		<property name="travelRouteService" ref="travelRouteService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+	</bean>
+
+	<bean id="perBookingPopulatePropertyMapStrategy" class="de.hybris.platform.travelfacades.order.strategies.impl.PerBookingPopulatePropertyMapStrategy" />
+
+	<bean id="perLegPopulatePropertyMapStrategy" class="de.hybris.platform.travelfacades.order.strategies.impl.PerLegPopulatePropertyMapStrategy">
+		<property name="travelRouteService" ref="travelRouteService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+	</bean>
+
+	<bean id="perPaxPopulatePropertyMapStrategy" class="de.hybris.platform.travelfacades.order.strategies.impl.PerPaxPopulatePropertyMapStrategy" />
+
+
+	<bean id="ancillaryPerLegAvailabilityStrategy" class="de.hybris.platform.travelfacades.fare.search.strategies.impl.AncillaryPerLegAvailabilityStrategy">
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="abstractRestrictionExtrasStrategy" alias="restrictionExtrasStrategy" />
+	<bean name="abstractRestrictionExtrasStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.strategies.AbstractRestrictionExtrasStrategy"
+		abstract="true">
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+	</bean>
+
+	<alias name="defaultAddFreeQuantityExtrasStrategy" alias="addFreeQuantityExtrasStrategy" />
+	<bean id="defaultAddFreeQuantityExtrasStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.strategies.impl.AddFreeQuantityExtrasStrategy"
+		parent="restrictionExtrasStrategy" />
+
+	<alias name="defaultAddExactlyNQuantityExtrasStrategy" alias="addExactlyNQuantityExtrasStrategy" />
+	<bean id="defaultAddExactlyNQuantityExtrasStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.strategies.impl.AddExactlyNQuantityExtrasStrategy"
+		parent="restrictionExtrasStrategy" />
+
+	<alias name="defaultSuggestionsDisplayStrategy" alias="suggestionsDisplayStrategy" />
+	<bean id="defaultSuggestionsDisplayStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultSuggestionsDisplayStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultDecodeSavedSearchStrategy" alias="decodeSavedSearchStrategy" />
+	<bean id="defaultDecodeSavedSearchStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultDecodeSavedSearchStrategy">
+	</bean>
+
+	<alias name="defaultEncodeSavedSearchStrategy" alias="encodeSavedSearchStrategy" />
+	<bean id="defaultEncodeSavedSearchStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultEncodeSavedSearchStrategy">
+	</bean>
+
+	<alias name="defaultCityLocationCodesResolvingStrategy" alias="cityLocationCodesResolvingStrategy" />
+	<bean id="defaultCityLocationCodesResolvingStrategy" class="de.hybris.platform.travelfacades.fare.search.strategies.impl.CityLocationCodesResolvingStrategy">
+		<property name="travelLocationService" ref="travelLocationService" />
+	</bean>
+
+	<alias name="defaultLocationCodesResolvingStrategy" alias="defaultLocationCodesResolvingStrategy" />
+	<bean id="defaultLocationCodesResolvingStrategy" class="de.hybris.platform.travelfacades.fare.search.strategies.impl.DefaultLocationCodesResolvingStrategy" />
+
+	<alias name="defaultTransportSuggestionsDisplayStrategy" alias="transportSuggestionsDisplayStrategy" />
+	<bean id="defaultTransportSuggestionsDisplayStrategy" class="de.hybris.platform.travelfacades.strategies.impl.DefaultTransportSuggestionsDisplayStrategy">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultEncodeSearchUrlToMapStrategy" alias="encodeSearchUrlToMapStrategy" />
+	<bean id="defaultEncodeSearchUrlToMapStrategy" class="de.hybris.platform.travelfacades.facades.accommodation.strategies.impl.DefaultEncodeSearchUrlToMapStrategy" />
+
+	<alias name="defaultEncodeSearchUrlToMapPackageStrategy" alias="encodeSearchUrlToMapPackageStrategy" />
+	<bean id="defaultEncodeSearchUrlToMapPackageStrategy" class="de.hybris.platform.travelfacades.facades.packages.strategies.impl.DefaultEncodeSearchUrlToMapPackageStrategy" />
+
+	<alias name="defaultAccommodationSuggestionsDisplayStrategy" alias="accommodationSuggestionsDisplayStrategy" />
+	<bean id="defaultAccommodationSuggestionsDisplayStrategy" class="de.hybris.platform.travelfacades.accommodation.strategies.impl.DefaultAccommodationSuggestionsDisplayStrategy">
+	</bean>
+
+	<alias name="maxRadiusCalculationStrategy" alias="accommodationRadiusCalculationStrategy" />
+	<bean id="maxRadiusCalculationStrategy" class="de.hybris.platform.travelfacades.accommodation.strategies.impl.MaxRadiusCalculationStrategy">
+		<property name="configurationService" ref="configurationService" />
+		<property name="defaultRadius" value="#{configurationService.configuration.getProperty('accommodation.autosuggestion.radius.default')}" />
+	</bean>
+
+	<alias name="googleMapAutosuggestWrapper" alias="accommodationAutoSuggestWrapper" />
+	<bean id="googleMapAutosuggestWrapper" class="de.hybris.platform.travelfacades.accommodation.autosuggestion.wrapper.impl.GoogleMapAutosuggestWrapper">
+		<property name="googleAPIKey" value="#{configurationService.configuration.getProperty('google.api.key')}" />
+		<property name="searchPlaceTypes" value="#{configurationService.configuration.getProperty('accommodation.autosuggestion.types')}" />
+		<property name="accommodationRadiusCalculationStrategy" ref="accommodationRadiusCalculationStrategy" />
+		<property name="accommodationAutosuggestResponseParser" ref="accommodationAutosuggestResponseParser" />
+		<property name="accommodationPlaceDetailResponseParser" ref="accommodationPlaceDetailResponseParser" />
+	</bean>
+	
+	<alias name="defaultAddTransportBundleToCartStrategy" alias="addTransportBundleToCartStrategy"/>
+	<bean id="defaultAddTransportBundleToCartStrategy" class="de.hybris.platform.travelfacades.packages.strategies.impl.AddTransportBundleToCartStrategy">
+		<property name="cartFacade" ref="cartFacade"/>
+	</bean>
+	
+	<alias name="defaultAddAccommodationBundleToCartStrategy" alias="addAccommodationBundleToCartStrategy"/>
+	<bean id="defaultAddAccommodationBundleToCartStrategy" class="de.hybris.platform.travelfacades.packages.strategies.impl.AddAccommodationBundleToCartStrategy">
+		<property name="accommodationCartFacade" ref="accommodationCartFacade"/>
+	</bean>
+	
+	<alias name="defaultAddStandardBundleToCartStrategy" alias="addStandardBundleToCartStrategy"/>
+	<bean id="defaultAddStandardBundleToCartStrategy" class="de.hybris.platform.travelfacades.packages.strategies.impl.AddStandardBundleToCartStrategy">
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="bundleCartFacade" ref="bundleCartFacade"/>
+    </bean>
+	
+
+	<!-- Dynamic Packages Strategy beans -->
+	
+	<bean id="packagePriceAscendingSortStrategy" class="de.hybris.platform.travelfacades.facades.packages.strategies.impl.PackagePriceAscendingSortStrategy">
+		<property name="totalPackagePriceAscComparator" ref="totalPackagePriceAscComparator"/>
+	</bean>
+
+	<bean id="packagePriceDescendingSortStrategy" class="de.hybris.platform.travelfacades.facades.packages.strategies.impl.PackagePriceDescendingSortStrategy" />
+
+</beans>

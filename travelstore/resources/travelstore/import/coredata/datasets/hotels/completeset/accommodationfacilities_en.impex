@@ -1,0 +1,106 @@
+
+$lang=en
+
+INSERT_UPDATE AccommodationFacility;shortDescription[lang=$lang];code[unique=true]
+
+;"Iron";facil1
+;"Ironing Facilities";facil2
+;"Fan";facil3
+;"Heating";facil4
+;"Shower";facil5
+;"Hairdryer";facil6
+;"Free toiletries";facil7
+;"Toilet";facil8
+;"Bathroom";facil9
+;"Telephone";facil10
+;"Satellite Channels";facil11
+;"Electric kettle";facil12
+;"Air Conditioning";facil13
+;"Bathrobe";facil14
+;"Slippers";facil15
+;"Tea/Coffee Maker";facil16
+;"Microwave";facil17
+;"Wake Up Service/Alarm Clock";facil18
+;"Desk";facil19
+;"Carpeted";facil20
+;"Hardwood/Parquet floors";facil21
+;"Wardrobe/Closet";facil22
+;"Bath or Shower";facil23
+;"Pay-per-view Channels";facil24
+;"Radio";facil25
+;"Cable Channels";facil26
+;"Laptop safe";facil27
+;"Flat-screen TV";facil28
+;"Minibar";facil29
+;"Wake-up service";facil30
+;"Towels";facil31
+;"Linen";facil32
+;"iPod dock";facil33
+;"Safety Deposit Box";facil34
+;"Seating Area";facil35
+;"Sofa";facil36
+;"Washing Machine";facil37
+;EXTRA_LONG_BEDS____2_METRES_;"Extra Long Beds (> 2 metres)";facil38
+;"Tile/Marble floor";facil39
+;"Tumble dryer";facil40
+;"Cleaning products";facil41
+;"TV";facil42
+;"Kitchenette";facil43
+;"Refrigerator";facil44
+;"Dishwasher";facil45
+;"Dining area";facil46
+;"Kitchenware";facil47
+;"Stovetop";facil48
+;"Toaster";facil49
+;"Coffee machine";facil50
+;"CD Player";facil51
+;"Oven";facil52
+;"Alarm clock";facil53
+;"Private flat in building";facil54
+;"Bath";facil55
+;"Trouser Press";facil56
+;"Executive Lounge Access";facil57
+;"Hypoallergenic";facil58
+;"Soundproofing";facil59
+;"City view";facil60
+;"Clothes rack";facil61
+;"Dining table";facil62
+;"Children's high chair";facil63
+;"Upper floors accessible by lift";facil64
+;"Entire unit wheelchair accessible";facil65
+;"Semi-detached";facil66
+;"DVD Player";facil67
+;"Dressing Room";facil68
+;"Additional Toilet";facil69
+;"Video Games";facil70
+;"Interconnected room(s) available";facil71
+;"Private entrance";facil72
+;"Landmark / City view";facil73
+;"Bidet";facil74
+;"Private Pool";facil75
+;"iPad";facil76
+;"View";facil77
+;"Video";facil78
+;"Kitchen";facil79
+;"Sofa bed";facil80
+;"Additional bathroom";facil81
+;"Toilet paper";facil82
+;"Detached";facil83
+;"Spa Bath";facil84
+;"Sauna";facil85
+;"Fax";facil86
+;"Landmark view";facil87
+;"Fireplace";facil88
+;"Laptop";facil89
+;"Pool / City view";facil90
+;"Terrace";facil91
+;"Hot Tub";facil92
+;"Outdoor furniture";facil93
+;"Garden / City view";facil94
+;GAME_CONSOLE___PS3;"Game console - PS3";facil95
+;"Upper floors accessible by stairs only";facil96
+;"Mosquito net";facil97
+;"Patio";facil98
+;"Garden view";facil99
+;"Outdoor dining area";facil100
+;"City / River view";facil101

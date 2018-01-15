@@ -1,0 +1,16 @@
+######################################
+##### Test Users And User Groups #####
+######################################
+$lang=en
+$defaultPassword=password
+$passwordEncoding=md5
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);$setPassword
+;jane.smith1@mailinator.com;jane.smith1@mailinator.com;mrs;Jane Smith;sample family group user;$lang;GBP;customergroup;
+;ram.sharma@mailinator.com ;ram.sharma@mailinator.com ;mr ;Ram Sharma;normal user			  ;$lang;GBP;customergroup;
+;mohan.gupta@mailinator.com;mohan.gupta@mailinator.com;mr ;Mohan Gupta;normal user			  ;$lang;GBP;customergroup;
+;amit.rana@mailinator.com  ;amit.rana@mailinator.com  ;mr ;Amit Rana ;normal user			  ;$lang;GBP;customergroup;
+;rajesh.tiwari@mailinator.com;rajesh.tiwari@mailinator.com;mr ;Rajesh Tiwari ;normal user	  ;$lang;GBP;customergroup;
+;deepak.khanjeja@mailinator.com;deepak.khanjeja@mailinator.com;mr ;Deepak Khaneja ;normal user;$lang;GBP;customergroup;
+;neha.sharma@mailinator.com;neha.sharma@mailinator.com;mrs ;Neha Sharma ;normal user		  ;$lang;GBP;customergroup;

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company. ~ All rights reserved. ~ ~ This software 
+	is the confidential and proprietary information of SAP ~ Hybris ("Confidential Information"). You shall not disclose such ~ Confidential 
+	Information and shall use it only in accordance with the ~ terms of the license agreement you entered into with SAP Hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+	   	   http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="travelbackofficeLabelLocator" class="com.hybris.cockpitng.util.labels.ResourcesLabelLocator" scope="singleton"
+		init-method="init" lazy-init="false">
+		<property name="location" value="/travelbackoffice-backoffice-labels/" />
+		<property name="name" value="labels" />
+	</bean>
+
+	<alias alias="travelOrderOnDemandPricesHelper" name="defaultTravelOrderOnDemandPricesHelper" />
+	<bean id="defaultTravelOrderOnDemandPricesHelper" class="de.hybris.platform.travelbackoffice.helpers.TravelOrderOnDemandPricesHelper">
+		<property name="ondemandTaxCalculationService" ref="travelOndemandTaxCalculationService" />
+		<property name="onDemandPromotionService" ref="travelOndemandPromotionService" />
+	</bean>
+
+	<alias alias="travelOndemandTaxCalculationService" name="defaultTravelOndemandTaxCalculationService" />
+	<bean id="defaultTravelOndemandTaxCalculationService" class="de.hybris.platform.travelbackoffice.services.DefaultTravelOndemandTaxCalculationService"
+		parent="ondemandTaxCalculationService" />
+
+	<alias alias="travelOndemandPromotionService" name="defaultTravelOndemandPromotionService" />
+	<bean id="defaultTravelOndemandPromotionService" class="de.hybris.platform.travelbackoffice.services.DefaultTravelOndemandPromotionService"
+		parent="onDemandPromotionService" />
+
+	<bean id="localizedNameRenderer" class="de.hybris.platform.travelbackoffice.renderer.LocalizedNameRenderer"></bean>
+
+	<bean id="bundleTemplateCollectionRenderer" class="de.hybris.platform.travelbackoffice.renderer.BundleTemplateCollectionRenderer"></bean>
+
+	<!-- Renderers -->
+
+	<alias alias="orderComponentRenderer" name="defaultTravelOrderComponentRenderer" />
+	<bean id="defaultTravelOrderComponentRenderer" class="de.hybris.platform.travelbackoffice.renderer.TravelOrderComponentRenderer">
+		<constructor-arg ref="travelOrderOnDemandPricesHelper" />
+	</bean>
+
+	<alias alias="orderEntryComponentRenderer" name="defaultTravelOrderEntryComponentRenderer" />
+	<bean id="defaultTravelOrderEntryComponentRenderer" class="de.hybris.platform.travelbackoffice.renderer.TravelOrderEntryComponentRenderer">
+		<constructor-arg ref="travelOrderOnDemandPricesHelper" />
+	</bean>
+
+	<alias name="createScheduleConfigurationDayRenderer" alias="createScheduleConfigurationDayRenderer" />
+	<bean id="createScheduleConfigurationDayRenderer" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.CreateScheduleConfigurationDayRenderer"
+		parent="abstractScheduleConfigurationDayRenderer" />
+
+	<alias name="defaultAssignStockInventoryConfigurationRenderer" alias="assignStockInventoryConfigurationRenderer" />
+	<bean id="defaultAssignStockInventoryConfigurationRenderer" class="de.hybris.platform.travelbackoffice.widgets.inventory.renderer.AssignStockInventoryConfigurationRenderer" parent="abstractStockInventoryConfigurationRenderer" />
+
+	<alias name="defaultAssignStockInventoryForProductConfigurationRenderer" alias="assignStockInventoryForProductConfigurationRenderer" />
+	<bean id="defaultAssignStockInventoryForProductConfigurationRenderer" class="de.hybris.platform.travelbackoffice.widgets.inventory.renderer.AssignStockInventoryForProductConfigurationRenderer" parent="abstractStockInventoryConfigurationRenderer" />
+
+	<alias name="defaultAbstractStockInventoryConfigurationRenderer" alias="abstractStockInventoryConfigurationRenderer" />
+	<bean id="defaultAbstractStockInventoryConfigurationRenderer" class="de.hybris.platform.travelbackoffice.widgets.inventory.renderer.AbstractStockInventoryConfigurationRenderer" abstract="true"/>
+
+	<alias name="defaultStockInventoryPreviewRenderer" alias="stockInventoryPreviewRenderer" />
+	<bean id="defaultStockInventoryPreviewRenderer" class="de.hybris.platform.travelbackoffice.widgets.inventory.renderer.StockInventoryPreviewRenderer">
+		<property name="labelService" ref="labelService" />
+	</bean>
+
+	<alias name="defaultModifyScheduleConfigurationDayRenderer" alias="modifyScheduleConfigurationDayRenderer" />
+	<bean id="defaultModifyScheduleConfigurationDayRenderer" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.ModifyScheduleConfigurationDayRenderer"
+		parent="abstractScheduleConfigurationDayRenderer" />
+
+	<alias name="defaultModifyScheduleConfigurationSearchRenderer" alias="modifyScheduleConfigurationSearchRenderer" />
+	<bean id="defaultModifyScheduleConfigurationSearchRenderer" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.ModifyScheduleConfigurationSearchRenderer">
+		<property name="backofficeScheduleConfigurationService" ref="backofficeScheduleConfigurationService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<bean id="abstractScheduleConfigurationDayRenderer" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.AbstractScheduleConfigurationDayRenderer"
+		abstract="true">
+		<property name="labelService" ref="labelService" />
+	</bean>
+
+	<alias name="defaultModifyInventoryForFlightRenderer" alias="modifyInventoryForFlightRenderer"/>
+	<bean id="defaultModifyInventoryForFlightRenderer" class="de.hybris.platform.travelbackoffice.widgets.inventory.renderer.ModifyInventoryForFlightRenderer">
+		<property name="labelService" ref="labelService" />
+	</bean>
+
+	<alias name="defaultTravelConfigurableFlowRenderer" alias="configurableFlowRenderer"/>
+	<bean id="defaultTravelConfigurableFlowRenderer" class="de.hybris.platform.travelbackoffice.renderer.TravelConfigurableFlowRenderer" scope="prototype" parent="defaultConfigurableFlowRenderer"/>
+	<!-- Renderers -->
+
+	<!-- Handlers -->
+
+	<alias name="defaultManageScheduleConfirmationHandler" alias="manageScheduleConfirmationHandler" />
+	<bean id="defaultManageScheduleConfirmationHandler" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.DefaultManageScheduleConfirmationHandler">
+		<property name="cronjobService" ref="defaultCronJobService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="manageScheduleValidationHandler" alias="manageScheduleValidationHandler" />
+	<bean id="manageScheduleValidationHandler" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.ManageScheduleValidationHandler" />
+
+	<alias name="defaultCreateBundleCustomFirstStepHandler" alias="createBundleCustomFirstStepHandler" />
+	<bean id="defaultCreateBundleCustomFirstStepHandler" class="de.hybris.platform.travelbackoffice.widgets.bundle.CreateBundleCustomFirstStepHandler" />
+
+	<alias name="defaultCreateBundleCustomSecondStepHandler" alias="createBundleCustomSecondStepHandler" />
+	<bean id="defaultCreateBundleCustomSecondStepHandler" class="de.hybris.platform.travelbackoffice.widgets.bundle.CreateBundleCustomSecondStepHandler">
+		<property name="travelBackofficeMessageBoxManager" ref="travelBackofficeMessageBoxManager" />
+	</bean>
+
+	<alias name="defaultCreateBundleCustomThirdStepHandler" alias="createBundleCustomThirdStepHandler" />
+	<bean id="defaultCreateBundleCustomThirdStepHandler" class="de.hybris.platform.travelbackoffice.widgets.bundle.CreateBundleCustomThirdStepHandler" />
+
+	<alias name="defaultCreateInventoryForBookingClassStepHandler" alias="createInventoryForBookingClassStepHandler" />
+	<bean id="defaultCreateInventoryForBookingClassStepHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.CreateInventoryForBookingClassStepHandler">
+		<property name="backofficeScheduleConfigurationService" ref="backofficeScheduleConfigurationService" />
+	</bean>
+
+	<alias name="defaultAssignStockInventoryConfigurationHandler" alias="assignStockInventoryConfigurationHandler" />
+	<bean id="defaultAssignStockInventoryConfigurationHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.AssignStockInventoryConfigurationHandler" parent="abstractStockInventoryConfigurationHandler"/>
+
+	<alias name="defaultAssignStockInventoryForProductConfigurationHandler" alias="assignStockInventoryForProductConfigurationHandler" />
+	<bean id="defaultAssignStockInventoryForProductConfigurationHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.AssignStockInventoryForProductConfigurationHandler" parent="abstractStockInventoryConfigurationHandler"/>
+
+	<alias name="defaultAbstractStockInventoryConfigurationHandler" alias="abstractStockInventoryConfigurationHandler" />
+	<bean id="defaultAbstractStockInventoryConfigurationHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.AbstractStockInventoryConfigurationHandler" abstract="true" />
+
+	<alias name="defaultStockInventoryPreviewPopupHandler" alias="stockInventoryPreviewPopupHandler" />
+	<bean id="defaultStockInventoryPreviewPopupHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.StockInventoryPreviewPopupHandler">
+		<property name="travelbackofficeStockService" ref="travelbackofficeStockService"/>
+		<property name="travelBackofficeNotificationUtils" ref="travelBackofficeNotificationUtils" />
+	</bean>
+
+	<alias name="defaultModifyScheduleFirstStepValidationHandler" alias="modifyScheduleFirstStepValidationHandler" />
+	<bean id="defaultModifyScheduleFirstStepValidationHandler" class="de.hybris.platform.travelbackoffice.widgets.scheduleconfiguration.ModifyScheduleFirstStepValidationHandler" />
+	
+	<alias name="defaultModifyInventoryFinderHandler" alias="modifyInventoryFinderHandler"/>
+	<bean id="defaultModifyInventoryFinderHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.ModifyInventoryFinderHandler">
+		<property name="travelStockService" ref="travelStockService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultModifyInventoryValidationHandler" alias="modifyInventoryValidationHandler"/>	
+	<bean id="defaultModifyInventoryValidationHandler" class="de.hybris.platform.travelbackoffice.widgets.inventory.handler.ModifyInventoryValidationHandler"/>
+
+	<alias name="defaultTravelProductLabelProvider" alias="travelProductLabelProvider" />
+	<bean id="defaultTravelProductLabelProvider" class="de.hybris.platform.travelbackoffice.display.providers.TravelProductLabelProvider">
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultFareProductLabelProvider" alias="fareProductLabelProvider" />
+	<bean id="defaultFareProductLabelProvider" class="de.hybris.platform.travelbackoffice.display.providers.FareProductLabelProvider">
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultTravelBackofficeMessageBoxManager" alias="travelBackofficeMessageBoxManager" />
+	<bean id="defaultTravelBackofficeMessageBoxManager" class="de.hybris.platform.travelbackoffice.utils.TravelBackofficeMessageBoxManager">
+	</bean>
+	<!-- Handlers -->
+
+</beans>

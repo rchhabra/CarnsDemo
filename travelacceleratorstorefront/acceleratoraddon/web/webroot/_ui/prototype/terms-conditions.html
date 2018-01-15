@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="content-page">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <header class="row header"></header>
+        <div class="container">
+            <h2 class="h2">Terms and Conditions</h2>
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul class="list-unstyled">
+                        <li><a href="#">Article 1: Definitions</a></li>
+                        <li><a href="#">Article 2: Applicability</a></li>
+                        <li><a href="#">Article 3: Tickets</a></li>
+                        <li><a href="#">Article 4: Fares, Taxes, Fees</a></li>
+                        <li><a href="#">Article 5: Reservations</a></li>
+                        <li><a href="#">Article 6: Check-in and Boarding</a></li>
+                        <li><a href="#">Article 7: Right to refuse Carriage</a></li>
+                        <li><a href="#">Article 8: Baggage</a></li>
+                        <li><a href="#">Article 9: Schedules, Delays</a></li>
+                        <li><a href="#">Article 10: Refunds</a></li>
+                        <li><a href="#">Article 11: Conduct Aboard</a></li>
+                        <li><a href="#">Article 12: Arrangements</a></li>
+                        <li><a href="#">Article 13: Formalities</a></li>
+                        <li><a href="#">Article 14: Liability for Damage</a></li>
+                        <li><a href="#">Article 15: Claims and Actions</a></li>
+                        <li><a href="#">Article 16: Other Conditions</a></li>
+                        <li><a href="#">Article 17: Shorttitles</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9">
+                    <h3>Article 1: Definitions</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say:</p>
+                    <h4>Airline Designator Code</h4>
+                    <p>Means the two-characters or three letters which identify particular air carriers.</p>
+                    <h4>Baggage</h4>
+                    <p>Means all articles intended for passenger use. Unless otherwise specified, it shall include both checked and unchecked baggage of the passenger.</p>
+                    <h4>Baggage Check</h4>
+                    <p>Means those portions of the ticket which relate to the carriage.</p>
+                    <h4>Baggage Tag</h4>
+                    <p>Means a document issued by Carrier solely for identification of checked baggage, the baggage (strap) tag portion of which is attached by Carrier to a particular article of checked baggage and the baggage (identification) tag portion of which is given to the passenger.</p>
+                    <h4>Carrier or Operating Carrier</h4>
+                    <p>Means an air carrier other than ourselves, whose Airline Designator Code appears on your Ticket or on a Conjunction Ticket.</p>
+                    <h4>Checked Baggage</h4>
+                    <p>Means Baggage of which we take sole custody and for which we have issued a Baggage Tag..</p>
+                    <h4>Check-in Deadline</h4>
+                    <p>Means the two-characters or three letters which identify particular air carriers.</p>
+                    <h4>Code Share</h4>
+                    <p>Means carriage by air which will be operated by another carrier as indicated in the ticket. For passengers who will be traveling on an itinerary operated by one of Travel Store Code Share partners.</p>
+                    <h4>Conditions of Contract</h4>
+                    <p>Means those statements contained in or delivered with your Ticket or Itinerary/Receipt, identified as such and which incorporate by reference these Conditions of Carriage and notices.</p>
+                    <h3>Article 2: Applicability</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 3: Tickets</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 4: Fares, Taxes, Fees</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 5: Reservations</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 6: Check-in and Boarding</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 7: Right to refuse Carriage</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 8: Baggage</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 9: Schedules, Delays</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 10: Refunds</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 11: Conduct Aboard</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 12: Arrangements</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 13: Formalities</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 14: Liability for Damage</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 15: Claims and Actions</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 16: Other Conditions</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                    <h3>Article 17: Shorttitles</h3>
+                    <p>In these Conditions, except where the context otherwise requires or where it is otherwise expressly provided, the following expressions have the meanings respectively assigned to them, that is to say.</p>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-wrapper"></footer>
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+    
+</body>
+
+</html>

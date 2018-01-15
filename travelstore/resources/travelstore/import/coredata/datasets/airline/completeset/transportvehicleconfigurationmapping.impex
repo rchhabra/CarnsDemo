@@ -1,0 +1,6 @@
+# ImpEx for Importing TransportVehicleConfigurationMapping into travel accelerator
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+
+INSERT_UPDATE TransportVehicleConfigurationMapping; code[unique = true]; vehicle(code); accommodationMap(code, $catalogVersion); $catalogVersion
+
+; configMap1 ; A380-800 ; config1 ;

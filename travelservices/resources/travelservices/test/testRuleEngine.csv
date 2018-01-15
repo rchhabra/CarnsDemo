@@ -1,0 +1,23 @@
+INSERT_UPDATE DroolsKIEModule; name[unique = true]; mvnGroupId; mvnArtifactId; mvnVersion; ruleType(code); version; active[default = true]
+; travel-rules-module ; hybris-rules ; travelrulesengine ; 1.0.0 ; DEFAULT   ; 0 ;
+; promotions-module   ; hybris-rules ; promotions        ; 1.0.0 ; PROMOTION ; 0 ;
+
+INSERT_UPDATE DroolsKIEBase; name[unique = true]; kieModule(name)[unique = true]; equalityBehavior(code); eventProcessingMode(code)
+; travel-rules-base ; travel-rules-module ; EQUALITY ; STREAM
+; promotions-base   ; promotions-module   ; EQUALITY ; STREAM
+
+INSERT_UPDATE DroolsKIESession; name[unique = true]; kieBase(name)[unique = true]; sessionType(code)
+; travel-rules-session ; travel-rules-base ; STATELESS
+; promotions-session   ; promotions-base   ; STATELESS
+
+INSERT_UPDATE DroolsRuleEngineContext; name[unique = true]; kieSession(name); ruleFiringLimit
+; travel-rules-context ; travel-rules-session ; 200 ;
+; promotions-context   ; promotions-session   ; 200 ;
+
+UPDATE DroolsKIEModule; name[unique = true]; defaultKIEBase(name)
+; travel-rules-module ; travel-rules-base
+; promotions-module   ; promotions-base
+
+UPDATE DroolsKIEBase; name[unique = true]; defaultKIESession(name)
+; travel-rules-base ; travel-rules-session
+; promotions-base   ; promotions-session

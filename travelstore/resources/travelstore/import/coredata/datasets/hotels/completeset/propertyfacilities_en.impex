@@ -1,0 +1,347 @@
+$lang=en
+
+INSERT_UPDATE PropertyFacility;shortDescription[lang=$lang];code[unique=true]
+
+;"Bathroom";facil1
+;"Toilet";facil2
+;"Free toiletries";facil3
+;"Hairdryer";facil4
+;"Shower";facil5
+;"Electric kettle";facil6
+;"Pets are not allowed.";facil7
+;"Satellite Channels";facil8
+;"Telephone";facil9
+;"Bar";facil10
+;"Free! WiFi is available in public areas and is free of charge.";facil11
+;"Free! Wired internet is available in the hotel rooms and is free of charge.";facil12
+;"Public parking is possible at a location nearby (reservation is not possible) and costs GBP 24 per day.";facil13
+;"Luggage storage";facil14
+;"Fax/photocopying";facil15
+;"Ironing service";facil16
+;"VIP room facilities";facil17
+;"Dry cleaning";facil18
+;"Laundry";facil19
+;"24-hour front desk";facil20
+;"Room service";facil21
+;"Air conditioning";facil22
+;"Non-smoking throughout";facil23
+;"Heating";facil24
+;"Safety deposit box";facil25
+;"Lift";facil26
+;"Fan";facil27
+;"Ironing Facilities";facil28
+;"Non-smoking rooms";facil29
+;"Iron";facil30
+;"Newspapers";facil31
+;"Chinese";facil32
+;"Italian";facil33
+;"Hindi";facil34
+;"French";facil35
+;"Spanish";facil36
+;"English";facil37
+;"German";facil38
+;"Bath or Shower";facil39
+;"Towels";facil40
+;"Linen";facil41
+;"Wardrobe/Closet";facil42
+;"Sauna";facil43
+;"Fitness centre";facil44
+;"Spa and wellness centre";facil45
+;"Massage";facil46
+;"Desk";facil47
+;"Pay-per-view Channels";facil48
+;"Radio";facil49
+;"Cable Channels";facil50
+;"Flat-screen TV";facil51
+;"Restaurant";facil52
+;"Breakfast in the room";facil53
+;"Restaurant (à la carte)";facil54
+;"Snack bar";facil55
+;"Special diet menus (on request)";facil56
+;"Minibar";facil57
+;"Free! WiFi is available in all areas and is free of charge.";facil58
+;"No parking available.";facil59
+;"Express check-in/check-out";facil60
+;"Currency exchange";facil61
+;"Tour desk";facil62
+;"Ticket service";facil63
+;"Concierge service";facil64
+;"Babysitting/child services";facil65
+;"Daily maid service";facil66
+;"Meeting/banquet facilities";facil67
+;"Business centre";facil68
+;"Airport shuttle";facil69
+;"Car hire";facil70
+;"Airport shuttle (surcharge)";facil71
+;"Facilities for disabled guests";facil72
+;"Family rooms";facil73
+;"Bridal suite";facil74
+;"Allergy-free room";facil75
+;"Carpeted";facil76
+;"Laptop safe";facil77
+;"Hardwood/Parquet floors";facil78
+;"Wake-up service";facil79
+;"Russian";facil80
+;"Portuguese";facil81
+;"Polish";facil82
+;"Dutch";facil83
+;"Arabic";facil84
+;"Slippers";facil85
+;"iPod dock";facil86
+;"Kid meals";facil87
+;"Public parking is possible at a location nearby (reservation is not needed) and costs GBP 48 per day.";facil88
+;"Children television networks";facil89
+;"Shoeshine";facil90
+;"Trouser press";facil91
+;"Packed lunches";facil92
+;"Thai";facil93
+;"Bathrobe";facil94
+;"Extra Long Beds (> 2 metres)";facil95
+;"Kitchenette";facil96
+;"Refrigerator";facil97
+;"Microwave";facil98
+;"Dishwasher";facil99
+;"Washing Machine";facil100
+;"Kitchenware";facil101
+;"Tumble dryer";facil102
+;"Stovetop";facil103
+;"Cleaning products";facil104
+;"Coffee machine";facil105
+;"Tile/Marble floor";facil106
+;"Pets are allowed. Charges may be applicable.";facil107
+;"Seating Area";facil108
+;"Sofa";facil109
+;"Dining area";facil110
+;"Grocery deliveries";facil111
+;"Alarm clock";facil112
+;"Private flat in building";facil113
+;"Oven";facil114
+;"CD Player";facil115
+;"TV";facil116
+;"Free! WiFi is available in the hotel rooms and is free of charge.";facil117
+;"Bath";facil118
+;"Kid-friendly buffet";facil119
+;"Public parking is possible on site (reservation is not possible) and costs GBP 33 per day.";facil120
+;"ATM/cash machine on site";facil121
+;"Gift shop";facil122
+;"Shops (on site)";facil123
+;"Turkish";facil124
+;"Filipino";facil125
+;"Slovenian";facil126
+;"Slovak";facil127
+;"Romanian";facil128
+;"Lithuanian";facil129
+;"Hungarian";facil130
+;"Greek";facil131
+;"Welsh";facil132
+;"Bulgarian";facil133
+;"Afrikaans";facil134
+;"Terrace";facil135
+;"Indoor pool";facil136
+;"WiFi is available in the hotel rooms and costs GBP 15 per 24 hours.";facil137
+;"Private parking is possible at a location nearby (reservation is not needed) and costs GBP 15 per day.";facil138
+;"Paid WiFi";facil139
+;"Soundproof rooms";facil140
+;"Danish";facil141
+;"Pets are allowed on request. Charges may be applicable.";facil142
+;"Public parking is possible at a location nearby (reservation is not possible) and charges may be applicable.";facil143
+;"Serbian";facil144
+;"Designated smoking area";facil145
+;"Barber/beauty shop";facil146
+;"Mini-market on site";facil147
+;"Semi-detached";facil148
+;"Dining table";facil149
+;"Children's high chair";facil150
+;"Upper floors accessible by lift";facil151
+;"Entire unit wheelchair accessible";facil152
+;"Soundproofing";facil153
+;"Clothes rack";facil154
+;"View";facil155
+;"City view";facil156
+;"Tea/Coffee Maker";facil157
+;"Shuttle service (surcharge)";facil158
+;"Private parking is possible on site (reservation is needed) and costs GBP 45 per day.";facil159
+;"Restaurant (buffet)";facil160
+;"Free! Wireless Internet Hotspot is available in public areas and is free of charge.";facil161
+;"Vending machine (drinks)";facil162
+;"Wake Up Service/Alarm Clock";facil163
+;"Urdu";facil164
+;"Latvian";facil165
+;"WiFi is available in all areas and costs GBP 10 per 24 hours.";facil166
+;"Public parking is possible at a location nearby (reservation is not possible) and costs GBP 42 per day.";facil167
+;"Lockers";facil168
+;"Interconnected room(s) available";facil169
+;"Heated pool";facil170
+;"Landmark view";facil171
+;"Public parking is possible at a location nearby (reservation is not needed) and costs GBP 50 per day.";facil172
+;"Private check-in/check-out";facil173
+;"Private entrance";facil174
+;"Hypoallergenic";facil175
+;"Vietnamese";facil176
+;"Ukrainian";facil177
+;"Swedish";facil178
+;"Norwegian";facil179
+;"Lao";facil180
+;"Korean";facil181
+;"Khmer";facil182
+;"Japanese";facil183
+;"Indonesian";facil184
+;"Hebrew";facil185
+;"Catalan";facil186
+;"Azerbaijani";facil187
+;"Public parking is possible at a location nearby (reservation is needed) and costs GBP 60 per day.";facil188
+;"Estonian";facil189
+;"Garden";facil190
+;"Public parking is possible at a location nearby (reservation is not needed) and costs GBP 3 per hour.";facil191
+;"Public parking is possible at a location nearby (reservation is not possible) and charges are applicable.";facil192
+;"Hot tub/jacuzzi";facil193
+;"Hammam";facil194
+;"Library";facil195
+;"iPad";facil196
+;"Public parking is possible at a location nearby (reservation is not needed) and costs GBP 40 per day.";facil197
+;"Czech";facil198
+;"Public parking is possible on site (reservation is not needed) and costs EUR 21.50 per day.";facil199
+;"Public parking is possible on site (reservation is not needed) and costs EUR 35 per day.";facil200
+;"Shared lounge/TV area";facil201
+;"Dressing Room";facil202
+;"Patio";facil203
+;"Kitchen";facil204
+;"DVD Player";facil205
+;"Public parking is possible at a location nearby (reservation is not needed) and costs EUR 30.80 per day.";facil206
+;"Public parking is possible at a location nearby (reservation is not needed) and charges are applicable.";facil207
+;"Vending machine (snacks)";facil208
+;"Free! Internet via modem is available in some hotel rooms and is free of charge.";facil209
+;"Public parking is possible at a location nearby (reservation is not needed) and costs EUR 30 per day.";facil210
+;"Public parking is possible at a location nearby (reservation is not needed) and costs EUR 21 per day.";facil211
+;"Public parking is possible at a location nearby (reservation is not needed) and costs EUR 37 per day.";facil212
+;"Sun terrace";facil213
+;"Wired internet is available in the hotel rooms and charges are applicable.";facil214
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 20 per day.";facil215
+;"Public parking is possible on site (reservation is needed) and costs EUR 4 per hour.";facil216
+;"Balcony";facil217
+;"Public parking is possible at a location nearby (reservation is not needed) and costs EUR 36 per day.";facil218
+;"Bicycle rental";facil219
+;"Public parking is possible at a location nearby (reservation is needed) and costs EUR 25 per day.";facil220
+;"Free! Pets are allowed. No extra charges.";facil221
+;"Public parking is possible on site (reservation is not needed) and charges are applicable.";facil222
+;"Public parking is possible at a location nearby (reservation is not possible) and costs EUR 35 per day.";facil223
+;"Additional bathroom";facil224
+;"Toilet paper";facil225
+;"Sofa bed";facil226
+;"Bidet";facil227
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 25 per day.";facil228
+;"Private parking is possible on site (reservation is needed) and costs EUR 20 per day.";facil229
+;"Public parking is possible at a location nearby (reservation is needed) and charges are applicable.";facil230
+;"Spa Bath";facil231
+;"Free! Pets are allowed on request. No extra charges.";facil232
+;"Private parking is possible at a location nearby (reservation is not needed) and charges are applicable.";facil233
+;"Fireplace";facil234
+;"Adult only";facil235
+;"Private parking is possible on site (reservation is not possible) and costs EUR 35 per day.";facil236
+;"Private parking is possible at a location nearby (reservation is needed) and costs EUR 55 per day.";facil237
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 70 per day.";facil238
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 23 per day.";facil239
+;"Outdoor pool (seasonal)";facil240
+;"Solarium";facil241
+;"Free! Free private parking is possible on site (reservation is not needed).";facil242
+;"Private parking is possible on site (reservation is not needed) and costs EUR 30 per day.";facil243
+;"Private parking is possible on site (reservation is not possible) and costs EUR 26 per day.";facil244
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 23.60 per day.";facil245
+;"Bikes available (free)";facil246
+;"WiFi is available in the hotel rooms and costs EUR 19 per 24 hours.";facil247
+;"Private parking is possible on site (reservation is not needed) and costs EUR 38.77 per day.";facil248
+;"Private parking is possible at a location nearby (reservation is not possible) and charges are applicable.";facil249
+;"Private parking is possible on site (reservation is not needed) and costs EUR 23 per day.";facil250
+;"Private parking is possible on site (reservation is not needed) and costs EUR 22 per day.";facil251
+;"Pool/beach towels";facil252
+;"Pool bar";facil253
+;"Cycling";facil254
+;"Public parking is possible on site (reservation is needed) and costs EUR 30 per day.";facil255
+;"Chapel/shrine";facil256
+;"Private parking is possible on site (reservation is not needed) and charges are applicable.";facil257
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 28 per day.";facil258
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 64 per day.";facil259
+;"Moldovan";facil260
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 24 per day.";facil261
+;"Private parking is possible at a location nearby (reservation is needed) and costs EUR 25 per day.";facil262
+;"Golf course (within 3 km)";facil263
+;"Private parking is possible at a location nearby (reservation is not possible) and costs EUR 50 per day.";facil264
+;"Fax";facil265
+;"Private parking is possible on site (reservation is not needed) and costs EUR 55 per day.";facil266
+;"Private parking is possible on site (reservation is needed) and costs EUR 32 per day.";facil267
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 50 per day.";facil268
+;"Nightclub/DJ";facil269
+;"Public parking is possible at a location nearby (reservation is not needed) and costs EUR 65 per day.";facil270
+;"Public parking is possible at a location nearby (reservation is not possible) and costs EUR 19 per day.";facil271
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 48 per day.";facil272
+;"Private parking is possible on site (reservation is not needed) and costs EUR 29 per day.";facil273
+;"Evening entertainment";facil274
+;"Private parking is possible on site (reservation is needed) and costs EUR 25 per day.";facil275
+;"Board games/puzzles";facil276
+;"Private parking is possible on site (reservation is needed) and costs EUR 38 per day.";facil277
+;"Upper floors accessible by stairs only";facil278
+;"Hiking";facil279
+;"Books, DVDs, music for children";facil280
+;"Mosquito net";facil281
+;"Free! Shuttle service available.";facil282
+;"Garden view";facil283
+;"Kids' club";facil284
+;"Private parking is possible on site (reservation is not needed) and costs EUR 38 per day.";facil285
+;"BBQ facilities";facil286
+;"Free! Wireless Internet Hotspot is available in the hotel rooms and is free of charge.";facil287
+;"Private parking is possible on site (reservation is not needed) and costs EUR 25 per day.";facil288
+;"Private parking is possible on site (reservation is not needed) and costs EUR 18 per day.";facil289
+;"Public parking is possible on site (reservation is not possible) and costs EUR 25 per day.";facil290
+;"Ski storage";facil291
+;"Skiing";facil292
+;"Private parking is possible on site (reservation is not needed) and costs EUR 13 per day.";facil293
+;"Private parking is possible on site (reservation is not possible) and costs EUR 15 per day.";facil294
+;"Private parking is possible on site (reservation is not possible) and costs EUR 28 per day.";facil295
+;"Croatian";facil296
+;"Farsi";facil297
+;"Private parking is possible on site (reservation is not possible) and costs EUR 18 per day.";facil298
+;"Private parking is possible on site (reservation is needed) and costs EUR 17 per day.";facil299
+;"Free! Wired internet is available in public areas and is free of charge.";facil300
+;"Public parking is possible on site (reservation is not needed) and costs EUR 20 per day.";facil301
+;"Private parking is possible at a location nearby (reservation is not needed) and costs EUR 10 per day.";facil302
+;"Public parking is possible on site (reservation is not possible) and costs EUR 17 per day.";facil303
+;"Public parking is possible on site (reservation is needed) and costs EUR 23 per day.";facil304
+;"Public parking is possible on site (reservation is not needed) and costs EUR 14 per day.";facil305
+;"Public parking is possible on site (reservation is not possible) and costs EUR 12 per day.";facil306
+;"Private parking is possible on site (reservation is not possible) and charges are applicable.";facil307
+;"Private parking is possible on site (reservation is not needed) and costs EUR 20 per day.";facil308
+;"Private parking is possible on site (reservation is not needed) and costs EUR 24 per day.";facil309
+;"Private parking is possible on site (reservation is not possible) and costs EUR 23 per day.";facil310
+;"Public parking is possible at a location nearby (reservation is needed) and costs EUR 18 per day.";facil311
+;"Private parking is possible on site (reservation is not possible) and costs EUR 20 per day.";facil312
+;"Public parking is possible at a location nearby (reservation is not needed) and charges may be applicable.";facil313
+;"Public parking is possible on site (reservation is not possible) and costs EUR 23 per day.";facil314
+;"Indoor pool (all year)";facil315
+;"Free! Free private parking is possible on site (reservation is needed).";facil316
+;"Outdoor pool (all year)";facil317
+;"Outdoor pool";facil318
+;"Ski school";facil319
+;"Private parking is possible on site (reservation is not needed) and costs EUR 10 per day.";facil320
+;"Private parking is possible on site (reservation is needed) and charges are applicable.";facil321
+;"Public parking is possible on site (reservation is needed) and costs EUR 12 per day.";facil322
+;"Video Games";facil323
+;"Free! Wired internet is available in all areas and is free of charge.";facil324
+;"Private parking is possible at a location nearby (reservation is needed) and costs EUR 15 per day.";facil325
+;"Free! Free public parking is possible on site (reservation is not needed).";facil326
+;"Airport shuttle (free)";facil327
+;"Indoor pool (seasonal)";facil329
+;"Private parking is possible on site (reservation is not possible) and costs EUR 21 per day.";facil330
+;"Shuttle service (free)";facil331
+;"Public parking is possible on site (reservation is not needed) and charges may be applicable.";facil332
+;"WiFi is available in all areas and costs USD 16.95 per 24 hours.";facil333
+;"Wired internet is available in the hotel rooms and costs USD 16.95 per 24 hours.";facil334
+;"Private parking is possible at a location nearby (reservation is not needed) and costs USD 90 per day.";facil335
+;"Private parking is possible on site (reservation is not needed) and costs USD 65 per day.";facil336
+;"Public parking is possible at a location nearby (reservation is not needed) and costs USD 65 per day.";facil337
+;"Public parking is possible on site (reservation is not needed) and costs USD 39 per day.";facil338
+;"Private parking is possible on site (reservation is not needed) and costs USD 45 per day.";facil339
+;"Public parking is possible at a location nearby (reservation is not needed) and costs USD 55 per day.";facil340
+;"Private parking is possible on site (reservation is not needed) and costs USD 70 per day.";facil341
+;"Private parking is possible on site (reservation is not needed) and costs USD 58 per day.";facil342
+;"Private parking is possible at a location nearby (reservation is not needed) and costs USD 65 per day.";facil343
+;"Video";facil344

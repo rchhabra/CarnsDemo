@@ -1,0 +1,44 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$economyFareProducts = ORTC5, OOWC5, ORTC6C7, OOW, ORT, QRTC5, QOWC5, QRTC6C7, QOW, QRT, MRTC5, MOWC5, MRTC6C7, MOW, MRT, KRTC5, KOWC5, KRTC6C7, KOW, KRT
+$economyPlusFareProducts = ERTC5, EOWC5, ERTC6C7, EOW, ERT, TRTC5, TOWC5, TRTC6C7, TOW, TRT, WRTC5, WOWC5, WRTC6C7, WOW, WRT
+$businessFareProducts = IRTC5, IOWC5, IRTC6C7, IOW, IRT, RRTC5, ROWC5, RRTC6C7, ROW, RRT, CRTC5, COWC5, CRTC6C7, COW, CRT, DRTC5, DOWC5, DRTC6C7, DOW, DRT
+$economyPlusAncillaryProducts = PRIBOARDING1
+$businessAncillaryProducts = PRIBOARDING1, LOUNGEACC1
+$familyAncillaryProducts = STANDARDMEAL
+
+INSERT_UPDATE BundleTemplateStatus; id[unique = true]; status(code)[default = approved]; $catalogVersion
+; Approved_Status ; ;
+
+INSERT_UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; name[lang = $lang]; type(code); parentTemplate(id, $catalogVersion); status(id, $catalogVersion); $catalogVersion; promotional[default = false]; ignoreRules[default = true]
+; EconomyBundle                     ; ; Economy Bundle                ; ECONOMY      ;                   ; Approved_Status ; ;      ;
+; EconomyPlusBundle                 ; ; Economy Plus Bundle           ; ECONOMY_PLUS ;                   ; Approved_Status ; ;      ;
+; BusinessBundle                    ; ; Business Bundle               ; BUSINESS     ;                   ; Approved_Status ; ;      ;
+; FamilyBundle                      ; ; Family Bundle                 ; FAMILY       ;                   ; Approved_Status ; ; true ; false
+; SpecialBundle                     ; ; Special Bundle                ; SPECIAL      ;                   ; Approved_Status ; ;      ; false
+
+; FareProductEconomyBundle          ; ; Economy Fare Bundle           ; ECONOMY      ; EconomyBundle     ; Approved_Status ; ;      ;
+; FareProductEconomyPlusBundle      ; ; Economy Plus Fare Bundle      ; ECONOMY_PLUS ; EconomyPlusBundle ; Approved_Status ; ;      ;
+; FareProductBusinessBundle         ; ; Business Fare Bundle          ; BUSINESS     ; BusinessBundle    ; Approved_Status ; ;      ;
+; FareProductFamilyBundle           ; ; Family Fare Bundle            ; FAMILY       ; FamilyBundle      ; Approved_Status ; ; true ; false
+; FareProductSpecialBundle          ; ; Special Fare Bundle           ; SPECIAL      ; SpecialBundle     ; Approved_Status ; ;      ; false
+
+; AncillaryProductEconomyBundle     ; ; Economy Ancillary Bundle      ; ECONOMY      ; EconomyBundle     ; Approved_Status ; ;      ;
+; AncillaryProductEconomyPlusBundle ; ; Economy Plus Ancillary Bundle ; ECONOMY_PLUS ; EconomyPlusBundle ; Approved_Status ; ;      ;
+; AncillaryProductBusinessBundle    ; ; Business Ancillary Bundle     ; BUSINESS     ; BusinessBundle    ; Approved_Status ; ;      ;
+; AncillaryProductFamilyBundle      ; ; Family Ancillary Bundle       ; FAMILY       ; FamilyBundle      ; Approved_Status ; ; true ; false
+; AncillaryProductSpecialBundle     ; ; Special Ancillary Bundle      ; SPECIAL      ; SpecialBundle     ; Approved_Status ; ;      ; false
+
+#Add relevant FareProducts & Accommodation products to FareProductBundles & AncillaryProductBundle respectively.
+
+UPDATE BundleTemplate; id[unique = true]; version[default = 1.0][unique = true]; products(code, $catalogVersion)[mode = replace]; $catalogVersion
+; FareProductEconomyBundle          ; ; $economyFareProducts          ;
+; FareProductEconomyPlusBundle      ; ; $economyPlusFareProducts      ;
+; FareProductBusinessBundle         ; ; $businessFareProducts         ;
+; FareProductFamilyBundle           ; ; $economyFareProducts          ;
+; FareProductSpecialBundle          ; ; $economyFareProducts          ;
+; AncillaryProductEconomyBundle     ; ;                               ;
+; AncillaryProductEconomyPlusBundle ; ; $economyPlusAncillaryProducts ;
+; AncillaryProductBusinessBundle    ; ; $businessAncillaryProducts    ;
+; AncillaryProductFamilyBundle      ; ; $familyAncillaryProducts      ;
+; AncillaryProductSpecialBundle     ; ; $economyPlusAncillaryProducts ;

@@ -1,0 +1,11 @@
+# ImpEx for Importing TravelSector into travel accelerator
+
+$origin = origin(code)
+$destination = destination(code)
+$lang = en
+
+INSERT_UPDATE TravelSector; code[unique = true]; name[lang = $lang]; $origin; $destination
+"#% beforeEach:
+	line.put(1,line.get(3) + ""_"" + line.get(4));
+"
+"#% impex.includeExternalData(ImpExManager.class.getResourceAsStream(""/travelstore/import/coredata/datasets/airline/completeset/csv/travelsector.csv""), ""utf-8"", new char[] {','}, 0, 0);"

@@ -1,0 +1,2410 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+  <collectiontypes>
+    <collectiontype elementtype="SpecialServiceRequest" code="SpecialServiceRequestList" type="list"/>
+    <collectiontype elementtype="Remark" code="RemarksList" type="list"/>
+    <collectiontype elementtype="java.lang.String" code="StringList" type="list"/>
+    <collectiontype elementtype="GuestOccupancy" code="GuestOccupanciesList" type="list"/>
+    <collectiontype elementtype="GuestCount" code="GuestCountsList" type="list"/>
+    <collectiontype elementtype="java.util.Date" code="DateList" type="list"/>
+    <collectiontype elementtype="DateRange" code="DateRangeList" type="list"/>
+    <collectiontype elementtype="Accommodation" code="AccommodationList" type="list"/>
+    <collectiontype elementtype="AccommodationOffering" code="AccommodationOfferingList" type="list"/>
+    <collectiontype elementtype="PropertyFacility" code="PropertyFacilityList" type="list"/>
+    <collectiontype elementtype="RoomPreference" code="RoomPreferencesList" type="list"/>
+  </collectiontypes>
+
+  <enumtypes>
+    <enumtype code="AccommodationType">
+      <value code="ROOM"/>
+      <value code="CABIN"/>
+      <value code="BERTH"/>
+      <value code="SEAT"/>
+      <value code="APARTMENT"/>
+    </enumtype>
+    <enumtype code="BundleType" dynamic="true">
+      <value code="ECONOMY"/>
+      <value code="ECONOMY_PLUS"/>
+      <value code="BUSINESS"/>
+    </enumtype>
+    <enumtype code="TravellerType">
+      <value code="PASSENGER"/>
+      <value code="PET"/>
+      <value code="VEHICLE"/>
+    </enumtype>
+    <enumtype code="TransportOfferingType">
+      <value code="CROSSING"/>
+      <value code="FLIGHT"/>
+      <value code="TRAINOFFERING"/>
+      <value code="BUSOFFERING"/>
+    </enumtype>
+    <enumtype code="TransportFacilityType">
+      <value code="AIRPORT"/>
+      <value code="PORT"/>
+      <value code="RAIL_STATION"/>
+      <value code="BUS_STATION"/>
+    </enumtype>
+    <enumtype code="LocationType">
+      <value code="CITY"/>
+      <value code="REGION"/>
+      <value code="COUNTRY"/>
+      <value code="CONTINENT"/>
+      <value code="AIRPORTGROUP"/>
+      <value code="PROPERTY"/>
+    </enumtype>
+    <enumtype code="TransportVehicleType">
+      <value code="AIRCRAFT"/>
+      <value code="TRAIN"/>
+      <value code="SHIP"/>
+      <value code="BUS"/>
+    </enumtype>
+    <enumtype code="ConfiguredAccommodationType">
+      <value code="DECK"/>
+      <value code="CABIN"/>
+      <value code="BERTH"/>
+      <value code="ZONE"/>
+      <value code="ROW"/>
+      <value code="COLUMN"/>
+      <value code="SEAT"/>
+    </enumtype>
+    <enumtype code="ProximityItemType" dynamic="true">
+      <value code="POWER_PORT"/>
+      <value code="EMERGENCY_EXIT"/>
+      <value code="GALLEY"/>
+      <value code="LAVATORY"/>
+      <value code="CLOSET"/>
+      <value code="BASSINET"/>
+      <value code="ACCESSIBILITY"/>
+    </enumtype>
+    <enumtype code="ProximityRelativePosition">
+      <value code="LEFT"/>
+      <value code="RIGHT"/>
+      <value code="FRONT"/>
+      <value code="BACK"/>
+    </enumtype>
+	<enumtype code="AccommodationCharacteristicsType" dynamic="true">
+	    <value code="ROW"/>
+	    <value code="SEAT"/>
+	    <value code="ZONE"/>
+	    <value code="CABIN"/>
+	</enumtype>
+    <enumtype code="ProductType" dynamic="true">
+      <value code="FARE_PRODUCT"/>
+      <value code="ACCOMMODATION"/>
+      <value code="ANCILLARY"/>
+      <value code="FEE"/>
+    </enumtype>
+    <enumtype code="WakeCategoryType">
+      <value code="H"/>
+      <value code="M"/>
+      <value code="L"/>
+    </enumtype>
+    <enumtype code="TransportOfferingStatus">
+      <value code="DELAYED"/>
+      <value code="CANCELLED"/>
+      <value code="BOARDED"/>
+      <value code="SCHEDULED"/>
+      <value code="DEPARTED"/>
+    </enumtype>
+    <enumtype code="DocumentType">
+      <value code="PASSPORT"/>
+      <value code="NATIONAL_ID"/>
+      <value code="DRIVING_LICENCE"/>
+    </enumtype>
+    <enumtype code="SpecialRequestType">
+      <value code="WHEELCHAIR"/>
+      <value code="MEAL"/>
+    </enumtype>
+    <enumtype code="TravellerPreferenceType">
+      <value code="TRANSPORT_FACILITY"/>
+      <value code="LANGUAGE"/>
+    </enumtype>
+    <enumtype code="DeckType">
+      <value code="UPPER"/>
+      <value code="LOWER"/>
+    </enumtype>
+    <enumtype code="ReasonForTravel" dynamic="true">
+      <value code="BUSINESS"/>
+      <value code="LEISURE"/>
+    </enumtype>
+    <enumtype code="OfferSort" dynamic="true">
+      <value code="HOLDITEM"/>
+      <value code="MEAL"/>
+      <value code="SPECIAL"/>
+      <value code="LOUNGEACCESS"/>
+      <value code="PRIORITYCHECKIN"/>
+      <value code="PRIORITYBOARDING"/>
+    </enumtype>
+    <enumtype code="AccommodationStatus" dynamic="true">
+      <value code="OCCUPIED"/>
+      <value code="AVAILABLE"/>
+      <value code="UNAVAILABLE"/>
+    </enumtype>
+    <enumtype code="OrderStatus" autocreate="false" dynamic="true">
+      <value code="AMENDED"/>
+      <value code="BOOKED"/>
+      <value code="PAST"/>
+      <value code="ACTIVE"/>
+      <value code="AMENDMENTINPROGRESS"/>
+      <value code="ACTIVE_DISRUPTED_PENDING"/>
+      <value code="ACTIVE_DISRUPTED"/>
+    </enumtype>
+    <enumtype code="ConsignmentStatus" autocreate="false">
+      <value code="CHECKED_IN"/>
+    </enumtype>
+    <enumtype code="OrderCancelState" autocreate="false" generate="false">
+      <value code="CancelPossible"/>
+    </enumtype>
+    <enumtype code="AmendStatus" dynamic="true">
+      <value code="NEW"/>
+      <value code="SAME"/>
+      <value code="CHANGED"/>
+    </enumtype>
+    <enumtype code="AddToCartCriteriaType">
+      <value code="PER_LEG_PER_PAX"/>
+      <value code="PER_BOOKING"/>
+      <value code="PER_LEG"/>
+      <value code="PER_PAX"/>
+      <value code="PER_ROOM"/>
+    </enumtype>
+    <enumtype code="PropertyFacilityType" dynamic="true">
+      <value code="H24_FRONT_DESK"/>
+      <value code="H24_SECURITY"/>
+      <value code="BABY_SITTING"/>
+      <value code="CASINO"/>
+      <value code="CURRENCY_EXCHANGE"/>
+      <value code="COFFEE_SHOP"/>
+    </enumtype>
+    <enumtype code="AccommodationFacilityType" dynamic="true">
+      <value code="AIR_CONDITIONING"/>
+      <value code="ALARM_CLOCK"/>
+      <value code="WIFI"/>
+      <value code="BATHTUB"/>
+      <value code="TV"/>
+      <value code="DESK"/>
+    </enumtype>
+    <enumtype code="OrderEntryType">
+      <value code="ACCOMMODATION"/>
+      <value code="TRANSPORT"/>
+      <value code="DEFAULT"/>
+    </enumtype>
+    <enumtype code="MealType" dynamic="true">
+      <value code="ALL_INCLUSIVE"/>
+      <value code="BED_BREAKFAST"/>
+      <value code="FULL_BOARD"/>
+      <value code="LUNCH"/>
+      <value code="DINNER"/>
+      <value code="BREAKFAST_LUNCH"/>
+    </enumtype>
+    <enumtype code="GuaranteeType">
+      <value code="GUARANTEE"/>
+      <value code="DEPOSIT"/>
+      <value code="PREPAYMENT"/>
+    </enumtype>
+    <enumtype code="ProductReferenceTypeEnum" autocreate="false" generate="false">
+      <value code="FARE_ACCOMMODATION"/>
+    </enumtype>
+    <enumtype code="RoomPreferenceType" dynamic="true">
+      <value code="BED_PREFERENCE"/>
+    </enumtype>
+    <enumtype code="RoomType" dynamic="true">
+      <value code="ONE_PEOPLE_ROOM"/>
+      <value code="TWO_PEOPLE_ROOM"/>
+      <value code="THREE_PEOPLE_ROOM"/>
+      <value code="FOUR_PEOPLE_ROOM"/>
+      <value code="FIVE_PEOPLE_ROOM"/>
+      <value code="SIX_PEOPLE_ROOM"/>
+      <value code="SEVEN_PEOPLE_ROOM"/>
+      <value code="EIGHT_PEOPLE_ROOM"/>
+      <value code="NINE_PEOPLE_ROOM"/>
+    </enumtype>
+    <enumtype code="SolrPropertiesTypes" dynamic="true" generate="false" autocreate="false">
+      <value code="location_rpt"/>
+    </enumtype>
+    <enumtype code="BookingJourneyType">
+      <value code="BOOKING_TRANSPORT_ONLY"/>
+      <value code="BOOKING_ACCOMMODATION_ONLY"/>
+      <value code="BOOKING_TRANSPORT_ACCOMMODATION"/>
+      <value code="BOOKING_PACKAGE"/>
+    </enumtype>
+    <enumtype code="TripType">
+      <value code="SINGLE" />
+      <value code="RETURN" />
+    </enumtype>
+  </enumtypes>
+
+  <maptypes>
+    <maptype argumenttype="java.lang.String" returntype="java.lang.Integer" code="TransportOfferingStockLevels"/>
+  </maptypes>
+
+  <relations>
+    <relation localized="false" code="ConfiguredAccommodationRelation">
+      <sourceElement type="ConfiguredAccommodation" qualifier="superConfiguredAccommodation" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="ConfiguredAccommodation" qualifier="configuredAccommodation" cardinality="many"
+              collectiontype="list" >
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="ProductConfigAccommodationRelation">
+      <sourceElement type="Product" qualifier="product" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="ConfiguredAccommodation" qualifier="configuredAccommodation" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="AccommodationMapConfiguredAccommodationRelation">
+      <sourceElement type="AccommodationMap" qualifier="accommodationMap" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="ConfiguredAccommodation" qualifier="configuredAccommodation" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="ConfiguredAccommodationProximityItemRelation">
+      <deployment table="ConfAccomProximimity" typecode="30001"/>
+      <sourceElement type="ConfiguredAccommodation" qualifier="configuredAccommodation" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="ProximityItem" qualifier="proximityItem" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="ConfiguredAccommodationCharacteristicsRelation">
+	    <deployment table="ConfAccomChars" typecode="6912"/>
+	    <sourceElement type="ConfiguredAccommodation" qualifier="configuredAccommodations" cardinality="many">
+	        <modifiers/>
+	    </sourceElement>
+	    <targetElement type="AccommodationCharacteristics" qualifier="characteristics" cardinality="many">
+	        <modifiers/>
+	    </targetElement>
+	</relation>
+    <relation localized="false" code="CustomerSavedTravellerRelation">
+      <sourceElement type="Customer" qualifier="customer" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Traveller" qualifier="savedTraveller" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="SavedSearchRelation">
+      <sourceElement type="Customer" qualifier="customer" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="SavedSearch" qualifier="savedSearch" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TravelOrderEntryInfoTravellerRelation">
+      <deployment table="orderEntryTraveller" typecode="30002"/>
+      <sourceElement type="TravelOrderEntryInfo" qualifier="travelOrderEntryInfo" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Traveller" qualifier="travellers" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="ConsignmentTravellerRelation">
+      <sourceElement type="Consignment" qualifier="consignment" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Traveller" qualifier="traveller" cardinality="one">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportFacilityLocationRelation">
+      <sourceElement type="TransportFacility" qualifier="transportFacility" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Location" qualifier="location" cardinality="one">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TravelRouteTravelSectorRelation">
+      <deployment table="TransRouteSector" typecode="30003"/>
+      <sourceElement type="TravelRoute" qualifier="travelRoute" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TravelSector" qualifier="travelSector" cardinality="many" ordered="true">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportOfferingTransportFacilityRelation">
+      <deployment table="TransOfferFacility" typecode="30004"/>
+      <sourceElement type="TransportOffering" qualifier="travelOffering" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TransportFacility" qualifier="stopLocations" cardinality="many" ordered="true">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportVehicleIdentifierRelation">
+      <sourceElement type="TransportVehicle" qualifier="transportVehicle" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Identifier" qualifier="identifier" cardinality="one">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportVehicleInfoRelation">
+      <sourceElement type="TransportVehicle" qualifier="transportVehicle" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TransportVehicleInfo" qualifier="transportVehicleInfo" cardinality="one">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportVehicleInfoProviderRelation">
+      <sourceElement type="TransportVehicleInfo" qualifier="transportVehicleInfo" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TravelProvider" qualifier="travelProvider" cardinality="one">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TravelSectorTransportOfferingRelation">
+      <sourceElement type="TravelSector" qualifier="travelSector" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TransportOffering" qualifier="transportOffering" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="LocationIdentifierRelation">
+      <sourceElement type="Location" qualifier="location" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Identifier" qualifier="identifier" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="LocationActivityRelation">
+      <deployment table="locActivity" typecode="30005"/>
+      <sourceElement type="Location" qualifier="location" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Activity" qualifier="activity" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportFacilityIdentifierRelation">
+      <sourceElement type="TransportFacility" qualifier="transportFacility" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Identifier" qualifier="identifier" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportFacilityActivityRelation">
+      <deployment table="transFacilityActivity" typecode="30006"/>
+      <sourceElement type="TransportFacility" qualifier="transportFacility" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Activity" qualifier="activity" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TravellerTravellerPreferenceRelation">
+      <sourceElement type="Traveller" qualifier="traveller" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TravellerPreference" qualifier="travellerPreference" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="LocationPointOfServiceRelation">
+      <sourceElement type="Location" qualifier="location" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="PointOfService" qualifier="pointOfService" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportFacilityPointOfServiceRelation">
+      <sourceElement type="TransportFacility" qualifier="transportFacility" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="PointOfService" qualifier="pointOfService" cardinality="many" collectiontype="list">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation code="LocationLocationRelation" localized="false">
+      <deployment table="Loc2LocRel" typecode="30007"/>
+      <sourceElement qualifier="superlocations" type="Location" cardinality="many" collectiontype="list"
+              ordered="true">
+        <description>Super Locations</description>
+        <modifiers optional="true"/>
+      </sourceElement>
+      <targetElement qualifier="locations" type="Location" cardinality="many" collectiontype="list" ordered="true">
+        <description>Sub Locations</description>
+        <modifiers optional="true"/>
+      </targetElement>
+    </relation>
+    <relation code="LocationMediaRelation" localized="false">
+      <deployment table="Loc2MedRel" typecode="30008"/>
+      <sourceElement qualifier="superlocations" type="Location" cardinality="many" ordered="false">
+        <description>Super Locations</description>
+        <modifiers optional="true"/>
+      </sourceElement>
+      <targetElement qualifier="medias" type="Media" cardinality="many" collectiontype="list" ordered="true">
+        <description>Location medias</description>
+        <modifiers optional="true"/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TravelOrderEntryInfoTransportOfferingRelation">
+      <deployment table="entryToTransportOffering" typecode="30009"/>
+      <sourceElement type="TravelOrderEntryInfo" qualifier="travelOrderEntryInfo" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="TransportOffering" qualifier="transportOfferings" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation code="OrderSelectedAccommodationRelation" localized="false">
+      <sourceElement qualifier="order" type="AbstractOrder" cardinality="one">
+        <description>abstract order</description>
+        <modifiers optional="true"/>
+      </sourceElement>
+      <targetElement qualifier="selectedAccommodations" type="SelectedAccommodation" cardinality="many"
+              collectiontype="list" ordered="true">
+        <description>Selected Accommodations</description>
+        <modifiers optional="true" partof="true"/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="AbstractOrderDisruptionRelation">
+      <sourceElement type="AbstractOrder" qualifier="abstractOrder" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Disruption" qualifier="disruptions" cardinality="many" collectiontype="list">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="AccommodationOfferingFacilityRelation">
+      <deployment table="Acc2offRel" typecode="30061"/>
+      <sourceElement type="AccommodationOffering" qualifier="accommodationOffering" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="PropertyFacility" qualifier="propertyFacility" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="AccommodationFacilityRelation">
+      <deployment table="Acc2facRel" typecode="30062"/>
+      <sourceElement type="Accommodation" qualifier="accommodation" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="AccommodationFacility" qualifier="accommodationFacility" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RatePlanCancelPenaltyRelation">
+      <deployment table="RatePlan2PenRel" typecode="30063"/>
+      <sourceElement type="RatePlan" qualifier="ratePlan" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="CancelPenalty" qualifier="cancelPenalty" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RatePlanGuaranteeRelation">
+      <deployment table="RatePlan2GuarRel" typecode="30064"/>
+      <sourceElement type="RatePlan" qualifier="ratePlan" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Guarantee" qualifier="guarantee" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RatePlanInclusionRelation">
+      <deployment table="RatePlan2InclRel" typecode="30065"/>
+      <sourceElement type="RatePlan" qualifier="ratePlan" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="RatePlanInclusion" qualifier="ratePlanInclusion" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RatePlanMealTypeRelation">
+      <deployment table="RatePlan2MealRel" typecode="30066"/>
+      <sourceElement type="RatePlan" qualifier="ratePlan" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="MealType" qualifier="mealType" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="AbstractOrderEntryEntryGroupRelation">
+      <sourceElement type="AbstractOrderEntry" qualifier="entries" cardinality="many" collectiontype="list">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="AbstractOrderEntryGroup" qualifier="entryGroup" cardinality="one">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="MarketingRatePlanInfoRatePlanConfigRelation">
+      <deployment table="Marketing2RatePlan" typecode="30075"/>
+      <sourceElement type="MarketingRatePlanInfo" qualifier="marketingRatePlanInfo" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="RatePlanConfig" qualifier="ratePlanConfig" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="MarketingRatePlanInfoAccommodationOfferingRelation">
+      <sourceElement type="AccommodationOffering" qualifier="accommodationOffering" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="MarketingRatePlanInfo" qualifier="marketingRatePlanInfos" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RatePlanAccommodationRelation">
+      <deployment table="RatePlan2Accommodation" typecode="30076"/>
+      <sourceElement type="RatePlan" qualifier="ratePlan" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="Accommodation" qualifier="accommodation" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="AccommodationOfferingCustomerReviewRelation">
+      <sourceElement type="AccommodationOffering" qualifier="accommodationOffering" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="CustomerReview" qualifier="customerReviews" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RatePlanConfigAccommodationRelation">
+      <sourceElement type="Accommodation" qualifier="accommodation" cardinality="one">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="RatePlanConfig" qualifier="ratePlanConfigs" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="PaymentTransactionAbstractOrderEntryRelation">
+      <deployment table="Transactions2Entries" typecode="30078"/>
+      <sourceElement type="PaymentTransaction" qualifier="paymentTransaction" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="AbstractOrderEntry" qualifier="abstractOrderEntries" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="RoomPreferenceAccommodationRelation">
+      <deployment table="RoomPref2Accommodation" typecode="6900"/>
+      <sourceElement type="Accommodation" qualifier="accommodation" cardinality="many">
+        <modifiers/>
+      </sourceElement>
+      <targetElement type="RoomPreference" qualifier="roomPreferences" cardinality="many">
+        <modifiers/>
+      </targetElement>
+    </relation>
+    <relation localized="false" code="TransportFacilityTerminalRelation">
+    	<sourceElement type="TransportFacility" cardinality="one" qualifier="transportFacility" />
+    	<targetElement type="Terminal" cardinality="many" qualifier="terminals" />
+    </relation>
+    <relation localized="false" code="ScheduleConfigurationTransportOfferingRelation">
+      <sourceElement type="ScheduleConfiguration" cardinality="one" qualifier="scheduleConfiguration"/>
+      <targetElement type="TransportOffering" cardinality="many" collectiontype="list" qualifier="transportOfferings"/>
+    </relation>
+    <relation localized="false" code="ScheduleConfigurationScheduleConfigurationDayRelation">
+      <sourceElement type="ScheduleConfiguration" cardinality="one" qualifier="scheduleConfiguration"/>
+      <targetElement type="ScheduleConfigurationDay" cardinality="many" collectiontype="list"
+            qualifier="scheduleConfigurationDays">
+        <modifiers partof="true"/>
+      </targetElement>
+    </relation>
+  </relations>
+  <itemtypes>
+  
+    <itemtype code="UpdateStockLevelsToTransportOfferingCronJob" extends="CronJob"
+            jaloclass="de.hybris.platform.travelservices.jalo.cronjob.UpdateStockLevelsToTransportOfferingCronJob">
+      <description>This type represents a cron job that updates stock levels for transport offerings.</description>
+      <attributes>
+        <attribute type="StringList" qualifier="domesticAirports">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="economyStockLevels">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="economyPlusStockLevels">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="businessStockLevel">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="economyAncillaryStockLevels">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="economyPlusAncillaryStockLevels">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="businessAncillaryStockLevel">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStockLevels" qualifier="ancillaryStockLevel">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="TransportOffering" extends="Warehouse"
+            jaloclass="de.hybris.platform.travelservices.jalo.warehouse.TransportOffering">
+      <description>This type represents a travel schedule holding travel related information and extends warehouse type to utilize
+        stock functionality.
+      </description>
+      <custom-properties>
+        <property name="catalogItemType">
+          <value>java.lang.Boolean.FALSE</value>
+        </property>
+      </custom-properties>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="number">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.util.Date" qualifier="departureTime">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.util.Date" qualifier="arrivalTime">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.Long" qualifier="duration">
+          <persistence type="dynamic" attributeHandler="durationAttributeHandler"/>
+        </attribute>
+        <attribute type="Terminal" qualifier="originTerminal">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="Terminal" qualifier="destinationTerminal">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingType" qualifier="type">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOfferingStatus" qualifier="status">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.util.Date" qualifier="updatedDepartureTime">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TravelProvider" qualifier="travelProvider">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportVehicle" qualifier="transportVehicle">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.Boolean" qualifier="active">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+      <indexes>
+        <index name="transportOffering_code">
+          <key attribute="code"/>
+        </index>
+        <index name="transportOffering_number">
+          <key attribute="number"/>
+        </index>
+      </indexes>
+    </itemtype>
+    <itemtype code="Terminal" jaloclass="de.hybris.platform.travelservices.jalo.travel.Terminal">
+      <description>This type represents a location that handles passenger transportation and transfers.</description>
+      <deployment table="Terminal" typecode="30010"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="TravelSector" jaloclass="de.hybris.platform.travelservices.jalo.travel.TravelSector">
+      <description>This type represents a point to point segment. One or more sectors form a travel route.</description>
+      <deployment table="TravelSector" typecode="30011"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportFacility" qualifier="origin">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportFacility" qualifier="destination">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+      <indexes>
+        <index name="travelSector_code">
+          <key attribute="code"/>
+        </index>
+      </indexes>
+    </itemtype>
+    <itemtype code="TransportFacility" jaloclass="de.hybris.platform.travelservices.jalo.travel.TransportFacility">
+      <description>This type represents a building used by passengers and travel companies for facilitating a trip or journey.
+      </description>
+      <deployment table="TransportFacility" typecode="30012"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportFacilityType" qualifier="type">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+      <indexes>
+        <index name="transportFacility_code">
+          <key attribute="code"/>
+        </index>
+      </indexes>
+    </itemtype>
+    <itemtype code="TravelRoute" jaloclass="de.hybris.platform.travelservices.jalo.travel.TravelRoute">
+      <description>This type represents a travel route. A route comprises one or more sectors.</description>
+      <deployment table="TravelRoute" typecode="30013"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportFacility" qualifier="origin">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportFacility" qualifier="destination">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+      <indexes>
+        <index name="travelRoute_code">
+          <key attribute="code"/>
+        </index>
+      </indexes>
+    </itemtype>
+    <itemtype code="TravelProvider" jaloclass="de.hybris.platform.travelservices.jalo.travel.TravelProvider">
+      <description>This type represents an agency or an organization that provides travel related services to the public.
+      </description>
+      <deployment table="TravelProvider" typecode="30014"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+      <indexes>
+        <index name="travelProvider_code">
+          <key attribute="code"/>
+        </index>
+      </indexes>
+    </itemtype>
+    <itemtype code="TransportVehicleInfo" jaloclass="de.hybris.platform.travelservices.jalo.travel.TransportVehicleInfo">
+      <description>This type holds the information of a transport vehicle.</description>
+      <deployment table="TransportVehicleInfo" typecode="30015"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="ShipInfo" extends="TransportVehicleInfo" jaloclass="de.hybris.platform.travelservices.jalo.travel.ShipInfo">
+      <description>This type represents a ship information.</description>
+      <deployment table="ShipInfo" typecode="30016"/>
+    </itemtype>
+    <itemtype code="AircraftInfo" extends="TransportVehicleInfo"
+            jaloclass="de.hybris.platform.travelservices.jalo.travel.AircraftInfo">
+      <description>This type represents an aircraft information.</description>
+      <deployment table="AircraftInfo" typecode="30017"/>
+      <attributes>
+        <attribute type="WakeCategoryType" qualifier="wakeCategory">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="BusInfo" extends="TransportVehicleInfo" jaloclass="de.hybris.platform.travelservices.jalo.travel.BusInfo">
+      <description>This type represents a bus information.</description>
+      <deployment table="BusInfo" typecode="30018"/>
+    </itemtype>
+    <itemtype code="TrainInfo" extends="TransportVehicleInfo" jaloclass="de.hybris.platform.travelservices.jalo.travel.TrainInfo">
+      <description>This type represents a train information.</description>
+      <deployment table="TrainInfo" typecode="30019"/>
+    </itemtype>
+    <itemtype code="TransportVehicle" jaloclass="de.hybris.platform.travelservices.jalo.travel.TransportVehicle">
+      <description>This type represents a travel medium that transports people.</description>
+      <deployment table="TransportVehicle" typecode="30020"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportVehicleType" qualifier="type">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="AccommodationMap" jaloclass="de.hybris.platform.travelservices.jalo.travel.AccommodationMap">
+      <description>This type represents an accommodation map.</description>
+      <deployment table="AccommodationMap" typecode="30021"/>
+      <custom-properties>
+        <property name="catalogItemType">
+          <value>java.lang.Boolean.TRUE</value>
+        </property>
+        <property name="catalogVersionAttributeQualifier">
+          <value>"catalogVersion"</value>
+        </property>
+        <property name="uniqueKeyAttributeQualifier">
+          <value>"code"</value>
+        </property>
+      </custom-properties>
+      <attributes>
+        <attribute qualifier="catalogVersion" type="CatalogVersion">
+          <modifiers optional="false"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="code">
+          <modifiers optional="false"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportVehicleType" qualifier="type">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="Identifier" jaloclass="de.hybris.platform.travelservices.jalo.travel.Identifier">
+      <deployment table="Identifier" typecode="30022"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="codeContext">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="Activity" jaloclass="de.hybris.platform.travelservices.jalo.travel.Activity">
+      <description>This type represents a trip activity.</description>
+      <deployment table="Activity" typecode="30023"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="Location" jaloclass="de.hybris.platform.travelservices.jalo.travel.Location">
+      <description>This type represents a particular place or position.</description>
+      <deployment table="Location" typecode="30024"/>
+      <attributes>
+        <attribute type="LocationType" qualifier="locationType">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="name" type="localized:java.lang.String">
+          <modifiers optional="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="description" type="localized:java.lang.String">
+          <modifiers optional="true"/>
+          <persistence type="property">
+            <columntype>
+              <value>HYBRIS.LONG_STRING</value>
+            </columntype>
+          </persistence>
+        </attribute>
+        <attribute qualifier="code" type="java.lang.String">
+          <modifiers optional="false" unique="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="picture" type="Media">
+          <description>Image</description>
+          <modifiers optional="true"/>
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="PriceRow" autocreate="false" generate="false">
+      <description>Extending price row type to include travel attributes.</description>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="transportOfferingCode">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="travelRouteCode">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="travelSectorCode">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+      <indexes>
+        <index name="transportOffering_code">
+          <key attribute="transportOfferingCode"/>
+        </index>
+        <index name="travelRoute_code">
+          <key attribute="travelRouteCode"/>
+        </index>
+        <index name="travelSector_code">
+          <key attribute="travelSectorCode"/>
+        </index>
+      </indexes>
+    </itemtype>
+    <itemtype code="ProximityItem" jaloclass="de.hybris.platform.travelservices.jalo.travel.ProximityItem">
+      <description>This type represents any item next or close to the accommodation that may affect the journey.</description>
+      <deployment table="ProximityItem" typecode="30025"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="ProximityItemType" qualifier="type">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="ProximityRelativePosition" qualifier="relativePosition">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="description"> 
+            <persistence type="property"/> 
+        </attribute> 
+      </attributes>
+    </itemtype>
+    <itemtype code="AccommodationCharacteristics" jaloclass="de.hybris.platform.travelservices.jalo.travel.AccommodationCharacteristics">
+	    <description>This type represents additional details about the particular accommodation.</description>
+	    <deployment table="AccChars" typecode="6911"/>
+	    <attributes>
+	        <attribute type="java.lang.String" qualifier="code">
+	            <persistence type="property"/>
+	        </attribute>
+	        <attribute type="AccommodationCharacteristicsType" qualifier="type">
+	            <persistence type="property"/>
+	        </attribute>
+	        <attribute type="java.lang.String" qualifier="description">
+	            <persistence type="property"/>
+	        </attribute>
+	    </attributes>
+	</itemtype>
+    <itemtype code="CabinClass" jaloclass="de.hybris.platform.travelservices.jalo.travel.CabinClass">
+      <description>This type represents a class of accommodations for a transport vehicle.</description>
+      <deployment table="CabinClass" typecode="30026"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="localized:java.lang.String" qualifier="name">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.Integer" qualifier="cabinClassIndex">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="TransportVehicleConfigurationMapping"
+            jaloclass="de.hybris.platform.travelservices.jalo.travel.TransportVehicleConfigurationMapping">
+      <description>This type represents a mapping for transport vehicle information and configuration.</description>
+      <deployment table="TransVehicleConfigMap" typecode="30027"/>
+      <custom-properties>
+        <property name="catalogItemType">
+          <value>java.lang.Boolean.TRUE</value>
+        </property>
+        <property name="catalogVersionAttributeQualifier">
+          <value>"catalogVersion"</value>
+        </property>
+        <property name="uniqueKeyAttributeQualifier">
+          <value>"code"</value>
+        </property>
+      </custom-properties>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="code">
+          <modifiers optional="false"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="catalogVersion" type="CatalogVersion">
+          <modifiers optional="false"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportVehicleInfo" qualifier="vehicle">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TravelRoute" qualifier="travelRoute">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TravelSector" qualifier="travelSector">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOffering" qualifier="transportOffering">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="AccommodationMap" qualifier="accommodationMap">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="BundleTemplateTransportOfferingMapping"
+            jaloclass="de.hybris.platform.travelservices.jalo.travel.BundleTemplateTransportOfferingMapping">
+      <description>This type represents the mapping between bundle template and transport offering.</description>
+      <deployment table="BundleTransOfferingMap" typecode="30028"/>
+      <custom-properties>
+        <property name="catalogItemType">
+          <value>java.lang.Boolean.TRUE</value>
+        </property>
+        <property name="catalogVersionAttributeQualifier">
+          <value>"catalogVersion"</value>
+        </property>
+        <property name="uniqueKeyAttributeQualifier">
+          <value>"code"</value>
+        </property>
+      </custom-properties>
+      <attributes>
+        <attribute qualifier="code" type="java.lang.String">
+          <description>Attribute which identifies a unique value for a
+            BundleTemplateTransportOfferingMapping
+          </description>
+          <modifiers optional="false" unique="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="catalogVersion" type="CatalogVersion">
+          <description>Catalog Version</description>
+          <modifiers optional="false" unique="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="BundleTemplate" qualifier="bundleTemplate">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TravelRoute" qualifier="travelRoute">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TravelSector" qualifier="travelSector">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TransportOffering" qualifier="transportOffering">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="CabinClass" qualifier="cabinClass">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="ScheduleConfiguration" jaloclass="de.hybris.platform.travelservices.jalo.travel.ScheduleConfiguration">
+      <description>This item is responsible to store information selected in 'Create Schedule' wizard in backoffice</description>
+      <deployment table="ScheduleConfiguration" typecode="6903"/>
+      <attributes>
+        <attribute type="TravelProvider" qualifier="travelProvider">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="java.lang.String" qualifier="number">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="java.util.Date" qualifier="startDate">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.util.Date" qualifier="endDate">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="TravelSector" qualifier="travelSector">
+          <persistence type="property" />
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="ScheduleConfigurationDay" jaloclass="de.hybris.platform.travelservices.jalo.travel.ScheduleConfigurationDay">
+      <deployment table="ScheduleConfigurationDay" typecode="6904"/>
+      <attributes>
+        <attribute type="DayOfWeek" qualifier="dayOfWeek">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="java.util.Date" qualifier="departureTime">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="java.lang.Integer" qualifier="durationHrs">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="java.lang.Integer" qualifier="durationMins">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="Terminal" qualifier="originTerminal">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="Terminal" qualifier="destinationTerminal">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="TransportVehicle" qualifier="transportVehicle">
+          <persistence type="property" />
+        </attribute>
+        <attribute type="java.lang.Boolean" qualifier="selected">
+          <persistence type="property" />
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="TravelRestriction" jaloclass="de.hybris.platform.travelservices.jalo.travel.TravelRestriction">
+      <description>This type represents a travel limitation or rule.</description>
+      <deployment table="TravelRestriction" typecode="30029"/>
+      <attributes>
+        <attribute qualifier="code" type="java.lang.String">
+          <modifiers optional="false" unique="true"/>
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="effectiveDate" type="java.util.Date">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="expireDate" type="java.util.Date">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="travellerMaxOfferQty" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="travellerMinOfferQty" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="tripMaxOfferQty" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="tripMinOfferQty" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="passengerTypes" type="StringList">
+          <persistence type="property"/>
+        </attribute>
+        <!-- deprecated (use 'addToCartCriteria' of OfferGroupRestriction) -->
+        <attribute qualifier="addToCartCriteria" type="addToCartCriteriaType">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="OfferGroupRestriction" extends="TravelRestriction"
+            jaloclass="de.hybris.platform.travelservices.jalo.travel.OfferGroupRestriction">
+      <attributes>
+        <attribute qualifier="addToCartCriteria" type="addToCartCriteriaType" redeclare="true">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="AccommodationRestriction" extends="OfferGroupRestriction"
+            jaloclass="de.hybris.platform.travelservices.jalo.travel.AccommodationRestriction">
+    </itemtype>
+    <itemtype code="AddExactlyNRestriction" extends="AccommodationRestriction"
+            jaloclass="de.hybris.platform.travelservices.jalo.travel.AddExactlyNRestriction">
+    </itemtype>
+    <itemtype code="SelectedAccommodation" jaloclass="de.hybris.platform.travelservices.jalo.travel.SelectedAccommodation">
+      <description>This type represents an accommodation selected by the traveller.</description>
+      <deployment table="SelectedAccommodation" typecode="30030"/>
+      <attributes>
+        <attribute qualifier="transportOffering" type="TransportOffering">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="traveller" type="Traveller">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="configuredAccommodation" type="ConfiguredAccommodation">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="status" type="AccommodationStatus">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="TaxRow" autocreate="false" generate="false">
+      <description>Extending tax row type to include travel attributes.</description>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="originTransportFacility">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="originCountry">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="java.lang.String" qualifier="passengerType">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="Category" autocreate="false" generate="false">
+      <description>Extending category type to include additional attributes.</description>
+      <attributes>
+        <attribute qualifier="travelRestriction" type="OfferGroupRestriction">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="SolrIndexerQuery" autocreate="false" generate="false">
+      <description>Extending SolrIndexerQuery type to include additional run time parameters for system set up queries
+      </description>
+      <attributes>
+        <attribute qualifier="active" type="boolean">
+          <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+          <persistence type="property"/>
+          <modifiers optional="false"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="SolrIndexedTypeDefaultSortOrderMapping"
+            jaloclass="de.hybris.platform.travelservices.jalo.search.SolrIndexedTypeDefaultSortOrderMapping">
+      <description>This type represents the mapping of default sort order for solr indexed type</description>
+      <deployment table="IdxTypeSortOrderMapping" typecode="30077"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="indexedType">
+          <persistence type="property"/>
+        </attribute>
+        <attribute type="StringCollection" qualifier="defaultSortOrder">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="Disruption" jaloclass="de.hybris.platform.travelservices.jalo.travel.Disruption">
+      <description>This type represents disruption that affected the order</description>
+      <deployment table="Disruption" typecode="30046"/>
+      <attributes>
+        <attribute qualifier="transportOffering" type="TransportOffering">
+          <persistence type="property"/>
+        </attribute>
+        <attribute qualifier="originDestinationRefNumber" type="java.lang.Integer">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    <itemtype code="SavedSearch" jaloclass="de.hybris.platform.travelservices.jalo.user.SavedSearch">
+      <description>This type represents the previous search made by User</description>
+      <deployment table="SavedSearch" typecode="30048"/>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="encodedSearch">
+          <persistence type="property">
+            <columntype>
+              <value>HYBRIS.LONG_STRING</value>
+            </columntype>
+          </persistence>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <typegroup name="Product">
+      <itemtype code="Category" autocreate="false" generate="false">
+        <description>Extending product type to include additional travel attributes.</description>
+        <attributes>
+          <attribute type="java.lang.Boolean" qualifier="ignoreRules">
+            <persistence type="property"/>
+            <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="BundleTemplate" autocreate="false" generate="false">
+        <description>This type represents the fare options and fare products for a journey.</description>
+        <attributes>
+          <attribute type="BundleType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="promotional">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="ignoreRules">
+            <persistence type="property"/>
+            <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="AutoPickPerLegBundleSelectionCriteria" extends="AutoPickBundleSelectionCriteria"
+              jaloclass="de.hybris.platform.travelservices.jalo.travel.AutoPickPerLegBundleSelectionCriteria">
+      </itemtype>
+      
+      <itemtype code="Product" autocreate="false" generate="false">
+        <description>Extending product type to include additional travel attributes.</description>
+        <attributes>
+          <attribute type="ProductType" qualifier="productType">
+            <persistence type="property"/>
+            <model>
+            	<getter name="productType" deprecated="true" default="true"/>
+            	<setter name="productType" deprecated="true" default="true"/>
+            </model>
+          </attribute>
+          <attribute qualifier="travelRestriction" type="TravelRestriction">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="ignoreRules">
+            <persistence type="property"/>
+            <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="TravelProduct" extends="Product">
+        <description>Extending product type to include additional travel attributes.</description>
+      </itemtype>
+      <itemtype code="FareProduct" extends="TravelProduct" jaloclass="de.hybris.platform.travelservices.jalo.product.FareProduct">
+        <description>This type represents a fare that is used for a particular journey.</description>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="bookingClass">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="fareBasisCode">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="Accommodation" extends="TravelProduct" jaloclass="de.hybris.platform.travelservices.jalo.product.Accommodation">
+        <description>This type represents the seats of a transport vehicle.</description>
+        <attributes>
+          <attribute type="AccommodationType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="GuestOccupanciesList" qualifier="guestOccupancies">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RoomType" qualifier="roomType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="size" type="java.lang.String">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="AncillaryProduct" extends="TravelProduct" jaloclass="de.hybris.platform.travelservices.jalo.product.Ancillary">
+        <description>This type represents the ancillary products.</description>      
+      </itemtype>
+      <itemtype code="FeeProduct" extends="TravelProduct" jaloclass="de.hybris.platform.travelservices.jalo.product.Fee">
+        <description>This type represents the fee product.</description>
+      </itemtype>
+
+      <itemtype code="ExtraProduct" extends="TravelProduct" jaloclass="de.hybris.platform.travelservices.jalo.product.ExtraProduct">
+        <description>This type represents the extra product for accommodation.</description>
+      </itemtype>
+      
+      <itemtype code="ConfiguredAccommodation"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.ConfiguredAccommodation">
+        <description>This type represents the configured accommodation types and the bookable status.</description>
+        <deployment table="ConfiguredAccommodation" typecode="30032"/>
+        <custom-properties>
+          <property name="catalogItemType">
+            <value>java.lang.Boolean.TRUE</value>
+          </property>
+          <property name="catalogVersionAttributeQualifier">
+            <value>"catalogVersion"</value>
+          </property>
+          <property name="uniqueKeyAttributeQualifier">
+            <value>"uid"</value>
+          </property>
+        </custom-properties>
+        <attributes>
+          <attribute qualifier="catalogVersion" type="CatalogVersion">
+            <description>Catalog Version</description>
+            <modifiers optional="false" unique="true" />
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="uid">
+          	<modifiers unique="true" />
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="boolean" qualifier="bookable">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="identifier">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="ConfiguredAccommodationType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="number">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="name">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+        <indexes>
+          <index name="configuredAccommodation_identifier">
+            <key attribute="identifier"/>
+          </index>
+        </indexes>
+      </itemtype>
+      <itemtype code="AircraftCabin" extends="ConfiguredAccommodation"
+              jaloclass="de.hybris.platform.travelservices.jalo.seating.AircraftCabin">
+        <description>Extending configured accommodation type, this type represents an aircraft cabin.</description>
+        <attributes>
+          <attribute type="CabinClass" qualifier="cabinClass">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="StringList" qualifier="columnHeaders">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="AircraftDeck" extends="ConfiguredAccommodation"
+              jaloclass="de.hybris.platform.travelservices.jalo.seating.AircraftDeck">
+        <description>Extending configured accommodation type, this type represents an aircraft deck.</description>
+        <attributes>
+          <attribute type="DeckType" qualifier="deckType">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="ProductSpaceMapping" jaloclass="de.hybris.platform.travelservices.jalo.product.ProductSpaceMapping">
+        <deployment table="ProductSpaceMapping" typecode="30033"/>
+        <attributes>
+          <attribute type="Product" qualifier="sourceProduct">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="Product" qualifier="targetProduct">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="amountToConsume">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="PointOfService" autocreate="false" generate="false">
+        <description>Extending point of service type to include travel attributes.</description>
+        <attributes>
+          <attribute qualifier="timeZoneId" type="java.lang.String">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="StockLevel" autocreate="false" generate="false">
+        <description>Extending StockLevel type to include date related fields</description>
+        <attributes>
+          <attribute type="java.util.Date" qualifier="date">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Long" qualifier="timeUnit">
+            <persistence type="property"/>
+            <defaultvalue>Long.valueOf(86400000)</defaultvalue>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <typegroup name="Passenger">
+      <itemtype code="Traveller" jaloclass="de.hybris.platform.travelservices.jalo.user.Traveller">
+        <description>This type represents a traveller.</description>
+        <deployment table="Traveller" typecode="30034"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="uid">
+            <modifiers unique="true"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="versionID">
+            <modifiers unique="true"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="label">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="TravellerInfo" qualifier="info">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="TravellerType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="SpecialRequestDetail" qualifier="specialRequestDetail">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="booker">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="savedTravellerUid">
+            <modifiers unique="true"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="simpleUID">
+            <persistence type="dynamic" attributeHandler="simpleUIDAttributeHandler" />
+            <modifiers read="true" write="false" />
+          </attribute>
+        </attributes>
+        <indexes>
+          <index name="traveller_uid">
+            <key attribute="uid"/>
+          </index>
+        </indexes>
+      </itemtype>
+      <itemtype code="TravellerInfo" abstract="true" jaloclass="de.hybris.platform.travelservices.jalo.user.TravellerInfo">
+        <description>This type represents a traveller information.</description>
+      </itemtype>
+      <itemtype code="PassengerInformation" extends="TravellerInfo"
+              jaloclass="de.hybris.platform.travelservices.jalo.user.PassengerInformation">
+        <description>Extending traveller info type to represent a passenger information.</description>
+        <deployment table="PassengerInformation" typecode="30035"/>
+        <attributes>
+          <attribute type="Title" qualifier="title">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="firstName">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="surname">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.util.Date" qualifier="dateOfBirth">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="PassengerType" qualifier="passengerType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="membershipNumber">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="gender">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="ReasonForTravel" qualifier="reasonForTravel">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="DocumentType" qualifier="documentType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="documentNumber">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="APISType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="Country" qualifier="countryOfIssue">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.util.Date" qualifier="documentExpiryDate">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="Country" qualifier="nationality">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="email" type="java.lang.String">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="PassengerType" jaloclass="de.hybris.platform.travelservices.jalo.user.PassengerType">
+        <description>This type represents a passenger type.</description>
+        <deployment table="PassengerType" typecode="30036"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="name">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="minAge">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="maxAge">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="VehicleInformation" jaloclass="de.hybris.platform.travelservices.jalo.user.VehicleInformation">
+        <description>This type represents vehicle information.</description>
+        <deployment table="VehicleInformation" typecode="30037"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="registration">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="make">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="model">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="year">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Double" qualifier="height">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Double" qualifier="length">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Double" qualifier="weight">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="PetInfo" jaloclass="de.hybris.platform.travelservices.jalo.user.PetInfo">
+        <description>This type represents a pet information.</description>
+        <deployment table="PetInfo" typecode="30038"/>
+      </itemtype>
+
+      <itemtype code="SpecialRequestDetail" jaloclass="de.hybris.platform.travelservices.jalo.user.SpecialRequestDetail">
+        <description>This type represents special request details.</description>
+        <deployment table="SpecialRequestDetail" typecode="30040"/>
+        <attributes>
+          <attribute type="SpecialServiceRequestList" qualifier="specialServiceRequest">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RemarksList" qualifier="remarks">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="SpecialServiceRequest" jaloclass="de.hybris.platform.travelservices.jalo.user.SpecialServiceRequest">
+        <description>This type represents a special service request.</description>
+        <deployment table="SpecialServiceRequest" typecode="30041"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="name">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="Remark" jaloclass="de.hybris.platform.travelservices.jalo.travel.Remark">
+        <description>This type represents the remarks or descriptions for a special request.</description>
+        <deployment table="Remark" typecode="30042"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="name">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="TravellerPreference" jaloclass="de.hybris.platform.travelservices.jalo.user.TravellerPreference">
+        <description>This type represents the preferences for a traveller.</description>
+        <deployment table="TravellerPreference" typecode="30043"/>
+        <attributes>
+          <attribute type="TravellerPreferenceType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="value">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <typegroup name="Consignment">
+      <itemtype code="Consignment" autocreate="false" generate="false">
+        <description>Extending Consignment to include travel info .</description>
+        <attributes>
+          <attribute qualifier="travellerInfo" type="TravellerInfo">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <typegroup name="Order">
+      <itemtype code="AbstractOrder" autocreate="false" generate="false">
+        <description>Extending AbstractOrder to include travel attributes.</description>
+        <attributes>
+          <attribute qualifier="originalOrder" type="Order">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="OrderStatus" qualifier="transportationOrderStatus">
+            <persistence type="dynamic" attributeHandler="transportationOrderStatusAttributeHandler"/>
+          </attribute>
+          <attribute type="OrderStatus" qualifier="accommodationOrderStatus">
+            <persistence type="dynamic" attributeHandler="accommodationOrderStatusAttributeHandler"/>
+          </attribute>
+          <attribute qualifier="bookingJourneyType" type="BookingJourneyType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="additionalSecurity" type="java.lang.Boolean">
+            <persistence type="property"/>
+            <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="Order" autocreate="false" generate="false">
+        <description>Extending Order to include travel attributes.</description>
+        <attributes>
+          <attribute qualifier="visibleToOwner" type="java.lang.Boolean">
+            <persistence type="property"/>
+            <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+          </attribute>
+         </attributes>
+      </itemtype>
+      <itemtype code="Cart" autocreate="false" generate="false">
+        <description>Extending Cart to include travel attributes.</description>
+        <attributes>
+          <attribute qualifier="tripType" type="TripType">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+        <description>Extending OrderEntry type to include travel attributes.</description>
+        <attributes>
+          <attribute type="TravelOrderEntryInfo" qualifier="travelOrderEntryInfo">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="AccommodationOrderEntryInfo" qualifier="accommodationOrderEntryInfo">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="active">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="AmendStatus" qualifier="amendStatus">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="OrderEntryType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="AbstractOrderEntryGroup" abstract="true">
+        <description/>
+      </itemtype>
+      <itemtype code="AccommodationOrderEntryGroup" extends="AbstractOrderEntryGroup"
+              jaloclass="de.hybris.platform.travelservices.jalo.order.AccommodationOrderEntryGroup">
+        <description>This item is used to group order entries for the same accommodation and to store common
+          information
+        </description>
+        <deployment table="AccommOrderEntryGrp" typecode="30069"/>
+        <attributes>
+          <attribute type="java.util.Date" qualifier="startingDate">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.util.Date" qualifier="endingDate">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="AccommodationOffering" qualifier="accommodationOffering">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="firstName">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="lastName">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="contactName">
+            <persistence type="dynamic" attributeHandler="contactNameAttributeHandler"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="contactNumber">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="contactEmail" type="java.lang.String">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="GuestCountsList" qualifier="guestCounts">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="roomStayRefNumber">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="Accommodation" qualifier="accommodation">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RatePlan" qualifier="ratePlan">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RoomPreferencesList" qualifier="roomPreferences">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.util.Date" qualifier="checkInTime">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="SpecialRequestDetail" qualifier="specialRequestDetail">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="TravelOrderEntryInfo" jaloclass="de.hybris.platform.travelservices.jalo.order.TravelOrderEntryInfo">
+        <description>This type represents travel order entry info.</description>
+        <deployment table="TravelOrderEntryInfo" typecode="30044"/>
+        <attributes>
+          <attribute type="TravelRoute" qualifier="travelRoute">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="SpecialRequestDetail" qualifier="specialRequestDetail">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="originDestinationRefNumber">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="priceLevel">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <typegroup name="Customer">
+      <itemtype code="Customer" autocreate="false" generate="false">
+        <description>Extending customer type to add travel attributes.</description>
+        <attributes>
+          <attribute type="Traveller" qualifier="customerTravellerInstance">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      <itemtype code="OrderUserAccountMapping">
+        <description>A mapping table between a customer and an order.</description>
+        <deployment table="OrderUserAccountMapping" typecode="30049"/>
+        <attributes>
+          <attribute qualifier="user" type="User">
+            <persistence type="property"/>
+            <description>Attribute represents a customer object that will be mapped to an order.</description>
+          </attribute>
+          <attribute qualifier="orderCode" type="java.lang.String">
+            <persistence type="property"/>
+            <description>Attribute represents an order code.</description>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <typegroup name="BaseStore">
+      <itemtype code="BaseStore" autocreate="false" generate="false">
+        <description>Extending BaseStore type with additional attributes.</description>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="checkinFlowGroup">
+            <description>Determines the checkin group</description>
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <typegroup name="CmsPages">
+      <itemtype code="AncillaryPage" jaloclass="de.hybris.platform.travelservices.jalo.pages.AncillaryPage"
+              extends="ContentPage">
+        <description>Extends existing ContentPage type with additional attributes.</description>
+        <attributes>
+          <attribute type="StringList" qualifier="offerGroups">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+
+    <!-- ACCOMMODATION -->
+    <typegroup name="Accommodation">
+      <itemtype code="AccommodationOffering" extends="Warehouse"
+              jaloclass="de.hybris.platform.travelservices.jalo.warehouse.AccommodationOffering">
+        <description>This type represents a property or building having some accommodations offered in it. Typical example is an
+          hotel or a bed and breakfast
+        </description>
+        <deployment table="AccOffering" typecode="30067"/>
+        <attributes>
+          <attribute type="Location" qualifier="location">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="starRating">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="AccommodationProvider" qualifier="provider">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="galleryCode">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Double" qualifier="averageUserRating">
+            <persistence type="dynamic" attributeHandler="averageUserRatingAttributeHandler"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="numberOfReviews">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="boosted">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="popularity">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="accommodations" type="StringList">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="extras" type="StringList">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="description" type="localized:java.lang.String">
+            <modifiers optional="true"/>
+            <persistence type="property">
+              <columntype database="oracle">
+                <value>CLOB</value>
+              </columntype>
+              <columntype database="sap">
+                <value>NCLOB</value>
+              </columntype>
+              <columntype>
+                <value>HYBRIS.LONG_STRING</value>
+              </columntype>
+            </persistence>
+          </attribute>
+          <attribute type="PropertyFacilityList" qualifier="activePropertyFacility">
+            <persistence type="dynamic" attributeHandler="activePropertyFacilityAttributeHandler"/>
+          </attribute>
+          <attribute qualifier="propertyInformation" type="localized:java.lang.String">
+            <modifiers optional="true"/>
+            <persistence type="property">
+              <columntype database="oracle">
+                <value>CLOB</value>
+              </columntype>
+              <columntype database="sap">
+                <value>NCLOB</value>
+              </columntype>
+              <columntype>
+                <value>HYBRIS.LONG_STRING</value>
+              </columntype>
+            </persistence>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="UpdateStockLevelsToAccommodationOfferingCronJob" extends="CronJob"
+              jaloclass="de.hybris.platform.travelservices.jalo.cronjob.UpdateStockLevelsToTransportOfferingCronJob">
+        <description>This type represents a cronjob that creates stock levels for accommodation offerings.</description>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="mappingDataFilePath">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="availabilityDataFilePath">
+            <modifiers optional="true"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="maxAvailability">
+            <persistence type="property"/>
+            <defaultvalue>Integer.valueOf(50)</defaultvalue>
+          </attribute>
+          <attribute type="TransportOfferingStockLevels" qualifier="serviceProductsStockLevels">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="MarketingRatePlanInfoCronjob" extends="Cronjob"
+              jaloclass="de.hybris.platform.travelservices.jalo.cronjob.MarketingRatePlanInfoCronjob">
+        <description>This type represents a cronjob that creates the RatePlanConfig and the MarketingRatePlanInfo</description>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="ratePlanCode">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="AccommodationOfferingList" qualifier="accommodationOfferings">
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="batchSize" type="java.lang.Integer">
+            <defaultvalue>Integer.valueOf(100)</defaultvalue>
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AccommodationProvider"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.AccommodationProvider">
+        <description>This type represents an accommodation provider, like an hotel chain</description>
+        <deployment table="AccProvider" typecode="30051"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="name">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AbstractFacility" abstract="true">
+        <description>This type represents a facility that could be extended by a property or accommodation facility</description>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Boolean" qualifier="active">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="shortDescription">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="longDescription">
+            <persistence type="property">
+              <columntype>
+                <value>VARCHAR(255)</value>
+              </columntype>
+            </persistence>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AccommodationOfferingGallery"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.AccommodationOfferingGallery">
+        <description>This item holds the media information for an accommodation offering</description>
+        <deployment table="AccommOfferingGallery" typecode="30070"/>
+        <custom-properties>
+          <property name="catalogItemType">
+            <value>java.lang.Boolean.TRUE</value>
+          </property>
+          <property name="catalogVersionAttributeQualifier">
+            <value>"catalogVersion"</value>
+          </property>
+          <property name="uniqueKeyAttributeQualifier">
+            <value>"code"</value>
+          </property>
+        </custom-properties>
+        <attributes>
+          <attribute qualifier="catalogVersion" type="CatalogVersion">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="code">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="Media" qualifier="listImage">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="MediaContainerList" qualifier="gallery">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="PropertyFacility" extends="AbstractFacility"
+              jaloclass="de.hybris.platform.travelservices.jalo.facility.PropertyFacility">
+        <description>This type represents a facility that can be assigned to an accommodation offering (property)</description>
+        <deployment table="PropertyFacility" typecode="30053"/>
+        <attributes>
+          <attribute type="PropertyFacilityType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AccommodationFacility" extends="AbstractFacility"
+              jaloclass="de.hybris.platform.travelservices.jalo.facility.AccommodationFacility">
+        <description>This type represents a facility that can be assigned to an accommodation offering (property)</description>
+        <deployment table="AccFacility" typecode="30054"/>
+        <attributes>
+          <attribute type="AccommodationFacilityType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AccommodationOrderEntryInfo"
+              jaloclass="de.hybris.platform.travelservices.jalo.order.AccommodationOrderEntryInfo">
+        <description>This type holds information about accommodation related order or cart entries</description>
+        <deployment table="AccEntryInfo" typecode="30055"/>
+        <attributes>
+          <attribute type="DateList" qualifier="dates">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AccommodationBundleMapping"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.AccommodationBundleMapping">
+        <description>This type maps an accommodation product with a bundletemplate</description>
+        <deployment table="AccBundleMapping" typecode="30056"/>
+        <attributes>
+          <attribute type="Accommodation" qualifier="accommodation">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="BundleTemplate" qualifier="bundleTemplate">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="GuestOccupancy" jaloclass="de.hybris.platform.travelservices.jalo.accommodation.GuestOccupancy">
+        <description>This type holds min and max quantity of a certain guest type (depending on age range)</description>
+        <deployment table="GuestOccupancy" typecode="30057"/>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="passengerType" qualifier="PassengerType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="quantityMax">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="quantityMin">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="MarketingRatePlanInfo"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.MarketingRatePlanInfo">
+        <description>This item represents the marketing configuration to be used at index time for a specified
+          number of adults and consisting of one or many rate plan config.
+        </description>
+        <deployment table="MarketingRatePlanInfo" typecode="30073"/>
+        <custom-properties>
+          <property name="catalogItemType">
+            <value>java.lang.Boolean.TRUE</value>
+          </property>
+          <property name="catalogVersionAttributeQualifier">
+            <value>"catalogVersion"</value>
+          </property>
+          <property name="uniqueKeyAttributeQualifier">
+            <value>"code"</value>
+          </property>
+        </custom-properties>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="catalogVersion" type="CatalogVersion">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="numberOfAdults">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="GuestOccupanciesList" qualifier="extraGuests">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="RatePlanConfig" jaloclass="de.hybris.platform.travelservices.jalo.accommodation.RatePlanConfig">
+        <description>This item represents the configuration for a rate plan to be used in a marketing rate plan info</description>
+        <deployment table="RatePlanConfig" typecode="30072"/>
+        <custom-properties>
+          <property name="catalogItemType">
+            <value>java.lang.Boolean.TRUE</value>
+          </property>
+          <property name="catalogVersionAttributeQualifier">
+            <value>"catalogVersion"</value>
+          </property>
+          <property name="uniqueKeyAttributeQualifier">
+            <value>"code"</value>
+          </property>
+        </custom-properties>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute qualifier="catalogVersion" type="CatalogVersion">
+            <modifiers optional="false"/>
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RatePlan" qualifier="ratePlan">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="quantity">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="RatePlan" extends="Category" jaloclass="de.hybris.platform.travelservices.jalo.accommodation.RatePlan">
+        <description>This item represents a pricing plan for a particular accommodation that could consist of many
+          room rates
+        </description>
+        <attributes>
+          <attribute type="java.lang.Long" qualifier="timeUnit">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="GuestOccupanciesList" qualifier="guestOccupancies">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="minStay">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="maxStay">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="RoomRateProduct" extends="TravelProduct"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.RoomRateProduct">
+        <description>This type represents a room rate that is used in a rate plan.</description>
+        <attributes>
+          <attribute type="DayOfWeekList" qualifier="daysOfWeek">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="DateRangeList" qualifier="dateRanges">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AbstractFinancialInfo" abstract="true"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.AbstractFinancialInfo">
+        <description>This item represent a financialInfo that could be extended</description>
+        <attributes>
+          <attribute type="java.lang.String" qualifier="code">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Double" qualifier="percentageAmount">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Double" qualifier="fixedAmount">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.util.Date" qualifier="absoluteDeadline">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Long" qualifier="relativeDeadline">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="CancelPenalty" extends="AbstractFinancialInfo"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.CancelPenalty">
+        <description>This item represents a cancel penalty that can be applied to a rate plan</description>
+        <deployment table="CancelPenalty" typecode="30059"/>
+        <attributes>
+          <attribute type="localized:java.lang.String" qualifier="description">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="Guarantee" extends="AbstractFinancialInfo"
+              jaloclass="de.hybris.platform.travelservices.jalo.accommodation.Guarantee">
+        <description>This item represents a guarantee that is required by a rate plan</description>
+        <deployment table="Guarantee" typecode="30060"/>
+        <attributes>
+          <attribute type="GuaranteeType" qualifier="type">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="shortDescription">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="longDescription">
+            <persistence type="property">
+              <columntype>
+                <value>VARCHAR(255)</value>
+              </columntype>
+            </persistence>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="RatePlanInclusion" jaloclass="de.hybris.platform.travelservices.jalo.accommodation.RatePlanInclusion">
+        <description>This item represents a generic rateplan inclusion and some editorial information</description>
+        <deployment table="RatePlanInclusion" typecode="30058"/>
+        <attributes>
+          <attribute type="MediaContainer" qualifier="medias">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="shortDescription">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="localized:java.lang.String" qualifier="longDescription">
+            <persistence type="property">
+              <columntype>
+                <value>VARCHAR(255)</value>
+              </columntype>
+            </persistence>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="GuestCount" jaloclass="de.hybris.platform.travelservices.jalo.order.GuestCount">
+        <description>This item represents a guest count relative to a passenger type</description>
+        <deployment table="GuestCount" typecode="30068"/>
+        <attributes>
+          <attribute type="PassengerType" qualifier="passengerType">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="quantity">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="DateRange" jaloclass="de.hybris.platform.travelservices.jalo.accommodation.DataRange">
+        <description>This item represents a date range from a start to an end date</description>
+        <deployment table="DateRange" typecode="30071"/>
+        <attributes>
+          <attribute type="java.util.Date" qualifier="startingDate">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.util.Date" qualifier="endingDate">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="RoomPreference" jaloclass="de.hybris.platform.travelservices.jalo.accommodation.RoomPreference">
+        <description>This item represents a room preference relative to a preference type</description>
+        <deployment table="RoomPreference" typecode="30074"/>
+        <attributes>
+          <attribute type="localized:java.lang.String" qualifier="value">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RoomPreferenceType" qualifier="preferenceType">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+      
+      <itemtype code="CustomerReview" autocreate="false" generate="false">
+      	<attributes>
+      		<attribute type="java.lang.String" qualifier="bookingReference">
+      			<modifiers initial="true" optional="false" unique="true"/>
+      			<persistence type="property"/>
+      		</attribute>
+      		<attribute type="java.lang.Integer" qualifier="roomStayRefNumber">
+      			<modifiers initial="true" optional="false" unique="true"/>
+      			<persistence type="property"/>
+      		</attribute>      		
+      	</attributes>
+      </itemtype>
+    </typegroup>
+    <!-- end ACCOMMODATION items -->
+
+    <!-- DEAL items -->
+    <typegroup name="Deal">
+      <itemtype code="DealBundleTemplate" extends="BundleTemplate"
+                jaloclass="de.hybris.platform.travelservices.jalo.deal.DealBundleTemplate">
+        <description>This item represents a static deal bundle template</description>
+        <attributes>
+          <attribute type="GuestCountsList" qualifier="guestCounts">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.String" qualifier="startingDatePattern">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="length">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="TransportBundleTemplate" extends="BundleTemplate"
+                jaloclass="de.hybris.platform.travelservices.jalo.deal.TransportBundleTemplate">
+        <description>This item represents the transport part of a static deal bundle template</description>
+      </itemtype>
+
+      <itemtype code="RouteBundleTemplate" extends="BundleTemplate"
+                jaloclass="de.hybris.platform.travelservices.jalo.deal.RouteBundleTemplate">
+        <description>This item represents the route information of the transport part of a static deal bundle template</description>
+        <attributes>
+          <attribute type="TravelRoute" qualifier="travelRoute">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="java.lang.Integer" qualifier="originDestinationRefNumber">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="CabinClass" qualifier="cabinClass">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+
+      <itemtype code="AccommodationBundleTemplate" extends="BundleTemplate"
+                jaloclass="de.hybris.platform.travelservices.jalo.deal.AccommodationBundleTemplate">
+        <description>This item represents the accommodation part of a static deal bundle template</description>
+        <attributes>
+          <attribute type="AccommodationOffering" qualifier="accommodationOffering">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="Accommodation" qualifier="accommodation">
+            <persistence type="property"/>
+          </attribute>
+          <attribute type="RatePlan" qualifier="ratePlan">
+            <persistence type="property"/>
+          </attribute>
+        </attributes>
+      </itemtype>
+    </typegroup>
+    <!-- end DEAL items -->
+  </itemtypes>
+</items>

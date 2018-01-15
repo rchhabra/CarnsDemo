@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:w="client">
+    <html>
+        <![CDATA[
+			<script type="text/javascript">
+                function showReference(className){
+                    jq(".y_reference-editor").slideUp();
+                    if(className){
+                        var classSelector = "." + className;
+                        jq(classSelector).slideDown();
+                    }
+                }
+			</script>
+			]]>
+			<zscript><![CDATA[ 
+       		import de.hybris.platform.travelservices.model.travel.BundleTemplateTransportOfferingMappingModel; 
+			import java.util.Map;
+ 			import java.util.LinkedHashMap;
+		 	import  java.util.Objects;
+      		Map bundleTemplateTransportOfferingMapping = widgetInstanceManager.getModel().getValue("mapping", 
+    														LinkedHashMap.class); 
+    		boolean isTravelRoute=Objects.nonNull(bundleTemplateTransportOfferingMapping.get("travelRoute"));
+     		boolean isTravelSector=Objects.nonNull(bundleTemplateTransportOfferingMapping.get("travelSector"));
+      		boolean isFlight=Objects.nonNull(bundleTemplateTransportOfferingMapping.get("transportOffering"));
+       		boolean isDefault=!isTravelRoute && !isTravelSector && !isFlight;
+    ]]> 
+        </zscript> 
+    </html>
+
+    <radiogroup>
+        <vlayout>
+            <radio id="travelRoute" checked="${isTravelRoute}" label="${c:l('create.wizard.bundle.step1.route')}" w:onCheck="showReference('y_travelRouteReferenceDiv')"/>
+            <div sclass="y_travelRouteReferenceDiv y_reference-editor" style="${isTravelRoute?'':'display: none;'} height: 50px;">
+                <editor id="travelRouteReferenceEditor" type="Reference(TravelRoute)" property="mapping.travelRoute">
+                    <custom-attributes pageSize="5"/>
+                </editor>
+            </div>
+            <radio id="travelSector" checked="${isTravelSector}" label="${c:l('create.wizard.bundle.step1.sector')}" w:onCheck="showReference('y_travelSectorReferenceDiv')"/>
+            <div zclass="y_travelSectorReferenceDiv y_reference-editor" style="${isTravelSector?'':'display: none;'} height: 50px;">
+                <editor id="travelSectorReferenceEditor" type="Reference(TravelSector)" property="mapping.travelSector">
+                    <custom-attributes pageSize="5"/>
+                </editor>
+            </div>
+            <radio id="transportOffering" checked="${isFlight}" label="${c:l('create.wizard.bundle.step1.flight')}" w:onCheck="showReference('y_transportOfferingReferenceDiv')"/>
+            <div zclass="y_transportOfferingReferenceDiv y_reference-editor" style="${isFlight?'':'display: none;'} height: 50px;">
+                <editor id="transportOfferingReferenceEditor" type="Reference(TransportOffering)" property="mapping.transportOffering">
+                    <custom-attributes pageSize="5"/>
+                </editor>
+            </div>
+            <radio id="defaultRadio" checked="${isDefault}" label="${c:l('create.wizard.bundle.step1.default')}"  w:onCheck="showReference()"/>
+        </vlayout>
+    </radiogroup>
+
+</zk>

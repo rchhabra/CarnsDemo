@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- Maps -->
+
+    <util:map id="addAncillariesToOrderRestrictionStrategyMap" key-type="java.lang.String">
+        <entry key="PER_PAX" value-ref="addToOrderPerPaxStrategy"/>
+        <entry key="PER_LEG_PER_PAX" value-ref="addToOrderPerLegPerPaxStrategy"/>
+        <entry key="PER_LEG" value-ref="addToOrderPerLegStrategy"/>
+        <entry key="PER_BOOKING" value-ref="addToOrderPerBookingStrategy"/>
+    </util:map>
+
+    <alias name="abstractAddAncillariesToOrderRestrictionStrategy" alias="abstractAddAncillariesToOrderRestrictionStrategy"/>
+    <bean id="abstractAddAncillariesToOrderRestrictionStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.AbstractAddAncillariesToOrderRestrictionStrategy" abstract="true">
+        <property name="bookingService" ref="bookingService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="ndcProductFacade" ref="ndcProductFacade"/>
+        <property name="ndcOrderService" ref="ndcOrderService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping"/>
+    </bean>
+
+    <alias name="defaultAddToOrderPerBookingStrategy" alias="addToOrderPerBookingStrategy"/>
+    <bean id="defaultAddToOrderPerBookingStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.AddToOrderPerBookingStrategy"
+          parent="abstractAddAncillariesToOrderRestrictionStrategy">
+    </bean>
+
+    <alias name="defaultAddToOrderPerLegStrategy" alias="addToOrderPerLegStrategy"/>
+    <bean id="defaultAddToOrderPerLegStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.AddToOrderPerLegStrategy"
+          parent="abstractAddAncillariesToOrderRestrictionStrategy">
+    </bean>
+
+    <alias name="defaultAddToOrderPerLegPerPaxStrategy" alias="addToOrderPerLegPerPaxStrategy"/>
+    <bean id="defaultAddToOrderPerLegPerPaxStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.AddToOrderPerLegPerPaxStrategy"
+          parent="abstractAddAncillariesToOrderRestrictionStrategy">
+    </bean>
+
+    <alias name="defaultAddToOrderPerPaxStrategy" alias="addToOrderPerPaxStrategy"/>
+    <bean id="defaultAddToOrderPerPaxStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.AddToOrderPerPaxStrategy"
+          parent="abstractAddAncillariesToOrderRestrictionStrategy">
+    </bean>
+
+    <util:map id="ndcBookingActionEnabledCalculationStrategiesMap"
+              key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+        <entry key="AMEND_ANCILLARY">
+            <list>
+                <ref bean="ndcOrderRestrictionStrategy"/>
+            </list>
+        </entry>
+        <entry key="CANCEL_BOOKING">
+            <list>
+                <ref bean="ndcOrderRestrictionStrategy"/>
+            </list>
+        </entry>
+        <entry key="CANCEL_TRANSPORT_BOOKING">
+            <list>
+                <ref bean="ndcOrderRestrictionStrategy"/>
+            </list>
+        </entry>
+        <entry key="REMOVE_TRAVELLER">
+            <list>
+                <ref bean="ndcOrderRestrictionStrategy"/>
+            </list>
+        </entry>
+        <entry key="ACCEPT_BOOKING">
+            <list>
+                <ref bean="ndcOrderRestrictionStrategy"/>
+            </list>
+        </entry>
+        <entry key="REJECT_BOOKING">
+            <list>
+                <ref bean="ndcOrderRestrictionStrategy"/>
+            </list>
+        </entry>
+    </util:map>
+
+    <util:map id="orderChangeActionToBookingActionMapping" key-type="java.lang.String"
+              value-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+        <entry key="ADD_ANCILLARIES" value="AMEND_ANCILLARY"/>
+        <entry key="REMOVE_ANCILLARIES" value="AMEND_ANCILLARY"/>
+        <entry key="ADD_ACCOMMODATION" value="AMEND_ANCILLARY"/>
+        <entry key="REMOVE_ACCOMMODATION" value="AMEND_ANCILLARY"/>
+        <entry key="REMOVE_PASSENGER" value="REMOVE_TRAVELLER"/>
+    </util:map>
+
+    <!-- Strategies -->
+
+    <util:list id="amendOrderOfferFilterStrategyList">
+        <ref bean="ndcTransportOfferingPastDepartureDateStrategy" />
+        <ref bean="ndcTransportOfferingStatusStrategy" />
+        <ref bean="ndcTravellerStatusStrategy" />
+    </util:list>
+
+    <alias name="ndcTransportOfferingPastDepartureDateStrategy" alias="ndcTransportOfferingPastDepartureDateStrategy"/>
+    <bean id="ndcTransportOfferingPastDepartureDateStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.NDCTransportOfferingPastDepartureDateStrategy">
+        <property name="timeService" ref="timeService"/>
+        <property name="ndcTransportOfferingService" ref="ndcTransportOfferingService"/>
+    </bean>
+
+    <alias name="ndcTransportOfferingStatusStrategy" alias="ndcTransportOfferingStatusStrategy"/>
+    <bean id="ndcTransportOfferingStatusStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.NDCTransportOfferingStatusStrategy">
+        <property name="notAllowedStatuses">
+            <util:list>
+                <util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.DEPARTED" />
+                <util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.BOARDED" />
+                <util:constant static-field="de.hybris.platform.travelservices.enums.TransportOfferingStatus.CANCELLED" />
+            </util:list>
+        </property>
+    </bean>
+
+    <alias name="ndcTravellerStatusStrategy" alias="ndcTravellerStatusStrategy"/>
+    <bean id="ndcTravellerStatusStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.NDCTravellerStatusStrategy">
+        <property name="notAllowedStatusList">
+            <util:list>
+                <util:constant static-field="de.hybris.platform.basecommerce.enums.ConsignmentStatus.CHECKED_IN" />
+                <util:constant static-field="de.hybris.platform.basecommerce.enums.ConsignmentStatus.CANCELLED" />
+            </util:list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCActionFacade" alias="actionFacade"/>
+    <bean id="defaultNDCActionFacade" class="de.hybris.platform.ndcfacades.facades.impl.DefaultNDCActionFacade">
+        <constructor-arg ref="ndcBookingActionEnabledCalculationStrategiesMap"/>
+        <constructor-arg ref="bookingActionEnabledCalculationStrategiesMap"/>
+        <property name="bookingActionStrategyMap" ref="bookingActionStrategyMap"/>
+        <property name="accommodationBookingActionStrategyMap" ref="accommodationBookingActionStrategyMap"/>
+        <property name="accommodationBookingActionEnabledCalculationStrategiesMap"
+                  ref="accommodationBookingActionEnabledCalculationStrategiesMap"/>
+        <property name="globalBookingActionStrategyMap" ref="globalBookingActionStrategyMap"/>
+        <property name="globalBookingActionEnabledCalculationStrategiesMap"
+                  ref="globalBookingActionEnabledCalculationStrategiesMap"/>
+    </bean>
+
+    <alias name="ndcOrderRestrictionStrategy" alias="ndcOrderRestrictionStrategy"/>
+    <bean id="ndcOrderRestrictionStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.NDCOrderRestrictionStrategy">
+    </bean>
+
+    <util:list id="amendOrderValidationStrategyList">
+        <ref bean="travellerStatusOrderValidationStrategy"/>
+        <ref bean="bundledProductOrderValidationStrategy"/>
+        <ref bean="productAvailabilityOrderValidationStrategy"/>
+        <ref bean="travelRestrictionOrderValidationStrategy"/>
+    </util:list>
+
+    <util:map id="amendOrderStrategyMap" key-type="de.hybris.platform.ndcservices.enums.NDCActionType">
+        <entry key="REMOVE_PASSENGER" value-ref="removePassengerToOrderStrategy"/>
+        <entry key="REMOVE_ANCILLARIES" value-ref="removeAncillariesToOrderStrategy"/>
+        <entry key="ADD_ANCILLARIES" value-ref="addAncillariesToOrderStrategy"/>
+        <entry key="ADD_ACCOMMODATION" value-ref="addAccommodationToOrderStrategy"/>
+        <entry key="REMOVE_ACCOMMODATION" value-ref="removeAccommodationToOrderStrategy"/>
+    </util:map>
+
+    <alias name="abstractAmendOrderStrategy" alias="abstractAmendOrderStrategy"/>
+    <bean id="abstractAmendOrderStrategy" class="de.hybris.platform.ndcfacades.strategies.impl.AbstractAmendOrderStrategy"
+          abstract="true">
+        <property name="productService" ref="productService"/>
+        <property name="travelRestrictionFacade" ref="travelRestrictionFacade"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="timeService" ref="timeService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="cloneAbstractOrderStrategy" ref="cloneAbstractOrderStrategy"/>
+        <property name="orderCodeGenerator" ref="orderCodeGenerator"/>
+        <property name="userService" ref="userService"/>
+        <property name="calculationService" ref="calculationService"/>
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="reservationFacade" ref="reservationFacade"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="travellerService" ref="travellerService"/>
+        <property name="amendOrderValidationStrategyList" ref="amendOrderValidationStrategyList"/>
+        <property name="travelCommerceCheckoutService" ref="commerceCheckoutService"/>
+        <property name="ndcOrderService" ref="ndcOrderService"/>
+        <property name="bookingService" ref="bookingService"/>
+        <property name="ndcPaymentTransactionFacade" ref="ndcPaymentTransactionFacade"/>
+        <property name="ndcTransportOfferingService" ref="ndcTransportOfferingService"/>
+        <property name="ndcAccommodationService" ref="ndcAccommodationService"/>
+    </bean>
+
+    <alias name="defaultAddAncillariesToOrderStrategy" alias="addAncillariesToOrderStrategy"/>
+    <bean id="defaultAddAncillariesToOrderStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.AddAncillariesToOrderStrategy" parent="abstractAmendOrderStrategy">
+        <property name="addAncillariesToOrderRestrictionStrategyMap" ref="addAncillariesToOrderRestrictionStrategyMap"/>
+        <property name="ndcProductFacade" ref="ndcProductFacade"/>
+        <property name="categoriesNotAllowed">
+            <list>
+                <value>ACCOMMODATION</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultAddAccommodationToOrderStrategy" alias="addAccommodationToOrderStrategy"/>
+    <bean id="defaultAddAccommodationToOrderStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.AddAccommodationToOrderStrategy"
+          parent="abstractAmendOrderStrategy">
+    </bean>
+
+    <alias name="defaultRemoveAccommodationToOrderStrategy" alias="removeAccommodationToOrderStrategy"/>
+    <bean id="defaultRemoveAccommodationToOrderStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.RemoveAccommodationToOrderStrategy"
+          parent="abstractAmendOrderStrategy">
+    </bean>
+
+    <alias name="defaultRemoveAncillariesToOrderStrategy" alias="removeAncillariesToOrderStrategy"/>
+    <bean id="defaultRemoveAncillariesToOrderStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.RemoveAncillariesToOrderStrategy"
+          parent="abstractAmendOrderStrategy">
+        <property name="ndcProductFacade" ref="ndcProductFacade"/>
+    </bean>
+
+    <alias name="defaultRemovePassengerToOrderStrategy" alias="removePassengerToOrderStrategy"/>
+    <bean id="defaultRemovePassengerToOrderStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.RemovePassengerToOrderStrategy"
+          parent="abstractAmendOrderStrategy">
+        <property name="bookingFacade" ref="bookingFacade"/>
+    </bean>
+
+    <alias name="defaultTravellerStatusOrderValidationStrategy" alias="travellerStatusOrderValidationStrategy"/>
+    <bean id="defaultTravellerStatusOrderValidationStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.TravellerStatusOrderValidationStrategy">
+        <property name="checkInFacade" ref="checkInFacade"/>
+        <property name="ndcOrderFacade" ref="ndcOrderFacade"/>
+    </bean>
+
+    <alias name="defaultBundledProductOrderValidationStrategy" alias="bundledProductOrderValidationStrategy"/>
+    <bean id="defaultBundledProductOrderValidationStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.BundledProductOrderValidationStrategy">
+        <property name="bookingService" ref="bookingService"/>
+    </bean>
+
+    <alias name="defaultProductAvailabilityOrderValidationStrategy" alias="productAvailabilityOrderValidationStrategy"/>
+    <bean id="defaultProductAvailabilityOrderValidationStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.ProductAvailabilityOrderValidationStrategy">
+        <property name="productService" ref="productService"/>
+        <property name="transportOfferingService" ref="transportOfferingService"/>
+        <property name="travelCommerceStockService" ref="commerceStockService"/>
+        <property name="bookingService" ref="bookingService"/>
+    </bean>
+
+    <alias name="defaultTravelRestrictionOrderValidationStrategy" alias="travelRestrictionOrderValidationStrategy"/>
+    <bean id="defaultTravelRestrictionOrderValidationStrategy"
+          class="de.hybris.platform.ndcfacades.strategies.impl.TravelRestrictionOrderValidationStrategy">
+        <property name="travelRestrictionFacade" ref="travelRestrictionFacade"/>
+        <property name="productService" ref="productService"/>
+    </bean>
+
+    <!-- Facades -->
+    <alias name="defaultAirShoppingFacade" alias="airShoppingFacade"/>
+    <bean id="defaultAirShoppingFacade" class="de.hybris.platform.ndcfacades.airshopping.impl.DefaultAirShoppingFacade"
+          scope="prototype">
+        <property name="ndcFareSearchRequestConverter" ref="ndcFareSearchRequestConverter"/>
+        <property name="ndcFareSelectionDataConverter" ref="ndcFareSelectionDataConverter"/>
+        <property name="fareSearchFacade" ref="fareSearchFacade"/>
+    </bean>
+
+    <alias name="abstractNDCOffersFacade" alias="abstractNDCOffersFacade"/>
+    <bean id="abstractNDCOffersFacade" class="de.hybris.platform.ndcfacades.offers.impl.AbstractNDCOffersFacade" abstract="true">
+        <property name="ndcAncillarySearchPipelineManager" ref="ndcAncillarySearchPipelineManager"/>
+    </bean>
+
+    <alias name="defaultBaggageListFacade" alias="baggageListFacade"/>
+    <bean id="defaultBaggageListFacade" class="de.hybris.platform.ndcfacades.baggagelist.impl.DefaultBaggageListFacade"
+          parent="abstractNDCOffersFacade">
+        <property name="baggageListRequestConverter" ref="ndcBaggageListRequestConverter"/>
+        <property name="baggageListResponseConverter" ref="ndcBaggageListRSConverter"/>
+        <property name="ndcOfferList">
+            <list>
+                <value>HOLDITEM</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultServiceListFacade" alias="serviceListFacade"/>
+    <bean id="defaultServiceListFacade" class="de.hybris.platform.ndcfacades.servicelist.impl.DefaultServiceListFacade"
+          parent="abstractNDCOffersFacade">
+        <property name="serviceListRequestConverter" ref="ndcServiceListRequestConverter"/>
+        <property name="serviceListResponseConverter" ref="ndcServiceListRSConverter"/>
+        <property name="ndcOfferList">
+            <list>
+                <value>MEAL</value>
+                <value>SPECIAL</value>
+                <value>LOUNGEACCESS</value>
+                <value>PRIORITYCHECKIN</value>
+                <value>PRIORITYBOARDING</value>
+                <value>ACCOMMODATION</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCOrderEntryFacade" alias="ndcOrderEntryFacade"/>
+    <bean id="defaultNDCOrderEntryFacade" class="de.hybris.platform.ndcfacades.order.impl.DefaultNDCOrderEntryFacade"
+          parent="abstractNDCFacade">
+        <property name="productService" ref="productService"/>
+        <property name="travellerService" ref="travellerService"/>
+        <property name="calculationService" ref="calculationService"/>
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+        <property name="userService" ref="userService"/>
+        <property name="travelRestrictionFacade" ref="travelRestrictionFacade"/>
+        <property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping"/>
+        <property name="ndcOrderService" ref="ndcOrderService"/>
+        <property name="ndcTransportOfferingService" ref="ndcTransportOfferingService"/>
+        <property name="ndcAccommodationService" ref="ndcAccommodationService"/>
+        <property name="addAncillariesToOrderRestrictionStrategyMap" ref="addAncillariesToOrderRestrictionStrategyMap"/>
+        <property name="categoriesNotAllowed">
+            <list>
+                <value>ACCOMMODATION</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCOfferItemIdResolver" alias="ndcOfferItemIdResolver"/>
+    <bean id="defaultNDCOfferItemIdResolver" class="de.hybris.platform.ndcfacades.resolvers.impl.DefaultNDCOfferItemIdResolver">
+        <property name="keyGenerator" ref="ndcOfferItemIDCodeGenerator"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="passengerTypeService" ref="passengerTypeService"/>
+        <property name="transportOfferingService" ref="transportOfferingService"/>
+        <property name="ndcOfferMappingService" ref="ndcOfferMappingService"/>
+    </bean>
+
+    <alias name="defaultNDCPaymentTransactionFacade" alias="ndcPaymentTransactionFacade"/>
+    <bean id="defaultNDCPaymentTransactionFacade"
+          class="de.hybris.platform.ndcfacades.order.impl.DefaultNDCPaymentTransactionFacade">
+        <property name="commerceCheckoutService" ref="commerceCheckoutService"/>
+        <property name="commerceCardTypeService" ref="commerceCardTypeService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="defaultDefaultNDCItineraryReshopFacade" alias="ndcItineraryReshopFacade"/>
+    <bean id="defaultDefaultNDCItineraryReshopFacade"
+          class="de.hybris.platform.ndcfacades.reshop.impl.DefaultNDCItineraryReshopFacade">
+    </bean>
+
+    <alias name="defaultNDCPaymentInfoFacade" alias="ndcPaymentInfoFacade"/>
+    <bean id="defaultNDCPaymentInfoFacade" class="de.hybris.platform.ndcfacades.order.impl.DefaultNDCPaymentInfoFacade">
+        <property name="paymentService" ref="paymentService"/>
+        <property name="commerceCheckoutService" ref="commerceCheckoutService"/>
+        <property name="commerceCardTypeService" ref="commerceCardTypeService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcCreditCardTypeMappingService" ref="ndcCreditCardTypeMappingService"/>
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <alias name="DefaultNDCPaymentAddressFacade" alias="ndcPaymentAddressFacade"/>
+    <bean id="DefaultNDCPaymentAddressFacade" class="de.hybris.platform.ndcfacades.order.impl.DefaultNDCPaymentAddressFacade">
+        <property name="userService" ref="userService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="abstractNDCOrderFacade" alias="abstractNDCOrderFacade"/>
+    <bean id="abstractNDCOrderFacade" class="de.hybris.platform.ndcfacades.offers.impl.AbstractNDCOrderFacade" abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="bookingService" ref="bookingService"/>
+        <property name="reservationFacade" ref="reservationFacade"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <alias name="defaultNDCOrderFacade" alias="ndcOrderFacade"/>
+    <bean id="defaultNDCOrderFacade" class="de.hybris.platform.ndcfacades.order.impl.DefaultNDCOrderFacade" scope="prototype"
+          parent="abstractNDCOrderFacade">
+        <property name="customerAccountService" ref="customerAccountService"/>
+        <property name="commerceStockService" ref="commerceStockService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="calculationService" ref="calculationService"/>
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+        <property name="bookingFacade" ref="bookingFacade"/>
+        <property name="ndcOrderService" ref="ndcOrderService"/>
+        <property name="ndcOrderEntryFacade" ref="ndcOrderEntryFacade"/>
+        <property name="ndcPaymentAddressFacade" ref="ndcPaymentAddressFacade"/>
+        <property name="ndcPaymentInfoFacade" ref="ndcPaymentInfoFacade"/>
+        <property name="ndcPaymentTransactionFacade" ref="ndcPaymentTransactionFacade"/>
+        <property name="ndcOrderViewRSConverter" ref="ndcOrderViewRSConverter"/>
+        <property name="amendOrderStrategyMap" ref="amendOrderStrategyMap"/>
+        <property name="orderChangeActionToBookingActionMapping" ref="orderChangeActionToBookingActionMapping"/>
+        <property name="bookingActionEnabledCalculationStrategiesMap" ref="bookingActionEnabledCalculationStrategiesMap"/>
+        <property name="bookingActionStrategyMap" ref="bookingActionStrategyMap"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="amendOrderOfferFilterStrategyList" ref="amendOrderOfferFilterStrategyList"/>
+    </bean>
+
+    <alias name="defaultNDCProductFacade" alias="ndcProductFacade"/>
+    <bean id="defaultNDCProductFacade" class="de.hybris.platform.ndcfacades.order.impl.DefaultNDCProductFacade">
+        <property name="amendOrderValidationStrategyList" ref="amendOrderValidationStrategyList"/>
+    </bean>
+
+    <alias name="defaultFlightPriceFacade" alias="flightPriceFacade"/>
+    <bean id="defaultFlightPriceFacade" class="de.hybris.platform.ndcfacades.flight.impl.DefaultFlightPriceFacade"
+          parent="abstractNDCFacade">
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+        <property name="productService" ref="productService"/>
+        <property name="cabinClassService" ref="cabinClassService"/>
+        <property name="travelRouteFacade" ref="travelRouteFacade"/>
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+        <property name="ndcTransportOfferingService" ref="ndcTransportOfferingService"/>
+        <property name="ndcFlightPriceRSConverter" ref="ndcFlightPriceRSConverter"/>
+    </bean>
+
+    <alias name="defaultNDCOfferItemIDCodeGenerator" alias="ndcOfferItemIDCodeGenerator"/>
+    <bean id="defaultNDCOfferItemIDCodeGenerator"
+          class="de.hybris.platform.servicelayer.keygenerator.impl.PersistentKeyGenerator"
+          init-method="init">
+        <property name="key" value="NDCOFFERITEMID"/>
+        <property name="digits" value="11"/>
+        <property name="start" value="00000000000"/>
+        <property name="numeric" value="true"/>
+    </bean>
+
+    <!-- Utils -->
+    <alias name="defaultNdcFacadesUtils" alias="ndcFacadesUtils"/>
+    <bean id="defaultNdcFacadesUtils" class="de.hybris.platform.ndcfacades.utils.NdcFacadesUtils">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <!-- Converters -->
+    <alias name="defaultNDCFareSearchRequestConverter" alias="ndcFareSearchRequestConverter"/>
+    <bean id="defaultNDCFareSearchRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.FareSearchRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcCurrencyPopulator"/>
+                <ref bean="ndcSearchProcessingInfoPopulator"/>
+                <ref bean="ndcTravellersPopulator"/>
+                <ref bean="ndcOriginDestinationPopulator"/>
+                <ref bean="ndcTripTypePopulator"/>
+                <ref bean="ndcTravelPreferencePopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCFareSelectionDataConverter" alias="ndcFareSelectionDataConverter"/>
+    <bean id="defaultNDCFareSelectionDataConverter" parent="abstractPopulatingConverter" scope="prototype">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.AirShoppingRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcAirShoppingRSDocumentTypePopulator"/>
+                <ref bean="ndcAirShoppingRSResponseIdPopulator"/>
+                <ref bean="ndcAirShoppingRSPopulator"/>
+                <ref bean="ndcAirShoppingRSMetadataPopulator"/>
+                <ref bean="ndcAirShoppingSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCServiceDetailConverter" alias="ndcServiceDetailConverter"/>
+    <bean id="defaultNDCServiceDetailConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.ServiceDetailType"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcServiceDetailPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCOrderViewRSConverter" alias="ndcOrderViewRSConverter"/>
+    <bean id="defaultNDCOrderViewRSConverter" parent="abstractPopulatingConverter" scope="prototype">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.OrderViewRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcOrderViewRSDocumentPopulator"/>
+                <ref bean="ndcOrderViewRSSuccessPopulator"/>
+                <ref bean="ndcOrderViewRSPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCFlightPriceRSConverter" alias="ndcFlightPriceRSConverter"/>
+    <bean id="defaultNDCFlightPriceRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.FlightPriceRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcFlightPriceRSDocumentPopulator"/>
+                <ref bean="ndcFlightPriceRSSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentConverter" alias="ndcFlightSegmentConverter"/>
+    <bean id="defaultNDCFlightSegmentConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.ListOfFlightSegmentType"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcFlightSegmentEquipmentPopulator"/>
+                <ref bean="ndcFlightSegmentDeparturePopulator"/>
+                <ref bean="ndcFlightSegmentArrivalPopulator"/>
+                <ref bean="ndcFlightSegmentDetailPopulator"/>
+                <ref bean="ndcFlightSegmentOperatingCarrierPopulator"/>
+                <ref bean="ndcFlightSegmentMarketingCarrierPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageListRequestConverter" alias="ndcBaggageListRequestConverter"/>
+    <bean id="defaultNDCBaggageListRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcBaggageListCurrencyPopulator"/>
+                <ref bean="ndcBaggageListOriginDestinationPopulator"/>
+                <ref bean="ndcBaggageListTravellersPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCServiceListRSConverter" alias="ndcServiceListRSConverter"/>
+    <bean id="defaultNDCServiceListRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.ServiceListRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcServiceListRSDocumentTypePopulator"/>
+                <ref bean="ndcServiceListRSDataListPopulator"/>
+                <ref bean="ndcServiceListRSPopulator"/>
+                <ref bean="ndcServiceListRSMetadataPopulator"/>
+                <ref bean="ndcServiceListSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCServiceListRequestConverter" alias="ndcServiceListRequestConverter"/>
+    <bean id="defaultNDCServiceListRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcServiceListCurrencyPopulator"/>
+                <ref bean="ndcServiceListOriginDestinationPopulator"/>
+                <ref bean="ndcServiceListTravellersPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageListRSConverter" alias="ndcBaggageListRSConverter"/>
+    <bean id="defaultNDCBaggageListRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.BaggageListRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcBaggageListRSDocumentTypePopulator"/>
+                <ref bean="ndcBaggageListRSDataListPopulator"/>
+                <ref bean="ndcBaggageListRSPopulator"/>
+                <ref bean="ndcBaggageListRSMetadataPopulator"/>
+                <ref bean="ndcBaggageListSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="passengerToTravellerConverter" alias="ndcPassengerToTravellerConverter"/>
+    <bean id="passengerToTravellerConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.TravellerData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcPassengerToTravellerPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Populators -->
+
+    <alias name="defaultNDCFlightPriceRSSuccessPopulator" alias="ndcFlightPriceRSSuccessPopulator"/>
+    <bean id="defaultNDCFlightPriceRSSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightPriceRSSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="defaultNDCOrderViewRSSuccessPopulator" alias="ndcOrderViewRSSuccessPopulator"/>
+    <bean id="defaultNDCOrderViewRSSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCOrderViewRSSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="defaultNDCBaggageListSuccessPopulator" alias="ndcBaggageListSuccessPopulator"/>
+    <bean id="defaultNDCBaggageListSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageListSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="defaultNDCServiceListSuccessPopulator" alias="ndcServiceListSuccessPopulator"/>
+    <bean id="defaultNDCServiceListSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServiceListSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="defaultNDCAirShoppingSuccessPopulator" alias="ndcAirShoppingSuccessPopulator"/>
+    <bean id="defaultNDCAirShoppingSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCAirShoppingSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="ndcRSSuccessPopulator" alias="ndcRSSuccessPopulator"/>
+    <bean id="ndcRSSuccessPopulator" class="de.hybris.platform.ndcfacades.populators.response.NDCRSSuccessPopulator"
+          abstract="true"/>
+
+    <alias name="defaultNDCPassengerToTravellerPopulator" alias="ndcPassengerToTravellerPopulator"/>
+    <bean id="defaultNDCPassengerToTravellerPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCPassengerToTravellerPopulator"/>
+
+    <alias name="defaultNDCRQTravellersPopulator" alias="ndcRQTravellersPopulator"/>
+    <bean id="defaultNDCRQTravellersPopulator" class="de.hybris.platform.ndcfacades.populators.request.NDCRQTravellersPopulator"
+          abstract="true">
+        <property name="passengerTypeService" ref="ndcPassengerTypeService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="passengerToTravellerConverter" ref="ndcPassengerToTravellerConverter"/>
+    </bean>
+
+    <alias name="ndcAbstractOfferRSPopulator" alias="ndcAbstractOfferRSPopulator"/>
+    <bean id="ndcAbstractOfferRSPopulator" class="de.hybris.platform.ndcfacades.populators.response.NDCAbstractOfferRSPopulator"
+          abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping"/>
+    </bean>
+
+    <alias name="abstractNDCFacade" alias="abstractNDCFacade"/>
+    <bean id="abstractNDCFacade" class="de.hybris.platform.ndcfacades.facades.AbstractNDCFacade"
+          abstract="true">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="timeService" ref="timeService"/>
+        <property name="transportFacilityFacade" ref="transportFacilityFacade"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="travelCommercePriceFacade" ref="travelCommercePriceFacade"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="travelCommercePriceService" ref="travelCommercePriceService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="ndcPassengerTypeService" ref="ndcPassengerTypeService"/>
+    </bean>
+
+    <alias name="defaultNDCServiceListRSPopulator" alias="ndcServiceListRSPopulator"/>
+    <bean id="defaultNDCServiceListRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServiceListRSPopulator"
+          parent="ndcAbstractOfferRSPopulator"/>
+
+    <alias name="defaultNDCBaggageListRSPopulator" alias="ndcBaggageListRSPopulator"/>
+    <bean id="defaultNDCBaggageListRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageListRSPopulator"
+          parent="ndcAbstractOfferRSPopulator"/>
+
+    <alias name="ndcAbstractOffersRSDataListPopulator" alias="ndcAbstractOffersRSDataListPopulator"/>
+    <bean id="ndcAbstractOffersRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCAbstractOffersRSDataListPopulator"
+          abstract="true">
+        <property name="ndcFlightSegmentConverter" ref="ndcFlightSegmentConverter"/>
+    </bean>
+
+    <alias name="defaultNDCServiceListRSDataListPopulator" alias="ndcServiceListRSDataListPopulator"/>
+    <bean id="defaultNDCServiceListRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServiceListRSDataListPopulator"
+          parent="ndcAbstractOffersRSDataListPopulator"/>
+
+    <alias name="defaultNDCBaggageListRSDataListPopulator" alias="ndcBaggageListRSDataListPopulator"/>
+    <bean id="defaultNDCBaggageListRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageListRSDataListPopulator"
+          parent="ndcAbstractOffersRSDataListPopulator"/>
+
+    <alias name="defaultNDCServiceListRSMetadataPopulator" alias="ndcServiceListRSMetadataPopulator"/>
+    <bean id="defaultNDCServiceListRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServiceListRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCBaggageListRSMetadataPopulator" alias="ndcBaggageListRSMetadataPopulator"/>
+    <bean id="defaultNDCBaggageListRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageListRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCMsgDocumentTypePopulator" alias="ndcMsgDocumentTypePopulator"/>
+    <bean id="defaultNDCMsgDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCMsgDocumentTypePopulator"
+          abstract="true"/>
+
+    <alias name="defaultNDCAirShoppingRSDocumentTypePopulator" alias="ndcAirShoppingRSDocumentTypePopulator"/>
+    <bean id="defaultNDCAirShoppingRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCAirShoppingRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCBaggageListRSDocumentTypePopulator" alias="ndcBaggageListRSDocumentTypePopulator"/>
+    <bean id="defaultNDCBaggageListRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageListRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCServiceListRSDocumentTypePopulator" alias="ndcServiceListRSDocumentTypePopulator"/>
+    <bean id="defaultNDCServiceListRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServiceListRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCOrderViewRSDocumentPopulator" alias="ndcOrderViewRSDocumentPopulator"/>
+    <bean id="defaultNDCOrderViewRSDocumentPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCOrderViewRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCFlightPriceRSDocumentPopulator" alias="ndcFlightPriceRSDocumentPopulator"/>
+    <bean id="defaultNDCFlightPriceRSDocumentPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightPriceRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCOrderViewRSPopulator" alias="ndcOrderViewRSPopulator"/>
+    <bean id="defaultNDCOrderViewRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCOrderViewRSPopulator" scope="prototype">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="ndcTransportVehicleInfoService" ref="ndcTransportVehicleInfoService"/>
+        <property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping"/>
+    </bean>
+
+    <alias name="defaultNDCAirShoppingRSMetadataPopulator" alias="ndcAirShoppingRSMetadataPopulator"/>
+    <bean id="defaultNDCAirShoppingRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCAirShoppingRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCServiceDetailPopulator" alias="ndcServiceDetailPopulator"/>
+    <bean id="defaultNDCServiceDetailPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServiceDetailPopulator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentOperatingCarrierPopulator" alias="ndcFlightSegmentOperatingCarrierPopulator"/>
+    <bean id="defaultNDCFlightSegmentOperatingCarrierPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightSegmentOperatingCarrierPopulator">
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentMarketingCarrierPopulator" alias="ndcFlightSegmentMarketingCarrierPopulator"/>
+    <bean id="defaultNDCFlightSegmentMarketingCarrierPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightSegmentMarketingCarrierPopulator">
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentDetailPopulator" alias="ndcFlightSegmentDetailPopulator"/>
+    <bean id="defaultNDCFlightSegmentDetailPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightSegmentDetailPopulator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentDeparturePopulator" alias="ndcFlightSegmentDeparturePopulator"/>
+    <bean id="defaultNDCFlightSegmentDeparturePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightSegmentDeparturePopulator">
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentArrivalPopulator" alias="ndcFlightSegmentArrivalPopulator"/>
+    <bean id="defaultNDCFlightSegmentArrivalPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightSegmentArrivalPopulator">
+    </bean>
+
+    <alias name="defaultNDCFlightSegmentEquipmentPopulator" alias="ndcFlightSegmentEquipmentPopulator"/>
+    <bean id="defaultNDCFlightSegmentEquipmentPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCFlightSegmentEquipmentPopulator">
+        <property name="ndcTransportVehicleInfoService" ref="ndcTransportVehicleInfoService"/>
+    </bean>
+
+    <alias name="defaultNDCAirShoppingRSResponseIdPopulator" alias="ndcAirShoppingRSResponseIdPopulator"/>
+    <bean id="defaultNDCAirShoppingRSResponseIdPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCAirShoppingRSResponseIdPopulator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCCurrencyPopulator" alias="ndcCurrencyPopulator"/>
+    <bean id="defaultNDCCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCCurrencyPopulator">
+    </bean>
+
+    <alias name="ndcAbstractOffersCurrencyPopulator" alias="ndcAbstractOffersCurrencyPopulator"/>
+    <bean id="ndcAbstractOffersCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCAbstractOffersCurrencyPopulator" abstract="true">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCServiceListCurrencyPopulator" alias="ndcServiceListCurrencyPopulator"/>
+    <bean id="defaultNDCServiceListCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCServiceListCurrencyPopulator"
+          parent="ndcAbstractOffersCurrencyPopulator"/>
+
+    <alias name="defaultNDCBaggageListCurrencyPopulator" alias="ndcBaggageListCurrencyPopulator"/>
+    <bean id="defaultNDCBaggageListCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageListCurrencyPopulator"
+          parent="ndcAbstractOffersCurrencyPopulator"/>
+
+    <bean id="ndcAirShoppingRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCAirShoppingRSPopulator" scope="prototype">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+        <property name="passengerTypeService" ref="passengerTypeService"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="cabinClassService" ref="cabinClassService"/>
+        <property name="ndcOfferItemIdResolver" ref="ndcOfferItemIdResolver"/>
+        <property name="ndcFlightSegmentConverter" ref="ndcFlightSegmentConverter"/>
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+    </bean>
+
+    <alias name="defaultNDCSearchProcessingInfoPopulator" alias="ndcSearchProcessingInfoPopulator"/>
+    <bean id="defaultNDCSearchProcessingInfoPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCSearchProcessingInfoPopulator">
+    </bean>
+
+    <alias name="defaultNDCTravellersPopulator" alias="ndcTravellersPopulator"/>
+    <bean id="defaultNDCTravellersPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCTravellersPopulator">
+        <property name="passengerTypeConverter" ref="passengerTypeConverter"/>
+        <property name="configurationService" ref="configurationService"/>
+        <property name="passengerTypeService" ref="ndcPassengerTypeService"/>
+    </bean>
+
+    <alias name="defaultNDCOriginDestinationPopulator" alias="ndcOriginDestinationPopulator"/>
+    <bean id="defaultNDCOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCOriginDestinationPopulator">
+        <property name="enumerationService" ref="enumerationService"/>
+        <property name="travelLocationService" ref="travelLocationService"/>
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCTripTypePopulator" alias="ndcTripTypePopulator"/>
+    <bean id="defaultNDCTripTypePopulator" class="de.hybris.platform.ndcfacades.populators.request.NDCTripTypePopulator"/>
+
+    <alias name="defaultNDCServiceListTravellersPopulator" alias="ndcServiceListTravellersPopulator"/>
+    <bean id="defaultNDCServiceListTravellersPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCServiceListTravellersPopulator"
+          parent="ndcRQTravellersPopulator"/>
+
+    <alias name="defaultNDCBaggageListTravellersPopulator" alias="ndcBaggageListTravellersPopulator"/>
+    <bean id="defaultNDCBaggageListTravellersPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageListTravellersPopulator"
+          parent="ndcRQTravellersPopulator"/>
+
+    <alias name="ndcAbstractOffersOriginDestinationPopulator" alias="ndcAbstractOffersOriginDestinationPopulator"/>
+    <bean id="ndcAbstractOffersOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCAbstractOffersOriginDestinationPopulator"
+          abstract="true">
+        <property name="travelRouteFacade" ref="travelRouteFacade"/>
+        <property name="transportOfferingFacade" ref="transportOfferingFacade"/>
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCServiceListOriginDestinationPopulator" alias="ndcServiceListOriginDestinationPopulator"/>
+    <bean id="defaultNDCServiceListOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCServiceListOriginDestinationPopulator"
+          parent="ndcAbstractOffersOriginDestinationPopulator"/>
+
+    <alias name="defaultNDCBaggageListOriginDestinationPopulator" alias="ndcBaggageListOriginDestinationPopulator"/>
+    <bean id="defaultNDCBaggageListOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageListOriginDestinationPopulator"
+          parent="ndcAbstractOffersOriginDestinationPopulator">
+    </bean>
+
+    <alias name="defaultNDCTravelPreferencePopulator" alias="ndcTravelPreferencePopulator"/>
+    <bean id="defaultNDCTravelPreferencePopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCTravelPreferencePopulator">
+        <property name="configurationService" ref="configurationService"/>
+        <property name="cabinClassService" ref="cabinClassService"/>
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityOriginDestinationPopulator" alias="ndcSeatAvailabilityOriginDestinationPopulator"/>
+    <bean id="defaultNDCSeatAvailabilityOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCSeatAvailabilityOriginDestinationPopulator"
+          parent="ndcAbstractOffersOriginDestinationPopulator">
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityQueryPopulator" alias="ndcSeatAvailabilityQueryPopulator"/>
+    <bean id="defaultNDCSeatAvailabilityQueryPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCSeatAvailabilityQueryPopulator"/>
+
+    <alias name="defaultNDCSeatAvailabilityRSDocumentTypePopulator" alias="ndcSeatAvailabilityRSDocumentTypePopulator"/>
+    <bean id="defaultNDCSeatAvailabilityRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCSeatAvailabilityRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityRSDataListPopulator" alias="ndcSeatAvailabilityRSDataListPopulator"/>
+    <bean id="defaultNDCSeatAvailabilityRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCSeatAvailabilityRSDataListPopulator"
+          parent="ndcAbstractOffersRSDataListPopulator">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityRSPopulator" alias="ndcSeatAvailabilityRSPopulator"/>
+    <bean id="defaultNDCSeatAvailabilityRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCSeatAvailabilityRSPopulator"
+          parent="ndcAbstractOfferRSPopulator"/>
+
+    <alias name="defaultNDCSeatAvailabilityRSMetadataPopulator" alias="ndcSeatAvailabilityRSMetadataPopulator"/>
+    <bean id="defaultNDCSeatAvailabilityRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCSeatAvailabilityRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilitySuccessPopulator" alias="ndcSeatAvailabilitySuccessPopulator"/>
+    <bean id="defaultNDCSeatAvailabilitySuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCSeatAvailabilitySuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <!-- Ancillary Search beans for NDC -->
+
+    <alias name="defaultNDCAncillarySearchPipelineManager" alias="ndcAncillarySearchPipelineManager"/>
+    <bean id="defaultNDCAncillarySearchPipelineManager"
+          class="de.hybris.platform.travelfacades.ancillary.search.manager.impl.DefaultAncillarySearchPipelineManager">
+        <property name="handlers">
+            <list>
+                <ref bean="basicOfferResponseHandler"/>
+                <ref bean="ndcOfferGroupHandler"/>
+                <ref bean="offerGroupFilterHandler"/>
+                <ref bean="originDestinationHandler"/>
+                <ref bean="offerPricingInfoHandler"/>
+                <ref bean="originDestinationBreakdownHandler"/>
+                <ref bean="travellerBreakdownHandler"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="ndcOfferGroupHandler" class="de.hybris.platform.ndcfacades.offers.handlers.impl.NDCOfferGroupHandler">
+        <property name="categoryOptionList">
+            <list>
+                <value>TRAVEL_RESTRICTION</value>
+            </list>
+        </property>
+        <property name="travelCategoryService" ref="travelCategoryService"/>
+        <property name="categoryConverter" ref="travelCategoryConverter"/>
+        <property name="offerGroupDataConfiguredPopulator" ref="offerGroupDataConfiguredPopulator"/>
+    </bean>
+
+    <alias name="defaultSeatAvailabilityFacade" alias="seatAvailabilityFacade"/>
+    <bean id="defaultSeatAvailabilityFacade"
+          class="de.hybris.platform.ndcfacades.seatavailability.impl.DefaultSeatAvailabilityFacade">
+        <property name="seatAvailabilityRQConverter" ref="ndcSeatAvailabilityRQConverter"/>
+        <property name="seatAvailabilityRSConverter" ref="ndcSeatAvailabilityRSConverter"/>
+        <property name="ndcAccommodationSearchPipelineManager" ref="ndcAccommodationSearchPipelineManager"></property>
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityRQConverter" alias="ndcSeatAvailabilityRQConverter"/>
+    <bean id="defaultNDCSeatAvailabilityRQConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcSeatAvailabilityCurrencyPopulator"/>
+                <ref bean="ndcSeatAvailabilityOriginDestinationPopulator"/>
+                <ref bean="ndcSeatAvailabilityQueryPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityRSConverter" alias="ndcSeatAvailabilityRSConverter"/>
+    <bean id="defaultNDCSeatAvailabilityRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.BaggageListRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcSeatAvailabilityRSDocumentTypePopulator"/>
+                <ref bean="ndcSeatAvailabilityRSDataListPopulator"/>
+                <ref bean="ndcSeatAvailabilityRSPopulator"/>
+                <ref bean="ndcSeatAvailabilityRSMetadataPopulator"/>
+                <ref bean="ndcSeatAvailabilitySuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCSeatAvailabilityCurrencyPopulator" alias="ndcSeatAvailabilityCurrencyPopulator"/>
+    <bean id="defaultNDCSeatAvailabilityCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCSeatAvailabilityCurrencyPopulator"
+          parent="ndcAbstractOffersCurrencyPopulator"/>
+
+    <!-- Accommodation Search beans for NDC -->
+
+    <bean id="ndcTravelAccommodationMapHandler"
+          class="de.hybris.platform.ndcfacades.offers.handlers.impl.NDCTravelAccommodationMapHandler"
+          parent="travelAccommodationMapHandler"/>
+
+    <bean id="ndcBasicAccommodationMapHandler"
+          class="de.hybris.platform.ndcfacades.offers.handlers.impl.NDCBasicAccommodationMapHandler"/>
+
+    <alias name="defaultNDCAccommodationSearchPipelineManager" alias="ndcAccommodationSearchPipelineManager"/>
+    <bean id="defaultNDCAccommodationSearchPipelineManager"
+          class="de.hybris.platform.travelfacades.ancillary.search.manager.impl.DefaultAncillarySearchPipelineManager">
+        <property name="handlers">
+            <list>
+                <ref bean="basicOfferResponseHandler"/>
+                <ref bean="ndcTravelAccommodationMapHandler"/>
+                <ref bean="ndcBasicAccommodationMapHandler"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCServicePriceRequestConverter" alias="ndcServicePriceRequestConverter"/>
+    <bean id="defaultNDCServicePriceRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcServicePriceCurrencyPopulator"/>
+                <ref bean="ndcServicePriceOriginDestinationPopulator"/>
+                <ref bean="ndcServicePriceTravellersPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCServicePriceRSConverter" alias="ndcServicePriceRSConverter"/>
+    <bean id="defaultNDCServicePriceRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.ServicePriceRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcServicePriceRSDocumentTypePopulator"/>
+                <ref bean="ndcServicePriceRSDataListPopulator"/>
+                <ref bean="ndcServicePriceRSPopulator"/>
+                <ref bean="ndcServicePriceRSMetadataPopulator"/>
+                <ref bean="ndcServicePriceSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultServicePriceFacade" alias="servicePriceFacade"/>
+    <bean id="defaultServicePriceFacade" class="de.hybris.platform.ndcfacades.serviceprice.impl.DefaultServicePriceFacade"
+          parent="abstractNDCOffersFacade">
+        <property name="servicePriceRequestConverter" ref="ndcServicePriceRequestConverter"/>
+        <property name="servicePriceResponseConverter" ref="ndcServicePriceRSConverter"/>
+        <property name="ndcOfferList">
+            <list>
+                <value>MEAL</value>
+                <value>SPECIAL</value>
+                <value>LOUNGEACCESS</value>
+                <value>PRIORITYCHECKIN</value>
+                <value>PRIORITYBOARDING</value>
+                <value>ACCOMMODATION</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCServicePriceCurrencyPopulator" alias="ndcServicePriceCurrencyPopulator"/>
+    <bean id="defaultNDCServicePriceCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCServicePriceCurrencyPopulator"
+          parent="ndcAbstractOffersCurrencyPopulator"/>
+
+    <alias name="defaultNDCServicePriceTravellersPopulator" alias="ndcServicePriceTravellersPopulator"/>
+    <bean id="defaultNDCServicePriceTravellersPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCServicePriceTravellersPopulator"
+          parent="ndcRQTravellersPopulator"/>
+
+    <alias name="defaultNDCServicePriceOriginDestinationPopulator" alias="ndcServicePriceOriginDestinationPopulator"/>
+    <bean id="defaultNDCServicePriceOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCServicePriceOriginDestinationPopulator"
+          parent="ndcAbstractOffersOriginDestinationPopulator"/>
+
+    <alias name="defaultNDCServicePriceRSDocumentTypePopulator" alias="ndcServicePriceRSDocumentTypePopulator"/>
+    <bean id="defaultNDCServicePriceRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServicePriceRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCServicePriceRSDataListPopulator" alias="ndcServicePriceRSDataListPopulator"/>
+    <bean id="defaultNDCServicePriceRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServicePriceRSDataListPopulator"
+          parent="ndcAbstractOffersRSDataListPopulator"/>
+
+    <alias name="defaultNDCServicePriceRSPopulator" alias="ndcServicePriceRSPopulator"/>
+    <bean id="defaultNDCServicePriceRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServicePriceRSPopulator"
+          parent="ndcAbstractOfferRSPopulator"/>
+
+    <alias name="defaultNDCServicePriceRSMetadataPopulator" alias="ndcServicePriceRSMetadataPopulator"/>
+    <bean id="defaultNDCServicePriceRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServicePriceRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCServicePriceSuccessPopulator" alias="ndcServicePriceSuccessPopulator"/>
+    <bean id="defaultNDCServicePriceSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCServicePriceSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="defaultBaggageChargesFacade" alias="baggageChargesFacade"/>
+    <bean id="defaultBaggageChargesFacade" class="de.hybris.platform.ndcfacades.baggagecharges.impl.DefaultBaggageChargesFacade"
+          parent="abstractNDCOffersFacade">
+        <property name="baggageChargesRequestConverter" ref="ndcBaggageChargesRequestConverter"/>
+        <property name="baggageChargesResponseConverter" ref="ndcBaggageChargesRSConverter"/>
+        <property name="ndcOfferList">
+            <list>
+                <value>HOLDITEM</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesRequestConverter" alias="ndcBaggageChargesRequestConverter"/>
+    <bean id="defaultNDCBaggageChargesRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcBaggageChargesCurrencyPopulator"/>
+                <ref bean="ndcBaggageChargesOriginDestinationPopulator"/>
+                <ref bean="ndcBaggageChargesTravellersPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesRSConverter" alias="ndcBaggageChargesRSConverter"/>
+    <bean id="defaultNDCBaggageChargesRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.BaggageListRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcBaggageChargesRSDocumentTypePopulator"/>
+                <ref bean="ndcBaggageChargesRSDataListPopulator"/>
+                <ref bean="ndcBaggageChargesRSPopulator"/>
+                <ref bean="ndcBaggageChargesRSMetadataPopulator"/>
+                <ref bean="ndcBaggageChargesSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesOriginDestinationPopulator" alias="ndcBaggageChargesOriginDestinationPopulator"/>
+    <bean id="defaultNDCBaggageChargesOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageChargesOriginDestinationPopulator"
+          parent="ndcAbstractOffersOriginDestinationPopulator">
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesCurrencyPopulator" alias="ndcBaggageChargesCurrencyPopulator"/>
+    <bean id="defaultNDCBaggageChargesCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageChargesCurrencyPopulator"
+          parent="ndcAbstractOffersCurrencyPopulator"/>
+
+    <alias name="defaultNDCBaggageChargesTravellersPopulator" alias="ndcBaggageChargesTravellersPopulator"/>
+    <bean id="defaultNDCBaggageChargesTravellersPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageChargesTravellersPopulator"
+          parent="ndcRQTravellersPopulator"/>
+
+
+    <alias name="defaultNDCBaggageChargesRSDocumentTypePopulator" alias="ndcBaggageChargesRSDocumentTypePopulator"/>
+    <bean id="defaultNDCBaggageChargesRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageChargesRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesRSDataListPopulator" alias="ndcBaggageChargesRSDataListPopulator"/>
+    <bean id="defaultNDCBaggageChargesRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageChargesRSDataListPopulator"
+          parent="ndcAbstractOffersRSDataListPopulator"/>
+
+    <alias name="defaultNDCBaggageChargesRSPopulator" alias="ndcBaggageChargesRSPopulator"/>
+    <bean id="defaultNDCBaggageChargesRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageChargesRSPopulator"
+          parent="ndcAbstractOfferRSPopulator"/>
+
+    <alias name="defaultNDCBaggageChargesRSMetadataPopulator" alias="ndcBaggageChargesRSMetadataPopulator"/>
+    <bean id="defaultNDCBaggageChargesRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageChargesRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCBaggageChargesSuccessPopulator" alias="ndcBaggageChargesSuccessPopulator"/>
+    <bean id="defaultNDCBaggageChargesSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageChargesSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <alias name="defaultBaggageAllowanceFacade" alias="baggageAllowanceFacade"/>
+    <bean id="defaultBaggageAllowanceFacade"
+          class="de.hybris.platform.ndcfacades.baggageallowance.impl.DefaultBaggageAllowanceFacade"
+          parent="abstractNDCOffersFacade">
+        <property name="baggageAllowanceRequestConverter" ref="ndcBaggageAllowanceRequestConverter"/>
+        <property name="baggageAllowanceResponseConverter" ref="ndcBaggageAllowanceRSConverter"/>
+        <property name="ndcOfferList">
+            <list>
+                <value>HOLDITEM</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceRequestConverter" alias="ndcBaggageAllowanceRequestConverter"/>
+    <bean id="defaultNDCBaggageAllowanceRequestConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcBaggageAllowanceCurrencyPopulator"/>
+                <ref bean="ndcBaggageAllowanceOriginDestinationPopulator"/>
+                <ref bean="ndcBaggageAllowanceTravellersPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceRSConverter" alias="ndcBaggageAllowanceRSConverter"/>
+    <bean id="defaultNDCBaggageAllowanceRSConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="de.hybris.platform.ndcfacades.ndc.BaggageListRS"/>
+        <property name="populators">
+            <list>
+                <ref bean="ndcBaggageAllowanceRSDocumentTypePopulator"/>
+                <ref bean="ndcBaggageAllowanceRSDataListPopulator"/>
+                <ref bean="ndcBaggageAllowanceRSPopulator"/>
+                <ref bean="ndcBaggageAllowanceRSMetadataPopulator"/>
+                <ref bean="ndcBaggageAllowanceSuccessPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceOriginDestinationPopulator" alias="ndcBaggageAllowanceOriginDestinationPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceOriginDestinationPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageAllowanceOriginDestinationPopulator"
+          parent="ndcAbstractOffersOriginDestinationPopulator">
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceCurrencyPopulator" alias="ndcBaggageAllowanceCurrencyPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceCurrencyPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageAllowanceCurrencyPopulator"
+          parent="ndcAbstractOffersCurrencyPopulator"/>
+
+    <alias name="defaultNDCBaggageAllowanceTravellersPopulator" alias="ndcBaggageAllowanceTravellersPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceTravellersPopulator"
+          class="de.hybris.platform.ndcfacades.populators.request.NDCBaggageAllowanceTravellersPopulator"
+          parent="ndcRQTravellersPopulator"/>
+
+
+    <alias name="defaultNDCBaggageAllowanceRSDocumentTypePopulator" alias="ndcBaggageAllowanceRSDocumentTypePopulator"/>
+    <bean id="defaultNDCBaggageAllowanceRSDocumentTypePopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageAllowanceRSDocumentPopulator"
+          parent="ndcMsgDocumentTypePopulator">
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceRSDataListPopulator" alias="ndcBaggageAllowanceRSDataListPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceRSDataListPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageAllowanceRSDataListPopulator"
+          parent="ndcAbstractOffersRSDataListPopulator"/>
+
+    <alias name="defaultNDCBaggageAllowanceRSPopulator" alias="ndcBaggageAllowanceRSPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceRSPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageAllowanceRSPopulator"
+          parent="ndcAbstractOfferRSPopulator"/>
+
+    <alias name="defaultNDCBaggageAllowanceRSMetadataPopulator" alias="ndcBaggageAllowanceRSMetadataPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceRSMetadataPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageAllowanceRSMetadataPopulator">
+        <property name="storeSessionFacade" ref="storeSessionFacade"/>
+    </bean>
+
+    <alias name="defaultNDCBaggageAllowanceSuccessPopulator" alias="ndcBaggageAllowanceSuccessPopulator"/>
+    <bean id="defaultNDCBaggageAllowanceSuccessPopulator"
+          class="de.hybris.platform.ndcfacades.populators.response.NDCBaggageAllowanceSuccessPopulator"
+          parent="ndcRSSuccessPopulator"/>
+
+    <!--JAXB Context-->
+
+    <alias name="defaultNDCJAXBContext" alias="ndcJAXBContext"/>
+    <bean id="defaultNDCJAXBContext" class="de.hybris.platform.ndcfacades.context.impl.DefaultNDCJAXBContext">
+        <constructor-arg value="#{configurationService.configuration.getProperty('ndcfacades.ndc.package.path')}"/>
+    </bean>
+
+</beans>

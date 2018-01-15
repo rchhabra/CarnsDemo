@@ -1,0 +1,368 @@
+/*------- Hotel overview start -------*/
+.panel-price-options {
+	.panel-body{
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+	.hotel-items {
+		padding: 0;
+		.price-option{
+			background-color: #d7d7d7;
+		    margin-bottom: 0;
+		    border-left: none;
+		    border-right: none;
+		    border-bottom: none;
+			> div{
+				padding: 15px;
+				&.hotel-details{
+					background: #f1f2f2;
+					height: 170px;
+				}
+			}
+			li{
+				border: none;
+				margin-bottom: 0;
+				background: transparent;
+			}
+		}
+	}
+}
+/*------- Hotel overview end -------*/
+
+/*------- Booking panels start -------*/
+
+.booking {
+	&.room-details {
+		&.panel-list {
+			.panel {
+				&:first-child {
+					border: 0;
+				}
+				.panel-heading {
+					border: 0;
+				}
+			}
+		}
+	}
+	&.panel.panel-list {
+		.journey-primary-wrapper {
+		    border-top: 1px solid #076480;
+		    border-bottom: 1px solid #076480;
+			margin: 10px 0;
+			padding: 20px 0;
+		}
+		.journey-wrapper {
+			.my-account-secondary-panel {
+				margin-top: 0;
+			    background: white;
+			    border-left: 1px solid @secondary-blue;
+			    border-right: 1px solid @secondary-blue;
+			    border-bottom: 1px solid @secondary-blue;
+			    .panel-heading {
+					border-left: 0;
+				    border-right: 0;
+				}
+			    .panel-body {
+					border: 0;
+				    border-top: 1px solid @secondary-blue;
+				    margin-bottom: 0;
+				}
+			}
+		}
+		.my-account-secondary-panel {
+			border-color: transparent;
+			&.panel {
+				box-shadow: none;
+			}
+			.room {
+				border: 1px solid @secondary-blue;
+				border-top: 0;
+				.panel-body {
+					padding-top: 0;
+					margin-bottom: 0;
+					border: 1px solid @secondary-blue;
+					&.collapsing, &.collapse {
+						border: 0;
+					}
+				}
+				> .panel-body {
+					border: 0;
+					padding: 0;
+				}
+				.panel-heading {
+					border: 0;
+					border-top: 1px solid @secondary-blue;
+					border-bottom: 1px solid @secondary-blue;
+				}
+			}
+			.panel-heading {
+				border: 1px solid @secondary-blue;
+				border-bottom: 0;
+				&.divided {
+					border: 0;
+				}
+			}
+			.panel-body {
+				border: 1px solid @secondary-blue;
+			}
+			.facilities-options {
+				.panel {
+					margin: 0;
+				}
+				.panel-body {
+					border: 0;
+					border-top: 1px solid @secondary-blue;
+				}
+			}
+			.review {
+				margin-bottom: 20px;
+				.panel-body {
+					margin-bottom: 0;
+				}
+			}
+		}
+		.option-buttons button {
+			margin-bottom: 20px;
+		}
+	}
+	.review-score {
+		@media (max-width: @screen-xs) {
+			margin-bottom: 20px;
+		    margin-top: 10px;
+		    padding-left: 0;
+		    padding-right: 0;
+		}
+		li {
+			list-style-type: none;
+			position: relative;
+			&:last-of-type {
+					label {
+						border-right: 1px solid #ccc;
+					}
+		    }
+		}
+		label {
+			padding: 5px;
+		    text-align: center;
+		    border: 1px solid #ccc;
+		    border-right: 0;
+		    width: 9%;
+		    float: left;
+		    margin-bottom: 0;
+		    @media (max-width: @screen-xs) {
+				padding: 2px 0;
+			}
+		    &:hover {
+		    	cursor: pointer;
+		    	background-color: #08deff;
+		    	color: #fff;
+		    }
+		}
+		input[type="radio"] {
+			opacity: 0;
+			position: absolute;
+			top: -20px;
+			z-index: -1000;
+			&:checked + label {
+				background-color: #00b7d3;
+				color: #fff;
+			}
+		}
+	}
+	#date-update {
+		margin-top: 20px;
+	}
+	.responsive-table-item {
+		@media (max-width: @screen-xs) {
+			padding: 0 15px;
+		}
+	}
+	.add-room {
+		label {
+			color: #fff;
+		}
+	}
+}
+
+.breakdown {
+	padding-bottom: 20px;
+}
+
+.extras {
+	margin-top: 20px;
+
+}
+
+#addRemoveModal {
+	.modal-body {
+		padding: 0;
+	}
+	.list-group {
+		margin-bottom: 0;
+	}
+	.list-group-item {
+		border: 0;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 0;
+	}
+}
+
+.pre-amendment {
+    position: relative;
+    &:before {
+        background: rgba(255,255,255, 0.5);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        z-index: 1;
+    }
+}
+
+.booking-table {
+	&.responsive-table {
+		th {
+			border-bottom: 0;	
+		}
+		@media (max-width: @screen-xs) {
+			.responsive-table-item {
+				padding: 0;
+			}
+			th, td {
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+			td {
+				word-wrap: break-all;
+			}
+		}
+		@media (max-width: @screen-sm) {
+			.responsive-table-item {
+				padding: 0;
+			}
+		}
+	}
+	td {
+		&.status {
+			text-align: left;
+		}
+	}
+}
+
+.booking-cancel {
+	filter: grayscale(100%);
+	opacity: 0.7;
+}
+
+#booking-details-body {
+	background-color: transparent;
+	.my-account-secondary-panel:first-child {
+		border-bottom: 0;
+		&.room-details:first-child {
+			border-bottom: 1px solid @secondary-blue;
+		}
+	}
+	.total {
+		border-bottom: 1px solid @secondary-blue;
+	}
+}
+.my-account-panels {
+	#booking-details-body {
+		.button-block {
+			display: none;
+		}
+	}
+}
+
+/*------- Booking panels end -------*/
+
+.booking-features {
+	background-color: @light-grey;
+	padding: 15px 0;
+	ul {
+		margin-bottom: 0;
+		margin-left: 15px;
+		li {
+			@media (max-width: @screen-xs) {
+				width: 100%;
+			}
+		}
+	}
+}
+
+.facilities-options {
+	padding: 15px;
+	.panel {
+		box-shadow: none;
+		&.panel-default {
+			border: 0;
+		}
+	}
+	.panel-body {
+	    padding-top: 30px;
+	}
+	ul {
+		list-style-type: none;
+		padding: 0;
+		padding-top: 30px;
+		li {
+			padding-left: 30px;
+			@media (max-width: @screen-xs) {
+				width: 100%;
+			}
+			.glyphicon {
+				margin-left: -20px;
+				padding-right: 5px;
+			}
+		}
+	}
+}
+
+.panel.panel-list {
+	.facilities-options {
+		.panel {
+			&:first-child {
+				.panel-heading {
+					border-top: 0;
+				}
+			}
+			&:last-child {
+				border: 0;
+			}
+		}
+	}
+}
+/*------- See Full Booking Details Modal -------*/
+.reservation-booking-reference {
+	.booking-number {
+		margin: 20px 0;
+	}
+}
+
+.reservation-modal {
+	.modal-body {
+		padding: 0;
+		border: none;
+		.panel-list {
+			border: none;
+			background: #fff;
+			.room-details {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+
+.itinerary-table {
+	.responsive-table-item:nth-child(even) {
+		background-color: #fff;
+	}
+	thead tr th {
+		border-bottom: 0;
+	}
+	tbody tr td {
+		border-top: 0;
+	}
+}

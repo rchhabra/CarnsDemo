@@ -1,0 +1,51 @@
+#
+# Import CMS content for the Airline site
+#
+
+$contentCatalog = airlineContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+# Language
+$lang = en
+
+# Content Pages
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; homepage                     ; "Home"
+; ; login                        ; "Login"
+; ; checkout-login               ; "Checkout Login"
+; ; bookingConfirmationPage      ; "Booking Confirmation"
+; ; profilePage                  ; "My Profile"
+; ; notFound                     ; "Page Not Found"
+; ; bookingDetailsPage           ; "Booking Details"
+; ; checkInDetailsPage           ; "Check In Details"
+; ; checkInSuccessPage           ; "Check In Success"
+; ; checkInFailedPage            ; "Check In Failed"
+; ; tripFinderPage               ; "Trip Finder"
+; ; transportOfferingStatusPage  ; "Transport Offering Status"
+; ; orderFailedPage              ; "Order Failed"
+; ; tripFinderActivitiesPage     ; "Trip Finder - Activities"
+; ; travelInformationPage        ; "Travel Information"
+; ; contactUsPage                ; "Contact Us"
+; ; faqPage                      ; "Frequently Asked Questions"
+; ; privacyPolicyPage            ; "Privacy Policy"
+; ; termsConditionsPage          ; "Terms & Conditions"
+; ; fareSelectionPage            ; "Fare Selection"
+; ; travellerDetailsPage         ; "Traveller Details"
+; ; paymentMethodPage            ; "Payment Method Page"
+; ; helpPage                     ; "Help"
+; ; updatePassword               ; "Update Forgotten Password"
+; ; multiStepCheckoutSummaryPage ; "Checkout"
+; ; payment-details              ; "Saved Payment Details"
+; ; saved-passengers             ; "My Saved Passengers"
+; ; my-saved-searches            ; "My Saved Searches"
+; ; consents                     ; "My Consents"
+; ; disability-and-mobility      ; "Disability & Mobility"
+; ; preferences                  ; "Preferences"
+; ; advance-passenger            ; "Advance Passenger Details"
+; ; order-approval-dashboard     ; "Order Approval Dashboard"
+; ; order-approval-details       ; "Order Approval Details"
+
+INSERT_UPDATE AncillaryPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; ancillaryPage          ; "Ancillary Checkout"
+; ; ancillaryAmendmentPage ; "Ancillary Amendment"
+; ; ancillaryCheckinPage   ; "Ancillary Checkin"

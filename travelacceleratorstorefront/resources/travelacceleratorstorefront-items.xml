@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+  <itemtypes>
+    <!-- <itemtype generate="true" code="MyProduct" jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.MyProduct" extends="Product"
+      autocreate="true" > <attributes> <attribute qualifier="myExampleInitialStringField" type="java.lang.String"> <description>My Example
+      Initial String Value</description> <modifiers initial="true"/> <persistence type="property"/> </attribute> <attribute qualifier="myExampleBooleanField"
+      type="java.lang.Boolean"> <description>Example Initial Boolean Field</description> <persistence type="property"/> </attribute> <attribute
+      qualifier="media" type="Media"> <persistence type="property"/> </attribute> </attributes> </itemtype> -->
+
+    <itemtype code="TravelJspIncludeComponent" autocreate="true" generate="true" extends="JspIncludeComponent"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.TravelJspIncludeComponent">
+      <description>Only overridden here so that we can reference jsps in our area in the add on</description>
+    </itemtype>
+
+    <itemtype code="ResponsiveBackgroundBannerComponent" extends="BannerComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.ResponsiveBackgroundBannerComponent">
+      <description>Responsive Banner Component which has some content displayed on the image</description>
+      <attributes>
+        <attribute type="java.lang.String" qualifier="styleAttributes">
+          <persistence type="property"/>
+          <description>Placeholder for any additional attributes of the banner component</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="ActivityBannerComponent" extends="BannerComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.ActivityBannerComponent">
+      <description>Custom Banner Component used on trip finder activities page</description>
+    </itemtype>
+
+    <itemtype code="TripFinderBannerComponent" extends="BannerComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.TripFinderBannerComponent">
+      <description>Custom Banner Component used on the top of trip finder page</description>
+    </itemtype>
+
+    <itemtype code="SidePromoBannerComponent" extends="BannerComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.SidePromoBannerComponent">
+      <description>Custom Banner Component used on the side promotional area</description>
+    </itemtype>
+
+    <itemtype code="ManageMyBookingComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.ManageMyBookingComponent">
+      <description>This component allows to view details of their booking and apply changes to it.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>This component allows to view details of their booking and apply changes to it.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="ReservationTotalsComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.ReservationTotalsComponent">
+      <description>It provides a view of totals summary in reservation.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It provides a view of totals summary in itinerary.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+    
+    <itemtype code="BookingTotalComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.BookingTotalComponent">
+      <description>It provides the total of a booking.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It is localized title of the component.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="ReservationOverlayTotalsComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.ReservationOverlayTotalsComponent">
+      <description>It provides a view of totals summary in reservation overlay.</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+          <description>It provides a view of totals summary in reservation overlay.</description>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="PaymentOptionsComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.PaymentOptionsComponent">
+      <description>This component displays the available payment options together with relative prices and conditions
+      </description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+
+    <itemtype code="AbstractBookingDetailsComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.AbstractBookingDetailsComponent">
+      <description>This components shows booking details for a booking</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+
+    <itemtype code="AbstractFinderComponent" extends="SimpleCMSComponent" autocreate="true" generate="true"
+            jaloclass="de.hybris.platform.travelacceleratorstorefront.jalo.components.AbstractBookingDetailsComponent">
+      <description>This components shows booking details for a booking</description>
+      <attributes>
+        <attribute qualifier="title" type="localized:java.lang.String">
+          <persistence type="property"/>
+        </attribute>
+      </attributes>
+    </itemtype>
+    
+  </itemtypes>
+</items>

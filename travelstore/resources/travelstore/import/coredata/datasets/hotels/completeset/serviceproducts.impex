@@ -1,0 +1,13 @@
+#
+# ImpEx for Importing Service Products into travel accelerator
+#
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$categories = supercategories(code, $catalogVersion)
+$approved = approvalstatus(code)[default = 'approved']
+
+
+INSERT_UPDATE ExtraProduct; code[unique = true]; travelRestriction(code); $categories; $catalogVersion; $approved
+; WIFI              ; WIFI_RESTRICTION        ; ;
+; GYM_ACCESS        ; GYM_RESTRICTION         ; ;
+; ENGLISH_BREAKFAST ; BREAKFAST_RESTRICTION   ; ;

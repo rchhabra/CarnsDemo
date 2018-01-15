@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Email Context Bean -->
+	<bean id="airlineBookingNotificationEmailContext" class="de.hybris.platform.travelfacades.airline.process.email.context.BookingNotificationEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="accommodationBookingNotificationEmailContext" class="de.hybris.platform.travelfacades.accommodation.process.email.context.BookingNotificationEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="travelBookingNotificationEmailContext" class="de.hybris.platform.travelfacades.travel.process.email.context.BookingNotificationEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="airlineBookingCancelledEmailContext" class="de.hybris.platform.travelfacades.airline.process.email.context.BookingCancelledEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<bean id="accommodationBookingCancelledEmailContext" class="de.hybris.platform.travelfacades.accommodation.process.email.context.BookingCancelledEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<bean id="travelBookingCancelledEmailContext" class="de.hybris.platform.travelfacades.travel.process.email.context.BookingCancelledEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<bean id="airlineBookingAmendmentEmailContext" class="de.hybris.platform.travelfacades.airline.process.email.context.BookingAmendmentEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+	</bean>
+
+
+	<bean id="accommodationBookingAmendmentEmailContext" class="de.hybris.platform.travelfacades.accommodation.process.email.context.BookingAmendmentEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="travelBookingAmendmentEmailContext" class="de.hybris.platform.travelfacades.travel.process.email.context.BookingAmendmentEmailContext"
+		parent="abstractBookingEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="dateTool" class="org.apache.velocity.tools.generic.DateTool" />
+
+	<alias name="defaultAbstractBookingEmailContext" alias="abstractBookingEmailContext" />
+	<bean id="defaultAbstractBookingEmailContext" class="de.hybris.platform.travelfacades.process.email.context.AbstractBookingEmailContext"
+		parent="abstractEmailContext" abstract="true" scope="prototype">
+		<property name="reservationFacade" ref="reservationFacade" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="date" ref="dateTool" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+	</bean>
+
+</beans>

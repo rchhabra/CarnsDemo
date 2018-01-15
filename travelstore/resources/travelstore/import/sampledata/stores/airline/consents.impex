@@ -1,0 +1,10 @@
+#
+# Import the Consents for the Airline Site
+#
+$siteUid = airline
+
+$defaultLanguage=en
+
+INSERT_UPDATE ConsentTemplate;id[unique=true];name[default=$defaultLanguage];description[default=$defaultLanguage];version[unique=true];baseSite(uid)[unique=true,default=$siteUid]
+;AIRLINE_CONSENT_DEMO;"Newsletter subscription consent";"I approve to use my personal data for receiving e-mail newsletters for Marketing campaigns.";0;;
+

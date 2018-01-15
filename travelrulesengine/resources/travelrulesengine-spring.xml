@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <import resource="travelrulesengine-compiler-spring.xml"/>
+
+  <!-- Bean definitions for drools -->
+
+  <alias name="defaultTravelRuleEngineCalculationService" alias="travelRuleEngineCalculationService"/>
+  <bean id="defaultTravelRuleEngineCalculationService" parent="defaultRuleEngineCalculationService"
+        class="de.hybris.platform.travelrulesengine.calculation.impl.DefaultTravelRuleEngineCalculationService">
+  </bean>
+
+  <alias name="defaultTravelRuleActionService" alias="travelRuleActionService"/>
+  <bean id="defaultTravelRuleActionService" parent="defaultRuleActionService">
+    <property name="actionStrategiesMapping" ref="travelActionStrategiesMapping"/>
+  </bean>
+
+  <alias name="defaultTravelFactContextFactory" alias="travelFactContextFactory"/>
+  <bean id="defaultTravelFactContextFactory" parent="defaultFactContextFactory">
+    <property name="raoProviders" ref="travelConfigRaoProviders" />
+  </bean>
+
+   <util:map id="travelConfigRaoProviders">
+	<entry key="CART" value-ref="travelCartRaoProviders" />
+	<entry key="FEE" value-ref="feeRaoProviders" />
+	<entry key="FILTER_FARE" value-ref="filterFareRaoProviders" />
+	<entry key="REFUND" value-ref="refundRaoProviders" />
+	<entry key="FILTER_BUNDLE" value-ref="filterBundleRaoProviders" />
+	<entry key="SHOW_BUNDLE_TEMPLATE" value-ref="showBundleTemplateRaoProviders" />
+	<entry key="FILTER_TRANSPORTOFFERING" value-ref="filterTransportOfferingRaoProviders" />
+    <entry key="SHOW_PRODUCTS" value-ref="showProductsRaoProviders" />
+    <entry key="SHOW_CATEGORIES" value-ref="showProductsRaoProviders" />
+  </util:map>
+
+  <util:map id="travelCartRaoProviders">
+    <entry key="de.hybris.platform.core.model.order.CartModel">
+      <util:list>
+        <ref bean="cartRaoProvider"/>
+      </util:list>
+    </entry>
+    <entry key="de.hybris.platform.core.model.order.OrderModel">
+      <util:list>
+        <ref bean="bookingRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+
+  <util:map id="feeRaoProviders">
+    <entry key="de.hybris.platform.core.model.order.CartModel">
+      <util:list>
+        <ref bean="cartRaoProvider"/>
+      </util:list>
+    </entry>
+    <entry key="de.hybris.platform.core.model.order.OrderModel">
+      <util:list>
+        <ref bean="bookingRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+
+  <util:map id="refundRaoProviders">
+    <entry key="de.hybris.platform.core.model.order.OrderModel">
+      <util:list>
+        <ref bean="bookingRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+
+  <util:map id="filterFareRaoProviders">
+    <entry key="de.hybris.platform.commercefacades.travel.FareProductData">
+      <util:list>
+        <ref bean="fareProductRaoProvider"/>
+      </util:list>
+    </entry>
+    <entry key="de.hybris.platform.commercefacades.travel.FareSearchRequestData">
+      <util:list>
+        <ref bean="fareSearchRequestRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+
+  <util:map id="filterBundleRaoProviders">
+    <entry key="de.hybris.platform.core.model.user.UserModel">
+      <util:list>
+        <ref bean="userRaoProvider"/>
+      </util:list>
+    </entry>
+    <entry key="de.hybris.platform.commercefacades.travel.FareSearchRequestData">
+      <util:list>
+        <ref bean="fareSearchRequestRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+
+  <util:map id="showBundleTemplateRaoProviders">
+    <entry key="de.hybris.platform.commercefacades.travel.FareSearchRequestData">
+      <util:list>
+        <ref bean="searchParameterRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+  
+  <util:map id="showProductsRaoProviders">
+    <entry key="de.hybris.platform.commercefacades.travel.ancillary.data.OfferRequestData">
+      <util:list>
+        <ref bean="offerRequestRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+  
+  <util:map id="filterTransportOfferingRaoProviders">
+    <entry key="de.hybris.platform.commercefacades.travel.TransportOfferingData">
+      <util:list>
+        <ref bean="transportOfferingRaoProvider"/>
+      </util:list>
+    </entry>
+    <entry key="de.hybris.platform.commercefacades.travel.FareSearchRequestData">
+      <util:list>
+        <ref bean="fareSearchRequestRaoProvider"/>
+      </util:list>
+    </entry>
+  </util:map>
+
+  <bean id="abstractTravelEngineService" class="de.hybris.platform.travelrulesengine.services.impl.AbstractTravelEngineService"
+        abstract="true">
+    <property name="commerceRuleEngineService" ref="commerceRuleEngineService"/>
+    <property name="ruleActionService" ref="travelRuleActionService"/>
+    <property name="ruleEngineContextDao" ref="ruleEngineContextDao"/>
+    <property name="factContextFactory" ref="travelFactContextFactory"/>
+  </bean>
+
+  <alias name="defaultTravelDroolsService" alias="travelDroolsService"/>
+  <bean id="defaultTravelDroolsService" class="de.hybris.platform.travelrulesengine.services.impl.DefaultTravelDroolsService"
+        parent="abstractTravelEngineService">
+    <property name="defaultRuleEngineContextName" value="travel-rules-context"/>
+  </bean>
+
+  <!-- RAO Providers -->
+
+  <alias name="defaultBookingRAOProvider" alias="bookingRaoProvider"/>
+  <bean id="defaultBookingRAOProvider" class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultBookingRAOProvider">
+    <property name="bookingRaoConverter" ref="bookingRaoConverter"/>
+    <property name="defaultOptions">
+      <list>
+        <value>INCLUDE_CANCEL_BOOKING</value>
+        <value>EXPAND_BOOKING</value>
+      </list>
+    </property>
+    <property name="timeService" ref="timeService"/>
+  </bean>
+
+  <alias name="defaultFareProductRAOProvider" alias="fareProductRaoProvider"/>
+  <bean id="defaultFareProductRAOProvider"
+        class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultFareProductRAOProvider">
+    <property name="fareProductRaoConverter" ref="fareProductRaoConverter"/>
+    <property name="defaultOptions">
+      <list>
+        <value>INCLUDE_PRODUCT</value>
+        <value>EXPAND_CATEGORIES</value>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultFareSearchRequestRaoProvider" alias="fareSearchRequestRaoProvider"/>
+  <bean id="defaultFareSearchRequestRaoProvider"
+        class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultFareSearchRequestRaoProvider">
+    <property name="fareSearchRequestRaoConverter" ref="fareSearchRequestRaoConverter"/>
+    <property name="defaultOptions">
+      <list>
+        <value>INCLUDE_FARE_SEARCH</value>
+        <value>EXPAND_LEG_INFOS</value>
+        <value>EXPAND_PASSENGER_TYPE_QUANTITIES</value>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultSearchParameterRaoProvider" alias="searchParameterRaoProvider"/>
+  <bean id="defaultSearchParameterRaoProvider"
+        class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultSearchParameterRaoProvider">
+    <property name="searchParamsRaoConverter" ref="searchParamsRaoConverter"/>
+    <property name="defaultOptions">
+      <list>
+        <value>INCLUDE_SEARCH_PARAMS</value>
+        <value>EXPAND_LEG_INFOS</value>
+        <value>EXPAND_USER</value>
+        <value>EXPAND_USER_GROUP</value>
+        <value>EXPAND_PASSENGER_TYPE_QUANTITIES</value>
+      </list>
+    </property>
+  </bean>
+  
+  <alias name="defaultOfferRequestRaoProvider" alias="offerRequestRaoProvider"/>
+  <bean id="defaultOfferRequestRaoProvider"
+        class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultOfferRequestRaoProvider">
+    <property name="offerRequestRaoConverter" ref="offerRequestRaoConverter"/>
+    <property name="defaultOptions">
+      <list>
+        <value>INCLUDE_OFFER_REQUEST</value>
+        <value>EXPAND_LEG_INFOS</value>
+        <value>EXPAND_USER</value>
+        <value>EXPAND_USER_GROUP</value>
+        <value>EXPAND_PASSENGER_TYPE_QUANTITIES</value>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultUserRaoProvider" alias="userRaoProvider"/>
+  <bean id="defaultUserRaoProvider" class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultUserRaoProvider">
+    <property name="userRaoConverter" ref="userRaoConverter"/>
+    <property name="defaultOptions">
+      <list>
+        <value>INCLUDE_USER</value>
+        <value>EXPAND_GROUPS</value>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultTransportOfferingRAOProvider" alias="transportOfferingRaoProvider"/>
+  <bean id="defaultTransportOfferingRAOProvider"
+        class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultTransportOfferingRAOProvider">
+    <property name="transportOfferingRaoConverter" ref="transportOfferingRaoConverter"/>
+  </bean>
+
+  <alias name="defaultTravelCartRAOProvider" alias="cartRaoProvider" />
+  <bean id="defaultTravelCartRAOProvider" class="de.hybris.platform.travelrulesengine.rao.providers.impl.DefaultTravelCartRAOProvider" parent="defaultCartRAOProvider">
+    <property name="travelOptions">
+      <list>
+        <value>EXPAND_PASSENGER_TYPE_QUANTITIES</value>
+      </list>
+    </property>
+  </bean>
+
+  <!-- RAO Converters Populators -->
+
+  <alias name="defaultBookingRaoConverter" alias="bookingRaoConverter"/>
+  <bean id="defaultBookingRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.BookingRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="bookingRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+  <alias name="defaultBookingRaoPopulator" alias="bookingRaoPopulator"/>
+  <bean id="defaultBookingRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.BookingRaoPopulator"/>
+
+  <alias name="defaultFareProductRaoConverter" alias="fareProductRaoConverter"/>
+  <bean id="defaultFareProductRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.FareProductRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="fareProductRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+  <alias name="defaultFareProductRaoPopulator" alias="fareProductRaoPopulator"/>
+  <bean id="defaultFareProductRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.FareProductRaoPopulator">
+    <property name="categoryDataRaoConverter" ref="categoryDataRaoConverter"/>
+  </bean>
+
+  <alias name="defaultTransportOfferingRaoConverter" alias="transportOfferingRaoConverter"/>
+  <bean id="defaultTransportOfferingRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.TransportOfferingRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="transportOfferingRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+  <alias name="defaultTransportOfferingRaoPopulator" alias="transportOfferingRaoPopulator"/>
+  <bean id="defaultTransportOfferingRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.TransportOfferingRaoPopulator">
+  </bean>
+
+  <alias name="defaultCategoryDataRaoConverter" alias="categoryDataRaoConverter"/>
+  <bean id="defaultCategoryDataRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.ruleengineservices.rao.CategoryRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="categoryDataRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+  <alias name="defaultCategoryDataRaoPopulator" alias="categoryDataRaoPopulator"/>
+  <bean id="defaultCategoryDataRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.CategoryDataRaoPopulator"/>
+
+  <alias name="defaultFareSearchRequestRaoConverter" alias="fareSearchRequestRaoConverter"/>
+  <bean id="defaultFareSearchRequestRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.FareSearchRequestRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="legInfoRaoPopulator"/>
+        <ref bean="passengerTypeQuantityRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultSearchParamsRaoConverter" alias="searchParamsRaoConverter"/>
+  <bean id="defaultSearchParamsRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.SearchParamsRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="searchParamsRaoBasicPopulator"/>
+        <ref bean="searchParamsUserRaoPopulator"/>
+        <ref bean="searchParamsLegInfoRaoPopulator"/>
+        <ref bean="searchParamsLocationRaoPopulator"/>
+        <ref bean="searchParamsOriginatingLocationsRaoPopulator"/>
+        <ref bean="searchParamsPassengerTypeQuantityRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+  
+  <alias name="defaultOfferRequestRaoConverter" alias="offerRequestRaoConverter"/>
+  <bean id="defaultOfferRequestRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.OfferRequestRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="offerRequestRaoChannelPopulator"/>
+        <ref bean="offerRequestRaoUserRaoPopulator"/>
+        <ref bean="offerRequestRaoLegInfoRaoPopulator"/>
+        <ref bean="offerRequestRaoLocationRaoPopulator"/>
+        <ref bean="offerRequestOriginatingLocationsRaoPopulator"/>
+        <ref bean="offerRequestRaoPassengerTypeQuantityPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultTravelCartRaoConverter" alias="cartRaoConverter" />
+  <bean id="defaultTravelCartRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.ruleengineservices.rao.CartRAO" />
+    <property name="populators">
+      <list>
+        <ref bean="cartRaoPopulator" />
+        <ref bean="searchDateCartRaoPopulator" />
+        <ref bean="originatingLocationsCartRaoPopulator" />
+        <ref bean="passengerTypeQuantityCartRaoPopulator" />
+        <ref bean="channelCartRaoPopulator" />
+        <ref bean="legInfoCartRaoPopulator"/>
+        <ref bean="locationsCartRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+  
+  <alias name="defaultLocationsCartRaoPopulator" alias="locationsCartRaoPopulator"/>
+  <bean id="defaultLocationsCartRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.LocationsCartRaoPopulator" />
+  
+  <alias name="defaultOfferRequestRaoChannelPopulator" alias="offerRequestRaoChannelPopulator"/>
+  <bean id="defaultOfferRequestRaoChannelPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.OfferRequestRaoChannelPopulator">
+    <property name="sessionService" ref="sessionService"/>
+  </bean>
+
+  <alias name="defaultOfferRequestRaoUserRaoPopulator" alias="offerRequestRaoUserRaoPopulator"/>
+  <bean id="defaultOfferRequestRaoUserRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.OfferRequestRaoUserRaoPopulator">
+    <property name="userConverter" ref="userRaoConverter"/>
+    <property name="sessionService" ref="sessionService"/>
+  </bean>
+  
+  <alias name="defaultOfferRequestRaoLegInfoRaoPopulator" alias="offerRequestRaoLegInfoRaoPopulator"/>
+  <bean id="defaultOfferRequestRaoLegInfoRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.OfferRequestRaoLegInfoRaoPopulator"/>
+  
+  <alias name="defaultOfferRequestRaoLocationRaoPopulator" alias="offerRequestRaoLocationRaoPopulator"/>
+  <bean id="defaultOfferRequestRaoLocationRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.OfferRequestRaoLocationRaoPopulator">
+    <property name="ruleTransportFacilityDao" ref="ruleTransportFacilityDao"/>
+  </bean>
+  
+  <alias name="defaultOfferRequestRaoPassengerTypeQuantityPopulator" alias="offerRequestRaoPassengerTypeQuantityPopulator"/>
+  <bean id="defaultOfferRequestRaoPassengerTypeQuantityPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.OfferRequestRaoPassengerTypeQuantityPopulator">
+    <property name="passengerTypeRaoConverter" ref="passengerTypeRaoConverter"/>
+  </bean>
+  
+  <alias name="defaultOfferRequestOriginatingLocationsRaoPopulator" alias="offerRequestOriginatingLocationsRaoPopulator"/>
+  <bean id="defaultOfferRequestOriginatingLocationsRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.OfferRequestOriginatingLocationsRaoPopulator"/>
+  
+  
+  <alias name="defaultChannelCartRaoPopulator" alias="channelCartRaoPopulator"/>
+  <bean id="defaultChannelCartRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.ChannelCartRaoPopulator">
+    <property name="sessionService" ref="sessionService"/>
+  </bean>
+
+  <alias name="defaultLegInfoCartRaoPopulator" alias="legInfoCartRaoPopulator"/>
+  <bean id="defaultLegInfoCartRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.LegInfoCartRaoPopulator" />
+
+  <alias name="defaultSearchDateCartRaoPopulator" alias="searchDateCartRaoPopulator"/>
+  <bean id="defaultSearchDateCartRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.SearchDateCartRaoPopulator">
+    <property name="timeService" ref="timeService" />
+  </bean>
+
+  <alias name="defaultOriginatingLocationsCartRaoPopulator" alias="originatingLocationsCartRaoPopulator"/>
+  <bean id="defaultOriginatingLocationsCartRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.OriginatingLocationsCartRaoPopulator">
+    <property name="ruleTravelLocationDao" ref="ruleTravelLocationDao"/>
+    <property name="ruleTransportFacilityDao" ref="ruleTransportFacilityDao"/>
+  </bean>
+
+  <alias name="defaultSearchParamsUserRaoPopulator" alias="searchParamsUserRaoPopulator"/>
+  <bean id="defaultSearchParamsUserRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.SearchParamsUserRaoPopulator">
+    <property name="userConverter" ref="userRaoConverter"/>
+    <property name="sessionService" ref="sessionService"/>
+  </bean>
+
+  <alias name="defaultSearchParamsRaoBasicPopulator" alias="searchParamsRaoBasicPopulator"/>
+  <bean id="defaultSearchParamsRaoBasicPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.SearchParamsRaoBasicPopulator">
+    <property name="timeService" ref="timeService" />
+  </bean>
+
+  <alias name="defaultSearchParamsOriginatingLocationsRaoPopulator" alias="searchParamsOriginatingLocationsRaoPopulator"/>
+  <bean id="defaultSearchParamsOriginatingLocationsRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.SearchParamsOriginatingLocationsRaoPopulator"/>
+
+  <alias name="defaultSearchParamsLegInfoRaoPopulator" alias="searchParamsLegInfoRaoPopulator"/>
+  <bean id="defaultSearchParamsLegInfoRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.SearchParamsLegInfoRaoPopulator"/>
+
+  <alias name="defaultSearchParamsLocationRaoPopulator" alias="searchParamsLocationRaoPopulator"/>
+  <bean id="defaultSearchParamsLocationRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.SearchParamsLocationRaoPopulator">
+    <property name="ruleTravelLocationDao" ref="ruleTravelLocationDao"/>
+    <property name="ruleTransportFacilityDao" ref="ruleTransportFacilityDao"/>
+  </bean>
+
+  <alias name="defaultLegInfoRaoPopulator" alias="legInfoRaoPopulator"/>
+  <bean id="defaultLegInfoRaoPopulator" class="de.hybris.platform.travelrulesengine.converters.populator.LegInfoRaoPopulator">
+    <property name="timeService" ref="timeService"/>
+  </bean>
+
+  <alias name="defaultPassengerTypeQuantityRaoPopulator" alias="passengerTypeQuantityRaoPopulator"/>
+  <bean id="defaultPassengerTypeQuantityRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.PassengerTypeQuantityRaoPopulator">
+    <property name="passengerTypeRaoConverter" ref="passengerTypeRaoConverter"/>
+  </bean>
+
+  <alias name="defaultPassengerTypeQuantityCartRaoPopulator" alias="passengerTypeQuantityCartRaoPopulator"/>
+  <bean id="defaultPassengerTypeQuantityCartRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.PassengerTypeQuantityCartRaoPopulator">
+    <property name="passengerTypeRaoConverter" ref="passengerTypeRaoConverter"/>
+    <property name="passengerTypeConverter" ref="passengerTypeConverter"/>
+  </bean>
+
+  <alias name="defaultSearchParamsPassengerTypeQuantityRaoPopulator" alias="searchParamsPassengerTypeQuantityRaoPopulator"/>
+  <bean id="defaultSearchParamsPassengerTypeQuantityRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.SearchParamsPassengerTypeQuantityRaoPopulator">
+    <property name="passengerTypeRaoConverter" ref="passengerTypeRaoConverter"/>
+  </bean>
+
+  <alias name="defaultPassengerTypeRaoConverter" alias="passengerTypeRaoConverter"/>
+  <bean id="defaultPassengerTypeRaoConverter" parent="abstractPopulatingConverter">
+    <property name="targetClass" value="de.hybris.platform.travelrulesengine.rao.PassengerTypeRAO"/>
+    <property name="populators">
+      <list>
+        <ref bean="passengerTypeRaoPopulator"/>
+      </list>
+    </property>
+  </bean>
+
+  <alias name="defaultPassengerTypeRaoPopulator" alias="passengerTypeRaoPopulator"/>
+  <bean id="defaultPassengerTypeRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.PassengerTypeRaoPopulator"/>
+
+  <alias name="defaultTravelProductRaoPopulator" alias="productRaoPopulator"/>
+  <bean id="defaultTravelProductRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.TravelProductRaoPopulator"
+        parent="defaultProductRaoPopulator"/>
+
+  <alias name="defaultTravelOrderEntryRaoPopulator" alias="orderEntryRaoPopulator"/>
+  <bean id="defaultTravelOrderEntryRaoPopulator"
+        class="de.hybris.platform.travelrulesengine.converters.populator.TravelOrderEntryRaoPopulator"
+        parent="defaultOrderEntryRaoPopulator"/>
+
+  <!--Action Strategies -->
+
+  <util:map id="travelActionStrategiesMapping">
+    <entry key="defaultAddAdminFeeRAOAction" value-ref="adminFeeActionStrategy"/>
+    <entry key="defaultRetainAdminFeeRAOAction" value-ref="retainFeeActionStrategy"/>
+    <entry key="defaultFareFilteringRAOAction" value-ref="discardFareActionStrategy"/>
+    <entry key="defaultBundleFilteringRAOAction" value-ref="discardBundleActionStrategy"/>
+    <entry key="defaultShowBundleTemplateRAOAction" value-ref="showBundleTemplateActionStrategy"/>
+    <entry key="defaultTransportOfferingFilteringRAOAction" value-ref="discardTransportOfferingActionStrategy"/>
+    <entry key="defaultShowProductRAOAction" value-ref="showProductsActionStrategy" />
+    <entry key="defaultShowProductCategoriesRAOAction" value-ref="showProductCategoriesActionStrategy" />
+  </util:map>
+
+
+  <bean id="abstractTravelRuleActionStrategy" abstract="true"
+        class="de.hybris.platform.travelrulesengine.action.impl.AbstractTravelRuleActionStrategy"/>
+
+  <alias name="defaultAdminFeeActionStrategy" alias="adminFeeActionStrategy"/>
+  <bean id="defaultAdminFeeActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultAdminFeeActionStrategy">
+    <property name="productService" ref="productService"/>
+    <property name="cartService" ref="cartService"/>
+    <property name="commerceCartService" ref="commerceCartService"/>
+    <property name="commercePriceService" ref="commercePriceService"/>
+    <property name="modelService" ref="modelService"/>
+  </bean>
+
+  <alias name="defaultRetainFeeActionStrategy" alias="retainFeeActionStrategy"/>
+  <bean id="defaultRetainFeeActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultRetainFeeActionStrategy">
+  </bean>
+
+  <alias name="defaultDiscardFareActionStrategy" alias="discardFareActionStrategy"/>
+  <bean id="defaultDiscardFareActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultDiscardFareActionStrategy"/>
+
+  <alias name="defaultDiscardBundleActionStrategy" alias="discardBundleActionStrategy"/>
+  <bean id="defaultDiscardBundleActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultDiscardBundleActionStrategy"/>
+
+  <alias name="defaultShowBundleTemplateActionStrategy" alias="showBundleTemplateActionStrategy"/>
+  <bean id="defaultShowBundleTemplateActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultShowBundleTemplateActionStrategy"/>
+        
+  <alias name="defaultShowProductsActionStrategy" alias="showProductsActionStrategy"/>
+  <bean id="defaultShowProductsActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultShowProductsActionStrategy"/>
+        
+  <alias name="defaultShowProductCategoriesActionStrategy" alias="showProductCategoriesActionStrategy"/>
+  <bean id="defaultShowProductCategoriesActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultShowProductCategoriesActionStrategy"/>      
+
+  <alias name="defaultDiscardTransportOfferingActionStrategy" alias="discardTransportOfferingActionStrategy"/>
+  <bean id="defaultDiscardTransportOfferingActionStrategy" parent="abstractTravelRuleActionStrategy"
+        class="de.hybris.platform.travelrulesengine.action.impl.DefaultDiscardTransportOfferingActionStrategy"/>
+
+  <alias name="defaultTravelOrderEntryAdjustActionStrategy" alias="orderEntryAdjustActionStrategy"/>
+  <alias name="defaultOrderEntryAdjustActionStrategy" alias="defaultTravelOrderEntryAdjustActionStrategy"/>
+  <bean id="defaultTravelOrderEntryAdjustActionStrategy" parent="defaultOrderEntryAdjustActionStrategy">
+    <property name="promotionAction"
+              value="de.hybris.platform.promotionengineservices.model.RuleBasedOrderEntryAdjustActionModel"/>
+    <property name="forceImmediateRecalculation" value="true"/>
+  </bean>
+
+  <!-- RAO Actions -->
+
+  <bean id="abstractTravelCommerceRAOAction"
+        class="de.hybris.platform.travelrulesengine.commerce.impl.AbstractTravelCommerceRAOAction"
+        parent="abstractCommerceRAOAction" abstract="true">
+    <property name="travelRuleEngineCalculationService" ref="travelRuleEngineCalculationService"/>
+  </bean>
+
+  <alias name="defaultAdminFeeRAOAction" alias="adminFeeRAOAction"/>
+  <bean id="defaultAdminFeeRAOAction" parent="abstractTravelCommerceRAOAction"
+        class="de.hybris.platform.travelrulesengine.commerce.impl.DefaultAdminFeeRAOAction">
+  </bean>
+
+  <alias name="defaultRetainFeeRAOAction" alias="retainFeeRAOAction"/>
+  <bean id="defaultRetainFeeRAOAction" parent="abstractTravelCommerceRAOAction"
+        class="de.hybris.platform.travelrulesengine.commerce.impl.DefaultRetainFeeRAOAction">
+  </bean>
+
+  <alias name="defaultDiscardFareRAOAction" alias="discardFareRAOAction"/>
+  <bean id="defaultDiscardFareRAOAction" parent="abstractTravelCommerceRAOAction"
+        class="de.hybris.platform.travelrulesengine.commerce.impl.DefaultDiscardFareRAOAction">
+  </bean>
+
+  <alias name="defaultDiscardBundleRAOAction" alias="discardBundleRAOAction"/>
+  <bean id="defaultDiscardBundleRAOAction" parent="abstractTravelCommerceRAOAction"
+        class="de.hybris.platform.travelrulesengine.commerce.impl.DefaultDiscardBundleRAOAction">
+  </bean>
+
+  <alias name="defaultDiscardTransportOfferingRAOAction" alias="discardTransportOfferingRAOAction"/>
+  <bean id="defaultDiscardTransportOfferingRAOAction" parent="abstractTravelCommerceRAOAction"
+        class="de.hybris.platform.travelrulesengine.commerce.impl.DefaultDiscardTransportOfferingRAOAction">
+  </bean>
+
+  <!-- New RAO Actions -->
+
+   <bean id="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.AbstractTravelRuleRAOAction"
+        parent="abstractRuleExecutableSupport" abstract="true">
+    <property name="travelRuleEngineCalculationService" ref="travelRuleEngineCalculationService"/>
+  </bean>
+
+  <alias name="defaultAddAdminFeeRAOAction" alias="addAdminFeeRAOAction"/>
+  <bean id="defaultAddAdminFeeRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultAddAdminFeeRAOAction">
+  </bean>
+
+  <alias name="defaultRetainAdminFeeRAOAction" alias="retainAdminFeeRAOAction"/>
+  <bean id="defaultRetainAdminFeeRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultRetainAdminFeeRAOAction">
+  </bean>
+
+  <alias name="defaultFareFilteringRAOAction" alias="fareFilteringRAOAction"/>
+  <bean id="defaultFareFilteringRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultFareFilteringRAOAction">
+  </bean>
+
+  <alias name="defaultBundleFilteringRAOAction" alias="bundleFilteringRAOAction"/>
+  <bean id="defaultBundleFilteringRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultBundleFilteringRAOAction">
+  </bean>
+
+  <alias name="defaultShowBundleTemplateRAOAction" alias="showBundleTemplateRAOAction"/>
+  <bean id="defaultShowBundleTemplateRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultShowBundleTemplateRAOAction">
+  </bean>
+
+  <alias name="defaultShowProductRAOAction" alias="showProductRAOAction"/>
+  <bean id="defaultShowProductRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultShowProductRAOAction">
+  </bean>
+  
+  <alias name="defaultShowProductCategoriesRAOAction" alias="showProductCategoriesRAOAction"/>
+  <bean id="defaultShowProductCategoriesRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultShowProductCategoriesRAOAction">
+  </bean>
+
+  <alias name="defaultTransportOfferingFilteringRAOAction" alias="transportOfferingFilteringRAOAction"/>
+  <bean id="defaultTransportOfferingFilteringRAOAction" parent="abstractTravelRuleRAOAction"
+        class="de.hybris.platform.travelrulesengine.rule.evaluation.actions.DefaultTransportOfferingFilteringRAOAction">
+  </bean>
+  
+  <!-- CONDITIONS -->
+
+  <alias alias="ruleFareTripTypeConditionTranslator" name="defaultRuleFareTripTypeConditionTranslator"/>
+  <bean id="defaultRuleFareTripTypeConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleFareTripTypeConditionTranslator"/>
+
+  <alias alias="ruleFareCategory5ConditionTranslator" name="defaultRuleFareCategory5ConditionTranslator"/>
+  <bean id="defaultRuleFareCategory5ConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleFareCategory5ConditionTranslator"/>
+
+  <alias alias="ruleFareCategory67ConditionTranslator" name="defaultRuleFareCategory67ConditionTranslator"/>
+  <bean id="defaultRuleFareCategory67ConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleFareCategory67ConditionTranslator"/>
+
+  <alias alias="ruleCancelAdvanceConditionTranslator" name="defaultRuleCancelAdvanceConditionTranslator"/>
+  <bean id="defaultRuleCancelAdvanceConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleCancelAdvanceConditionTranslator"/>
+
+  <alias alias="ruleSearchParamsTranslator" name="defaultRuleSearchParamsTranslator"/>
+  <bean id="defaultRuleSearchParamsTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleSearchParamsTranslator"/>
+
+  <alias alias="ruleTravelDateConditionTranslator" name="defaultRuleTravelDateConditionTranslator"/>
+  <bean id="defaultRuleTravelDateConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleTravelDateConditionTranslator"/>
+
+  <alias alias="ruleMarketLocationConditionTranslator" name="defaultRuleMarketLocationConditionTranslator"/>
+  <bean id="defaultRuleMarketLocationConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleMarketLocationConditionTranslator"/>
+
+  <alias alias="ruleMarketLocationCartConditionTranslator" name="defaultRuleMarketLocationCartConditionTranslator"/>
+  <bean id="defaultRuleMarketLocationCartConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleMarketLocationCartConditionTranslator"/>
+
+  <alias alias="ruleOriginDestinationLocationConditionTranslator" name="defaultRuleOriginDestinationLocationConditionTranslator"/>
+  <bean id="defaultRuleOriginDestinationLocationConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleOriginDestinationLocationConditionTranslator"/>
+        
+  <alias alias="ruleOriginDestinationLocationCartConditionTranslator" name="defaultRuleOriginDestinationLocationCartConditionTranslator"/>
+  <bean id="defaultRuleOriginDestinationLocationCartConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleOriginDestinationLocationCartConditionTranslator"/>      
+
+  <alias alias="rulePassengerTypeQuantityConditionTranslator" name="defaultRulePassengerTypeQuantityConditionTranslator"/>
+  <bean id="defaultRulePassengerTypeQuantityConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RulePassengerTypeQuantityConditionTranslator"/>
+
+  <alias alias="rulePassengerTypeQuantityCartConditionTranslator" name="defaultRulePassengerTypeQuantityCartConditionTranslator"/>
+  <bean id="defaultRulePassengerTypeQuantityCartConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RulePassengerTypeQuantityCartConditionTranslator"/>
+
+  <alias alias="ruleSalesApplicationConditionTranslator" name="defaultRuleSalesApplicationConditionTranslator"/>
+  <bean id="defaultRuleSalesApplicationConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleSalesApplicationConditionTranslator"/>
+        
+  <alias alias="ruleSalesApplicationCartConditionTranslator" name="defaultRuleSalesApplicationCartConditionTranslator"/>
+  <bean id="defaultRuleSalesApplicationCartConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleSalesApplicationCartConditionTranslator"/>      
+
+  <alias alias="ruleSearchDateConditionTranslator" name="defaultRuleSearchDateConditionTranslator"/>
+  <bean id="defaultRuleSearchDateConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleSearchDateConditionTranslator"/>
+
+  <alias alias="ruleSearchDateCartConditionTranslator" name="defaultRuleSearchDateCartConditionTranslator"/>
+  <bean id="defaultRuleSearchDateCartConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleSearchDateCartConditionTranslator"/>
+
+  <alias alias="ruleCustomersConditionTranslator" name="defaultRuleCustomersConditionTranslator"/>
+  <bean id="defaultRuleCustomersConditionTranslator" class="de.hybris.platform.travelrulesengine.conditions.RuleCustomersConditionTranslator" parent="ruleTargetCustomersConditionTranslator"/>
+  
+  <alias alias="ruleTravelDateCartConditionTranslator" name="defaultRuleTravelDateCartConditionTranslator"/>
+  <bean id="defaultRuleTravelDateCartConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleTravelDateCartConditionTranslator"/>
+        
+  <alias alias="ruleSalesApplOfferRequestConditionTranslator" name="defaultRuleSalesApplOfferRequestConditionTranslator"/>
+  <bean id="defaultRuleSalesApplOfferRequestConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleSalesAppOfferRequestConditionTranslator"/>
+        
+  <alias alias="rulePassengerTypeQuantityProductConditionTranslator" name="defaultRulePassengerTypeQuantityProductConditionTranslator"/>
+  <bean id="defaultRulePassengerTypeQuantityProductConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RulePassengerTypeQuantityProductConditionTranslator"/>
+  
+  <alias alias="ruleCustomersProductConditionTranslator" name="defaultRuleCustomersProductConditionTranslator"/>
+  <bean id="defaultRuleCustomersProductConditionTranslator" class="de.hybris.platform.travelrulesengine.conditions.RuleCustomersProductConditionTranslator" parent="ruleTargetCustomersConditionTranslator"/>
+   
+  <alias alias="ruleLocationProductConditionTranslator" name="defaultRuleLocationProductConditionTranslator"/>
+  <bean id="defaultRuleLocationProductConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleLocationProductConditionTranslator"/>
+                    
+  <alias alias="ruleMarketLocationProductConditionTranslator" name="defaultRuleMarketLocationProductConditionTranslator"/>
+  <bean id="defaultRuleMarketLocationProductConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleMarketLocationProductConditionTranslator"/>                  
+
+   <alias alias="ruleTravelDateProductConditionTranslator" name="defaultRuleTravelDateProductConditionTranslator"/>
+   <bean id="defaultRuleTravelDateProductConditionTranslator"
+        class="de.hybris.platform.travelrulesengine.conditions.RuleTravelDateProductConditionTranslator"/>
+
+  <!-- ACTIONS -->
+
+  <alias alias="ruleAddFeeToCartAction" name="defaultRuleAddFeeToCartAction"/>
+  <bean id="defaultRuleAddFeeToCartAction"
+        class="de.hybris.platform.travelrulesengine.ruledefinitions.actions.RuleAddFeeToCartAction">
+    <property name="adminFeeRAOAction" ref="adminFeeRAOAction"/>
+  </bean>
+
+  <alias alias="ruleDiscardFareAction" name="defaultRuleDiscardFareAction"/>
+  <bean id="defaultRuleDiscardFareAction"
+        class="de.hybris.platform.travelrulesengine.ruledefinitions.actions.RuleDiscardFareAction">
+    <property name="discardFareRAOAction" ref="discardFareRAOAction"/>
+  </bean>
+
+  <alias alias="ruleRetainFeeAction" name="defaultRuleRetainFeeAction"/>
+  <bean id="defaultRuleRetainFeeAction" class="de.hybris.platform.travelrulesengine.ruledefinitions.actions.RuleRetainFeeAction">
+    <property name="retainFeeRAOAction" ref="retainFeeRAOAction"/>
+  </bean>
+
+  <alias alias="ruleDiscardBundleAction" name="defaultRuleDiscardBundleAction"/>
+  <bean id="defaultRuleDiscardBundleAction"
+        class="de.hybris.platform.travelrulesengine.ruledefinitions.actions.RuleDiscardBundleAction">
+    <property name="discardBundleRAOAction" ref="discardBundleRAOAction"/>
+  </bean>
+
+	<!-- Rule Executable Actions -->
+
+  <alias alias="ruleAddAdminFeeToCartAction" name="defaultRuleAddAdminFeeToCartAction" />
+  <bean id="defaultRuleAddAdminFeeToCartAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="addAdminFeeRAOAction" />
+  </bean>
+
+  <alias alias="ruleFareFilterAction" name="defaultRuleFareFilterAction" />
+  <bean id="defaultRuleFareFilterAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="fareFilteringRAOAction" />
+  </bean>
+
+  <alias alias="ruleRetainAdminFeeAction" name="defaultRuleRetainAdminFeeAction" />
+  <bean id="defaultRuleRetainAdminFeeAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="retainAdminFeeRAOAction" />
+  </bean>
+
+  <alias alias="ruleBundleFilterAction" name="defaultRuleBundleFilterAction" />
+  <bean id="defaultRuleBundleFilterAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="bundleFilteringRAOAction" />
+  </bean>
+
+  <alias alias="ruleShowBundleTemplateAction" name="defaultRuleShowBundleTemplateAction" />
+  <bean id="defaultRuleShowBundleTemplateAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="showBundleTemplateRAOAction" />
+  </bean>
+  
+  <alias alias="ruleShowProductAction" name="defaultRuleShowProductAction" />
+  <bean id="defaultRuleShowProductAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="showProductRAOAction" />
+  </bean>
+  
+  <alias alias="ruleShowProductCategoriesAction" name="defaultRuleShowProductCategoriesAction" />
+  <bean id="defaultRuleShowProductCategoriesAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="showProductCategoriesRAOAction" />
+  </bean>
+
+  <alias alias="ruleTransportOfferingFilterAction" name="defaultRuleTransportOfferingFilterAction" />
+  <bean id="defaultRuleTransportOfferingFilterAction" class="de.hybris.platform.ruledefinitions.actions.DefaultRuleExecutableAction">
+    <property name="raoAction" ref="transportOfferingFilteringRAOAction" />
+  </bean>
+
+  <!-- Mapper definitions -->
+
+  <bean id="bundleTemplateRuleParameterValueMapper" class="de.hybris.platform.travelrulesengine.rule.strategies.impl.mappers.BundleTemplateParameterValueMapper">
+    <property name="ruleBundleTemplateDao" ref="ruleBundleTemplateDao"/>
+  </bean>
+
+  <bean id="locationParameterValueMapper" class="de.hybris.platform.travelrulesengine.rule.strategies.impl.mappers.LocationParameterValueMapper">
+    <property name="ruleTravelLocationDao" ref="ruleTravelLocationDao"/>
+  </bean>
+
+  <bean id="passengerTypeParameterValueMapper" class="de.hybris.platform.travelrulesengine.rule.strategies.impl.mappers.PassengerTypeParameterValueMapper">
+    <property name="rulePassengerTypeDao" ref="rulePassengerTypeDao"/>
+  </bean>
+
+  <bean id="salesApplicationParameterValueMapper" class="de.hybris.platform.travelrulesengine.rule.strategies.impl.mappers.SalesApplicationParameterValueMapper">
+    <property name="enumerationService" ref="enumerationService"/>
+  </bean>
+
+  <!-- Mapper binding definitions -->
+
+  <bean id="bundleTemplateRuleParameterValueMapperDefinition" class="de.hybris.platform.ruleengineservices.rule.strategies.impl.RuleParameterValueMapperDefinition">
+    <property name="mapper" ref="bundleTemplateRuleParameterValueMapper" />
+    <property name="type" value="ItemType(BundleTemplate)" />
+  </bean>
+
+  <bean id="locationRuleParameterValueMapperDefinition" class="de.hybris.platform.ruleengineservices.rule.strategies.impl.RuleParameterValueMapperDefinition">
+    <property name="mapper" ref="locationParameterValueMapper" />
+    <property name="type" value="ItemType(Location)" />
+  </bean>
+
+  <bean id="passengerTypeRuleParameterValueMapperDefinition" class="de.hybris.platform.ruleengineservices.rule.strategies.impl.RuleParameterValueMapperDefinition">
+    <property name="mapper" ref="passengerTypeParameterValueMapper" />
+    <property name="type" value="ItemType(PassengerType)" />
+  </bean>
+  <bean id="salesApplicationParameterValueMapperDefinition" class="de.hybris.platform.ruleengineservices.rule.strategies.impl.RuleParameterValueMapperDefinition">
+    <property name="mapper" ref="salesApplicationParameterValueMapper" />
+    <property name="type" value="ItemType(SalesApplication)" />
+  </bean>
+
+  <!-- Dao definitions -->
+
+  <alias name="defaultRulePassengerTypeDao" alias="rulePassengerTypeDao" />
+  <bean id="defaultRulePassengerTypeDao" class="de.hybris.platform.travelrulesengine.dao.impl.DefaultRulePassengerTypeDao">
+    <constructor-arg value="PassengerType" />
+  </bean>
+
+  <alias name="defaultRuleBundleTemplateDao" alias="ruleBundleTemplateDao" />
+  <bean id="defaultRuleBundleTemplateDao" class="de.hybris.platform.travelrulesengine.dao.impl.DefaultRuleBundleTemplateDao">
+    <constructor-arg value="BundleTemplate" />
+  </bean>
+
+  <alias name="defaultRuleTravelLocationDao" alias="ruleTravelLocationDao" />
+  <bean id="defaultRuleTravelLocationDao" class="de.hybris.platform.travelrulesengine.dao.impl.DefaultRuleTravelLocationDao">
+    <constructor-arg value="Location" />
+  </bean>
+
+  <alias name="defaultRuleTransportFacilityDao" alias="ruleTransportFacilityDao" />
+  <bean id="defaultRuleTransportFacilityDao" class="de.hybris.platform.travelrulesengine.dao.impl.DefaultRuleTransportFacilityDao">
+    <constructor-arg value="TransportFacility" />
+  </bean>
+
+</beans>

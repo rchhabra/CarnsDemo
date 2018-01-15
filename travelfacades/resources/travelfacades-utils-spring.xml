@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:map id="accommodationOfferingSearchResponseSortStrategyMap" key-type="java.lang.String">
+		<entry key="price-asc" value-ref="priceAscendingSortStrategy" />
+		<entry key="price-desc" value-ref="priceDescendingSortStrategy" />
+		<entry key="DEFAULT" value-ref="propertiesSortStrategy" />
+	</util:map>
+
+	<util:list id="updateSearchCriterionStrategies">
+		<ref bean="updateCriterionSortsStrategy" />
+		<ref bean="updateCriterionFacetsStrategy" />
+		<ref bean="updateCriterionFilteredFacetsStrategy" />
+		<ref bean="updateCriterionQueryStrategy" />
+	</util:list>
+
+	<util:map id="orderStatusValueMap" key-type="java.lang.String" value-type="java.lang.Integer">
+		<entry key="ACTIVE" value="0" />
+		<entry key="AMENDED" value="0" />
+		<entry key="BOOKED" value="0" />
+		<entry key="ACTIVE_DISRUPTED" value="0" />
+		<entry key="ACTIVE_DISRUPTED_PENDING" value="0" />
+		<entry key="ORDER_SPLIT" value="1" />
+		<entry key="SUSPENDED" value="2" />
+		<entry key="PAST" value="3" />
+		<entry key="CANCELLED" value="4" />
+		<entry key="DEFAULT" value="100" />
+	</util:map>
+
+	<util:map id="maxGuestMap" key-type="java.lang.String" value-type="java.lang.String">
+		<entry key="BOOKING_TRANSPORT_ONLY" value="finder.transport.max.guests" />
+		<entry key="BOOKING_ACCOMMODATION_ONLY" value="finder.accommodation.max.guests" />
+		<entry key="BOOKING_TRANSPORT_ACCOMMODATION" value="finder.transport.accommodation.max.guests" />
+		<entry key="BOOKING_PACKAGE" value="finder.package.max.guests" />
+	</util:map>
+
+	<util:map id="bookingActionStrategyMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="AMEND_ANCILLARY" value-ref="bookingLevelBookingActionStrategy" />
+		<entry key="CANCEL_BOOKING" value-ref="bookingLevelBookingActionStrategy" />
+		<entry key="CANCEL_TRANSPORT_BOOKING" value-ref="bookingLevelBookingActionStrategy" />
+		<entry key="CHECK_IN_ALL" value-ref="originDestinationRefLevelBookingActionStrategy" />
+		<entry key="CHECK_IN" value-ref="travellerLevelBookingActionStrategy" />
+		<entry key="REMOVE_TRAVELLER" value-ref="travellerLevelBookingActionStrategy" />
+		<entry key="ACCEPT_BOOKING" value-ref="bookingLevelBookingActionStrategy" />
+		<entry key="REJECT_BOOKING" value-ref="bookingLevelBookingActionStrategy" />
+	</util:map>
+
+	<util:map id="accommodationBookingActionStrategyMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="ADD_REQUEST" value-ref="accommodationRoomStayLevelBookingActionStrategy" />
+		<entry key="CANCEL_REQUEST" value-ref="accommodationRequestLevelBookingActionStrategy" />
+		<entry key="CANCEL_BOOKING" value-ref="accommodationBookingLevelBookingActionStrategy" />
+		<entry key="CANCEL_ACCOMMODATION_BOOKING" value-ref="accommodationBookingLevelBookingActionStrategy" />
+		<entry key="CHANGE_DATES" value-ref="accommodationBookingLevelBookingActionStrategy" />
+		<entry key="ADD_ROOM" value-ref="accommodationBookingLevelBookingActionStrategy" />
+		<entry key="PAY_NOW" value-ref="accommodationBookingLevelBookingActionStrategy" />
+		<entry key="WRITE_REVIEW" value-ref="accommodationRoomStayLevelBookingActionStrategy" />
+		<entry key="AMEND_EXTRAS" value-ref="accommodationBookingLevelBookingActionStrategy" />
+	</util:map>
+
+	<util:map id="globalBookingActionStrategyMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="CANCEL_BOOKING" value-ref="globalBookingLevelBookingActionStrategy" />
+	</util:map>
+
+	<util:map id="bookingActionEnabledCalculationStrategiesMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="AMEND_ANCILLARY">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="pastLegsRestrictionStrategy" />
+				<ref bean="departedLegsAmendRestrictionStrategy" />
+				<ref bean="journeyCheckInRestrictionStrategy" />
+				<ref bean="paymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CANCEL_BOOKING">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="userActionTypeRestrictionStrategy" />
+				<ref bean="departedLegsCancelRestrictionStrategy" />
+				<ref bean="pastLegsRestrictionStrategy" />
+				<ref bean="paymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CANCEL_TRANSPORT_BOOKING">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="userActionTypeRestrictionStrategy" />
+				<ref bean="departedLegsCancelRestrictionStrategy" />
+				<ref bean="pastLegsRestrictionStrategy" />
+				<ref bean="paymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CHECK_IN_ALL">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="transportOfferingStatusRestrictionStrategy" />
+				<ref bean="legCheckInRestrictionStrategy" />
+				<ref bean="checkInWindowRestrictionStrategy" />
+				<ref bean="additionalSecurityRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CHECK_IN">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="transportOfferingStatusRestrictionStrategy" />
+				<ref bean="travellerCheckInRestrictionStrategy" />
+				<ref bean="checkInWindowRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="REMOVE_TRAVELLER">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="removeTravellerUserActionTypeRestrictionStrategy" />
+				<ref bean="pastLegRestrictionStrategy" />
+				<ref bean="departedLegRestrictionStrategy" />
+				<ref bean="travellerCheckInRestrictionStrategy" />
+				<ref bean="lastAdultTravellerRestrictionStrategy" />
+				<ref bean="paymentTypeRestrictionStrategy" />
+				<ref bean="transportDealBundleRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="ACCEPT_BOOKING">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="disruptedBookingStatusStrategy" />
+			</list>
+		</entry>
+		<entry key="REJECT_BOOKING">
+			<list>
+				<ref bean="bookingStatusRestrictionStrategy" />
+				<ref bean="userGroupTypeRestriction" />
+				<ref bean="disruptedBookingStatusStrategy" />
+			</list>
+		</entry>
+	</util:map>
+
+	<util:map id="accommodationBookingActionEnabledCalculationStrategiesMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="ADD_REQUEST">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+				<ref bean="maxRequestNumberRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CANCEL_REQUEST">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CANCEL_BOOKING">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+				<ref bean="accommodationUserActionTypeRestrictionStrategy" />
+				<ref bean="accommodationPaymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CANCEL_ACCOMMODATION_BOOKING">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+				<ref bean="accommodationUserActionTypeRestrictionStrategy" />
+				<ref bean="accommodationPaymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="CHANGE_DATES">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+				<ref bean="accommodationPaymentTypeRestrictionStrategy" />
+				<ref bean="accommodationDealBundleRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="ADD_ROOM">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+				<ref bean="maxAccommodationNumberRestrictionStrategy" />
+				<ref bean="accommodationPaymentTypeRestrictionStrategy" />
+				<ref bean="accommodationDealBundleRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="PAY_NOW">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="totalPaymentTransactionRestrictionStrategy" />
+				<ref bean="accommodationPaymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="WRITE_REVIEW">
+			<list>
+				<ref bean="roomStayExpiredCheckOutDateRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="accommodationExpiredBookingStatusRestrictionStrategy" />
+				<ref bean="previouslySubmittedReviewRestrictionStrategy" />
+			</list>
+		</entry>
+		<entry key="AMEND_EXTRAS">
+			<list>
+				<ref bean="accommodationBookingStatusRestrictionStrategy" />
+				<ref bean="accommodationUserGroupTypeRestriction" />
+				<ref bean="roomStayCheckInDateRestrictionStrategy" />
+				<ref bean="accommodationPaymentTypeRestrictionStrategy" />
+			</list>
+		</entry>
+	</util:map>
+
+	<util:map id="globalBookingActionEnabledCalculationStrategiesMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="CANCEL_BOOKING">
+			<list>
+				<ref bean="globalUserGroupTypeRestriction" />
+				<ref bean="cancelCompleteBookingRestrictionStrategy" />
+				<ref bean="cancelCompleteBookingDealBundleRestrictionStrategy" />
+			</list>
+		</entry>
+	</util:map>
+
+	<util:map id="bookingActionTypeAltMessagesMap" key-type="de.hybris.platform.commercefacades.travel.enums.ActionTypeOption">
+		<entry key="CHECK_IN" value="checked.in.action.alternative.message" />
+	</util:map>
+
+	<util:map id="bookingActionTypeUrlMap" key-type="java.lang.String">
+		<entry key="AMEND_ANCILLARY" value="/manage-booking/{orderCode}/amend-ancillaries" />
+		<entry key="CANCEL_BOOKING" value="/manage-booking/cancel-booking/{orderCode}" />
+		<entry key="CANCEL_TRANSPORT_BOOKING" value="/manage-booking/cancel-transport-order/{orderCode}" />
+		<entry key="CHECK_IN_ALL" value="/manage-booking/check-in/{orderCode}/{originDestinationRefNumber}" />
+		<entry key="CHECK_IN" value="/manage-booking/check-in/{orderCode}/{originDestinationRefNumber}?travellerReference={travellerUid}" />
+		<entry key="REMOVE_TRAVELLER" value="/manage-booking/cancel-traveller?orderCode={orderCode}&amp;amp;travellerUid={travellerUid}" />
+		<entry key="ACCEPT_BOOKING" value="/manage-booking/accept-booking/{orderCode}" />
+		<entry key="REJECT_BOOKING" value="/manage-booking/cancel-booking/{orderCode}" />
+	</util:map>
+
+	<util:map id="accommodationBookingActionTypeUrlMap" key-type="java.lang.String">
+		<entry key="ADD_REQUEST" value="/manage-booking/add-request/{bookingReference}" />
+		<entry key="CANCEL_REQUEST" value="/manage-booking/cancel-request/{bookingReference}/{roomStayRefNumber}/{requestCode}" />
+		<entry key="CANCEL_BOOKING" value="/manage-booking/cancel-booking/{bookingReference}" />
+		<entry key="CANCEL_ACCOMMODATION_BOOKING" value="/manage-booking/cancel-accommodation-order/{bookingReference}" />
+		<entry key="CHANGE_DATES" value="/manage-booking/get-new-dates/{bookingReference}" />
+		<entry key="ADD_ROOM" value="/manage-booking/add-room/{bookingReference}" />
+		<entry key="PAY_NOW" value="/manage-booking/pay-now/{bookingReference}" />
+		<entry key="WRITE_REVIEW" value="/manage-booking/write-review/{bookingReference}" />
+		<entry key="AMEND_EXTRAS" value="/manage-booking/amend-extras/{bookingReference}" />
+	</util:map>
+
+	<util:map id="globalBookingActionTypeUrlMap" key-type="java.lang.String">
+		<entry key="CANCEL_BOOKING" value="/manage-booking/cancel-booking/{bookingReference}" />
+	</util:map>
+
+	<util:map id="fareSelectionSortingStrategyMap" key-type="de.hybris.platform.commercefacades.travel.enums.FareSelectionDisplayOrder"
+		value-type="de.hybris.platform.travelfacades.fare.sorting.strategies.AbstractSortingStrategy" scope="prototype">
+		<entry key="PRICE" value-ref="priceSortingStrategy" />
+		<entry key="NUMBER_OF_STOPS" value-ref="numberOfStopsSortingStrategy" />
+		<entry key="DEPARTURE_TIME" value-ref="departureTimeSortingStrategy" />
+		<entry key="ARRIVAL_TIME" value-ref="arrivalTimeSortingStrategy" />
+		<entry key="TRAVEL_TIME" value-ref="travelTimeSortingStrategy" />
+	</util:map>
+
+	<util:list id="addToCartValidationStrategyList">
+		<ref bean="travellerStatusValidationStrategy" />
+		<ref bean="bundledProductValidationStrategy" />
+		<ref bean="productAvailabilityValidationStrategy" />
+		<ref bean="travelRestrictionValidationStrategy" />
+	</util:list>
+
+	<util:list id="addBundleToCartValidationStrategyList">
+		<ref bean="originDestinationRefNumberValidationStrategy" />
+		<ref bean="originDestinationValidationStrategy" />
+		<ref bean="departureArrivalTimesValidationStrategy" />
+	</util:list>
+
+	<util:list id="addPackageBundleToCartValidationStrategyList">
+		<ref bean="originDestinationRefNumberValidationStrategy" />
+		<ref bean="originDestinationValidationStrategy" />
+		<ref bean="transportOfferingsTimesValidationStrategy" />
+	</util:list>
+
+	<util:list id="selectedAccommodationStrategyList">
+		<ref bean="travellerStatusAccommodationValidationStrategy" />
+	</util:list>
+
+	<util:list id="sortedPassengerTypes" value-type="java.lang.String">
+		<value>adult</value>
+		<value>child</value>
+		<value>infant</value>
+	</util:list>
+
+	<util:list id="offerResponseFilterStrategyList">
+		<ref bean="transportOfferingPastDepartureDateStrategy" />
+		<ref bean="transportOfferingStatusStrategy" />
+		<ref bean="travellerStatusStrategy" />
+	</util:list>
+
+	<util:map id="accommodationDiscountEvaluationStrategyMap" key-type="java.lang.String">
+		<entry key="ProductFixedPricePromotionModel" value-ref="productFixedPriceDiscountEvaluationStrategy" />
+		<entry key="ProductPercentageDiscountPromotionModel" value-ref="productPercentageDiscountEvaluationStrategy" />
+	</util:map>
+
+	<util:map id="paymentInfoToPaymentTypeMap" key-type="java.lang.String" value-type="de.hybris.platform.commercefacades.travel.enums.PaymentType">
+		<entry key="CreditCardPaymentInfoModel" value="CREDIT_CARD" />
+		<entry key="InvoicePaymentInfoModel" value="COST_CENTER" />
+	</util:map>
+
+	<util:map id="locationCodesResolvingStrategyMap" key-type="de.hybris.platform.travelservices.enums.LocationType">
+		<entry key="CITY" value-ref="cityLocationCodesResolvingStrategy" />
+		<entry key="AIRPORTGROUP" value-ref="defaultLocationCodesResolvingStrategy" />
+	</util:map>
+
+	<util:map id="addBundleByTypeStrategyMap" key-type="java.lang.String">
+		<entry key="TransportBundleTemplateModel" value-ref="addTransportBundleToCartStrategy" />
+		<entry key="AccommodationBundleTemplateModel" value-ref="addAccommodationBundleToCartStrategy" />
+		<entry key="StandardBundleTemplateModel" value-ref="addStandardBundleToCartStrategy" />
+		<entry key="DEFAULT" value-ref="addStandardBundleToCartStrategy" />
+	</util:map>
+
+	<!-- Dynamic Packages Strategy beans map -->
+
+	<util:map id="packageSearchResponseSortStrategyMap" key-type="java.lang.String">
+		<entry key="price-asc" value-ref="packagePriceAscendingSortStrategy" />
+		<entry key="price-desc" value-ref="packagePriceDescendingSortStrategy" />
+		<entry key="DEFAULT" value-ref="propertiesSortStrategy" />
+	</util:map>
+	
+	<util:map id="productTypeInstanceMap" key-type="java.lang.String" value-type="de.hybris.platform.travelservices.enums.ProductType">
+		<entry key="FareProductModel" value="FARE_PRODUCT" />
+		<entry key="AccommodationModel" value="ACCOMMODATION" />
+		<entry key="AncillaryProductModel" value="ANCILLARY" />
+		<entry key="FeeProductModel" value="FEE" />
+	</util:map>
+
+</beans>

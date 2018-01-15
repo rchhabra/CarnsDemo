@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="page-homepage">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="carousel-wrapper">
+            <div class="container landing-form">
+                <div class="form-wrapper col-xs-12 col-xs-offset-0 col-sm-6 col-sm-offset-1">
+                    <form class="fe-validate form-background form-booking-trip y_fareFinderForm">
+                        <fieldset>
+                            <legend class="with-icon heading-booking-trip primary-legend">Booking Trip</legend>
+                            <button type="button" class="modal-only close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div class="fieldset-inner-wrapper">
+                                <!-- One way / return radio -->
+                                <div class="radio-button-row">
+                                    <input type="radio" name="trip-type" class="y_fareFinderRoundTripBtn" id="radio-rt" checked value="Round Trip">
+                                    <label for="radio-rt">Round Trip</label>
+                                    <input type="radio" name="trip-type" class="y_fareFinderOneWayBtn" id="radio-ow" value="One Way">
+                                    <label for="radio-ow">One Way</label>
+                                </div>
+                                <!-- / One way / return radio -->
+                                <!-- From / To input fields -->
+                                <div class="row input-row">
+                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="fromLocation">From</label>
+                                        <input type="search" class="y_fareFinderOriginLocation input-grid col-xs-12 form-control" id="fromLocation" name="fromLocation" placeholder="From">
+                                        <div id="y_fareFinderOriginLocationSuggestions" class="autocomplete-suggestions-wrapper hidden"><div class="y_suggestionsResults autocomplete-suggestions">
+                                            <ul>
+                                                
+                                                <li class="parent"><span class="title"><strong>edi</strong>nburgh - United Kingdom</span>
+                                                        <ul>
+                                                            
+                                                                <li class="child"><a href="" class="autocomplete-suggestion" data-value="EDI"><strong>edi</strong>nburgh (<strong>edi</strong>) United Kingdom</a></li>
+                                                                <li class="child"><a href="" class="autocomplete-suggestion" data-value="LTN"><strong>edi</strong>had (<strong>edi</strong>) United Emirites</a></li>
+                                                            
+                                                        </ul>
+                                                    </li>
+                                                
+                                            </ul>
+                                        </div></div>
+                                    </div>
+                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="toLocation">To</label>
+                                        <input type="search" class="col-xs-12 y_fareFinderAirportToLocations input-grid form-control" id="toLocation" name="toLocation" placeholder="To">
+                                    </div>
+                                </div>
+                                <!-- / From / To input fields -->
+                                <!-- Departing / Returning dates input fields -->
+                                <div class="row input-row">
+                                    <div class="input-required-wrap col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="datePickerDeparting">Departing</label>
+                                        <input type="text" class="col-xs-12 datepicker input-grid form-control" id="datePickerDeparting" name="datePickerDeparting" placeholder="Departing" autocomplete="off">
+                                    </div>
+                                    <div class="y_fareFinderReturnField">
+                                        <div class="input-required-wrap col-xs-12 col-sm-6">
+                                            <label class="sr-only" for="datePickerReturning">Returning</label>
+                                            <input type="text" class="col-xs-12 datepicker input-grid form-control" id="datePickerReturning" name="datePickerReturning" placeholder="Returning" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Departing / Returning dates input fields -->
+                                <div class="row input-row less-margin">
+                                    <div class="col-xs-12 col-sm-6">
+                                        <label class="sr-only" for="flightClass">Class</label>
+                                        <select class="form-control" id="flightClass" required>
+                                            <option value="" disabled selected>Class</option>
+                                            <option>Economy</option>
+                                            <option>First Class</option>
+                                            <option>Business Class</option>
+                                        </select>
+                                        <a tabindex="0" class="link-trigger" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="Please contact us at least 48 hours before your flight departs in order to help us make your journey as easy as possible even if your flight is operated by one of our airline alliance or franchise partners because they may have different restrictions.<br><br>If you have any questions please call us. To ensure we can provide the best possible service.">Special Requirements <i class="glyphicon glyphicon-info-sign"></i></a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6">
+                                        <!-- Adult Row -->
+                                        <div class="input-group input-stacked">
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="minus" data-field="quant[1]">
+                                            <span class="glyphicon glyphicon-minus">
+                                            <span class="sr-only">Remove one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                            <label for="numberOfAdults" class="sr-only">Number of adults</label>
+                                            <input type="text" name="quant[1]" id="numberOfAdults" class="form-control y_inputNumber fe-dont-validate" value="2" data-min="1" data-max="10" readonly disabled>
+                                            <div class="input-group-addon text-number"> Adult(s)</div>
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="plus" data-field="quant[1]">
+                                            <span class="glyphicon glyphicon-plus">
+                                                <span class="sr-only">Add one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <input id="y_fareFinderTravelingWithChildren" name="travelingWithChildren" type="hidden" value="false">
+                                        <!-- / Adult Row -->
+                                        <!-- Child Row -->
+                                        <div class="input-group input-stacked hidden y_fareFinderTravelingChildren" id="add-child">
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" disabled="disabled" data-type="minus" data-field="quant[2]">
+                                            <span class="glyphicon glyphicon-minus">
+                                                <span class="sr-only">Remove one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                            <label for="numberOfChildren" class="sr-only">Number of children</label>
+                                            <input type="text" name="quant[2]" id="numberOfChildren" class="form-control y_inputNumber fe-dont-validate" value="0" data-min="0" data-max="10" readonly disabled>
+                                            <div class="input-group-addon text-number"> Children</div>
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="plus" data-field="quant[2]">
+                                            <span class="glyphicon glyphicon-plus">
+                                                <span class="sr-only">Add one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <!-- / Child Row -->
+                                        <!-- Infant Row -->
+                                        <div class="input-group input-stacked hidden y_fareFinderTravelingChildren" id="add-infant">
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment fe-dont-validate" disabled="disabled" data-type="minus" data-field="quant[3]">
+                                            <span class="glyphicon glyphicon-minus">
+                                                <span class="sr-only">Remove one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                            <label for="numberOfInfants" class="sr-only">Number of infants</label>
+                                            <input type="text" name="quant[3]" id="numberOfInfants" class="form-control y_inputNumber fe-dont-validate" value="0" data-min="0" data-max="10" readonly disabled>
+                                            <div class="input-group-addon text-number"> Infants</div>
+                                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default y_inputNumberChangeBtn increment" data-type="plus" data-field="quant[3]">
+                                            <span class="glyphicon glyphicon-plus">
+                                                <span class="sr-only">Add one</span>
+                                            </span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                        <!-- / Infant Row -->
+                                        <a href="#" class="link-trigger y_fareFinderChildrenTrigger"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Travel with children</a>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <a tabindex="0" class="link-trigger short" role="button" data-toggle="popover" data-html="true" data-trigger="focus" data-placement="bottom" data-content="Age refers to the age at the time of arrival date of the last leg of the journey: Adult[16+], Child[2-15], Infant[0-1]">Age Information <i class="glyphicon glyphicon-info-sign"></i></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <!-- CTA (Search Flights) -->
+                                <div class="row margin-cancel">
+                                    <div class="col-xs-12 btn-wrapper full-width">
+                                        <button type="submit" class="btn btn-primary col-xs-12 col-sm-6 col-sm-offset-6">Search Flights</button>
+                                    </div>
+                                </div>
+                                <!--  / CTA (Search Flights) -->
+                            </div>
+                            <!-- / .fieldset-inner-wrapper -->
+                        </fieldset>
+                    </form>
+                    <!-- Form (Manage Booking) -->
+                    <form class="col-xs-12 col-sm-6 form-background y_manageBookingsForm">
+                        <fieldset>
+                            <legend class="primary-legend">Manage Booking</legend>
+                            <!-- From / To input fields -->
+                            <div class="row input-row stacked">
+                                <label class="sr-only" for="bookingReference">Booking Reference</label>
+                                <input type="search" class="col-xs-12 input-grid form-control" id="bookingReference" name="bookingReference" placeholder="Booking Reference">
+                                <label class="sr-only" for="lastName">Last Name</label>
+                                <input type="search" class="col-xs-12 input-grid form-control" id="lastName" placeholder="Last Name" name="lastName">
+                                <div class="col-xs-12 btn-wrapper">
+                                    <button type="submit" class="btn btn-primary col-xs-12">Manage Booking</button>
+                                </div>
+                            </div>
+                            <!-- / From / To input fields -->
+                        </fieldset>
+                    </form>
+                    <!-- / Form (Manage Booking) -->
+                    <!-- Form (Flight Status) -->
+                    <form class="col-xs-12 col-sm-6 form-background y_formFlightStatus">
+                        <fieldset>
+                            <legend class="primary-legend">Flight Status</legend>
+                            <!-- Flight Number / Departure Date input fields -->
+                            <div class="row input-row stacked">
+                                <label class="sr-only" for="flightNumber">Flight Number</label>
+                                <input type="search" class="col-xs-12 input-grid form-control" id="flightNumber" name="flightNumber" placeholder="Flight Number RAI1234">
+                                <label class="sr-only" for="departureDate">Departure Date</label>
+                                <input type="search" class="col-xs-12 datepicker input-grid form-control" id="departureDate" name="departureDate" placeholder="Departure Date DD/MM/YYYY">
+                                <div class="col-xs-12 btn-wrapper">
+                                    <button type="submit" class="btn btn-primary col-xs-12">Search</button>
+                                </div>
+                            </div>
+                            <!-- / From / To input fields -->
+                        </fieldset>
+                    </form>
+                    <!-- / Form (Flight Status) -->
+                </div>
+                <!-- / .form-wrapper -->
+            </div>
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active" style="background-image: url('assets/images/photos/burano2.jpg');">
+                    <!-- inline CSS bg images for CMS compatability -->
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row">
+                                    <a href="#">
+                                        <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-8 main-banner-message">
+                                            <h3>Escape to Burano</h3>
+                                            <p>Flights to Burano from</p>
+                                            <h3>&pound;34 each-way</h3>
+                                            <p>Flights plus 2 nights hotel from &pound;99 pp</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('assets/images/photos/NYC2.jpg');">
+                    <!-- inline CSS bg images for CMS compatability -->
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row">
+                                    <a href="#">
+                                        <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-8 main-banner-message">
+                                            <h3>Escape to New York</h3>
+                                            <p>Flights to New York from</p>
+                                            <h3>&pound;34 each-way</h3>
+                                            <p>Flights plus 2 nights hotel from &pound;99 pp</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url('assets/images/photos/kl1.jpg');">
+                    <!-- inline CSS bg images for CMS compatability -->
+                        <div class="carousel-caption">
+                            <div class="container">
+                                <div class="row">
+                                    <a href="#">
+                                        <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-8 main-banner-message ">
+                                            <h3>Escape to Kuala Lumpur</h3>
+                                            <p>Flights to Kuala Lumpur from</p>
+                                            <h3>&pound;34 each-way</h3>
+                                            <p>Flights plus 2 nights hotel from &pound;99 pp</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="cta-section">
+                        <div class="col-xs-12 col-sm-6 col-md-3 relative">
+                            <a href="#">
+                                <div class="cta cta-one" style="background-image: url('assets/images/photos/safari.jpg'); background-position: 50% 0;">
+                                    <div class="tile-title">
+                                        <h3 class="heading">Wildlife Adventure</h3>
+                                        <p>Go now</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 relative">
+                            <a href="#">
+                                <div class="cta cta-two" style="background-image: url('assets/images/photos/ocean-rocks.jpg');">
+                                    <div class="tile-title">
+                                        <h3 class="heading">Get inspired by Southeast Asia</h3>
+                                        <p>Go now</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 relative">
+                            <a href="#">
+                                <div class="cta cta-three" style="background-image: url('assets/images/photos/port-hole.jpg');">
+                                    <div class="tile-title">
+                                        <h3 class="heading">Sail away on a mini cruise</h3>
+                                        <p>Go now</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 relative" >
+                            <a href="#">
+                                <div class="cta cta-four" style="background-image: url('assets/images/photos/gondola.jpg');">
+                                    <div class="tile-title">
+                                        <h3 class="heading">Burj Al Arab dream package</h3>
+                                        <p>Go now</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <p>Autocomplete input</p>
+    <input type="text" name="country" id="autocomplete"/>
+    <p id="outputcontent">Choose a country and the results will display here.</p> -->
+        <!-- / .container -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+    <!-- jQuery Cookie Bar -->
+    <script src="assets/js/jquery.cookieBar.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+          $.cookieBar();
+        });
+    </script>
+</body>
+
+</html>

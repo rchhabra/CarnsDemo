@@ -1,0 +1,884 @@
+#
+# Import the CMS content for the Travel Accelerator Travel site
+#
+$contentCatalog = travelContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+$travelStorefront = travelacceleratorstorefront
+$accommodationAddon = accommodationaddon
+$travelAddon = traveladdon
+$travelcommons = travelcommons
+
+$jarResourceCmsAccommodation = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/$accommodationAddon/import/cockpits/cmscockpit
+$jarResourceCmsTravel = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/$travelAddon/import/cockpits/cmscockpit
+$jarResourceCmsCommons = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/$travelcommons/import/cockpits/cmscockpit
+$jarResourceCmsStorefront = jar:de.hybris.platform.travelstore.constants.TravelstoreConstants&/$travelStorefront/import/cockpits/cmscockpit
+
+# Import modulegen config properties into impex macros
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$jarResourceCms = $config-jarResourceCmsValue
+
+#############################################
+######## PAGE TEMPLATES #####################
+
+# These define the layout for pages
+# "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
+# "RestrictedPageTypes" is used to restrict templates to page types
+
+# Travel frontend templates
+INSERT_UPDATE PageTemplate; $contentCV[unique = true]; uid[unique = true]; name; frontendTemplateName; restrictedPageTypes(code); active[default = true]
+; ; TravelLandingPageTemplate            ; Travel Landing Page Template              ; addon:/$travelStorefront/pages/layout/travelLandingPage                       ; CategoryPage, ContentPage
+; ; TravelContent1PageTemplate           ; Travel Content 1 Page Template            ; addon:/$travelStorefront/pages/layout/travelContent1Page                      ; ContentPage
+; ; TravelContent2PageTemplate           ; Travel Content 2 Page Template            ; addon:/$travelStorefront/pages/layout/travelContent2Page                      ; ContentPage
+; ; TravelContent3PageTemplate           ; Travel Content 3 Page Template            ; addon:/$travelStorefront/pages/layout/travelContent3Page                      ; ContentPage
+; ; CheckoutLoginPageTemplate            ; Checkout Login Page Template              ; addon:/$travelStorefront/pages/checkout/checkoutLoginPage                     ; ContentPage
+; ; BookingConfirmationPageTemplate      ; Order Confirmation Page Template          ; addon:/$travelStorefront/pages/order/bookingConfirmationPage                  ; ContentPage
+; ; AccountPageTemplate                  ; Account Page Template                     ; account/accountLayoutPage                                                     ; ContentPage
+; ; ManageBookingPageTemplate            ; ManageBooking Page Template               ; addon:/$travelcommons/pages/managebooking/manageBookingPage                   ; ContentPage
+; ; BookingDetailsPageTemplate           ; Booking Details Page Template             ; addon:/$travelStorefront/pages/managebooking/bookingDetailsPage               ; ContentPage
+; ; AccommodationSearchPageTemplate      ; Accommodation Search Page Template        ; addon:/$accommodationAddon/pages/hotel/accommodationSearchPage                ; ContentPage
+; ; AccommodationDetailsPageTemplate     ; Accommodation Details Page Template       ; addon:/$accommodationAddon/pages/hotel/accommodationDetailsPage               ; ContentPage
+; ; GuestDetailsPageTemplate             ; Guest Details Page Template               ; addon:/$accommodationAddon/pages/hotel/guestDetailsPage                       ; ContentPage
+; ; TripFinderPageTemplate               ; Trip Finder Page Template                 ; addon:/$travelAddon/pages/tripfinder/tripFinderPage                           ; ContentPage
+; ; TransportOfferingStatusPageTemplate  ; Transport Offering Status Page Template   ; addon:/$travelAddon/pages/transportofferingstatus/transportOfferingStatusPage ; ContentPage
+; ; FareSelectionPageTemplate            ; Fare Selection Page Template              ; addon:/$travelAddon/pages/booking/fareSelectionPage                           ; ContentPage
+; ; AncillaryPageTemplate                ; Ancillary Page Template                   ; addon:/$travelAddon/pages/ancillary/ancillaryPage                             ; ContentPage
+; ; AncillaryExtrasPageTemplate          ; Ancillary Extras Page Template            ; addon:/$travelcommons/pages/ancillary/ancillaryExtrasPage                       ; ContentPage
+; ; TravellerDetailsPageTemplate         ; Traveller Details Page Template           ; addon:/$travelAddon/pages/travellerdetails/travellerDetailsPage               ; ContentPage
+; ; AccountDetailsPageTemplate           ; Account Details Page Template             ; addon:/$travelStorefront/pages/account/accountDetailsLayoutPage               ; ContentPage
+; ; DealListingPageTemplate              ; Deal Listing Page Template                ; addon:/$travelcommons/pages/deal/dealListingLayoutPage                        ; ContentPage
+; ; DealDetailsPageTemplate              ; Deal Details Page Template                ; addon:/$travelcommons/pages/deal/dealDetailsPage                              ; ContentPage
+; ; PackageDetailsPageTemplate           ; Package Details Page Template             ; addon:/$travelcommons/pages/package/packageDetailsPage                        ; ContentPage
+; ; PackageListingPageTemplate           ; Package Listing Page Template             ; addon:/$travelcommons/pages/package/packageListingPage                        ; ContentPage
+; ; PersonalDetailsPageTemplate         ; Personal Details Page Template             ; addon:/$travelcommons/pages/personaldetails/personalDetailsPage               ; ContentPage
+
+# Templates without a frontendTemplateName
+; ; LoginPageTemplate                    ; Login Page Template                       ;                                                                               ; ContentPage ; false
+; ; ErrorPageTemplate                    ; Error Page Template                       ;
+; ; PaymentDetailsPageTemplate           ; Payment Details Page Template             ;                                                                               ; ContentPage ; false
+; ; MultiStepCheckoutSummaryPageTemplate ; Multi Step Checkout Summary Page Template ;                                                                               ; ContentPage ; false
+
+# Travel frontendTemplates
+UPDATE PageTemplate; $contentCV[unique = true]; uid[unique = true]; velocityTemplate[translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; ; TravelLandingPageTemplate            ; $jarResourceCmsStorefront/structure-view/structure_travelLandingPageTemplate.vm
+; ; TravelContent1PageTemplate           ; $jarResourceCmsStorefront/structure-view/structure_travelContent1PageTemplate.vm
+; ; TravelContent2PageTemplate           ; $jarResourceCmsStorefront/structure-view/structure_travelContent2PageTemplate.vm
+; ; TravelContent3PageTemplate           ; $jarResourceCmsStorefront/structure-view/structure_travelContent3PageTemplate.vm
+; ; PaymentDetailsPageTemplate           ; $jarResourceCmsStorefront/structure-view/structure_paymentDetailsPageTemplate.vm
+; ; MultiStepCheckoutSummaryPageTemplate ; $jarResourceCmsStorefront/structure-view/structure_multiStepCheckoutSummaryPageTemplate.vm
+; ; BookingConfirmationPageTemplate      ; $jarResourceCmsStorefront/structure-view/structure_bookingConfirmationPageTemplate.vm
+; ; AccountPageTemplate                  ; $jarResourceCms/structure-view/structure_accountPageTemplate.vm
+; ; ManageBookingPageTemplate            ; $jarResourceCmsCommons/structure-view/structure_manageBookingPageTemplate.vm
+; ; BookingDetailsPageTemplate           ; $jarResourceCmsStorefront/structure-view/structure_bookingDetailsPageTemplate.vm
+; ; AccommodationSearchPageTemplate      ; $jarResourceCmsAccommodation/structure-view/structure_accommodationSearchPageTemplate.vm
+; ; AccommodationDetailsPageTemplate     ; $jarResourceCmsAccommodation/structure-view/structure_accommodationDetailsPageTemplate.vm
+; ; GuestDetailsPageTemplate             ; $jarResourceCmsAccommodation/structure-view/structure_guestDetailsPageTemplate.vm
+; ; TripFinderPageTemplate               ; $jarResourceCmsTravel/structure-view/structure_tripFinderPageTemplate.vm
+; ; TransportOfferingStatusPageTemplate  ; $jarResourceCmsTravel/structure-view/structure_transportOfferingStatusPageTemplate.vm
+; ; FareSelectionPageTemplate            ; $jarResourceCmsTravel/structure-view/structure_fareSelectionPageTemplate.vm
+; ; AncillaryPageTemplate                ; $jarResourceCmsTravel/structure-view/structure_ancillaryPageTemplate.vm
+; ; AncillaryExtrasPageTemplate          ; $jarResourceCmsCommons/structure-view/structure_ancillaryExtrasPageTemplate.vm
+; ; TravellerDetailsPageTemplate         ; $jarResourceCmsTravel/structure-view/structure_travellerDetailsPageTemplate.vm
+; ; AccountDetailsPageTemplate           ; $jarResourceCmsStorefront/structure-view/structure_accountDetailsPageTemplate.vm
+; ; DealListingPageTemplate              ; $jarResourceCmsCommons/structure-view/structure_dealListingPageTemplate.vm
+; ; DealDetailsPageTemplate              ; $jarResourceCmsCommons/structure-view/structure_dealDetailsPageTemplate.vm
+; ; PackageDetailsPageTemplate           ; $jarResourceCmsCommons/structure-view/structure_packageDetailsPageTemplate.vm
+; ; PackageListingPageTemplate           ; $jarResourceCmsCommons/structure-view/structure_packageListingPageTemplate.vm
+; ; PersonalDetailsPageTemplate          ; $jarResourceCmsCommons/structure-view/structure_personalDetailsPageTemplate.vm
+
+; ; LoginPageTemplate                    ; $jarResourceCms/structure-view/structure_loginPageTemplate.vm
+; ; ErrorPageTemplate                    ; $jarResourceCms/structure-view/structure_errorPageTemplate.vm
+; ; CheckoutLoginPageTemplate            ; $jarResourceCms/structure-view/structure_checkoutLoginPageTemplate.vm
+
+
+#############################################
+######## CONTENT SLOT NAMES #################
+
+# Travel Landing Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TravelLandingPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ;                                        ; logo
+; TopHeaderSlot ; ;                                        ; wide
+; HeaderLinks   ; ;                                        ; headerlinks
+; NavigationBar ; ;                                        ; navigation
+; Section1      ; ; TabbedFinderComponent,AccommodationFinderComponent,FareFinderComponent,TravelFinderComponent,PackageFinderComponent;
+; Section2A     ; ; ManageMyBookingComponent               ; wide
+; Section2B     ; ; TransportOfferingStatusSearchComponent ; wide
+; Section3      ; ;                                        ; wide
+; Section4A     ; ;                                        ; narrow
+; Footer        ; ;                                        ; footer
+
+# Account Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AccountPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo       ; ; ; logo
+; TopHeaderSlot  ; ; ; wide
+; HeaderLinks    ; ; ; headerlinks
+; NavigationBar  ; ; ; navigation
+; RightContent   ; ; ; wide
+; SideContent    ; ; ; narrow
+; Footer         ; ; ; footer
+; TopContent     ; ; ; wide
+; TopInfoContent ; ; ; wide
+; BodyContent    ; ; ; wide
+; BottomContent  ; ; ; wide
+
+# Travel Content 1 Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TravelContent1PageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; MiddleContent ; ; ; wide
+; Footer        ; ; ; footer
+
+# Travel Content 2 Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TravelContent2PageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; LeftContent   ; ; ; wide
+; RightContent  ; ; ; narrow
+; SideContent   ; ; ; narrow
+; Footer        ; ; ; footer
+
+# Travel Content 3 Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TravelContent3PageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; LeftContent   ; ; ; narrow
+; SideContent   ; ; ; narrow
+; RightContent  ; ; ; wide
+; Footer        ; ; ; footer
+
+# Login Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LoginPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo         ; ; ; logo
+; TopHeaderSlot    ; ; ; wide
+; HeaderLinks      ; ; ; headerlinks
+; NavigationBar    ; ; ; navigation
+; Footer           ; ; ; footer
+; LeftContentSlot  ; ; ; wide
+; RightContentSlot ; ; ; wide
+
+# Checkout Login Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'CheckoutLoginPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo          ; ; ; logo
+; TopHeaderSlot     ; ; ; wide
+; HeaderLinks       ; ; ; headerlinks
+; NavigationBar     ; ; ; navigation
+; Footer            ; ; ; footer
+; LeftContentSlot   ; ; ; wide
+; RightContentSlot  ; ; ; wide
+; CenterContentSlot ; ; ; wide
+
+# Error Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ErrorPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; MiddleContent ; ; CMSParagraphComponent
+; BottomContent ; ; ; wide
+; SideContent   ; ; ; narrow
+; Footer        ; ; ; footer
+
+# Manage Booking In Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ManageBookingPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ;                           ; logo
+; TopHeaderSlot ; ;                           ; wide
+; HeaderLinks   ; ;                           ; headerlinks
+; NavigationBar ; ;                           ; navigation
+; LeftContent   ; ;                           ; narrow
+; RightContent  ; ; TravelJspIncludeComponent ;
+; Footer        ; ;                           ; footer
+
+# Account Details In Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AccountDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ;                           ; logo
+; TopHeaderSlot ; ;                           ; wide
+; HeaderLinks   ; ;                           ; headerlinks
+; NavigationBar ; ;                           ; navigation
+; LeftContent   ; ;                           ; narrow
+; RightContent  ; ; TravelJspIncludeComponent ;
+; Footer        ; ;                           ; footer
+
+# Order Confirmation Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'BookingConfirmationPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; LeftContent   ; ; ; narrow
+; RightContent  ; ; ; wide
+; Footer        ; ; ; footer
+
+# Booking Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'BookingDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; LeftContent   ; ; ; narrow
+; RightContent  ; ; ; wide
+; Footer        ; ; ; footer
+
+# Trip Finder Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TripFinderPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; TopContent    ; ; ; wide
+; LeftContent   ; ; ; wide
+; RightContent  ; ; ; narrow
+; Footer        ; ; ; footer
+
+# Hotel Search Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AccommodationSearchPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; LeftContent        ; ; TabbedFinderComponent,AccommodationFinderComponent                                                 ;
+; Refinement         ; ; AccommodationRefinementComponent                                                                    ;
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Hotel Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AccommodationDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Guest Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'GuestDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Fare Selection Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'FareSelectionPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; LeftContent        ; ; TabbedFinderComponent,FareFinderComponent                                                           ;
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; AsmContent         ; ;                                                                                                     ;
+; SideContent        ; ;                                                                                                     ; narrow
+; BottomContent      ; ;                                                                                                     ; wide
+; Footer             ; ;                                                                                                     ; footer
+
+# Ancillary Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AncillaryPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+
+# Ancillary Extras Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AncillaryExtrasPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Traveller Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TravellerDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Transport Offering Status Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'TransportOfferingStatusPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ; ; logo
+; TopHeaderSlot ; ; ; wide
+; HeaderLinks   ; ; ; headerlinks
+; NavigationBar ; ; ; navigation
+; RightContent  ; ; ; narrow
+; Footer        ; ; ; footer
+
+# Payment Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'PaymentDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; PaymentOptions     ; ; PaymentOptionsComponent                                                                             ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'MultiStepCheckoutSummaryPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo         ; ;                                                                  ; logo
+; HeaderLinks      ; ;                                                                  ; headerlinks
+; SearchBox        ; ;                                                                  ; searchbox
+; MiniCart         ; ;                                                                  ; minicart
+; NavigationBar    ; ;                                                                  ; navigation
+; CenterContent    ; ; TransportReservationComponent, AccommodationReservationComponent ;
+; SideContent      ; ;                                                                  ; narrow
+; Footer           ; ;                                                                  ; footer
+; TopHeaderSlot    ; ;                                                                  ; wide
+; BottomHeaderSlot ; ;                                                                  ; wide
+
+# Deal Listing Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'DealListingPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo       ; ; ; logo
+; TopHeaderSlot  ; ; ; wide
+; HeaderLinks    ; ; ; headerlinks
+; NavigationBar  ; ; ; navigation
+; TopInfoHeader  ; ; ; wide
+; TopInfoContent ; ; ; wide
+; BodyContent    ; ; ; wide
+; BottomContent  ; ; ; wide
+; Footer         ; ; ; footer
+
+# Deal Details Page Templates
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'DealDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Package Listing Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'PackageListingPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo      ; ;                            ; logo
+; TopHeaderSlot ; ;                            ; wide
+; HeaderLinks   ; ;                            ; headerlinks
+; NavigationBar ; ;                            ; navigation
+; LeftContent   ; ; TabbedFinderComponent,PackageFinderComponent      ;
+; Refinement    ; ; PackageRefinementComponent ;
+; SideContent   ; ;                            ; narrow
+; Footer        ; ;                            ; footer
+
+# Package Details Page Templates
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'PackageDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; NavigationBar      ; ;                                                                                                     ; navigation
+; LeftContent        ; ; TabbedFinderComponent,PackageFinderComponent                                                                               ;
+; BottomContent      ; ;                                                                                                     ; wide
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+# Personal Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'PersonalDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; SiteLogo           ; ;                                                                                                     ; logo
+; TopHeaderSlot      ; ;                                                                                                     ; wide
+; HeaderLinks        ; ;                                                                                                     ; headerlinks
+; Reservation        ; ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent                ;
+; ReservationOverlay ; ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent ;
+; SideContent        ; ;                                                                                                     ; narrow
+; Footer             ; ;                                                                                                     ; footer
+
+#############################################
+######## CONTENT SLOTS ######################
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)[mode = replace]
+; ; SiteLogoSlot           ; Default Site Logo Slot   ; true
+; ; TopHeaderSlot          ; Top Header Slot          ; true
+; ; HeaderLinksSlot        ; Header links             ; true
+; ; HomepageNavLinkSlot    ; Default Homepage Link    ; true
+; ; NavigationBarSlot      ; Navigation Bar           ; true
+; ; TopContentSlot         ; Top Content Slot         ; true
+; ; LeftContentSlot        ; Left Content Slot        ; true
+; ; MiddleContentSlot      ; Middle Content Slot      ; true
+; ; CenterContentSlot      ; Center Content Slot      ; true
+; ; SideContentSlot        ; Side Content Slot        ; true
+; ; RightContentSlot       ; Right Content Slot       ; true
+; ; BottomContentSlot      ; Bottom Content Slot      ; true
+; ; ReservationSlot        ; Reservation Slot         ; true
+; ; ReservationOverlaySlot ; Reservation Overlay Slot ; true
+; ; FooterSlot             ; Footer                   ; true
+; ; FooterCheckoutSlot     ; Footer                   ; true
+; ; RefinementSlot         ; Refinement Slot          ; true
+; ; TopInfoHeaderSlot      ; Top Info Header Slot     ; true
+; ; TopInfoContentSlot     ; Top Info Content Slot    ; true
+; ; BodyContentSlot        ; Body Content Slot        ; true
+; ; BottomContentSlot      ; Bottom Content Slot      ; true
+; ; PackageRefinementSlot  ; Package Refinement Slot  ; true
+
+#############################################
+######## CONTENT SLOTS FOR TEMPLATES ########
+
+# Bind Content Slots to Page Templates
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TravelLandingPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TravelLanding      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-TravelLanding ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-TravelLanding  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-TravelLanding ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-TravelLanding        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-TravelLanding   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AccountPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-Account      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-Account ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-Account  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-Account ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-Account        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-Account   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; RightContent-Account  ; RightContent    ; ; RightContentSlot    ; true
+; ; SideContent-Account   ; SideContent     ; ; SideContentSlot     ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TravelContent1PageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TravelContent1      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-TravelContent1 ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-TravelContent1  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-TravelContent1 ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-TravelContent1        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-TravelContent1   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; MiddleContent-TravelContent1 ; MiddleContent   ; ; MiddleContentSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TravelContent2PageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TravelContent2      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-TravelContent2 ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-TravelContent2  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-TravelContent2 ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-TravelContent2        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-TravelContent2   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; LeftContent-TravelContent2   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; RightContent-TravelContent2  ; RightContent    ; ; RightContentSlot    ; true
+; ; SideContent-TravelContent2   ; SideContent     ; ; SideContentSlot     ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TravelContent3PageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TravelContent3      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-TravelContent3 ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-TravelContent3  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-TravelContent3 ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-TravelContent3        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-TravelContent3   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; LeftContent-TravelContent3   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; SideContent-TravelContent3   ; SideContent     ; ; SideContentSlot     ; true
+; ; RightContent-TravelContent3  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LoginPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-LoginPage         ; SiteLogo         ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-LoginPage    ; TopHeaderSlot    ; ; TopHeaderSlot       ; true
+; ; HomepageLink-LoginPage     ; HomepageNavLink  ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-LoginPage    ; NavigationBar    ; ; NavigationBarSlot   ; true
+; ; Footer-LoginPage           ; Footer           ; ; FooterSlot          ; true
+; ; HeaderLinks-LoginPage      ; HeaderLinks      ; ; HeaderLinksSlot     ; true
+; ; LeftContentSlot-LoginPage  ; LeftContentSlot  ; ; LeftContentSlot     ; true
+; ; RightContentSlot-LoginPage ; RightContentSlot ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'CheckoutLoginPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-CheckoutLoginPage          ; SiteLogo          ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-CheckoutLoginPage     ; TopHeaderSlot     ; ; TopHeaderSlot       ; true
+; ; HomepageLink-CheckoutLoginPage      ; HomepageNavLink   ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-CheckoutLoginPage     ; NavigationBar     ; ; NavigationBarSlot   ; true
+; ; Footer-CheckoutLoginPage            ; Footer            ; ; FooterSlot          ; true
+; ; HeaderLinks-CheckoutLoginPage       ; HeaderLinks       ; ; HeaderLinksSlot     ; true
+; ; LeftContentSlot-CheckoutLoginPage   ; LeftContentSlot   ; ; LeftContentSlot     ; true
+; ; RightContentSlot-CheckoutLoginPage  ; RightContentSlot  ; ; RightContentSlot    ; true
+; ; CenterContentSlot-CheckoutLoginPage ; CenterContentSlot ; ; CenterContentSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'PaymentDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-PaymentDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-PaymentDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-PaymentDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; Footer-PaymentDetails             ; Footer             ; ; FooterCheckoutSlot     ; true
+; ; HeaderLinks-PaymentDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-PaymentDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-PaymentDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; PaymentOptions-PaymentOptions     ; PaymentOptions     ; ; PaymentOptionsSlot     ; true
+; ; SideContent-PaymentDetails        ; SideContent        ; ; SideContentSlot        ; true
+
+# Bind Content Slots to - Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'MultiStepCheckoutSummaryPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-MultiStepCheckoutSummaryPage      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-MultiStepCheckoutSummaryPage ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-MultiStepCheckoutSummaryPage  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; HeaderLinks-MultiStepCheckoutSummaryPage   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; CenterContent-MultiStepCheckoutSummaryPage ; CenterContent   ; ; CenterContentSlot   ; true
+; ; SideContent-MultiStepCheckoutSummaryPage   ; SideContent     ; ; SideContentSlot     ; true
+; ; Footer-MultiStepCheckoutSummaryPage        ; Footer          ; ; FooterCheckoutSlot  ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ErrorPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-ErrorPage          ; SiteLogo          ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-ErrorPage     ; TopHeaderSlot     ; ; TopHeaderSlot       ; true
+; ; HomepageLink-ErrorPage      ; HomepageNavLink   ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-ErrorPage     ; NavigationBar     ; ; NavigationBarSlot   ; true
+; ; Footer-ErrorPage            ; Footer            ; ; FooterSlot          ; true
+; ; HeaderLinks-ErrorPage       ; HeaderLinks       ; ; HeaderLinksSlot     ; true
+; ; MiddleContentSlot-ErrorPage ; MiddleContentSlot ; ; MiddleContentSlot   ; true
+; ; SideContentSlot-ErrorPage   ; SideContentSlot   ; ; SideContentSlot     ; true
+; ; BottomContentSlot-ErrorPage ; BottomContentSlot ; ; BottomContentSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'BookingConfirmationPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-BookingConfirmation      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-BookingConfirmation ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-BookingConfirmation  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-BookingConfirmation ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-BookingConfirmation        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-BookingConfirmation   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; LeftContent-BookingConfirmation   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; RightContent-BookingConfirmation  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'BookingDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-BookingDetails      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-BookingDetails ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-BookingDetails  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-BookingDetails ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-BookingDetails        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-BookingDetails   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; LeftContent-BookingDetails   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; RightContent-BookingDetails  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ManageBookingPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-ManageBooking      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-ManageBooking ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-ManageBooking  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-ManageBooking ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-ManageBooking        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-ManageBooking   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; LeftContent-ManageBooking   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; RightContent-ManageBooking  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TripFinderPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TripFinder      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-TripFinder ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-TripFinder  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-TripFinder ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-TripFinder        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-TripFinder   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; TopContent-TripFinder    ; TopContent      ; ; TopContentSlot      ; true
+; ; LeftContent-TripFinder   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; RightContent-TripFinder  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AccommodationSearchPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-AccommodationSearch           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-AccommodationSearch      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-AccommodationSearch       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-AccommodationSearch      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-AccommodationSearch             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-AccommodationSearch        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Refinement-AccommodationSearch         ; Refinement         ; ; RefinementSlot         ; true
+; ; LeftContent-AccommodationSearch        ; LeftContent        ; ; LeftContentSlot        ; true
+; ; Reservation-AccommodationSearch        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-AccommodationSearch ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-AccommodationSearch        ; SideContent        ; ; SideContentSlot        ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AccommodationDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-AccommodationDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-AccommodationDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-AccommodationDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-AccommodationDetails      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-AccommodationDetails             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-AccommodationDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-AccommodationDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-AccommodationDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-AccommodationDetails        ; SideContent        ; ; SideContentSlot        ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'GuestDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-GuestDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-GuestDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-GuestDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; Footer-GuestDetails             ; Footer             ; ; FooterCheckoutSlot     ; true
+; ; HeaderLinks-GuestDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-GuestDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-GuestDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-GuestDetails        ; SideContent        ; ; SideContentSlot        ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'FareSelectionPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-FareSelection           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-FareSelection      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-FareSelection       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-FareSelection      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-FareSelection             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-FareSelection        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; LeftContent-FareSelection        ; LeftContent        ; ; LeftContentSlot        ; true
+; ; Reservation-FareSelection        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-FareSelection ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-FareSelection        ; SideContent        ; ; SideContentSlot        ; true
+; ; BottomContent-FareSelection      ; BottomContent      ; ; BottomContentSlot      ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AncillaryPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-Ancillary           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-Ancillary      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-Ancillary       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-Ancillary      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-Ancillary             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-Ancillary        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-Ancillary        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-Ancillary ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-Ancillary        ; SideContent        ; ; SideContentSlot        ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AncillaryExtrasPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-AncillaryExtras           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-AncillaryExtras      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-AncillaryExtras       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-AncillaryExtras      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-AncillaryExtras             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-AncillaryExtras        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-AncillaryExtras        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-AncillaryExtras ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-AncillaryExtras        ; SideContent        ; ; SideContentSlot        ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TravellerDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TravellerDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-TravellerDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-TravellerDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; Footer-TravellerDetails             ; Footer             ; ; FooterCheckoutSlot     ; true
+; ; HeaderLinks-TravellerDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-TravellerDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-TravellerDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-TravellerDetails        ; SideContent        ; ; SideContentSlot        ; true
+
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'TransportOfferingStatusPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-TransportOfferingStatus      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-TransportOfferingStatus ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-TransportOfferingStatus  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-TransportOfferingStatus ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-TransportOfferingStatus        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-TransportOfferingStatus   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; RightContent-TransportOfferingStatus  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AccountDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-AccountDetail      ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-AccountDetail ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-AccountDetail  ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-AccountDetail ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-AccountDetail        ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-AccountDetail   ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; LeftContent-AccountDetail   ; LeftContent     ; ; LeftContentSlot     ; true
+; ; RightContent-AccountDetail  ; RightContent    ; ; RightContentSlot    ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'DealListingPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-DealListing       ; SiteLogo        ; ; SiteLogoSlot        ; true
+; ; TopHeaderSlot-DealListing  ; TopHeaderSlot   ; ; TopHeaderSlot       ; true
+; ; HomepageLink-DealListing   ; HomepageNavLink ; ; HomepageNavLinkSlot ; true
+; ; NavigationBar-DealListing  ; NavigationBar   ; ; NavigationBarSlot   ; true
+; ; Footer-DealListing         ; Footer          ; ; FooterSlot          ; true
+; ; HeaderLinks-DealListing    ; HeaderLinks     ; ; HeaderLinksSlot     ; true
+; ; TopInfoHeader-DealListing  ; TopInfoHeader   ; ; TopInfoHeaderSlot   ; true
+; ; TopInfoContent-DealListing ; TopInfoContent  ; ; TopInfoContentSlot  ; true
+; ; BodyContent-DealListing    ; BodyContent     ; ; BodyContentSlot     ; true
+; ; BottomContent-DealListing  ; BottomContent   ; ; BottomContentSlot   ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'DealDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-DealDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-DealDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-DealDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-DealDetails      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-DealDetails             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-DealDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-DealDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-DealDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-DealDetails        ; SideContent        ; ; SideContentSlot        ; true
+
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'PackageDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-PackageDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-PackageDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-PackageDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-PackageDetails      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-PackageDetails             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-PackageDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-PackageDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-PackageDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-PackageDetails        ; SideContent        ; ; SideContentSlot        ; true
+; ; LeftContent-PackageDetails        ; LeftContent        ; ; LeftContentSlot        ; true
+; ; BottomContent-PackageDetails      ; BottomContent      ; ; BottomContentSlot      ; true
+
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'PackageListingPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-PackageListing           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-PackageListing      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-PackageListing       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; NavigationBar-PackageListing      ; NavigationBar      ; ; NavigationBarSlot      ; true
+; ; Footer-PackageListing             ; Footer             ; ; FooterSlot             ; true
+; ; HeaderLinks-PackageListing        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Refinement-PackageListing         ; Refinement         ; ; PackageRefinementSlot  ; true
+; ; LeftContent-PackageListing        ; LeftContent        ; ; LeftContentSlot        ; true
+; ; Reservation-PackageListing        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-PackageListing ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-PackageListing        ; SideContent        ; ; SideContentSlot        ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'PersonalDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-PersonalDetails           ; SiteLogo           ; ; SiteLogoSlot           ; true
+; ; TopHeaderSlot-PersonalDetails      ; TopHeaderSlot      ; ; TopHeaderSlot          ; true
+; ; HomepageLink-PersonalDetails       ; HomepageNavLink    ; ; HomepageNavLinkSlot    ; true
+; ; Footer-PersonalDetails             ; Footer             ; ; FooterCheckoutSlot     ; true
+; ; HeaderLinks-PersonalDetails        ; HeaderLinks        ; ; HeaderLinksSlot        ; true
+; ; Reservation-PersonalDetails        ; Reservation        ; ; ReservationSlot        ; true
+; ; ReservationOverlay-PersonalDetails ; ReservationOverlay ; ; ReservationOverlaySlot ; true
+; ; SideContent-PersonalDetails        ; SideContent        ; ; SideContentSlot        ; true
+
+
+#############################################
+######## CONTENT PAGES ######################
+
+# Preview Image for use in the CMS Cockpit for special ContentPages
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]
+; ; ContentPageModel__function_preview ; text/gif ; ContentPageModel__function_preview.gif ; $jarResourceCms/preview-images/ContentPageModel__function_preview.gif
+
+# Functional Content Pages
+INSERT_UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false']; previewImage(code, $contentCV)[default = 'ContentPageModel__function_preview']
+; ; login                        ; Login Page                     ; LoginPageTemplate                    ; login
+; ; checkout-login               ; Checkout-Login Page            ; CheckoutLoginPageTemplate            ; checkout-login
+; ; profilePage                  ; Profile Page                   ; AccountPageTemplate                  ; profile
+; ; updatePassword               ; Update Forgotten Password Page ; AccountPageTemplate                  ; updatePassword
+; ; update-profile               ; Update Profile Page            ; AccountPageTemplate                  ; update-profile
+; ; update-email                 ; Update Email Page              ; AccountPageTemplate                  ; update-email
+; ; payment-details              ; Saved Payment Info             ; AccountPageTemplate                  ; payment-details
+; ; add-edit-address             ; Add Edit Address               ; AccountPageTemplate                  ; add-edit-address
+; ; preferences                  ; Preferences                    ; AccountPageTemplate                  ; preferences
+; ; my-bookings                  ; My Bookings                    ; AccountPageTemplate                  ; my-bookings
+; ; disability-and-mobility      ; Disability and Mobility        ; AccountPageTemplate                  ; disability-and-mobility
+; ; my-saved-searches            ; My Saved Searches              ; AccountPageTemplate                  ; my-saved-searches
+; ; saved-passengers             ; Saved Passengers               ; AccountPageTemplate                  ; saved-passengers
+; ; advance-passenger            ; Advance Passenger Details      ; AccountPageTemplate                  ; advance-passenger
+; ; checkInDetailsPage           ; Check In Details Page          ; ManageBookingPageTemplate            ; checkInDetails
+; ; checkInSuccessPage           ; Check In Success Page          ; ManageBookingPageTemplate            ; checkInSuccess
+; ; checkInFailedPage            ; Check In Failed Page           ; ManageBookingPageTemplate            ; checkInFailed
+; ; paymentMethodPage            ; Silent Order Post Page         ; PaymentDetailsPageTemplate           ; paymentMethod
+; ; multiStepCheckoutSummaryPage ; Multi Checkout Summary Page    ; MultiStepCheckoutSummaryPageTemplate ; multiStepCheckoutSummary
+; ; notFound                     ; Not Found Page                 ; ErrorPageTemplate                    ; notFound
+; ; orderFailedPage              ; Order Failed Page              ; TravelContent3PageTemplate           ; orderFailed
+; ; bookingConfirmationPage      ; Order Confirmation Page        ; BookingConfirmationPageTemplate      ; bookingConfirmation
+; ; bookingDetailsPage           ; Booking Details Page           ; BookingDetailsPageTemplate           ; bookingDetails
+; ; tripFinderPage               ; Trip Finder Page               ; TripFinderPageTemplate               ; tripFinder
+; ; accommodationSearchPage      ; Accommodation Search Page      ; AccommodationSearchPageTemplate      ; accommodationSearch
+; ; accommodationDetailsPage     ; Accommodation Details Page     ; AccommodationDetailsPageTemplate     ; accommodationDetails
+; ; guestDetailsPage             ; Guest Details Page             ; GuestDetailsPageTemplate             ; guestDetails
+; ; transportOfferingStatusPage  ; Transport Offering Status Page ; TransportOfferingStatusPageTemplate  ; transportOfferingStatus
+; ; fareSelectionPage            ; Fare Selection Page            ; FareSelectionPageTemplate            ; fareSelection
+; ; travellerDetailsPage         ; Traveller Details Page         ; TravellerDetailsPageTemplate         ; travellerDetails
+; ; order-approval-dashboard     ; Order Approval Dashboard       ; AccountPageTemplate                  ; order-approval-dashboard
+; ; order-approval-details       ; Order Approval Details         ; AccountDetailsPageTemplate           ; order-approval-details
+; ; dealDetailsPage              ; Deal Details Page              ; DealDetailsPageTemplate              ; dealDetails
+; ; packageDetailsPage           ; Package Details Page           ; PackageDetailsPageTemplate           ; packageDetails
+; ; packageListingPage           ; Package Listing Page           ; PackageListingPageTemplate           ; packageListing
+; ; personalDetailsPage          ; Personal Details Page          ; PersonalDetailsPageTemplate          ; personalDetails
+; ; consents            		 ; My Consents              	  ; AccountPageTemplate                  ; consents
+
+# Ancillary Pages
+INSERT_UPDATE AncillaryPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; offerGroups; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false']; previewImage(code, $contentCV)[default = 'ContentPageModel__function_preview']
+; ; ancillaryPage          ; Ancillary Page           ; AncillaryPageTemplate 		; ancillaryCheckout  ; HOLDITEM, MEAL, SPECIAL, LOUNGEACCESS, PRIORITYCHECKIN, PRIORITYBOARDING, SEAT
+; ; ancillaryAmendmentPage ; Ancillary Amendment Page ; AncillaryPageTemplate 		; ancillaryAmendment ; HOLDITEM, MEAL, SPECIAL, LOUNGEACCESS, PRIORITYCHECKIN, PRIORITYBOARDING, SEAT
+; ; ancillaryCheckinPage   ; Ancillary Check In Page  ; AncillaryPageTemplate 		; ancillaryCheckin   ; SEAT
+; ; ancillaryExtrasPage    ; Ancillary Extras Page    ; AncillaryExtrasPageTemplate ; ancillaryCheckout  ; HOLDITEM, MEAL, LOUNGEACCESS, PRIORITYCHECKIN, PRIORITYBOARDING, SEAT
+
+# Homepage
+INSERT_UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'true']
+; ; homepage ; Homepage ; TravelLandingPageTemplate ; homepage
+
+# Normal Content Pages
+INSERT_UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); label; defaultPage[default = 'true']; approvalStatus(code)[default = 'approved']; homepage[default = 'false']
+; ; tripFinderActivitiesPage  ; Trip Finder Activities Page  ; TravelContent1PageTemplate ; /trip-finder-activities
+; ; travelInformationPage     ; Travel Information Page      ; TravelContent1PageTemplate ; /travel-information
+; ; contactUsPage             ; Contact Us Page              ; TravelContent2PageTemplate ; /contact-us
+; ; faqPage                   ; FAQ Page                     ; TravelContent3PageTemplate ; /faq
+; ; privacyPolicyPage         ; Privacy Policy Page          ; TravelContent1PageTemplate ; /privacy-policy
+; ; termsConditionsPage       ; Terms and Conditions Page    ; TravelContent3PageTemplate ; /terms-conditions
+; ; helpPage                  ; Help Page                    ; TravelContent1PageTemplate ; /help
+; ; beachDestinationDealsPage ; Beach Destination Deals Page ; DealListingPageTemplate    ; /beach-destination-deals
+; ; exploreEuropeDealsPage    ; Explore Europe Deals Page    ; DealListingPageTemplate    ; /explore-europe-deals
+; ; greatSavingsDealsPage     ; Great Savings Deals Page     ; DealListingPageTemplate    ; /great-savings-deals
+; ; winterOlympicsDealsPage   ; Winter Olympics Deals Page   ; DealListingPageTemplate    ; /winter-olympics-deals
+
+
+##################################################
+######## CMS Assisted Service Components #########
+
+# CMS Assisted Service Component
+INSERT_UPDATE AssistedServiceComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AssistedServiceComponent ; Assisted Service Component ; AssistedServiceComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; TopHeaderSlot ; AssistedServiceComponent
+
+############################################
+######## Reservation Components ############
+
+# TransportSummaryComponent
+INSERT_UPDATE TransportSummaryComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; TransportSummaryComponent ; Transport Summary Component ; TransportSummaryComponent
+
+# AccommodationSummaryComponent
+INSERT_UPDATE AccommodationSummaryComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationSummaryComponent ; Accommodation Summary Component ; AccommodationSummaryComponent
+
+# ReservationTotalsComponent
+INSERT_UPDATE ReservationTotalsComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; ReservationTotalsComponent ; Reservation Totals Component ; ReservationTotalsComponent
+
+# TransportReservationComponent
+INSERT_UPDATE TransportReservationComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; TransportReservationComponent ; Transport Reservation Component ; TransportReservationComponent
+
+# AccommodationReservationComponent
+INSERT_UPDATE AccommodationReservationComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationReservationComponent ; Accommodation Reservation Component ; AccommodationReservationComponent
+
+# Reservation Overlay Totals Component
+INSERT_UPDATE ReservationOverlayTotalsComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; ReservationOverlayTotalsComponent ; Reservation Overlay Totals Component ; ReservationOverlayTotalsComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; ReservationSlot        ; ReservationTotalsComponent, TransportSummaryComponent, AccommodationSummaryComponent
+; ; ReservationOverlaySlot ; TransportReservationComponent, AccommodationReservationComponent, ReservationOverlayTotalsComponent
+
+#####################################
+######## Refinement Slot ############
+
+INSERT_UPDATE AccommodationRefinementComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; AccommodationRefinementComponent ; Accommodation Refinement Component ; AccommodationRefinementComponent
+
+INSERT_UPDATE PackageRefinementComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; PackageRefinementComponent ; Package Refinement Component ; PackageRefinementComponent
+
+# Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; RefinementSlot        ; AccommodationRefinementComponent
+; ; PackageRefinementSlot ; PackageRefinementComponent
+
+#####################################
+######## Payment Options ############
+
+INSERT_UPDATE PaymentOptionsComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef
+; ; PaymentOptionsComponent ; Payment Options Component ; PaymentOptionsComponent
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; PaymentOptionsSlot ; PaymentOptionsComponent
+

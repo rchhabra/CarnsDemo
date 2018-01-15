@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ Hybris ("Confidential Information"). You shall not disclose such
+ Confidential Information and shall use it only in accordance with the
+ terms of the license agreement you entered into with SAP Hybris.
+
+  
+-->
+<!--
+ All hybris buildcallbacks.xml macrodefinitions:
+ 
+ Build/Documentation
+ 
+	 before/after ant macro "clean"
+		 <macrodef name="travelacceleratorstorefront_before_clean"/>
+		 <macrodef name="travelacceleratorstorefront_after_clean"/>
+	 
+	 before/after ant macro "build"
+		 <macrodef name="travelacceleratorstorefront_before_build"/>
+		 <macrodef name="travelacceleratorstorefront_after_build"/>
+		 
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="travelacceleratorstorefront_before_compile_core">
+		 <macrodef name="travelacceleratorstorefront_after_compile_core">
+	 
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="travelacceleratorstorefront_before_compile_web" />
+		 <macrodef name="travelacceleratorstorefront_after_compile_web" />
+	 
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="travelacceleratorstorefront_before_compile_hmc" />
+		 <macrodef name="travelacceleratorstorefront_after_compile_hmc" />
+ 
+ Preparing extension
+ 
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)	
+		 <macrodef name="travelacceleratorstorefront_only_once_prepare"/>
+ 
+ Creating ear module/production
+ 
+	 before/after ant macro "ear"
+		 <macrodef name="travelacceleratorstorefront_before_ear"/>
+		 <macrodef name="travelacceleratorstorefront_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="travelacceleratorstorefront_before_production" />
+		 <macrodef name="travelacceleratorstorefront_after_production" />
+ 
+ JUnit Test
+ 
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="travelacceleratorstorefront_before_yunitinit" />
+		 <macrodef name="travelacceleratorstorefront_after_yunitinit" />
+	 
+	 before/after ant macro "yunit"
+		 <macrodef name="travelacceleratorstorefront_before_yunit" />
+		 <macrodef name="travelacceleratorstorefront_after_yunit" /> 
+		 
+ Distribution package
+ 
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="travelacceleratorstorefront_after_dist"/>
+		 <macrodef name="travelacceleratorstorefront_before_dist"/>
+	 
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="travelacceleratorstorefront_before_dist_copy"/>
+		 <macrodef name="travelacceleratorstorefront_after_dist_copy"/>
+ 
+-->
+<project name="travelacceleratorstorefront_buildcallbacks">
+
+	<!-- 
+	    Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+	
+	     ${ear.path}: 			path to ear
+	 -->
+
+	<macrodef name="travelacceleratorstorefront_before_ear">
+		<sequential>
+
+			<!-- you can do anything before the EAR file is being packed -->
+
+		</sequential>
+	</macrodef>
+	<macrodef name="travelacceleratorstorefront_after_build">
+		<sequential>
+			<echo level="info" message="Copy travel accelerator server error page......" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/views/responsive/pages/error">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/pages/error">
+					<include name="serverError.jsp" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy travel accelerator storefront page template for header and footer......" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/tags/responsive/template">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/tags/responsive/template">
+					<include name="page.tag" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy custom global messages......" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/tags/responsive/common">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/tags/responsive/common">
+					<include name="globalMessages.tag" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy account layout and account login page templates" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/views/responsive/pages/account">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/pages/account">
+					<include name="accountLayoutPage.jsp" />
+					<include name="accountLoginPage.jsp" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy account payment info page" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/views/responsive/pages/account">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/pages/account">
+					<include name="accountPaymentInfoPage.jsp" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy navigation bar collection component, navigation bar component and language currency component" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/views/responsive/cms">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/cms">
+					<include name="navigationbarcollectioncomponent.jsp" />
+					<include name="navigationbarcomponent.jsp" />
+					<include name="languagecurrencycomponent.jsp" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Replacing acc.payment.js" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/_ui/responsive/common/js">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/_ui/responsive/common/js">
+					<include name="acc.payment.js" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy passwordResetRequestPage.jsp......" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/web/webroot/WEB-INF/views/responsive/pages/password">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/pages/password">
+					<include name="passwordResetRequestPage.jsp" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Replacing generateVariables" />
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}/resources">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/resources">
+					<include name="generateVariables.properties" />
+				</fileset>
+			</copy>
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/">
+					<include name="Gruntfile.js" />
+				</fileset>
+			</copy>
+			<copy overwrite="true" verbose="true" todir="${ext.yacceleratorstorefront.path}">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/">
+					<include name="package.json" />
+				</fileset>
+			</copy>
+			<echo level="info" message="Copy asmCustomerListTable.jsp......." />
+			<copy overwrite="true" verbose="true" todir="${ext.assistedservicestorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/fragments">
+				<fileset dir="${ext.travelacceleratorstorefront.path}/acceleratoraddon/web/webroot/WEB-INF/views/responsive/fragments/customer360">
+					<include name="asmCustomerListTable.jsp" />
+				</fileset>
+			</copy>
+		</sequential>
+	</macrodef>
+
+</project>

@@ -1,0 +1,5 @@
+#Impex to invoke Cronjob to update StockLevels to accommodationOfferings.
+$accommodationServices=WIFI->10,GYM_ACCESS->10,ENGLISH_BREAKFAST->10
+
+INSERT_UPDATE UpdateStockLevelsToAccommodationOfferingCronJob;code[unique=true];job(code)[default = updateStockLevelsToAccommodationOfferingJob];serviceProductsStockLevels[map-delimiter=,]
+;updateStockLevelsToAccommodationOfferingCronJob;;$accommodationServices

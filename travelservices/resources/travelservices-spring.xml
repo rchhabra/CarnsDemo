@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Services -->
+
+	<import resource="travelservices-spring-solrfacetsearch.xml" />
+	<import resource="travelservices-utils-spring.xml" />
+	<import resource="travelservices-dao-spring.xml" />
+	<import resource="travelservices-solrproviders-spring.xml" />
+	<import resource="travelservices-strategies-spring.xml" />
+	<import resource="travelservices-eventlistener-spring.xml" />
+	<import resource="travelservices-email-spring.xml" />
+	<import resource="travelservices-cronjob-spring.xml" />
+
+
+	<alias name="defaultTravelKeyGeneratorService" alias="travelKeyGeneratorService" />
+	<bean id="defaultTravelKeyGeneratorService" class="de.hybris.platform.travelservices.service.keygenerator.impl.DefaultTravelKeyGeneratorService">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultExtensionSubstitutionService" alias="extensionSubstitutionService" />
+	<bean id="defaultExtensionSubstitutionService" class="de.hybris.platform.travelservices.substitute.impl.DefaultExtensionSubsitutionService">
+		<property name="extensionSubstitutionMap">
+			<map>
+				<entry key="travelservices" value="travelacceleratorstorefront" />
+				<entry key="cms2" value="travelacceleratorstorefront" />
+				<entry key="cms2lib" value="travelacceleratorstorefront" />
+				<entry key="acceleratorcms" value="travelacceleratorstorefront" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultTransportOfferingService" alias="transportOfferingService" />
+	<bean id="defaultTransportOfferingService" class="de.hybris.platform.travelservices.services.impl.DefaultTransportOfferingService">
+		<property name="transportOfferingDao" ref="transportOfferingDao" />
+        <property name="modelService" ref="modelService" />
+		<property name="travelVendorService" ref="travelVendorService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="travelKeyGeneratorService" ref="travelKeyGeneratorService" />
+	</bean>
+
+	<alias name="defaultCabinClassService" alias="cabinClassService" />
+	<bean id="defaultCabinClassService" class="de.hybris.platform.travelservices.services.impl.DefaultCabinClassService">
+		<property name="cabinClassDao" ref="cabinClassDao" />
+	</bean>
+
+	<alias name="defaultPassengerTypeService" alias="passengerTypeService" />
+	<bean id="defaultPassengerTypeService" class="de.hybris.platform.travelservices.services.impl.DefaultPassengerTypeService">
+		<property name="passengerTypeDao" ref="passengerTypeDao" />
+	</bean>
+
+	<alias name="defaultTravelRouteService" alias="travelRouteService" />
+	<bean id="defaultTravelRouteService" class="de.hybris.platform.travelservices.services.impl.DefaultTravelRouteService">
+		<property name="travelRouteDao" ref="travelRouteDao" />
+	</bean>
+
+	<alias name="defaultTravellerService" alias="travellerService" />
+	<bean id="defaultTravellerService" class="de.hybris.platform.travelservices.services.impl.DefaultTravellerService">
+		<property name="modelService" ref="modelService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="passengerTypeService" ref="passengerTypeService" />
+		<property name="travellerDao" ref="travellerDao" />
+		<property name="travelKeyGeneratorService" ref="travelKeyGeneratorService" />
+		<property name="cartService" ref="cartService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias alias="commerceCartService" name="bundleCommerceCartService" />
+	<alias alias="bundleCommerceCartService" name="defaultTravelCommerceCartService" />
+	<alias alias="travelCommerceCartService" name="defaultTravelCommerceCartService" />
+	<bean id="defaultTravelCommerceCartService" class="de.hybris.platform.travelservices.order.impl.DefaultTravelCommerceCartService"
+		parent="defaultBundleCommerceCartService">
+		<property name="travellerService" ref="travellerService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="cartService" ref="cartService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="travelRouteService" ref="travelRouteService" />
+	</bean>
+
+	<alias alias="travelBundleTemplateService" name="defaultTravelBundleTemplateService" />
+	<bean id="defaultTravelBundleTemplateService" class="de.hybris.platform.travelservices.bundle.impl.DefaultTravelBundleTemplateService"
+		parent="defaultBundleTemplateService">
+		<property name="travelBundleTemplateDao" ref="travelBundleTemplateDao" />		
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultTravelCategoryService" alias="travelCategoryService" />
+	<bean id="defaultTravelCategoryService" class="de.hybris.platform.travelservices.services.impl.DefaultTravelCategoryService"
+		parent="categoryService">
+		<property name="travelCategoryDao" ref="travelCategoryDao" />
+	</bean>
+
+	<alias name="defaultAccommodationMapService" alias="accommodationMapService" />
+	<bean id="defaultAccommodationMapService" class="de.hybris.platform.travelservices.services.accommodationmap.impl.DefaultAccommodationMapService">
+		<property name="transportVehicleConfigurationMappingDao" ref="transportVehicleConfigurationMappingDao" />
+		<property name="transportVehicleInfoDao" ref="transportVehicleInfoDao" />
+		<property name="transportFacilityDao" ref="transportFacilityDao" />
+		<property name="travelSectorDao" ref="travelSectorDao" />
+		<property name="travelRouteDao" ref="travelRouteDao" />
+		<property name="configuredAccommodationDao" ref="configuredAccommodationDao" />
+		<property name="selectedAccommodationDao" ref="selectedAccommodationDao" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="productReferenceService" ref="productReferenceService" />
+	</bean>
+
+	<alias alias="commerceStockService" name="defaultTravelCommerceStockService" />
+	<bean id="defaultTravelCommerceStockService" class="de.hybris.platform.travelservices.stock.impl.DefaultTravelCommerceStockService"
+		parent="defaultCommerceStockService">
+		<property name="configurationService" ref="configurationService" />
+		<property name="warehouseService" ref="warehouseService" />
+		<property name="travelRestrictionService" ref="travelRestrictionService" />
+		<property name="modelService" ref="modelService" />
+		<property name="manageStockByEntryTypeStrategyMap" ref="manageStockByEntryTypeStrategyMap" />
+		<property name="stockReservationReleaseByEntryTypeStrategyMap" ref="stockReservationReleaseByEntryTypeStrategyMap" />
+		<property name="stockReservationCreationStrategyMap" ref="stockReservationCreationStrategyMap" />
+		<property name="travelStockService" ref="travelStockService" />
+	</bean>
+
+	<alias alias="travelCartService" name="defaultTravelCartService" />
+	<bean id="defaultTravelCartService" class="de.hybris.platform.travelservices.order.impl.DefaultTravelCartService" parent="defaultCartService">
+		<property name="cloneAbstractOrderStrategy" ref="cloneAbstractOrderStrategy" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="orderCodeGenerator" ref="orderCodeGenerator" />
+		<property name="userService" ref="userService" />
+		<property name="travelCartDao" ref="travelCartDao" />
+		<property name="commerceCartCalculationStrategy" ref="commerceCartCalculationStrategy" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="travelCommerceStockService" ref="commerceStockService" />
+		<property name="storeSessionService" ref="storeSessionService" />
+		<property name="paymentOptionCreationStrategies">
+			<util:list>
+				<ref bean="fullInAdvancePaymentOptionStrategy" />
+				<ref bean="partiallyDelayedPaymentOptionStrategy" />
+			</util:list>
+		</property>
+		<property name="paymentOptionsCreationStrategyMap">
+			<util:map key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+				<entry key="ACCOMMODATION">
+					<list>
+						<ref bean="accommodationPayNowPaymentOptionStrategy" />
+					</list>
+				</entry>
+			</util:map>
+		</property>
+		<property name="timeService" ref="timeService" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultTransportFacilityService" alias="transportFacilityService" />
+	<bean id="defaultTransportFacilityService" class="de.hybris.platform.travelservices.services.impl.DefaultTransportFacilityService">
+		<property name="transportFacilityDao" ref="transportFacilityDao" />
+	</bean>
+
+	<alias name="defaultSpecialServiceRequestService" alias="specialServiceRequestService" />
+	<bean id="defaultSpecialServiceRequestService" class="de.hybris.platform.travelservices.services.impl.DefaultSpecialServiceRequestService">
+		<property name="specialServiceRequestDao" ref="specialServiceRequestDao" />
+	</bean>
+
+	<alias name="defaultTravelConsignmentService" alias="consignmentService" />
+	<bean id="defaultTravelConsignmentService" class="de.hybris.platform.travelservices.ordersplitting.impl.DefaultTravelConsignmentService"
+		parent="defaultConsignmentService">
+		<property name="modelService" ref="modelService" />
+		<property name="travelConsignmentDao" ref="consignmentDao" />
+	</bean>
+
+
+	<alias alias="commerceCheckoutService" name="defaultTravelCommerceCheckoutService" />
+	<bean id="defaultTravelCommerceCheckoutService" parent="defaultCommerceCheckoutService"
+		class="de.hybris.platform.travelservices.order.impl.DefaultTravelCommerceCheckoutService">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="userService" ref="userService" />
+		<property name="timeService" ref="timeService" />
+		<property name="refundPaymentTransactionStrategyMap" ref="refundPaymentTransactionStrategyMap"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<alias name="defaultTravelCommerceUpdateCartEntryStrategy" alias="commerceUpdateCartEntryStrategy" />
+	<bean id="defaultTravelCommerceUpdateCartEntryStrategy" class="de.hybris.platform.travelservices.order.impl.DefaultTravelCommerceUpdateCartEntryStrategy"
+		parent="defaultCommerceUpdateCartEntryStrategy">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultBookingService" alias="bookingService" />
+	<bean id="defaultBookingService" class="de.hybris.platform.travelservices.services.impl.DefaultBookingService">
+		<property name="modelService" ref="modelService" />
+		<property name="userService" ref="userService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="commerceCheckoutService" ref="commerceCheckoutService" />
+		<property name="paymentService" ref="paymentService" />
+		<property name="orderCancelService" ref="orderCancelService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="totalRefundCalculationStrategy" ref="totalRefundCalculationStrategy" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="orderService" ref="orderService" />
+		<property name="timeService" ref="timeService" />
+		<property name="orderUserAccountMappingDao" ref="orderUserAccountMapping" />
+		<property name="travelKeyGeneratorService" ref="travelKeyGeneratorService" />
+		<property name="abstractOrderEntryGroupDao" ref="abstractOrderEntryGroupDao" />
+		<property name="travelOrderDao" ref="travelOrderDao" />
+		<property name="orderHistoryService" ref="orderHistoryService" />
+		<property name="totalRefundCalculationStrategyMap">
+			<util:map key-type="de.hybris.platform.travelservices.enums.OrderEntryType">
+				<entry key="TRANSPORT" value-ref="totalRefundCalculationStrategy" />
+				<entry key="ACCOMMODATION" value-ref="accommodationTotalRefundCalculationStrategy" />
+                <entry key="DEFAULT" value-ref="standardTotalRefundCalculationStrategy" />
+			</util:map>
+		</property>
+		<property name="orderTotalPaidForAccommodationGroupCalculationStrategy" ref="orderTotalPaidForAccommodationGroupCalculationStrategy" />
+		<property name="orderTotalPaidCalculationStrategy" ref="orderTotalPaidCalculationStrategy" />
+		<property name="orderTotalPaidForOrderEntryTypeCalculationStrategy" ref="orderTotalPaidForOrderEntryTypeCalculationStrategy" />
+		<property name="changeDatesOrderTotalToPayStrategy" ref="changeDatesOrderTotalToPayStrategy" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingService" alias="accommodationOfferingService" />
+	<bean id="defaultAccommodationOfferingService" class="de.hybris.platform.travelservices.services.impl.DefaultAccommodationOfferingService">
+		<property name="accommodationOfferingDao" ref="accommodationOfferingDao" />
+	</bean>
+
+	<alias name="defaultPropertyFacilityService" alias="propertyFacilityService" />
+	<bean id="defaultPropertyFacilityService" class="de.hybris.platform.travelservices.services.impl.DefaultPropertyFacilityService">
+		<property name="propertyFacilityDao" ref="propertyFacilityDao" />
+	</bean>
+
+	<alias name="defaultTravelRestrictionService" alias="travelRestrictionService" />
+	<bean id="defaultTravelRestrictionService" class="de.hybris.platform.travelservices.services.impl.DefaultTravelRestrictionService">
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<!-- Comment out this alias when using optimized version of accommodationService. -->
+	<alias name="defaultAccommodationService" alias="accommodationService" />
+	<bean id="defaultAccommodationService" class="de.hybris.platform.travelservices.services.impl.DefaultAccommodationService">
+		<property name="accommodationDao" ref="accommodationDao" />
+	</bean>
+
+	<!-- Uncomment this alias to use optimized version of accommodationService. Comment out the default alias! -->
+	<!--<alias name="optimizedAccommodationService" alias="accommodationService" /> -->
+	<bean id="optimizedAccommodationService" class="de.hybris.platform.travelservices.services.impl.OptimizedAccommodationService">
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<alias name="defaultRatePlanConfigService" alias="ratePlanConfigService" />
+	<bean id="defaultRatePlanConfigService" class="de.hybris.platform.travelservices.services.impl.DefaultRatePlanConfigService">
+		<property name="ratePlanConfigDao" ref="ratePlanConfigDao" />
+	</bean>
+
+	<alias name="defaultMarketingRatePlanInfoService" alias="marketingRatePlanInfoService" />
+	<bean id="defaultMarketingRatePlanInfoService" class="de.hybris.platform.travelservices.services.impl.DefaultMarketingRatePlanInfoService">
+		<property name="marketingRatePlanInfoDao" ref="marketingRatePlanInfoDao" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingGalleryService" alias="accommodationOfferingGalleryService" />
+	<bean id="defaultAccommodationOfferingGalleryService" class="de.hybris.platform.travelservices.services.impl.DefaultAccommodationOfferingGalleryService">
+		<property name="accommodationOfferingGalleryDao" ref="accommodationOfferingGalleryDao" />
+	</bean>
+
+	<alias name="defaultTravelLocationService" alias="travelLocationService" />
+	<bean id="defaultTravelLocationService" class="de.hybris.platform.travelservices.services.impl.DefaultTravelLocationService">
+		<property name="travelLocationDao" ref="travelLocationDao" />
+	</bean>
+
+	<alias name="defaultAccommodationCommerceCartService" alias="accommodationCommerceCartService" />
+	<bean id="defaultAccommodationCommerceCartService" class="de.hybris.platform.travelservices.order.impl.DefaultAccommodationCommerceCartService"
+		parent="defaultCommerceCartService">
+		<property name="cartService" ref="travelCartService" />
+		<property name="productService" ref="productService" />
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="changeDatesPaymentActionStrategyMap" ref="changeDatesPaymentActionStrategyMap" />
+	</bean>
+
+	<alias name="defaultSolrIndexSortService" alias="solrIndexSortService" />
+	<bean id="defaultSolrIndexSortService" class="de.hybris.platform.travelservices.services.impl.DefaultSolrIndexSortService">
+		<property name="solrIndexSortDao" ref="solrIndexSortDao" />
+	</bean>
+
+	<!-- Comment out this alias when using optimized version of accommodationExtrasService. -->
+	<alias name="defaultAccommodationExtrasService" alias="accommodationExtrasService" />
+	<bean id="defaultAccommodationExtrasService" class="de.hybris.platform.travelservices.services.impl.DefaultAccommodationExtrasService">
+		<property name="accommodationExtrasDao" ref="accommodationExtrasDao" />
+	</bean>
+
+	<!-- Uncomment this alias to use optimized version of accommodationExtrasService. Comment out the default alias! -->
+	<!--<alias name="optimizedAccommodationExtrasService" alias="accommodationExtrasService" /> -->
+	<bean id="optimizedAccommodationExtrasService" class="de.hybris.platform.travelservices.services.impl.OptimizedAccommodationExtrasService">
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="productService" ref="productService" />
+	</bean>
+
+	<alias name="defaultTravelStockService" alias="travelStockService" />
+	<bean id="defaultTravelStockService" parent="defaultStockService" class="de.hybris.platform.travelservices.stock.impl.DefaultTravelStockService">
+		<property name="travelStockLevelDao" ref="travelStockLevelDao" />
+	</bean>
+
+	<alias alias="modelService" name="defaultTravelModelService" />
+	<bean id="defaultTravelModelService" class="de.hybris.platform.travelservices.services.impl.DefaultTravelModelService"
+		parent="defaultModelService">
+		<property name="abstractOrderEntryGroupDao" ref="abstractOrderEntryGroupDao" />
+	</bean>
+
+	<!-- Add entry in requestExecutorsMap -->
+	<alias alias="orderCancelCallbackService" name="extDefaultOrderCancelService" />
+	<alias alias="orderCancelService" name="extDefaultOrderCancelService" />
+	<bean id="extDefaultOrderCancelService" parent="defaultOrderCancelService" scope="tenant">
+		<property name="requestExecutorsMap">
+			<map merge="true">
+				<entry key="CANCELPOSSIBLE" value-ref="immediateCancelRequestExecutor" />
+			</map>
+		</property>
+	</bean>
+
+
+	<alias name="defaultTravelCommercePriceService" alias="travelCommercePriceService" />
+	<bean id="defaultTravelCommercePriceService" class="de.hybris.platform.travelservices.price.impl.DefaultTravelCommercePriceService"
+		parent="defaultCommercePriceService">
+		<property name="modelService" ref="modelService" />
+		<property name="productService" ref="productService" />
+		<property name="offerGroupToOriginDestinationMapping" ref="offerGroupToOriginDestinationMapping" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+		<property name="cartService" ref="cartService" />
+		<property name="travelCommerceCartService" ref="travelCommerceCartService" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="timeService" ref="timeService"></property>
+	</bean>
+
+	<alias name="defaultTravelStoreFinderService" alias="travelStoreFinderService" />
+	<bean id="defaultTravelStoreFinderService" class="de.hybris.platform.travelservices.storefinder.impl.DefaultTravelStoreFinderService"
+		parent="storeFinderService">
+		<property name="travelPointOfServiceDao" ref="pointOfServiceDao" />
+	</bean>
+
+	<alias alias="customerAccountService" name="defaultTravelCustomerAccountService" />
+	<bean id="defaultTravelCustomerAccountService" class="de.hybris.platform.travelservices.customer.impl.DefaultTravelCustomerAccountService"
+		parent="defaultCustomerAccountService" />
+
+	<alias alias="accommodationOfferingCustomerReviewService" name="defaultAccommodationOfferingCustomerReviewService" />
+	<bean id="defaultAccommodationOfferingCustomerReviewService" class="de.hybris.platform.travelservices.services.impl.DefaultAccommodationOfferingCustomerReviewService">
+		<property name="pagedAccommodationOfferingCustomerReviewDao" ref="pagedAccommodationOfferingCustomerReviewDao" />
+		<property name="accommodationCustomerReviewDao" ref="accommodationCustomerReviewDao" />
+		<property name="userService" ref="userService" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<alias name="defaultRoomPreferenceService" alias="roomPreferenceService" />
+	<bean id="defaultRoomPreferenceService" class="de.hybris.platform.travelservices.services.impl.DefaultRoomPreferenceService">
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="productService" ref="productService" />
+		<property name="modelService" ref="modelService" />
+		<property name="roomPreferenceDAO" ref="roomPreferenceDAO" />
+		<property name="defaultRoomBedPreferenceCodes" ref="defaultRoomBedPreferenceCodes"/>
+	</bean>
+
+	<alias name="defaultRatePlanService" alias="ratePlanService" />
+	<bean id="defaultRatePlanService" class="de.hybris.platform.travelservices.services.impl.DefaultRatePlanService">
+		<property name="guaranteeComparator" ref="guaranteeComparator" />
+		<property name="ratePlanDao" ref="ratePlanDao" />
+	</bean>
+
+	<alias name="defaultDealBundleTemplateService" alias="dealBundleTemplateService" />
+	<bean name="defaultDealBundleTemplateService" class="de.hybris.platform.travelservices.services.impl.DefaultDealBundleTemplateService" >
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultGuestCountService" alias="guestCountService" />
+	<bean name="defaultGuestCountService" class="de.hybris.platform.travelservices.services.impl.DefaultGuestCountService" >
+		<property name="guestCountDao" ref="guestCountDao" />
+	</bean>
+
+	<!-- Email Services -->
+	<alias alias="emailGenerationService" name="defaultTravelEmailGenerationService" />
+	<bean id="defaultTravelEmailGenerationService" class="de.hybris.platform.travelservices.email.impl.DefaultTravelEmailGenerationService"
+		parent="defaultEmailGenerationService">
+	</bean>
+
+
+	<!-- Dynamic Attribute Handlers -->
+
+	<bean id="durationAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.DurationAttributeHandler" />
+
+	<bean id="activePropertyFacilityAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.ActivePropertyFacilityAttributeHandler" />
+
+	<bean id="averageUserRatingAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.AverageUserRatingAttributeHandler">
+		<property name="accommodationOfferingCustomerReviewService" ref="accommodationOfferingCustomerReviewService" />
+	</bean>
+
+	<alias name="defaultSimpleUIDAttributeHandler" alias="simpleUIDAttributeHandler" />
+	<bean id="defaultSimpleUIDAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.SimpleUIDAttributeHandler">
+	</bean>
+
+	<alias name="defaultTransportationOrderStatusAttributeHandler" alias="transportationOrderStatusAttributeHandler" />
+	<bean id="defaultTransportationOrderStatusAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.TransportationOrderStatusAttributeHandler">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultAccommodationOrderStatusAttributeHandler" alias="accommodationOrderStatusAttributeHandler" />
+	<bean id="defaultAccommodationOrderStatusAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.AccommodationOrderStatusAttributeHandler">
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultContactNameAttributeHandler" alias="contactNameAttributeHandler" />
+	<bean id="defaultContactNameAttributeHandler" class="de.hybris.platform.travelservices.model.dynamic.attribute.ContactNameAttributeHandler" />
+
+	<!-- overriding europe1 manager to filter travel price rows -->
+	<bean id="europe1.manager" class="de.hybris.platform.travelservices.jalo.TravelEurope1PriceFactory" init-method="init"
+		destroy-method="destroy">
+		<property name="retrieveChannelStrategy" ref="retrieveChannelStrategy" />
+		<property name="pricingQueryStrategy" ref="travelPDTRowsQueryStrategy" />
+		<property name="timeService" ref="timeService"></property>
+	</bean>
+
+	<!-- Geo-location/Timezone offset -->
+	<alias name="defaultTravelGoogleMapTools" alias="googleMapTools" />
+	<bean id="defaultTravelGoogleMapTools" class="de.hybris.platform.travelservices.storelocator.impl.TravelGoogleMapTools"
+		parent="defaultGoogleMapTools">
+		<property name="timeZoneResponseGoogleResponseParser" ref="timeZoneResponseGoogleResponseParser" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias alias="geoServiceWrapper" name="defaultTravelGoogleMapsServiceWrapper" />
+	<bean id="defaultTravelGoogleMapsServiceWrapper" class="de.hybris.platform.travelservices.storelocator.impl.TravelGoogleMapsServiceWrapper"
+		parent="defaultGoogleMapsGeoServiceWrapper">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultTimeZoneResponseGoogleResponseParser" alias="timeZoneResponseGoogleResponseParser" />
+	<bean id="defaultTimeZoneResponseGoogleResponseParser" class="de.hybris.platform.travelservices.storelocator.impl.TimeZoneResponseGoogleResponseParser"
+		scope="prototype" />
+
+	<!-- Comparators -->
+	<bean id="guaranteeComparator" class="de.hybris.platform.travelservices.comparators.GuaranteeComparator">
+		<property name="guaranteesPriorityMap" ref="guaranteesPriorityMap" />
+	</bean>
+
+	<bean id="configuredAccomNumberComparator" class="de.hybris.platform.travelservices.ancillary.search.accommodation.comparator.ConfiguredAccomNumberComparator" />
+
+	<!-- Method Hooks -->
+	<alias alias="bundleCommercePlaceOrderMethodHook" name="defaultBundleCommercePlaceOrderMethodHook" />
+	<alias alias="defaultBundleCommercePlaceOrderMethodHook" name="travelPlaceOrderMethodHook" />
+	<alias alias="travelPlaceOrderMethodHook" name="defaultTravelPlaceOrderMethodHook" />
+	<bean id="defaultTravelPlaceOrderMethodHook" class="de.hybris.platform.travelservices.order.hook.DefaultTravelPlaceOrderMethodHook">
+		<property name="modelService" ref="modelService" />
+		<property name="calculationService" ref="calculationService" />
+		<property name="externalTaxesService" ref="externalTaxesService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="orderHistoryService" ref="orderHistoryService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="travelOrderCodeGenerationStrategy" ref="travelOrderCodeGenerationStrategy"/>
+	</bean>
+	
+	<alias name="defaultCancelPenaltiesCalculationService" alias="cancelPenaltiesCalculationService"/>
+	<bean id="defaultCancelPenaltiesCalculationService" class="de.hybris.platform.travelservices.services.impl.DefaultCancelPenaltiesCalculationService">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+    <alias name="travelBundleAddToCartMethodHook" alias="bundleAddToCartMethodHook"/>
+    <bean id="travelBundleAddToCartMethodHook"
+          class="de.hybris.platform.travelservices.order.hook.TravelBundleAddToCartMethodHook">
+        <property name="bundleComponentEditableChecker" ref="cartBundleComponentEditableChecker"/>
+        <property name="l10NService" ref="l10nService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="bundleRuleService" ref="bundleRuleService"/>
+        <property name="bundleCartHookHelper" ref="bundleCartHookHelper"/>
+        <property name="bundleCartValidator" ref="bundleCartValidator"/>
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+        <property name="entryGroupService" ref="entryGroupService"/>
+    </bean>
+
+    <alias name="travelBundleSelectionCriteriaAddToCartMethodHook" alias="bundleSelectionCriteriaAddToCartMethodHook"/>
+    <bean id="travelBundleSelectionCriteriaAddToCartMethodHook"
+          class="de.hybris.platform.travelservices.order.hook.TravelBundleSelectionCriteriaAddToCartMethodHook">
+        <property name="l10NService" ref="l10nService"/>
+        <property name="bundleTemplateService" ref="bundleTemplateService"/>
+    </bean>
+
+	<alias name="travelBundleCartValidationHook" alias="bundleCartValidationHook"/>
+	<bean id="travelBundleCartValidationHook" class="de.hybris.platform.travelservices.order.hook.TravelBundleCartValidationHook">
+		<property name="entryGroupService" ref="entryGroupService"/>
+	</bean>
+   
+	<alias name="defaultTravelVendorService" alias="travelVendorService"/>
+	<bean id="defaultTravelVendorService" class="de.hybris.platform.travelservices.vendor.impl.DefaultTravelVendorService">
+		<property name="travelVendorDao" ref="travelVendorDao"/>
+	</bean>
+
+	<!-- Interceptors -->
+
+	<alias name="travelBundleTemplateRemoveInterceptor" alias="bundleTemplateRemoveInterceptor"/>
+	<bean id="travelBundleTemplateRemoveInterceptor" class="de.hybris.platform.travelservices.interceptors.TravelBundleTemplateRemoveInterceptor"/>
+   
+</beans>

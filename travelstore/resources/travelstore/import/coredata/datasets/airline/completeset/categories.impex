@@ -1,0 +1,13 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Staged'])[unique = true, default = 'travelProductCatalog:Staged']
+$categories=supercategories(code,$catalogVersion)
+
+# Insert Categories
+INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$categories[default='FAREPRODUCT'];$catalogVersion
+;CATEGORY_5;
+;CATEGORY_6;
+;CATEGORY_7;
+;CATEGORY_DEFAULT;
+;CATEGORY_OW;
+;CATEGORY_RT;

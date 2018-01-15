@@ -1,0 +1,883 @@
+INSERT_UPDATE Location; code[unique = true]; locationType(code); pointOfService(&posID)
+
+; LONDON_PREMIER_SHAFTESBURY_PREMIER_LONDON_PADDINGTON                                                               ; PROPERTY ; pos1
+; PARK_PLAZA_HOTELS__AMP__RESORTS_PARK_PLAZA_SHERLOCK_HOLMES_LONDON                                                  ; PROPERTY ; pos2
+; DORSET_SQUARE_HOTEL                                                                                                ; PROPERTY ; pos4
+; PARK_PLAZA_HOTELS__AMP__RESORTS_PLAZA_ON_THE_RIVER                                                                 ; PROPERTY ; pos5
+; 44_CURZON_STREET_BY_MANSLEY_SERVICED_APARTMENTS                                                                    ; PROPERTY ; pos6
+; HOLIDAY_INN_LONDON_KENSINGTON_FORUM                                                                                ; PROPERTY ; pos7
+; HILTON_LONDON_WEMBLEY                                                                                              ; PROPERTY ; pos8
+; FLEMINGS_MAYFAIR                                                                                                   ; PROPERTY ; pos9
+; PARK_LANE_CITY_APARTMENTS                                                                                          ; PROPERTY ; pos10
+; MILLENNIUM_HOTELS_MILLENNIUM_HOTEL_LONDON_KNIGHTSBRIDGE                                                            ; PROPERTY ; pos11
+; HUTTONS_HOTEL                                                                                                      ; PROPERTY ; pos12
+; THE_CUMBERLAND___A_GUOMAN_HOTEL                                                                                    ; PROPERTY ; pos13
+; MILLENNIUM_HOTELS_MILLENNIUM_HOTEL_LONDON_MAYFAIR                                                                  ; PROPERTY ; pos14
+; HOTEL_CAFE_ROYAL                                                                                                   ; PROPERTY ; pos15
+; THE_EXHIBITIONIST_HOTEL                                                                                            ; PROPERTY ; pos16
+; LANGORF_HOTEL                                                                                                      ; PROPERTY ; pos17
+; AMBA_HOTELS_AMBA_HOTEL_MARBLE_ARCH                                                                                 ; PROPERTY ; pos19
+; THE_Z_HOTEL_PICCADILLY                                                                                             ; PROPERTY ; pos20
+; WARWICK_HOTELS_AND_RESORTS__WARWICK_INTERNATIONAL_HOTELS_AND_RESORTS_WARWICK_PARIS__FORMER_WARWICK_CHAMPS_ELYSEES_ ; PROPERTY ; pos21
+; LE_MERIDIEN_HOTELS__AMP__RESORTS_LE_M_RIDIEN_ETOILE                                                                ; PROPERTY ; pos22
+; FRASER_SUITES_FRASER_SUITES_LE_CLARIDGE_CHAMPS_ELYS_ES                                                             ; PROPERTY ; pos24
+; LES_HAUTS_DE_PASSY___TROCADERO_EIFFEL                                                                              ; PROPERTY ; pos25
+; CITADINES_CITADINES_LES_HALLES_PARIS                                                                               ; PROPERTY ; pos26
+; H_TEL_CALIFORNIA_CHAMPS_ELYS_ES                                                                                    ; PROPERTY ; pos27
+; MARCEAU_CHAMPS_ELYS_ES                                                                                             ; PROPERTY ; pos28
+; IBIS_PARIS_MONTMARTRE                                                                                              ; PROPERTY ; pos29
+; MERCURE_PARIS_TERMINUS_NORD                                                                                        ; PROPERTY ; pos30
+; NOVOTEL_PARIS_SUD_PORTE_DE_CHARENTON                                                                               ; PROPERTY ; pos31
+; H_TEL_SAN_R_GIS                                                                                                    ; PROPERTY ; pos32
+; BEST_WESTERN_PREMIER_MARAIS_GRANDS_BOULEVARDS                                                                      ; PROPERTY ; pos33
+; DAUNOU_OP_RA                                                                                                       ; PROPERTY ; pos34
+; HOTEL_MADEMOISELLE                                                                                                 ; PROPERTY ; pos35
+; H_TEL_DE_LA_MOTTE_PICQUET                                                                                          ; PROPERTY ; pos36
+; MILL_SIME_H_TEL                                                                                                    ; PROPERTY ; pos37
+; PULLMAN_HOTELS_AND_RESORTS_PULLMAN_PARIS_MONTPARNASSE                                                              ; PROPERTY ; pos38
+; DOISY_ETOILE                                                                                                       ; PROPERTY ; pos39
+; SWEET_INN_APARTMENTS___MILAN                                                                                       ; PROPERTY ; pos40
+; BORGOFICO_RELAIS___WELLNESS                                                                                        ; PROPERTY ; pos41
+; BEST_WESTERN_PLUS_HOTEL_MILTON                                                                                     ; PROPERTY ; pos42
+; PIAZZA_FARNESE_LUXURY_SUITES                                                                                       ; PROPERTY ; pos44
+; DOMUS_FONTIS                                                                                                       ; PROPERTY ; pos45
+; ITI_HOTELS_COLONNA_PALACE                                                                                          ; PROPERTY ; pos46
+; MY_SECRET_CONDOTTI                                                                                                 ; PROPERTY ; pos47
+; ALPI_HOTEL                                                                                                         ; PROPERTY ; pos48
+; GRAND_HOTEL_PLAZA                                                                                                  ; PROPERTY ; pos49
+; SPAGNA_ROYAL_SUITE                                                                                                 ; PROPERTY ; pos50
+; LA_MONGOLFIERA_ROOMS_IN_NAVONA                                                                                     ; PROPERTY ; pos51
+; LIFESTYLE_SUITES_ROME                                                                                              ; PROPERTY ; pos52
+; REMAR_HOTELS_HOTEL_DELLE_NAZIONI                                                                                   ; PROPERTY ; pos53
+; BABUINO_181                                                                                                        ; PROPERTY ; pos54
+; HOTEL_MARTIS_PALACE                                                                                                ; PROPERTY ; pos55
+; MY_SECRET_SPAGNA                                                                                                   ; PROPERTY ; pos56
+; THE_LEADING_HOTELS_OF_THE_WORLD_HOTEL_MAJESTIC_ROMA                                                                ; PROPERTY ; pos57
+; THE_INDEPENDENT_SUITES                                                                                             ; PROPERTY ; pos58
+; HOTEL_VILLAFRANCA                                                                                                  ; PROPERTY ; pos59
+; NH_ROMA_VILLA_CARPEGNA                                                                                             ; PROPERTY ; pos60
+; VINCCI_HOTELES_VINCCI_SOHO                                                                                         ; PROPERTY ; pos61
+; CHH_HOTELES_GRAN_HOTEL_VELAZQUEZ                                                                                   ; PROPERTY ; pos62
+; AMADOR_DE_LOS_RIOS                                                                                                 ; PROPERTY ; pos64
+; AYRE_HOTELES_ONLY_YOU_BOUTIQUE_HOTEL_MADRID                                                                        ; PROPERTY ; pos65
+; GRUPO_INTUR_INTUR_PALACIO_SAN_MARTIN                                                                               ; PROPERTY ; pos66
+; GRAN_VERSALLES                                                                                                     ; PROPERTY ; pos67
+; PETIT_PALACE_HOTELES_PETIT_PALACE_SANTA_B_RBARA                                                                    ; PROPERTY ; pos68
+; WESTIN_WESTIN_PALACE_HOTEL                                                                                         ; PROPERTY ; pos69
+; VINCCI_HOTELES_VINCCI_V_A___66                                                                                     ; PROPERTY ; pos70
+; VINCCI_HOTELES_VINCCI_CENTRUM                                                                                      ; PROPERTY ; pos71
+; PETIT_PALACE_HOTELES_PETIT_PALACE_SAVOY_ALFONSO_XII                                                                ; PROPERTY ; pos72
+; VP_HOTELS_VP_JARDIN_DE_RECOLETOS                                                                                   ; PROPERTY ; pos73
+; HOTEL_LIABENY                                                                                                      ; PROPERTY ; pos74
+; PETIT_PALACE_HOTELES_PETIT_PALACE_PRESIDENT_CASTELLANA                                                             ; PROPERTY ; pos75
+; PETIT_PALACE_HOTELES_PETIT_PALACE_ART_GALLERY                                                                      ; PROPERTY ; pos76
+; WELLINGTON_MADRID                                                                                                  ; PROPERTY ; pos77
+; CATALONIA_HOTELS__AMP__RESORTS_CATALONIA_LAS_CORTES                                                                ; PROPERTY ; pos78
+; PETIT_PALACE_HOTELES_PETIT_PALACE_EMBASSY_SERRANO                                                                  ; PROPERTY ; pos79
+; PETIT_PALACE_HOTELES_PETIT_PALACE_ALCAL__TORRE                                                                     ; PROPERTY ; pos80
+; DORCHESTER_COLLECTION_HOTEL_PRINCIPE_DI_SAVOIA                                                                     ; PROPERTY ; pos81
+; NH_COLLECTION_NH_COLLECTION_MILANO_PRESIDENT                                                                       ; PROPERTY ; pos82
+; HEART_MILAN_APARTMENTS_SAN_SEPOLCRO_DUOMO                                                                          ; PROPERTY ; pos83
+; TOWNHOUSE_GALLERIA                                                                                                 ; PROPERTY ; pos84
+; NH_MILANO_TOURING                                                                                                  ; PROPERTY ; pos85
+; THE_SQUARE_MILANO_DUOMO                                                                                            ; PROPERTY ; pos86
+; SENATO_HOTEL_MILANO                                                                                                ; PROPERTY ; pos87
+; STARHOTELS_STARHOTELS_ROSA_GRAND                                                                                   ; PROPERTY ; pos88
+; FOUR_SEASONS_HOTELS_AND_RESORTS_FOUR_SEASONS_HOTEL_MILANO                                                          ; PROPERTY ; pos89
+; UNA_HOTELS__AMP__RESORTS_UNA_HOTEL_CUSANI                                                                          ; PROPERTY ; pos90
+; PARK_HYATT_PARK_HYATT_MILANO                                                                                       ; PROPERTY ; pos91
+; ARMANI_HOTEL_MILANO                                                                                                ; PROPERTY ; pos92
+; ROOM_MATE_ROOM_MATE_GIULIA                                                                                         ; PROPERTY ; pos93
+; UPTOWN_PALACE                                                                                                      ; PROPERTY ; pos94
+; DESIGN_HOTELS_HOTEL_STRAF                                                                                          ; PROPERTY ; pos95
+; UNA_HOTELS__AMP__RESORTS_UNA_HOTEL_CENTURY                                                                         ; PROPERTY ; pos96
+; BIANCA_MARIA_PALACE_HOTEL                                                                                          ; PROPERTY ; pos97
+; STARHOTELS_STARHOTELS_ANDERSON                                                                                     ; PROPERTY ; pos98
+; ME_BY_MELI__ME_MILAN_IL_DUCA                                                                                       ; PROPERTY ; pos99
+; GLAM_MILANO                                                                                                        ; PROPERTY ; pos100
+; SAVOIA___JOLANDA                                                                                                   ; PROPERTY ; pos101
+; RESIDENCE_CA__FOSCOLO                                                                                              ; PROPERTY ; pos102
+; HOTEL_PALAZZO_BARBARIGO_SUL_CANAL_GRANDE                                                                           ; PROPERTY ; pos103
+; HOTEL_BONVECCHIATI                                                                                                 ; PROPERTY ; pos104
+; PALAZZETTO_PISANI                                                                                                  ; PROPERTY ; pos105
+; KEMPINSKI_SAN_CLEMENTE_PALACE_KEMPINSKI_VENICE                                                                     ; PROPERTY ; pos106
+; HOTEL_AGLI_ALBORETTI                                                                                               ; PROPERTY ; pos107
+; WESTIN_THE_WESTIN_EUROPA___REGINA                                                                                  ; PROPERTY ; pos108
+; PALACE_BONVECCHIATI                                                                                                ; PROPERTY ; pos109
+; PESARO_PALACE                                                                                                      ; PROPERTY ; pos110
+; HOTEL_A_LA_COMMEDIA                                                                                                ; PROPERTY ; pos111
+; HOTEL_SATURNIA___INTERNATIONAL                                                                                     ; PROPERTY ; pos112
+; BAGLIONI_HOTELS_BAGLIONI_HOTEL_LUNA___THE_LEADING_HOTELS_OF_THE_WORLD                                              ; PROPERTY ; pos113
+; HOTEL_L_OROLOGIO                                                                                                   ; PROPERTY ; pos114
+; PALAZZETTO_MADONNA                                                                                                 ; PROPERTY ; pos115
+; AQUA_PALACE                                                                                                        ; PROPERTY ; pos116
+; KEMPINSKI_VIER_JAHRESZEITEN_KEMPINSKI_M_NCHEN                                                                      ; PROPERTY ; pos121
+; DERAG_LIVINGHOTEL_DERAG_LIVINGHOTEL_AM_VIKTUALIENMARKT                                                             ; PROPERTY ; pos122
+; PULLMAN_HOTELS_AND_RESORTS_PULLMAN_MUNICH                                                                          ; PROPERTY ; pos124
+; HOTEL_AN_DER_OPER                                                                                                  ; PROPERTY ; pos125
+; THE_LEADING_HOTELS_OF_THE_WORLD__GEISEL_PRIVATHOTELS_HOTEL_K_NIGSHOF                                               ; PROPERTY ; pos126
+; H_HOTELS_COM_H2_HOTEL_M_NCHEN_MESSE                                                                                ; PROPERTY ; pos127
+; EUROSTARS_HOTELS_EUROSTARS_BOOK_HOTEL                                                                              ; PROPERTY ; pos128
+; LEONARDO_ROYAL_HOTELS_LEONARDO_ROYAL_HOTEL_MUNICH                                                                  ; PROPERTY ; pos129
+; NH_M_NCHEN_MESSE                                                                                                   ; PROPERTY ; pos130
+; RAMADA_HOTEL___CONFERENCE_CENTER_M_NCHEN_MESSE                                                                     ; PROPERTY ; pos131
+; WORLDHOTELS_FLEMING_S_HOTEL_M_NCHEN_SCHWABING                                                                      ; PROPERTY ; pos132
+; RELEXA_HOTEL_M_NCHEN                                                                                               ; PROPERTY ; pos133
+; HOTEL_CONCORDE                                                                                                     ; PROPERTY ; pos134
+; KING_S_HOTEL_CENTER_SUPERIOR                                                                                       ; PROPERTY ; pos135
+; SHERATON_M_NCHEN_ARABELLAPARK_HOTEL                                                                                ; PROPERTY ; pos136
+; INTERCITYHOTELS_INTERCITYHOTEL_M_NCHEN                                                                             ; PROPERTY ; pos137
+; H_HOTELS_COM_H__HOTEL_M_NCHEN_CITY_CENTRE_B___B                                                                    ; PROPERTY ; pos138
+; LEONARDO_BOUTIQUE_HOTELS_LEONARDO_BOUTIQUE_HOTEL_MUNICH                                                            ; PROPERTY ; pos139
+; GEISEL_PRIVATHOTELS_HOTEL_EXCELSIOR                                                                                ; PROPERTY ; pos140
+; CLIPPER_CITY_HOME_APARTMENTS_BERLIN                                                                                ; PROPERTY ; pos141
+; HOLLYWOOD_MEDIA_HOTEL_AM_KURF_RSTENDAMM                                                                            ; PROPERTY ; pos142
+; MOTEL_ONE_MOTEL_ONE_BERLIN_TIERGARTEN                                                                              ; PROPERTY ; pos143
+; PARK_PLAZA_HOTELS__AMP__RESORTS_PARK_PLAZA_BERLIN_KUDAMM                                                           ; PROPERTY ; pos144
+; PARK_PLAZA_HOTELS__AMP__RESORTS_PARK_PLAZA_WALLSTREET_BERLIN_MITTE                                                 ; PROPERTY ; pos145
+; ART_OTEL_ART_OTEL_BERLIN_KUDAMM                                                                                    ; PROPERTY ; pos146
+; ART_OTEL_ART_OTEL_BERLIN_MITTE                                                                                     ; PROPERTY ; pos147
+; RAMADA_PLAZA_BERLIN_CITY_CENTRE                                                                                    ; PROPERTY ; pos148
+; MOTEL_ONE_MOTEL_ONE_BERLIN_SPITTELMARKT                                                                            ; PROPERTY ; pos149
+; STEIGENBERGER_HOTELS__AMP__RESORTS_STEIGENBERGER_HOTEL_AM_KANZLERAMT                                               ; PROPERTY ; pos150
+; GRAND_HYATT_GRAND_HYATT_BERLIN                                                                                     ; PROPERTY ; pos151
+; STEIGENBERGER_HOTELS__AMP__RESORTS_STEIGENBERGER_HOTEL_BERLIN                                                      ; PROPERTY ; pos152
+; APARION_APARTMENTS_BERLIN                                                                                          ; PROPERTY ; pos153
+; NH_COLLECTION_NH_COLLECTION_BERLIN_MITTE_FRIEDRICHSTRASSE                                                          ; PROPERTY ; pos154
+; H_HOTELS_COM_H2_HOTEL_BERLIN_ALEXANDERPLATZ                                                                        ; PROPERTY ; pos155
+; CATALONIA_HOTELS__AMP__RESORTS_CATALONIA_BERLIN_MITTE                                                              ; PROPERTY ; pos156
+; MELI__HOTELS__AMP__RESORTS_MELI__BERLIN                                                                            ; PROPERTY ; pos157
+; KEMPINSKI_HOTEL_ADLON_KEMPINSKI_BERLIN                                                                             ; PROPERTY ; pos158
+; HOTEL_GAT_POINT_CHARLIE                                                                                            ; PROPERTY ; pos159
+; SOFITEL_SOFITEL_ATHENS_AIRPORT                                                                                     ; PROPERTY ; pos161
+; DIVANI_COLLECTION__THE_LEADING_HOTELS_OF_THE_WORLD_DIVANI_APOLLON_PALACE___THALASSO                                ; PROPERTY ; pos162
+; ROYAL_OLYMPIC_HOTEL                                                                                                ; PROPERTY ; pos163
+; THE_ATHENS_GATE_HOTEL                                                                                              ; PROPERTY ; pos164
+; HERODION_HOTEL                                                                                                     ; PROPERTY ; pos165
+; ELECTRA_HOTELS__AMP__RESORTS_ELECTRA_HOTEL_ATHENS                                                                  ; PROPERTY ; pos166
+; THE_LUXURY_COLLECTION_BY_STARWOOD_HOTEL_GRANDE_BRETAGNE__A_LUXURY_COLLECTION_HOTEL                                 ; PROPERTY ; pos167
+; ELECTRA_HOTELS__AMP__RESORTS_ELECTRA_PALACE_ATHENS                                                                 ; PROPERTY ; pos168
+; ATHENS_HOTELS_GROUP_ATHENS_CENTER_SQUARE                                                                           ; PROPERTY ; pos169
+; NJV_ATHENS_PLAZA                                                                                                   ; PROPERTY ; pos170
+; DIVANI_COLLECTION_DIVANI_PALACE_ACROPOLIS                                                                          ; PROPERTY ; pos171
+; ST_GEORGE_LYCABETTUS                                                                                               ; PROPERTY ; pos172
+; HOLIDAY_INN_ATHENS_ATTICA_AV__AIRPORT_W_                                                                           ; PROPERTY ; pos173
+; ATHENS_STATUS_SUITES                                                                                               ; PROPERTY ; pos174
+; DIVANI_COLLECTION__THE_LEADING_HOTELS_OF_THE_WORLD_DIVANI_CARAVEL                                                  ; PROPERTY ; pos175
+; PHILIPPOS_HOTEL                                                                                                    ; PROPERTY ; pos176
+; BEST_WESTERN_ACROPOLIS_AMI_HOTEL                                                                                   ; PROPERTY ; pos178
+; DESIGN_HOTELS_HOTEL_FRESH                                                                                          ; PROPERTY ; pos180
+; NOMO_SOHO                                                                                                          ; PROPERTY ; pos181
+; NEW_YORK_MARRIOTT_MARQUIS                                                                                          ; PROPERTY ; pos182
+; SOHO_GRAND_HOTEL                                                                                                   ; PROPERTY ; pos184
+; EXECUTIVE_HOTELS_EXECUTIVE_HOTEL_LE_SOLEIL_NEW_YORK                                                                ; PROPERTY ; pos185
+; HYATT_HYATT_PLACE_NEW_YORK                                                                                         ; PROPERTY ; pos186
+; THE_QUIN                                                                                                           ; PROPERTY ; pos187
+; GRAND_HYATT_GRAND_HYATT_NEW_YORK                                                                                   ; PROPERTY ; pos188
+; 1_HOTEL_CENTRAL_PARK                                                                                               ; PROPERTY ; pos189
+; SUMMIT_HOTELS__AMP__RESORTS_PARK_LANE_HOTEL_ON_CENTRAL_PARK                                                        ; PROPERTY ; pos190
+; DREAM_DOWNTOWN                                                                                                     ; PROPERTY ; pos191
+; THE_LONDON_NYC                                                                                                     ; PROPERTY ; pos192
+; HYATT_HYATT_TIMES_SQUARE                                                                                           ; PROPERTY ; pos193
+; WALKER_HOTEL_GREENWICH_VILLAGE                                                                                     ; PROPERTY ; pos194
+; THE_ROGER                                                                                                          ; PROPERTY ; pos195
+; DESIGN_HOTELS__STANDARD_HOTELS_THE_STANDARD__HIGH_LINE_NEW_YORK                                                    ; PROPERTY ; pos196
+; NOLITAN_HOTEL_SOHO___NEW_YORK                                                                                      ; PROPERTY ; pos197
+; THE_ROXY_HOTEL_TRIBECA                                                                                             ; PROPERTY ; pos198
+; HOLIDAY_INN_EXPRESS___TIMES_SQUARE_SOUTH                                                                           ; PROPERTY ; pos199
+; THE_KNICKERBOCKER                                                                                                  ; PROPERTY ; pos200
+
+
+; GALAXIA_HOLIDAY_HOMES                                                                                              ; PROPERTY ; pos201
+; SANDALWOOD_HOTEL_RETREAT                                                                                           ; PROPERTY ; pos202
+; TAJ_HOTELS_RESORTS_AND_PALACES_VIVANTA_BY_TAJ_FORT_AGUADA                                                          ; PROPERTY ; pos203
+; PALMGROVE_GOA_HOLIDAY                                                                                              ; PROPERTY ; pos204
+; RATHNA_GUEST_HOMES_GOA                                                                                             ; PROPERTY ; pos205
+; DEVASTHALI_THE_VALLEY_OF_GODS                                                                                      ; PROPERTY ; pos206
+; VILLA_LOBO_BETALBATIM                                                                                              ; PROPERTY ; pos207
+; DUDHSAGAR_FARMSTAY                                                                                                 ; PROPERTY ; pos208
+; SHALOM                                                                                                             ; PROPERTY ; pos209
+; NORA_VILLA_ANJUNA                                                                                                  ; PROPERTY ; pos210
+; CROWNE_PLAZA_HOTELS_AMP_RESORTS_CROWNE_PLAZA_HOTEL_MIAMI_INTERNATIONAL_AIRPORT                                     ; PROPERTY ; pos211
+; THE_RITZ_CARLTON_COMPANY_L_L_C_THE_RITZ_CARLTON_KEY_BISCAYNE_MIAMI                                                 ; PROPERTY ; pos212
+; HYATT_REGENCY_HYATT_REGENCY_MIAMI                                                                                  ; PROPERTY ; pos213
+; SLS_BRICKELL                                                                                                       ; PROPERTY ; pos214
+; MANDARIN_ORIENTAL_MANDARIN_ORIENTAL_MIAMI                                                                          ; PROPERTY ; pos215
+; TRUMP_HOTEL_COLLECTION_TRUMP_NATIONAL_DORAL                                                                        ; PROPERTY ; pos216
+; SONESTA_COLLECTION_HOTELS_SONESTA_COCONUT_GROVE_MIAMI                                                              ; PROPERTY ; pos217
+; EAST_MIAMI                                                                                                         ; PROPERTY ; pos218
+; HILTON_MIAMI_DOWNTOWN                                                                                              ; PROPERTY ; pos219
+; KIMPTON_HOTELS_KIMPTON_EPIC_HOTEL                                                                                  ; PROPERTY ; pos220
+; HOTEL_MIRAMALFI                                                                                                    ; PROPERTY ; pos221
+; LLOYD_S_BAIA_HOTEL                                                                                                 ; PROPERTY ; pos222
+; HOTEL_SAVOIA                                                                                                       ; PROPERTY ; pos223
+; VILLA_ROMANA_HOTEL_SPA                                                                                             ; PROPERTY ; pos224
+; HOTEL_FONTANA                                                                                                      ; PROPERTY ; pos225
+; RESIDENCE_HOTEL_PANORAMIC                                                                                          ; PROPERTY ; pos226
+; VILLA_COSTANZO                                                                                                     ; PROPERTY ; pos227
+; HOTEL_AURORA                                                                                                       ; PROPERTY ; pos228
+; HOTEL_CAPORAL                                                                                                      ; PROPERTY ; pos229
+; VILLA_ANNALARA                                                                                                     ; PROPERTY ; pos230
+; PORTRAIT_FIRENZE                                                                                                   ; PROPERTY ; pos231
+; HOTEL_RIVOLI                                                                                                       ; PROPERTY ; pos232
+; HOTEL_SPADAI                                                                                                       ; PROPERTY ; pos233
+; STARHOTELS_HELVETIA_BRISTOL_FIRENZE_STARHOTELS_COLLEZIONE                                                          ; PROPERTY ; pos234
+; SUMMIT_HOTELS_AMP_RESORTS_GRAND_HOTEL_BAGLIONI                                                                     ; PROPERTY ; pos235
+; HOTEL_BALESTRI                                                                                                     ; PROPERTY ; pos236
+; CLASSIC_HOTEL                                                                                                      ; PROPERTY ; pos237
+; HOTEL_MONTEBELLO_SPLENDID                                                                                          ; PROPERTY ; pos238
+; RODO_HOTEL_FASHION_DELIGHT                                                                                         ; PROPERTY ; pos239
+; VILLA_CORA                                                                                                         ; PROPERTY ; pos240
+; YING_DONMUANG_AIRPORT_GUESTHOUSE                                                                                   ; PROPERTY ; pos241
+; IPREMIUM_SUKHUMVIT81                                                                                               ; PROPERTY ; pos242
+; EMPORIUM_SUITES_BY_CHATRIUM                                                                                        ; PROPERTY ; pos243
+; PARADISE_SUKHUMVIT                                                                                                 ; PROPERTY ; pos244
+; CHATEAU_DE_SUKHUMVIT                                                                                               ; PROPERTY ; pos245
+; GARDENGROVE_SUITES                                                                                                 ; PROPERTY ; pos246
+; THE_RICHE_BOUTIQUE                                                                                                 ; PROPERTY ; pos247
+; PAK_D_RESORT                                                                                                       ; PROPERTY ; pos248
+; CNC_HERITAGE                                                                                                       ; PROPERTY ; pos249
+; LAIDBACK_PLACE                                                                                                     ; PROPERTY ; pos250
+; THE_MAPLE_SUITE                                                                                                    ; PROPERTY ; pos251
+; MILLENNIUM_HOTELS_GRAND_MILLENNIUM_HOTELS_GRAND_MILLENNIUM_KUALA_LUMPUR                                            ; PROPERTY ; pos252
+; PARKROYAL_HOTELS_AMP_RESORTS_PARKROYAL_KUALA_LUMPUR                                                                ; PROPERTY ; pos253
+; AMBASSADOR_ROW_HOTEL_SUITES_BY_LANSON_PLACE                                                                        ; PROPERTY ; pos254
+; SOMERSET_SOMERSET_AMPANG_KUALA_LUMPUR                                                                              ; PROPERTY ; pos255
+; ASCOTT_THE_RESIDENCE_ASCOTT_KUALA_LUMPUR                                                                           ; PROPERTY ; pos256
+; COMPASS_HOSPITALITY_CITIN_SEACARE_PUDU_BY_COMPASS_HOSPITALITY                                                      ; PROPERTY ; pos257
+; CAPRI_BY_FRASER_CAPRI_BY_FRASER_KUALA_LUMPUR_MALAYSIA                                                              ; PROPERTY ; pos258
+; FAR_EAST_HOSPITALITY_SRI_TIARA_RESIDENCES                                                                          ; PROPERTY ; pos259
+; WEDGEWOOD_RESIDENCES                                                                                               ; PROPERTY ; pos260
+; WENCESLAS_SQUARE_TERRACES                                                                                          ; PROPERTY ; pos261
+; HILTON_PRAGUE_HOTEL                                                                                                ; PROPERTY ; pos262
+; OLD_TOWN_SQUARE_APARTMENTS                                                                                         ; PROPERTY ; pos263
+; HOTEL_U_MARTINA_PRAHA                                                                                              ; PROPERTY ; pos264
+; RESIDENCE_LEON_D_ORO                                                                                               ; PROPERTY ; pos265
+; SMETANA_HOTEL                                                                                                      ; PROPERTY ; pos266
+; HOTEL_PENZION_PRAGA                                                                                                ; PROPERTY ; pos267
+; PACHTUV_PALACE                                                                                                     ; PROPERTY ; pos268
+; PVH_CHARMING_FLATS_ODBOR_                                                                                          ; PROPERTY ; pos269
+; THE_LEADING_HOTELS_OF_THE_WORLD_THE_GRAND_MARK_PRAGUE                                                              ; PROPERTY ; pos270
+; HOTEL_GRIMSBORGIR_LUXURY_ROOMS_AND_APARTMENTS                                                                      ; PROPERTY ; pos271
+; HOTEL_KEILIR_BY_KEFLAVIK_AIRPORT                                                                                   ; PROPERTY ; pos272
+; KEAHOTELS_STORM_HOTEL_BY_KEAHOTELS                                                                                 ; PROPERTY ; pos273
+; GOLDEN_CIRCLE_APARTMENTS                                                                                           ; PROPERTY ; pos274
+; FOSSHOTEL_FOSSHOTEL_HUSAVIK                                                                                        ; PROPERTY ; pos275
+; FOSSTUN_APARTMENTS_HOTEL                                                                                           ; PROPERTY ; pos276
+; PARK_INN_BY_RADISSON_PARK_INN_BY_RADISSON_REYKJAVIK_KEFLAV_K_AIRPORT                                               ; PROPERTY ; pos277
+; ICELANDAIR_HOTELS_ICELANDAIR_HOTEL_AKUREYRI                                                                        ; PROPERTY ; pos278
+; HOTEL_ISAFJ_RDUR                                                                                                   ; PROPERTY ; pos279
+; SIGLO_HOTEL                                                                                                        ; PROPERTY ; pos280
+; GOODSTAY_ELF_SPA_RESORT                                                                                            ; PROPERTY ; pos281
+; RIVER_TERRACE_PENSION                                                                                              ; PROPERTY ; pos282
+; YONGPYONG_RESORT_DRAGON_VALLEY_HOTEL                                                                               ; PROPERTY ; pos283
+; WHITE_CABIN                                                                                                        ; PROPERTY ; pos284
+; MAYFAIR_PENSION                                                                                                    ; PROPERTY ; pos285
+; ECOPIA_PENSION                                                                                                     ; PROPERTY ; pos286
+; PENSION_IN_MY_ARMS                                                                                                 ; PROPERTY ; pos287
+; BONGPYEONG_PROVENCE_PENSION                                                                                        ; PROPERTY ; pos288
+; CHALET_RESORT                                                                                                      ; PROPERTY ; pos289
+; LIUN_CABIN                                                                                                         ; PROPERTY ; pos290
+; AMARI_HOTELS_AMP_RESORTS_AMARI_PHUKET                                                                              ; PROPERTY ; pos291
+; PHUKET_GRACELAND_RESORT_AND_SPA                                                                                    ; PROPERTY ; pos292
+; THE_CHARM_RESORT_PHUKET                                                                                            ; PROPERTY ; pos293
+; THE_LANTERN_RESORTS_PATONG                                                                                         ; PROPERTY ; pos294
+; WYNDHAM_HOTELS_AMP_RESORTS_WYNDHAM_SEA_PEARL_RESORT_PHUKET                                                         ; PROPERTY ; pos295
+; HORIZON_PATONG_BEACH_RESORT_AND_SPA                                                                                ; PROPERTY ; pos296
+; BYD_LOFTS_BOUTIQUE_HOTEL_SERVICED_APARTMENTS                                                                       ; PROPERTY ; pos297
+; SAI_ROUGN_RESIDENCE                                                                                                ; PROPERTY ; pos298
+; ROYAL_PRINCE_RESIDENCE                                                                                             ; PROPERTY ; pos299
+; PALMYRA_PATONG_RESORT_PHUKET                                                                                       ; PROPERTY ; pos300
+
+INSERT_UPDATE PointOfService; &posID; name[unique = true]; longitude; latitude; type(code); address(&addrID); timeZoneId
+
+
+; pos1   ; Shaftesbury Premier London Paddington                 ; -0.1780730000000000 ; 51.5152090000000 ; STORE ; addr1   ; Europe/London
+; pos2   ; Park Plaza Sherlock Holmes London                     ; -0.1568146795034405 ; 51.5208981990574 ; STORE ; addr2   ; Europe/London
+; pos4   ; Dorset Square Hotel                                   ; -0.1602910000000000 ; 51.5226140000000 ; STORE ; addr4   ; Europe/London
+; pos5   ; Plaza on the River                                    ; -0.1217140000000000 ; 51.4914760000000 ; STORE ; addr5   ; Europe/London
+; pos6   ; 44 Curzon Street By Mansley Serviced Apartments       ; -0.1466500000000000 ; 51.5067960000000 ; STORE ; addr6   ; Europe/London
+; pos7   ; Holiday Inn London Kensington Forum                   ; -0.1849168539047240 ; 51.4940828212052 ; STORE ; addr7   ; Europe/London
+; pos8   ; Hilton London Wembley                                 ; -0.2826511859893799 ; 51.5575560774353 ; STORE ; addr8   ; Europe/London
+; pos9   ; Flemings Mayfair                                      ; -0.1451880000000000 ; 51.5064400000000 ; STORE ; addr9   ; Europe/London
+; pos10  ; Park Lane City Apartments                             ; -0.0767810000000000 ; 51.5171780000000 ; STORE ; addr10  ; Europe/London
+; pos11  ; Millennium Hotel London Knightsbridge                 ; -0.1604685187339785 ; 51.4998462241752 ; STORE ; addr11  ; Europe/London
+; pos12  ; Huttons Hotel                                         ; -0.1384140551090240 ; 51.4905641404859 ; STORE ; addr12  ; Europe/London
+; pos13  ; The Cumberland - A Guoman Hotel                       ; -0.1590549945831295 ; 51.5137971035941 ; STORE ; addr13  ; Europe/London
+; pos14  ; Millennium Hotel London Mayfair                       ; -0.1510539650917050 ; 51.5108041138169 ; STORE ; addr14  ; Europe/London
+; pos15  ; Hotel Cafe Royal                                      ; -0.1359450000000000 ; 51.5100880000000 ; STORE ; addr15  ; Europe/London
+; pos16  ; The Exhibitionist Hotel                               ; -0.177629292011261  ; 51.4947775072687 ; STORE ; addr16  ; Europe/London
+; pos17  ; Langorf Hotel                                         ; -0.1800870000000000 ; 51.5504690000000 ; STORE ; addr17  ; Europe/London
+; pos19  ; Amba Hotel Marble Arch                                ; -0.1566195487976075 ; 51.5143846613178 ; STORE ; addr19  ; Europe/London
+; pos20  ; The Z Hotel Piccadilly                                ; -0.1314030000000000 ; 51.5090260000000 ; STORE ; addr20  ; Europe/London
+
+; pos21  ; Warwick Paris (Former Warwick Champs-Elysees)         ; 2.30333760380745020 ; 48.8720870241292 ; STORE ; addr21  ; Europe/Paris
+; pos22  ; Le Méridien Etoile                                    ; 2.28510260581970000 ; 48.8794352690386 ; STORE ; addr22  ; Europe/Paris
+; pos24  ; Fraser Suites Le Claridge Champs-Elysées              ; 2.30522990226745500 ; 48.8708335427052 ; STORE ; addr24  ; Europe/Paris
+; pos25  ; Les Hauts de Passy - Trocadero Eiffel                 ; 2.27831326425075980 ; 48.8572192943586 ; STORE ; addr25  ; Europe/Paris
+; pos26  ; Citadines Les Halles Paris                            ; 2.34697900000000000 ; 48.8607130000000 ; STORE ; addr26  ; Europe/Paris
+; pos27  ; Hôtel California Champs Elysées                       ; 2.30487800000000000 ; 48.8727650000000 ; STORE ; addr27  ; Europe/Paris
+; pos28  ; Marceau Champs-Elysées                                ; 2.29875639081001500 ; 48.8681959246936 ; STORE ; addr28  ; Europe/Paris
+; pos29  ; ibis Paris Montmartre                                 ; 2.33016900000000000 ; 48.8853570000000 ; STORE ; addr29  ; Europe/Paris
+; pos30  ; Mercure Paris Terminus Nord                           ; 2.35498353838920500 ; 48.8796460598014 ; STORE ; addr30  ; Europe/Paris
+; pos31  ; Novotel Paris Sud Porte de Charenton                  ; 2.40527100000000000 ; 48.8265010000000 ; STORE ; addr31  ; Europe/Paris
+; pos32  ; Hôtel San Régis                                       ; 2.30853103101254000 ; 48.8664491981159 ; STORE ; addr32  ; Europe/Paris
+; pos33  ; Best Western Premier Marais Grands Boulevards         ; 2.3541802167892447  ; 48.8687455134254 ; STORE ; addr33  ; Europe/Paris
+; pos34  ; Daunou Opéra                                          ; 2.3321650000000000  ; 48.8693850000000 ; STORE ; addr34  ; Europe/Paris
+; pos35  ; Hotel Mademoiselle                                    ; 2.3543666303157798  ; 48.8772964422351 ; STORE ; addr35  ; Europe/Paris
+; pos36  ; Hôtel de la Motte Picquet                             ; 2.3072260000000000  ; 48.8556620000000 ; STORE ; addr36  ; Europe/Paris
+; pos37  ; Millésime Hôtel                                       ; 2.3350393027067200  ; 48.8551111959400 ; STORE ; addr37  ; Europe/Paris
+; pos38  ; Pullman Paris Montparnasse                            ; 2.3200820000000000  ; 48.8383580000000 ; STORE ; addr38  ; Europe/Paris
+; pos39  ; Doisy Etoile                                          ; 2.2920180000000000  ; 48.8789830000000 ; STORE ; addr39  ; Europe/Paris
+; pos40  ; Sweet Inn Apartments - Milan                          ; 2.327509166359735   ; 48.8788430779202 ; STORE ; addr40  ; Europe/Paris
+
+; pos41  ; Borgofico Relais & Wellness                           ; 12.47008055448530   ; 41.8996138839441 ; STORE ; addr41  ; Europe/Rome
+; pos42  ; Best Western Plus Hotel Milton                        ; 12.50627900000000   ; 41.8904420000000 ; STORE ; addr42  ; Europe/Rome
+; pos44  ; Piazza Farnese Luxury Suites                          ; 12.47085900000000   ; 41.8952170000000 ; STORE ; addr44  ; Europe/Rome
+; pos45  ; Domus Fontis                                          ; 12.48228460550305   ; 41.9010278265297 ; STORE ; addr45  ; Europe/Rome
+; pos46  ; Colonna Palace                                        ; 12.47910600000000   ; 41.9006670000000 ; STORE ; addr46  ; Europe/Rome
+; pos47  ; My Secret Condotti                                    ; 12.47914200000000   ; 41.9064760000000 ; STORE ; addr47  ; Europe/Rome
+; pos48  ; Alpi Hotel                                            ; 12.50267200000000   ; 41.9051840000000 ; STORE ; addr48  ; Europe/Rome
+; pos49  ; Grand Hotel Plaza                                     ; 12.47878432273865   ; 41.9052255492646 ; STORE ; addr49  ; Europe/Rome
+; pos50  ; Spagna Royal Suite                                    ; 12.48183200000000   ; 41.9045490000000 ; STORE ; addr50  ; Europe/Rome
+; pos51  ; La Mongolfiera Rooms in Navona                        ; 12.47142800000005   ; 41.8991982000000 ; STORE ; addr51  ; Europe/Rome
+; pos52  ; Lifestyle Suites Rome                                 ; 12.47349800000000   ; 41.8988200000000 ; STORE ; addr52  ; Europe/Rome
+; pos53  ; Hotel Delle Nazioni                                   ; 12.48252500000000   ; 41.9016690000000 ; STORE ; addr53  ; Europe/Rome
+; pos54  ; Babuino 181                                           ; 12.47786100000000   ; 41.9092110000000 ; STORE ; addr54  ; Europe/Rome
+; pos55  ; Hotel Martis Palace                                   ; 12.47357330000000   ; 41.8971896000000 ; STORE ; addr55  ; Europe/Rome
+; pos56  ; My Secret Spagna                                      ; 12.48253800000000   ; 41.9070970000000 ; STORE ; addr56  ; Europe/Rome
+; pos57  ; Hotel Majestic Roma                                   ; 12.4879380315542    ; 41.9055589197665 ; STORE ; addr57  ; Europe/Rome
+; pos58  ; The Independent Suites                                ; 12.50063300000000   ; 41.9038430000000 ; STORE ; addr58  ; Europe/Rome
+; pos59  ; Hotel Villafranca                                     ; 12.50495329499245   ; 41.9051347204729 ; STORE ; addr59  ; Europe/Rome
+; pos60  ; NH Roma Villa Carpegna                                ; 12.439515441656098  ; 41.8922816428784 ; STORE ; addr60  ; Europe/Rome
+
+; pos61  ; Vincci Soho                                           ; -3.69842827320099   ; 40.4147928312711 ; STORE ; addr61  ; Europe/Madrid
+; pos62  ; Gran Hotel Velazquez                                  ; -3.68366200000000   ; 40.4281900000000 ; STORE ; addr62  ; Europe/Madrid
+; pos64  ; Amador De Los Rios                                    ; -3.69140088558197   ; 40.4270926336557 ; STORE ; addr64  ; Europe/Madrid
+; pos65  ; Only YOU Boutique Hotel Madrid                        ; -3.695740699768065  ; 40.4222646652486 ; STORE ; addr65  ; Europe/Madrid
+; pos66  ; Intur Palacio San Martin                              ; -3.70666801929474   ; 40.4185359991351 ; STORE ; addr66  ; Europe/Madrid
+; pos67  ; Gran Versalles                                        ; -3.697128742933275  ; 40.4283860905435 ; STORE ; addr67  ; Europe/Madrid
+; pos68  ; Petit Palace Santa Bárbara                            ; -3.69634000000000   ; 40.4264290000000 ; STORE ; addr68  ; Europe/Madrid
+; pos69  ; Westin Palace Hotel                                   ; -3.695333000000000  ; 40.4152950000000 ; STORE ; addr69  ; Europe/Madrid
+; pos70  ; Vincci Vía - 66                                       ; -3.708859000000000  ; 40.4224130000000 ; STORE ; addr70  ; Europe/Madrid
+; pos71  ; Vincci Centrum                                        ; -3.698608000000000  ; 40.4175470000000 ; STORE ; addr71  ; Europe/Madrid
+; pos72  ; Petit Palace Savoy Alfonso XII                        ; -3.689344972372055  ; 40.4172566474004 ; STORE ; addr72  ; Europe/Madrid
+; pos73  ; VP Jardin de Recoletos                                ; -3.688965439796445  ; 40.4222646652486 ; STORE ; addr73  ; Europe/Madrid
+; pos74  ; Hotel Liabeny                                         ; -3.703980445861814  ; 40.4186809839903 ; STORE ; addr74  ; Europe/Madrid
+; pos75  ; Petit Palace President Castellana                     ; -3.688412904739380  ; 40.4292211584137 ; STORE ; addr75  ; Europe/Madrid
+; pos76  ; Petit Palace Art Gallery                              ; -3.685176074523040  ; 40.4238393145821 ; STORE ; addr76  ; Europe/Madrid
+; pos77  ; Wellington Madrid                                     ; -3.684145000000000  ; 40.4221320000000 ; STORE ; addr77  ; Europe/Madrid
+; pos78  ; Catalonia Las Cortes                                  ; -3.699448000000000  ; 40.4145840000000 ; STORE ; addr78  ; Europe/Madrid
+; pos79  ; Petit Palace Embassy Serrano                          ; -3.687463402748105  ; 40.4269976906943 ; STORE ; addr79  ; Europe/Madrid
+; pos80  ; Petit Palace Alcalá Torre                             ; -3.699363000000000  ; 40.4183770000000 ; STORE ; addr80  ; Europe/Madrid
+
+; pos81  ; Hotel Principe Di Savoia                              ; 9.196787774562836   ; 45.4797154966262 ; STORE ; addr81  ; Europe/Rome
+; pos82  ; NH Collection Milano President                        ; 9.197802990674976   ; 45.4631735842988 ; STORE ; addr82  ; Europe/Rome
+; pos83  ; Heart Milan Apartments San Sepolcro Duomo             ; 9.185437000000000   ; 45.4632760       ; STORE ; addr83  ; Europe/Rome
+; pos84  ; TownHouse Galleria                                    ; 9.189301729202270   ; 45.4654770842465 ; STORE ; addr84  ; Europe/Rome
+; pos85  ; NH Milano Touring                                     ; 9.196691215038300   ; 45.4769339283957 ; STORE ; addr85  ; Europe/Rome
+; pos86  ; The Square Milano Duomo                               ; 9.189349171163940   ; 45.4609479       ; STORE ; addr86  ; Europe/Rome
+; pos87  ; Senato Hotel Milano                                   ; 9.196451799999975   ; 45.4714144       ; STORE ; addr87  ; Europe/Rome
+; pos88  ; Starhotels Rosa Grand                                 ; 9.194052000000000   ; 45.4638340000000 ; STORE ; addr88  ; Europe/Rome
+; pos89  ; Four Seasons Hotel Milano                             ; 9.19529914855957    ; 45.4695006937861 ; STORE ; addr89  ; Europe/Rome
+; pos90  ; UNA Hotel Cusani                                      ; 9.183092415332794   ; 45.4685611248355 ; STORE ; addr90  ; Europe/Rome
+; pos91  ; Park Hyatt Milano                                     ; 9.188932000000000   ; 45.4654780000000 ; STORE ; addr91  ; Europe/Rome
+; pos92  ; Armani Hotel Milano                                   ; 9.193118512630459   ; 45.4705211288079 ; STORE ; addr92  ; Europe/Rome
+; pos93  ; Room Mate Giulia                                      ; 9.189273299999964   ; 45.4651759000000 ; STORE ; addr93  ; Europe/Rome
+; pos94  ; Uptown Palace                                         ; 9.192005395889286   ; 45.4574600467336 ; STORE ; addr94  ; Europe/Rome
+; pos95  ; Hotel Straf                                           ; 9.191340543329716   ; 45.4649618696759 ; STORE ; addr95  ; Europe/Rome
+; pos96  ; UNA Hotel Century                                     ; 9.200312197208405   ; 45.4846727044195 ; STORE ; addr96  ; Europe/Rome
+; pos97  ; Bianca Maria Palace Hotel                             ; 9.18927329999997    ; 45.4628195983958 ; STORE ; addr97  ; Europe/Rome
+; pos98  ; Starhotels Anderson                                   ; 9.20689970254898    ; 45.4852067629943 ; STORE ; addr98  ; Europe/Rome
+; pos99  ; ME Milan Il Duca                                      ; 9.19651111177825    ; 45.4793079463174 ; STORE ; addr99  ; Europe/Rome
+; pos100 ; Glam Milano                                           ; 9.20305592936097    ; 45.4838995674742 ; STORE ; addr100 ; Europe/Rome
+
+; pos101 ; Savoia & Jolanda                                      ; 12.342841923236850  ; 45.433986685277  ; STORE ; addr101 ; Europe/Rome
+; pos102 ; Residence Ca' Foscolo                                 ; 12.338144750262451  ; 45.437996912877  ; STORE ; addr102 ; Europe/Rome
+; pos103 ; Hotel Palazzo Barbarigo Sul Canal Grande              ; 12.329663559794401  ; 45.436002304054  ; STORE ; addr103 ; Europe/Rome
+; pos104 ; Hotel Bonvecchiati                                    ; 12.335827946662900  ; 45.435178870181  ; STORE ; addr104 ; Europe/Rome
+; pos105 ; Palazzetto Pisani                                     ; 12.330478280782700  ; 45.431747178648  ; STORE ; addr105 ; Europe/Rome
+; pos106 ; San Clemente Palace Kempinski Venice                  ; 12.335586547851550  ; 45.410743297105  ; STORE ; addr106 ; Europe/Rome
+; pos107 ; Hotel Agli Alboretti                                  ; 12.328516244888300  ; 45.430744354565  ; STORE ; addr107 ; Europe/Rome
+; pos108 ; The Westin Europa & Regina                            ; 12.335426285862901  ; 45.432342966090  ; STORE ; addr108 ; Europe/Rome
+; pos109 ; Palace Bonvecchiati                                   ; 12.336345613002800  ; 45.435580142795  ; STORE ; addr109 ; Europe/Rome
+; pos110 ; Pesaro Palace                                         ; 12.334210574626950  ; 45.440749754155  ; STORE ; addr110 ; Europe/Rome
+; pos111 ; Hotel A La Commedia                                   ; 12.3348931968212    ; 45.436518943858  ; STORE ; addr111 ; Europe/Rome
+; pos112 ; Hotel Saturnia & International                        ; 12.334084510803200  ; 45.432856251384  ; STORE ; addr112 ; Europe/Rome
+; pos113 ; Baglioni Hotel Luna - The Leading Hotels of the World ; 12.337248176336250  ; 45.433047540617  ; STORE ; addr113 ; Europe/Rome
+; pos114 ; Hotel L'Orologio                                      ; 12.333120700000000  ; 45.440337800000  ; STORE ; addr114 ; Europe/Rome
+; pos115 ; Palazzetto Madonna                                    ; 12.327004638640350  ; 45.435580678022  ; STORE ; addr115 ; Europe/Rome
+; pos116 ; Aqua Palace                                           ; 12.338644266128501  ; 45.436551261589  ; STORE ; addr116 ; Europe/Rome
+
+; pos121 ; Vier Jahreszeiten Kempinski München                   ; 11.581778530000001  ; 48.138860920000  ; STORE ; addr121 ; Europe/Berlin
+; pos122 ; Derag Livinghotel Am Viktualienmarkt                  ; 11.575986000000050  ; 48.134438000000  ; STORE ; addr122 ; Europe/Berlin
+; pos124 ; Pullman Munich                                        ; 11.594001350000000  ; 48.172675530000  ; STORE ; addr124 ; Europe/Berlin
+; pos125 ; Hotel an der Oper                                     ; 11.580161820000000  ; 48.138599230000  ; STORE ; addr125 ; Europe/Berlin
+; pos126 ; Hotel Königshof                                       ; 11.564867198467250  ; 48.139555400650  ; STORE ; addr126 ; Europe/Berlin
+; pos127 ; H2 Hotel München Messe                                ; 11.689866185188250  ; 48.136501914613  ; STORE ; addr127 ; Europe/Berlin
+; pos128 ; Eurostars Book Hotel                                  ; 11.557424068450900  ; 48.137522047824  ; STORE ; addr128 ; Europe/Berlin
+; pos129 ; Leonardo Royal Hotel Munich                           ; 11.547204852104201  ; 48.186398643765  ; STORE ; addr129 ; Europe/Berlin
+; pos130 ; NH München Messe                                      ; 11.642781347036351  ; 48.139950964333  ; STORE ; addr130 ; Europe/Berlin
+; pos131 ; Ramada Hotel & Conference Center München Messe        ; 11.689120530000000  ; 48.137438540000  ; STORE ; addr131 ; Europe/Berlin
+; pos132 ; Fleming's Hotel München-Schwabing                     ; 11.586532741785050  ; 48.167543402846  ; STORE ; addr132 ; Europe/Berlin
+; pos133 ; relexa hotel München                                  ; 11.555757055225400  ; 48.137562678083  ; STORE ; addr133 ; Europe/Berlin
+; pos134 ; Hotel Concorde                                        ; 11.582440000000000  ; 48.136434000000  ; STORE ; addr134 ; Europe/Berlin
+; pos135 ; King's Hotel Center Superior                          ; 11.558386310000000  ; 48.143085830000  ; STORE ; addr135 ; Europe/Berlin
+; pos136 ; Sheraton München Arabellapark Hotel                   ; 11.618214000000000  ; 48.151192000000  ; STORE ; addr136 ; Europe/Berlin
+; pos137 ; InterCityHotel München                                ; 11.559445112943650  ; 48.139418474050  ; STORE ; addr137 ; Europe/Berlin
+; pos138 ; H+ Hotel München City Centre B & B                    ; 11.560846570000000  ; 48.136614530000  ; STORE ; addr138 ; Europe/Berlin
+; pos139 ; Leonardo Boutique Hotel Munich                        ; 11.576535478234300  ; 48.147450883514  ; STORE ; addr139 ; Europe/Berlin
+; pos140 ; Hotel Excelsior                                       ; 11.562053561210650  ; 48.139900847836  ; STORE ; addr140 ; Europe/Berlin
+
+; pos141 ; Clipper City Home Apartments Berlin                   ; 13.390174000000000  ; 52.515822000000  ; STORE ; addr141 ; Europe/Berlin
+; pos142 ; Hollywood Media Hotel am Kurfürstendamm               ; 13.321516000000000  ; 52.501546000000  ; STORE ; addr142 ; Europe/Berlin
+; pos143 ; Motel One Berlin-Tiergarten                           ; 13.348093628883350  ; 52.502432946662  ; STORE ; addr143 ; Europe/Berlin
+; pos144 ; Park Plaza Berlin Kudamm                              ; 13.331066966056849  ; 52.501432068693  ; STORE ; addr144 ; Europe/Berlin
+; pos145 ; Park Plaza Wallstreet Berlin Mitte                    ; 13.407745000000000  ; 52.511490000000  ; STORE ; addr145 ; Europe/Berlin
+; pos146 ; art'otel berlin kudamm                                ; 13.322545588016500  ; 52.499774773667  ; STORE ; addr146 ; Europe/Berlin
+; pos147 ; art'otel berlin mitte                                 ; 13.409918546676650  ; 52.512351509207  ; STORE ; addr147 ; Europe/Berlin
+; pos148 ; Ramada Plaza Berlin City Centre                       ; 13.368183374404900  ; 52.523885114092  ; STORE ; addr148 ; Europe/Berlin
+; pos149 ; Motel One Berlin-Spittelmarkt                         ; 13.400709000000000  ; 52.510876000000  ; STORE ; addr149 ; Europe/Berlin
+; pos150 ; Steigenberger Hotel am Kanzleramt                     ; 13.368083000000000  ; 52.523848000000  ; STORE ; addr150 ; Europe/Berlin
+; pos151 ; Grand Hyatt Berlin                                    ; 13.372315317392350  ; 52.507988792861  ; STORE ; addr151 ; Europe/Berlin
+; pos152 ; Steigenberger Hotel Berlin                            ; 13.335076868534049  ; 52.502528461557  ; STORE ; addr152 ; Europe/Berlin
+; pos153 ; Aparion Apartments Berlin                             ; 13.302013278007500  ; 52.429493762283  ; STORE ; addr153 ; Europe/Berlin
+; pos154 ; NH Collection Berlin Mitte Friedrichstrasse           ; 13.388513177633300  ; 52.519439489580  ; STORE ; addr154 ; Europe/Berlin
+; pos155 ; H2 Hotel Berlin-Alexanderplatz                        ; 13.414287865161900  ; 52.525366888956  ; STORE ; addr155 ; Europe/Berlin
+; pos156 ; Catalonia Berlin Mitte                                ; 13.415529727935802  ; 52.511304333540  ; STORE ; addr156 ; Europe/Berlin
+; pos157 ; Meliá Berlin                                          ; 13.388219475746151  ; 52.521424082397  ; STORE ; addr157 ; Europe/Berlin
+; pos158 ; Hotel Adlon Kempinski Berlin                          ; 13.380060195922850  ; 52.516109872634  ; STORE ; addr158 ; Europe/Berlin
+; pos159 ; Hotel Gat Point Charlie                               ; 13.388090729713450  ; 52.508962585428  ; STORE ; addr159 ; Europe/Berlin
+
+; pos161 ; Sofitel Athens Airport                                ; 23.94590646028515   ; 37.9367748300202 ; STORE ; addr161 ; Europe/Athens
+; pos162 ; Divani Apollon Palace & Thalasso                      ; 23.77150923013690   ; 37.8281244322966 ; STORE ; addr162 ; Europe/Athens
+; pos163 ; Royal Olympic Hotel                                   ; 23.73242944478985   ; 37.9678016433471 ; STORE ; addr163 ; Europe/Athens
+; pos164 ; The Athens Gate Hotel                                 ; 23.73141825199125   ; 37.9686241937134 ; STORE ; addr164 ; Europe/Athens
+; pos165 ; Herodion Hotel                                        ; 23.72708112001415   ; 37.9683725661736 ; STORE ; addr165 ; Europe/Athens
+; pos166 ; Electra Hotel Athens                                  ; 23.73303964734075   ; 37.9757487012910 ; STORE ; addr166 ; Europe/Athens
+; pos167 ; Hotel Grande Bretagne, a Luxury Collection Hotel      ; 23.73527258634570   ; 37.9761599331052 ; STORE ; addr167 ; Europe/Athens
+; pos168 ; Electra Palace Athens                                 ; 23.73168379068375   ; 37.9737284518997 ; STORE ; addr168 ; Europe/Athens
+; pos169 ; Athens Center Square                                  ; 23.72691214084625   ; 37.9801938998964 ; STORE ; addr169 ; Europe/Athens
+; pos170 ; NJV Athens Plaza                                      ; 23.73460739850995   ; 37.9762339334441 ; STORE ; addr170 ; Europe/Athens
+; pos171 ; Divani Palace Acropolis                               ; 23.72590094804760   ; 37.9675225239050 ; STORE ; addr171 ; Europe/Athens
+; pos172 ; St George Lycabettus                                  ; 23.74241799116135   ; 37.9794560472777 ; STORE ; addr172 ; Europe/Athens
+; pos173 ; Holiday Inn Athens Attica Av, Airport W.              ; 23.88014405965805   ; 37.9713116912047 ; STORE ; addr173 ; Europe/Athens
+; pos174 ; Athens Status Suites                                  ; 23.73077620000000   ; 37.9756227000000 ; STORE ; addr174 ; Europe/Athens
+; pos175 ; Divani Caravel                                        ; 23.75117003917690   ; 37.9730581946585 ; STORE ; addr175 ; Europe/Athens
+; pos176 ; Philippos Hotel                                       ; 23.72729301452635   ; 37.9675512817277 ; STORE ; addr176 ; Europe/Athens
+; pos178 ; Best Western Acropolis Ami Hotel                      ; 23.73044997453690   ; 37.9645134643602 ; STORE ; addr178 ; Europe/Athens
+; pos180 ; Hotel Fresh                                           ; 23.72653394937515   ; 37.9812065852519 ; STORE ; addr180 ; Europe/Athens
+
+; pos181 ; Nomo Soho                                             ; -74.0000193938614   ; 40.7198188804501 ; STORE ; addr181 ; America/New_York
+; pos182 ; New York Marriott Marquis                             ; -73.9855585992336   ; 40.7583753092875 ; STORE ; addr182 ; America/New_York
+; pos184 ; Soho Grand Hotel                                      ; -74.0042562782764   ; 40.7219035556008 ; STORE ; addr184 ; America/New_York
+; pos185 ; Executive Hotel Le Soleil New York                    ; -73.9854720000000   ; 40.7503300000000 ; STORE ; addr185 ; America/New_York
+; pos186 ; Hyatt Place New York                                  ; -73.9857704937458   ; 40.7505101655785 ; STORE ; addr186 ; America/New_York
+; pos187 ; The Quin                                              ; -73.9773950000000   ; 40.7646610000000 ; STORE ; addr187 ; America/New_York
+; pos188 ; Grand Hyatt New York                                  ; -73.9764592051507   ; 40.7518227807209 ; STORE ; addr188 ; America/New_York
+; pos189 ; 1 Hotel Central Park                                  ; -73.9765530000000   ; 40.7647990000000 ; STORE ; addr189 ; America/New_York
+; pos190 ; Park Lane Hotel on Central Park                       ; -73.9753836393356   ; 40.7650084516372 ; STORE ; addr190 ; America/New_York
+; pos191 ; Dream Downtown                                        ; -74.0036520000000   ; 40.7420020000000 ; STORE ; addr191 ; America/New_York
+; pos192 ; The London NYC                                        ; -73.9807265996933   ; 40.7633860845744 ; STORE ; addr192 ; America/New_York
+; pos193 ; Hyatt Times Square                                    ; -73.9841770000000   ; 40.7575160000000 ; STORE ; addr193 ; America/New_York
+; pos194 ; Walker Hotel Greenwich Village                        ; -73.9965851604938   ; 40.7362804456219 ; STORE ; addr194 ; America/New_York
+; pos195 ; The Roger                                             ; -73.9843288064003   ; 40.7457349538319 ; STORE ; addr195 ; America/New_York
+; pos196 ; The Standard, High Line New York                      ; -74.0078122168779   ; 40.7406794597630 ; STORE ; addr196 ; America/New_York
+; pos197 ; Nolitan Hotel SoHo - New York                         ; -73.9952873066067   ; 40.7205761200763 ; STORE ; addr197 ; America/New_York
+; pos198 ; The Roxy Hotel Tribeca                                ; -74.0049281716347   ; 40.7190809446878 ; STORE ; addr198 ; America/New_York
+; pos199 ; Holiday Inn Express - Times Square South              ; -73.9859589189291   ; 40.7506312686148 ; STORE ; addr199 ; America/New_York
+; pos200 ; The Knickerbocker                                     ; -73.98627010000004  ; 40.7555831000000 ; STORE ; addr200 ; America/New_York
+
+
+; pos201 ; Galaxia Holiday Homes                                 ; 73.7791532278       ; 15.5538850112    ; STORE ; addr201 ; Asia/Kolkata
+; pos202 ; Sandalwood Hotel and Retreat                          ; 73.8159370422       ; 15.456125844     ; STORE ; addr202 ; Asia/Kolkata
+; pos203 ; Vivanta by Taj Fort Aguada                            ; 73.7671074271       ; 15.4974074743    ; STORE ; addr203 ; Asia/Kolkata
+; pos204 ; Palmgrove Goa Holiday                                 ; 73.7962775241       ; 15.5463825876    ; STORE ; addr204 ; Asia/Kolkata
+; pos205 ; Rathna Guest Homes Goa                                ; 73.9984560013       ; 15.2732145061    ; STORE ; addr205 ; Asia/Kolkata
+; pos206 ; Devasthali - The Valley of Gods                       ; 73.8539171219       ; 15.3728137795    ; STORE ; addr206 ; Asia/Kolkata
+; pos207 ; Villa Lobo Betalbatim                                 ; 73.9212700725       ; 15.2851757193    ; STORE ; addr207 ; Asia/Kolkata
+; pos208 ; Dudhsagar Farmstay                                    ; 74.1599625349       ; 15.3297890862    ; STORE ; addr208 ; Asia/Kolkata
+; pos209 ; Shalom                                                ; 73.7918521464       ; 15.5739543938    ; STORE ; addr209 ; Asia/Kolkata
+; pos210 ; NORA Villa-Anjuna                                     ; 73.7583191693       ; 15.6031588124    ; STORE ; addr210 ; Asia/Kolkata
+; pos211 ; Crowne Plaza Hotel Miami International Airport        ; -80.2646622062      ; 25.7809923036    ; STORE ; addr211 ; America/New_York
+; pos212 ; The Ritz-Carlton Key Biscayne, Miami                  ; -80.1583877206      ; 25.6915170531    ; STORE ; addr212 ; America/New_York
+; pos213 ; Hyatt Regency Miami                                   ; -80.1912474632      ; 25.7714891995    ; STORE ; addr213 ; America/New_York
+; pos214 ; SLS Brickell                                          ; -80.1934000098      ; 25.7611801       ; STORE ; addr214 ; America/New_York
+; pos215 ; Mandarin Oriental, Miami                              ; -80.185302          ; 25.76533         ; STORE ; addr215 ; America/New_York
+; pos216 ; Trump National Doral                                  ; -80.3393000364      ; 25.8142393244    ; STORE ; addr216 ; America/New_York
+; pos217 ; Sonesta Coconut Grove Miami                           ; -80.2409152687      ; 25.7270902434    ; STORE ; addr217 ; America/New_York
+; pos218 ; EAST, Miami                                           ; -80.1920760479      ; 25.7668357839    ; STORE ; addr218 ; America/New_York
+; pos219 ; Hilton Miami Downtown                                 ; -80.1889944077      ; 25.7908834667    ; STORE ; addr219 ; America/New_York
+; pos220 ; Kimpton EPIC Hotel                                    ; -80.1889327168      ; 25.7706341365    ; STORE ; addr220 ; America/New_York
+; pos221 ; Hotel Miramalfi                                       ; 14.5955112576       ; 40.6313812128    ; STORE ; addr221 ; Europe/Rome
+; pos222 ; Lloyds Baia Hotel                                     ; 14.7341144085       ; 40.6715471658    ; STORE ; addr222 ; Europe/Rome
+; pos223 ; Hotel Savoia                                          ; 14.486631006        ; 40.6298443413    ; STORE ; addr223 ; Europe/Rome
+; pos224 ; Villa Romana Hotel and Spa                            ; 14.626474008        ; 40.6516320427    ; STORE ; addr224 ; Europe/Rome
+; pos225 ; Hotel Fontana                                         ; 14.6025668085       ; 40.6340925344    ; STORE ; addr225 ; Europe/Rome
+; pos226 ; Residence Hotel Panoramic                             ; 14.638826251        ; 40.6489987648    ; STORE ; addr226 ; Europe/Rome
+; pos227 ; Villa Costanzo                                        ; 14.4872633281       ; 40.6269507386    ; STORE ; addr227 ; Europe/Rome
+; pos228 ; Hotel Aurora                                          ; 14.5969301462       ; 40.6318554985    ; STORE ; addr228 ; Europe/Rome
+; pos229 ; Hotel Caporal                                         ; 14.6259844302       ; 40.6498740484    ; STORE ; addr229 ; Europe/Rome
+; pos230 ; Villa Annalara                                        ; 14.6009346843       ; 40.6386396538    ; STORE ; addr230 ; Europe/Rome
+; pos231 ; Portrait Firenze                                      ; 11.253171131        ; 43.7685323372    ; STORE ; addr231 ; Europe/Rome
+; pos232 ; Hotel Rivoli                                          ; 11.2474237382       ; 43.7741016673    ; STORE ; addr232 ; Europe/Rome
+; pos233 ; Hotel Spadai                                          ; 11.2557184696       ; 43.7744328508    ; STORE ; addr233 ; Europe/Rome
+; pos234 ; Helvetia and Bristol Firenze - Starhotels Collezione  ; 11.2521994114       ; 43.7719024464    ; STORE ; addr234 ; Europe/Rome
+; pos235 ; Grand Hotel Baglioni                                  ; 11.2506973743       ; 43.7746313663    ; STORE ; addr235 ; Europe/Rome
+; pos236 ; Hotel Balestri                                        ; 11.2579312921       ; 43.7671972366    ; STORE ; addr236 ; Europe/Rome
+; pos237 ; Classic Hotel                                         ; 11.2442936003       ; 43.7586134032    ; STORE ; addr237 ; Europe/Rome
+; pos238 ; Hotel Montebello Splendid                             ; 11.2412828207       ; 43.7753837825    ; STORE ; addr238 ; Europe/Rome
+; pos239 ; Rodo Hotel Fashion Delight                            ; 11.2552987039       ; 43.7725173842    ; STORE ; addr239 ; Europe/Rome
+; pos240 ; Villa Cora                                            ; 11.2473070621       ; 43.7576888424    ; STORE ; addr240 ; Europe/Rome
+; pos241 ; YING Donmuang Airport Guesthouse                      ; 100.5548465252      ; 13.9131072171    ; STORE ; addr241 ; Asia/Bangkok
+; pos242 ; iPREMIUM Sukhumvit81                                  ; 100.6081973389      ; 13.7074455021    ; STORE ; addr242 ; Asia/Bangkok
+; pos243 ; Emporium Suites by Chatrium                           ; 100.5682575703      ; 13.730343964     ; STORE ; addr243 ; Asia/Bangkok
+; pos244 ; Paradise Sukhumvit                                    ; 100.5950260162      ; 13.729400749     ; STORE ; addr244 ; Asia/Bangkok
+; pos245 ; Chateau de Sukhumvit                                  ; 100.5988340721      ; 13.6991663812    ; STORE ; addr245 ; Asia/Bangkok
+; pos246 ; Gardengrove Suites                                    ; 100.5612999201      ; 13.7292131477    ; STORE ; addr246 ; Asia/Bangkok
+; pos247 ; The Riche Boutique                                    ; 100.5596610904      ; 13.8699007501    ; STORE ; addr247 ; Asia/Bangkok
+; pos248 ; Pak-D Resort                                          ; 100.633097291       ; 13.8394750143    ; STORE ; addr248 ; Asia/Bangkok
+; pos249 ; CNC Heritage                                          ; 100.5686116219      ; 13.7344033929    ; STORE ; addr249 ; Asia/Bangkok
+; pos250 ; Laidback Place                                        ; 100.6027774936      ; 13.7207159051    ; STORE ; addr250 ; Asia/Bangkok
+; pos251 ; The Maple Suite                                       ; 101.7050367594      ; 3.1498147063     ; STORE ; addr251 ; Asia/Kuala_Lumpur
+; pos252 ; Grand Millennium Kuala Lumpur                         ; 101.7124275863      ; 3.1478007304     ; STORE ; addr252 ; Asia/Kuala_Lumpur
+; pos253 ; PARKROYAL Kuala Lumpur                                ; 101.7122894526      ; 3.1442173433     ; STORE ; addr253 ; Asia/Kuala_Lumpur
+; pos254 ; Ambassador Row Hotel Suites by Lanson Place           ; 101.7291375992      ; 3.1601288327     ; STORE ; addr254 ; Asia/Kuala_Lumpur
+; pos255 ; Somerset Ampang Kuala Lumpur                          ; 101.7228399217      ; 3.1601068125     ; STORE ; addr255 ; Asia/Kuala_Lumpur
+; pos256 ; Ascott Kuala Lumpur                                   ; 101.710621          ; 3.154928         ; STORE ; addr256 ; Asia/Kuala_Lumpur
+; pos257 ; Citin Seacare Pudu by Compass Hospitality             ; 101.7012646795      ; 3.1460309993     ; STORE ; addr257 ; Asia/Kuala_Lumpur
+; pos258 ; Capri by Fraser- Kuala Lumpur                         ; 101.6634088755      ; 3.1105736145     ; STORE ; addr258 ; Asia/Kuala_Lumpur
+; pos259 ; Sri Tiara Residences                                  ; 101.682613492       ; 3.1218088437     ; STORE ; addr259 ; Asia/Kuala_Lumpur
+; pos260 ; Wedgewood Residences                                  ; 101.6580310464      ; 3.174399896      ; STORE ; addr260 ; Asia/Kuala_Lumpur
+; pos261 ; Wenceslas Square Terraces                             ; 14.4244104624       ; 50.0838797801    ; STORE ; addr261 ; Europe/Bratislava
+; pos262 ; Hilton Prague Hotel                                   ; 14.4391518831       ; 50.0932664964    ; STORE ; addr262 ; Europe/Bratislava
+; pos263 ; Old Town Square Apartments                            ; 14.4248704612       ; 50.0876962971    ; STORE ; addr263 ; Europe/Bratislava
+; pos264 ; Hotel u Martina Praha                                 ; 14.4034510106       ; 50.0768985679    ; STORE ; addr264 ; Europe/Bratislava
+; pos265 ; Residence Leon D'Oro                                  ; 14.4222405553       ; 50.0858641453    ; STORE ; addr265 ; Europe/Bratislava
+; pos266 ; Smetana Hotel                                         ; 14.4137631          ; 50.0849434       ; STORE ; addr266 ; Europe/Bratislava
+; pos267 ; Hotel Penzion Praga                                   ; 14.5051972568       ; 50.1067775735    ; STORE ; addr267 ; Europe/Bratislava
+; pos268 ; Pachtuv Palace                                        ; 14.4140071794       ; 50.0846650168    ; STORE ; addr268 ; Europe/Bratislava
+; pos269 ; PVH Charming Flats Odborů                             ; 14.4185578823       ; 50.0775870955    ; STORE ; addr269 ; Europe/Bratislava
+; pos270 ; The Grand Mark Prague                                 ; 14.4313745201       ; 50.0871834722    ; STORE ; addr270 ; Europe/Bratislava
+; pos271 ; Hotel Grimsborgir Luxury Rooms and Apartments         ; -20.9704113007      ; 64.0527342764    ; STORE ; addr271 ; Atlantic/Reykjavik
+; pos272 ; Hotel Keilir by Keflavik Airport                      ; -22.5530004501      ; 64.0025419236    ; STORE ; addr272 ; Atlantic/Reykjavik
+; pos273 ; Storm Hotel by Keahotels                              ; -21.9106067302      ; 64.1446475511    ; STORE ; addr273 ; Atlantic/Reykjavik
+; pos274 ; Golden Circle Apartments                              ; -20.735771656       ; 64.2153018771    ; STORE ; addr274 ; Atlantic/Reykjavik
+; pos275 ; Fosshotel Husavik                                     ; -17.3383569717      ; 66.045807002     ; STORE ; addr275 ; Atlantic/Reykjavik
+; pos276 ; Fosstun Apartments Hotel                              ; -21.0085340534      ; 63.9364396215    ; STORE ; addr276 ; Atlantic/Reykjavik
+; pos277 ; Park Inn by Radisson Reykjavik Keflavík Airport       ; -22.5492668152      ; 64.0002586285    ; STORE ; addr277 ; Atlantic/Reykjavik
+; pos278 ; Icelandair Hotel Akureyri                             ; -18.1004208326      ; 65.6791233888    ; STORE ; addr278 ; Atlantic/Reykjavik
+; pos279 ; Hotel Isafjördur                                      ; -23.1196975708      ; 66.0725538616    ; STORE ; addr279 ; Atlantic/Reykjavik
+; pos280 ; Siglo Hotel                                           ; -18.9111306254      ; 66.1489236609    ; STORE ; addr280 ; Atlantic/Reykjavik
+; pos281 ; Goodstay Elf Spa Resort                               ; 128.3195346594      ; 37.6062953127    ; STORE ; addr281 ; Asia/Seoul
+; pos282 ; River Terrace Pension                                 ; 128.3974796534      ; 37.5336434869    ; STORE ; addr282 ; Asia/Seoul
+; pos283 ; Yongpyong Resort Dragon Valley Hotel                  ; 128.6806007272      ; 37.6454844297    ; STORE ; addr283 ; Asia/Seoul
+; pos284 ; White Cabin                                           ; 128.3215785027      ; 37.5876809274    ; STORE ; addr284 ; Asia/Seoul
+; pos285 ; Mayfair Pension                                       ; 128.3060513         ; 37.5906182       ; STORE ; addr285 ; Asia/Seoul
+; pos286 ; Ecopia Pension                                        ; 128.3478514105      ; 37.3313865999    ; STORE ; addr286 ; Asia/Seoul
+; pos287 ; Pension In My Arms                                    ; 128.7133486569      ; 37.7020647255    ; STORE ; addr287 ; Asia/Seoul
+; pos288 ; Bongpyeong Provence Pension                           ; 128.3763456778      ; 37.6267653219    ; STORE ; addr288 ; Asia/Seoul
+; pos289 ; Chalet Resort                                         ; 128.3491996883      ; 37.575501717     ; STORE ; addr289 ; Asia/Seoul
+; pos290 ; Liun Cabin                                            ; 128.3834758401      ; 37.538518462     ; STORE ; addr290 ; Asia/Seoul
+; pos291 ; Amari Phuket                                          ; 98.2861965895       ; 7.8849453629     ; STORE ; addr291 ; Asia/Bangkok
+; pos292 ; Phuket Graceland Resort and Spa                       ; 7.715498405         ; 7.9023925298     ; STORE ; addr292 ; Asia/Bangkok
+; pos293 ; The Charm Resort Phuket                               ; 98.2993447781       ; 7.9045099446     ; STORE ; addr293 ; Asia/Bangkok
+; pos294 ; The Lantern Resorts Patong                            ; 98.3001413941       ; 7.8925438846     ; STORE ; addr294 ; Asia/Bangkok
+; pos295 ; Wyndham Sea Pearl Resort, Phuket                      ; 98.3136302233       ; 7.9041061223     ; STORE ; addr295 ; Asia/Bangkok
+; pos296 ; Horizon Patong Beach Resort and Spa                   ; 98.2935190201       ; 7.8890979989     ; STORE ; addr296 ; Asia/Bangkok
+; pos297 ; BYD Lofts Boutique Hotel and Serviced Apartments      ; 98.2996237278       ; 7.9009658591     ; STORE ; addr297 ; Asia/Bangkok
+; pos298 ; Sai Rougn Residence                                   ; 98.2945516706       ; 7.8788345623     ; STORE ; addr298 ; Asia/Bangkok
+; pos299 ; Royal Prince Residence                                ; 98.3030824363       ; 7.8911304638     ; STORE ; addr299 ; Asia/Bangkok
+; pos300 ; Palmyra Patong Resort Phuket                          ; 98.3000019193       ; 7.8982984763     ; STORE ; addr300 ; Asia/Bangkok
+
+
+INSERT_UPDATE Address; &addrID; streetName[unique = true]; streetNumber[unique = true]; postalCode[unique = true]; town[unique = true]; country(isocode); owner(PointOfService.name); phone1[default = '02079460097']
+
+; addr1   ; Westbourne Terrace                             ; 5561    ; W2 3UY             ; London               ; GB ; Shaftesbury Premier London Paddington
+; addr2   ; Baker Street                                   ; 108     ; W1U 6LJ            ; London               ; GB ; Park Plaza Sherlock Holmes London
+; addr4   ; Dorset Square Hotel                            ; 3940    ; NW1 6QN            ; London               ; GB ; Dorset Square Hotel
+; addr5   ; Albert Embankment                              ; 18      ; SE1 7TJ            ; London               ; GB ; Plaza on the River
+; addr6   ; Curzon Street                                  ; 44      ; W1J 7UG            ; London               ; GB ; 44 Curzon Street By Mansley Serviced Apartments
+; addr7   ; Cromwell Road                                  ; 97      ; SW7 4DN            ; London               ; GB ; Holiday Inn London Kensington Forum
+; addr8   ; Lakeside Way                                   ;         ; HA9 0BU            ; London               ; GB ; Hilton London Wembley
+; addr9   ; Half Moon Street                               ;         ; W1J 7BH            ; London               ; GB ; Flemings Mayfair
+; addr10  ; Middlesex Street                               ; 92      ;                    ; London               ; GB ; Park Lane City Apartments
+; addr11  ; Sloane Street                                  ; 1725    ;                    ; London               ; GB ; Millennium Hotel London Knightsbridge
+; addr12  ; To Belgrave Rd                                 ; 5357    ;                    ; London               ; GB ; Huttons Hotel
+; addr13  ; Great Cumberland Place                         ;         ; W1H 7DL            ; London               ; GB ; The Cumberland - A Guoman Hotel
+; addr14  ; Grosvenor Square                               ; 44      ; W1K 2HP            ; London               ; GB ; Millennium Hotel London Mayfair
+; addr15  ; Regent Street                                  ; 68      ;                    ; London               ; GB ; Hotel Cafe Royal
+; addr16  ; Queensberry Place                              ; 810     ; SW7 2EA            ; London               ; GB ; The Exhibitionist Hotel
+; addr17  ; Frognal                                        ; 20      ;                    ; London               ; GB ; Langorf Hotel
+; addr19  ; Bryanston Street                               ;         ;                    ; London               ; GB ; Amba Hotel Marble Arch
+; addr20  ; Orange Street                                  ; 2       ; WC2H 7DF           ; London               ; GB ; The Z Hotel Piccadilly
+; addr21  ; rue de Berri                                   ; 5       ; 75008              ; Paris                ; FR ; Warwick Paris (Former Warwick Champs-Elysees)
+; addr22  ;                                                ; 81      ; 75017              ; Paris                ; FR ; Le Méridien Etoile
+; addr24  ; Avenue Des Champs Elyses                       ; 74      ; 75008              ; Paris                ; FR ; Fraser Suites Le Claridge Champs-Elysées
+; addr25  ; rue del Annonciation                           ; 37      ; 75016              ; Paris                ; FR ; Les Hauts de Passy - Trocadero Eiffel
+; addr26  ; Rue Des Innocents                              ; 4       ; 75001              ; Paris                ; FR ; Citadines Les Halles Paris
+; addr27  ; rue de Berri                                   ; 16      ; 75008              ; Paris                ; FR ; Hôtel California Champs Elysées
+; addr28  ; Avenue Marceau                                 ; 37      ; 75016              ; Paris                ; FR ; Marceau Champs-Elysées
+; addr29  ; rue Caulaincourt                               ; 5       ; 75018              ; Paris                ; FR ; ibis Paris Montmartre
+; addr30  ; Boulevard De Denain                            ; 12      ; 75010              ; Paris                ; FR ; Mercure Paris Terminus Nord
+; addr31  ; place des Marseillais                          ; 35      ;                    ; Paris                ; FR ; Novotel Paris Sud Porte de Charenton
+; addr32  ;                                                ; 12      ; 75008              ; Paris                ; FR ; Hôtel San Régis
+; addr33  ; boulevard de Sbastopol                         ; 112     ; 75003              ; Paris                ; FR ; Best Western Premier Marais Grands Boulevards
+; addr34  ;                                                ; 6       ; 75002              ; Paris                ; FR ; Daunou Opéra
+; addr35  ; Rue des Petits Htels                           ; 7       ; 75010              ; Paris                ; FR ; Hotel Mademoiselle
+; addr36  ; avenue de la Motte Picquet                     ; 30      ; 75007              ; Paris                ; FR ; Hôtel de la Motte Picquet
+; addr37  ; Rue Jacob                                      ; 15      ; 75006              ; Paris                ; FR ; Millésime Hôtel
+; addr38  ;                                                ; 19      ; 75014              ; Paris                ; FR ; Pullman Paris Montparnasse
+; addr39  ; avenue des Ternes                              ; 55      ; 75017              ; Paris                ; FR ; Doisy Etoile
+; addr40  ; Rue de Milan                                   ; 22      ; 75009              ; Paris                ; FR ; Sweet Inn Apartments - Milan
+; addr41  ; Vicolo del Fico                                ; 6       ; 186                ; Rome                 ; IT ; Borgofico Relais & Wellness
+; addr42  ; Via Emanuele Filiberto                         ; 155     ; 185                ; Rome                 ; IT ; Best Western Plus Hotel Milton
+; addr44  ; Piazza Farnese                                 ; 101     ; 186                ; Rome                 ; IT ; Piazza Farnese Luxury Suites
+; addr45  ; Via Dei Crociferi                              ; 41      ; 187                ; Rome                 ; IT ; Domus Fontis
+; addr46  ; Piazza Montecitorio                            ;         ; 00186              ; Rome                 ; IT ; Colonna Palace
+; addr47  ; Via Belsiana                                   ; 7       ; 172                ; Rome                 ; IT ; My Secret Condotti
+; addr48  ; Via Castelfidardo                              ; 84      ; 185                ; Rome                 ; IT ; Alpi Hotel
+; addr49  ; Via del Corso                                  ; 126     ; 186                ; Rome                 ; IT ; Grand Hotel Plaza
+; addr50  ; Via Mario De Fiori                             ; 3       ; 187                ; Rome                 ; IT ; Spagna Royal Suite
+; addr51  ; Via Di Tor Millina                             ; 35      ; 186                ; Rome                 ; IT ; La Mongolfiera Rooms in Navona
+; addr52  ; Piazza Navona                                  ; 93      ; 186                ; Rome                 ; IT ; Lifestyle Suites Rome
+; addr53  ; Via Poli                                       ; 6       ; 187                ; Rome                 ; IT ; Hotel Delle Nazioni
+; addr54  ; Via Del Babuino                                ; 181     ; 187                ; Rome                 ; IT ; Babuino 181
+; addr55  ; Via San Giuseppe Calasanzio                    ; 1       ; 186                ; Rome                 ; IT ; Hotel Martis Palace
+; addr56  ; Via Di S Sebastianello                         ; 10      ; 187                ; Rome                 ; IT ; My Secret Spagna
+; addr57  ; Via Veneto                                     ; 50      ; 187                ; Rome                 ; IT ; Hotel Majestic Roma
+; addr58  ; Via Volturno                                   ; 4048    ; 185                ; Rome                 ; IT ; The Independent Suites
+; addr59  ; Via Di Villafranca                             ;         ; 185                ; Rome                 ; IT ; Hotel Villafranca
+; addr60  ; Via Pio IV                                     ; 6       ; 165                ; Rome                 ; IT ; NH Roma Villa Carpegna
+; addr61  ; Calle del Prado                                ;         ; 28014              ; Madrid               ; ES ; Vincci Soho
+; addr62  ; Velazquez                                      ; 62      ; 28001              ; Madrid               ; ES ; Gran Hotel Velazquez
+; addr64  ; Amador de Los Rios                             ;         ; 2801               ; Madrid               ; ES ; Amador De Los Rios
+; addr65  ; Barquillo                                      ;         ; 28004              ; Madrid               ; ES ; Only YOU Boutique Hotel Madrid
+; addr66  ; Plaza San Martn                                ;         ; 28018              ; Madrid               ; ES ; Intur Palacio San Martin
+; addr67  ; Covarrubias                                    ;         ; 28010              ; Madrid               ; ES ; Gran Versalles
+; addr68  ; Plaza Santa Barbara                            ;         ; 28004              ; Madrid               ; ES ; Petit Palace Santa Bárbara
+; addr69  ; Plaza de las Cortes                            ;         ; 28014              ; Madrid               ; ES ; Westin Palace Hotel
+; addr70  ; Gran Va                                        ;         ; 28013              ; Madrid               ; ES ; Vincci Vía - 66
+; addr71  ; Cedaceros                                      ;         ; 28014              ; Madrid               ; ES ; Vincci Centrum
+; addr72  ; AlfonsoXII                                     ;         ; 28014              ; Madrid               ; ES ; Petit Palace Savoy Alfonso XII
+; addr73  ; Gilde Santivaes                                ;         ; 28001              ; Madrid               ; ES ; VP Jardin de Recoletos
+; addr74  ; Salud                                          ;         ; 28013              ; Madrid               ; ES ; Hotel Liabeny
+; addr75  ; Marques de Villamagna                          ;         ; 28001              ; Madrid               ; ES ; Petit Palace President Castellana
+; addr76  ; Jorge Juan                                     ;         ; 28009              ; Madrid               ; ES ; Petit Palace Art Gallery
+; addr77  ; Velazquez                                      ; 8       ; 28001              ; Madrid               ; ES ; Wellington Madrid
+; addr78  ; Del Prado                                      ;         ; 28014              ; Madrid               ; ES ; Catalonia Las Cortes
+; addr79  ; Serrano                                        ;         ; 28001              ; Madrid               ; ES ; Petit Palace Embassy Serrano
+; addr80  ; Vrgende los peligroses quina Alcala            ; 223     ; 28013              ; Madrid               ; ES ; Petit Palace Alcalá Torre
+; addr81  ; Piazza Della Repubblica                        ; 17      ; 20124              ; Milan                ; IT ; Hotel Principe Di Savoia
+; addr82  ; Largo Augusto                                  ; 10      ; 20122              ; Milan                ; IT ; NH Collection Milano President
+; addr83  ; Via delle Asole                                ; 1       ; 20123              ; Milan                ; IT ; Heart Milan Apartments San Sepolcro Duomo
+; addr84  ; Via Silvio Pellico                             ; 8       ; 20121              ; Milan                ; IT ; TownHouse Galleria
+; addr85  ; Via Tarchetti                                  ; 2       ; 20121              ; Milan                ; IT ; NH Milano Touring
+; addr86  ; Via Albricci                                   ; 24      ; 20122              ; Milan                ; IT ; The Square Milano Duomo
+; addr87  ; Via Senato                                     ; 22      ; 20121              ; Milan                ; IT ; Senato Hotel Milano
+; addr88  ; Piazza Fontana                                 ; 3       ; 20122              ; Milan                ; IT ; Starhotels Rosa Grand
+; addr89  ; Via Ges                                        ; 68      ; 20121              ; Milan                ; IT ; Four Seasons Hotel Milano
+; addr90  ; Via Cusani                                     ; 13      ; 20121              ; Milan                ; IT ; UNA Hotel Cusani
+; addr91  ; Via Tommaso Grossi                             ; 1       ; 20121              ; Milan                ; IT ; Park Hyatt Milano
+; addr92  ; Via Manzoni                                    ; 31      ; 20121              ; Milan                ; IT ; Armani Hotel Milano
+; addr93  ; Silvio Pellico                                 ; 4       ; 20121              ; Milan                ; IT ; Room Mate Giulia
+; addr94  ; Via Santa Sofia                                ; 10      ; 20122              ; Milan                ; IT ; Uptown Palace
+; addr95  ; Via San Raffaele                               ; 3       ; 20121              ; Milan                ; IT ; Hotel Straf
+; addr96  ; Via Fabio Filzi B                              ; 25      ; 20124              ; Milan                ; IT ; UNA Hotel Century
+; addr97  ; Viale Bianca Maria                             ; 4       ; 20129              ; Milan                ; IT ; Bianca Maria Palace Hotel
+; addr98  ; Piazza Luigi di Savoia                         ; 20      ; 20124              ; Milan                ; IT ; Starhotels Anderson
+; addr99  ; Piazza della Repubblica                        ; 13      ; 20124              ; Milan                ; IT ; ME Milan Il Duca
+; addr100 ; Piazza Duca D Aosta                            ; 46      ; 20124              ; Milan                ; IT ; Glam Milano
+; addr101 ; Riva degli Schiavoni                           ; 4187    ; 30122              ; Venice               ; IT ; Savoia & Jolanda
+; addr102 ; Castello Campo della Fava                      ; 5526    ; 30122              ; Venice               ; IT ; Residence Ca' Foscolo
+; addr103 ; Sestiere San Polo                              ; 2765    ; 30125              ; Venice               ; IT ; Hotel Palazzo Barbarigo Sul Canal Grande
+; addr104 ; Piazza san Marco                               ;         ; 4488               ; Venice               ; IT ; Hotel Bonvecchiati
+; addr105 ; SanMarcoI                                      ; 2814    ; 30124              ; Venice               ; IT ; Palazzetto Pisani
+; addr106 ; Isola Di San Clemente                          ; 1       ; 30124              ; Venice               ; IT ; San Clemente Palace Kempinski Venice
+; addr107 ; Accademia D orsoduro                           ; 884     ; 30123              ; Venice               ; IT ; Hotel Agli Alboretti
+; addr108 ; San Marco                                      ; 2159    ; 30124              ; Venice               ; IT ; The Westin Europa & Regina
+; addr109 ; San Marco                                      ;         ; 30124              ; Venice               ; IT ; Palace Bonvecchiati
+; addr110 ; Calle Ca D Oro                                 ; 3935    ; 30121              ; Venice               ; IT ; Pesaro Palace
+; addr111 ; San Marco A Corte Del Teatro Goldoni           ; 4596    ; 30124              ; Venice               ; IT ; Hotel A La Commedia
+; addr112 ; Via XXII Marzo                                 ;         ; 30124              ; Venice               ; IT ; Hotel Saturnia & International
+; addr113 ; San Marco                                      ; 1243    ; 30124              ; Venice               ; IT ; Baglioni Hotel Luna - The Leading Hotels of the World
+; addr114 ; Sestiere San Polo Riva de L Ogio               ; 1777    ; 30125              ; Venice               ; IT ; Hotel L'Orologio
+; addr115 ; San Polo                                       ; 2902    ; 30125              ; Venice               ; IT ; Palazzetto Madonna
+; addr116 ; Calle Della Malvasia                           ; 5492    ; 30122              ; Venice               ; IT ; Aqua Palace
+; addr121 ; Maximilian str                                 ; 17      ; 80539              ; Munich               ; DE ; Vier Jahreszeiten Kempinski München
+; addr122 ; Frauenstrasse                                  ; 4       ; 80469              ; Munich               ; DE ; Derag Livinghotel Am Viktualienmarkt
+; addr124 ; Theodor Dombart Strae                          ; 4       ;                    ; Munich               ; DE ; Pullman Munich
+; addr125 ; Falkenturm strasse                             ; 10      ; 80331              ; Munich               ; DE ; Hotel an der Oper
+; addr126 ; Karlsplatz                                     ; 25      ; 80335              ; Munich               ; DE ; Hotel Königshof
+; addr127 ; Olof Palme Str                                 ; 12      ; 81829              ; Munich               ; DE ; H2 Hotel München Messe
+; addr128 ; Schwanthaler str                               ; 44      ; 80336              ; Munich               ; DE ; Eurostars Book Hotel
+; addr129 ; Moosacher Strae                                ; 90      ; 80809              ; Munich               ; DE ; Leonardo Royal Hotel Munich
+; addr130 ; Eggenfeldener Strasse                          ; 100     ; 81929              ; Munich               ; DE ; NH München Messe
+; addr131 ; Konrad Zuse Platz                              ; 14      ; 81829              ; Munich               ; DE ; Ramada Hotel & Conference Center München Messe
+; addr132 ; Leopold strae                                  ; 130132  ;                    ; Munich               ; DE ; Fleming's Hotel München-Schwabing
+; addr133 ; Schwanthaler strasse                           ; 5860    ; 80336              ; Munich               ; DE ; relexa hotel München
+; addr134 ; Herrn str                                      ; 38      ; 80539              ; Munich               ; DE ; Hotel Concorde
+; addr135 ; Mars str                                       ; 15      ; 80335              ; Munich               ; DE ; King's Hotel Center Superior
+; addr136 ; Arabella str                                   ; 5       ; 81925              ; Munich               ; DE ; Sheraton München Arabellapark Hotel
+; addr137 ; Bayer str                                      ; 10      ; 80335              ; Munich               ; DE ; InterCityHotel München
+; addr138 ; Schiller strasse                               ; 28      ; 80336              ; Munich               ; DE ; H+ Hotel München City Centre B & B
+; addr139 ; Amalien strasse                                ; 25      ; 80333              ; Munich               ; DE ; Leonardo Boutique Hotel Munich
+; addr140 ; Schtzen strae                                  ; 11      ; 80335              ; Munich               ; DE ; Hotel Excelsior
+; addr141 ; Behren str                                     ; 47      ; 10117              ; Berlin               ; DE ; Clipper City Home Apartments Berlin
+; addr142 ; Kurfrstendamm                                  ; 202     ; 10719              ; Berlin               ; DE ; Hollywood Media Hotel am Kurfürstendamm
+; addr143 ; Ander Urania                                   ; 1214    ; 10787              ; Berlin               ; DE ; Motel One Berlin-Tiergarten
+; addr144 ; Joachimstaler Str                              ; 29      ; 10719              ; Berlin               ; DE ; Park Plaza Berlin Kudamm
+; addr145 ; Wall str                                       ; 2324    ; 10179              ; Berlin               ; DE ; Park Plaza Wallstreet Berlin Mitte
+; addr146 ; Lietzenburger Str                              ; 85      ; 10719              ; Berlin               ; DE ; art'otel berlin kudamm
+; addr147 ; Wall str                                       ; 7073    ; 10179              ; Berlin               ; DE ; art'otel berlin mitte
+; addr148 ; Prager Str                                     ; 12      ; 10779              ; Berlin               ; DE ; Ramada Plaza Berlin City Centre
+; addr149 ; Leipziger Strae                                ; 50      ; 10117              ; Berlin               ; DE ; Motel One Berlin-Spittelmarkt
+; addr150 ; Ella Trebe Strae                               ; 5       ; 10557              ; Berlin               ; DE ; Steigenberger Hotel am Kanzleramt
+; addr151 ; Marlene Dietrich Platz                         ; 2       ; 10785              ; Berlin               ; DE ; Grand Hyatt Berlin
+; addr152 ; Los Angeles Platz                              ; 1       ; 10789              ; Berlin               ; DE ; Steigenberger Hotel Berlin
+; addr153 ; The kla strasse                                ; 20      ; 12205              ; Berlin               ; DE ; Aparion Apartments Berlin
+; addr154 ; Friedrich str                                  ; 96      ; 10117              ; Berlin               ; DE ; NH Collection Berlin Mitte Friedrichstrasse
+; addr155 ; Karl Liebknecht Stra                           ; 32      ; 10178              ; Berlin               ; DE ; H2 Hotel Berlin-Alexanderplatz
+; addr156 ; Kpenicker Strasse                              ;         ; 10179              ; Berlin               ; DE ; Catalonia Berlin Mitte
+; addr157 ; Friedrich str                                  ; 103     ; 10117              ; Berlin               ; DE ; Meliá Berlin
+; addr158 ; Unterden Linden                                ; 77      ; 10117              ; Berlin               ; DE ; Hotel Adlon Kempinski Berlin
+; addr159 ; Mauer str                                      ; 8182    ; 10117              ; Berlin               ; DE ; Hotel Gat Point Charlie
+; addr161 ; Athens International Airport                   ;         ; 19019              ; Athens               ; GR ; Sofitel Athens Airport
+; addr162 ; Ag Nikolaou Iliou Str                          ; 10      ; 166 71             ; Athens               ; GR ; Divani Apollon Palace & Thalasso
+; addr163 ; Ath Diakou                                     ; 2834    ; 11743              ; Athens               ; GR ; Royal Olympic Hotel
+; addr164 ;                                                ; 10      ; 11742              ; Athens               ; GR ; The Athens Gate Hotel
+; addr165 ; Rovertou Galli Street                          ; 4       ; 11742              ; Athens               ; GR ; Herodion Hotel
+; addr166 ; Ermou                                          ; 5       ; 10563              ; Athens               ; GR ; Electra Hotel Athens
+; addr167 ; Vasileos Georgiou Astr                         ; 1       ; 10564              ; Athens               ; GR ; Hotel Grande Bretagne, a Luxury Collection Hotel
+; addr168 ; N Nikodimou street                             ; 1820    ; 10557              ; Athens               ; GR ; Electra Palace Athens
+; addr169 ; Aristogitonos Street Athinas                   ; 15      ; 10552              ; Athens               ; GR ; Athens Center Square
+; addr170 ; Vas Georgiou A                                 ; 2       ; 105 64             ; Athens               ; GR ; NJV Athens Plaza
+; addr171 ; Parthenonos                                    ; 1925    ; 11742              ; Athens               ; GR ; Divani Palace Acropolis
+; addr172 ;                                                ; 2       ; 106 75             ; Athens               ; GR ; St George Lycabettus
+; addr173 ; Klm Attica Avenue                              ; 402     ; 19002              ; Athens               ; GR ; Holiday Inn Athens Attica Av, Airport W.
+; addr174 ; Petraki                                        ; 28      ; 10563              ; Athens               ; GR ; Athens Status Suites
+; addr175 ; Vas Alexandrou Ave                             ; 2       ; 16121              ; Athens               ; GR ; Divani Caravel
+; addr176 ; Mitseon Street                                 ; 3       ; 11742              ; Athens               ; GR ; Philippos Hotel
+; addr178 ; Iras Street                                    ; 10      ; 11743              ; Athens               ; GR ; Best Western Acropolis Ami Hotel
+; addr180 ; Sofokleous Klisthenous                         ; 262     ; 10552              ; Athens               ; GR ; Hotel Fresh
+; addr181 ; Crosby Street                                  ; 9       ; 10013              ; New York             ; US ; Nomo Soho
+; addr182 ; Broadway                                       ; 1535    ; 10036              ; NY                   ; US ; New York Marriott Marquis
+; addr184 ; West Broadway                                  ; 310     ; 10013              ; New York             ; US ; Soho Grand Hotel
+; addr185 ; Westth Street                                  ; 3836    ; 10018              ; NY                   ; US ; Executive Hotel Le Soleil New York
+; addr186 ; Westth Street                                  ; 5236    ; 10018              ; NY                   ; US ; Hyatt Place New York
+; addr187 ; Westth Street at Sixth Avenue                  ; 10157   ; 10019              ; NY                   ; US ; The Quin
+; addr188 ; Eastnd Street                                  ; 10942   ;                    ; New York             ; US ; Grand Hyatt New York
+; addr189 ; Avenue of the Americas                         ; 1414    ; 10019              ; NY                   ; US ; 1 Hotel Central Park
+; addr190 ; Central Park South                             ; 36      ; 10019              ; NY                   ; US ; Park Lane Hotel on Central Park
+; addr191 ; Westth Street                                  ; 35516   ; 10011              ; New York             ; US ; Dream Downtown
+; addr192 ; Westth Street                                  ; 15154   ; 10019              ; NY                   ; US ; The London NYC
+; addr193 ; Westth Street                                  ; 13545   ; 10036              ; NY                   ; US ; Hyatt Times Square
+; addr194 ; Westth Steet                                   ; 5213    ; 10011              ; New York             ; US ; Walker Hotel Greenwich Village
+; addr195 ; Madison Avenue                                 ; 131     ; 10016              ; NY                   ; US ; The Roger
+; addr196 ; Washington Street                              ; 848     ; 10014              ; New York             ; US ; The Standard, High Line New York
+; addr197 ; Kenmare Street                                 ; 30      ; 10012              ; NY                   ; US ; Nolitan Hotel SoHo - New York
+; addr198 ; Avenue of the Americas                         ; 2       ; 10013              ; New York             ; US ; The Roxy Hotel Tribeca
+; addr199 ; Westth Street                                  ; 6036    ; 10018              ; NY                   ; US ; Holiday Inn Express - Times Square South
+; addr200 ; Times Square                                   ; 6       ; 10036              ; NY                   ; US ; The Knickerbocker
+
+
+; addr201 ; S. No. AC                                      ; 2864    ; 403004             ; Goa                  ; IN ; Galaxia Holiday Homes                                ; ;
+; addr202 ; Vainguinim Beach                               ;         ; 403004             ; Panaji               ; IN ; Sandalwood Hotel and Retreat                         ; ;
+; addr203 ; Sinquerim beach                                ;         ; 403515             ; Candolim             ; IN ; Vivanta by Taj Fort Aguada                           ; ;
+; addr204 ; Alto                                           ;         ;                    ; Bardez               ; IN ; Palmgrove Goa Holiday                                ; ;
+; addr205 ; DavorlimRoad                                   ;         ;                    ; GOA                  ; IN ; Rathna Guest Homes Goa                               ; ;
+; addr206 ; Village Issorcim                               ;         ; 403712             ; Bogmalo              ; IN ; Devasthali - The Valley of Gods                      ; ;
+; addr207 ; Near Menino Guest House                        ;         ; 403708 Colva       ;                      ; IN ; Villa Lobo Betalbatim                                ; ;
+; addr208 ; Dudhsaga rPlantation                           ;         ;                    ; Mollem National Park ; IN ; Dudhsagar Farmstay                                   ; ;
+; addr209 ; Calangute Mapusa Road                          ; 761     ;                    ; Goa                  ; IN ; Shalom                                               ; ;
+; addr210 ; House No.                                      ; 6354    ;                    ; Goa                  ; IN ; NORA Villa-Anjuna                                    ; ;
+; addr211 ; NWnd Avenue                                    ; 95042   ; 33126              ; Miami                ; US ; Crowne Plaza Hotel Miami International Airport       ; ;
+; addr212 ; Grand Bay Drive                                ; 455     ; 33149              ; Miami                ; US ; The Ritz-Carlton Key Biscayne, Miami                 ; ;
+; addr213 ; South Eas tSecond Avenue                       ; 400     ; 33131              ; Miami                ; US ; Hyatt Regency Miami                                  ; ;
+; addr214 ; South Miami Avenue                             ; 1300    ; 33130              ; Miami                ; US ; SLS Brickell                                         ; ;
+; addr215 ; Brickell Key Drive                             ; 500     ; 33131              ; Miami                ; US ; Mandarin Oriental, Miami                             ; ;
+; addr216 ; NWth Avenue                                    ; 440087  ; 33178              ; Miami                ; US ; Trump National Doral                                 ; ;
+; addr217 ; McFarlane Road                                 ; 2889    ; 33133              ; Miami                ; US ; Sonesta Coconut Grove Miami                          ; ;
+; addr218 ; Brickell Plaza                                 ; 788     ; 33131              ; Miami                ; US ; EAST, Miami                                          ; ;
+; addr219 ; BiscayneBoulevard                              ; 1601    ; 33132              ; Miami                ; US ; Hilton Miami Downtown                                ; ;
+; addr220 ; Biscayne Boulevard Way                         ; 270     ; 33131              ; Miami                ; US ; Kimpton EPIC Hotel                                   ; ;
+; addr221 ; Via Quasimodo                                  ; 3       ;                    ; Amalfi Salerno       ; IT ; Hotel Miramalfi                                      ; ;
+; addr222 ; Via E. DeMarinis                               ; 2       ;                    ; Salerno              ; IT ; Lloyds Baia Hotel                                    ; ;
+; addr223 ; c.Colombo                                      ;         ;                    ; Positano Salerno     ; IT ; Hotel Savoia                                         ; ;
+; addr224 ; Corso Vittorio Emanuele                        ; 90      ;                    ; Minori Salerno       ; IT ; Villa Romana Hotel and Spa                           ; ;
+; addr225 ; Piazza Duomo                                   ;         ; 84011              ; Amalfi               ; IT ; Hotel Fontana                                        ; ;
+; addr226 ; Via Santa Tecla                                ;         ; 84010              ; Maiori               ; IT ; Residence Hotel Panoramic                            ; ;
+; addr227 ; Via del Saracino                               ;         ; 84017              ; Positano             ; IT ; Villa Costanzo                                       ; ;
+; addr228 ; Piazzale Dei Protontini                        ; 8       ;                    ; Salerno              ; IT ; Hotel Aurora                                         ; ;
+; addr229 ; Via Strada Nuova                               ; 20      ;                    ; Salerno              ; IT ; Hotel Caporal                                        ; ;
+; addr230 ; Via Delle Cartiere                             ; 3       ;                    ; Salerno              ; IT ; Villa Annalara                                       ; ;
+; addr231 ; Lungarno Acciaiuoli                            ;         ; 50123              ; Florence             ; IT ; Portrait Firenze                                     ; ;
+; addr232 ; Via della Scala                                ; 33      ; 50123              ; Florence             ; IT ; Hotel Rivoli                                         ; ;
+; addr233 ; Via dei Martelli                               ; 10      ; 50129              ; Florence             ; IT ; Hotel Spadai                                         ; ;
+; addr234 ; Via Dei Pescioni                               ; 2       ; 50123              ; Florence             ; IT ; Helvetia and Bristol Firenze - Starhotels Collezione ; ;
+; addr235 ; Piazza Unit Italiana                           ; 6       ; 50123              ; Florence             ; IT ; Grand Hotel Baglioni                                 ; ;
+; addr236 ; Piazza Mentana                                 ; 7       ; 50122              ; Florence             ; IT ; Hotel Balestri                                       ; ;
+; addr237 ; Viale Machiavelli                              ; 25      ;                    ; Florence             ; IT ; Classic Hotel                                        ; ;
+; addr238 ; Via Giuseppe Garibaldi                         ; 14      ;                    ; Florence             ; IT ; Hotel Montebello Splendid                            ; ;
+; addr239 ; Via Calzaiuoli Nero                            ; 13      ; 50122              ; Florence             ; IT ; Rodo Hotel Fashion Delight                           ; ;
+; addr240 ; Viale Machiavelli                              ; 18      ;                    ; Florence             ; IT ; Villa Cora                                           ; ;
+; addr241 ; popular condo T Exit D Impact Muangthong Thani ; 8       ; 10210              ; Bangkok              ; TH ; YING Donmuang Airport Guesthouse                     ; ;
+; addr242 ; Suanluang Bangkok                              ; 28481   ;                    ; Bangkok              ; TH ; iPREMIUM Sukhumvit81                                 ; ;
+; addr243 ; Sukhumvit Soi                                  ; 62224   ; 10110              ; Bangkok              ; TH ; Emporium Suites by Chatrium                          ; ;
+; addr244 ; Ekkamai                                        ; 15012   ;                    ; PhrakhanongNua       ; TH ; Paradise Sukhumvit                                   ; ;
+; addr245 ; Sukhumvit Rd Bangjak Phrakanong                ; 5956    ;                    ; Bangkok              ; TH ; Chateau de Sukhumvit                                 ; ;
+; addr246 ; Sukhumvit Soi                                  ; 5116    ; 10110              ; Bangkok              ; TH ; Gardengrove Suites                                   ; ;
+; addr247 ; Soi Ngamwongwan Yak                            ; 1114742 ;                    ; Laksri               ; TH ; The Riche Boutique                                   ; ;
+; addr248 ; Soi Ramintra                                   ; 2134    ;                    ; Ladpharo             ; TH ; Pak-D Resort                                         ; ;
+; addr249 ; Sukhumvit                                      ; 5033    ; 10110              ; Bangkok              ; TH ; CNC Heritage                                         ; ;
+; addr250 ; Soi Pridi Yak                                  ; 222     ; 1416               ; Bangkok              ; TH ; Laidback Place                                       ; ;
+; addr251 ; Bukit Bintang                                  ;         ; 50200              ; Kuala Lumpur         ; MY ; The Maple Suite                                      ; ;
+; addr252 ; Jalan Bukit Bintang                            ; 160     ; 55100              ; Kuala Lumpur         ; MY ; Grand Millennium Kuala Lumpur                        ; ;
+; addr253 ; Jalan Sultan Ismail                            ;         ; 50250              ; Kuala Lumpur         ; MY ; PARKROYAL Kuala Lumpur                               ; ;
+; addr254 ; No Jalan Ampang Hilir                          ; 1       ;                    ; Kuala Lumpur         ; MY ; Ambassador Row Hotel Suites by Lanson Place          ; ;
+; addr255 ;                                                ;         ; 50450              ; Kuala Lumpur         ; MY ; Somerset Ampang Kuala Lumpur                         ; ;
+; addr256 ; No Jalan Pinang                                ; 9       ;                    ; Kuala Lumpur         ; MY ; Ascott Kuala Lumpur                                  ; ;
+; addr257 ;                                                ;         ; 55100              ; Kuala Lumpur         ; MY ; Citin Seacare Pudu by Compass Hospitality            ; ;
+; addr258 ;                                                ;         ; 59200              ; Kuala Lumpur         ; MY ; Capri by Fraser- Kuala Lumpur                        ; ;
+; addr259 ; Jalan Taman Seputeh                            ; 6       ;                    ; Kuala Lumpur         ; MY ; Sri Tiara Residences                                 ; ;
+; addr260 ; La Grande Kiara                                ;         ; 50480              ; Kuala Lumpur         ; MY ; Wedgewood Residences                                 ; ;
+; addr261 ; Vclavsknmst                                    ; 3       ; 11000              ; Prague               ; CZ ; Wenceslas Square Terraces                            ; ;
+; addr262 ; Pobrezni                                       ; 1       ; 18600              ; Prague               ; CZ ; Hilton Prague Hotel                                  ; ;
+; addr263 ; tupartsk                                       ; 9       ; 11000              ; Prague               ; CZ ; Old Town Square Apartments                           ; ;
+; addr264 ; Zubatho                                        ; 2893    ; 15000              ; Prague               ; CZ ; Hotel u Martina Praha                                ; ;
+; addr265 ; Havelsk                                        ; 29      ; 11000              ; Prague               ; CZ ; Residence Leon D'Oro                                 ; ;
+; addr266 ; Smetanovo Nabrezi                              ; 20      ; 11000              ; Prague               ; CZ ; Smetana Hotel                                        ; ;
+; addr267 ; U. Lidovhodomu                                 ; 85711   ; 19000              ; Prague               ; CZ ; Hotel Penzion Praga                                  ; ;
+; addr268 ; Karoliny Svetle                                ; 34      ; 11000              ; Prague               ; CZ ; Pachtuv Palace                                       ; ;
+; addr269 ; Odbor                                          ; 10      ; 12000              ; Prague               ; CZ ; PVH Charming Flats Odborů                            ; ;
+; addr270 ; Hybernsk                                       ; 12      ; 11000              ; Prague               ; CZ ; The Grand Mark Prague                                ; ;
+; addr271 ; Asborgir                                       ; 30      ;                    ; Selfoss              ; IS ; Hotel Grimsborgir Luxury Rooms and Apartments        ; ;
+; addr272 ; Hafnargata                                     ; 37      ;                    ; Keflavik             ; IS ; Hotel Keilir by Keflavik Airport                     ; ;
+; addr273 ; Thrunnartn                                     ; 4       ;                    ; Reykjavík            ; IS ; Storm Hotel by Keahotels                             ; ;
+; addr274 ; Laugarbraut                                    ; 15      ;                    ; Laugarvatn           ; IS ; Golden Circle Apartments                             ; ;
+; addr275 ; Husavik                                        ;         ;                    ; Húsavík              ; IS ; Fosshotel Husavik                                    ; ;
+; addr276 ; Eyravegur                                      ; 26      ;                    ; Selfoss              ; IS ; Fosstun Apartments Hotel                             ; ;
+; addr277 ; Hafnargata                                     ; 57      ;                    ; Iceland              ; IS ; Park Inn by Radisson Reykjavik Keflavík Airport      ; ;
+; addr278 ; Thingvallastraeti                              ; 23      ;                    ; Keflavík             ; IS ; Icelandair Hotel Akureyri                            ; ;
+; addr279 ; Silfurtorgi                                    ; 2       ;                    ; Isafjördur           ; IS ; Hotel Isafjördur                                     ; ;
+; addr280 ; Snorragata                                     ; 3       ;                    ; Siglufjörður         ; IS ; Siglo Hotel                                          ; ;
+; addr281 ; Bongpyeong-myeon                               ; 86412   ; 232-923            ; Pyeongchang          ; KR ; Goodstay Elf Spa Resort                              ; ;
+; addr282 ; Yongpyeong-myeon                               ; 736     ; 25317              ; Pyeongchang          ; KR ; River Terrace Pension                                ; ;
+; addr283 ; Daegwallyeong-myeon                            ; 715     ; 25352              ; Pyeongchang          ; KR ; Yongpyong Resort Dragon Valley Hotel                 ; ;
+; addr284 ; MuiRi                                          ; 69413   ; 232923             ; Pyeongchang          ; KR ; White Cabin                                          ; ;
+; addr285 ; Bongpyeong-myeon                               ; 11422   ; 232-923            ; Pyeongchang          ; KR ; Mayfair Pension                                      ; ;
+; addr286 ; Pyeongchang-eup                                ; 49014   ; 232-800            ; Pyeongchang          ; KR ; Ecopia Pension                                       ; ;
+; addr287 ; Daegwanryeong-myeon                            ; 372     ; 232-954            ; Pyeongchang          ; KR ; Pension In My Arms                                   ; ;
+; addr288 ; Bongpyeong-myeon                               ; 603     ; 25302              ; Pyeongchang          ; KR ; Bongpyeong Provence Pension                          ; ;
+; addr289 ; Bongpyeongmyeon                                ; 72644   ;                    ; Pyeongchang          ; KR ; Chalet Resort                                        ; ;
+; addr290 ; Bongpyeong-myeon                               ; 8917    ; 25311              ; Pyeongchang          ; KR ; Liun Cabin                                           ; ;
+; addr291 ; Meun Ngern Road                                ; 2       ; 83150              ; Phuket               ; TH ; Amari Phuket                                         ; ;
+; addr292 ; Thaweewong Road                                ; 190     ;                    ; Phuket               ; TH ; Phuket Graceland Resort and Spa                      ; ;
+; addr293 ; Thaweewong Road                                ; 212     ; 83150              ; Phuket               ; TH ; The Charm Resort Phuket                              ; ;
+; addr294 ; Soi San Sabai                                  ; 1813641 ;                    ; Phuket               ; TH ; The Lantern Resorts Patong                           ; ;
+; addr295 ; Prabaramee Road                                ; 12      ; 83150              ; Phuket               ; TH ; Wyndham Sea Pearl Resort, Phuket                     ; ;
+; addr296 ; Thaweewong Road                                ; 6439    ;                    ; Phuket               ; TH ; Horizon Patong Beach Resort and Spa                  ; ;
+; addr297 ;                                                ;         ; 83150 Patong Beach ; Phuket               ; TH ; BYD Lofts Boutique Hotel and Serviced Apartments     ; ;
+; addr298 ; Phetchakut Rd                                  ; 17      ;                    ; Phuket               ; TH ; Sai Rougn Residence                                  ; ;
+; addr299 ; Soi Wirakit                                    ; 6638    ;                    ; Phuket               ; TH ; Royal Prince Residence                               ; ;
+; addr300 ; Rat U. ThitRoad                                ; 913     ;                    ; Phuket               ; TH ; Palmyra Patong Resort Phuket                         ; ;

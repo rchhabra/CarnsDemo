@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-logged-in.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : "",
+            			"HideMenu" : "true"};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer-reduced.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body>
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Flight Search</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        <div class="breadcrumb-wrap hidden-xs">
+            <div class="container breadcrumb-inner-wrap">
+                    <ul class="breadcrumbs">
+                    	<li class="col-xs-4 breadcrumb">
+							<span>Flight Search</span>
+						</li>
+						<li class="col-xs-4 breadcrumb">
+							<span>Ancillary</span>
+						</li>
+						<li class="col-xs-4 breadcrumb active">
+							<span>Traveller Details</span>
+						</li>
+						<li class="col-xs-4 breadcrumb">
+							<span>Payment</span>
+						</li>
+						<li class="col-xs-4 breadcrumb">
+							<span>Summary</span
+						</li>
+						<li class="col-xs-4 breadcrumb">
+							<span>Confirmation</span>
+						</li>
+                    </ul>
+                </div>
+        </div>
+        <div class="container">
+            <!-- <div class="clearfix"> -->
+            <div class="col-xs-12">
+                <h2 class="h2">Please enter your passenger details</h2>
+            </div>
+            <div class="col-xs-12 col-sm-9 y_nonItineraryContentArea">
+                <form>
+                    <!-- Payment Details -->
+                    <div class="panel panel-primary panel-list">
+                        <div class="panel-heading">
+                            <h3 class="title">Please specify</h3>
+                        </div>
+                        <div class="panel-body">
+                            <fieldset class="fieldset">
+                                <legend class="sr-only">Booking payment</legend>
+                                <p class="form-label">Are you travelling?</p>
+                                <div class="row">
+                                    <div class="col-xs-4 form-group">
+                                        <label for="radio-yes" class="radio-inline col-xs-4">
+                                            <input type="radio" name="booking-pay" class="" id="radio-yes" checked="" value="Yes">Yes</label>
+                                        <label for="radio-no" class="radio-inline col-xs-4">
+                                            <input type="radio" name="booking-pay" class="" id="radio-no" value="No">No</label>
+                                    </div>
+                                </div>
+                                <!-- / .row -->
+                            </fieldset>
+                        </div>
+                    </div>
+                    <!-- / Payment Details -->
+
+                    <!-- Passenger Details -->
+                    <div class="panel panel-primary panel-list panel-stack panel-details">
+                        <div class="panel-heading">
+                            <h3 class="title">Passenger Details</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- Passenger -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Adult 1</h3>
+                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#traveller-details1" aria-expanded="true" aria-controls="traveller-details1">Collapse / Expand</button>
+                                </div>
+                                <div class="panel-body collapse in" id="traveller-details1">
+                                    <div class="summary traveller-details">
+                                        <h4>Ancillaries Summary:</h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>LHR <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> DBX</strong></li>
+                                            <li>1 x 25kg bag</li>
+                                            <li>1 x priority boarding</li>
+                                        </ul>
+                                        <ul class="list-unstyled">
+                                            <li><strong>DBX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> LHR</strong></li>
+                                            <li>2 x 10kg bag</li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-form">
+                                        <fieldset class="fieldset">
+                                            <legend class="sr-only">Passenger details</legend>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-name1" class="nowrap">Previously saved passenger?</label>
+                                                    <select name="td-traveller-name1" id="td-traveller-name1" class="form-control">
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                    </select>
+                                                </div>
+                                            </div><!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-sm-6 col-md-2">
+                                                    <label for="td-traveller-title1">Title</label>
+                                                    <select name="td-traveller-title1" id="td-traveller-title1" class="form-control">
+                                                        <option value="Mr">Mr</option>
+                                                        <option value="Ms">Miss</option>
+                                                        <option value="Dr">Dr</option>
+                                                        <option value="Mrs">Mrs</option>
+                                                        <option value="Rev">Rev</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <div id="td-traveller-gender1" class="form-label">Gender</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender1" id="td-traveller-gender-male1" aria-labelledby="td-traveller-gender1" value="male" checked>Male</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender1" id="td-traveller-gender-female1" aria-labelledby="td-traveller-gender1" value="female">Female</label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-first-name1">First Name</label>
+                                                    <input type="text" name="td-traveller-first-name1" id="td-traveller-first-name1" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-last-name1">Last Name</label>
+                                                    <input type="text" name="td-traveller-last-name1" id="td-traveller-last-name1" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                                    <label for="td-traveller-age1" class="nowrap">Age at time of travel</label>
+                                                    <select name="td-traveller-age1" id="td-traveller-age1" class="form-control">
+                                                        <option value="" disabled>Select</option>
+                                                        <option selected value="16-20">16-20</option>
+                                                        <option value="21-30">21-30</option>
+                                                        <option value="31-40">31-40</option>
+                                                        <option value="41-50">41-50</option>
+                                                        <option value="51-60">51-60</option>
+                                                        <option value="61-65">61-65</option>
+                                                        <option value="65+">65+</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-md-4">
+                                                    <div id="td-traveller-frequent-flyer1" class="form-label">Are you member of a frequent flyer programme?</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer1" id="td-traveller-frequent-flyer-yes1" aria-labelledby="td-traveller-frequent-flyer1" value="yes" class="y_travellerDetailsMembershipYesBtn">Yes</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer1" id="td-traveller-frequent-flyer-no1" aria-labelledby="td-traveller-frequent-flyer1" value="no" class="y_travellerDetailsMembershipNoBtn">No</label>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 membershipNumber y_membershipNumber">
+                                                    <label for="td-traveller-membership1">Membership No.</label>
+                                                    <input type="number" name="td-traveller-membership1" id="td-traveller-membership1" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-travel-reason1" class="nowrap">What is your reasons for travel?</label>
+                                                    <select name="td-traveller-travel-reason1" id="td-traveller-travel-reason1" class="form-control">
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Leisure">Leisure</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-12 text-right">
+                                                    <label for="td-traveller-assistance1">Do you required special assistance? <input id="td-traveller-assistance1" name="td-traveller-assistance1" type="checkbox" /></label>                                                    
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-12 text-right">
+                                                    <label for="td-traveller-save-details1">Save these details? <input id="td-traveller-save-details1" name="td-traveller-save-details1" type="checkbox" /></label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- / .panel-body -->
+                                </div>
+                                <!-- / .panel -->
+                            </div>
+                            <!-- / Passenger -->
+
+                            <!-- Passenger -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Adult 2</h3>
+                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#traveller-details2" aria-expanded="true" aria-controls="traveller-details2">Collapse / Expand</button>
+                                </div>
+                                <div class="panel-body collapse" id="traveller-details2">
+                                    <div class="summary traveller-details">
+                                        <h4>Ancillaries Summary:</h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>LHR <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> DBX</strong></li>
+                                            <li>1 x 25kg bag</li>
+                                            <li>1 x priority boarding</li>
+                                        </ul>
+                                        <ul class="list-unstyled">
+                                            <li><strong>DBX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> LHR</strong></li>
+                                            <li>2 x 10kg bag</li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-form">
+                                        <fieldset class="fieldset">
+                                            <legend class="sr-only">Passenger details</legend>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-name2" class="nowrap">Previously saved customer?</label>
+                                                    <select name="td-traveller-name2" id="td-traveller-name2" class="form-control">
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                    </select>
+                                                </div>
+                                            </div><!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-sm-6 col-md-2">
+                                                    <label for="td-traveller-title2">Title</label>
+                                                    <select name="td-traveller-title2" id="td-traveller-title2" class="form-control">
+                                                        <option value="Mr">Mr</option>
+                                                        <option value="Ms">Miss</option>
+                                                        <option value="Dr">Dr</option>
+                                                        <option value="Mrs">Mrs</option>
+                                                        <option value="Rev">Rev</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <div id="td-traveller-gender2" class="form-label">Gender</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender2" id="td-traveller-gender-male2" aria-labelledby="td-traveller-gender2" value="male" checked>Male</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender2" id="td-traveller-gender-female2" aria-labelledby="td-traveller-gender2" value="female">Female</label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-first-name2">First Name</label>
+                                                    <input type="text" name="td-traveller-first-name2" id="td-traveller-first-name2" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-last-name2">Last Name</label>
+                                                    <input type="text" name="td-traveller-last-name2" id="td-traveller-last-name2" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                                    <label for="td-traveller-age2" class="nowrap">Age at time of travel</label>
+                                                    <select name="td-traveller-age2" id="td-traveller-age2" class="form-control">
+                                                        <option disabled>Select</option>
+                                                        <option value="16-20" selected>16-20</option>
+                                                        <option value="21-30">21-30</option>
+                                                        <option value="31-40">31-40</option>
+                                                        <option value="41-50">41-50</option>
+                                                        <option value="51-60">51-60</option>
+                                                        <option value="61-65">61-65</option>
+                                                        <option value="65+">65+</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-md-4">
+                                                    <div id="td-traveller-frequent-flyer2" class="form-label">Are you member of a frequent flyer programme?</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer2" id="td-traveller-frequent-flyer-yes2" aria-labelledby="td-traveller-frequent-flyer2" value="yes" class="y_travellerDetailsMembershipYesBtn">Yes</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer2" id="td-traveller-frequent-flyer-no2" aria-labelledby="td-traveller-frequent-flyer2" value="no" class="y_travellerDetailsMembershipNoBtn">No</label>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 membershipNumber y_membershipNumber">
+                                                    <label for="td-traveller-membership2">Membership No.</label>
+                                                    <input type="number" name="td-traveller-membership2" id="td-traveller-membership2" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-travel-reason2" class="nowrap">What are your reasons for travel?</label>
+                                                    <select name="td-traveller-travel-reason2" id="td-traveller-travel-reason2" class="form-control">
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Leisure">Leisure</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6">
+                                                    <label for="td-traveller-assistance2">Do you required special assistance? <input id="td-traveller-assistance2" name="td-traveller-assistance2" type="checkbox" /></label>                                                    
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 text-right">
+                                                    <label for="td-traveller-save-details2">Save these details? <input id="td-traveller-save-details2" name="td-traveller-save-details2" type="checkbox" /></label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- / .panel-body -->
+                                </div>
+                                <!-- / .panel -->
+                            </div>
+                            <!-- / Passenger -->
+
+                            <!-- Passenger -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Child 1</h3>
+                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#traveller-details3" aria-expanded="true" aria-controls="traveller-details3">Collapse / Expand</button>
+                                </div>
+                                <div class="panel-body collapse" id="traveller-details3">
+                                    <div class="summary traveller-details">
+                                        <h4>Ancillaries Summary:</h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>LHR <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> DBX</strong></li>
+                                            <li>1 x 25kg bag</li>
+                                            <li>1 x priority boarding</li>
+                                        </ul>
+                                        <ul class="list-unstyled">
+                                            <li><strong>DBX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> LHR</strong></li>
+                                            <li>2 x 10kg bag</li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-form">
+                                        <fieldset class="fieldset">
+                                            <legend class="sr-only">Passenger details</legend>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-name3" class="nowrap">Previously saved customer?</label>
+                                                    <select name="td-traveller-name3" id="td-traveller-name3" class="form-control">
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                    </select>
+                                                </div>
+                                            </div><!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-sm-6 col-md-2">
+                                                    <label for="td-traveller-title3">Title</label>
+                                                    <select name="td-traveller-title3" id="td-traveller-title3" class="form-control">
+                                                        <option value="Mr">Mr</option>
+                                                        <option value="Ms">Miss</option>
+                                                        <option value="Dr">Dr</option>
+                                                        <option value="Mrs">Mrs</option>
+                                                        <option value="Rev">Rev</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <div id="td-traveller-gender3" class="form-label">Gender</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender3" id="td-traveller-gender-male3" aria-labelledby="td-traveller-gender3" value="male" checked>Male</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender3" id="td-traveller-gender-female3" aria-labelledby="td-traveller-gender3" value="female">Female</label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-first-name3">First Name</label>
+                                                    <input type="text" name="td-traveller-first-name3" id="td-traveller-first-name3" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-last-name3">Last Name</label>
+                                                    <input type="text" name="td-traveller-last-name3" id="td-traveller-last-name3" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                                    <label for="td-traveller-age3" class="nowrap">Age at time of travel</label>
+                                                    <select name="td-traveller-age3" id="td-traveller-age3" class="form-control">
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11+">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-md-4">
+                                                    <div id="td-traveller-frequent-flyer3" class="form-label">Are you member of a frequent flyer programme?</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer3" id="td-traveller-frequent-flyer-yes3" aria-labelledby="td-traveller-frequent-flyer3" value="yes" class="y_travellerDetailsMembershipYesBtn">Yes</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer3" id="td-traveller-frequent-flyer-no3" aria-labelledby="td-traveller-frequent-flyer3" value="no" class="y_travellerDetailsMembershipNoBtn">No</label>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 membershipNumber y_membershipNumber">
+                                                    <label for="td-traveller-membership3">Membership No.</label>
+                                                    <input type="number" name="td-traveller-membership3" id="td-traveller-membership3" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-travel-reason3" class="nowrap">What are your reasons for travel?</label>
+                                                    <select name="td-traveller-travel-reason3" id="td-traveller-travel-reason3" class="form-control">
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Leisure">Leisure</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6">
+                                                    <label for="td-traveller-assistance3">Do you required special assistance? <input id="td-traveller-assistance3" name="td-traveller-assistance3" type="checkbox" /></label>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 text-right">
+                                                    <label for="td-traveller-save-details3">Save these details? <input id="td-traveller-save-details3" name="td-traveller-save-details3" type="checkbox" /></label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- / .panel-body -->
+                                </div>
+                                <!-- / .panel -->
+                            </div>
+                            <!-- / Passenger -->
+
+                            <!-- Passenger -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Infant 1</h3>
+                                    <button class="show-hide-button" type="button" data-toggle="collapse" data-target="#traveller-details4" aria-expanded="true" aria-controls="traveller-details4">Collapse / Expand</button>
+                                </div>
+                                <div class="panel-body collapse" id="traveller-details4">
+                                    <div class="summary traveller-details">
+                                        <h4>Ancillaries Summary:</h4>
+                                        <ul class="list-unstyled">
+                                            <li><strong>LHR <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> DBX</strong></li>
+                                            <li>1 x 25kg bag</li>
+                                            <li>1 x priority boarding</li>
+                                        </ul>
+                                        <ul class="list-unstyled">
+                                            <li><strong>DBX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> LHR</strong></li>
+                                            <li>2 x 10kg bag</li>
+                                        </ul>
+                                    </div>
+                                    <div class="panel-form">
+                                        <fieldset class="fieldset">
+                                            <legend class="sr-only">Passenger details</legend>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-name4" class="nowrap">Previously saved customer?</label>
+                                                    <select name="td-traveller-name4" id="td-traveller-name4" class="form-control">
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                        <option value="">Firstname Lastname</option>
+                                                    </select>
+                                                </div>
+                                            </div><!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-sm-6 col-md-2">
+                                                    <label for="td-traveller-title4">Title</label>
+                                                    <select name="td-traveller-title4" id="td-traveller-title4" class="form-control">
+                                                        <option value="Mr">Mr</option>
+                                                        <option value="Ms">Miss</option>
+                                                        <option value="Dr">Dr</option>
+                                                        <option value="Mrs">Mrs</option>
+                                                        <option value="Rev">Rev</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <div id="td-traveller-gender4" class="form-label">Gender</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender4" id="td-traveller-gender-male4" aria-labelledby="td-traveller-gender4" value="male" checked>Male</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-4">
+                                                        <input type="radio" name="td-traveller-gender4" id="td-traveller-gender-female4" aria-labelledby="td-traveller-gender4" value="female">Female</label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-first-name4">First Name</label>
+                                                    <input type="text" name="td-traveller-first-name4" id="td-traveller-first-name4" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-last-name4">Last Name</label>
+                                                    <input type="text" name="td-traveller-last-name4" id="td-traveller-last-name4" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                                                    <label for="td-traveller-age4" class="nowrap">Age at time of travel</label>
+                                                    <select name="td-traveller-age4" id="td-traveller-age4" class="form-control">
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                        <option value="11+">11</option>
+                                                        <option value="12">12</option>
+                                                        <option value="13">13</option>
+                                                        <option value="14">14</option>
+                                                        <option value="15">15</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-md-4">
+                                                    <div id="td-traveller-frequent-flyer4" class="form-label">Are you member of a frequent flyer programme?</div>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer4" id="td-traveller-frequent-flyer-yes4" aria-labelledby="td-traveller-frequent-flyer4" value="yes" class="y_travellerDetailsMembershipYesBtn">Yes</label>
+                                                    <label class="radio-inline col-xs-3 col-sm-2 col-md-4">
+                                                        <input type="radio" name="td-traveller-frequent-flyer4" id="td-traveller-frequent-flyer-no4" aria-labelledby="td-traveller-frequent-flyer4" value="no" class="y_travellerDetailsMembershipNoBtn">No</label>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 membershipNumber y_membershipNumber">
+                                                    <label for="td-traveller-membership4">Membership No.</label>
+                                                    <input type="number" name="td-traveller-membership4" id="td-traveller-membership4" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6 col-md-4">
+                                                    <label for="td-traveller-travel-reason4" class="nowrap">What are your reasons for travel?</label>
+                                                    <select name="td-traveller-travel-reason4" id="td-traveller-travel-reason4" class="form-control">
+                                                        <option value="" disabled selected>Select</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value="Leisure">Leisure</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-xs-12 col-sm-6">
+                                                    <label for="td-traveller-assistance4">Do you required special assistance? <input id="td-traveller-assistance4" name="td-traveller-assistance4" type="checkbox" /></label>
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-6 text-right">
+                                                    <label for="td-traveller-save-details4">Save these details? <input id="td-traveller-save-details4" name="td-traveller-save-details4" type="checkbox" /></label>
+                                                </div>
+                                            </div>
+                                            <!-- / .row -->
+                                        </fieldset>
+                                    </div>
+                                    <!-- / .panel-body -->
+                                </div>
+                                <!-- / .panel -->
+                            </div>
+                            <!-- / Passenger -->
+
+                        </div>
+                    </div>
+                    <!-- / Passenger Details -->
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-3">
+                <aside id="sidebar" class="y_itinerarySideBar">
+                        <div class="main-wrap">
+                            <section>
+                                <h2 class="hidden-xs text-center h4">Your Itinerary</h2>
+                            </section>
+                            <div class="visible-xs-block sidebar-mobile-content-section clearfix">
+                                <div class="text-center">
+                                    <span class="glyphicon glyphicon-align-justify y_fareSlide"></span>
+                                </div>
+                                <div>
+                                    <dl class="clearfix">
+                                        <dt>Total</dt>
+                                        <dd>&pound;1100</dd>
+                                    </dl>
+                                    <p>Incl. Taxes Charges &amp; Admin. Fee</p>
+                                </div>
+                                <button type="button" class="btn btn-secondary col-xs-8">Continue</button>
+                            </div>
+                            <div class="inner-wrap y_itinerarySideBarContent">
+                                <button type="button" class="btn btn-secondary col-xs-8 hidden-xs center-block btn-top">Continue</button>
+                                <div>
+                                    <img src="assets/images/photos/paris.jpg" class="img-responsive hidden-xs" alt="Paris">
+                                    <h2 class="h4">Order No.: <span>1234</span></h2>
+                                </div>
+                                <section>
+                                    <div class="sidebar-content-section">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-sm-9 col-md-9 col-lg-10">
+                                                <h3 class="h5">LHR > PAR:</h3>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-3 col-md-2">
+                                                <button type="button" class="info-btn" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="This flight will be stopping to refuel.">
+                                                    <i class="glyphicon glyphicon-info-sign"><span class="sr-only">Information</span></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Depart:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">07:00 hrs</dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Arrival:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">08:30 hrs</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="sidebar-content-section">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-sm-9 col-md-9 col-lg-10">
+                                                <h3 class="h5">PAR > DXB:</h3>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-3 col-md-2">
+                                                <button type="button" class="info-btn" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="This flight will be stopping to refuel.">
+                                                    <i class="glyphicon glyphicon-info-sign"><span class="sr-only">Information</span></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Depart:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">13:00 hrs</dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Arrival:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">14:30 hrs</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="sidebar-content-section">
+                                        <dl class="clearfix text-capitalize">
+                                            <dt class="sr-only">Passengers</dt>
+                                            <dd class="col-xs-6">2 x Adult</dd>
+                                            <dd class="col-xs-6">&pound;200</dd>
+                                            <dd class="col-xs-6">1 x Child</dd>
+                                            <dd class="col-xs-6">&pound;150</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="extras sidebar-content-section">
+                                        <h3 class="h5">Your Extras:</h3>
+                                        <dl class="clearfix">
+                                            <dt class="sr-only">extra</dt>
+                                            <dd class="col-xs-6 col-sm-12 col-md-6">1 x 20kg baggage</dd>
+                                            <dd class="col-xs-6 col-sm-12 col-md-6">included</dd>
+                                            <!-- <dd class="col-xs-6">2 x lounge access</dd>
+                                            <dd class="col-xs-6">&pound;60</dd> -->
+                                        </dl>
+                                        <dl class="clearfix">
+                                            <dt class="sr-only">extra</dt>
+                                            <dd class="col-xs-6 col-sm-12 col-md-6">2 x lounge access</dd>
+                                            <dd class="col-xs-6 col-sm-12 col-md-6">&pound;60</dd>
+                                        </dl>
+                                    </div>
+                                    <dl class="clearfix">
+                                        <dt class="col-xs-6">Total</dt>
+                                        <dd class="col-xs-6">&pound;610</dd>
+                                    </dl>
+                                </section>
+                                <section>
+                                    <div class="sidebar-content-section">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-sm-9 col-md-9 col-lg-10">
+                                                <h3 class="h5">LHR > PAR:</h3>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-3 col-md-2">
+                                                <button type="button" class="info-btn" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="This flight will be stopping to refuel.">
+                                                    <i class="glyphicon glyphicon-info-sign"><span class="sr-only">Information</span></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Depart:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">13:00 hrs</dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Arrival:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">14:30 hrs</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="sidebar-content-section">
+                                        <div class="row">
+                                            <div class="col-xs-10 col-sm-9 col-md-9 col-lg-10">
+                                                <h3 class="h5">PAR > DXB:</h3>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-3 col-md-2">
+                                                <button type="button" class="info-btn" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="left" data-content="This flight will be stopping to refuel.">
+                                                    <i class="glyphicon glyphicon-info-sign"><span class="sr-only">Information</span></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Depart:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">13:00 hrs</dd>
+                                        </dl>
+                                        <dl class="row">
+                                            <dt class="col-xs-4 col-sm-12 col-md-4">Arrival:</dt>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">01/01/2016</dd>
+                                            <dd class="col-xs-4 col-sm-12 col-md-4">14:30 hrs</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="extras sidebar-content-section">
+                                        <h3 class="h5">Your Extras:</h3>
+                                        <dl class="clearfix">
+                                            <dt class="sr-only">Your Extras</dt>
+                                            <dd class="col-xs-6">1 x Skis</dd>
+                                            <dd class="col-xs-6">included</dd>
+                                            <dd class="col-xs-6">1 x Extra 24Kg Holdall Bag</dd>
+                                            <dd class="col-xs-6">&pound;60</dd>
+                                        </dl>
+                                    </div>
+                                    <dl class="clearfix">
+                                        <dt class="col-xs-6">Total</dt>
+                                        <dd class="col-xs-6">&pound;610</dd>
+                                    </dl>
+                                </section>
+                                <section>
+                                    <h2 class="h4">Summary</h2>
+                                    <dl class="clearfix">
+                                        <dt class="col-xs-6">2 x Adult</dt>
+                                        <dd class="col-xs-6">&pound;400</dd>
+                                        <dt class="col-xs-6">1 x Child</dt>
+                                        <dd class="col-xs-6">&pound;200</dd>
+                                        <dt class="col-xs-6">Extras</dt>
+                                        <dd class="col-xs-6">&pound;90</dd>
+                                        <dt class="col-xs-6">Taxes / Fees</dt>
+                                        <dd class="col-xs-6">&pound;400</dd>
+                                    </dl>
+                                    <dl class="clearfix">
+                                        <dt class="col-xs-6">Total</dt>
+                                        <dd class="col-xs-6">&pound;1100</dd>
+                                    </dl>
+                                </section>
+                                <section>
+                                    <div class="journey-total">
+                                        <h2 class="h4">Grand Total</h2>
+                                        <dl class="clearfix">
+                                            <dt class="col-xs-7">Total to pay</dt>
+                                            <dd class="col-xs-5">&pound;1100</dd>
+                                        </dl>
+                                    </div>
+                                </section>
+                                <button type="button" class="btn btn-secondary col-xs-8 hidden-xs center-block">Continue</button>
+                            </div>
+                        </div>
+                        <div class="promotions hidden-xs">
+                            <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                        </div>
+                    </aside>
+            </div>
+            <!-- </div> -->
+        </div>
+        <!-- Modal (Special requirements)-->
+        <div class="modal fade" id="special-requirements-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Special Requirements</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Do you required special assitance?</h3>
+                        <p>Please contact us at least 48 hours before your flight departs in order to help us make your journey as easy as possible even if your flight is operated by one of our airline alliance or franchise partners because they may have different restrictions.</p>
+                        <p>If you have any questions please call us. To ensure we can provide the best possible service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / Modal (Special requirements)-->
+        <!-- <p>Autocomplete input</p>
+    <input type="text" name="country" id="autocomplete"/>
+    <p id="outputcontent">Choose a country and the results will display here.</p> -->
+        <!-- / .container -->
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+</body>
+
+</html>

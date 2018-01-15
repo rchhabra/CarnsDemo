@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  [y] hybris Platform
+
+  Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+  All rights reserved.
+
+  This software is the confidential and proprietary information of SAP
+  Hybris ("Confidential Information"). You shall not disclose such
+  Confidential Information and shall use it only in accordance with the
+  terms of the license agreement you entered into with SAP Hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="travelfacades-utils-spring.xml" />
+	<import resource="travelfacades-strategies-spring.xml" />
+	<import resource="travelfacades-converter-populator-spring.xml" />
+	<import resource="travelfacades-pipelinemanagers-spring.xml" />
+	<import resource="travelfacades-email-context-spring.xml" />
+
+	<alias name="defaultTravelI18NFacade" alias="travelI18NFacade" />
+	<bean id="defaultTravelI18NFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelI18NFacade" parent="defaultI18NFacade">
+		<property name="languageConverter" ref="languageConverter" />
+	</bean>
+
+	<alias name="defaultCabinClassFacade" alias="cabinClassFacade" />
+	<bean id="defaultCabinClassFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultCabinClassFacade">
+		<property name="cabinClassConverter" ref="cabinClassConverter" />
+		<property name="cabinClassService" ref="cabinClassService" />
+	</bean>
+
+	<alias name="defaultTransportOfferingFacade" alias="transportOfferingFacade" />
+	<bean id="defaultTransportOfferingFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTransportOfferingFacade">
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="travelRouteConverter" ref="travelRouteConverter" />
+		<property name="transportOfferingConverter" ref="transportOfferingConverter" />
+		<property name="transportOfferingConfiguredPopulator" ref="transportOfferingConfiguredPopulator" />
+		<property name="transportOfferingSearchFacade" ref="transportOfferingSearchFacade" />
+		<property name="travelRouteService" ref="travelRouteService" />
+		<property name="suggestionsDisplayStrategy" ref="suggestionsDisplayStrategy" />
+		<property name="transportSuggestionsDisplayStrategy" ref="transportSuggestionsDisplayStrategy" />
+		<property name="timeService" ref="timeService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="travelRulesService" ref="travelDroolsService" />
+		<property name="locationCodesResolvingStrategyMap" ref="locationCodesResolvingStrategyMap" />
+		<property name="enumerationService" ref="enumerationService" />
+	</bean>
+
+	<alias name="defaultPassengerTypeFacade" alias="passengerTypeFacade" />
+	<bean id="defaultPassengerTypeFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultPassengerTypeFacade">
+		<property name="passengerTypeConverter" ref="passengerTypeConverter" />
+		<property name="passengerTypeService" ref="passengerTypeService" />
+	</bean>
+
+	<alias name="defaultFareSearchFacade" alias="fareSearchFacade" />
+	<bean id="defaultFareSearchFacade" class="de.hybris.platform.travelfacades.fare.search.impl.DefaultFareSearchFacade">
+		<property name="fareSearchPipelineManager" ref="fareSearchPipelineManager" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+	</bean>
+
+	<alias name="defaultUpgradeFareSearchFacade" alias="upgradeFareSearchFacade" />
+	<bean id="defaultUpgradeFareSearchFacade" class="de.hybris.platform.travelfacades.fare.search.impl.DefaultUpgradeFareSearchFacade">
+		<property name="reservationFacade" ref="reservationFacade" />
+		<property name="upgradeBundleFareSearchPipelineManager" ref="upgradeBundleFareSearchPipelineManager" />
+	</bean>
+
+	<alias name="defaultSolrTransportOfferingSearchFacade" alias="transportOfferingSearchFacade" />
+	<bean id="defaultSolrTransportOfferingSearchFacade" class="de.hybris.platform.travelfacades.search.solrfacetsearch.impl.DefaultSolrTransportOfferingSearchFacade">
+		<property name="transportOfferingSearchService" ref="travelTransportOfferingSearchService" />
+		<property name="transportOfferingSearchPageConverter" ref="transportOfferingSearchPageConverter" />
+		<property name="solrTravelSearchQueryDecoder" ref="solrTravelSearchQueryDecoder" />
+		<property name="threadContextService" ref="threadContextService" />
+	</bean>
+
+	<alias name="defaultTripFinderFacade" alias="tripFinderFacade" />
+	<bean id="defaultTripFinderFacade" class="de.hybris.platform.travelfacades.tripfinder.impl.DefaultTripFinderFacade">
+		<property name="transportOfferingSearchFacade" ref="transportOfferingSearchFacade" />
+		<property name="suggestionsDisplayStrategy" ref="suggestionsDisplayStrategy" />
+		<property name="locationCodesResolvingStrategyMap" ref="locationCodesResolvingStrategyMap" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultTravellerFacade" alias="travellerFacade" />
+	<bean id="defaultTravellerFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravellerFacade">
+		<property name="travellerDataConverter" ref="travellerDataConverter" />
+		<property name="passengerInformationDataConverter" ref="passengerInformationDataConverter" />
+		<property name="passengerInformationReverseConverter" ref="passengerInformationReverseConverter" />
+		<property name="passengerDetailsReverseConverter" ref="passengerDetailsReverseConverter" />
+		<property name="travellerPreferenceConverter" ref="travellerPreferenceConverter" />
+		<property name="travellerPreferenceReverseConverter" ref="travellerPreferenceReverseConverter" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="userService" ref="userService" />
+		<property name="modelService" ref="modelService" />
+		<property name="passengerTypeService" ref="passengerTypeService" />
+		<property name="cartService" ref="travelCartService" />
+		<property name="specialServiceRequestService" ref="specialServiceRequestService" />
+		<property name="passengerTypeFacade" ref="passengerTypeFacade" />
+	</bean>
+
+	<alias name="defaultTravelRouteFacade" alias="travelRouteFacade" />
+	<bean id="defaultTravelRouteFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelRouteFacade">
+		<property name="travelRouteService" ref="travelRouteService" />
+		<property name="travelRouteConverter" ref="travelRouteConverter" />
+	</bean>
+
+	<alias name="defaultOffersFacade" alias="offersFacade" />
+	<bean id="defaultOffersFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultOffersFacade">
+		<property name="ancillarySearchPipelineManager" ref="ancillarySearchPipelineManager" />
+		<property name="ancillarySearchRequestPipelineManager" ref="ancillarySearchRequestPipelineManager" />
+		<property name="accommodationSearchPipelineManager" ref="accommodationSearchPipelineManager" />
+		<property name="reservationFacade" ref="reservationFacade" />
+		<property name="travelCartFacade" ref="cartFacade" />
+		<property name="cartService" ref="cartService" />
+		<property name="offerResponseFilterStrategyList" ref="offerResponseFilterStrategyList" />
+	</bean>
+
+	<alias name="defaultReservationFacade" alias="reservationFacade" />
+	<bean id="defaultReservationFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultReservationFacade">
+		<property name="reservationPipelineManager" ref="reservationPipelineManager" />
+		<property name="fullAccommodationReservationPipelineManager" ref="fullAccommodationReservationPipelineManager" />
+		<property name="globalTravelReservationPipelineManager" ref="globalTravelReservationPipelineManager" />
+		<property name="cancelledGlobalTravelReservationPipelineManager" ref="cancelledGlobalTravelReservationPipelineManager" />
+		<property name="cartService" ref="cartService" />
+		<property name="reservationSummaryPipelineManager" ref="reservationSummaryPipelineManager" />
+		<property name="accommmodationReservationSummaryPipelineManager" ref="accommmodationReservationSummaryPipelineManager" />
+		<property name="transportReservationSummaryPipelineManager" ref="transportReservationSummaryPipelineManager" />
+		<property name="packageTransportReservationSummaryPipelineManager" ref="packageTransportReservationSummaryPipelineManager" />
+		<property name="reservationItemPipelineManager" ref="reservationItemPipelineManager" />
+		<property name="bookingService" ref="bookingService" />
+	</bean>
+
+	<alias name="defaultTravelCommercePriceFacade" alias="travelCommercePriceFacade" />
+	<bean id="defaultTravelCommercePriceFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelCommercePriceFacade">
+		<property name="productService" ref="productService" />
+		<property name="travelCommercePriceService" ref="travelCommercePriceService" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+		<property name="bundleRuleService" ref="bundleRuleService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="travelRulesService" ref="travelDroolsService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<alias name="defaultTravelRestrictionFacade" alias="travelRestrictionFacade" />
+	<bean id="defaultTravelRestrictionFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelRestrictionFacade">
+		<property name="travelCommerceCartService" ref="travelCommerceCartService" />
+		<property name="cartService" ref="cartService" />
+		<property name="productService" ref="productService" />
+		<property name="travelRestrictionStrategy" ref="travelRestrictionStrategy" />
+		<property name="travelCategoryService" ref="travelCategoryService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="travelRestrictionService" ref="travelRestrictionService" />
+		<property name="travelRestrictionConverter" ref="travelRestrictionConverter" />
+	</bean>
+
+	<alias name="defaultBookingFacade" alias="bookingFacade" />
+	<bean id="defaultBookingFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultBookingFacade">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="reservationFacade" ref="reservationFacade" />
+		<property name="basicAccommodationReservationPipelineManager" ref="basicAccommodationReservationPipelineManager" />
+		<property name="guestDetailsAccommodationReservationPipelineManager" ref="guestDetailsAccommodationReservationPipelineManager" />
+		<property name="fullAccommodationReservationPipelineManager" ref="fullAccommodationReservationPipelineManager" />
+		<property name="basicGlobalTravelReservationPipelineManager" ref="basicGlobalTravelReservationPipelineManager" />
+		<property name="travelOfferingStatusSearchPipelineManager" ref="travelOfferingStatusSearchPipelineManager" />
+		<property name="bookingListFacade" ref="bookingListFacade" />
+		<property name="userService" ref="userService" />
+		<property name="reservationItemPipelineManager" ref="reservationItemPipelineManager" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="enumerationService" ref="enumerationService" />
+		<property name="checkoutFacade" ref="checkoutFacade" />
+		<property name="accommodationCartFacade" ref="accommodationCartFacade" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+		<property name="travelCheckoutCustomerStrategy" ref="checkoutCustomerStrategy" />
+		<property name="orderStatusValueMap" ref="orderStatusValueMap" />
+		<property name="modelService" ref="modelService" />
+		<property name="guestCountReverseConverter" ref="guestCountReverseConverter" />
+		<property name="guestOccupancyConverter" ref="guestOccupancyConverter" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="roomPreferenceService" ref="roomPreferenceService" />
+		<property name="timeService" ref="timeService" />
+		<property name="calculatePaymentTypeForChangeDatesStrategy" ref="calculatePaymentTypeForChangeDatesStrategy" />
+		<property name="guestCountService" ref="guestCountService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="accommodationBookingFacade" ref="accommodationBookingFacade" />
+		<property name="notAllowedStatuses">
+			<util:list>
+				<util:constant static-field="de.hybris.platform.core.enums.OrderStatus.CREATED" />
+			</util:list>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationBookingFacade" alias="accommodationBookingFacade" />
+	<bean id="defaultAccommodationBookingFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultAccommodationBookingFacade"/>
+
+	<alias name="defaultBookingListFacade" alias="bookingListFacade" />
+	<bean id="defaultBookingListFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultBookingListFacade">
+		<property name="orderStatusValueMap" ref="orderStatusValueMap" />
+		<property name="userService" ref="userService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="transportBookingListPipelineManager" ref="transportBookingListPipelineManager" />
+		<property name="accommodationBookingListPipelineManager" ref="accommodationBookingListPipelineManager" />
+		<property name="travelBookingListPipelineManager" ref="travelBookingListPipelineManager" />
+	</bean>
+
+	<alias name="defaultCheckInFacade" alias="checkInFacade" />
+	<bean id="defaultCheckInFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultCheckInFacade">
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="modelService" ref="modelService" />
+		<property name="checkInEvaluatorStrategy" ref="checkInEvaluatorStrategy" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+	</bean>
+
+	<alias name="defaultTravelCustomerFacade" alias="travelCustomerFacade" />
+	<bean id="defaultTravelCustomerFacade" class="de.hybris.platform.travelfacades.facades.customer.impl.DefaultTravelCustomerFacade"
+		parent="customerFacade">
+		<property name="customerAccountService" ref="customerAccountService" />
+		<property name="timeService" ref="timeService" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="savedSearchConverter" ref="savedSearchConverter" />
+		<property name="savedSearchReverseConverter" ref="savedSearchReverseConverter" />
+	</bean>
+
+	<alias name="defaultAccommodationSearchFacade" alias="accommodationSearchFacade" />
+	<bean id="defaultAccommodationSearchFacade" class="de.hybris.platform.travelfacades.facades.accommodation.search.impl.DefaultAccommodationSearchFacade">
+		<property name="accommodationOfferingFacade" ref="accommodationOfferingFacade" />
+		<property name="accommodationOfferingSearchPipelineManager" ref="accommodationOfferingSearchPipelineManager" />
+		<property name="sortStrategyMap" ref="accommodationOfferingSearchResponseSortStrategyMap" />
+		<property name="updateSearchCriterionStrategies" ref="updateSearchCriterionStrategies" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingFacade" alias="accommodationOfferingFacade" />
+	<bean id="defaultAccommodationOfferingFacade" class="de.hybris.platform.travelfacades.facades.accommodation.impl.DefaultAccommodationOfferingFacade">
+		<property name="accommodationOfferingSearchFacade" ref="accommodationOfferingSearchFacade" />
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="accommodationDetailsPipelineManager" ref="accommodationDetailsPipelineManager" />
+		<property name="selectedAccommodationDetailsPipelineManager" ref="selectedAccommodationDetailsPipelineManager" />
+		<property name="accommodationOfferingConverter" ref="accommodationOfferingConverter" />
+	</bean>
+
+	<alias name="defaultAccommodationSuggestionFacade" alias="accommodationSuggestionFacade" />
+	<bean id="defaultAccommodationSuggestionFacade" class="de.hybris.platform.travelfacades.facades.accommodation.impl.DefaultAccommodationSuggestionFacade">
+		<property name="accommodationOfferingSearchFacade" ref="accommodationOfferingSearchFacade" />
+		<property name="accommodationSuggestionsDisplayStrategy" ref="accommodationSuggestionsDisplayStrategy" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultTravelImageFacade" alias="travelImageFacade" />
+	<bean id="defaultTravelImageFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelImageFacade">
+		<property name="accommodationOfferingService" ref="accommodationOfferingService" />
+		<property name="imageConverter" ref="imageConverter" />
+		<property name="travelLocationService" ref="travelLocationService" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+		<property name="accommodationCommerceCartService" ref="accommodationCommerceCartService" />
+		<property name="travelCartService" ref="travelCartService" />
+	</bean>
+
+	<alias name="defaultAccommodationCartFacade" alias="accommodationCartFacade" />
+	<bean id="defaultAccommodationCartFacade" class="de.hybris.platform.travelfacades.order.impl.DefaultAccommodationCartFacade"
+		parent="defaultCartFacade">
+		<property name="accommodationCommerceCartService" ref="accommodationCommerceCartService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="cartFacade" ref="cartFacade" />
+		<property name="modelService" ref="modelService" />
+		<property name="enumerationService" ref="enumerationService"/>
+		<property name="bundleCartFacade" ref="bundleCartFacade"/>
+		<property name="configuredAccommodationFacade" ref="configuredAccommodationFacade"/>
+		<property name="accommodationMapService" ref="accommodationMapService"/>
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade"/>
+		<property name="travelRestrictionFacade" ref="travelRestrictionFacade"/>
+		<property name="travellerFacade" ref="travellerFacade"/>
+		<property name="selectedAccommodationStrategyList" ref="selectedAccommodationStrategyList"/>
+	</bean>
+
+	<alias name="defaultAccommodationExtrasFacade" alias="accommodationExtrasFacade" />
+	<bean id="defaultAccommodationExtrasFacade" class="de.hybris.platform.travelfacades.facades.accommodation.impl.DefaultAccommodationExtrasFacade">
+		<property name="accommodationExtrasService" ref="accommodationExtrasService" />
+		<property name="accommodationServicePipelineManager" ref="accommodationServicePipelineManager" />
+	</bean>
+
+	<alias name="defaultActionFacade" alias="actionFacade" />
+	<bean name="defaultActionFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultActionFacade">
+		<property name="bookingActionStrategyMap" ref="bookingActionStrategyMap" />
+		<property name="bookingActionEnabledCalculationStrategiesMap" ref="bookingActionEnabledCalculationStrategiesMap" />
+		<property name="accommodationBookingActionStrategyMap" ref="accommodationBookingActionStrategyMap" />
+		<property name="accommodationBookingActionEnabledCalculationStrategiesMap" ref="accommodationBookingActionEnabledCalculationStrategiesMap" />
+		<property name="globalBookingActionStrategyMap" ref="globalBookingActionStrategyMap" />
+		<property name="globalBookingActionEnabledCalculationStrategiesMap" ref="globalBookingActionEnabledCalculationStrategiesMap" />
+	</bean>
+
+	<alias name="defaultTravelCartFacade" alias="cartFacade" />
+	<bean id="defaultTravelCartFacade" class="de.hybris.platform.travelfacades.order.impl.DefaultTravelCartFacade" parent="defaultSubscriptionCartFacade">
+		<property name="travelCommerceCartService" ref="travelCommerceCartService" />
+		<property name="travellerService" ref="travellerService" />
+		<property name="travelRouteService" ref="travelRouteService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="orderEntryConverter" ref="orderEntryConverter" />
+		<property name="accommodationMapService" ref="accommodationMapService" />
+		<property name="travelCartService" ref="travelCartService" />
+		<property name="voucherFacade" ref="voucherFacade" />
+		<property name="travelPromotionsFacade" ref="travelPromotionsFacade" />
+		<property name="travellerFacade" ref="travellerFacade" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="bookingService" ref="bookingService" />
+		<property name="travelRulesService" ref="travelDroolsService" />
+		<property name="populateCartEntryPropertyStrategyMap">
+			<util:map key-type="java.lang.String">
+				<entry key="PER_LEG_PER_PAX" value-ref="perLegPerPaxPopulatePropertyMapStrategy" />
+				<entry key="PER_BOOKING" value-ref="perBookingPopulatePropertyMapStrategy" />
+				<entry key="PER_LEG" value-ref="perLegPopulatePropertyMapStrategy" />
+				<entry key="PER_PAX" value-ref="perPaxPopulatePropertyMapStrategy" />
+			</util:map>
+		</property>
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="paymentOptionConverter" ref="paymentOptionConverter" />
+		<property name="bookingFacade" ref="bookingFacade" />
+		<property name="bundleCartFacade" ref="bundleCartFacade"/>
+	</bean>
+
+	<alias name="travelBundleCartFacade" alias="bundleCartFacade"/>
+	<bean id="travelBundleCartFacade" class="de.hybris.platform.travelfacades.order.impl.DefaultTravelBundleCartFacade" parent="defaultBundleCartFacade" />
+
+	<alias name="travelCheckoutFacade" alias="acceleratorCheckoutFacade" />
+	<bean id="travelCheckoutFacade" class="de.hybris.platform.travelfacades.order.impl.DefaultTravelCheckoutFacade" parent="defaultAcceleratorCheckoutFacade">
+		<property name="sessionService" ref="sessionService" />
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="defaultTravelB2BCheckoutFacade" alias="b2bCheckoutFacade" />
+	<bean id="defaultTravelB2BCheckoutFacade" class="de.hybris.platform.travelfacades.order.impl.DefaultTravelB2BCheckoutFacade"
+		parent="defaultB2BCheckoutFacade">
+		<property name="travelCheckoutFacade" ref="travelCheckoutFacade" />
+	</bean>
+
+	<alias name="defaultTravelPromotionsFacade" alias="travelPromotionsFacade" />
+	<bean id="defaultTravelPromotionsFacade" class="de.hybris.platform.travelfacades.promotion.impl.DefaultTravelPromotionsFacade">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="userService" ref="userService" />
+		<property name="promotionsService" ref="promotionsService" />
+		<property name="promotionsConverter" ref="promotionsConverter" />
+		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<alias name="defaultConfiguredAccommodationFacade" alias="configuredAccommodationFacade" />
+	<bean id="defaultConfiguredAccommodationFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultConfiguredAccommodationFacade">
+		<property name="configuredAccommodationConverter" ref="configuredAccommodationConverter" />
+		<property name="accommodationMapService" ref="accommodationMapService" />
+	</bean>
+
+	<alias name="defaultAccommodationOfferingCustomerReviewFacade" alias="accommodationOfferingCustomerReviewFacade" />
+	<bean id="defaultAccommodationOfferingCustomerReviewFacade" class="de.hybris.platform.travelfacades.facades.accommodation.impl.DefaultAccommodationOfferingCustomerReviewFacade">
+		<property name="accommodationOfferingCustomerReviewConverter" ref="accommodationOfferingCustomerReviewConverter" />
+		<property name="accommodationOfferingCustomerReviewService" ref="accommodationOfferingCustomerReviewService" />
+		<property name="accommodationCustomerReviewReverseConverter" ref="accommodationCustomerReviewReverseConverter" />
+	</bean>
+
+	<alias name="defaultTransportFacilityFacade" alias="transportFacilityFacade" />
+	<bean id="defaultTransportFacilityFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTransportFacilityFacade">
+		<property name="transportFacilityConverter" ref="transportFacilityConverter" />
+		<property name="travelStoreFinderService" ref="travelStoreFinderService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="transportFacilityService" ref="transportFacilityService" />
+		<property name="locationConverter" ref="locationConverter" />
+		<property name="transportOfferingSearchFacade" ref="transportOfferingSearchFacade" />
+	</bean>
+
+	<alias name="defaultTravelBundleTemplateFacade" alias="travelBundleTemplateFacade" />
+	<bean id="defaultTravelBundleTemplateFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelBundleTemplateFacade">
+		<property name="typeService" ref="typeService" />
+		<property name="sessionService" ref="sessionService" />
+		<property name="transportOfferingService" ref="transportOfferingService" />
+		<property name="productService" ref="productService" />
+		<property name="commerceStockService" ref="commerceStockService" />
+		<property name="travelCommercePriceFacade" ref="travelCommercePriceFacade" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+	</bean>
+
+	<alias name="defaultRoomPreferenceFacade" alias="roomPreferenceFacade" />
+	<bean id="defaultRoomPreferenceFacade" class="de.hybris.platform.travelfacades.facades.accommodation.impl.DefaultRoomPreferenceFacade">
+		<property name="roomPreferenceService" ref="roomPreferenceService" />
+		<property name="roomPreferenceConverter" ref="roomPreferenceConverter" />
+	</bean>
+
+	<alias name="defaultTravelLocationFacade" alias="travelLocationFacade" />
+	<bean id="defaultTravelLocationFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultTravelLocationFacade">
+		<property name="travelLocationService" ref="travelLocationService" />
+		<property name="locationConverter" ref="locationConverter" />
+	</bean>
+
+	<alias name="defaultDealCartFacade" alias="dealCartFacade" />
+	<bean id="defaultDealCartFacade" class="de.hybris.platform.travelfacades.facades.packages.impl.DefaultDealCartFacade">
+		<property name="dealBundleTemplateFacade" ref="dealBundleTemplateFacade" />
+		<property name="addBundleByTypeStrategyMap" ref="addBundleByTypeStrategyMap" />
+		<property name="commerceCartService" ref="commerceCartService" />
+		<property name="cartService" ref="cartService" />
+		<property name="cartFacade" ref="cartFacade" />
+	</bean>
+
+	<alias name="defaultDealSearchBundleTemplateFacade" alias="dealSearchBundleTemplateFacade" />
+	<bean id="defaultDealSearchBundleTemplateFacade" class="de.hybris.platform.travelfacades.facades.packages.impl.DefaultDealBundleTemplateFacade">
+		<property name="cartService" ref="cartService" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+		<property name="dealBundleTemplateService" ref="dealBundleTemplateService" />
+		<property name="passengerTypeConverter" ref="passengerTypeConverter" />
+		<property name="dealBundleTemplateConverter" ref="dealBundleTemplateConverter" />
+		<property name="timeService" ref="timeService" />
+		<property name="dealSearchResponsePipelineManager" ref="dealSearchResponsePipelineManager" />
+	</bean>
+
+	<alias name="defaultDealBundleTemplateFacade" alias="dealBundleTemplateFacade" />
+	<bean id="defaultDealBundleTemplateFacade" class="de.hybris.platform.travelfacades.facades.packages.impl.DefaultDealBundleTemplateFacade">
+		<property name="cartService" ref="cartService" />
+		<property name="bundleTemplateService" ref="bundleTemplateService" />
+		<property name="dealBundleTemplateService" ref="dealBundleTemplateService" />
+		<property name="passengerTypeConverter" ref="passengerTypeConverter" />
+		<property name="dealBundleTemplateConverter" ref="dealBundleTemplateConverter" />
+		<property name="timeService" ref="timeService" />
+		<property name="dealSearchResponsePipelineManager" ref="dealDetailsSearchResponsePipelineManager" />
+	</bean>
+
+	<!-- Accommodation Offering specific bean configs -->
+
+	<alias name="defaultSolrAccommodationOfferingSearchFacade" alias="accommodationOfferingSearchFacade" />
+	<bean id="defaultSolrAccommodationOfferingSearchFacade" class="de.hybris.platform.travelfacades.search.solrfacetsearch.impl.DefaultSolrAccommodationOfferingSearchFacade">
+		<property name="accommodationOfferingSearchService" ref="accommodationOfferingSearchService" />
+		<property name="accommodationOfferingSearchPageConverter" ref="accommodationOfferingSearchPageConverter" />
+		<property name="solrTravelSearchQueryDecoder" ref="solrTravelSearchQueryDecoder" />
+		<property name="threadContextService" ref="threadContextService" />
+	</bean>
+
+	<alias name="defaultAccommodationAmendmentFacade" alias="accommodationAmendmentFacade" />
+	<bean id="defaultAccommodationAmendmentFacade" class="de.hybris.platform.travelfacades.facades.impl.DefaultAccommodationAmendmentFacade">
+		<property name="bookingFacade" ref="bookingFacade" />
+		<property name="travelCartService" ref="travelCartService" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="defaultOrderConverter" />
+		<property name="add" ref="originalOrderCodePopulator" />
+	</bean>
+
+	<!-- Mapping -->
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping" />
+	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="thumbnail" value="100Wx100H" />
+				<entry key="hotelGallery" value="860Wx465H" />
+			</map>
+		</property>
+	</bean>
+
+	<alias name="defaultAccommodationImageFormatMapping" alias="accommodationImageFormatMapping" />
+	<bean id="defaultAccommodationImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="accommodationDetail" value="860Wx465H" />
+				<entry key="thumbnail" value="100Wx100H" />
+				<entry key="list" value="300Wx300H" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Predicates -->
+	<bean id="enableSeatPredicate" class="de.hybris.platform.travelfacades.ancillary.search.accommodation.predicates.EnableSeatPredicate">
+	</bean>
+
+	<!-- Comparators -->
+	<bean id="accommodationInfoDataComparator" class="de.hybris.platform.travelfacades.ancillary.search.accommodation.comparator.AccommodationInfoDataComparator">
+	</bean>
+
+	<bean id="configuredFacilityDataComparator" class="de.hybris.platform.travelfacades.facades.accommodation.comparators.ConfiguredFacilityDataComparator">
+	</bean>
+
+	<bean id="totalPackagePriceAscComparator" class="de.hybris.platform.travelfacades.facades.packages.comparators.TotalPackagePriceAscComparator">
+	</bean>
+
+	<alias name="defaultPackageFacade" alias="packageFacade" />
+	<bean id="defaultPackageFacade" class="de.hybris.platform.travelfacades.facades.packages.impl.DefaultPackageFacade">
+		<property name="packageDetailsPipelineManager" ref="packageDetailsPipelineManager" />
+		<property name="bookingFacade" ref="bookingFacade" />
+		<property name="travelCartFacade" ref="cartFacade" />
+		<property name="accommodationCartFacade" ref="accommodationCartFacade" />
+		<property name="amendPackageDetailsPipelineManager" ref="amendPackageDetailsPipelineManager" />
+	</bean>
+
+	<!-- Dynamic Packages facades beans -->
+
+	<alias name="defaultPackageSearchFacade" alias="packageSearchFacade" />
+	<bean id="defaultPackageSearchFacade" class="de.hybris.platform.travelfacades.facades.packages.impl.DefaultPackageSearchFacade"
+		parent="accommodationSearchFacade">
+		<property name="packageSearchResponsePipelineManager" ref="packageSearchResponsePipelineManager" />
+		<property name="packageSearchResponsePriceRangeFilterPipelineManager" ref="packageSearchResponsePriceRangeFilterPipelineManager" />
+		<property name="sortStrategyMap" ref="packageSearchResponseSortStrategyMap" />
+		<property name="totalPackagePriceAscComparator" ref="totalPackagePriceAscComparator" />
+	</bean>
+
+	<alias name="defaultPackageSearchFareSearchFacade" alias="packageSearchFareSearchFacade" />
+	<bean id="defaultPackageSearchFareSearchFacade" class="de.hybris.platform.travelfacades.fare.search.impl.DefaultFareSearchFacade">
+		<property name="fareSearchPipelineManager" ref="packageSearchFareSearchPipelineManager" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+	</bean>
+
+	<alias name="defaultDealSearchFareSearchFacade" alias="dealSearchFareSearchFacade" />
+	<bean id="defaultDealSearchFareSearchFacade" class="de.hybris.platform.travelfacades.fare.search.impl.DefaultFareSearchFacade">
+		<property name="fareSearchPipelineManager" ref="dealSearchFareSearchPipelineManager" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+	</bean>
+
+	<alias name="defaultDealFareSearchFacade" alias="dealFareSearchFacade" />
+	<bean id="defaultDealFareSearchFacade" class="de.hybris.platform.travelfacades.fare.search.impl.DefaultFareSearchFacade">
+		<property name="fareSearchPipelineManager" ref="dealFareSearchPipelineManager" />
+		<property name="transportOfferingFacade" ref="transportOfferingFacade" />
+	</bean>
+
+	<alias name="defaultFareSearchHashResolver" alias="fareSearchHashResolver" />
+	<bean id="defaultFareSearchHashResolver" class="de.hybris.platform.travelfacades.fare.search.resolvers.impl.DefaultFareSearchHashResolver">
+		<property name="sessionService" ref="sessionService"/>
+		<property name="travelBundleTemplateFacade" ref="travelBundleTemplateFacade"/>
+	</bean>
+
+</beans>

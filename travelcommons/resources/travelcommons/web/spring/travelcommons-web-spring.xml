@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2017 SAP SE or an SAP affiliate company.
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <context:annotation-config/>
+
+  <context:component-scan base-package="de.hybris.platform.travelcommons"/>
+
+  <!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+  <bean id="defaultTravelcommonsJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+    <property name="addOnName" value="travelcommons"/>
+  </bean>
+
+  <bean id="defaultTravelcommonsBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee"
+        class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+    <property name="messageSource" ref="defaultTravelcommonsJavaScriptMessageResourceAccessor"/>
+  </bean>
+
+  <bean id="getTravelcommonsBeforeViewHandler" parent="beforeViewHandlerAdapter">
+    <property name="adaptee">
+      <ref bean="defaultTravelcommonsBeforeViewJsPropsHandlerAdaptee"/>
+    </property>
+  </bean>
+  <bean id="TravelcommonsBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList" parent="listMergeDirective">
+    <property name="add" ref="getTravelcommonsBeforeViewHandler"/>
+  </bean>
+
+  <bean id="packageRefinementComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+    <property name="typeCode" value="PackageRefinementComponent"/>
+    <property name="renderer" ref="packageRefinementComponentRenderer"/>
+  </bean>
+  <bean id="packageRefinementComponentRenderer" parent="substitutingAddOnJspIncludeCMSComponentRenderer"/>
+  
+  <bean name="personalDetailsPageController" class="de.hybris.platform.travelcommons.controllers.page.PersonalDetailsPageController">
+    <property name="adultAgesRange" value="${travellerdetails.form.property.adultAgesRange}" />
+    <property name="childrenAgeRange" value="${travellerdetails.form.property.childrenAgeRange}" />
+    <property name="infantAgeRange" value="${travellerdetails.form.property.infantAgeRange}" />
+    <property name="adultTitles" value="${travellerdetails.form.property.adultTitles}" />
+    <property name="childrenTitles" value="${travellerdetails.form.property.childrenTitles}" />
+  </bean>
+  
+  <bean name="ancillaryExtrasPageController" class="de.hybris.platform.travelcommons.controllers.page.AncillaryExtrasPageController">
+    <property name="defaultRoomBedPreferenceCode" value="#{configurationService.configuration.getProperty('accommodation.room.bed.preference.code.default')}" />
+  </bean>
+
+</beans>

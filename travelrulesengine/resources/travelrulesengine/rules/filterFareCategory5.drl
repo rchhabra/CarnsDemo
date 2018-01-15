@@ -1,0 +1,30 @@
+package de.hybris.platform.travelrulesengine.rules
+
+import de.hybris.platform.travelrulesengine.utils.TravelRuleUtils;
+import de.hybris.platform.travelrulesengine.rao.FareProductRAO;
+import de.hybris.platform.travelrulesengine.rao.FareSearchRequestRAO;
+import de.hybris.platform.ruleengineservices.rao.CategoryRAO;
+import de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO;
+import java.util.Date;
+import de.hybris.platform.droolsruleengineservices.compiler.impl.DefaultDroolsRuleActionContext;
+import java.util.Map;
+
+global de.hybris.platform.ruleengineservices.rule.evaluation.RuleExecutableAction ruleFareFilterAction;
+
+rule "filterFareCategory5"
+@ruleCode("filterFareCategory5")
+@moduleName("travel-rules-module")
+dialect "mvel"
+    when
+        $result : RuleEngineResultRAO()
+        $fareSearchRequest : FareSearchRequestRAO($firstLegInfo : legInfos[0])
+        $fareProduct : FareProductRAO($fareproduct_categories : categories)
+        exists (CategoryRAO(code == "CATEGORY_5") from $fareproduct_categories)
+        eval(TravelRuleUtils.getDaysBetweenDates(new Date(), $firstLegInfo.getDepartureTime()) < 21)
+    then
+    	Map variables = [
+		   "de.hybris.platform.ruleengineservices.rao.RuleEngineResultRAO": $result,
+		   "de.hybris.platform.travelrulesengine.rao.FareProductRAO": $fareProduct
+		];
+    	ruleFareFilterAction.executeAction(new DefaultDroolsRuleActionContext(variables, kcontext), null);
+end

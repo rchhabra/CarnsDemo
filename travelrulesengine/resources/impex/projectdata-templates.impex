@@ -1,0 +1,81 @@
+$lang = en
+
+INSERT_UPDATE RuleGroup; code[unique = true]
+; showBundleTemplateRuleGroup
+; feeRuleGroup
+; fareFilterRuleGroup
+; cancellationRuleGroup
+; transportOfferingFilterRuleGroup
+; channelRuleGroup
+; showProductRuleGroup
+; showProductCategoryRuleGroup
+
+INSERT_UPDATE FeeSourceRuleTemplate; code[unique = true]; name[lang = $lang]; description[lang = $lang]; messageFired[lang = $lang]
+; admin_fee ; Admin Fee on Cart ; Admin fee is added on a cart ; Admin Fee is added on the cart
+
+INSERT_UPDATE FeeSourceRuleTemplate; code[unique = true]; maxAllowedRuns; ruleGroup(code); conditions; actions
+; admin_fee ; 1 ; feeRuleGroup ; "" ; "[{""definitionId"":""y_cart_admin_fee"",""parameters"":{}}]"
+
+INSERT_UPDATE FareFilterSourceRuleTemplate; code[unique = true]; name[lang = $lang]; description[lang = $lang]; messageFired[lang = $lang]
+; filter_fare_triptype  ; Filter Fare for Trip Type  ; Filter Fare based on Trip Type  ; Fares are filtered based on trip type
+; filter_fare_category5 ; Filter Fare for Category 5 ; Filter Fare based on Category 5 ; Fare Product is discarded if it is in category {d607781d-4537-42b7-b63b-31008219a74c} and the search is made {8b7556df-8dbf-44ce-a391-10fa36ba2075} {2bd8488d-2190-495b-9795-97065afb2d19} days in advance
+; filter_fare_category6 ; Filter Fare for Category 6 ; Filter Fare based on Category 6 ; Fare Product is discarded if it is in category {f7292b00-874e-4044-95e5-edc75d096c72} and the duration of stay is {75555f16-b68a-44af-b163-bb17d6772524} {0fbbe425-48aa-4247-88ae-063f9dfbe19b}
+; filter_fare_category7 ; Filter Fare for Category 7 ; Filter Fare based on Category 7 ; Fare Product is discarded if it is in category {f7292b00-874e-4044-95e5-edc75d096c72} and the duration of stay is {75555f16-b68a-44af-b163-bb17d6772524} {0fbbe425-48aa-4247-88ae-063f9dfbe19b}
+
+INSERT_UPDATE FareFilterSourceRuleTemplate; code[unique = true]; maxAllowedRuns; ruleGroup(code); conditions; actions
+; filter_fare_triptype  ; 1 ; fareFilterRuleGroup ; "[{""definitionId"":""y_fare_triptype"",""parameters"":{},""children"":[]}]"                                                                                                                                                                                                                                                                                                                                                                          ; "[{""definitionId"":""y_discard_fare"",""parameters"":{}}]"
+; filter_fare_category5 ; 1 ; fareFilterRuleGroup ; "[{""definitionId"":""y_fare_category5"",""parameters"":{""advanceDays"":{""uuid"":""2bd8488d-2190-495b-9795-97065afb2d19"",""type"":""java.lang.Integer""},""category"":{""uuid"":""d607781d-4537-42b7-b63b-31008219a74c"",""type"":""ItemType(Category)""},""operator"":{""uuid"":""8b7556df-8dbf-44ce-a391-10fa36ba2075"",""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""LESS_THAN""}},""children"":[]}]"        ; "[{""definitionId"":""y_discard_fare"",""parameters"":{}}]"
+; filter_fare_category6 ; 1 ; fareFilterRuleGroup ; "[{""definitionId"":""y_fare_category67"",""parameters"":{""durationOfStay"":{""uuid"":""0fbbe425-48aa-4247-88ae-063f9dfbe19b"",""type"":""java.lang.Integer""},""category"":{""uuid"":""f7292b00-874e-4044-95e5-edc75d096c72"",""type"":""ItemType(Category)""},""operator"":{""uuid"":""75555f16-b68a-44af-b163-bb17d6772524"",""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""LESS_THAN""}},""children"":[]}]"    ; "[{""definitionId"":""y_discard_fare"",""parameters"":{}}]"
+; filter_fare_category7 ; 1 ; fareFilterRuleGroup ; "[{""definitionId"":""y_fare_category67"",""parameters"":{""durationOfStay"":{""uuid"":""0fbbe425-48aa-4247-88ae-063f9dfbe19b"",""type"":""java.lang.Integer""},""category"":{""uuid"":""f7292b00-874e-4044-95e5-edc75d096c72"",""type"":""ItemType(Category)""},""operator"":{""uuid"":""75555f16-b68a-44af-b163-bb17d6772524"",""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN""}},""children"":[]}]" ; "[{""definitionId"":""y_discard_fare"",""parameters"":{}}]"
+
+INSERT_UPDATE CancellationSourceRuleTemplate; code[unique = true]; name[lang = $lang]; description[lang = $lang]; messageFired[lang = $lang]
+; retain_fee ; Retain admin fee on cancellation ; Admin fee is retained during cancellation ; Admin fee is retained if cancelled booking departs in {f59b42b5-a819-4ba8-a524-e27881faa235} {2601e5ae-630d-4495-86dc-be2318a6c197} days
+
+INSERT_UPDATE CancellationSourceRuleTemplate; code[unique = true]; maxAllowedRuns; ruleGroup(code); conditions; actions
+; retain_fee ; 1 ; cancellationRuleGroup ; "[{""definitionId"":""y_cancel_advance"",""parameters"":{""cancellationAdvance"":{""uuid"":""2601e5ae-630d-4495-86dc-be2318a6c197"",""type"":""java.lang.Integer""},""operator"":{""uuid"":""f59b42b5-a819-4ba8-a524-e27881faa235"",""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""LESS_THAN""}},""children"":[]}]" ; "[{""definitionId"":""y_retain_fee"",""parameters"":{}}]"
+
+INSERT_UPDATE ShowBundleTemplateSourceRuleTemplate; code[unique = true]; name[lang = $lang]; description[lang = $lang]; messageFired[lang = $lang]
+; showBundleTemplate ; Show Bundle Template ; Bundle templates are shown for sale ;
+
+INSERT_UPDATE ShowBundleTemplateSourceRuleTemplate; code[unique = true]; maxAllowedRuns; ruleGroup(code); conditions; actions
+; showBundleTemplate ; 1 ; showBundleTemplateRuleGroup ; "[{""definitionId"":""y_travel_dates"",""parameters"":{""date"":{""uuid"":""386ce056-6d8c-4885-976c-301fa81c9b73"",""type"":""java.util.Date""},""operator"":{""uuid"":""ff74a036-2486-45b8-bebb-6afd591c44af"",""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN""}},""children"":[]}]" ; "[{""definitionId"":""y_show_bundle_template"",""parameters"":{""bundle_templates"":{""uuid"":""66a87060-406a-43bc-be7d-21c889606fa1"",""type"":""List(ItemType(BundleTemplate))""}}}]"
+
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];name[lang=en];description[lang=en];messageFired[lang=en]
+;customerFixedDiscountOnCartTemplate;Customer specific fixed price discount;A fixed discount is applied to the cart for the specified customer group;You qualify for {f35b15ae-0534-41cd-9bfa-818558e787c9} discount on cart
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];maxAllowedRuns;ruleGroup(code);conditions;actions
+;customerFixedDiscountOnCartTemplate;1;customerPromotionRuleGroup;"[{""definitionId"":""y_target_customers"",""parameters"":{""customer_groups"":{""uuid"":""94ae472b-90b9-484b-9230-42cf956af2ef"",""type"":""List(ItemType(UserGroup))"",""value"":[]},""customer_groups_operator"":{""uuid"":""f28e1a11-668e-42c6-bbc6-d64dd386862d"",""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""customers"":{""uuid"":""b615a521-14ae-4f34-93a0-cbbdecf1cc51"",""type"":""List(ItemType(Customer))"",""value"":[]},""excluded_customers"":{""uuid"":""51d5cad3-92e3-4530-a946-166e642894ce"",""type"":""List(ItemType(Customer))"",""value"":[]},""excluded_customer_groups"":{""uuid"":""6ca1c6ee-3908-4859-b7ff-59c89d625f52"",""type"":""List(ItemType(UserGroup))"",""value"":[]}},""children"":[]}]";"[{""definitionId"":""y_order_fixed_discount"",""parameters"":{""value"":{""uuid"":""f35b15ae-0534-41cd-9bfa-818558e787c9"",""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{}}}}]"
+
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];name[lang=en];description[lang=en];messageFired[lang=en]
+;channelFixedDiscountOnCartTemplate;Channel specific fixed price discount;A fixed discount is applied to the cart for the specific channel;A discount is applied for this channel
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];maxAllowedRuns;ruleGroup(code);conditions;actions
+;channelFixedDiscountOnCartTemplate;1;customerPromotionRuleGroup;"[{""definitionId"":""y_cart_sales_application"",""parameters"":{""channel"":{""uuid"":""23c75382-4d86-446d-a0e0-41ee935dec69"",""type"":""ItemType(SalesApplication)""}},""children"":[]}]";"[{""definitionId"":""y_order_fixed_discount"",""parameters"":{""value"":{""uuid"":""f35b15ae-0534-41cd-9bfa-818558e787c9"",""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{}}}}]"
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];name[lang=en];description[lang=en];messageFired[lang=en]
+;travelDatesSpecificFixedDiscountOnCartTemplate;Travel Dates specific fixed price discount;A fixed discount is applied to the cart based on travel dates;Discount is applied on the cart
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];maxAllowedRuns;ruleGroup(code);conditions;actions
+;travelDatesSpecificFixedDiscountOnCartTemplate;1;customerPromotionRuleGroup;"[{""definitionId"":""y_cart_travel_dates"",""parameters"":{""date"":{""uuid"":""c34c0d4d-8471-4049-be56-b54637962052"",""type"":""java.util.Date""},""operator"":{""uuid"":""439d16ec-2775-4e38-8789-484228bc1699"",""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""LESS_THAN""}},""children"":[]}]";"[{""definitionId"":""y_order_fixed_discount"",""parameters"":{""value"":{""uuid"":""f35b15ae-0534-41cd-9bfa-818558e787c9"",""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{}}}}]"
+
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];name[lang=en];description[lang=en];messageFired[lang=en]
+;locationsFixedDiscountOnCartTemplate;Locations specific fixed price discount;A fixed discount is applied to the cart based on origin and destination locations;A discount is applied for these locations
+
+INSERT_UPDATE PromotionSourceRuleTemplate;code[unique=true];maxAllowedRuns;ruleGroup(code);conditions;actions
+;locationsFixedDiscountOnCartTemplate;1;customerPromotionRuleGroup;"[{""definitionId"":""y_cart_origin_destination_locations"",""parameters"":{""inclDepLocations"":{""uuid"":""29a56db2-2dac-4330-ba87-5fd7174266b2"",""type"":""List(ItemType(Location))""},""excDepLocations"":{""uuid"":""b514ef46-e1f7-4ccd-8c40-958a7218d24a"",""type"":""List(ItemType(Location))""},""excArrLocations"":{""uuid"":""a8ec5fb9-ddf1-4a68-a4f6-15563b081b9e"",""type"":""List(ItemType(Location))""},""inclArrLocations"":{""uuid"":""8182e9f1-0dc3-4e7c-b03a-855d86786db8"",""type"":""List(ItemType(Location))""}},""children"":[]}]";"[{""definitionId"":""y_order_fixed_discount"",""parameters"":{""value"":{""uuid"":""f35b15ae-0534-41cd-9bfa-818558e787c9"",""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{}}}}]"
+
+INSERT_UPDATE ShowProductSourceRuleTemplate; code[unique = true]; name[lang = $lang]; description[lang = $lang]; messageFired[lang = $lang]
+; showProductTemplate ; Show Product Template ; Show products template used to create a rule which will be executed during ancillary search ;
+
+INSERT_UPDATE ShowProductSourceRuleTemplate; code[unique = true]; maxAllowedRuns; ruleGroup(code); conditions; actions
+; showProductTemplate ; 1 ; showProductRuleGroup ;"[{""definitionId"":""y_ancillary_sales_application"",""parameters"":{""channel"":{""uuid"":""6c957671-cfaa-4743-beec-6bf5e4abb102"",""type"":""ItemType(SalesApplication)""}},""children"":[]}]"; "[{""definitionId"":""y_show_product_template"",""parameters"":{""products"":{""uuid"":""14da3b5c-1832-4c33-95e1-c3d29fe62120"",""type"":""List(ItemType(Product))""}}}]"
+
+INSERT_UPDATE ShowProductCategorySourceRuleTemplate; code[unique = true]; name[lang = $lang]; description[lang = $lang]; messageFired[lang = $lang]
+; showProductCategoryTemplate ; Show Product Category Template ; Show product Categories template used to create a rule which will be executed during ancillary search ;
+
+INSERT_UPDATE ShowProductCategorySourceRuleTemplate; code[unique = true]; maxAllowedRuns; ruleGroup(code); conditions; actions
+; showProductCategoryTemplate ; 1 ; showProductCategoryRuleGroup ;"[{""definitionId"":""y_ancillary_sales_application"",""parameters"":{""channel"":{""uuid"":""6c957671-cfaa-4743-beec-6bf5e4abb102"",""type"":""ItemType(SalesApplication)""}},""children"":[]}]"; "[{""definitionId"":""y_show_product_category_template"",""parameters"":{""categories"":{""uuid"":""a9bd08af-9048-4493-88c6-6605c72365f8"",""type"":""List(ItemType(Category))""}}}]"
+

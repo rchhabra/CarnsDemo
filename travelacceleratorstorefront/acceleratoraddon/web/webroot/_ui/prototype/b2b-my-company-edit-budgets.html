@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Travel ACC</title>
+    
+    <!-- Our custom CSS files etc -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/assistedservicestorefront.css" rel="stylesheet" />
+    <link href="assets/css/liveeditaddon.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="common/js/jquery-2.1.1.min.js"></script>
+    <script src="common/js/jquery.tmpl.js"></script>
+    <script>
+        // Asynchronously load the header template
+        $.get('templates/header-logged-in.tmpl.htm', function(headerTemplate) {
+            var data = {"CurrentPage" : ""};
+            $.tmpl(headerTemplate, data).appendTo('header');
+        });
+        // Asynchronously load the footer template
+        $.get('templates/footer.tmpl.htm', function(footerTemplate) {
+          $.tmpl(footerTemplate).appendTo('footer');
+        });
+    </script>
+</head>
+
+<body class="my-company-section">
+    <main class="page-margin">
+        <h1 class="screen-readers-only">Budget Details</h1>
+        <!-- TEMPLATE header -->
+        <header class="row header"></header>
+        <!-- / TEMPLATE header -->
+        
+    <div class="container">
+        <div class="col-xs-12 col-sm-3 side-to-top hidden-xs">
+            <aside id="sidebar">
+                <div class="promotions">
+                    <section>
+                        <img src="assets/images/photos/green.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Explore the gardens of Croatia</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/rocks.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Checkout Mabua Pebble Beach, Philippines</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                    <section>
+                        <img src="assets/images/photos/boat.jpg" class="img-responsive" alt="dubai">
+                        <div class="promotion-content">
+                            <h2 class="h4">Set sail around the Mediterranean</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </section>
+                </div>
+            </aside>
+        </div>
+        
+        
+        <div class="col-xs-12 col-sm-9">
+            <div class="row heading-with-button">
+                <div class="col-xs-7 col-sm-8">
+                    <h2 class="h2">Edit Budget</h2>
+                </div>
+                <div class="col-xs-5 col-sm-4 button-inline">
+                    <button class="btn btn-primary btn-block" href="#">Back to Budgets</button>
+                </div>
+            </div>
+			<div class="panel panel-primary panel-list">
+				<div class="panel-heading">
+					<h3 class="title">Edit Budget</h3>
+				</div>
+				<div class="panel-body">
+					<form class="y_budgetDates">
+					<fieldset class="fieldset">
+						<legend class="sr-only">Enter New Budget details</legend>
+						<div class="row">
+							<div class="form-group col-sm-6 col-xs-12">
+								<label for="bud-id">Budget ID</label>
+								<input id="bud-id" name="bud-id" class="form-control" type="text" />
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group">
+									<label class="control-label " for="text.company.budget.name"> Budget Name</label>
+									<input id="text.company.budget.name" name="name" class="text form-control" type="text" value="">
+								</div>
+							</div>
+						</div>
+						<!-- / .row -->
+						<div class="row">
+							<div class="col-sm-6 col-xs-12 nowrap">
+								<div class="form-group">
+									<label class="control-label " for="bud-parentUnit">
+										Parent Unit
+										<span class="sr-only">Parent Unit</span>
+									</label>
+									<div class="controls">
+										<select id="text.company.budget.unit" name="parentB2BUnit" class="form-control">
+											<option value="" disabled="disabled" selected="selected">Please select unit</option>
+											<option value="Rustic" selected="selected">Rustic</option>
+											<option value="Rustic Services">Rustic Services</option>
+											<option value="Services East">Services East</option>
+											<option value="Rustic Retail">Rustic Retail</option>
+											<option value="Custom Retail">Custom Retail</option>
+											<option value="Services West">Services West</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-xs-12 nowrap">
+									<div class="form-group">
+										<label class="control-label " for="text.company.budget.amount"> Budget Amount</label>
+										<input id="text.company.budget.amount" name="budget" class="text form-control" placeholder="00.00" type="text" value="">
+									</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group">
+									<label class="control-label " for="text.company.budget.currency">
+										Currency
+										<span class="mandatory"> </span>
+										<span class="skip"> </span>
+									</label>
+									<div class="control">
+										<select id="text.company.budget.currency" name="currency" class="form-control">
+											<option value="" disabled="disabled" selected="selected">Please select currency</option>
+											<option value="USD">USD</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="form-group col-sm-6 col-xs-12 nowrap">
+								<div class="form-group">
+									<label class="control-label " for="start-date">Start Date</label>
+									<input type="text" class="col-xs-12 datepicker input-grid form-control datePickerStart" id="datePickerStart" name="datePickerStart" placeholder="Start Date" autocomplete="off" aria-required="true">
+								</div>
+							</div>
+							<div class="form-group col-sm-6 col-xs-12 nowrap">
+								<div class="form-group">
+									<label class="control-label " for="end-date">End Date</label>
+									<input type="text" class="col-xs-12 datepicker input-grid form-control datePickerEnd" id="datePickerEnd" name="datePickerEnd" placeholder="End Date" autocomplete="off" aria-required="true">
+								</div>
+							</div>
+						</div>		
+						
+						<div class="row">
+                              <div class="form-group col-xs-12 col-sm-6 bottom-align-parent btn-margin">
+                                  <button class="btn btn-primary btn-block bottom-align">Save</button>
+                             </div>
+                              <div class="form-group col-xs-12 col-sm-6  bottom-align-parent">
+                                  <button class="btn btn-primary btn-block bottom-align">Cancel</button>
+                             </div>
+                        </div>
+					</fieldset>
+					</form>
+				</div>
+			</div>
+
+		</div>
+</div>
+
+        <!-- TEMPLATE footer -->
+        <footer class="footer-wrapper"></footer>
+        <!-- / TEMPLATE footer -->
+    </main>
+    <script src="assets/js/acc.hybrisdefault.js"></script>
+    <script src="assets/js/_autoload.js"></script>
+    
+    <!-- Travel Accelerator scripts -->
+    <script src="assets/js/travelacceleratorstorefront.js"></script>
+
+</body>
+
+</html>

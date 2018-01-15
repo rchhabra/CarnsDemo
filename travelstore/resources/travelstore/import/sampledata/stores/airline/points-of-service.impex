@@ -1,0 +1,103 @@
+INSERT_UPDATE Address; &addrID; streetname; streetnumber; postalcode[unique = true]; town[unique = true]; country(isocode); region(isocode); phone1; owner(PointOfService.name)[unique = true]
+#;addr1;Bassingbourn Rd, Stansted;;CM241QW;Essex;GB;;;StanstedPOS
+; addr2  ; Airport Way                 ;      ; L229LY  ; Luton       ; GB ; ; ; LutonPOS
+; addr3  ; West Sussex                 ;      ; RH60NP  ; West Sussex ; GB ; ; ; GatwickPOS
+#;addr4;Hartmann Rd;;E162PX;London;GB;;;LondonCityPOS
+; addr5  ; Ingliston                   ;      ; EH129DN ; Edinburgh   ; GB ; ; ; EdinburghCityPOS
+; addr6  ; Roissy-en-France            ;      ; 95700   ; France      ; FR ; ; ; ParisCityPOS
+#;addr7;New Delhi;;110037;Delhi;IN;;;DelhiCityPOS
+; addr8  ; L'Altet                     ;      ; 03195   ; Spain       ; ES ; ; ; AlicanteCityPOS
+; addr9  ; Rue Costes et Bellonte      ;      ; 06206   ; Nice        ; FR ; ; ; NicePOS
+; addr10 ; Attiki Odos, Spata Artemida ;      ; 19004   ; Athens      ; GR ; ; ; AthensPOS
+; addr11 ; Via Galileo Galilei         ; 30/1 ; 30173   ; Venice      ; IT ; ; ; VenicePOS
+; addr12 ; New York                    ;      ; 11430   ; New York    ; US ; ; ; NewYorkJFKPOS
+; addr13 ; Airport Main Rd             ;      ; 22000   ; Male        ; MV ; ; ; MalePOS
+; addr14 ; Mai Khao		               ;      ; 83110   ; Phuket      ; TH ; ; ; PhuketPOS
+; addr15 ; Airport Rd, Dabolim		   ;	  ; 403801	; Goa		  ; IN ; ; ; GoaPOS
+; addr16 ; NW 42nd Ave				   ; 2100 ;FL 33126 ; Miami       ; US ; ; ; MiamiPOS
+; addr17 ; Viale F. Ruffo di Calabria  ;	  ; 80144	; Naples	  ; IT ; ; ; NaplesPOS
+; addr18 ; Via del Termine			   ; 11	  ;	50127   ; Firenze     ; IT ; ; ; FlorencePOS
+; addr19 ; Via dell Aeroporto di Fiumicino		;	320		;	00054	;	Fiumicino RM 			;	IT  ; ; ;	RomePOS
+; addr20 ; Tambon Nong Prue, Amphoe Bang Phli	;	999		;	10540	;	Chang Wat Samut Prakan	;	TH	; ; ;	BangkokPOS
+; addr21 ; Kuala Lumpur International Airport	;			;	64000	;	Selangor				;	MY	; ; ;	KualaLumpurPOS
+; addr22 ; Aviaticka, 161 08 Praha 6			;			;			;	Praha					;	CZ	; ; ;	PraguePOS         
+; addr23 ; Reykjavikurflugvollur, Þorragata 10	;			;			;	Reykjavik				;	IS	; ; ;	ReykjavikPOS      
+; addr24 ; 272 Gonghang-ro, Unseo-dong, Jung-gu	;			;			;	Incheon					;	KR	; ; ;	SeoulPOS		  
+
+INSERT_UPDATE PointOfService; name[unique = true]; type(code); address(&addrID); latitude; longitude; geocodeTimestamp[dateformat = dd-MM-yyyy]; basestore(uid); features(code); &posID
+#;StanstedPOS;STORE;addr1;;;;airline;;pos1
+; LutonPOS         ; STORE ; addr2  ; ; ; ; airline ; ; pos2
+; GatwickPOS       ; STORE ; addr3  ; ; ; ; airline ; ; pos3
+#;LondonCityPOS;STORE;addr4;;;;airline;;pos4
+; EdinburghCityPOS ; STORE ; addr5  ; ; ; ; airline ; ; pos5
+; ParisCityPOS     ; STORE ; addr6  ; ; ; ; airline ; ; pos6
+#;DelhiCityPOS;STORE;addr7;;;;airline;;pos7
+; AlicanteCityPOS  ; STORE ; addr8  ; ; ; ; airline ; ; pos8
+; NicePOS          ; STORE ; addr9  ; ; ; ; airline ; ; pos9
+; AthensPOS        ; STORE ; addr10 ; ; ; ; airline ; ; pos10
+; VenicePOS        ; STORE ; addr11 ; ; ; ; airline ; ; pos11
+; NewYorkJFKPOS    ; STORE ; addr12 ; ; ; ; airline ; ; pos12
+; MalePOS          ; STORE ; addr13 ; ; ; ; airline ; ; pos13
+
+; PhuketPOS        ; STORE ; addr14 ; ; ; ; airline ; ; pos14
+; GoaPOS           ; STORE ; addr15 ; ; ; ; airline ; ; pos15
+; MiamiPOS         ; STORE ; addr16 ; ; ; ; airline ; ; pos16
+; NaplesPOS        ; STORE ; addr17 ; ; ; ; airline ; ; pos17
+; FlorencePOS      ; STORE ; addr18 ; ; ; ; airline ; ; pos18
+; RomePOS          ; STORE ; addr19 ; ; ; ; airline ; ; pos19
+; BangkokPOS       ; STORE ; addr20 ; ; ; ; airline ; ; pos20
+; KualaLumpurPOS   ; STORE ; addr21 ; ; ; ; airline ; ; pos21
+; PraguePOS        ; STORE ; addr22 ; ; ; ; airline ; ; pos22
+; ReykjavikPOS     ; STORE ; addr23 ; ; ; ; airline ; ; pos23
+; SeoulPOS         ; STORE ; addr24 ; ; ; ; airline ; ; pos24
+
+INSERT_UPDATE TransportFacility; code[unique = true]; pointOfService[mode = replace](&posID)
+#;STN;pos1
+; LTN ; pos2
+; LGW ; pos3
+#;LCY;pos4
+; EDI ; pos5
+; CDG ; pos6
+#;DEL;pos7
+; ALC ; pos8
+; NCE ; pos9
+; ATH ; pos10
+; VCE ; pos11
+; JFK ; pos12
+; MLE ; pos13
+; HKT ; pos14
+; GOI ; pos15
+; MIA ; pos16
+; NAP ; pos17
+; FLR ; pos18
+; FCO ; pos19
+; BKK ; pos20
+; KUL ; pos21
+; PRG ; pos22
+; KEF ; pos23
+; ICN ; pos24
+
+# Updates the coordinates and the timeZoneId for the existing POS
+UPDATE PointOfService; name[unique = true]; latitude; longitude; timeZoneId
+; LutonPOS         ; 51.877 ; -0.38   ; Europe/London
+; GatwickPOS       ; 51.157 ; -0.158  ; Europe/London
+; EdinburghCityPOS ; 55.948 ; -3.363  ; Europe/London
+; ParisCityPOS     ; 49.004 ; 2.517   ; Europe/Paris
+; AlicanteCityPOS  ; 38.272 ; -0.54   ; Europe/Madrid
+; NicePOS          ; 43.667 ; 7.21    ; Europe/Paris
+; AthensPOS        ; 38.068 ; 23.728  ; Europe/Athens
+; VenicePOS        ; 45.505 ; 12.34   ; Europe/Rome
+; NewYorkJFKPOS    ; 40.643 ; -73.789 ; America/New_York
+; MalePOS          ; 4.184  ; 73.531  ; Indian/Maldives
+
+; PhuketPOS		   ; 8.1111  ; 98.3065		;	Asia/Bangkok 
+; GoaPOS		   ; 15.3803 ; 73.8350		;	Asia/Kolkata
+; MiamiPOS         ; 25.7959 ; 80.2870		;	America/New_York
+; NaplesPOS        ; 40.8830 ; 14.2866		;	Europe/Rome
+; FlorencePOS      ; 43.8087 ; 11.2012		;	Europe/Rome
+; RomePOS          ; 41.7999 ; 12.2462		;	Europe/Rome
+; BangkokPOS       ; 13.6900 ; 100.7501		;	Asia/Bangkok 
+; KualaLumpurPOS   ; 2.7402	 ; 101.7081		;	Asia/Kuala_Lumpur
+; PraguePOS        ; 50.1018 ; 14.2632		;	Europe/Bratislava
+; ReykjavikPOS     ; 63.9868 ; 22.6280		;	Atlantic/Reykjavik
+; SeoulPOS         ; 37.4602 ; 126.4407		;	Asia/Seoul
