@@ -1,0 +1,202 @@
+# Language
+$lang = en
+$vendorUid = airline
+$originTerminal = originTerminal(code[unique = true])[default = T1]
+$destinationTerminal = destinationTerminal(code[unique = true])[default = T2]
+$defaultStatus = SCHEDULED
+$defaultType = FLIGHT
+$defaultActiveState = true
+$travelDate="yyyy/MM/dd"
+$defaultTemplate = true
+
+
+								
+								
+								
+								
+
+INSERT_UPDATE Address			;&addrID	;streetname		;streetnumber	;postalcode[unique = true]	;town[unique = true]	;country(isocode)	;region(isocode)	;phone1	;owner(PointOfService.name)[unique = true]
+								;addr1  	;howard street  ;      			; 21218						;Rosedale      			;US 				; 					; 		;BaltimorePOS
+								;addr26  	;Bearup LN		;				;NSW 2020  					;George 				;US 				; 					; 		;BahamasPOS
+								;addr27 	;Abri lane		;				;HM 20				  		;Hamelton     			;GB 				; 					; 		;BarmudaPOS
+								;addr28 	;Calle Fortaleza;				;000801  					;Santo	 				;US 				; 					; 		;CaribbanPOS
+								;addr29 	;Shunyi Ave		;				;331250	  					;Aventura 				;US 				; 					; 		;MiamiPOS
+                                ;addr30		;Mile creek		;				;336210	  					;St petersburg			;US 				; 					; 		;TampaPOS
+							    ;addr32 	;Ad street avenue;		        ;294050	  					;West Ashley			;US				    ; 					; 		;CharlesestonPOS
+
+INSERT_UPDATE PointOfService	;name[unique = true]	;type(code)	;address(&addrID)	;latitude	;longitude	;geocodeTimestamp[dateformat = dd-MM-yyyy]	;basestore(uid)	;features(code)	;&posID
+								;BaltimorePOS      		;STORE 		;addr1  			; 			; 			; 											;airline 		; 				;pos1
+								;BahamasPOS       		;STORE 		;addr26  			; 			; 			; 											;airline 		; 				;pos26
+								;BarmudaPOS             ;STORE 		;addr27  			; 			; 			; 											;airline 		; 				;pos27
+								;CaribbanPOS       		;STORE 		;addr28  			; 			; 			; 											;airline 		; 				;pos28
+								;MiamiPOS        		;STORE 		;addr29  			; 			; 			; 											;airline 		; 				;pos29
+                                ;TampaPOS        		;STORE 		;addr30				; 			; 			; 											;airline 		; 				;pos30
+                                ;CharlesestonPOS       	;STORE 		;addr32 			; 			; 			; 											;airline 		; 				;pos32
+                                
+# Updates the coordinates and the timeZoneId for the existing POS
+UPDATE PointOfService; name[unique = true]; latitude; longitude; timeZoneId
+; BaltimorePOS         ; 51.877 ; -0.38   ; America/New_York
+; BahamasPOS       ; 51.157 ; -0.158  ; America/New_York
+; BarmudaPOS ; 55.948 ; -3.363  ; Europe/London
+; CaribbanPOS     ; 49.004 ; 2.517   ; America/New_York
+; MiamiPOS  ; 38.272 ; -0.54   ; America/New_York
+; TampaPOS          ; 43.667 ; 7.21    ; America/New_York
+; CharlesestonPOS        ; 38.068 ; 23.728  ; America/New_York
+; NewYorkJFKPOS    ; 40.643 ; -73.789 ; America/New_York								
+
+INSERT_UPDATE TransportFacility	;code[unique = true]	;pointOfService[mode = replace](&posID)
+								;BLT 					;pos1
+								;BHM 					;pos26
+								;BRM					;pos27
+								;CRB					;pos28
+								;MIA					;pos29
+								;TMP					;pos30
+								;CHT					;pos32
+
+INSERT_UPDATE Identifier		;code[unique = true]	;codeContext
+								;BLT					;IATA
+								;BHM					;IATA
+								;BRM					;IATA
+								;CRB					;IATA
+								;MIA					;IATA
+								;TMP					;IATA
+								;CHT					;IATA
+
+								
+
+INSERT_UPDATE TransportFacility	;code[unique = true]	;type(code)	;name[lang = $lang]						    ;identifier(code)
+								;BLT					;PORT	;Baltimore International port					;BLT
+								;BHM					;PORT	;Bahamas International port					    ;BHM
+								;BRM					;PORT	;Bermuda International port				        ;BRM
+								;CRB					;PORT	;Caribbean Shivaji International port		    ;CRB
+								;MIA					;PORT	;Miami Capital International port			    ;MIA
+								;TMP					;PORT	;Tampa International port					    ;TMP
+								;CHT					;PORT	;Charleston International port					;CHT
+	
+INSERT_UPDATE Location			;code[unique = true]	;locationType(code)	;superlocations(code) 	;name[lang = $lang] 	;description[lang = $lang] 	;identifier(code)	;transportFacility(code)
+
+								#Regions
+
+								#Countries
+								;MX 					;COUNTRY 			; NOA					;Mexico					;							;					;				
+
+								#Cities
+								;BLT 					;CITY				;US					;Maryland				;							;BLT				;BLT
+								;BHM 					;CITY				;US					;Nassau					;							;BHM				;BHM
+								;BRM 					;CITY				;GB					;Hamilton   			;							;BRM				;BRM
+								;CRB 					;CITY				;MX					;Mexico 				;							;CRB				;CRB
+								;MIA 					;CITY				;US					;Miami  				;							;MIA				;MIA
+								;TMP					;CITY				;US					;Tampa					;							;TMP				;TMP	
+								;CHT					;CITY				;US					;Charleston				;							;CHT				;CHT																	
+	
+INSERT_UPDATE TravelSector		;code[unique = true]	;origin(code)	;destination(code)
+								;BLT_BHM				;BLT 			;BHM
+								;BLT_BRM				;BLT 			;BRM		
+								;BLT_CRB				;BLT			;CRB
+								;MIA_BHM				;MIA			;BHM
+								;MIA_CRB				;MIA			;CRB
+								;TMP_CRB				;TMP			;CRB
+								;CHT_BHM				;CHT			;BHM
+								;CHT_BRM				;CHT			;BRM
+								;CHT_CRB				;CHT			;CRB
+								;BHM_BLT				;BHM			;BLT
+								;BHM_BRM				;BHM			;BRM
+								;BRM_BHM				;BRM			;BHM	
+								
+								
+								#Baltimore,MD to The Bahamas
+								;BLT_BHM				;BLT			;BHM
+								#Baltimore,MD to Bermuda
+								;BLT_BRM				;BLT 			;BRM
+								#Baltimore,MD to Caribbean
+								;BLT_CRB				;BLT 			;CRB		
+								#Miami,FL to The Bahamas
+								;MIA_BHM				;MIA			;BHM
+								#Miami,FL to Caribbean
+								;MIA_CRB				;MIA		    ;CRB
+								#Tampa,FL to Caribbean
+								;TMP_CRB				;TMP			;CRB
+								#Charleston,SC to The Bahamas
+								;CHT_BHM				;CHT		    ;BHM
+								#Charleston,SC to Bermuda
+								;CHT_BRM				;CHT		    ;BRM
+								#Charleston,SC to Caribbean
+								;CHT_CRB				;CHT		    ;CRB
+								
+
+
+INSERT_UPDATE TravelSector; code[unique = true]; name[lang = $lang]	
+						  ;BLT_BHM  		   ;Baltimore MD to The Bahamas
+#Baltimore,MD to Bermuda
+						  ;BLT_BRM             ;Baltimore MD to Bermuda
+#Baltimore,MD to Caribbean
+						  ;BLT_CRB			   ;Baltimore MD to Caribbean
+#Miami,FL to The Bahamas
+						  ;MIA_BHM			   ;Miami FL to The Bahamas
+#Miami,FL to Caribbean
+						  ;MIA_CRB			   ;Miami FL to Caribbean
+#Tampa,FL to Caribbean
+						  ;TMP_CRB   		   ;Tampa FL to Caribbean
+#Charleston,SC to The Bahamas
+						  ;CHT_BHM			   ;Charleston SC to The Bahamas
+#Charleston,SC to Bermuda
+						  ;CHT_BRM			   ;Charleston SC to Bermuda
+#Charleston,SC to Caribbean
+						  ;CHT_CRB			   ;Charleston SC to Caribbean
+#Bahamas,BS to Baltimore	
+						  ;BHM_BLT			   ;Bahamas BS to Baltimore																				  								
+			
+
+INSERT_UPDATE TravelRoute		;code[unique = true]	;origin(code)	;destination(code)	;travelSector(code)
+								;BLT_BHM 				;BLT 			;BHM				;BLT_BHM
+								;BLT_BRM 				;BLT 			;BRM				;BLT_BRM
+								;BLT_CRB				;BLT 			;CRB				;BLT_CRB
+								;MIA_CRB				;MIA		    ;CRB				;MIA_CRB
+								;CHT_BHM				;CHT		    ;BHM				;CHT_BHM
+								
+								
+								
+								#Baltimore,MD to The Bermuda
+								;BLT_BHM_BRM			;BLT			;BRM				;BLT_BHM, BHM_BRM
+								;BRM_BHM_BLT			;BRM			;BLT				;BRM_BHM, BHM_BLT
+								
+								#Baltimore,MD to The Bahamas
+								;BLT_BHM				;BLT			;BHM				;BLT_BHM
+								;BHM_BLT				;BHM			;BLT				;BHM_BLT
+								
+								
+								#Baltimore,MD to Bermuda
+								;BLT_BRM				;BLT 			;BRM				;BLT_BRM
+								
+								
+								#Baltimore,MD to Caribbean
+								;BLT_CRB				;BLT 			;CRB				;BLT_CRB
+								
+								
+								#Miami,FL to The Bahamas
+								;MIA_CRB				;MIA		    ;CRB				;MIA_CRB
+								
+								
+								#Charleston,SC to The Bahamas
+								;CHT_BHM				;CHT		    ;BHM				;CHT_BHM
+								
+
+INSERT_UPDATE TransportOffering	;code[unique = true]	;number			;arrivalTime[dateformat = 'yyyy/MM/dd HH:mm']	;departureTime[dateformat = 'yyyy/MM/dd HH:mm']	;vendor(code)[default = $vendorUid]	;$originTerminal	;$destinationTerminal	;type(code)[default = $defaultType]	;status(code)[default = $defaultStatus]	;travelSector(code)	;travelProvider(code)	;transportVehicle(code)	;active[default = $defaultActiveState] 
+								;HYRD1					;9682			;2018/02/04 10:00								;2018/01/28 17:00								;									;					;						;									;										;BLT_BHM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD2					;9682			;2018/02/11 10:00								;2018/02/04 17:00								;									;					;						;									;										;BLT_BRM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD3					;9682			;2018/09/16 10:00								;2018/09/09 17:00								;									;					;						;									;										;BLT_CRB			;HY					;AIRCRAFT_A380-800_1
+								;HYRD4					;9682			;2018/09/23 10:00								;2018/09/16 17:00								;									;					;						;									;										;MIA_CRB			;HY					;AIRCRAFT_A380-800_1											
+								;HYRD5					;9683			;2018/01/19 10:00								;2020/01/05 18:00								;									;					;						;									;										;CHT_BHM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD6					;9683			;2018/01/29 08:00								;2018/01/26 16:00								;									;					;						;									;										;MIA_BHM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD7					;9683			;2018/02/02 08:00								;2018/01/12 16:00								;									;					;						;									;										;TMP_CRB			;HY					;AIRCRAFT_A380-800_1
+								;HYRD8					;9683			;2018/02/16 08:00								;2018/02/12 16:00								;									;					;						;									;										;CHT_BRM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD9					;9684			;2018/01/25 08:00								;2018/01/24 16:00								;									;					;						;									;										;CHT_CRB			;HY					;AIRCRAFT_A380-800_1
+								;HYRD10					;9684			;2018/02/20 08:00								;2018/02/14 16:00								;									;					;						;									;										;BHM_BLT			;HY					;AIRCRAFT_A380-800_1
+								;HYRD11					;9684			;2018/03/24 08:00								;2018/01/21 16:00								;									;					;						;									;										;BHM_BRM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD12					;9684			;2018/03/02 08:00								;2018/01/26 16:00								;									;					;						;									;										;BRM_BHM			;HY					;AIRCRAFT_A380-800_1				
+												
+							
+								
+								
+								
+								

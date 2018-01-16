@@ -23,9 +23,6 @@
 				<n:type-node id="hmc_typenode_travelrestriction" code="TravelRestriction" />
 				<n:type-node id="hmc_typenode_bundlemapping" code="BundleTemplateTransportOfferingMapping" />
 				<n:type-node id="hmc_typenode_activity" code="Activity" />
-				<n:type-node id="hmc_typenode_accommodation" code="Accommodation" />
-				<n:type-node id="hmc_typenode_travelagency" code="TravelAgency" />
-				<n:type-node id="hmc_typenode_accommodationmap" code="AccommodationMap" />
 				<n:navigation-node id="hmc_typenode_travelrules">
 					<n:navigation-node id="hmc_typenode_travelrules_source">
 						<n:type-node id="hmc_typenode_all_source_rules" code="SourceRule" />
@@ -44,17 +41,6 @@
 				</n:navigation-node>
 				<n:type-node id="hmc_typenode_scheduleconfiguration" code="ScheduleConfiguration" />
 				<n:type-node id="hmc_typenode_bundleTemplate" code="BundleTemplate" />
-			</n:navigation-node>
-			<n:navigation-node id="hmc_typenode_accommodation">
-				<n:type-node id="hmc_typenode_accommodationprovider" code="AccommodationProvider" />
-				<n:type-node id="hmc_typenode_accommodationoffering" code="AccommodationOffering" />
-				<n:type-node id="hmc_typenode_accommodationofferinggallery" code="AccommodationOfferingGallery" />
-				<n:type-node id="hmc_typenode_accommodation" code="Accommodation" />
-				<n:type-node id="hmc_typenode_rateplan" code="RatePlan" />
-				<n:type-node id="hmc_typenode_marketingrateplaninfo" code="MarketingRatePlanInfo" />
-				<n:type-node id="hmc_typenode_rateplanconfig" code="RatePlanConfig" />
-				<n:type-node id="hmc_typenode_roomrateproduct" code="RoomRateProduct" />
-				<n:type-node id="hmc_typenode_roompreference" code="RoomPreference" />
 			</n:navigation-node>
 		</n:explorer-tree>
 	</context>

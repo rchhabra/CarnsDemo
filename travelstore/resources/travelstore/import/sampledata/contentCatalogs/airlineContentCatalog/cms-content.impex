@@ -77,7 +77,6 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ############# NAVIGATION BAR #################
 
 INSERT_UPDATE NavigationBarComponent; $contentCV[unique = true]; uid[unique = true]; name; wrapAfter; navigationNode(&nodeRef); link(uid, $contentCV); styleClass; dropDownLayout(code); &componentRef
-; ; BookTripBarComponent          ; Book Trip Bar Component          ; 10 ; BookTripNavNode          ; HomepageLink          ; ; AUTO ; BookTripBarComponent
 ; ; TravelInformationBarComponent ; Travel Information Bar Component ; 10 ; TravelInformationNavNode ; TravelInformationLink ; ; AUTO ; TravelInformationBarComponent
 ; ; BusinessUsersBarComponent     ; Business Users Bar Component     ; 10 ; BusinessUsersNavNode     ; BusinessUsersLink     ; ; AUTO ; BusinessUsersBarComponent
 ; ; TripFinderBarComponent        ; Trip Finder Bar Component        ; 10 ; TripFinderNavNode        ; TripFinderLink        ; ; AUTO ; TripFinderBarComponent

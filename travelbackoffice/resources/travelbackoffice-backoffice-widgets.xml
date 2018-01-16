@@ -27,12 +27,6 @@
 
 	<widget-extension widgetId="backoffice_dashboard">
 
-		<widget id="mainPanel" widgetDefinitionId="de.hybris.platform.travelbackoffice.widgets.mainpanel" slotId="dashboardWidgets" template="false">
-			<setting key="widgetStyleClass" type="String"></setting>
-			<setting key="widgetStyleAttribute" type="String"></setting>
-			<virtual-sockets/>
-		</widget>
-
 		<widget id="modifyWizard" widgetDefinitionId="de.hybris.platform.travelbackoffice.widget.modifywizard" slotId="cockpitWidgetChildrenInvisible" template="true">
 			<widget id="wizardNotificationWidget" widgetDefinitionId="com.hybris.backoffice.notificationarea" slotId="wizardNotificationarea" template="false">
                  <setting key="notificationId" type="String">creationWizard</setting>
