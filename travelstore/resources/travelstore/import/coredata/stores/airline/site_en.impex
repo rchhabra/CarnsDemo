@@ -6,5 +6,5 @@
 $lang = en
 
 # Create CMS Site
-UPDATE CMSSite; uid[unique = true]; name[lang = $lang]; locale[lang = $lang]
-; airline ; "Airline Site" ; en_GB
+INSERT_UPDATE CMSSite; uid[unique = true]; name[lang = $lang]; locale[lang = $lang]
+; airline ; "Cruises" ; en_GB
