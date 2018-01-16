@@ -10,13 +10,13 @@ $lang = en
 
 # Site Logo Component
 INSERT_UPDATE Media; code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; $contentCV[unique = true]; folder(qualifier)[default = images];
-; logo.svg ; $siteResource/images/theme/logo.svg ; logo.svg ; "Home"
+; carnival-logo.png ; $siteResource/images/theme/carnival-logo.png ; carnival-logo.png ; "Home"
 
-UPDATE Media; code[unique = true]; mime; $contentCV[unique = true]; folder(qualifier)[default = images];
-; logo.svg ; image/svg+xml
+INSERT_UPDATE Media; code[unique = true]; mime; $contentCV[unique = true]; folder(qualifier)[default = images];
+; carnival-logo.png ; image/png+xml
 
-UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture
-; ; SiteLogoComponent ; logo.svg
+INSERT_UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture
+; ; SiteLogoComponent ; carnival-logo.png
 
 # CMS Link Components
 UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
