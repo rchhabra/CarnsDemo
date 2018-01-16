@@ -8,7 +8,7 @@ UPDATE BundleType; code[unique = true]; name[lang = $lang]
 ; BUSINESS     ; Business
 
 UPDATE PassengerType; code[unique = true]; name[lang = $lang]
-; adult  ; Adult
+; adult  ; Number of User
 ; child  ; Child
 ; infant ; Infant
 

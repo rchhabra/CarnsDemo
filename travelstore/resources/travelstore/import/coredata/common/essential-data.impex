@@ -88,8 +88,6 @@ REMOVE ComponentTypeGroups2ComponentType; source(code)[unique = true]; target(co
 ############################
 INSERT_UPDATE PassengerType; code[unique = true]; minAge; maxAge
 ; adult  ; 16 ;
-; child  ; 2  ; 15
-; infant ; 0  ; 2
 
 #############################################
 ###	Terminal and Travel Provider SAMPLE DATA
