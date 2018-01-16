@@ -98,7 +98,10 @@ INSERT_UPDATE TravelSector		;code[unique = true]	;origin(code)	;destination(code
 								;TMP_CRB				;TMP			;CRB
 								;CHT_BHM				;CHT			;BHM
 								;CHT_BRM				;CHT			;BRM
-								;CHT_CRB				;CHT			;CRB	
+								;CHT_CRB				;CHT			;CRB
+								;BHM_BLT				;BHM			;BLT
+								;BHM_BRM				;BHM			;BRM
+								;BRM_BHM				;BRM			;BHM	
 								
 								
 								#Baltimore,MD to The Bahamas
@@ -139,7 +142,9 @@ INSERT_UPDATE TravelSector; code[unique = true]; name[lang = $lang]
 #Charleston,SC to Bermuda
 						  ;CHT_BRM			   ;Charleston SC to Bermuda
 #Charleston,SC to Caribbean
-						  ;CHT_CRB			   ;Charleston SC to Caribbean								
+						  ;CHT_CRB			   ;Charleston SC to Caribbean
+#Bahamas,BS to Baltimore	
+						  ;BHM_BLT			   ;Bahamas BS to Baltimore																				  								
 			
 
 INSERT_UPDATE TravelRoute		;code[unique = true]	;origin(code)	;destination(code)	;travelSector(code)
@@ -149,10 +154,15 @@ INSERT_UPDATE TravelRoute		;code[unique = true]	;origin(code)	;destination(code)
 								;MIA_CRB				;MIA		    ;CRB				;MIA_CRB
 								;CHT_BHM				;CHT		    ;BHM				;CHT_BHM
 								
-
+								
+								
+								#Baltimore,MD to The Bermuda
+								;BLT_BHM_BRM			;BLT			;BRM				;BLT_BHM, BHM_BRM
+								;BRM_BHM_BLT			;BRM			;BLT				;BRM_BHM, BHM_BLT
 								
 								#Baltimore,MD to The Bahamas
 								;BLT_BHM				;BLT			;BHM				;BLT_BHM
+								;BHM_BLT				;BHM			;BLT				;BHM_BLT
 								
 								
 								#Baltimore,MD to Bermuda
@@ -171,7 +181,7 @@ INSERT_UPDATE TravelRoute		;code[unique = true]	;origin(code)	;destination(code)
 								;CHT_BHM				;CHT		    ;BHM				;CHT_BHM
 								
 
-INSERT_UPDATE TransportOffering	;code[unique = true]	;number			;departureTime[dateformat = 'yyyy/MM/dd HH:mm']	;arrivalTime[dateformat = 'yyyy/MM/dd HH:mm']	;vendor(code)[default = $vendorUid]	;$originTerminal	;$destinationTerminal	;type(code)[default = $defaultType]	;status(code)[default = $defaultStatus]	;travelSector(code)	;travelProvider(code)	;transportVehicle(code)	;active[default = $defaultActiveState] 
+INSERT_UPDATE TransportOffering	;code[unique = true]	;number			;arrivalTime[dateformat = 'yyyy/MM/dd HH:mm']	;departureTime[dateformat = 'yyyy/MM/dd HH:mm']	;vendor(code)[default = $vendorUid]	;$originTerminal	;$destinationTerminal	;type(code)[default = $defaultType]	;status(code)[default = $defaultStatus]	;travelSector(code)	;travelProvider(code)	;transportVehicle(code)	;active[default = $defaultActiveState] 
 								;HYRD1					;9682			;2018/02/04 10:00								;2018/01/28 17:00								;									;					;						;									;										;BLT_BHM			;HY					;AIRCRAFT_A380-800_1
 								;HYRD2					;9682			;2018/02/11 10:00								;2018/02/04 17:00								;									;					;						;									;										;BLT_BRM			;HY					;AIRCRAFT_A380-800_1
 								;HYRD3					;9682			;2018/09/16 10:00								;2018/09/09 17:00								;									;					;						;									;										;BLT_CRB			;HY					;AIRCRAFT_A380-800_1
@@ -180,7 +190,11 @@ INSERT_UPDATE TransportOffering	;code[unique = true]	;number			;departureTime[da
 								;HYRD6					;9683			;2018/01/29 08:00								;2018/01/26 16:00								;									;					;						;									;										;MIA_BHM			;HY					;AIRCRAFT_A380-800_1
 								;HYRD7					;9683			;2018/02/02 08:00								;2018/01/12 16:00								;									;					;						;									;										;TMP_CRB			;HY					;AIRCRAFT_A380-800_1
 								;HYRD8					;9683			;2018/02/16 08:00								;2018/02/12 16:00								;									;					;						;									;										;CHT_BRM			;HY					;AIRCRAFT_A380-800_1
-								;HYRD9					;9684			;2018/01/25 08:00								;2018/01/25 16:00								;									;					;						;									;										;CHT_CRB			;HY					;AIRCRAFT_A380-800_1
+								;HYRD9					;9684			;2018/01/25 08:00								;2018/01/24 16:00								;									;					;						;									;										;CHT_CRB			;HY					;AIRCRAFT_A380-800_1
+								;HYRD10					;9684			;2018/02/20 08:00								;2018/02/14 16:00								;									;					;						;									;										;BHM_BLT			;HY					;AIRCRAFT_A380-800_1
+								;HYRD11					;9684			;2018/03/24 08:00								;2018/01/21 16:00								;									;					;						;									;										;BHM_BRM			;HY					;AIRCRAFT_A380-800_1
+								;HYRD12					;9684			;2018/03/02 08:00								;2018/01/26 16:00								;									;					;						;									;										;BRM_BHM			;HY					;AIRCRAFT_A380-800_1				
+												
 							
 								
 								
