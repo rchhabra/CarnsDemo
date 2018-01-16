@@ -10,7 +10,7 @@ $lang = en
 
 # Content Pages
 UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
-; ; homepage                     ; "Home"
+; ; homepage                     ; "Carnival Cruise Deals: Caribbean, Bahamas, Alaska, Mexico"
 ; ; login                        ; "Login"
 ; ; checkout-login               ; "Checkout Login"
 ; ; bookingConfirmationPage      ; "Booking Confirmation"
