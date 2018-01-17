@@ -16,8 +16,12 @@
 		<h2 class="h2">
 			<spring:theme code="text.ancillary.offers.title" text="Add extras to your booking" />
 		</h2>
+
+		
 		<div class="margin-reset y_ancillarySection clearfix">
 			<div class="col-xs-12 col-sm-9 y_nonItineraryContentArea">
+			
+			
 				<c:if test="${not empty errorResult}">
 					<div class="alert alert-danger alert-dismissible y_cancellationResult" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -54,6 +58,30 @@
 				</section>
 			</div>
 			<div class="col-xs-12 col-sm-3">
+			<div class="row">
+			
+				<div class="brand_di col-md-12 col-sm-12 col-xs-12">
+					<div class="banner banner__component--responsive">
+						<a href="#">
+							<div>
+								 <img title="box" alt="box"
+									src="${themeResourcePath}/images/box-1.jpg">
+
+
+								<div class="text-center pad_10 bg-yellow">
+									<h3 class="margin-0">
+									100 pounds discount for loyal customers
+									</h3>
+									<button class="btn btn-transparent-white">Shop Now</button>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+			
+		</div>
 				<aside id="sidebar" class="reservation y_reservationSideBar">
 					<div class="main-wrap">
 						<cms:pageSlot position="Reservation" var="feature" element="div">

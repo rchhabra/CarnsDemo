@@ -18,6 +18,7 @@
 		<jsp:invoke fragment="pageScripts" />
 	</jsp:attribute>
 	<jsp:body>
+	<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/custom.css"/>
 		<main class="page-margin" data-currency-iso-code="${fn:escapeXml(currentCurrency.isocode)}">
 
 			<header:header hideHeaderLinks="${hideHeaderLinks}" />

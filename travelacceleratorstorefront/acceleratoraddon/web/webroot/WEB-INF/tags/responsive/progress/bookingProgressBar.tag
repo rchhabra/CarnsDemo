@@ -6,7 +6,7 @@
 <%@ attribute name="amend" required="false" type="java.lang.Boolean" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="breadcrumb-wrap hidden-xs">
+<div class="breadcrumb-wrap hidden-xs hidden">
     <div class="container">
         <ul class="breadcrumbs">
             <c:choose>

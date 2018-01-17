@@ -76,6 +76,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="container-fluid bg-nav">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -85,6 +86,7 @@
 			<div class="collapse navbar-collapse" id="navbar-collapse">
 				<nav:topNavigation />
 			</div>
+		</div>
 		</div>
 	</nav>
 </header>
