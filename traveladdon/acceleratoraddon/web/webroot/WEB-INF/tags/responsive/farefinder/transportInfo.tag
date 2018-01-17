@@ -9,44 +9,44 @@
 <%@ attribute name="idPrefix" required="true" type="java.lang.String"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <%-- One way / return radio --%>
-<div class="radio-button-row">
+<div class="radio-button-row hidden">
 	<form:radiobutton id="y_roundTripRadbtn" path="${fn:escapeXml(formPrefix)}tripType" value="RETURN" class="y_fareFinderTripTypeBtn" />
 	<label for="roundTripRadbtn">
 		<spring:theme code="text.cms.farefinder.triptype.roundtrip" text="Round Trip" />
 	</label>
-	<form:radiobutton id="y_oneWayRadbtn" path="${fn:escapeXml(formPrefix)}tripType" value="SINGLE" class="y_fareFinderTripTypeBtn" />
+	<%-- <form:radiobutton id="y_oneWayRadbtn" path="${fn:escapeXml(formPrefix)}tripType" value="SINGLE" class="y_fareFinderTripTypeBtn" />
 	<label for="oneWayRadbtn">
 		<spring:theme code="text.cms.farefinder.triptype.oneway" text="One Way" />
-	</label>
+	</label> --%>
 </div>
 <%-- / One way / return radio --%>
 <%-- From / To input fields --%>
-<div class="row input-row">
-	<div class="input-required-wrap col-xs-12 col-sm-6">
+<div class=" input-row">
+	<div class="input-required-wrap col-xs-12 col-sm-2">
 		<label for="y_originLocation">
-			<spring:theme var="departureLocationPlaceholderText" code="text.cms.farefinder.departure.location.placeholder" text="From" />
+			From<spring:theme var="departureLocationPlaceholderText" code="text.cms.farefinder.departure.location.placeholder" text="From" />
 		</label>
 		<form:input type="text" id="y_originLocation" path="${fn:escapeXml(formPrefix)}departureLocationName" cssErrorClass="fieldError" class="y_originLocation input-grid col-xs-12 form-control" placeholder="${fn:escapeXml(departureLocationPlaceholderText)}" autocomplete="off" />
 		<form:hidden path="${fn:escapeXml(formPrefix)}departureLocation" class="y_originLocationCode" />
 		<form:hidden path="${fn:escapeXml(formPrefix)}departureLocationSuggestionType" class="y_originLocationSuggestionType" />
 		<div id="y_originLocationSuggestions" class="autocomplete-suggestions-wrapper hidden"></div>
 	</div>
-	<div class="input-required-wrap col-xs-12 col-sm-6">
+	<div class="input-required-wrap col-xs-12 col-sm-2">
 		<label for="y_destinationLocation">
-			<spring:theme var="arrivalLocationPlaceholderText" code="text.cms.farefinder.arrival.location.placeholder" text="To" />
+			To<spring:theme var="arrivalLocationPlaceholderText" code="text.cms.farefinder.arrival.location.placeholder" text="To" />
 		</label>
 		<form:input type="text" id="y_destinationLocation" path="${fn:escapeXml(formPrefix)}arrivalLocationName" cssErrorClass="fieldError" class="col-xs-12 y_destinationLocation input-grid form-control" placeholder="${fn:escapeXml(arrivalLocationPlaceholderText)}" autocomplete="off" />
 		<form:hidden path="${fn:escapeXml(formPrefix)}arrivalLocation" class="y_destinationLocationCode" />
 		<form:hidden path="${fn:escapeXml(formPrefix)}arrivalLocationSuggestionType" class="y_destinationLocationSuggestionType" />
 		<div id="y_destinationLocationSuggestions" class="autocomplete-suggestions-wrapper hidden"></div>
 	</div>
-</div>
+
 <%-- / From / To input fields --%>
 <%-- Departing / Returning dates input fields --%>
-<div class="row input-row">
-	<div class="input-required-wrap col-xs-12 col-sm-6">
+
+	<div class="input-required-wrap col-xs-12 col-sm-2">
 		<label for="departingDateTime">
-			<spring:theme var="departingDatePlaceholderText" code="text.cms.farefinder.departure.date.placeholder" text="Departure Date" />
+			Departure Date<spring:theme var="departingDatePlaceholderText" code="text.cms.farefinder.departure.date.placeholder" text="Departure Date" />
 		</label>
 		<form:input type="text" path="${fn:escapeXml(formPrefix)}departingDateTime" class="col-xs-12 datepicker input-grid form-control y_${fn:escapeXml( idPrefix )}FinderDatePickerDeparting y_transportDepartDate" placeholder="${fn:escapeXml(departingDatePlaceholderText)}" autocomplete="off" />
 	</div>
@@ -59,17 +59,17 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="y_fareFinderReturnField" style="display: ${showReturnOptions ? 'block' : 'none'};">
-		<div class="input-required-wrap col-xs-12 col-sm-6">
+		<div class="input-required-wrap col-xs-12 col-sm-2">
 			<label for="returnDateTime">
-				<spring:theme var="returnDatePlaceholderText" code="text.cms.farefinder.return.date.placeholder" text="Return Date" />
+				Return Date<spring:theme var="returnDatePlaceholderText" code="text.cms.farefinder.return.date.placeholder" text="Return Date" />
 			</label>
 			<form:input type="text" path="${fn:escapeXml(formPrefix)}returnDateTime" class="returnOption col-xs-12 datepicker input-grid form-control y_${fn:escapeXml( idPrefix )}FinderDatePickerReturning y_transportReturnDate" placeholder="${fn:escapeXml(returnDatePlaceholderText)}" autocomplete="off" />
 		</div>
 	</div>
 </div>
 <%-- Departing / Returning dates input fields --%>
-<div class="row input-row less-margin">
-	<div class="col-xs-12 col-sm-6">
+<%-- <div class="row input-row less-margin">
+	<div class="col-xs-12 col-sm-3">
 		<label class="sr-only" for="flightClass">
 			<spring:theme var="defaultCabinClassText" code="text.cms.farefinder.default.cabin.class" text="Select a Class" />
 		</label>
@@ -86,4 +86,4 @@
 			&nbsp;<i class="glyphicon glyphicon-info-sign"></i>
 		</a>
 	</div>
-</div>
+</div> --%>

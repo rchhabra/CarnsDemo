@@ -204,9 +204,9 @@ INSERT_UPDATE BannerComponent; $contentCV[unique = true]; uid[unique = true]; na
 
 INSERT_UPDATE ResponsiveBackgroundBannerComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; styleAttributes; urlLink
 ; ; HomePromoABannerComponent ; Promo A Banner Component ; HomePromoABannerComponent ; class="cta" ; /trip-finder?activity=family_friends&origin=LGW&city=NYC
-; ; HomePromoBBannerComponent ; Promo B Banner Component ; HomePromoBBannerComponent ; class="cta" ; /trip-finder?activity=beach_holiday&origin=LGW&city=NCE
-; ; HomePromoCBannerComponent ; Promo C Banner Component ; HomePromoCBannerComponent ; class="cta" ; /trip-finder?activity=beach_holiday&origin=LGW&city=ATH
-; ; HomePromoDBannerComponent ; Promo D Banner Component ; HomePromoDBannerComponent ; class="cta" ; /trip-finder?activity=culture_break&origin=LGW&city=VCE
+; ; HomePromoBBannerComponent ; Promo B Banner Component ; HomePromoBBannerComponent ; class="cta box-first" ; /trip-finder?activity=beach_holiday&origin=LGW&city=NCE
+; ; HomePromoCBannerComponent ; Promo C Banner Component ; HomePromoCBannerComponent ; class="cta box-sec" ; /trip-finder?activity=beach_holiday&origin=LGW&city=ATH
+; ; HomePromoDBannerComponent ; Promo D Banner Component ; HomePromoDBannerComponent ; class="cta box-thrd" ; /trip-finder?activity=culture_break&origin=LGW&city=VCE
 
 INSERT_UPDATE RotatingImagesComponent; $contentCV[unique = true]; uid[unique = true]; name; timeout; banners(&componentRef); &componentRef
 ; ; HomepageCarouselComponent ; Homepage Carousel ; 10 ; HomeCarousel1BannerComponent, HomeCarousel2BannerComponent, HomeCarousel3BannerComponent ; HomepageCarouselComponent

@@ -16,8 +16,12 @@
 		<h2 class="h2">
 			<spring:theme code="text.ancillary.offers.title" text="Add extras to your booking" />
 		</h2>
+
+		
 		<div class="margin-reset y_ancillarySection clearfix">
 			<div class="col-xs-12 col-sm-9 y_nonItineraryContentArea">
+			
+			
 				<c:if test="${not empty errorResult}">
 					<div class="alert alert-danger alert-dismissible y_cancellationResult" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -54,6 +58,31 @@
 				</section>
 			</div>
 			<div class="col-xs-12 col-sm-3">
+				<div class="row">
+					<div class="brand_di col-md-12 col-sm-12 col-xs-12">
+						<div class="banner banner__component--responsive">
+							
+								<div>
+									<img title="box" alt="box"
+										src="/yacceleratorstorefront/_ui/responsive/theme-alpha/images/promotion-img.jpg">
+									<div class="text-center pad_10 bg-yellow">
+										<h3 class="margin-0">Book Valentine Dinner at 50% discount</h3>
+										<form:form action="${fn:escapeXml(addToCartUrl)}" id="js-add-to-cart-form">
+											<input type="hidden" name="productCode" value="P00001"/>
+											<input type="hidden" name="qty" value="1"/>
+											<input type="hidden" name="transportOfferingCodes" value="HY9304160120181915"/>
+											<input type="hidden" name="travelRouteCode" value="LGW_JFK"/>
+											<input type="hidden" name="travellerCode" value="adult1"/>
+											<input type="hidden" name="originDestinationRefNumber" value="0"/>
+											<input type="submit" class="btn btn-transparent-white" id="js-btn-add-dinner" value="Book Now"></input>
+										</form:form>
+										
+									</div>
+								</div>
+							
+						</div>
+					</div>
+				</div>
 				<aside id="sidebar" class="reservation y_reservationSideBar">
 					<div class="main-wrap">
 						<cms:pageSlot position="Reservation" var="feature" element="div">

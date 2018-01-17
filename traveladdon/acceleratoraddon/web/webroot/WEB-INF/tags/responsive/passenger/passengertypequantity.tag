@@ -8,8 +8,28 @@
 <%@ attribute name="formPrefix" required="true" type="java.lang.String"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+
+<div class="col-xs-12 col-sm-3" style="opacity: 0; width: 0; padding: 0;">
+		<label class="" for="flightClass">
+			Economy<spring:theme var="defaultCabinClassText" code="text.cms.farefinder.default.cabin.class" text="Select a Class" />
+		</label>
+		<form:select class="form-control" id="flightClass" path="${fn:escapeXml(formPrefix)}cabinClass" multiple="no">
+			<form:option value="default" disabled="true">${fn:escapeXml(defaultCabinClassText)}</form:option>
+			<form:options items="${cabinClasses}" itemValue="code" itemLabel="name" htmlEscape="true"/>
+		</form:select>
+		<c:set var="specialAssistanceText">
+			<spring:theme code="text.cms.farefinder.special.assistance"
+						  text="Please contact us at least 48 hours before your flight departs in order to help us make your journey as easy as possible even if your flight is operated by one of our airline alliance or franchise partners because they may have different restrictions. If you have any questions please call us. To ensure we can provide the best possible service." />
+		</c:set>
+		<a tabindex="0" class="link-trigger" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-container="body" data-content="${fn:escapeXml(specialAssistanceText)}">
+			<spring:theme code="text.cms.farefinder.specialrequirements" text="Special Assistance" />
+			&nbsp;<i class="glyphicon glyphicon-info-sign"></i>
+		</a>
+	</div>
+
 <c:forEach var="entry" items="${passengerTypeQuantityList}" varStatus="i">
-	<div class="col-xs-4 col-sm-4">
+<c:if test="${entry.passengerType.code == 'adult'}">
+	<div class="col-xs-4 col-sm-2">
 		<label for="y_${fn:escapeXml(entry.passengerType.code)}">
 				${fn:escapeXml(entry.passengerType.name)}
 		</label>
@@ -31,7 +51,7 @@
 		<form:input path="${fn:escapeXml(formPrefix)}passengerTypeQuantityList[${fn:escapeXml(i.index)}].passengerType.name" type="hidden" readonly="true" />
 		<form:input path="${fn:escapeXml(formPrefix)}passengerTypeQuantityList[${fn:escapeXml(i.index)}].passengerType.minAge" type="hidden" readonly="true" />
 		<form:input path="${fn:escapeXml(formPrefix)}passengerTypeQuantityList[${fn:escapeXml(i.index)}].passengerType.maxAge" type="hidden" readonly="true" />
-		<c:set var="label">
+		<%-- <c:set var="label">
 			<c:choose>
 				<c:when test="${entry.passengerType.code == 'adult'}">
 					<span class="age-range">
@@ -60,7 +80,8 @@
 					</span>
 				</c:otherwise>
 			</c:choose>
-		</c:set>
+		</c:set> --%>
 		<div>${label}</div>
 	</div>
+	</c:if>
 </c:forEach>

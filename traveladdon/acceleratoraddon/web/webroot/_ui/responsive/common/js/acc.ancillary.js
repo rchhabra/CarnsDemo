@@ -8,7 +8,7 @@ ACC.ancillary = {
         [ "bindCheckboxChange", $(".y_ancillarySection").length != 0 ],
         [ "bindOfferItemChange", $(".y_ancillarySection").length != 0 ],
         [ "bindReservationContinueButton", $(".y_ancillarySection").length != 0 ],
-        "bindSelectUpgradeBundleOptions"],
+        "bindSelectUpgradeBundleOptions","bindancillaryAddToCart"],
 
     updateSelectedOptionsInit : function() {
         // Update all the select dropdown to disable already selected
@@ -495,5 +495,23 @@ ACC.ancillary = {
                 $("#y_noAvailabilityModal").modal();
             }
         }
+    },
+    bindancillaryAddToCart : function() {
+    	$("#js-add-to-cart-form").ajaxForm({success: function(response) {
+    		var jsonData = JSON.parse(response);
+
+                if(jsonData.valid) {
+                    ACC.reservation.refreshReservationTotalsComponent($("#y_reservationTotalsComponentId").val());
+                    ACC.reservation.refreshTransportSummaryComponent($("#y_transportSummaryComponentId").val());
+                } else {
+                    var output = [];
+                    jsonData.errors.forEach(function(error) {
+                        output.push("<p>" + error + "</p>");
+                    });
+                    $("#y_addProductToCartErrorModal .y_addProductToCartErrorBody").html(output.join(""));
+                    $("#y_addProductToCartErrorModal").modal();
+                }
+    	}});
     }
+    
 }

@@ -19,7 +19,7 @@
         <div class="fare-selection-wrap y_fareSelectionSection clearfix">
             <div class="col-xs-12 col-sm-9 fare-selection-body y_nonItineraryContentArea">
                 <%-- Fare Finder container --%>
-                <div class="col-xs-12">
+                <div class="col-xs-12 hidden">
                     <div class="row">
                         <div class="modify-search panel panel-primary col-xs-12 col-sm-9">
                             <div class="row">
