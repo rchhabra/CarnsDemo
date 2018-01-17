@@ -16,8 +16,51 @@
         <h2 class="h2">
             <spring:theme code="fareselection.title" text="Please choose your flight"/>
         </h2>
+        <div class="row">
+        	<div class="col-md-6">
+				<div class="itnery-bg-1">
+					<div class="itnery-text">
+						<div class="row">
+							<div class="col-md-12">
+								<p class="third-entry-2">dsfdsfdsfdsfdsfdsfdsf</p>
+								<p class="four-entry-2">dsfdsfdsfdsfdsfdsfdsf</p>
+								<a href="/yacceleratorstorefront/ancillary"
+									class="btn btn-secondary btn-select-4 col-xs-4 y_fareSelectionContinueButton">
+									Select</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="itnery-bg">
+					<div class="itnery-text">
+						<div class="row">
+							<div class="col-md-12">
+								<p class="first-entry">dsfdsfdsfdsfdsfdsfdsf</p>
+								<p class="second-entry">dsfdsfdsfdsfdsfdsfdsf</p>
+								<p class="third-entry">dsfdsfdsfdsfdsfdsfdsf</p>
+								<a href="/yacceleratorstorefront/ancillary"
+									class="btn btn-secondary btn-select-3 col-xs-4 y_fareSelectionContinueButton">
+									Select</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+        
+        </div>
+        
+        
         <div class="fare-selection-wrap y_fareSelectionSection clearfix">
-            <div class="col-xs-12 col-sm-9 fare-selection-body y_nonItineraryContentArea">
+            <div class="col-xs-12 col-sm-12 fare-selection-body y_nonItineraryContentArea">
+            
+            
+            
+            
+            
                 <%-- Fare Finder container --%>
                 <div class="col-xs-12 hidden">
                     <div class="row">
@@ -114,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-3">
+            <div class="col-xs-12 col-sm-3 hidden">
                 <aside id="sidebar" class="reservation y_reservationSideBar">
                     <div class="main-wrap">
                         <cms:pageSlot position="Reservation" var="feature" element="div">
