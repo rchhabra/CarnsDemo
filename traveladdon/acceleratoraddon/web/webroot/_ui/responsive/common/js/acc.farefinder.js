@@ -297,11 +297,33 @@ ACC.farefinder = {
         if (selectedMinDate) {
             minDateUK = selectedMinDate;
         }
+		var departure_Date = $('.y_transportDepartDate').val();
+		var edit_Date = departure_Date.split("/");
+		var date = edit_Date[0];
+		var month = edit_Date[1];
 
+		if (date > 15) {
+			date = date - 5;
+			month = parseInt(month);
+			month = (month + 1);
+			edit_Date[0] = date.toString();
+			edit_Date[1] = month.toString();
+		} 
+		else {
+			date = parseInt(date);
+			date = (date + 15);
+			month = parseInt(month);
+			edit_Date[0] = date.toString();
+			edit_Date[1] = month.toString();
+		}
+		
+		var return_Date = edit_Date[0].toString() + "/0" + edit_Date[1]
+				+ "/" + edit_Date[2];
+		
+        document.getElementById('returnDate').value = return_Date;
         if(!$returnDateField.length){
             return;
         }
-        
         var selectedUSDate=ACC.travelcommon.convertToUSDate(minDateUK);
     	var minDateForReturnDate=ACC.travelcommon.addDays(selectedUSDate,ACC.farefinder.minRelativeReturnDate);
 
