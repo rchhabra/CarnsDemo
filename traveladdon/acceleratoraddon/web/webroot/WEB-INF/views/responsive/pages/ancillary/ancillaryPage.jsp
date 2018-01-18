@@ -74,7 +74,7 @@
 											<input type="hidden" name="travelRouteCode" value="LGW_JFK"/>
 											<input type="hidden" name="travellerCode" value="adult1"/>
 											<input type="hidden" name="originDestinationRefNumber" value="0"/>
-											<input type="submit" class="btn btn-transparent-white" id="js-btn-add-dinner" value="Book Now"></input>
+											<input type="submit" class="btn btn-secondary" id="js-btn-add-dinner" value="Book Now"></input>
 										</form:form>
 										
 									</div>
