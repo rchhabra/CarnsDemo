@@ -84,7 +84,7 @@
 															:
 														</dt>
 														<dd>
-															<fmt:formatDate value="${transportOffering.departureTime}" pattern="${datePattern}" />
+															<fmt:formatDate value="${transportOffering.departureTime}" pattern="dd MMM yyyy" />
 														</dd>
 													</dl>
 												</div>
@@ -95,7 +95,7 @@
 															:
 														</dt>
 														<dd>
-															<fmt:formatDate value="${transportOffering.arrivalTime}" pattern="${datePattern}" />
+															<fmt:formatDate value="${transportOffering.arrivalTime}" pattern="dd MMM yyyy" />
 														</dd>
 													</dl>
 												</div>

@@ -32,7 +32,7 @@
                             <dt>
                                 <spring:theme code="text.page.managemybooking.reservationitem.departs" text="Departs" />
                             </dt>
-                            <fmt:formatDate value="${transportOffering.departureTime}" var="formattedDepartureDate" type="both" pattern="HH:mm dd MMM yyyy" />
+                            <fmt:formatDate value="${transportOffering.departureTime}" var="formattedDepartureDate" type="both" pattern="dd MMM yyyy" />
                             <dd>${fn:escapeXml(formattedDepartureDate)}</dd>
                         </dl>
                     </div>
@@ -41,7 +41,7 @@
                             <dt>
                                 <spring:theme code="text.page.managemybooking.reservationitem.arrives" text="Arrives" />
                             </dt>
-                            <fmt:formatDate value="${transportOffering.arrivalTime}" var="formattedArrivalDate" type="both" pattern="HH:mm dd MMM yyyy" />
+                            <fmt:formatDate value="${transportOffering.arrivalTime}" var="formattedArrivalDate" type="both" pattern="dd MMM yyyy" />
                             <dd>${fn:escapeXml(formattedArrivalDate)}</dd>
                         </dl>
                     </div>
