@@ -16,7 +16,7 @@ ACC.fareselection = {
         "setFromPriceForOptions",
         [ "bindSortingSelection", $(".y_fareSelectionSection").length !== 0 ],
         "hideProcessingModal",
-        "bindSaveSearch"
+        "bindSaveSearch","bindFareSelectionButton"
     ],
 
     init : function() {
@@ -43,10 +43,10 @@ ACC.fareselection = {
         }
     },
 
-    bindOutboundSelectionButton : function() {
+    bindOutboundSelectionButton : function(event) {
         $(document).on('click', '#y_outbound .y_fareResultSelect', function() {
             ACC.appmodel.previouslySelectedItineraryId = $("#y_outbound label.selected input").attr("id");
-        }).on('change', '#y_outbound .y_fareResultSelect', function() {
+        }).on('change', '#y_outbound .y_fareResultSelect', function(event) {
             ACC.fareselection.disableButtonsOnPage();
             ACC.appmodel.currentlySelectedItineraryId = $(this).attr("id");
             ACC.appmodel.trips.outbound.dateTime = new Date(parseInt($(this).val()));
@@ -60,7 +60,9 @@ ACC.fareselection = {
 
             //Call to server to addBundleToCart
             var addBundleToCartForm = $(this).parent().find(".y_addBundleToCartForm");
-            ACC.fareselection.addBundleToCartSubmit(addBundleToCartForm,this);
+            var listSize = parseInt($("input[type=hidden][name=numberOfOutBounds]").val());
+    		var index = $(this).data("index");
+            ACC.fareselection.addBundleToCartSubmit(addBundleToCartForm,this, index + listSize);
         });
     },
 
@@ -505,7 +507,7 @@ ACC.fareselection = {
         return fareFinderSerialized;
     },
 
-    addBundleToCartSubmit : function(addBundleToCartForm,btnClicked){
+    addBundleToCartSubmit : function(addBundleToCartForm,btnClicked,index){
         if($('html').hasClass('y_isMobile')) {
             ACC.fareselection.contractExpandTravelSelection(true, $(btnClicked));
         }
@@ -563,6 +565,11 @@ ACC.fareselection = {
                 ACC.reservation.refreshReservationTotalsComponent($("#y_reservationTotalsComponentId").val());
                 ACC.reservation.refreshTransportSummaryComponent($("#y_transportSummaryComponentId").val());
                 ACC.fareselection.enableButtonsOnPage();
+                if(index)
+            	{
+            	$("#y_frSelect-"+index+"-ECONOMY").click();
+            	}
+                
             });
         return addToCartResult;
     },
@@ -578,6 +585,18 @@ ACC.fareselection = {
                 });
             }
         });
+    },
+    
+    bindFareSelectionButton : function() {
+    	$(".y_fareSelectionButton").click(function() {
+    		var listSize = parseInt($("input[type=hidden][name=numberOfOutBounds]").val());
+    		var index = $(this).data("index");
+    		$("#y_frSelect-"+index+"-ECONOMY").click();
+    		/*setTimeout(function() {
+    			$("#y_frSelect-"+ (index + listSize) +"-ECONOMY").click();
+    		},4000);*/
+    		
+    	});
     }
 
 

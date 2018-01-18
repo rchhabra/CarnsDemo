@@ -81,7 +81,7 @@
 								<div class="clearfix">
 									<ul class="flight-details flight-details-stop col-xs-12">
 										<li class="flight-number col-sm-12 test">
-											<span class="heading"><spring:theme code="fareselection.flight" /></span>&nbsp;${fn:escapeXml(transportOffering.travelProvider.code)}${fn:escapeXml(transportOffering.number)}&nbsp;${fn:escapeXml(transportOffering.transportVehicle.vehicleInfo.name)}
+											<span class="heading">Cruise</span>&nbsp;${fn:escapeXml(transportOffering.travelProvider.code)}${fn:escapeXml(transportOffering.number)}&nbsp;${fn:escapeXml(transportOffering.transportVehicle.vehicleInfo.name)}
 										</li>
 									</ul>
 									<c:if test='${!offeringIdx.last}'>
