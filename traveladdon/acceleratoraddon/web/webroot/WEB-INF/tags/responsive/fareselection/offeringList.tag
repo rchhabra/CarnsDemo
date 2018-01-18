@@ -22,7 +22,8 @@
 <c:set var="dates" value="${refNumber == outboundRefNumber ? outboundDates : inboundDates }" />
 <c:set var="linksForTabs" value="${refNumber == outboundRefNumber ? outboundTabLinks : inboundTabLinks }" />
 
-<div class="nav-tabs-wrapper y_fareResultNavTabs">
+        
+<div class="nav-tabs-wrapper y_fareResultNavTabs">dfgfdg
 	<a href="${fn:escapeXml(linksForTabs[3])}" class="next y_next">&#10095;</a>
 	<a href="${fn:escapeXml(linksForTabs[1])}" class="prev y_previous">&#10094;</a>
 	<%-- Nav tabs --%>
@@ -95,10 +96,12 @@
 														<c:choose>
 															<c:when test="${numberOfConnections > 1}">
 																<c:set var="firstOffering" value="${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0]}" />
+																<c:set var="inboundFirstOffering" value="${inboundList[idx.index].itinerary.originDestinationOptions[0].transportOfferings[0]}" />
 																<c:set var="lastOffering" value="${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[(numberOfConnections-1)]}" />
 															</c:when>
 															<c:otherwise>
 																<c:set var="firstOffering" value="${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0]}" />
+																<c:set var="inboundFirstOffering" value="${inboundList[idx.index].itinerary.originDestinationOptions[0].transportOfferings[0]}" />
 																<c:set var="lastOffering" value="${firstOffering}" />
 															</c:otherwise>
 														</c:choose>
@@ -106,7 +109,7 @@
 															<dt class="sr-only">
 																<spring:theme code="sr.fareselection.fromlocation" />
 															</dt>
-															<dd class="location-info heading">${fn:escapeXml(firstOffering.sector.origin.location.name)}&nbsp;(${fn:escapeXml(firstOffering.sector.origin.code)})</dd>
+															<dd class="location-info heading">${fn:escapeXml(firstOffering.sector.origin.location.name)}&nbsp;(${fn:escapeXml(firstOffering.sector.origin.code)}) - ${fn:escapeXml(inboundFirstOffering.sector.origin.location.name)}&nbsp;(${fn:escapeXml(inboundFirstOffering.sector.origin.code)})</dd>
 															<dt class="sr-only">
 																<spring:theme code="sr.fareselection.departuretime" />
 															</dt>
