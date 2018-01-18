@@ -16,7 +16,7 @@ ACC.fareselection = {
         "setFromPriceForOptions",
         [ "bindSortingSelection", $(".y_fareSelectionSection").length !== 0 ],
         "hideProcessingModal",
-        "bindSaveSearch"
+        "bindSaveSearch","bindFareSelectionButton"
     ],
 
     init : function() {
@@ -578,6 +578,18 @@ ACC.fareselection = {
                 });
             }
         });
+    },
+    
+    bindFareSelectionButton : function() {
+    	$(".y_fareSelectionButton").click(function() {
+    		var listSize = parseInt($("input[type=hidden][name=numberOfOutBounds]").val());
+    		var index = $(this).data("index");
+    		$("#y_frSelect-"+index+"-ECONOMY").click();
+    		setTimeout(function() {
+    			$("#y_frSelect-"+ (index + listSize) +"-ECONOMY").click();
+    		},4000);
+    		
+    	});
     }
 
 

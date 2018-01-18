@@ -59,6 +59,7 @@ import de.hybris.platform.travelservices.utils.TravelDateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -67,6 +68,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -311,7 +313,31 @@ public class FareSelectionPageController extends TravelAbstractPageController
 		final String priceDisplayPassengerType = configurationService.getConfiguration()
 				.getString(TraveladdonWebConstants.PRICE_DISPLAY_PASSENGER_TYPE);
 		model.addAttribute(TraveladdonWebConstants.MODEL_PRICE_DISPLAY_PASSENGER_TYPE, priceDisplayPassengerType);
-
+		List<PricedItineraryData> iteneraryDataList = fareSelectionData.getPricedItineraries();
+		List<PricedItineraryData> outBoundDataList = new ArrayList<>();
+		List<PricedItineraryData> inBoundDataList = new ArrayList<>();
+		for (PricedItineraryData iteneraryData : iteneraryDataList) {
+			if (iteneraryData.getOriginDestinationRefNumber() == 0) {
+				outBoundDataList.add(iteneraryData);
+			} else {
+				inBoundDataList.add(iteneraryData);
+			}
+		}
+		
+		List<Long> durationList = new ArrayList<>();
+		
+		for(int i=0;i<outBoundDataList.size(); i++)
+		{
+			Date departureTime = outBoundDataList.get(i).getItinerary().getOriginDestinationOptions().get(0).getTransportOfferings().get(0).getDepartureTime();
+			Date arrivalTime = inBoundDataList.get(i).getItinerary().getOriginDestinationOptions().get(0).getTransportOfferings().get(0).getArrivalTime();
+			long diff = arrivalTime.getTime() - departureTime.getTime();
+				diff= TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+			durationList.add(diff);
+				
+		}
+		model.addAttribute(durationList);
+		model.addAttribute("outboundList", outBoundDataList);
+		model.addAttribute("inboundList", inBoundDataList);
 		model.addAttribute(TraveladdonWebConstants.FARE_SELECTION, fareSelectionData);
 		model.addAttribute(TraveladdonWebConstants.TRIP_TYPE, fareFinderForm.getTripType());
 		final AddBundleToCartForm addBundleToCartForm = new AddBundleToCartForm();

@@ -9,48 +9,34 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+
 <template:page pageTitle="${pageTitle}">
     <progress:bookingProgressBar stage="flights" bookingJourney="${bookingJourney}"/>
     <c:url var="ancillaryPageUrl" value="/ancillary" />
     <div class="container y_fareSelectionPage">
         <h2 class="h2">
-            <spring:theme code="fareselection.title" text="Please choose your flight"/>
+            <spring:theme code="fareselection.title" text="Please choose your Cruise"/>
         </h2>
         <div class="row">
-        	<div class="col-md-6">
-				<div class="itnery-bg-1">
-					<div class="itnery-text">
-						<div class="row">
-							<div class="col-md-12">
-								<p class="third-entry-2">dsfdsfdsfdsfdsfdsfdsf</p>
-								<p class="four-entry-2">dsfdsfdsfdsfdsfdsfdsf</p>
-								<a href="/yacceleratorstorefront/ancillary"
-									class="btn btn-secondary btn-select-4 col-xs-4 y_fareSelectionContinueButton">
-									Select</a>
+        	<input type="hidden" name="numberOfOutBounds" value="${fn:length(outboundList)}"/>
+        	<c:forEach items="${outboundList}" var="pricedItinerary" varStatus="idx">
+        		<div class="col-md-6">
+					<div class="itnery-bg-1">
+						<div class="itnery-text">
+							<div class="row">
+								<div class="col-md-12">
+									<p class="third-entry-2">${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].sector.origin.location.name} - ${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].departureTime}</p>
+									<p class="four-entry-2">${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].sector.destination.location.name} - ${inboundList[idx.index].itinerary.originDestinationOptions[0].transportOfferings[0].arrivalTime}</p>
+									<input type="button"
+										class="btn btn-secondary btn-select-4 col-xs-4 y_fareSelectionButton" data-index=${idx.index}
+										value="Select"/>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="itnery-bg">
-					<div class="itnery-text">
-						<div class="row">
-							<div class="col-md-12">
-								<p class="first-entry">dsfdsfdsfdsfdsfdsfdsf</p>
-								<p class="second-entry">dsfdsfdsfdsfdsfdsfdsf</p>
-								<p class="third-entry">dsfdsfdsfdsfdsfdsfdsf</p>
-								<a href="/yacceleratorstorefront/ancillary"
-									class="btn btn-secondary btn-select-3 col-xs-4 y_fareSelectionContinueButton">
-									Select</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		
-        
+        	</c:forEach>
         </div>
         
         
@@ -80,7 +66,7 @@
                                 <c:when test="${not empty fareSelection && not empty fareSelection.pricedItineraries}">
                                     <input type="hidden" id="y_tripType" value="${fn:escapeXml(tripType)}" />
                                     <%-- Outbound offerings table --%>
-                                    <div id="y_outbound_start" class="with-icon heading-booking-trip-blue">
+                                   <div id="y_outbound_start" class="with-icon heading-booking-trip-blue">
                                         <h2 class="h4">
                                             <spring:theme code="fareselection.outbound"/>
                                         </h2>
