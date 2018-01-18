@@ -24,10 +24,18 @@
         		<div class="col-md-6">
 					<div class="itnery-bg-1">
 						<div class="itnery-text">
+
+							<div class="duration-title">
+								<p>
+									<span class="ng-binding"> ${longList[idx.index]}<br>
+										Day
+									</span>
+								</p>
+							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<p class="third-entry-2">${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].sector.origin.location.name} - ${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].departureTime}</p>
-									<p class="four-entry-2">${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].sector.destination.location.name} - ${inboundList[idx.index].itinerary.originDestinationOptions[0].transportOfferings[0].arrivalTime}</p>
+									<p class="third-entry-2">${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].sector.origin.location.name}</p>
+									<p class="four-entry-2">${pricedItinerary.itinerary.originDestinationOptions[0].transportOfferings[0].sector.destination.location.name}</p>
 									<input type="button"
 										class="btn btn-secondary btn-select-4 col-xs-4 y_fareSelectionButton" data-index=${idx.index}
 										value="Select"/>
@@ -60,7 +68,7 @@
                     </div>
                 </div>
                 <div class="fare-table-wrapper clearfix">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 hidden">
                         <div class="fare-table-inner-wrap">
                             <c:choose>
                                 <c:when test="${not empty fareSelection && not empty fareSelection.pricedItineraries}">
