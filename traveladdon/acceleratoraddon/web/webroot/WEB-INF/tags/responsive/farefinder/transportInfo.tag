@@ -8,13 +8,7 @@
 <%@ attribute name="tripType" required="true" type="java.lang.String"%>
 <%@ attribute name="idPrefix" required="true" type="java.lang.String"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
-<style>
-#returnDateTime{
-    margin: 0;
-    padding: 0;
-    width: 0;
-    opacity: 0;}
-</style>
+
 <%-- One way / return radio --%>
 <div class="radio-button-row hidden">
 	<form:radiobutton id="y_roundTripRadbtn" path="${fn:escapeXml(formPrefix)}tripType" value="RETURN" class="y_fareFinderTripTypeBtn" />
@@ -29,7 +23,7 @@
 <%-- / One way / return radio --%>
 <%-- From / To input fields --%>
 <div class=" input-row">
-	<div class="input-required-wrap col-xs-12 col-sm-2">
+	<div class="input-required-wrap col-xs-12 col-sm-3">
 		<label for="y_originLocation">
 			From<spring:theme var="departureLocationPlaceholderText" code="text.cms.farefinder.departure.location.placeholder" text="From" />
 		</label>
@@ -38,7 +32,7 @@
 		<form:hidden path="${fn:escapeXml(formPrefix)}departureLocationSuggestionType" class="y_originLocationSuggestionType" />
 		<div id="y_originLocationSuggestions" class="autocomplete-suggestions-wrapper hidden"></div>
 	</div>
-	<div class="input-required-wrap col-xs-12 col-sm-2">
+	<div class="input-required-wrap col-xs-12 col-sm-3">
 		<label for="y_destinationLocation">
 			To<spring:theme var="arrivalLocationPlaceholderText" code="text.cms.farefinder.arrival.location.placeholder" text="To" />
 		</label>

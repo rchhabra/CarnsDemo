@@ -1,0 +1,19 @@
+$lang = en
+$catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), version[default = 'Online'])[unique = true, default = 'travelProductCatalog:Online']
+$categories = supercategories(code, $catalogVersion)
+$approved = approvalstatus(code)[default = 'approved']
+$taxGroupLounge = Europe1PriceFactory_PTG(code)[default = LOUNGE]
+
+#Special Products                     
+INSERT_UPDATE Product; code[unique = true]; name[lang = $lang]; Description[lang = $lang]; $categories; productType(code)[default = 'ANCILLARY']; travelRestriction(code); $catalogVersion; $approved; ignoreRules[default = true]
+; P00001 ; "Wi-Fi"; "Wi-Fi" ; SPECIAL; ; ; ; ; false
+                     
+INSERT_UPDATE PriceRow; product(code, $catalogVersion)[unique = true]; ug(code)[unique = true]; currency(isocode)[unique = true, default = GBP]; price[unique = true]; $catalogVersion; minqtd[default = '1']; net[default = true]; unit(code)[default = pieces]; user(uid); transportOfferingCode[unique = true]; travelSectorCode[unique = true]; travelRouteCode[unique = true]
+
+# Default Prices for Economy fare products in GBP
+; P00001 ; ; ; 50 ; ; ; ; ; ; ; ;
+
+# Stock Levels
+INSERT_UPDATE StockLevel;productCode[unique=true];inStockStatus(code);warehouse(code)[unique=true];available[default=200];reserved[default=0]
+; P00001 ; forceInStock ; default ; 100 ; ;
+

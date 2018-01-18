@@ -5,7 +5,7 @@
 <%@ taglib prefix="footer" tagdir="/WEB-INF/tags/responsive/common/footer"%>
 <div class="container">
 	<nav>
-		<ul class="flexbox row">
+		<ul class="flexbox col-sm-6">
 			<li class="col-xs-6">
 				<small class="copyright">${fn:escapeXml(notice)}</small>
 			</li>
@@ -19,5 +19,12 @@
 				</c:if>
 			</c:forEach>
 		</ul>
+		 <ul class="col-sm-3 list-unstyled flexbox pull-right"> 
+              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li> 
+              <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li> 
+              <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li> 
+              <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> 
+              <li><a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a></li> 
+            </ul> 
 	</nav>
 </div>
