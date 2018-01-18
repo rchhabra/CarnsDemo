@@ -45,14 +45,14 @@
                             <dd>${fn:escapeXml(formattedArrivalDate)}</dd>
                         </dl>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-3">
+                    <%-- <div class="col-xs-12 col-sm-6 col-md-3">
                         <dl>
                             <dt>
                                 <spring:theme code="text.page.managemybooking.reservationitem.terminal" text="Terminal" />
                             </dt>
                             <dd>${fn:escapeXml(transportOffering.originTerminal.name)}</dd>
                         </dl>
-                    </div>
+                    </div> --%>
                 </div>
                 <div class="col-xs-12">
                     <dl class="status">

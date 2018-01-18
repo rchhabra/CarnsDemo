@@ -14,8 +14,7 @@ UPDATE PassengerType; code[unique = true]; name[lang = $lang]
 
 
 INSERT_UPDATE Terminal; code[unique = true]; name[lang = $lang]
-; T1 ; Terminal 1
-; T2 ; Terminal 2
+
 
 INSERT_UPDATE TravelProvider; code[unique = true]; name[lang = $lang]
 ; HY ; Hybris Air

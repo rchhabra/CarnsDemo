@@ -320,7 +320,7 @@ ACC.farefinder = {
 		var return_Date = edit_Date[0].toString() + "/0" + edit_Date[1]
 				+ "/" + edit_Date[2];
 		
-        document.getElementById('returnDate').value = return_Date;
+        document.getElementById('returnDateTime').value = return_Date;
         if(!$returnDateField.length){
             return;
         }
