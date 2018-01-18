@@ -60,7 +60,7 @@
 		</c:otherwise>
 	</c:choose>
 	<div class="y_fareFinderReturnField" style="display: ${showReturnOptions ? 'block' : 'none'};">
-		<div class="input-required-wrap col-xs-12 col-sm-2">
+		<div class="input-required-wrap col-xs-12 col-sm-2 retrun-none">
 			<label for="returnDateTime">
 				Return Date<spring:theme var="returnDatePlaceholderText" code="text.cms.farefinder.return.date.placeholder" text="Return Date" />
 			</label>
