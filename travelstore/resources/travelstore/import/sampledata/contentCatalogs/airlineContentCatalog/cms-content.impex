@@ -217,7 +217,7 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 ; ; ManageMyBookingSlot               ; Check In Search Slot                  ; true ; ManageMyBookingComponent
 ; ; TransportOfferingStatusSearchSlot ; Transport Offering Status Search Slot ; true ; TransportOfferingStatusSearchComponent
 ; ; HomeCarouselSlot                  ; Slot for Carousel of home page        ; true ; HomepageCarouselComponent
-; ; HomeSection4ASlot                 ; Slot for Section 4A                   ; true ; HomePromoABannerComponent,HomePromoBBannerComponent,HomePromoCBannerComponent,HomePromoDBannerComponent
+; ; HomeSection4ASlot                 ; Slot for Section 4A                   ; true ; HomePromoBBannerComponent,HomePromoCBannerComponent,HomePromoDBannerComponent
 
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'homepage']; contentSlot(uid, $contentCV)[unique = true]
 ; ; HomePage-Section1  ; Section1  ; ; FareFinderSlot
