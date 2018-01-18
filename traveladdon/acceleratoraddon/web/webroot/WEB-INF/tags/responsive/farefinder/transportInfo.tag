@@ -8,6 +8,13 @@
 <%@ attribute name="tripType" required="true" type="java.lang.String"%>
 <%@ attribute name="idPrefix" required="true" type="java.lang.String"%>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<style>
+#returnDateTime{
+    margin: 0;
+    padding: 0;
+    width: 0;
+    opacity: 0;}
+</style>
 <%-- One way / return radio --%>
 <div class="radio-button-row hidden">
 	<form:radiobutton id="y_roundTripRadbtn" path="${fn:escapeXml(formPrefix)}tripType" value="RETURN" class="y_fareFinderTripTypeBtn" />
