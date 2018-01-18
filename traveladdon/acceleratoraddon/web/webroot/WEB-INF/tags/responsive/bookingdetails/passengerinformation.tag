@@ -33,7 +33,7 @@
 					<dt class="sr-only">
 						<spring:theme code="text.page.managemybooking.reservationitem.passengersummary.passengerinformation.class" text="Class:" />
 					</dt>
-					<dd>${fn:escapeXml(reservationItem.reservationPricingInfo.itineraryPricingInfo.bundleTypeName)}</dd>
+					<%-- <dd>${fn:escapeXml(reservationItem.reservationPricingInfo.itineraryPricingInfo.bundleTypeName)}</dd> --%>
 					<dt class="sr-only">
 						<spring:theme code="text.page.managemybooking.reservationitem.passengersummary.passengerinformation.specialassistance" text="Special Assistance:" />
 					</dt>
