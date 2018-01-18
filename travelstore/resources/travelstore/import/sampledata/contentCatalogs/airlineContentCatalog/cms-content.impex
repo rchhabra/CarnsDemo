@@ -835,3 +835,10 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; name; page; &componentRef
 ; ; AccountOrderDetailsTotalsComponent ; Account Order Details Order Totals Component ; /WEB-INF/views/addons/assistedservicestorefront/desktop/updates/accountOrderDetailOrderTotals.jsp ; AccountOrderDetailsTotalsComponent
 
+######################## Remove Components from Account Section ##############
+Remove CMSLinkComponent ;$contentCV[unique = true]; uid[unique = true]
+;;DisabilityAndMobilityLink
+;;AdvancePassengerLink
+;;PreferencesLink
+;;MySavedSearchesLink
+;;SavedPassengersLink
