@@ -12,7 +12,7 @@
 
 <c:if test="${not empty itineraryPricingInfo}">
 	<label class="${itineraryPricingInfo.promotional ? 'promotional-price' : ''} ${itineraryPricingInfo.selected ? 'selected' : ''}">
-		<input type="radio" name="${fn:escapeXml(name)}" id="y_frSelect-${fn:escapeXml(pricedItinerary.id)}-${fn:escapeXml(itineraryPricingInfo.bundleType)}" ${itineraryPricingInfo.available ? '' : 'disabled'} ${itineraryPricingInfo.selected ? 'checked' : ''} value="${fn:escapeXml(pricedItineraryDateTime.time)}" class="y_fareResultSelect" />
+		<input type="radio" name="${fn:escapeXml(name)}" data-index="${fn:escapeXml(pricedItinerary.id)}" id="y_frSelect-${fn:escapeXml(pricedItinerary.id)}-${fn:escapeXml(itineraryPricingInfo.bundleType)}" ${itineraryPricingInfo.available ? '' : 'disabled'} ${itineraryPricingInfo.selected ? 'checked' : ''} value="${fn:escapeXml(pricedItineraryDateTime.time)}" class="y_fareResultSelect" />
 		<c:if test="${not empty dealBundleTemplateId}">
 			<span class="selected">
 				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
