@@ -70,7 +70,7 @@
 										<form:form action="${fn:escapeXml(addToCartUrl)}" id="js-add-to-cart-form">
 											<input type="hidden" name="productCode" value="P00001"/>
 											<input type="hidden" name="qty" value="1"/>
-											<input type="hidden" name="transportOfferingCodes" value="HY9304160120181915"/>
+											<input type="hidden" name="transportOfferingCodes" value="HY9518170120180015"/>
 											<input type="hidden" name="travelRouteCode" value="LGW_JFK"/>
 											<input type="hidden" name="travellerCode" value="adult1"/>
 											<input type="hidden" name="originDestinationRefNumber" value="0"/>
