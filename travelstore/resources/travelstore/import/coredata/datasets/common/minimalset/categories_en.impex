@@ -4,8 +4,8 @@ $catalogVersion = catalogVersion(catalog(id[default = 'travelProductCatalog']), 
 # Insert Categories
 INSERT_UPDATE Category; code[unique = true]; name[lang = $lang]; description[lang = $lang]; $catalogVersion
 ; PRIORITYCHECKIN  ; Priority Check-In ; Don't like waiting in queues? Skip them with Priority Check-In.
-; PRIORITYBOARDING ; Priority Boarding ; In a hurry? Be the first one to get on and off the plane with our Priority Boarding.
-; LOUNGEACCESS     ; Lounge Access     ; Enjoy our bar and comfortable sofas in a dedicated lounge while waiting for your flight.
+; PRIORITYBOARDING ; Priority Boarding ; In a hurry? Be the first one to get on and off the cruise with our Priority Boarding.
+; LOUNGEACCESS     ; Lounge Access     ; Enjoy our bar and comfortable sofas in a dedicated lounge while waiting for your cruise.
 ; MEAL             ; Pre-Order Meal    ; We serve delicious dishes which will suit any preferences. Pre-order your meal now.
 ; HOLDITEM         ; Hold Allowance    ; Extend your allowed luggage space to fit more of your essential items or the ones which exceed limited size.
 ; SPECIAL          ; SPECIAL CATEGORY  ; A Special Category.
